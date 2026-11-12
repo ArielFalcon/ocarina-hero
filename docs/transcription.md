@@ -1,5 +1,57 @@
 # Audio transcription
 
+## Isolated instrument mode: Basic Pitch in the browser
+
+Isolated instrument mode (*Single instrument or voice*, and the only audio mode of the static
+site) runs the Basic Pitch note model (spotify/basic-pitch v0.4.0, `nmp.onnx`, Apache-2.0, 225 KB,
+sha256 `2c3c1d14…a0ec`, served from `public/models/` with its license and notice) in the browser
+with onnxruntime-web 1.31.1 (WebAssembly, about 3.9 MB compressed, loaded only when the first
+analysis starts). The fragment is resampled to 22.05 kHz, analysed in overlapping two-second
+windows, and decoded into one melody line by `src/core/melody-decoder.ts`:
+
+- note posteriors are used as absolute probabilities, never normalized per clip, with a mild
+  preference for higher pitches that only ranks pitches and never turns silence into a note;
+- a Viterbi pass over MIDI 36–96 penalizes pitch changes and voicing switches;
+- notes shorter than a minimum that follows the fragment's onset rate (40–60 ms) are absorbed
+  by a neighbour or removed;
+- a held note is split where Basic Pitch reports a strong new onset (≥ 0.7) of the same pitch.
+
+The analysis records `engine: { id: 'basic-pitch', modelSha256, decoder: 'basic-pitch-viterbi-v1' }`.
+A 15-second fragment takes about 1 s in a desktop browser (single-threaded WebAssembly), compared
+with about 0.5 s for the earlier detector. If the runtime or model cannot load, the earlier
+periodicity detector described below runs instead. The analysis then records
+`engine: { id: 'isolated-periodicity' }` and a warning naming the reason.
+
+Parameters were chosen on `scripts/instrument-benchmark.ts`, which scores every recording with a
+reference: the corpus clips with accompaniment, the MedleyDB Phoenix_ScotchMorris flute and violin
+stems and mix (against grouped annotated f0), the isolated 1998 ocarina and accompanied 2026 lullaby
+references, oscillator fixtures, and silence, noise and click controls. Chosen on random halves of
+the recordings, the parameters kept a held-out score of 0.75 (mean of group means) against 0.77
+on the full set. Note F1 (exact pitch after one global octave, onset within ±100 ms), from
+`out/instrument-benchmark/basic-pitch-v1.json`:
+
+| Recordings | Basic Pitch (current) | Periodicity (earlier) | Main melody (local server) |
+|---|---|---|---|
+| Corpus, 30 clips with accompaniment | **0.61** | 0.20 | 0.68 |
+| Phoenix flute stem, 9 windows | **0.71** | 0.67 | 0.70 |
+| Phoenix violin stem, 10 windows | **0.83** | 0.60 | 0.80 |
+| Phoenix mix, 9 windows | **0.59** | 0.25 | 0.60 |
+| 1998 ocarina / 2026 accompanied lullaby | 0.96 / **1.00** | 1.00 / 0.74 | 1.00 / 1.00 |
+| Oscillator fixtures, 5 | 0.93 | 0.97 | 0.64 |
+| Silence, noise and click controls | 0 notes | 0 notes | 0 notes |
+
+Basic Pitch improves on the earlier detector on 28 of the 30 corpus clips (worse on always-with-me)
+and matches or beats Main melody on 13. Projected TAB F1 follows the same order (corpus 0.60 vs 0.24).
+Known limits:
+
+- Main melody remains more precise on dense accompaniment (imperial-march 0.62 vs 0.91,
+  fallen-down 0.52 vs 0.76).
+- The 1998 ocarina gains one extra short note.
+- Pure low sine tones (MIDI 36 and 43) are missed. The earlier detector found them.
+- Basic Pitch is polyphonic, so the decoder can still follow an accompanying voice.
+
+## Fallback: periodicity detector
+
 The extractor estimates a single fundamental in each overlapping analysis frame,
 then converts the detected frequency to chromatic MIDI. It does not consult the
 instrument's pitches, fine tuning, playable range, or projection policy. The
@@ -53,7 +105,7 @@ failing reference check are recorded in `out/source-segmentation-checks/`.
 Repeated same-pitch notes separated by detectable unvoiced gaps remain supported;
 continuous reattacks require additional articulation evidence and remain open.
 
-The model contour and isolated detector use the same fractional-pitch grouping
+The Main melody model contour and the fallback detector use the same fractional-pitch grouping
 rule with windows expressed in seconds. Model scores are raw scores, not measured
 accuracy. Model analysis retains its original contour and every positive-duration
 candidate, including candidates marked as having insufficient stable support;

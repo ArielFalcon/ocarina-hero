@@ -17,13 +17,13 @@ Test runner: `npm test` (tsx --test); benchmark scripts with tsx.
 
 | ID | Specs | Route | Status | Evidence |
 |---|---|---|---|---|
-| T1 | S2 S4 | inline (dependency: item 5) | pending | onnxruntime-web pinned; model asset with checksum and license |
-| T2 | S2 | inline | pending | TS resampler, Basic Pitch framing, decoder with unit tests (RED→GREEN) |
-| T3 | S3 S6 | inline | pending | Cached posteriors; decoder parameters tuned with cross-validation |
-| T4 | S2 S4 S5 | inline | pending | Import wiring, engine provenance, fallback, tests |
-| T5 | S3 | inline | pending | Benchmark over every recording, old vs new vs Main melody |
-| T6 | S4 | inline | pending | Static build, browser check at mobile and desktop widths, docs |
-| T7 | S1–S6 | delegated verifier (item 5) | pending | Independent verification |
+| T1 | S2 S4 | inline (dependency: item 5) | done | onnxruntime-web 1.31.1 exact (MIT, published 2026-10-26); public/models/basic-pitch-nmp.onnx sha256 2c3c1d14… + LICENSE/NOTICE; digest test |
+| T2 | S2 | inline | done | src/core/melody-decoder.ts, src/core/basic-pitch.ts; 12 tests (written after code: no strict RED); weak-floor test caught height-bias voicing defect RED→GREEN (bias normalized) |
+| T3 | S3 S6 | inline | done | 768+432 combos; chosen scale 2, silence 0.5, change 2, voicing 2, min 0.06 s, repeat onset 0.7; full 0.775, held-out 0.748 |
+| T4 | S2 S4 S5 | inline | done | src/ui/import.ts engine basic-pitch / isolated-periodicity fallback with warning; 2 new import tests; npm test 131/131, tsc OK |
+| T5 | S3 | inline | done | out/instrument-benchmark/basic-pitch-v1.json: corpus 0.20→0.61 (Main 0.68), flute 0.67→0.71, violin 0.60→0.83, mix 0.25→0.59, refs 0.87→0.98, synth 0.97→0.93, controls 0 notes |
+| T6 | S4 | inline | done | static build emits wasm (3.9 MB gz, lazy) + models; Chrome dev and static: 15 s in 1.1 s, mp3 UI flow OK; note layout 375/1440 px no overflow (geometry; screenshots unavailable); docs updated |
+| T7 | S1–S6 | delegated verifier (item 5) | done | No blockers. Python parity confirmed (framing max diff 2.8e-4, identical decoded paths); edge cases 8–96 kHz and 0–15 s OK; stale-generation probes OK; static lazy chunk OK; docs match JSON; 13/27 mutants survived (advisory: framing and penalty tests weak) |
 
 ## Log
 

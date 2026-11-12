@@ -159,6 +159,24 @@ export function createSongbookEntries(tracks: readonly DemoTrack[]): SongbookEnt
   }));
 }
 
+export interface LetterAnchor { letter: string; id: string }
+
+/** Index letter of a title: its first letter or digit, accents folded; digits and non-Latin letters become '#'. */
+function indexLetter(title: string): string {
+  const first = title.normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[\p{L}\p{N}]/u)?.[0].toUpperCase() ?? '';
+  return /^[A-Z]$/.test(first) ? first : '#';
+}
+
+/** The first entry of each run of index letters, in list order, for the letter rail. */
+export function letterAnchors(entries: readonly SongbookEntry[]): LetterAnchor[] {
+  const anchors: LetterAnchor[] = [];
+  for (const entry of entries) {
+    const letter = indexLetter(entry.title);
+    if (anchors.at(-1)?.letter !== letter) anchors.push({ letter, id: entry.id });
+  }
+  return anchors;
+}
+
 function normalize(value: string): string {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
 }

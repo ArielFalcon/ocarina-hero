@@ -62,8 +62,10 @@
             <div class="catalog-layout">
               <div>
                 <div class="catalog-count"><p id="catalog-count" role="status" aria-live="polite"></p><button id="reset-search" type="button" class="text-button" hidden>Clear filters</button></div>
-                <div id="demos" class="song-list"></div>
-                <button id="load-more" type="button" class="action full" hidden><span class="stitched-label">More melodies</span></button>
+                <div class="song-index">
+                  <div id="demos" class="song-list"></div>
+                  <nav id="letter-rail" class="letter-rail" aria-label="Jump to letter" hidden><div class="letter-list"></div><span id="letter-bubble" class="letter-bubble" aria-hidden="true"></span></nav>
+                </div>
               </div>
               <aside class="catalog-aside">
                 <h2 class="embroidered">One passage<br>at a time.</h2>

@@ -190,6 +190,19 @@ folded panel is `inert`. Choosing a chip or pressing Escape folds it and returns
 focus to the toggle. A universe outside a newly chosen category resets to Every
 universe.
 
+### Letter rail
+
+The Songbook shows every matching song in one list, with no paging. Beside it, a
+sticky `<nav>` rail lists the initials present in the current results (accents
+folded, digits and symbols under `#`) as stitched letters in a recessed,
+cord-framed strip. The letter of the topmost visible row wears the selected cloth
+with a dashed inner seam; it is marked with `aria-current`, not color alone.
+Tapping a letter jumps to its first song. Dragging along the rail scrubs through
+letters and shows a rust patch with the letter beside the finger. The rail is one
+tab stop: arrow keys, Home and End move between letters, Enter or Space jumps. It
+is hidden below 12 results or when only one initial remains. Returning from a
+lesson or the Workshop restores the Songbook scroll position.
+
 ### Text inputs and select
 
 Keep native `<input>` and `<select>` elements inside a decorative `.input-frame`.

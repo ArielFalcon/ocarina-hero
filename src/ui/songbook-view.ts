@@ -1,9 +1,10 @@
 import { threadIcon, type ThreadIcon } from './thread-icons';
-import { createSongbookEntries, filterSongbook, listUniverses, type SongbookEntry, type SongCategory } from './songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, type SongbookEntry, type SongCategory } from './songbook';
 import type { DemoTrack } from '../core/demo';
 
 const SAVED_KEY = 'ocarina.saved.v1';
-const PAGE_SIZE = 6;
+/** Below this many results the list is short enough to scan, so the letter rail is hidden. */
+const RAIL_MIN_RESULTS = 12;
 const CATEGORY_ICONS: Record<SongCategory, ThreadIcon> = { All: 'songbook', Games: 'gamepad', Anime: 'anime', Film: 'film', Pop: 'microphone', Classics: 'lyre', Other: 'collection' };
 
 /** A visible count badge; the noun stays available to assistive technology only. */
@@ -21,7 +22,6 @@ export class SongbookView {
   private saved = new Set<string>();
   private onlySaved = false;
   private sessionOnly = false;
-  private limit = PAGE_SIZE;
   private search: HTMLInputElement;
   private universe = '';
   private universes: HTMLElement;
@@ -30,7 +30,10 @@ export class SongbookView {
   private list: HTMLElement;
   private categories: HTMLElement;
   private count: HTMLElement;
-  private more: HTMLButtonElement;
+  private rail: HTMLElement;
+  private bubble: HTMLElement;
+  private scroller: HTMLElement;
+  private railFrame = 0;
   private reset: HTMLButtonElement;
   private filters: HTMLDetailsElement;
   private filterSummary: HTMLElement;
@@ -47,7 +50,9 @@ export class SongbookView {
     this.list = root.querySelector('#demos')!;
     this.categories = root.querySelector('#categories')!;
     this.count = root.querySelector('#catalog-count')!;
-    this.more = root.querySelector('#load-more')!;
+    this.rail = root.querySelector('#letter-rail')!;
+    this.bubble = root.querySelector('#letter-bubble')!;
+    this.scroller = root.closest<HTMLElement>('main') ?? document.documentElement;
     this.reset = root.querySelector('#reset-search')!;
     this.filters = root.querySelector('#catalog-filters')!;
     this.filterSummary = root.querySelector('#filter-summary')!;
@@ -80,7 +85,7 @@ export class SongbookView {
       event.preventDefault();
       this.foldUniverses();
     });
-    this.more.addEventListener('click', () => { this.limit += PAGE_SIZE; this.renderResults(); });
+    this.bindRail();
     this.reset.addEventListener('click', () => {
       this.search.value = '';
       this.universe = '';
@@ -172,7 +177,6 @@ export class SongbookView {
   }
 
   private filterChanged(): void {
-    this.limit = PAGE_SIZE;
     if (!this.categories.childElementCount) this.categories.innerHTML = (Object.keys(CATEGORY_ICONS) as SongCategory[]).map(category => {
       const count = filterSongbook(this.entries, { category }).length;
       if (category === 'Other' && !count) return '';
@@ -199,17 +203,102 @@ export class SongbookView {
     const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved });
     this.count.textContent = `${result.length} ${result.length === 1 ? 'melody' : 'melodies'}${this.sessionOnly ? ' · Saves last for this session only' : ''}`;
     this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All';
-    this.more.hidden = result.length <= this.limit;
-    this.list.innerHTML = result.length ? result.slice(0, this.limit).map(entry => {
+    const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));
+    this.list.innerHTML = result.length ? result.map(entry => {
       const title = escapeHtml(entry.title);
       const universe = escapeHtml(entry.universe === 'The Legend of Zelda' ? 'Zelda' : entry.universe);
       const detail = [entry.artist, entry.version].filter(Boolean).map(value => escapeHtml(value!)).join(' · ');
-      return `<article class="song-row"><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}"><span class="song-seal" aria-hidden="true">${threadIcon(entry.icon)}</span><span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${universe}${detail ? ` · ${detail}` : ''}</span></span></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${this.saved.has(entry.id) ? '♥' : '♡'}</button></article>`;
+      const letter = anchors.get(entry.id);
+      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}"><span class="song-seal" aria-hidden="true">${threadIcon(entry.icon)}</span><span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${universe}${detail ? ` · ${detail}` : ''}</span></span></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${this.saved.has(entry.id) ? '♥' : '♡'}</button></article>`;
     }).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? 'No saved songs yet. Tap ♡ next to a song to keep it here.' : 'No melodies found. Try another title or clear your filters.'}</p>`;
     if (focused) {
       const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];
       const replacement = buttons.find(button => focused.dataset.save ? button.dataset.save === focusedId : button.dataset.song === focusedId);
       (replacement ?? buttons[Math.min(focusedIndex, buttons.length - 1)] ?? this.reset).focus({ preventScroll: true });
     }
+    this.renderRail([...anchors.values()], result.length);
+  }
+
+  /** One stitched letter per initial present in the results; hidden when the list is short. */
+  private renderRail(letters: readonly string[], total: number): void {
+    this.rail.hidden = total < RAIL_MIN_RESULTS || letters.length < 2;
+    this.rail.style.setProperty('--letters', String(letters.length));
+    this.rail.querySelector('.letter-list')!.innerHTML = this.rail.hidden ? '' : letters.map((letter, index) =>
+      `<button class="letter-slot" type="button" data-letter="${escapeHtml(letter)}" tabindex="${index ? -1 : 0}" aria-label="${letter === '#' ? 'Numbers and symbols' : `Songs starting with ${letter}`}"><span class="stitched-label" aria-hidden="true">${escapeHtml(letter)}</span></button>`).join('');
+    this.markCurrentLetter();
+  }
+
+  private letterButtons(): HTMLButtonElement[] {
+    return [...this.rail.querySelectorAll<HTMLButtonElement>('.letter-slot')];
+  }
+
+  private jumpToLetter(letter: string): void {
+    const row = this.list.querySelector<HTMLElement>(`.song-row[data-letter="${CSS.escape(letter)}"]`);
+    if (!row) return;
+    this.scroller.scrollTop += row.getBoundingClientRect().top - this.scroller.getBoundingClientRect().top - 12;
+    this.markCurrentLetter(letter);
+  }
+
+  /** The letter whose first row is the last one at or above the top of the visible list. */
+  private markCurrentLetter(forced?: string): void {
+    let current = forced;
+    if (!current) {
+      const top = this.scroller.getBoundingClientRect().top + 24;
+      for (const row of this.list.querySelectorAll<HTMLElement>('.song-row[data-letter]')) {
+        if (row.getBoundingClientRect().top > top && current) break;
+        current = row.dataset.letter;
+      }
+    }
+    for (const button of this.letterButtons()) {
+      if (button.dataset.letter === current) button.setAttribute('aria-current', 'true');
+      else button.removeAttribute('aria-current');
+    }
+  }
+
+  private bindRail(): void {
+    this.scroller.addEventListener('scroll', () => {
+      if (this.rail.hidden || this.railFrame) return;
+      this.railFrame = requestAnimationFrame(() => { this.railFrame = 0; this.markCurrentLetter(); });
+    }, { passive: true });
+    // Dragging along the rail scrubs through the letters, like a phone contact index.
+    const buttonAt = (y: number) => {
+      const buttons = this.letterButtons();
+      return buttons.find(button => y < button.getBoundingClientRect().bottom) ?? buttons.at(-1);
+    };
+    const scrub = (event: PointerEvent) => {
+      const button = buttonAt(event.clientY);
+      if (!button) return;
+      this.jumpToLetter(button.dataset.letter!);
+      const box = button.getBoundingClientRect();
+      this.bubble.style.top = `${box.top + box.height / 2 - this.rail.getBoundingClientRect().top}px`;
+      this.bubble.textContent = button.dataset.letter!;
+      this.rail.classList.add('is-scrubbing');
+    };
+    const list = this.rail.querySelector<HTMLElement>('.letter-list')!;
+    list.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      event.preventDefault();
+      list.setPointerCapture(event.pointerId);
+      scrub(event);
+    });
+    list.addEventListener('pointermove', event => { if (list.hasPointerCapture(event.pointerId)) scrub(event); });
+    const end = () => this.rail.classList.remove('is-scrubbing');
+    list.addEventListener('pointerup', end);
+    list.addEventListener('pointercancel', end);
+    // Keyboard: one tab stop, arrows move between letters, Enter or Space jumps (native click).
+    list.addEventListener('click', event => {
+      const button = (event.target as Element).closest<HTMLButtonElement>('.letter-slot');
+      if (button && event.detail === 0) this.jumpToLetter(button.dataset.letter!);
+    });
+    list.addEventListener('keydown', event => {
+      const buttons = this.letterButtons();
+      const index = buttons.indexOf(document.activeElement as HTMLButtonElement);
+      const next = { ArrowDown: index + 1, ArrowUp: index - 1, Home: 0, End: buttons.length - 1 }[event.key];
+      if (next === undefined || index < 0) return;
+      event.preventDefault();
+      const target = buttons[Math.max(0, Math.min(buttons.length - 1, next))]!;
+      buttons.forEach(button => { button.tabIndex = button === target ? 0 : -1; });
+      target.focus();
+    });
   }
 }

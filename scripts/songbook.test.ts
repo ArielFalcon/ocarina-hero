@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DEMOS, type DemoTrack } from '../src/core/demo';
-import { createSongbookEntries, filterSongbook, listUniverses } from '../src/ui/songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses } from '../src/ui/songbook';
 
 const entries = createSongbookEntries(DEMOS);
 const ids = (result: ReturnType<typeof filterSongbook>) => result.map((entry) => entry.id);
@@ -72,4 +72,10 @@ test('franchise composers and full theme names stay searchable without being dis
   assert.deepEqual(ids(filterSongbook(entries, { query: 'jujutsu aizo' })), ['catalogue-aizo']);
   assert.deepEqual(ids(filterSongbook(entries, { category: 'Games', universe: 'Super Mario' })),
     ['catalogue-dire-dire-docks', 'catalogue-smb-world-clear', 'catalogue-smb-game-over']);
+});
+
+test('letter anchors mark the first song of each initial, folding accents and non-letters', () => {
+  const make = (id: string, title: string) => createSongbookEntries([{ id, title, subtitle: '', tempoBpm: 100, melody: [] }])[0]!;
+  const anchors = letterAnchors([make('a', 'Étoile'), make('b', 'eagle'), make('c', '1UP'), make('d', '¡Ya!'), make('e', 'Zebra')]);
+  assert.deepEqual(anchors, [{ letter: 'E', id: 'a' }, { letter: '#', id: 'c' }, { letter: 'Y', id: 'd' }, { letter: 'Z', id: 'e' }]);
 });

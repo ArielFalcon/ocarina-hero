@@ -38,17 +38,17 @@ export interface DecoderParameters {
 export const DEFAULT_DECODER: DecoderParameters = {
   scale: 2,
   heightBias: 0.04,
-  silence: 1,
-  changePenalty: 9,
+  silence: 0.5,
+  changePenalty: 2,
   distancePenalty: 0.05,
-  voicingPenalty: 4,
-  minNoteSeconds: 0.09,
+  voicingPenalty: 2,
+  minNoteSeconds: 0.06,
   minNoteFloorSeconds: 0.04,
   onsetSpacingFraction: 0.5,
   onsetThreshold: 0.5,
   onsetMinSpacingSeconds: 0.05,
   activeNoteThreshold: 0.3,
-  repeatOnsetThreshold: 2,
+  repeatOnsetThreshold: 0.7,
 };
 
 const SCORE_FLOOR = 1e-4;

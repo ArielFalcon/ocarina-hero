@@ -43,7 +43,7 @@ test('a sustained pitch change starts the next note at its boundary', () => {
 
 test('silence and a weak posterior floor stay unvoiced: posteriors are absolute, never normalized per clip', () => {
   assert.deepEqual(notesOf(grid(150, [])), []);
-  const floor = grid(300, [], 0.2);
+  const floor = grid(300, [], 0.1); // below the voicing threshold; per-clip normalization would raise it to certainty
   floor.values[150 * STATES + 60 - MIDI_LOW] = 0.8; // one loud click frame
   assert.deepEqual(notesOf(floor), []);
 });

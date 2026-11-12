@@ -5,7 +5,7 @@
 <h1 align="center">Ocarina Hero</h1>
 
 <p align="center">
-  <em>Learn a melody on the ocarina, one passage at a time.</em><br />
+  <em>Learn a melody on the ocarina, be the hylian rockstar.</em><br />
   <a href="https://arielfalcon.github.io/ocarina-hero/"><strong>Play it in your browser →</strong></a>
 </p>
 

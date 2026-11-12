@@ -9,3 +9,7 @@ dist/
 .codegraph/
 # Stray screenshot output from tooling; never source.
 /undefined/
+
+# Local-only working docs and ODD task tracking; never published.
+/docs/
+/odd/

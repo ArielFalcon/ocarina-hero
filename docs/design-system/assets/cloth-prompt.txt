@@ -1,5 +1,0 @@
-Mode: built-in ImageGen, reference-guided texture generation.
-Reference: docs/design-system/assets/sources/tapestry.jpg.
-Output: public/art/cloth.jpg, exported as a 768px JPEG.
-
-Create a seamless tileable square texture using ONLY the plain dark olive forest green woven fabric visible on the LEFT HALF of the attached tapestry. Match its exact dark olive hue, fine dense irregular horizontal weft, subtle vertical warp and aged matte fibers. Uniform even lighting, no vignette, no gradients. No tree, branches, flowers, leaves, ocarina, border, symbols, or decoration whatsoever. This is the continuation fabric underneath that exact tapestry for a website background, so match the source's plain green cloth as closely as possible. The entire image must be plain seamless dark green woven cloth.

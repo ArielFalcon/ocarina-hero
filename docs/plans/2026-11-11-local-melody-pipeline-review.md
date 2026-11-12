@@ -1,7 +1,0 @@
-# Local melody pipeline plan review
-
-The comprehension review found one medium ambiguity: whether low-support candidates are included in TAB or only retained in downloadable analysis. The plan now explicitly includes all finite positive-duration grouped candidates in the initial TAB, retains their support flags and warns about uncertainty. There is no silent duration-based filtering.
-
-The readiness review found one medium gap: sparse pitch centers and an unspecified dense-transition inspection could not determine whether the model should become the default. The plan now keeps the existing isolated mode as default while the model is an explicitly experimental selectable path. Default activation requires an independent event-order audit, with missing, extra, octave-incorrect or unresolved pitches blocking activation, including the documented transition candidates around 9.7 s. The current evidence has not passed that gate. This technical containment does not meet or redefine the user's fidelity goal.
-
-The fresh scoped recheck confirmed both corrections and found no new concrete blocker. The default-activation quality gate remains pending; technical integration may proceed under the user's autonomous authorization without claiming fidelity. The prerequisite's stable-detuning change passed independent review; continuous reattack detection remains explicitly unresolved after its rejected reference regression.

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@tonejs/midi": "^2.0.28",
+    "onnxruntime-web": "1.31.1",
     "wavesurfer.js": "8.0.5"
   }
 }

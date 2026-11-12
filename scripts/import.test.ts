@@ -1,6 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { SourceImporter } from '../src/ui/import';
+import { BASIC_PITCH_DECODER, SourceImporter } from '../src/ui/import';
+import { BASIC_PITCH_MODEL_SHA256 } from '../src/audio/basic-pitch-model';
+
+/** Isolated mode with the model unavailable, so the injected periodicity detector runs. */
+const unavailable = async (): Promise<never> => { throw new Error('offline'); };
 
 test('invalidation prevents stale decode errors and closes the context', async () => {
   let reject!: (e: Error) => void;
@@ -78,6 +82,7 @@ test('a newer audio import wins over an earlier decode success', async () => {
   const buffer = { length: 10, sampleRate: 10, numberOfChannels: 1, getChannelData: () => new Float32Array(10) } as AudioBuffer;
   const importer = new SourceImporter({ onSource: x => sources.push(x.title), onStatus: () => {} }, {
     createContext: () => ({ decodeAudioData: async () => ++calls === 1 ? new Promise(r => { resolve = r; }) : buffer, close: async () => {} }),
+    basicPitch: unavailable,
     transcribe: () => ({ notes: [{ midi: 60, startBeat: 0.25, durationBeats: 0.5 }], tempoBpm: 60, quality: 0.5 }),
   });
   const file = (name: string) => ({ name, arrayBuffer: async () => new ArrayBuffer(0) } as File);
@@ -158,6 +163,7 @@ test('a newer audio source supersedes a pending MIDI read', async () => {
   const callbacks: string[] = [];
   const importer = new SourceImporter({ onSource: source => callbacks.push(`source:${source.title}`), onStatus: status => callbacks.push(`status:${status}`) }, {
     createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
+    basicPitch: unavailable,
     transcribe: () => ({ notes: [{ midi: 64, startBeat: 0.2, durationBeats: 0.3 }], tempoBpm: 60, quality: 0.5 }),
   });
   const old = importer.load(fakeFile('old.mid', () => new Promise(r => { resolve = r; })), 'isolated');
@@ -209,6 +215,7 @@ test('prepared audio analyzes only the selected stereo samples with local clock 
   let source: import('../src/ui/import').ImportedSource | undefined;
   const importer = new SourceImporter({ onSource: x => { source = x; }, onStatus: () => {} }, {
     createContext: () => ({ decodeAudioData: async () => buffer, close: async () => {} }),
+    basicPitch: unavailable,
     transcribe: samples => { received = [...samples]; return { notes: [{ midi: 60, startBeat: 0.25, durationBeats: 0.5 }], tempoBpm: 60, quality: 1 }; },
   });
   const prepared = await importer.prepareAudio(fakeFile('clip.wav'));
@@ -254,7 +261,8 @@ test('release and MIDI selection invalidate prepared audio identities', async ()
     let transcriptions = 0;
     const importer = new SourceImporter({ onSource: () => {}, onStatus: () => {} }, {
       createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
-      transcribe: () => { transcriptions++; return null; },
+      basicPitch: unavailable,
+    transcribe: () => { transcriptions++; return null; },
     });
     const prepared = (await importer.prepareAudio(fakeFile('old.wav')))!;
     if (replacement === 'release') importer.releaseAudio();
@@ -271,6 +279,7 @@ test('changing the selection aborts a pending model and suppresses its late resu
   const importer = new SourceImporter({ onSource: source => sources.push(source), onStatus: () => {} }, {
     createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
     fetch: async (_, init) => { signal = init!.signal as AbortSignal; return new Promise(done => { resolve = done; }); },
+    basicPitch: unavailable,
     transcribe: () => ({ notes: [{ midi: 72, startBeat: 0, durationBeats: 0.5 }], tempoBpm: 60, quality: 1 }),
   });
   const prepared = (await importer.prepareAudio(fakeFile('clip.wav')))!;
@@ -282,4 +291,48 @@ test('changing the selection aborts a pending model and suppresses its late resu
   await old;
   assert.equal(sources.length, 1);
   assert.deepEqual(sources[0]!.analysis!.sourceWindow, { startSeconds: 0.2, endSeconds: 0.7, sourceDurationSeconds: 1 });
+});
+
+test('isolated mode decodes the Basic Pitch melody with provenance and never runs the fallback detector', async () => {
+  const rate = 22050;
+  const buffer = { length: rate * 2, duration: 2, sampleRate: rate, numberOfChannels: 1, getChannelData: () => new Float32Array(rate * 2) } as AudioBuffer;
+  let fallback = 0;
+  let source: import('../src/ui/import').ImportedSource | undefined;
+  const importer = new SourceImporter({ onSource: x => { source = x; }, onStatus: () => {} }, {
+    createContext: () => ({ decodeAudioData: async () => buffer, close: async () => {} }),
+    // Every frame of every window: MIDI 69 (piano key 48) sounds.
+    basicPitch: async () => async () => {
+      const notes = new Float32Array(172 * 88);
+      for (let j = 0; j < 172; j++) notes[j * 88 + 48] = 0.9;
+      return { notes, onsets: new Float32Array(notes.length) };
+    },
+    transcribe: () => { fallback++; return null; },
+  });
+  await importer.load(fakeFile('flute.wav'), 'isolated');
+  assert.equal(fallback, 0);
+  assert.deepEqual(source!.melody.map(note => note.midi), [69]);
+  assert.ok(source!.melody[0]!.durationBeats > 1.9);
+  assert.deepEqual(source!.analysis!.engine, { id: 'basic-pitch', modelSha256: BASIC_PITCH_MODEL_SHA256, decoder: BASIC_PITCH_DECODER });
+  assert.deepEqual(source!.analysis!.warnings, []);
+});
+
+test('isolated mode falls back to the periodicity detector and says why when the model cannot load', async () => {
+  let source: import('../src/ui/import').ImportedSource | undefined;
+  const messages: string[] = [];
+  const importer = new SourceImporter({ onSource: x => { source = x; }, onStatus: x => messages.push(x) }, {
+    createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
+    basicPitch: unavailable,
+    transcribe: () => ({ notes: [{ midi: 64, startBeat: 0.2, durationBeats: 0.3 }], tempoBpm: 60, quality: 0.5 }),
+  });
+  await importer.load(fakeFile('flute.wav'), 'isolated');
+  assert.deepEqual(source!.analysis!.engine, { id: 'isolated-periodicity' });
+  assert.match(source!.analysis!.warnings[0]!, /Melody model unavailable \(offline\)/);
+  assert.match(source!.subtitle, /Melody model unavailable/);
+  const silent = new SourceImporter({ onSource: () => assert.fail('no notes'), onStatus: x => messages.push(x) }, {
+    createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
+    basicPitch: unavailable,
+    transcribe: () => null,
+  });
+  await silent.load(fakeFile('quiet.wav'), 'isolated');
+  assert.match(messages.at(-1)!, /No melody found.*could not load \(offline\)/);
 });

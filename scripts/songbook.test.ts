@@ -57,3 +57,19 @@ test('universes group under their primary category with the universe icon and so
   assert.deepEqual(listUniverses(fixture, 'Film').map(group => group.category), ['Film']);
   assert.equal(listUniverses(fixture, 'Film')[0]!.universes.some(universe => universe.name === 'Studio Ghibli'), true);
 });
+
+test('every bundled melody has a specific universe and a clean, song-only title', () => {
+  const generic = new Set(['Pop', 'Classics']);
+  for (const entry of entries) {
+    assert.notDeepEqual(entry.categories, ['Other'], `${entry.id} has no category`);
+    assert.doesNotMatch(entry.title, /\s[—–-]\s|·/, `${entry.id} title mixes song and credit`);
+    assert.ok(!entry.artist || generic.has(entry.universe), `${entry.id} shows an artist next to the ${entry.universe} universe`);
+  }
+});
+
+test('franchise composers and full theme names stay searchable without being displayed', () => {
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'zimmer interstellar' })), ['catalogue-cornfield-chase']);
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'jujutsu aizo' })), ['catalogue-aizo']);
+  assert.deepEqual(ids(filterSongbook(entries, { category: 'Games', universe: 'Super Mario' })),
+    ['catalogue-dire-dire-docks', 'catalogue-smb-world-clear', 'catalogue-smb-game-over']);
+});

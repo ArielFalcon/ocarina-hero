@@ -90,3 +90,7 @@ npx tsx scripts/corpus.ts check           # compare extraction against existing 
 npx tsx scripts/melody-benchmark.ts       # Main melody notes and adapted TABs on the 29 corpus recordings
 npm run test:melody                       # Main melody decoder tests (local Python runtime)
 ```
+
+## Deployment
+
+The public site is a static build: `npm run build:static` sets `MELODY_SERVER=off`, which removes the server-only *Song with accompaniment* mode. Pushing to `main` runs `.github/workflows/pages.yml`, which tests, builds with `BASE_PATH=/<repo>/` and publishes `dist` to GitHub Pages at https://arielfalcon.github.io/ocarina-hero/. `vercel.json` holds the equivalent Vercel configuration (root base path).

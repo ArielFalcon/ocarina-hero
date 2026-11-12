@@ -2,7 +2,7 @@ import type { ControllerButton } from '../core/pitches';
 import { modifierForBend, noteInstruction } from '../core/tab';
 
 function icon(name: string, kind: 'button' | 'shoulder' | 'modifier' | 'plus'): string {
-  return `<img class="control-icon control-icon--${kind}" src="/icons/controller/${name}.svg" alt="" aria-hidden="true" draggable="false" />`;
+  return `<img class="control-icon control-icon--${kind}" src="${import.meta.env.BASE_URL}icons/controller/${name}.svg" alt="" aria-hidden="true" draggable="false" />`;
 }
 
 export function buttonIcon(button: ControllerButton): string {

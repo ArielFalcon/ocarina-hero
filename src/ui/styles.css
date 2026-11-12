@@ -79,6 +79,17 @@ p { margin: 10px 0; }
 .action.primary:hover:not(:disabled) { background-color: #91492d; }
 .action:active:not(:disabled), .step:active { transform: translateY(1px); }
 .full { width: 100%; }
+/* Header repository link: a compact corded slot that never grows the header. */
+.repo-link { flex-shrink: 0; gap: 7px; min-height: 44px; margin-block: -6px; padding: 6px 13px 6px 11px; font-size: 16px; text-decoration: none; white-space: nowrap; }
+.repo-link .thread-icon { width: 18px; height: 18px; color: var(--accent); }
+.repo-long { display: none; }
+@media (min-width: 480px) { .repo-long { display: inline; } }
+.head:has(.repo-link) .brand { white-space: nowrap; }
+@media (max-width: 399px) {
+  .head:has(.repo-link) { gap: 10px; }
+  .head:has(.repo-link) .brand { font-size: 22px; }
+  .repo-link { gap: 6px; padding-inline: 9px 11px; font-size: 15px; }
+}
 .field { display: grid; gap: 7px; min-width: 0; }
 .field label { font-size: 19px; }
 .input-frame { display: block; width: 100%; min-width: 0; }

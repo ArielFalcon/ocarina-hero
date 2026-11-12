@@ -125,6 +125,11 @@ The rust fill identifies a primary action. Hover lightens the cloth slightly;
 pressed states move by at most 1px; disabled states remain recognizable but muted.
 Provide an explicit focus ring outside the cord.
 
+The header's repository link reuses the `.action` slot at compact size: a thread
+star, "GitHub" on phones and "Star on GitHub" from 480px, a constant accessible
+name, and negative block margins so its 44px target never grows the header. The
+brand stays on one line beside it. It is hidden with the header during lessons.
+
 Tabs use a stitched underline and an explicit selected state. Note controls use
 thread circles, with an additional ochre ring and cloth fill for the active note.
 Retain the app's existing controller SVGs, note mappings, timing, and semantics.

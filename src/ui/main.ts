@@ -16,6 +16,7 @@ import { SourceImporter, type AudioImportMode, type AudioSourceAnalysis, type Pr
 import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { Playback } from './playback';
+import { parseRoute, routeHash, shareUrl } from './route';
 import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
@@ -796,6 +797,7 @@ function updateLessonHeading(): void {
   save.textContent = saved ? '♥ Saved' : '♡ Save';
   save.setAttribute('aria-pressed', String(saved));
   save.setAttribute('aria-label', saved ? 'Remove from saved songs' : 'Save song');
+  must('#share-song').hidden = selectedEntry === null;
   must('#song-modes').hidden = current === null;
   must('.app').classList.toggle('has-song', current !== null);
   must('#listen-mode').setAttribute('aria-pressed', String(!practiceMode));
@@ -933,24 +935,46 @@ function showView(next: AppView, pushHistory = true): void {
     if (link.dataset.viewLink === route || next === 'lesson' && current && link.dataset.viewLink === 'catalog') link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
-  if (pushHistory && location.hash !== `#${route}`) history.pushState(null, '', `#${route}`);
+  const hash = next === 'lesson' && selectedEntry ? routeHash({ view: 'song', songId: selectedEntry.id }) : `#${route}`;
+  if (pushHistory && location.hash !== hash) history.pushState(null, '', hash);
   if (next === 'lesson') updateLessonHeading();
   document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
 
+function openSong(entry: SongbookEntry, pushHistory = true): void {
+  selectedEntry = entry;
+  practiceMode = false;
+  runDemo(entry.track);
+  showView('lesson', pushHistory);
+}
+
 const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
-  select(entry) {
-    selectedEntry = entry;
-    practiceMode = false;
-    runDemo(entry.track);
-    showView('lesson');
-  },
+  select: entry => openSong(entry),
   savedChanged: updateLessonHeading,
 });
 
 must('#save-song').addEventListener('click', () => {
   if (selectedEntry) catalogue.toggleSaved(selectedEntry.id);
+});
+
+let shareResetTimer: number | undefined;
+must('#share-song').addEventListener('click', async () => {
+  if (!selectedEntry) return;
+  const button = must('#share-song .share-label');
+  const url = shareUrl(location.href, selectedEntry.id);
+  const title = `${selectedEntry.title} · Ocarina Hero`;
+  let label = 'Copied!';
+  try {
+    if (navigator.share) { await navigator.share({ title, url }); return; }
+    await navigator.clipboard.writeText(url);
+  } catch (error) {
+    if ((error as DOMException).name === 'AbortError') return;
+    label = 'Copy failed';
+  }
+  button.textContent = label;
+  window.clearTimeout(shareResetTimer);
+  shareResetTimer = window.setTimeout(() => { button.textContent = 'Share'; }, 1800);
 });
 
 must('#practice-mode').addEventListener('click', () => {
@@ -1001,9 +1025,14 @@ function openFreePlay(): void {
 }
 
 function restoreView(): void {
-  const route = location.hash.slice(1);
-  if (route === 'free') openFreePlay();
-  else showView(['lesson', 'workshop'].includes(route) ? route as AppView : 'catalog', false);
+  const route = parseRoute(location.hash);
+  if (route.view === 'song') {
+    const entry = catalogue.entries.find(item => item.id === route.songId);
+    if (!entry) { history.replaceState(null, '', '#catalog'); showView('catalog', false); }
+    else if (entry === selectedEntry && current) showView('lesson', false);
+    else openSong(entry, false);
+  } else if (route.view === 'free') openFreePlay();
+  else showView(route.view, false);
 }
 window.addEventListener('popstate', restoreView);
 window.addEventListener('visibilitychange', () => {

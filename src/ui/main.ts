@@ -16,7 +16,8 @@ import { SourceImporter, type AudioImportMode, type AudioSourceAnalysis, type Pr
 import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { Playback } from './playback';
-import { createPassages, advancePractice, playbackSelection, staffTransition } from './lesson';
+import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
+import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, readBindings, handleKeyDown, type KeyboardAction } from './keyboard';
 import { threadIcon, type ThreadIcon } from './thread-icons';
@@ -72,6 +73,7 @@ let view: AppView = 'catalog';
 let selectedEntry: SongbookEntry | null = null;
 let practiceMode = false;
 let practiceCursor = 0;
+let combo: Combo = { streak: 0, best: 0 };
 let playbackCursor = 0;
 let activeNote: number | null = null;
 let passageIndex = 0;
@@ -82,6 +84,9 @@ let renderedWindow: { song: unknown; indices: readonly number[] } | null = null;
 let repeatingTimer: number | undefined;
 let isPlaying = false;
 const practiceStatus = must<HTMLParagraphElement>('#practice-status');
+const comboBadge = must<HTMLParagraphElement>('#combo');
+const practiceLine = must<HTMLDivElement>('.practice-line');
+let comboHideTimer: number | undefined;
 const passageSelect = must<HTMLSelectElement>('#passage');
 const repeatPassage = must<HTMLInputElement>('#repeat-passage');
 let selectedAudio: PreparedAudio | null = null;
@@ -323,6 +328,7 @@ function arrangementLabel(projection: Projection): string {
 function show(arrangement: Arrangement, label: string, play = false): void {
   songArrangement = arrangement;
   practiceCursor = 0;
+  combo = { streak: 0, best: 0 };
   playbackCursor = 0;
   passageIndex = 0;
   activeNote = null;
@@ -766,9 +772,13 @@ function updateProgress(): void {
   must('#progress-label').textContent = `${position} / ${recorded.length} notes`;
   must('#progress-percent').textContent = `${Math.round(position / Math.max(1, recorded.length) * 100)}%`;
   must('#progress-caption').textContent = practiceMode ? 'Practice progress' : 'Song progress';
+  if (!practiceMode) renderCombo();
   const expected = practiceMode && !isPlaying ? recorded[practiceCursor] : undefined;
   for (const key of pad.querySelectorAll<HTMLElement>('[data-button]')) {
     key.classList.toggle('is-expected', !!expected && key.dataset.button === pitchById(expected.pitch).button);
+  }
+  for (const key of bends.querySelectorAll<HTMLElement>('[data-bend]')) {
+    key.classList.toggle('is-expected', !!expected?.bend && Number(key.dataset.bend) === expected.bend);
   }
 }
 
@@ -794,32 +804,89 @@ function updateLessonHeading(): void {
   refreshPracticeStatus();
 }
 
-function refreshPracticeStatus(): void {
+function refreshPracticeStatus(lead = ''): void {
   if (!current) {
     practiceStatus.textContent = recorded.length ? 'Your melody is ready to play.' : 'Play any note to start a melody.';
   } else if (!practiceMode) {
     practiceStatus.textContent = 'Listen and follow the highlighted button.';
   } else {
     const expected = recorded[practiceCursor];
-    practiceStatus.textContent = expected
+    practiceStatus.textContent = lead + (expected
       ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}`
-      : 'You reached the end. Choose a passage to practise again.';
+      : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}. Choose a passage to practise again.`);
+  }
+}
+
+/** Show the running streak from the second hit; a broken streak drops away. */
+function renderCombo(broken = false): void {
+  window.clearTimeout(comboHideTimer);
+  comboBadge.classList.remove('is-broken');
+  if (broken && !comboBadge.hidden) {
+    retrigger(comboBadge, 'is-broken');
+    comboHideTimer = window.setTimeout(() => { comboBadge.hidden = true; comboBadge.classList.remove('is-broken'); }, 450);
+    return;
+  }
+  const visible = practiceMode && combo.streak >= 2;
+  const count = comboBadge.querySelector('.combo-count')!;
+  comboBadge.hidden = !visible;
+  if (!visible) { count.textContent = ''; return; }
+  if (count.textContent === `×${combo.streak}`) return;
+  comboBadge.dataset.tier = String(comboTier(combo.streak));
+  count.textContent = `×${combo.streak}`;
+  retrigger(comboBadge, 'is-bumped');
+}
+
+function resetCombo(): void {
+  combo = { streak: 0, best: combo.best };
+  renderCombo();
+}
+
+/** Reward a correct note: sparks on the staff, a ripple on the pressed controls, ribbons at milestones. */
+function rewardHit(point: { x: number; y: number } | null, button: ControllerButton, noteBend: number, milestone: ComboMilestone | null, cleared: boolean, finished: boolean): void {
+  const tier = comboTier(combo.streak);
+  if (point) sparkBurst(tab, point, tier);
+  stitchRipple(pad.querySelector(`[data-button="${button}"]`));
+  if (noteBend) stitchRipple(bends.querySelector(`[data-bend="${noteBend}"]`));
+  retrigger(must('.progress-track'), 'is-hit');
+  if (finished) {
+    ribbon(practiceLine, 'Song complete', combo.best > 1 ? `Best combo ×${combo.best}` : '', 'song');
+    haptic([18, 50, 18, 50, 40]);
+  } else if (milestone) {
+    ribbon(practiceLine, `${milestone.label}!`, `×${milestone.streak} combo`, 'combo');
+    haptic([14, 40, 22]);
+  } else if (cleared) {
+    ribbon(practiceLine, 'Passage clear', combo.streak > 1 ? `×${combo.streak} in a row` : '', 'passage');
+    haptic([10, 30, 10]);
+  } else {
+    haptic(8);
   }
 }
 
 function practise(button: ControllerButton): void {
+  const expected = recorded[practiceCursor];
+  if (!expected) return;
   const next = advancePractice(recorded, practiceCursor, button, bend);
+  const result = scoreCombo(combo, next !== practiceCursor);
+  combo = result.combo;
   if (next === practiceCursor) {
-    const expected = recorded[practiceCursor];
-    if (expected) practiceStatus.textContent = `Keep your place. Try ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}.`;
+    retrigger(pad.querySelector(`[data-button="${button}"]`), 'is-miss');
+    if (result.broken) haptic(24);
+    renderCombo(result.broken);
+    practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}.`;
     return;
   }
+  const hitIndex = practiceCursor;
   const passage = passages[passageIndex]!;
-  practiceCursor = repeatPassage.checked && next > passage[passage.length - 1]! ? passage[0]! : next;
+  const cleared = next > passage[passage.length - 1]!;
+  const finished = next >= recorded.length;
+  practiceCursor = repeatPassage.checked && cleared ? passage[0]! : next;
   const nextPassage = passages.findIndex(indices => indices.includes(practiceCursor));
   if (nextPassage >= 0) passageIndex = nextPassage;
   renderTab();
-  refreshPracticeStatus();
+  renderCombo();
+  const stillDrawnHit = centreIn(tab, tab.querySelector(`[data-note-index="${hitIndex}"]`));
+  rewardHit(stillDrawnHit, button, expected.bend ?? 0, result.milestone, cleared, finished && !repeatPassage.checked);
+  refreshPracticeStatus(result.milestone ? `${result.milestone.label}! ` : '');
 }
 
 function selectPassage(index: number): void {
@@ -831,13 +898,20 @@ function selectPassage(index: number): void {
   practiceCursor = passages[passageIndex]?.[0] ?? 0;
   playbackCursor = practiceCursor;
   activeNote = null;
+  resetCombo();
   renderTab();
   refreshPracticeStatus();
   if (resume) replay();
 }
 
+/** Songbook scroll position, kept while a lesson or the workshop is open so returning lands where the user left. */
+let catalogScroll = 0;
+
 function showView(next: AppView, pushHistory = true): void {
   cancelBinding();
+  const scroller = must('#main-content');
+  const returningToCatalog = view !== next && next === 'catalog';
+  if (view === 'catalog' && next !== 'catalog') catalogScroll = scroller.scrollTop;
   if (view !== next) {
     stopPlayback();
     controls.reset();
@@ -862,7 +936,7 @@ function showView(next: AppView, pushHistory = true): void {
   if (pushHistory && location.hash !== `#${route}`) history.pushState(null, '', `#${route}`);
   if (next === 'lesson') updateLessonHeading();
   document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
-  must('#main-content').scrollTop = 0;
+  scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
 
 const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
@@ -888,6 +962,7 @@ must('#practice-mode').addEventListener('click', () => {
 must('#listen-mode').addEventListener('click', () => {
   stopPlayback();
   practiceMode = false;
+  resetCombo();
   renderTab();
   updateLessonHeading();
 });
@@ -901,6 +976,7 @@ tab.addEventListener('click', event => {
   stopPlayback();
   practiceCursor = Number(target.dataset.noteIndex);
   playbackCursor = practiceCursor;
+  resetCombo();
   renderTab();
   refreshPracticeStatus();
 });

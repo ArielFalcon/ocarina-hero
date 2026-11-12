@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { Note } from '../src/core/ir';
-import { advancePractice, createPassages, passageArrangement, playbackSelection, staffTransition } from '../src/ui/lesson';
+import { advancePractice, comboTier, createPassages, scoreCombo, passageArrangement, playbackSelection, staffTransition } from '../src/ui/lesson';
 
 const notes: Note[] = [0, 1, 2, 3, 4, 5, 9, 10].map((startBeat, index) => ({
   pitch: index === 2 ? 'F4' : 'D4', startBeat, durationBeats: 1,
@@ -58,4 +58,31 @@ test('staff transitions follow the passage direction and only reflow a growing w
   assert.equal(staffTransition({ song, indices: [0, 1] }, { song, indices: [0, 1, 2] }), 'reflow');
   assert.equal(staffTransition({ song, indices: [0, 1] }, { song, indices: [2, 3] }), 'forward');
   assert.equal(staffTransition({ song, indices: [2, 3] }, { song, indices: [0, 1] }), 'backward');
+});
+
+test('combo streak grows on hits, resets on a miss and keeps the best run', () => {
+  let combo = { streak: 0, best: 0 };
+  for (let hit = 0; hit < 3; hit++) combo = scoreCombo(combo, true).combo;
+  assert.deepEqual(combo, { streak: 3, best: 3 });
+  const missed = scoreCombo(combo, false);
+  assert.deepEqual(missed.combo, { streak: 0, best: 3 });
+  assert.equal(missed.broken, true);
+  assert.equal(scoreCombo(missed.combo, false).broken, false);
+  assert.deepEqual(scoreCombo(missed.combo, true).combo, { streak: 1, best: 3 });
+});
+
+test('combo milestones fire once when a tier threshold is reached', () => {
+  const reach = (streak: number) => scoreCombo({ streak: streak - 1, best: 0 }, true).milestone;
+  assert.equal(reach(4), null);
+  assert.equal(reach(5)?.label, 'Good');
+  assert.equal(reach(6), null);
+  assert.equal(reach(10)?.label, 'Great');
+  assert.equal(reach(50)?.label, 'Legendary');
+  assert.equal(reach(75)?.label, 'Legendary');
+  assert.equal(reach(76), null);
+  assert.equal(scoreCombo({ streak: 4, best: 0 }, false).milestone, null);
+});
+
+test('combo tier rises at each threshold boundary', () => {
+  assert.deepEqual([0, 4, 5, 9, 10, 19, 20, 29, 30, 49, 50, 200].map(comboTier), [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]);
 });

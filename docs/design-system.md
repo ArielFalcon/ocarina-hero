@@ -136,6 +136,23 @@ Retain the app's existing controller SVGs, note mappings, timing, and semantics.
 The specimen's six-note sequence and song metadata are illustrative, not validated
 musical arrangements or a replacement for production data.
 
+The expected modifier is marked twice, never with a second ring: its pad key
+takes the shared selected slot, and the staff's modifier icon under the current
+note becomes a small selected slot (ochre cloth, cord edge, cream seam).
+
+### Practice rewards
+
+Consecutive correct notes build a combo (`scoreCombo` in `src/ui/lesson.ts`).
+Rewards stay in the tapestry material: thread-diamond sparks and an expanding
+running stitch on the staff, a stitched ripple on the pressed keys, a combo slot
+beside the status (ochre cloth, rust from ×10, cream seam from ×20) and a rust
+ribbon unrolled over the status line at milestones (5, 10, 20, 30, 50, then every
+25), passage clears and the final note. Ribbons never cover the staff or the
+controller; only per-note sparks appear on the staff. A miss shakes the key and
+drops the combo.
+Effects are `aria-hidden` and pointer-transparent; the status line announces
+milestones and misses. Reduced motion keeps only static state and a fading ribbon.
+
 ### Slots, selection and dividers
 
 Grid controls (category cards, controller keys, bends, song seals) read as slots

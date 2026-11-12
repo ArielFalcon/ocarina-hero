@@ -137,12 +137,12 @@ details[open] summary { color: var(--text); }
 .category-card { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 10px; text-align: left; }
 .category-card::before { padding: 1px; opacity: .6; }
 .category-card, .key, .bend-key, .song-seal { box-shadow: var(--slot-recess); }
-.category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-active, .key.is-expected, .bend-key.is-active, .binding-key[aria-pressed='true'] {
+.category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-active, .key.is-expected, .bend-key.is-active, .bend-key.is-expected, .binding-key[aria-pressed='true'] {
   background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised);
 }
 .category-card[aria-pressed='true']::before { padding: 3px; opacity: 1; }
 /* A cream running seam inside the cord marks the selected slot without a glow. */
-.category-card[aria-pressed='true']::after, .mode-switch [aria-pressed='true']::after, .key.is-expected::after {
+.category-card[aria-pressed='true']::after, .mode-switch [aria-pressed='true']::after, .key.is-expected::after, .bend-key.is-expected::after {
   content: ''; position: absolute; inset: 6px; border: 1px dashed #e5c993b3; border-radius: 3px; pointer-events: none;
 }
 .category-name { flex: 1; min-width: 0; font-size: 17px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -267,7 +267,10 @@ details[open] summary { color: var(--text); }
 .tok.is-playing > .control-icon { translate: 0 -2px; }
 .tok.is-played, .tok.is-past { opacity: .55; }
 .tok-leaving { pointer-events: none; }
-.tok .staff-modifier { position: absolute; top: calc(152px - var(--staff-y)); left: 50%; transform: translateX(-50%); }
+.tok .staff-modifier { position: absolute; top: calc(152px - var(--staff-y)); left: 50%; transform: translateX(-50%); padding: 2px 4px; border-radius: 6px; transition: background-color .16s ease-out, box-shadow .16s ease-out, translate .16s ease-out; }
+/* The current note's modifier is a selected slot, matching its pad key. */
+.tok.is-expected .staff-modifier, .tok.is-playing .staff-modifier { background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised), 0 0 0 2px #b48a3d; translate: 0 -2px; }
+.tok.is-expected .staff-modifier::after, .tok.is-playing .staff-modifier::after { content: ''; position: absolute; inset: 3px; border: 1px dashed #e5c993b3; border-radius: 3px; pointer-events: none; }
 .tok .control-icon--button { width: 38px; height: 42px; }
 .tok .control-icon--shoulder { width: 44px; height: 28px; }
 .tok .control-icon--modifier { width: 31px; height: 42px; }
@@ -286,6 +289,45 @@ progress::-webkit-progress-value { background: var(--cord); }
 progress::-moz-progress-bar { background: var(--cord); }
 #progress-label { margin: 5px 0 0; font-size: 14px; }
 .practice-status { min-height: 27px; margin: 6px 0 10px; font-size: 18px; }
+.practice-line { position: relative; display: flex; align-items: center; gap: 10px; }
+.practice-line .practice-status { flex: 1 1 auto; min-width: 0; }
+
+/* Practice rewards: a woven combo slot, thread sparks, stitched ripples and a rust ribbon. */
+.combo-badge { position: relative; flex: 0 0 auto; display: flex; align-items: baseline; gap: 5px; margin: 0; padding: 4px 11px 5px; border-radius: 6px; background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); line-height: 1.1; }
+.combo-badge::before { content: ''; position: absolute; inset: 0; padding: 2px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+.combo-count { font: 600 22px/1 Georgia, serif; font-variant-numeric: tabular-nums; }
+.combo-label { font-size: 14px; color: var(--muted); }
+.combo-badge[data-tier='2'], .combo-badge[data-tier='3'], .combo-badge[data-tier='4'], .combo-badge[data-tier='5'] { background-color: var(--rust); background-image: var(--weave), linear-gradient(180deg, #8a4129, #62291a); }
+.combo-badge[data-tier='3']::after, .combo-badge[data-tier='4']::after, .combo-badge[data-tier='5']::after { content: ''; position: absolute; inset: 4px; border: 1px dashed #e5c993b3; border-radius: 3px; pointer-events: none; }
+.combo-badge[data-tier='4'] .combo-count, .combo-badge[data-tier='5'] .combo-count { font-size: 25px; }
+.combo-badge[data-tier='5']::before { padding: 3px; }
+.combo-badge.is-bumped { animation: combo-bump .3s cubic-bezier(.3, 1.6, .5, 1); }
+.combo-badge.is-broken { animation: combo-break .45s ease-in forwards; }
+@keyframes combo-bump { 40% { scale: 1.2; } }
+@keyframes combo-break { 25% { translate: -4px 0; rotate: -4deg; } 55% { translate: 4px 1px; rotate: 3deg; opacity: 1; } 100% { translate: 0 10px; rotate: 8deg; opacity: 0; } }
+
+.staff-fx { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.hit-burst { position: absolute; left: var(--x); top: var(--y); }
+.hit-burst::before { content: ''; position: absolute; left: -24px; top: -24px; width: 48px; height: 48px; border: 2px dashed var(--text); border-radius: 50%; animation: burst-ring .5s ease-out forwards; }
+.hit-burst i { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; background: var(--satin), var(--accent); background-size: 2.8px 2.8px, auto, auto; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); animation: burst-spark .62s cubic-bezier(.15, .75, .3, 1) forwards; }
+.hit-burst[data-tier='2'] i:nth-child(3n), .hit-burst[data-tier='3'] i:nth-child(odd), .hit-burst[data-tier='4'] i:nth-child(odd), .hit-burst[data-tier='5'] i:nth-child(odd) { background: #b0553a; }
+@keyframes burst-ring { from { scale: .55; opacity: .95; } to { scale: 1.45; opacity: 0; } }
+@keyframes burst-spark { from { transform: rotate(var(--a)) translateY(-8px) scale(.5); opacity: 1; } 70% { opacity: 1; } to { transform: rotate(var(--a)) translateY(calc(-1 * var(--d))) scale(1) rotate(90deg); opacity: 0; } }
+
+.combo-ribbon { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 16px; white-space: nowrap; overflow: hidden; background-color: var(--rust); background-image: var(--weave), linear-gradient(180deg, #8a4129, #62291a); border-block: 2px solid #b48a3d; border-image: var(--cord) 1; box-shadow: var(--slot-raised); pointer-events: none; animation: ribbon-unroll 1.25s cubic-bezier(.22, .72, .18, 1) forwards; }
+.combo-ribbon::after { content: ''; position: absolute; inset: 3px 6px; border-block: 1px dashed #e5c993b3; pointer-events: none; }
+.combo-ribbon.is-passage { background-color: #604620; background-image: var(--weave), var(--selected-cloth); }
+.combo-ribbon.is-song { animation-duration: 2.2s; }
+.ribbon-title { font: 600 23px/1 Georgia, serif; }
+.ribbon-detail { font-size: 15px; }
+@keyframes ribbon-unroll { 0% { clip-path: inset(0 50%); } 22%, 80% { clip-path: inset(0 0); opacity: 1; } 100% { clip-path: inset(0 0); opacity: 0; } }
+
+.key-ripple { position: absolute; inset: -1px; border: 2px dashed var(--text); border-radius: 8px; pointer-events: none; animation: key-ripple .45s ease-out forwards; }
+@keyframes key-ripple { from { scale: .96; opacity: .95; } to { scale: 1.24; opacity: 0; } }
+.key.is-miss { animation: key-miss .32s ease-in-out; }
+@keyframes key-miss { 20% { translate: -4px 0; } 45% { translate: 4px 0; } 70% { translate: -2px 0; } }
+.progress-track.is-hit::after { animation: progress-hit .32s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes progress-hit { 40% { scale: 1.7; } }
 .playback-controls { display: flex; gap: 9px; align-items: center; }
 .playback-controls .primary { flex: 1; }
 .playback-controls .action { padding: 8px 14px; min-height: 46px; }
@@ -344,7 +386,12 @@ progress::-moz-progress-bar { background: var(--cord); }
   .app.is-lesson .head { display: none; }
   .lesson-view { display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px; padding: 2px 16px 12px; }
   .lesson-top, .lesson-heading, .lesson-view .lesson-layout, .score-panel { display: contents; }
-  .lesson-view .tab, #song-progress, .practice-status, .playback-controls, .lesson-options, .controller-panel { flex: 1 1 100%; min-width: 0; }
+  .lesson-view .tab, #song-progress, .practice-line, .playback-controls, .lesson-options, .controller-panel { flex: 1 1 100%; min-width: 0; }
+  .combo-badge { padding: 2px 9px 3px; }
+  .combo-count { font-size: 19px; }
+  .combo-label { font-size: 13px; }
+  .ribbon-title { font-size: 19px; }
+  .ribbon-detail { font-size: 14px; }
   .lesson-view::before { content: ''; order: -1; flex: 0 0 100%; height: 0; }
   .back-link { order: -4; flex: 0 0 auto; min-width: 44px; font-size: 22px; text-decoration: none; }
   .back-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -498,17 +545,23 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .practice-status { margin-block: 2px; }
   .controller-panel { padding-top: 6px; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+  .combo-badge, .key.is-miss, .progress-track::after { animation: none !important; }
+  .combo-ribbon { animation: ribbon-fade 1.25s linear forwards; }
+}
+@keyframes ribbon-fade { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
 @media (forced-colors: active) {
   .embroidered, .stitched-label { -webkit-text-fill-color: currentColor; filter: none; background: none; }
   .category-card, .action, .step, .key, .bend-key, .input-frame { border: 1px solid ButtonText; }
   .toggle input, .select-frame select { appearance: auto; }
   .toggle input::before, .toggle input::after, .select-chevron { display: none; }
-  .tok.is-playing, .tok.is-expected { outline: 2px solid Highlight; }
+  .tok.is-playing, .tok.is-expected, .tok.is-expected .staff-modifier, .tok.is-playing .staff-modifier, .combo-badge, .combo-ribbon { outline: 2px solid Highlight; }
+  .hit-burst, .key-ripple { display: none; }
   .tok::before, .tok::after { display: none; }
   .universe-chip { border: 1px solid ButtonText; }
   .universe-chip:has(input:checked) { outline: 3px solid Highlight; outline-offset: -3px; }
-  .category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-expected, .key.is-active, .bend-key.is-active, .app-nav a[aria-current='page'] { outline: 3px solid Highlight; outline-offset: -3px; }
+  .category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-expected, .key.is-active, .bend-key.is-active, .bend-key.is-expected, .app-nav a[aria-current='page'] { outline: 3px solid Highlight; outline-offset: -3px; }
   .app::after { display: none; }
 }
 @supports not (background-clip: text) { .embroidered, .stitched-label { -webkit-text-fill-color: currentColor; background: none; filter: none; } }

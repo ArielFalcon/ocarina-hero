@@ -67,3 +67,35 @@ export function staffTransition(
   if (from === to) return 'reflow';
   return to > from ? 'forward' : 'backward';
 }
+
+export interface Combo { streak: number; best: number }
+export interface ComboMilestone { streak: number; tier: number; label: string }
+
+/** Consecutive-hit thresholds; each one raises the reward tier. */
+const COMBO_TIERS = [
+  { at: 5, label: 'Good' },
+  { at: 10, label: 'Great' },
+  { at: 20, label: 'Superb' },
+  { at: 30, label: 'Brilliant' },
+  { at: 50, label: 'Legendary' },
+] as const;
+const LEGENDARY_EVERY = 25;
+
+/** Reward tier for a streak: 0 below the first threshold, then one per threshold reached. */
+export function comboTier(streak: number): number {
+  return COMBO_TIERS.filter(tier => streak >= tier.at).length;
+}
+
+/** Score one practice attempt; a milestone fires only on the hit that reaches a threshold. */
+export function scoreCombo(combo: Combo, hit: boolean): { combo: Combo; milestone: ComboMilestone | null; broken: boolean } {
+  if (!hit) return { combo: { streak: 0, best: combo.best }, milestone: null, broken: combo.streak > 0 };
+  const streak = combo.streak + 1;
+  const last = COMBO_TIERS[COMBO_TIERS.length - 1]!;
+  const reached = COMBO_TIERS.find(tier => tier.at === streak)
+    ?? (streak > last.at && (streak - last.at) % LEGENDARY_EVERY === 0 ? last : undefined);
+  return {
+    combo: { streak, best: Math.max(combo.best, streak) },
+    milestone: reached ? { streak, tier: comboTier(streak), label: reached.label } : null,
+    broken: false,
+  };
+}

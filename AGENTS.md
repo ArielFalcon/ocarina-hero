@@ -2,6 +2,8 @@
 
 Read [the ocarina catalogue skill](skills/ocarina-catalogue/SKILL.md) before curating song fragments, expanding the catalogue, or preparing aligned audio/melody corpus items. Its detailed pipeline is the quality contract for this project.
 
+Every song added to the app must be classified in `src/ui/songbook.ts` following the skill's "Songbook Metadata" rules: song-only title, franchise universe, specific version, and artist shown only for Pop and Classics.
+
 Keep downloaded media outside this project. `out` is an ignored symlink to `../ocarina-tabs-media`. Retain only matching original audio clips for new corpus items; distinguish them from synthesized previews.
 
 ## Visual identity

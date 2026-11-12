@@ -42,6 +42,23 @@ Use for curated song fragments, catalogue expansion, source corroboration, or al
 7. Obtain only the corresponding original clip; retain provenance and alignment state separately from adapted notes.
 8. Audit previews, source fidelity and corpus alignment independently. Run focused checks, then final tests/build once.
 
+## Songbook Metadata
+
+Every bundled song gets an explicit entry in `src/ui/songbook.ts`; none may fall back to `Other melodies`. The card shows `title`, then `universe · version`.
+
+| Field | Rule | Example |
+| --- | --- | --- |
+| `title` | Song name only: no franchise, artist, dash or `·` | `Cornfield Chase`, not `Cornfield Chase — Hans Zimmer` |
+| `universe` | The franchise for games, anime, film and TV; `Pop` or `Classics` when there is none. Reuse an existing universe before creating one | `Super Mario`, not `Super Mario 64` |
+| `version` | Specific game, film, season or arrangement inside the universe | `Super Mario 64`, `Spirited Away`, `Season 2 opening` |
+| `artist` | Only in `Pop` and `Classics`; join performers with `&` | `PinkPantheress & Zara Larsson` |
+| `aliases` | Composers and performers of franchise songs, alternate and original titles, so they stay searchable | `['Hans Zimmer']`, `['On The Way']` |
+| `categories` | Primary first: `Games`, `Anime`, `Film` (includes TV), `Pop`, `Classics`. Add a second only when the song genuinely belongs to both | Studio Ghibli: `['Anime', 'Film']` |
+
+- A franchise theme without a proper name is titled `Main Theme`; keep the full name as an alias.
+- Verify the franchise of a new song from a primary source; manifest categories such as `Anime / 2026` are not enough.
+- The generated title in `catalogue.ts` never replaces this entry. `scripts/songbook.test.ts` enforces these rules for every bundled song.
+
 ## Output Contract
 
 Return accepted/rejected/pending status per approved fragment, evidence, deviations, exact source selection, adaptation, exports and verification limits. Never describe pending material as validated. Follow the acceptance checklist and corpus fields in the pipeline.

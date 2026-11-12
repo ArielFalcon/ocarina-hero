@@ -1,0 +1,13 @@
+{
+  "name": "Ocarina Hero",
+  "short_name": "Ocarina Hero",
+  "icons": [
+    { "src": "icons/app/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/app/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#293529",
+  "background_color": "#293529",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone"
+}

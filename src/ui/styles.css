@@ -48,7 +48,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 #main-content { scrollbar-color: #aa8341 #18251b; scrollbar-width: thin; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior-y: contain; scrollbar-gutter: stable; }
 .tapestry-edge { flex-shrink: 0; height: var(--tapestry-band-height); background: url('/art/tapestry-band.jpg') top / 100% auto; }
 .head { flex-shrink: 0; display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 22px; border-bottom: 1px dashed #a5824259; }
-.brand { font: 600 25px/1.2 Georgia, serif; text-decoration: none; letter-spacing: -.045em; }
+.brand { display: inline-flex; gap: .3em; align-items: center; font: 600 25px/1.2 Georgia, serif; text-decoration: none; letter-spacing: -.045em; }
+.brand-icon { flex-shrink: 0; width: 1.55em; height: 1.55em; filter: drop-shadow(0 1px 1.5px #110f09b3); }
 h1, h2, p { overflow-wrap: anywhere; }
 h1 { font: 600 37px/1.08 Georgia, serif; margin: 0 0 12px; letter-spacing: -.035em; }
 h2 { font: 400 25px/1.2 Georgia, serif; margin: 0 0 14px; }

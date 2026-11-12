@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#293529" />
+    <meta name="description" content="Find a melody and learn to play it on the ocarina, one passage at a time." />
+    <title>Ocarina Tabs</title>
+    <link rel="preload" href="/fonts/im-fell-english.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/ui/styles.css" />
+  </head>
+  <body>
+    <svg class="thread-filters" xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true"><defs>
+      <filter id="satin-edge" x="-5%" y="-12%" width="110%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".8 .52" numOctaves="3" seed="17" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale="1.15" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="cord-edge" x="-5%" y="-15%" width="110%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".23 .62" numOctaves="3" seed="8" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="soft-thread" x="-6%" y="-15%" width="112%" height="140%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".5 .7" numOctaves="2" seed="9" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale=".45" xChannelSelector="R" yChannelSelector="G"/></filter>
+    </defs></svg>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="app">
+      <picture class="tapestry-art" aria-hidden="true">
+        <source media="(min-width: 800px)" srcset="/art/tree-desktop.webp" width="2172" height="724" />
+        <img src="/art/tree-mobile.webp" width="1536" height="1024" alt="" decoding="async" />
+      </picture>
+      <div class="tapestry-edge" aria-hidden="true"></div>
+      <header class="head">
+        <a class="brand embroidered" href="#catalog">Ocarina Tabs</a>
+      </header>
+      <main id="main-content" tabindex="-1">
+        <section id="catalog-view" class="view" aria-labelledby="catalog-title">
+          <div class="catalog-hero">
+            <div class="hero-copy">
+              <p class="eyebrow stitched-label">Your songbook</p>
+              <h1 id="catalog-title" class="embroidered">What will<br>you play?</h1>
+              <p class="subtitle stitched-label">A song for every adventure.</p>
+            </div>
+          </div>
+          <div class="catalog-content">
+            <div class="field search-field">
+              <label for="song-search" class="stitched-label">Find a melody</label>
+              <span class="input-frame"><input id="song-search" type="search" placeholder="Song, artist or universe…" autocomplete="off" /></span>
+            </div>
+            <details id="catalog-filters" class="catalog-filters" open>
+            <summary id="filter-summary" class="stitched-label">Categories &amp; universes</summary>
+            <fieldset class="category-selector">
+              <legend class="stitched-label">Explore by category</legend>
+              <div id="categories" class="category-grid"></div>
+            </fieldset>
+            <div class="catalog-facets">
+              <fieldset class="universe-filter">
+                <legend class="stitched-label">Universe</legend>
+                <button id="universe-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="universe-panel"></button>
+                <div id="universe-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="universes" class="universe-row"></div></div></div>
+              </fieldset>
+            </div>
+            </details>
+            <div class="catalog-layout">
+              <div>
+                <div class="catalog-count"><p id="catalog-count" role="status" aria-live="polite"></p><button id="reset-search" type="button" class="text-button" hidden>Clear filters</button></div>
+                <div id="demos" class="song-list"></div>
+                <button id="load-more" type="button" class="action full" hidden><span class="stitched-label">More melodies</span></button>
+              </div>
+              <aside class="catalog-aside">
+                <h2 class="embroidered">One passage<br>at a time.</h2>
+                <p>Listen to a melody, follow the staff and make it yours on the controller.</p>
+                <button class="action" type="button" data-view-link="free"><span class="stitched-label">Try free play</span></button>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section id="lesson-view" class="view lesson-view" aria-labelledby="lesson-title" hidden>
+          <div class="lesson-top"><button class="text-button back-link" type="button" data-view-link="catalog"><span aria-hidden="true">←</span><span class="back-label"> Songbook</span></button><button id="save-song" class="text-button" type="button" aria-pressed="false" hidden>Save song</button></div>
+          <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">Your instrument</p><h1 id="lesson-title" class="embroidered">Free play</h1><p id="lesson-meta" class="subtitle stitched-label">Make a little music.</p></div>
+          <div id="song-modes" class="mode-switch" role="group" aria-label="Learning mode" hidden>
+            <button id="listen-mode" class="action" type="button" aria-pressed="true"><span class="stitched-label">Listen</span></button>
+            <button id="practice-mode" class="action" type="button" aria-pressed="false"><span class="stitched-label">Practise</span></button>
+          </div>
+          <div class="lesson-layout">
+            <div class="score-panel">
+              <div id="passage-controls" class="passage-controls">
+                <button id="previous-passage" class="action passage-arrow" type="button" aria-label="Previous passage"><span data-thread-icon="previous"></span><span class="stitched-label">Previous</span></button>
+                <div class="field passage-field"><label for="passage">Passage</label><span class="input-frame select-frame"><select id="passage"></select><span class="select-chevron" aria-hidden="true"></span></span></div>
+                <button id="next-passage" class="action passage-arrow" type="button" aria-label="Next passage"><span class="stitched-label">Next</span><span data-thread-icon="next"></span></button>
+              </div>
+              <div id="tab" class="tab"></div>
+              <div id="song-progress" hidden><div class="progress-heading"><span id="progress-caption" class="stitched-label">Song progress</span><span id="progress-percent">0%</span></div><div class="progress-track"><progress id="progress" value="0" max="1" aria-label="Song position"></progress></div><p id="progress-label" class="meta"></p></div>
+              <p id="practice-status" class="practice-status" role="status" aria-live="polite">Play any note.</p>
+              <div class="playback-controls">
+                <button id="play" class="action primary" type="button" disabled><span class="play-icon" data-thread-icon="play"></span><span class="stitched-label">Play</span></button>
+                <button id="restart" class="action" type="button"><span data-thread-icon="reset"></span><span class="stitched-label">Reset</span></button>
+                <span class="input-frame select-frame rate-field"><span class="rate-icon" data-thread-icon="speed" aria-hidden="true"></span><select id="playback-rate" aria-label="Playback speed" title="Playback speed"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option></select><span class="select-chevron" aria-hidden="true"></span></span>
+              </div>
+              <details class="lesson-options">
+                <summary>Playback &amp; arrangement</summary>
+                <label class="toggle"><input id="repeat-passage" type="checkbox" /><span class="stitched-label">Repeat this passage</span></label>
+                <label class="toggle"><input id="bends" type="checkbox" checked /><span class="stitched-label">Use bends</span></label>
+                <label class="toggle"><input id="simplify" type="checkbox" /><span class="stitched-label">Simplify ornaments</span></label>
+                <button id="clear" class="text-button" type="button">Clear and start free play</button>
+              </details>
+              <p id="song-hint" class="visually-hidden" role="status" aria-live="polite"></p>
+            </div>
+            <section class="controller-panel" aria-labelledby="controller-title">
+              <h2 id="controller-title" class="stitched-label">Your controller</h2>
+              <div id="pad" class="pad"></div><div id="bend-pad" class="bends"></div>
+              <p id="hint" class="hint" aria-live="off">Press a note to begin.</p>
+              <details id="keyboard-settings" class="keyboard-settings desktop-only"><summary><span data-thread-icon="keyboard"></span><span class="stitched-label">Keyboard mapping</span></summary><p class="meta">Choose a control, then press its new key. Each key can control one action.</p><div id="keyboard-bindings" class="keyboard-bindings"></div><p id="keyboard-status" class="meta" role="status" aria-live="polite">Changes are saved in this browser. Escape cancels an assignment.</p><button id="reset-bindings" class="text-button" type="button">Restore default keys</button></details>
+            </section>
+          </div>
+        </section>
+
+        <section id="workshop-view" class="view padded-view workshop" aria-labelledby="workshop-title" hidden>
+          <div class="section-art"><p class="eyebrow stitched-label">Experimental workshop</p><h1 id="workshop-title" class="embroidered">Your own melody</h1><p class="subtitle stitched-label">Bring a recording. Explore its tune.</p></div>
+          <ol class="workshop-steps">
+            <li class="workshop-step">
+              <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">1</span><span class="stitched-label">Choose a recording</span></h2>
+              <div class="file-picker">
+                <label class="action primary" for="file"><span data-thread-icon="music"></span><span class="stitched-label">Choose audio or MIDI</span></label>
+                <input id="file" type="file" accept=".mid,.midi,audio/*" class="visually-hidden" />
+                <span id="file-name" class="file-name">No file selected</span>
+              </div>
+              <p class="meta">Any length works: you will pick up to 15 seconds next. MIDI files import directly. Everything runs on this device.</p>
+            </li>
+            <li class="workshop-step workshop-step-fragment">
+              <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">2</span><span class="stitched-label">Pick the fragment</span></h2>
+              <p class="step-placeholder meta">The waveform appears here after you choose an audio file. MIDI files skip this step.</p>
+              <div id="audio-editor"></div>
+            </li>
+            <li class="workshop-step">
+              <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">3</span><span class="stitched-label">Find the melody</span></h2>
+              <div class="analysis-controls">
+                <div class="field"><label for="audio-mode">Recording type</label><span class="input-frame select-frame"><select id="audio-mode"><option value="main-melody">Song with accompaniment</option><option value="isolated">Single instrument or voice</option></select><span class="select-chevron" aria-hidden="true"></span></span><p id="audio-mode-note" class="meta" hidden>This online version reads clear single-instrument or voice recordings. Songs with accompaniment need the local analysis server.</p></div>
+                <button id="analyze" class="action primary analyze-button" type="button" disabled><span data-thread-icon="play"></span><span class="stitched-label">Analyze fragment</span></button>
+              </div>
+              <div id="analysis-progress" class="analysis-progress" hidden>
+                <span class="thread-spinner" aria-hidden="true"></span>
+                <div class="analysis-progress-copy"><p id="analysis-progress-label" class="analysis-progress-label">Analysing the fragment…</p><p class="meta"><span id="analysis-elapsed" aria-hidden="true">0 s</span> · Usually takes about 10 seconds.</p></div>
+                <button id="cancel-analysis" class="text-button" type="button">Cancel</button>
+              </div>
+              <p id="workshop-status" class="song-hint" role="status" aria-live="polite">Choose a recording to begin.</p>
+              <div class="workshop-actions"><button id="open-import" class="action" type="button" disabled><span class="stitched-label">Open melody</span></button><button id="analysis-download" class="action" type="button" disabled><span class="stitched-label">Download analysis</span></button></div>
+              <p class="notice">Audio extraction is experimental. Some notes may be missed or misidentified; review the result before practising.</p>
+            </li>
+          </ol>
+        </section>
+
+      </main>
+      <footer class="menu-footer">
+        <img class="menu-ornament" src="/art/sword-triforce-v2.webp" width="1920" height="819" alt="" aria-hidden="true" draggable="false" decoding="async" />
+        <nav class="app-nav" aria-label="Main navigation"><a href="#catalog" data-view-link="catalog" aria-current="page"><span data-thread-icon="songbook"></span><span>Songbook</span></a><a href="#free" data-view-link="free"><span data-thread-icon="music"></span><span>Free play</span></a><a href="#workshop" data-view-link="workshop"><span data-thread-icon="waveform"></span><span>Workshop</span></a></nav>
+      </footer>
+    </div>
+    <script type="module" src="/src/ui/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "ocarina-tabs",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test scripts/*.test.ts",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:static": "MELODY_SERVER=off npm run build",
+    "preview": "vite preview",
+    "preview:tab": "tsx scripts/preview.ts",
+    "setup:melody": "python3 scripts/setup-melody.py",
+    "test:melody": ".runtime-melody/venv/bin/python -m unittest discover -s scripts -p 'test_*.py'"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.7"
+  },
+  "dependencies": {
+    "@tonejs/midi": "^2.0.28",
+    "wavesurfer.js": "8.0.5"
+  }
+}

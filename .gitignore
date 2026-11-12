@@ -1,0 +1,11 @@
+.runtime-melody/
+/out
+.atl/
+__pycache__/
+node_modules/
+dist/
+.vercel/
+.DS_Store
+.codegraph/
+# Stray screenshot output from tooling; never source.
+/undefined/

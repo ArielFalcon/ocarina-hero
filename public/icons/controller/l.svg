@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 56">
+  <title>L shoulder button</title>
+  <rect x="2" y="10" width="100" height="42" rx="19" fill="#101211"/>
+  <rect x="3" y="3" width="98" height="40" rx="17" fill="#a09a99" stroke="#151615" stroke-width="4"/>
+  <path d="M21 7h62" fill="none" stroke="#c2bcba" stroke-width="1.5"/>
+  <text x="52" y="33" text-anchor="middle" fill="#111411" font-family="Arial, sans-serif" font-size="32" font-weight="400">L</text>
+</svg>

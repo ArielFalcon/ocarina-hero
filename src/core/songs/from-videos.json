@@ -1,0 +1,485 @@
+[
+  {
+    "id": "v1",
+    "title": "In the End",
+    "tempoBpm": 60,
+    "notes": [
+      {
+        "midi": 74,
+        "startBeat": 1.086,
+        "durationBeats": 0.636
+      },
+      {
+        "midi": 81,
+        "startBeat": 1.741,
+        "durationBeats": 0.578
+      },
+      {
+        "midi": 81,
+        "startBeat": 2.339,
+        "durationBeats": 0.485
+      },
+      {
+        "midi": 77,
+        "startBeat": 2.885,
+        "durationBeats": 0.537
+      },
+      {
+        "midi": 76,
+        "startBeat": 3.442,
+        "durationBeats": 0.56
+      },
+      {
+        "midi": 76,
+        "startBeat": 4.023,
+        "durationBeats": 0.549
+      },
+      {
+        "midi": 76,
+        "startBeat": 4.592,
+        "durationBeats": 0.427
+      },
+      {
+        "midi": 76,
+        "startBeat": 5.103,
+        "durationBeats": 0.276
+      },
+      {
+        "midi": 77,
+        "startBeat": 5.416,
+        "durationBeats": 0.27
+      },
+      {
+        "midi": 74,
+        "startBeat": 5.706,
+        "durationBeats": 0.555
+      },
+      {
+        "midi": 81,
+        "startBeat": 6.281,
+        "durationBeats": 0.415
+      },
+      {
+        "midi": 81,
+        "startBeat": 6.827,
+        "durationBeats": 0.468
+      },
+      {
+        "midi": 77,
+        "startBeat": 7.407,
+        "durationBeats": 0.468
+      },
+      {
+        "midi": 76,
+        "startBeat": 8.034,
+        "durationBeats": 0.543
+      },
+      {
+        "midi": 76,
+        "startBeat": 8.597,
+        "durationBeats": 0.531
+      },
+      {
+        "midi": 76,
+        "startBeat": 9.149,
+        "durationBeats": 0.386
+      },
+      {
+        "midi": 76,
+        "startBeat": 9.66,
+        "durationBeats": 0.305
+      },
+      {
+        "midi": 77,
+        "startBeat": 9.985,
+        "durationBeats": 0.253
+      },
+      {
+        "midi": 74,
+        "startBeat": 10.257,
+        "durationBeats": 0.468
+      },
+      {
+        "midi": 81,
+        "startBeat": 10.838,
+        "durationBeats": 0.433
+      },
+      {
+        "midi": 81,
+        "startBeat": 11.459,
+        "durationBeats": 0.462
+      },
+      {
+        "midi": 77,
+        "startBeat": 11.987,
+        "durationBeats": 0.531
+      },
+      {
+        "midi": 76,
+        "startBeat": 12.539,
+        "durationBeats": 0.572
+      },
+      {
+        "midi": 76,
+        "startBeat": 13.131,
+        "durationBeats": 0.549
+      },
+      {
+        "midi": 76,
+        "startBeat": 13.735,
+        "durationBeats": 0.439
+      },
+      {
+        "midi": 76,
+        "startBeat": 14.28,
+        "durationBeats": 0.241
+      },
+      {
+        "midi": 77,
+        "startBeat": 14.541,
+        "durationBeats": 0.27
+      },
+      {
+        "midi": 74,
+        "startBeat": 14.832,
+        "durationBeats": 0.531
+      },
+      {
+        "midi": 81,
+        "startBeat": 15.383,
+        "durationBeats": 0.56
+      },
+      {
+        "midi": 81,
+        "startBeat": 15.964,
+        "durationBeats": 0.578
+      },
+      {
+        "midi": 77,
+        "startBeat": 16.562,
+        "durationBeats": 0.531
+      },
+      {
+        "midi": 76,
+        "startBeat": 17.113,
+        "durationBeats": 0.311
+      }
+    ]
+  },
+  {
+    "id": "v2",
+    "title": "Never Gonna Give You Up",
+    "tempoBpm": 60,
+    "notes": [
+      {
+        "midi": 74,
+        "startBeat": 0.012,
+        "durationBeats": 0.421
+      },
+      {
+        "midi": 81,
+        "startBeat": 0.975,
+        "durationBeats": 0.317
+      },
+      {
+        "midi": 79,
+        "startBeat": 1.393,
+        "durationBeats": 0.7
+      },
+      {
+        "midi": 75,
+        "startBeat": 2.142,
+        "durationBeats": 0.903
+      },
+      {
+        "midi": 79,
+        "startBeat": 3.106,
+        "durationBeats": 0.386
+      },
+      {
+        "midi": 77,
+        "startBeat": 3.558,
+        "durationBeats": 0.404
+      },
+      {
+        "midi": 75,
+        "startBeat": 3.982,
+        "durationBeats": 0.473
+      },
+      {
+        "midi": 75,
+        "startBeat": 4.54,
+        "durationBeats": 0.572
+      },
+      {
+        "midi": 77,
+        "startBeat": 5.132,
+        "durationBeats": 0.514
+      },
+      {
+        "midi": 79,
+        "startBeat": 5.677,
+        "durationBeats": 0.293
+      },
+      {
+        "midi": 74,
+        "startBeat": 5.991,
+        "durationBeats": 1.222
+      },
+      {
+        "midi": 78,
+        "startBeat": 7.274,
+        "durationBeats": 1.687
+      }
+    ]
+  },
+  {
+    "id": "v3",
+    "title": "Axel F",
+    "tempoBpm": 60,
+    "notes": [
+      {
+        "midi": 74,
+        "startBeat": 0.128,
+        "durationBeats": 0.497
+      },
+      {
+        "midi": 77,
+        "startBeat": 0.644,
+        "durationBeats": 0.334
+      },
+      {
+        "midi": 74,
+        "startBeat": 0.998,
+        "durationBeats": 0.172
+      },
+      {
+        "midi": 73,
+        "startBeat": 1.689,
+        "durationBeats": 1.025
+      },
+      {
+        "midi": 81,
+        "startBeat": 2.734,
+        "durationBeats": 0.357
+      },
+      {
+        "midi": 74,
+        "startBeat": 3.111,
+        "durationBeats": 0.154
+      },
+      {
+        "midi": 74,
+        "startBeat": 3.355,
+        "durationBeats": 0.102
+      },
+      {
+        "midi": 82,
+        "startBeat": 3.495,
+        "durationBeats": 0.177
+      },
+      {
+        "midi": 81,
+        "startBeat": 3.762,
+        "durationBeats": 0.195
+      },
+      {
+        "midi": 77,
+        "startBeat": 4.023,
+        "durationBeats": 0.247
+      },
+      {
+        "midi": 74,
+        "startBeat": 4.377,
+        "durationBeats": 0.224
+      },
+      {
+        "midi": 77,
+        "startBeat": 4.621,
+        "durationBeats": 0.247
+      },
+      {
+        "midi": 86,
+        "startBeat": 4.917,
+        "durationBeats": 0.264
+      },
+      {
+        "midi": 74,
+        "startBeat": 5.393,
+        "durationBeats": 0.189
+      },
+      {
+        "midi": 75,
+        "startBeat": 5.637,
+        "durationBeats": 1.721
+      }
+    ]
+  },
+  {
+    "id": "v4",
+    "title": "Littleroot Town",
+    "tempoBpm": 60,
+    "notes": [
+      {
+        "midi": 72,
+        "startBeat": 0.081,
+        "durationBeats": 0.317
+      },
+      {
+        "midi": 78,
+        "startBeat": 0.418,
+        "durationBeats": 0.514
+      },
+      {
+        "midi": 81,
+        "startBeat": 1.045,
+        "durationBeats": 1.205
+      },
+      {
+        "midi": 81,
+        "startBeat": 2.328,
+        "durationBeats": 0.485
+      },
+      {
+        "midi": 81,
+        "startBeat": 2.932,
+        "durationBeats": 0.322
+      },
+      {
+        "midi": 82,
+        "startBeat": 3.274,
+        "durationBeats": 0.317
+      },
+      {
+        "midi": 84,
+        "startBeat": 3.843,
+        "durationBeats": 0.502
+      },
+      {
+        "midi": 86,
+        "startBeat": 4.464,
+        "durationBeats": 0.172
+      },
+      {
+        "midi": 80,
+        "startBeat": 4.795,
+        "durationBeats": 0.752
+      },
+      {
+        "midi": 85,
+        "startBeat": 5.695,
+        "durationBeats": 0.322
+      },
+      {
+        "midi": 86,
+        "startBeat": 6.037,
+        "durationBeats": 0.497
+      },
+      {
+        "midi": 76,
+        "startBeat": 6.629,
+        "durationBeats": 1.054
+      },
+      {
+        "midi": 80,
+        "startBeat": 7.918,
+        "durationBeats": 0.578
+      },
+      {
+        "midi": 77,
+        "startBeat": 8.58,
+        "durationBeats": 0.334
+      },
+      {
+        "midi": 76,
+        "startBeat": 8.934,
+        "durationBeats": 0.276
+      },
+      {
+        "midi": 77,
+        "startBeat": 9.23,
+        "durationBeats": 0.201
+      },
+      {
+        "midi": 81,
+        "startBeat": 9.497,
+        "durationBeats": 0.172
+      },
+      {
+        "midi": 86,
+        "startBeat": 9.816,
+        "durationBeats": 0.508
+      },
+      {
+        "midi": 74,
+        "startBeat": 10.432,
+        "durationBeats": 0.514
+      },
+      {
+        "midi": 77,
+        "startBeat": 11.082,
+        "durationBeats": 1.071
+      },
+      {
+        "midi": 83,
+        "startBeat": 12.283,
+        "durationBeats": 0.595
+      },
+      {
+        "midi": 82,
+        "startBeat": 12.899,
+        "durationBeats": 0.293
+      },
+      {
+        "midi": 81,
+        "startBeat": 13.212,
+        "durationBeats": 0.241
+      },
+      {
+        "midi": 77,
+        "startBeat": 13.502,
+        "durationBeats": 1.042
+      },
+      {
+        "midi": 86,
+        "startBeat": 14.652,
+        "durationBeats": 0.282
+      },
+      {
+        "midi": 81,
+        "startBeat": 14.954,
+        "durationBeats": 0.224
+      },
+      {
+        "midi": 80,
+        "startBeat": 15.25,
+        "durationBeats": 0.601
+      },
+      {
+        "midi": 77,
+        "startBeat": 15.9,
+        "durationBeats": 1.205
+      },
+      {
+        "midi": 77,
+        "startBeat": 17.299,
+        "durationBeats": 0.288
+      },
+      {
+        "midi": 75,
+        "startBeat": 17.607,
+        "durationBeats": 1.304
+      },
+      {
+        "midi": 77,
+        "startBeat": 18.93,
+        "durationBeats": 0.09
+      },
+      {
+        "midi": 78,
+        "startBeat": 19.168,
+        "durationBeats": 0.595
+      }
+    ]
+  }
+]

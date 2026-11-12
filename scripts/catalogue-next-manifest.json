@@ -1,0 +1,1791 @@
+[
+  {
+    "id": "numb",
+    "title": "Linkin Park \u2014 Numb",
+    "category": "pop",
+    "hook": "Opening keyboard hook",
+    "source": {
+      "file": "out/catalogue-next/numb.mid",
+      "page": "https://bitmidi.com/linkin_park-numb-mid",
+      "url": "https://bitmidi.com/uploads/68942.mid",
+      "sha256": "b8768a0e23f608c4fb5ecf534ddaa31947249bb763d3a01dd9e2ff94a6d5551f"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Keyboard introduction: three pickup eighths and two complete answering figures. All twelve pitches and relative onsets corroborated by the score, including terminal ties; source110 BPM versus score108 BPM.",
+      "urls": [
+        "https://www.thepianonotes.com/wp-content/uploads/2021/12/Numb-Sheet-Music-Linkin-Park-thepianonotes.com_.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        73,
+        76,
+        73,
+        78,
+        81,
+        80,
+        73,
+        76,
+        73,
+        81,
+        80,
+        76
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/numb/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "imperial-march",
+    "title": "Star Wars \u2014 Imperial March",
+    "category": "film",
+    "hook": "First march phrase",
+    "source": {
+      "file": "out/catalogue-next/imperial-march.mid",
+      "page": "https://bitmidi.com/imperial-mid",
+      "url": "https://bitmidi.com/uploads/29414.mid",
+      "sha256": "c126cc55bba8d4adc552da4ce5f135d1f4d10555ba9aaab7b6893d43ab90d81a"
+    },
+    "trackIndex": 6,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first two march statements, melody track6 rather than octave double track7. Eighteen pitches match the D-minor score transposed+5. Source humanized onsets and shortened orchestral articulation are retained; score durations are not identical.",
+      "urls": [
+        "https://we.riseup.net/assets/4817/imperialmarchc.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        62,
+        62,
+        62,
+        58,
+        65,
+        62,
+        58,
+        65,
+        62,
+        69,
+        69,
+        69,
+        70,
+        65,
+        61,
+        58,
+        65,
+        62
+      ],
+      "pitchShift": 5
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/imperial-march/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "once-upon-a-time",
+    "title": "Undertale \u2014 Once Upon a Time",
+    "category": "gaming",
+    "hook": "First opening phrase",
+    "source": {
+      "file": "out/catalogue-next/once-upon-a-time.mid",
+      "page": "https://www.vgmusic.com/file/50416c2b05939701325d225b513e3ee2.html",
+      "url": "https://www.vgmusic.com/music/computer/microsoft/windows/UT_Once_Upon_A_Time_Lu9.mid",
+      "sha256": "a0492992e6a0d289f3158327ce4eb558c149580b487f748c04882d3b13bab775"
+    },
+    "trackIndex": 2,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete opening four-measure statement from the direct melody channel, excluding delayed echo tracks. Thirteen pitches match Darren Ang's arrangement transposed+2; onset pattern matches at two MIDI beats per score quarter. Ang's rests differ from sustained source articulation.",
+      "urls": [
+        "https://static1.squarespace.com/static/5c3449ef55b02c9498c7c143/t/5e2172317ecee047b544815f/1579250225928/03%2B-%2BOnce%2BUpon%2BA%2BTime%2B-%2BFull%2BScore.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        84,
+        79,
+        77,
+        84,
+        72,
+        72,
+        77,
+        84,
+        86,
+        84,
+        79,
+        77
+      ],
+      "pitchShift": 2
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/once-upon-a-time/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "fallen-down",
+    "title": "Undertale \u2014 Fallen Down",
+    "category": "gaming",
+    "hook": "First main melody phrase",
+    "source": {
+      "file": "out/catalogue-next/fallen-down.mid",
+      "page": "https://www.vgmusic.com/file/35bed025662c837aeaf1c36420069ff2.html",
+      "url": "https://www.vgmusic.com/music/computer/microsoft/windows/Undertale-Toriels_Theme.mid",
+      "sha256": "fa7801be6babf9ccb009374a641a2d40e3464abb91f0a97425d38d66bc79a5fb"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      43,
+      45
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First complete eight-measure waltz phrase. The final two upper chord tones E5/D-sharp5 are selected explicitly, not their B4 harmony. Forty-four pitches match the score transposed+2; regular eighth-note rhythm, quarter and final chord onsets match. Source note tails are about95% of their notated values.",
+      "urls": [
+        "https://truongca.com/images/sheet/pdf/fallen/fallen-down-piano-toby-fox-truongca.com.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        78,
+        73,
+        78,
+        73,
+        78,
+        73,
+        78,
+        73,
+        78,
+        73,
+        78,
+        73,
+        71,
+        69,
+        73,
+        69,
+        71,
+        76,
+        75,
+        76,
+        78,
+        75,
+        71,
+        78,
+        71,
+        78,
+        71,
+        78,
+        71,
+        78,
+        70,
+        78,
+        70,
+        79,
+        70,
+        78,
+        74,
+        78,
+        74,
+        76,
+        78,
+        76,
+        74,
+        73
+      ],
+      "pitchShift": 2
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/fallen-down/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "all-star",
+    "title": "Smash Mouth \u2014 All Star",
+    "category": "pop",
+    "hook": "First chorus phrase",
+    "source": {
+      "file": "out/catalogue-next/all-star.mid",
+      "page": "https://bitmidi.com/smash-mouth-all-star-mid",
+      "url": "https://bitmidi.com/uploads/94634.mid",
+      "sha256": "d1b6d92ff41231632925f7279685c628b4d2c2d3a8873e6e2529c66c6c2b3803"
+    },
+    "trackIndex": 0,
+    "indices": [
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First two parallel chorus lines, vocal Staff track0. Twenty-four pitches and onsets corroborated against Peter Laib's quartet melody (transposed-2); repeated first line is fully retained. MIDI holds some notes through rests written for brass articulation; no duration equivalence claimed.",
+      "urls": [
+        "https://tubapeter.com/free_pdfs/SmashMouth_AllStar/SmashMouth_AllStar_Tuba4tet_ScoreParts.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        60,
+        56,
+        56,
+        53,
+        56,
+        56,
+        56,
+        53,
+        56,
+        56,
+        56,
+        60,
+        60,
+        56,
+        56,
+        53,
+        56,
+        56,
+        56,
+        53,
+        56,
+        56,
+        56,
+        60
+      ],
+      "pitchShift": -2
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/all-star/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "pirate",
+    "title": "Pirates of the Caribbean \u2014 He\u2019s a Pirate",
+    "category": "film",
+    "hook": "First lead theme phrase",
+    "source": {
+      "file": "out/catalogue-next/pirate.mid",
+      "page": "https://bitmidi.com/pirates-of-the-caribbean-hes-a-pirate-1-mid",
+      "url": "https://bitmidi.com/uploads/85261.mid",
+      "sha256": "4df5b64422f94e901545832b1dbe7cce9d8833b7fd46008060a4a66b38819833"
+    },
+    "trackIndex": 0,
+    "indices": [
+      25,
+      26,
+      29,
+      32,
+      35,
+      38,
+      41,
+      44,
+      47,
+      49,
+      52,
+      55,
+      57,
+      59,
+      61,
+      63,
+      64,
+      65,
+      68,
+      71,
+      73,
+      75,
+      78,
+      81,
+      83,
+      85,
+      88,
+      91,
+      93,
+      95,
+      98
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Pickup and first two answering lead statements. Explicit score-guided melody events from the Right Hand track preserve repeated attacks; auxiliary track3 sustains over them and is not used. Thirty-one pitches corroborated with Dimitris Theologistis's score. Score articulation includes rests where MIDI sustains; source timing remains unedited.",
+      "urls": [
+        "https://electricodysseas.com/wp-content/uploads/2020/11/Hes-A-Pirate-easy-Piano.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        57,
+        60,
+        62,
+        62,
+        62,
+        64,
+        65,
+        65,
+        65,
+        67,
+        64,
+        64,
+        62,
+        60,
+        60,
+        62,
+        57,
+        60,
+        62,
+        62,
+        62,
+        64,
+        65,
+        65,
+        65,
+        67,
+        64,
+        64,
+        62,
+        60,
+        62
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/pirate/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original clip identity, exact timing and source pitch alignment require a separate audit; adapted labels are not original-audio labels."
+    }
+  },
+  {
+    "id": "laputa",
+    "title": "Castle in the Sky \u2014 Main Theme",
+    "category": "anime",
+    "hook": "First lyrical theme phrase",
+    "source": {
+      "file": "out/catalogue-next/laputa.mid",
+      "page": "https://bitmidi.com/laputa-castle-in-the-sky-laputa-theme-mid",
+      "url": "https://bitmidi.com/uploads/67573.mid",
+      "sha256": "0b347620ddc517df28358c729fe46b2dee2ab1e9243abe02f06793f8e10591a3"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first two lyrical statements, including the opening pickup; all13 pitches and dotted/eighth/held rhythmic patterns match the rendered Laputa score, measures1\u20135. Source articulation is90% of score values in many notes; source timing is retained.",
+      "urls": [
+        "https://barapartitions.com/wp-content/uploads/2022/11/Le-chateau-dans-le-ciel-Laputa.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        74,
+        75,
+        74,
+        75,
+        79,
+        74,
+        67,
+        72,
+        70,
+        72,
+        75,
+        70
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/laputa/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "l-theme",
+    "title": "Death Note \u2014 L\u2019s Theme",
+    "category": "anime",
+    "hook": "Piano motif",
+    "source": {
+      "file": "out/catalogue-next/l-theme.mid",
+      "page": "https://bitmidi.com/death-note-ls-theme-mid",
+      "url": "https://bitmidi.com/uploads/38458.mid",
+      "sha256": "ccf853545dbbfb69d1940d0989bc3b5843719440dda5b4958ddffd4bc1f2405c"
+    },
+    "trackIndex": 5,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete four-measure piano motif, before accompaniment enters. The rendered score confirms all27 pitches and eighth-note succession with changing7/8 and6/8 grouping; the final E5 is retained. Humanized onsets and short piano articulation remain as in the source.",
+      "urls": [
+        "https://en.truongca.com/images/sheet/pdf/death/death-note-l-s-theme-piano-undefined-truongca.com.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        79,
+        76,
+        81,
+        76,
+        78,
+        79,
+        76,
+        83,
+        81,
+        79,
+        78,
+        76,
+        74,
+        79,
+        76,
+        81,
+        76,
+        78,
+        79,
+        76,
+        83,
+        81,
+        79,
+        78,
+        76,
+        74,
+        76
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/l-theme/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "always-with-me",
+    "title": "Spirited Away \u2014 Always With Me",
+    "category": "anime",
+    "hook": "First vocal phrase",
+    "source": {
+      "file": "out/catalogue-next/derived/always-with-me.mid",
+      "page": "https://bitmidi.com/spirited-away-itsumo-nando-demo-mid",
+      "url": "https://bitmidi.com/uploads/96222.mid",
+      "sha256": "b02ceeb5a50d5d0b22330284c804ccdf17ccb17ee6f00a91a04336c1865a6b8d",
+      "derivation": {
+        "rawFile": "out/catalogue-next/always-with-me.mid",
+        "rawSha256": "5a5446a42be36dac0d5d9d0d215dd4f84bce09592c6cecc60116ec8a7ab652ef",
+        "rawTrackIndex": 0,
+        "rawIndices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "method": "The raw MIDI omits tempo and encodes score eighths as quarter-of-a-beat events. Normalize the notated beat scale and performance tempo to the inspected130BPM3/4score; every pitch and relative rhythm is retained. Raw default120BPMwould play almost twice too fast.",
+        "timeScale": 1.8461538461538463,
+        "targetTempo": 130,
+        "articulationEdits": []
+      }
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First complete vocal phrase through the E5 cadence. Fourteen pitches and eighth/dotted-quarter/quarter/half rhythm match Schleicher's score, measures4\u20138. Explicit derived source corrects missing tempo and doubled rhythmic resolution; it is not an untouched MIDI timing claim.",
+      "urls": [
+        "https://easymusicnotes.com/many-pdf/Always_With_Me_Spirited_Away.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        77,
+        79,
+        81,
+        77,
+        84,
+        81,
+        79,
+        84,
+        79,
+        77,
+        74,
+        81,
+        77,
+        76
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/always-with-me/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "merry-go-round",
+    "title": "Howl\u2019s Moving Castle \u2014 Merry-Go-Round of Life",
+    "category": "anime",
+    "hook": "First main waltz phrase",
+    "source": {
+      "file": "out/catalogue-next/merry-go-round.mid",
+      "page": "https://bitmidi.com/joe-hisaishi-merry-go-round-of-life-howls-moving-castle-mid",
+      "url": "https://bitmidi.com/uploads/63179.mid",
+      "sha256": "42151989424419fc5aede85f2e743a1d92080ef20177be7d4c2b5aa6468af644"
+    },
+    "trackIndex": 2,
+    "indices": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Opening main waltz statement with its D4 pickup, excluding the preceding free piano introduction. All9 pitches and sustained D/B-flat cadence match the inspected Howl piano score at the first waltz entrance (measure23 onward). The following answering statement is outside this agreed first phrase.",
+      "urls": [
+        "https://musescore.com/user/7445276/scores/5920093",
+        "https://drive.google.com/uc?export=download&id=1R92ghVHjLzGRAuLXZE46pGTIPThOC7IZ"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        62,
+        67,
+        70,
+        74,
+        74,
+        72,
+        70,
+        69,
+        70
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/merry-go-round/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "moonlight",
+    "title": "Sailor Moon \u2014 Moonlight Densetsu",
+    "category": "anime",
+    "hook": "First vocal hook",
+    "source": {
+      "file": "out/catalogue-next/moonlight.mid",
+      "page": "https://bitmidi.com/sailor-moon-moonlight-densetsu-moonlight-legend-mid",
+      "url": "https://bitmidi.com/uploads/91027.mid",
+      "sha256": "0a2940995398137682019109b780073d699b9a2f53f2b1f67891faebd2893b8d"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      8,
+      11,
+      13,
+      16,
+      19,
+      23,
+      25,
+      27,
+      29,
+      32,
+      34,
+      37,
+      39,
+      41,
+      43,
+      46
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete opening two vocal statements with pickup. All21 pitches match Alecat's accordion transcription; repeated attacks are distinguished from ties. Source piano follows the same dotted/syncopated phrase structure, with some articulation differences. Lowest G4 through B-flat5 spans15semitones.",
+      "urls": [
+        "https://ale.chenonetta.com/blog/wp-content/uploads/2014/08/moonlight_densetsu.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        67,
+        72,
+        75,
+        79,
+        79,
+        77,
+        77,
+        75,
+        74,
+        77,
+        71,
+        74,
+        77,
+        80,
+        80,
+        82,
+        80,
+        79,
+        77,
+        75,
+        79
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/moonlight/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "tapion",
+    "title": "Dragon Ball Z \u2014 Tapion\u2019s Theme",
+    "category": "anime",
+    "hook": "Opening solo phrase",
+    "source": {
+      "file": "out/catalogue-next/derived/tapion.mid",
+      "page": "https://bitmidi.com/dragon-ball-z-tapions-theme-mid",
+      "url": "https://bitmidi.com/uploads/41250.mid",
+      "sha256": "726f6983540a3d83a287a3541eca55f01d2c946e32f318e3e30fab1ec8e243ea",
+      "derivation": {
+        "rawFile": "out/catalogue-next/tapion.mid",
+        "rawSha256": "6608aff05af9e3e99bb2adec6d0290e52387b1f307715b5fbe1e61de39950a12",
+        "rawTrackIndex": 1,
+        "rawIndices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "method": "Close evidenced monophonic legato tails at the next melodic attack; retain all pitches and onsets and archive every edit.",
+        "timeScale": 1,
+        "targetTempo": 78.000078000078,
+        "articulationEdits": [
+          {
+            "index": 1,
+            "sourceDurationSeconds": 0.41195279583333333,
+            "preparedDurationSeconds": 0.3905712354166666,
+            "closedTailSeconds": 0.021381560416666723
+          }
+        ]
+      }
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first solo statement. Thirteen pitches match both the rendered piano score and the published ocarina solfege; the score confirms pickup and held-note rhythm. A derived source closes the short overlapping C4 tail; raw MIDI and per-note articulation edits are retained.",
+      "urls": [
+        "https://notes-box.com/notes/tapion-theme-dragon-ball-z/",
+        "https://ocarinalibrary.barretolopes.com/artigos/tapion-s-theme/"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        60,
+        60,
+        65,
+        72,
+        70,
+        68,
+        70,
+        65,
+        67,
+        68,
+        70,
+        68,
+        67
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/tapion/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "pallet-town",
+    "title": "Pok\u00e9mon \u2014 Pallet Town",
+    "category": "gaming",
+    "hook": "First main-theme phrase",
+    "source": {
+      "file": "out/catalogue-next/pallet-town.mid",
+      "page": "https://bitmidi.com/pokemon-redblueyellow-pallet-town-mid",
+      "url": "https://bitmidi.com/uploads/85753.mid",
+      "sha256": "2f48c044e1c2d34881c3d75d0fd02de67320f59ffe193fca64ad40a4e7568e5a"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      10,
+      11,
+      13,
+      15,
+      16,
+      17,
+      19,
+      20,
+      23,
+      24,
+      26,
+      27,
+      29,
+      31,
+      32
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first main-theme period from melody channel2 in the game sequence. All22 pitches and relative attack pattern match the pokered disassembly, including the short C5/B4 decoration before the A4 cadence. Humanized MIDI onsets and articulation are retained.",
+      "urls": [
+        "https://github.com/pret/pokered/blob/master/audio/music/pallettown.asm"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        74,
+        72,
+        71,
+        69,
+        79,
+        76,
+        78,
+        76,
+        74,
+        71,
+        67,
+        67,
+        69,
+        71,
+        72,
+        66,
+        67,
+        69,
+        71,
+        72,
+        71,
+        69
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/pallet-town/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "pokemon-center",
+    "title": "Pok\u00e9mon \u2014 Pok\u00e9mon Center",
+    "category": "gaming",
+    "hook": "Complete opening Pok\u00e9mon Center theme statement",
+    "source": {
+      "file": "out/catalogue-next/pokemon-center.mid",
+      "page": "https://bitmidi.com/pokemon-redblueyellow-pokemon-center-mid",
+      "url": "https://bitmidi.com/uploads/85754.mid",
+      "sha256": "2c9ab066f7fec125fdb9c19565745b02155d1226ff5e699a0eb4f6f3533357b6"
+    },
+    "trackIndex": 1,
+    "indices": [
+      1,
+      4,
+      7,
+      10,
+      14,
+      19,
+      22,
+      25,
+      32,
+      36
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Opening game melody channel2 sub1 plus its A/E response, not the separate healing sound effect. The ten source pitches match the game sequence one octave higher. The complete statement spans E4\u2013A5 (17semitones), so reject rather than omit its low response or fold octaves.",
+      "urls": [
+        "https://github.com/pret/pokered/blob/master/audio/music/pokecenter.asm"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        74,
+        69,
+        74,
+        81,
+        79,
+        78,
+        76,
+        73,
+        69,
+        64
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "lavender-town",
+    "title": "Pok\u00e9mon \u2014 Lavender Town",
+    "category": "gaming",
+    "hook": "First complete theme phrase",
+    "source": {
+      "file": "out/catalogue-next/lavender-town.mid",
+      "page": "https://bitmidi.com/pokemon-redblueyellow-lavender-town-mid",
+      "url": "https://bitmidi.com/uploads/85749.mid",
+      "sha256": "bfa772b0a5a4b860868da1f26cc3d1d6e8947445db9015f44d2aaf7cc7987ecc"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "The iconic opening ostinato: four complete cycles actually present in the source before the lower counter-melody enters, with no inserted repetitions. Its sixteen pitches and quarter-note pulse match melody channel2 in the game disassembly. Source short articulation and tempo are retained.",
+      "urls": [
+        "https://github.com/pret/pokered/blob/master/audio/music/lavender.asm"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        79,
+        83,
+        78,
+        72,
+        79,
+        83,
+        78,
+        72,
+        79,
+        83,
+        78,
+        72,
+        79,
+        83,
+        78
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/lavender-town/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "green-hill",
+    "title": "Sonic \u2014 Green Hill Zone",
+    "category": "gaming",
+    "hook": "First lead phrase",
+    "source": {
+      "file": "out/catalogue-next/green-hill.mid",
+      "page": "https://bitmidi.com/sonic-the-hedgehog-green-hill-zone-mid",
+      "url": "https://bitmidi.com/uploads/95742.mid",
+      "sha256": "ab08c90a59496fe95649934370da3c841b0a59217d792e2977649ca614dc5d68"
+    },
+    "trackIndex": 0,
+    "indices": [
+      24,
+      29,
+      34,
+      39,
+      44,
+      48,
+      52,
+      57,
+      62
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First complete sustained lead statement after the high arpeggiated introduction. All9 pitches and syncopated attack positions match the Flutetunes lead transcription; the final A is held through its cadence. Source piano articulation and humanization are retained.",
+      "urls": [
+        "https://www.flutetunes.com/tunes.php?id=179"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-next/batches/gaming/green-hill-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/green-hill/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "ff7-victory",
+    "title": "Final Fantasy VII \u2014 Victory Fanfare",
+    "category": "gaming",
+    "hook": "Opening fanfare",
+    "source": {
+      "file": "out/catalogue-next/ff7-victory.mid",
+      "page": "https://bitmidi.com/final-fantasy-vii-victory-fanfare-mid",
+      "url": "https://bitmidi.com/uploads/46458.mid",
+      "sha256": "e3c9275cc29575c047d95c5e204f3ede2a3e998eadb555817112b8a5239d0ab6"
+    },
+    "trackIndex": 0,
+    "indices": [
+      2,
+      6,
+      10,
+      14,
+      18,
+      22,
+      26,
+      30,
+      34
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete opening nine-note victory fanfare before the following accompaniment section. An alternate multichannel FFVII transcription corroborates all9 pitches and the triplet/held pattern. MIDI versions may share ancestry; no independent recording audit is claimed.",
+      "urls": [
+        "https://www.hellandheavennet.com/final-fantasy-7/midis.php"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-next/batches/gaming/ff7-reference.mid",
+      "trackIndex": 1,
+      "indices": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        13,
+        15,
+        17
+      ]
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/ff7-victory/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "green-greens",
+    "title": "Kirby \u2014 Green Greens",
+    "category": "gaming",
+    "hook": "Opening lead phrase",
+    "source": {
+      "file": "out/catalogue-next/green-greens.mid",
+      "page": "https://bitmidi.com/kirbys-dream-land-green-greens-mid",
+      "url": "https://bitmidi.com/uploads/66291.mid",
+      "sha256": "0e20c604438f9b06803fcba2886b0204c7c373a38c0dfb5ccb24670c1a8b3e03"
+    },
+    "trackIndex": 0,
+    "indices": [
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first lead statement and its low G pickup, beginning after the accompaniment introduction. Drew's clarinet score confirms the octave-plus-fourth span from pickup to high climax. Source G5\u2013C7 is17semitones; reject the complete phrase rather than remove the pickup or fold the high C.",
+      "urls": [
+        "https://drewm.com/sheetmusic/vg/kirby/",
+        "https://drewm.com/sheetmusic/files/GreenGreens.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        79,
+        79,
+        84,
+        84,
+        88,
+        91,
+        96,
+        95,
+        93,
+        91,
+        88,
+        91,
+        89,
+        86,
+        88,
+        86,
+        88,
+        86,
+        84
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "wind-scene",
+    "title": "Chrono Trigger \u2014 Wind Scene",
+    "category": "gaming",
+    "hook": "First lyrical melody phrase",
+    "source": {
+      "file": "out/catalogue-next/wind-scene.mid",
+      "page": "https://bitmidi.com/chrono-trigger-wind-scene-mid",
+      "url": "https://bitmidi.com/uploads/24046.mid",
+      "sha256": "645791395acc9b3debdd562d42ce86cf72617496948a076483f83c86d9c7afbf"
+    },
+    "trackIndex": 0,
+    "indices": [
+      7,
+      8,
+      10,
+      12,
+      17,
+      20,
+      24,
+      26,
+      29,
+      31,
+      35,
+      40
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First complete lyrical two-measure statement after the D/E ornamental pickup. Twelve score-guided top-voice events match Kabukibear's printed melody and rhythm; rolled chord offsets are preserved. The ornamental introduction is outside this selected main phrase, whose full span is12semitones.",
+      "urls": [
+        "https://kabukibear.com/dl/109/pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        77,
+        76,
+        72,
+        69,
+        74,
+        74,
+        72,
+        69,
+        65,
+        67,
+        69,
+        67
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/wind-scene/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "gerudo-valley",
+    "title": "Zelda \u2014 Gerudo Valley",
+    "category": "gaming",
+    "hook": "First main-theme phrase",
+    "source": {
+      "file": "out/catalogue-next/gerudo-valley.mid",
+      "page": "https://bitmidi.com/the-legend-of-zelda-ocarina-of-time-gerudo-valley-mid",
+      "url": "https://bitmidi.com/uploads/101374.mid",
+      "sha256": "973b0a16bf4e0ebfecb260d1e86a26f36e6e5e97ddcf21fc3924c742277fbbe5"
+    },
+    "trackIndex": 1,
+    "indices": [
+      181,
+      185,
+      189,
+      193,
+      198,
+      202,
+      207,
+      211,
+      229,
+      233,
+      237,
+      241,
+      246,
+      250,
+      255,
+      259,
+      277,
+      281,
+      285,
+      289,
+      294,
+      298,
+      303,
+      307,
+      325,
+      329,
+      333,
+      337
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "First complete four-harmony lead statement after the guitar introduction. All28 pitches and relative attack positions match Drew's clarinet MIDI one octave above, also checked against its printed score. Explicit voice events exclude the guitar voicings; transcription ancestry is uncertain.",
+      "urls": [
+        "https://drewm.com/sheetmusic/files/GerudoValley.pdf",
+        "https://drewm.com/sheetmusic/files/GerudoValley.mid"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-next/batches/gaming/gerudo-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "pitchShift": -12
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/gerudo-valley/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "blue-bird",
+    "title": "Naruto Shippuden \u2014 Blue Bird",
+    "category": "anime",
+    "hook": "Complete opening vocal line, Habataitara",
+    "source": {
+      "file": "out/catalogue-next/blue-bird.mid",
+      "page": "https://bitmidi.com/naruto-shippuden-blue-bird-mid",
+      "url": "https://bitmidi.com/uploads/79365.mid",
+      "sha256": "8bfb0bbf1f734a95370636c6dbceb769eaddf1353040570f9e67a96e6ccd0f81"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      5,
+      6,
+      9
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first vocal line, ending on the held F-sharp before the next answering line. The six pitches and pickup/held-note rhythm match the inspected Binh-Nam La score, measures1\u20133. This is a short complete hook; no repeated material is inserted.",
+      "urls": [
+        "https://truongca.com/images/sheet/pdf/blue/blue-bird-piano-ikimonogakari-truongca.com.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        61,
+        66,
+        68,
+        69,
+        68,
+        66
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/blue-bird/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "totoro",
+    "title": "My Neighbor Totoro \u2014 Tonari no Totoro",
+    "category": "anime",
+    "hook": "Title chorus melody",
+    "source": {
+      "file": "out/catalogue-next/derived/totoro.mid",
+      "page": "https://bitmidi.com/tonari-no-totoro-tonari-no-totoro-mid",
+      "url": "https://bitmidi.com/uploads/104765.mid",
+      "sha256": "ca61a5fe674bae80ba6c92ab77db982c19f5f660e0b79fe919f8b334ee16899a",
+      "derivation": {
+        "rawFile": "out/catalogue-next/totoro.mid",
+        "rawSha256": "429d3e082456852a7af7f2aff5482ae768d3b849a9da2e651e08e37c52b38ba7",
+        "rawTrackIndex": 2,
+        "rawIndices": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68
+        ],
+        "method": "Close short score-confirmed legato tails in the isolated violin voice at the following attacks. Preserve all16pitches/onsets and log all edits.",
+        "timeScale": 1,
+        "targetTempo": 119.99928000431997,
+        "articulationEdits": [
+          {
+            "index": 0,
+            "sourceDurationSeconds": 0.27636884570312503,
+            "preparedDurationSeconds": 0.24902493164062633,
+            "closedTailSeconds": 0.027343914062498698
+          },
+          {
+            "index": 1,
+            "sourceDurationSeconds": 0.2739274248046897,
+            "preparedDurationSeconds": 0.24658351074219098,
+            "closedTailSeconds": 0.027343914062498698
+          },
+          {
+            "index": 2,
+            "sourceDurationSeconds": 0.2739274248046826,
+            "preparedDurationSeconds": 0.24658351074218388,
+            "closedTailSeconds": 0.027343914062498698
+          }
+        ]
+      }
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-contour-with-rhythm-and-articulation-differences",
+      "summary": "Title chorus with its four-eighth pickup and both Totoro calls, using the isolated violin voice. The EOP score page2 measures28\u201332 corroborates the whole contour transposed-5; it repeats some held notes and simplifies syncopation, so full onset/duration equivalence is not claimed. Short overlapping MIDI tails are transparently closed in a derived source.",
+      "urls": [
+        "https://www.everyonepiano.com/Music-5916-Tonari-no-Totoro-My-Neighbor-Totoro.html",
+        "https://www.everyonepiano.com/pianomusic/006/0005916/0005916-w-b-2.png"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        74,
+        76,
+        77,
+        79,
+        76,
+        72,
+        79,
+        77,
+        74,
+        74,
+        77,
+        74,
+        71,
+        77,
+        76,
+        72,
+        72
+      ],
+      "pitchShift": -5,
+      "collapseRepeated": true
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/totoro/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  },
+  {
+    "id": "mii-channel",
+    "title": "Wii \u2014 Mii Channel",
+    "category": "gaming",
+    "hook": "Opening motif",
+    "source": {
+      "file": "out/catalogue-next/derived/mii-channel.mid",
+      "page": "https://bitmidi.com/wii-channels-mii-channel-mid",
+      "url": "https://bitmidi.com/uploads/110325.mid",
+      "sha256": "8f2c131ad0220256c56413bccc077844a287de4d1726b5baa41d55ef45f75361",
+      "derivation": {
+        "rawFile": "out/catalogue-next/mii-channel.mid",
+        "rawSha256": "53f2e2b3308ed5f6ae56870cbb37847adec8dadc4282bc7ad71934e7e417117d",
+        "rawTrackIndex": 0,
+        "rawIndices": [
+          1,
+          4,
+          6,
+          8,
+          10,
+          11,
+          13,
+          15,
+          17,
+          19,
+          23,
+          25,
+          27,
+          29,
+          31,
+          34,
+          38,
+          42
+        ],
+        "method": "Close the27ms C-sharp pickup tail at the following D attack, preserve the humanized attack pattern, and use the piano score114BPMperformance tempo. Raw MIDI and all edits retained.",
+        "timeScale": 1.0526315789473684,
+        "targetTempo": 114,
+        "articulationEdits": [
+          {
+            "index": 8,
+            "sourceDurationSeconds": 0.27685712988281264,
+            "preparedDurationSeconds": 0.24951321582031305,
+            "closedTailSeconds": 0.027343914062499586
+          }
+        ]
+      }
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "score-pitch-and-rhythm-comparison",
+      "summary": "Complete first four-measure motif,18pitches verified against Olimar12345/Nate Wilson's piano score. Grid onset deviations are within0.02344beat in the raw MIDI. Pizzaking27's transcription corroborates the principal opening but omits the C-sharp pickup; shared ancestry with the piano score is uncertain. Derived source closes one short legato tail and normalizes global tempo; it is not untouched source timing.",
+      "urls": [
+        "https://truongca.com/images/sheet/pdf/mii/mii-channel-music-piano-composed-by-kazumi-totaka-arranged-by-olimar12345-nate-wilson-truongca.com.pdf",
+        "https://www.vgmusic.com/file/3d95c739bc59b3e622a4efec0475c9c0.html"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        66,
+        69,
+        73,
+        69,
+        66,
+        62,
+        62,
+        62,
+        61,
+        62,
+        66,
+        69,
+        73,
+        69,
+        66,
+        76,
+        75,
+        74
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/mii-channel/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+    }
+  }
+]

@@ -1,0 +1,42 @@
+/* Tracks must never size to the zoomed waveform: wavesurfer resizes on container changes, which loops. */
+.audio-editor { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 12px; }
+.audio-editor[hidden] { display: none; }
+.audio-editor p { margin: 0; }
+.audio-editor-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.audio-editor-file { min-width: 0; font-size: 17px; overflow-wrap: anywhere; }
+.audio-editor-duration { color: var(--muted); font-size: 15px; white-space: nowrap; }
+.audio-editor-zoom { display: flex; align-items: center; gap: 8px; width: min(100%, 240px); }
+.audio-editor-zoom input { flex: 1; min-width: 0; }
+.audio-editor-zoom .step { min-width: 40px; min-height: 40px; padding: 4px; font-size: 20px; line-height: 1; }
+
+/* The waveform sits on quiet cloth inside the shared cord frame. */
+.audio-editor-wave-frame { position: relative; min-width: 0; padding: 10px 10px 4px; border-radius: 6px; background: #16251b99; box-shadow: inset 0 4px 14px #101b1644; }
+.audio-editor-wave-frame::before { content: ''; position: absolute; inset: 0; padding: 3px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; filter: url('#cord-edge'); }
+.audio-editor-wave { min-width: 0; overflow: hidden; }
+.audio-editor-wave ::part(region) { border-block: 2px solid var(--accent); }
+/* Wavesurfer writes 6px inline handles; widen the touch target and draw a visible grip. */
+.audio-editor-wave ::part(region-handle) { width: 24px !important; border: 0 !important; touch-action: none; }
+.audio-editor-wave ::part(region-handle-left) { left: -12px !important; background: linear-gradient(90deg, transparent 10px, var(--text) 10px 14px, transparent 14px); }
+.audio-editor-wave ::part(region-handle-right) { right: -12px !important; background: linear-gradient(90deg, transparent 10px, var(--text) 10px 14px, transparent 14px); }
+.audio-editor-wave ::part(timeline) { opacity: .85; }
+.audio-editor-wave ::part(timeline-notch) { border-color: #c19845aa; }
+.audio-editor-hint { font-size: 15px; color: var(--muted); }
+
+.audio-editor-selection { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: end; }
+.audio-editor-bounds { display: contents; }
+.audio-editor-bounds .field label { font-size: 16px; }
+.audio-editor-bounds input { min-height: 48px; padding: 8px 14px; font-variant-numeric: tabular-nums; user-select: text; }
+.audio-editor-length { grid-column: 1 / -1; display: grid; gap: 6px; }
+.audio-editor-summary { font-size: 16px; font-variant-numeric: tabular-nums; }
+.audio-editor-meter { height: 6px; border-radius: 3px; background: #81744944; overflow: hidden; }
+.audio-editor-meter span { display: block; height: 100%; background: var(--cord); }
+.audio-editor-preview { grid-column: 1 / -1; }
+.audio-editor-preview-icon .thread-icon { width: 20px; height: 20px; }
+.audio-editor-status { min-height: 1.4em; font-size: 15px; color: var(--muted); }
+.audio-editor.is-busy .audio-editor-wave-frame { opacity: .6; }
+
+@media (min-width: 800px) {
+  .audio-editor-selection { grid-template-columns: 150px 150px minmax(200px, 1fr) auto; gap: 16px; }
+  .audio-editor-length, .audio-editor-preview { grid-column: auto; }
+  .audio-editor-length { align-self: center; padding-top: 24px; }
+}

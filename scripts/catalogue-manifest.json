@@ -1,0 +1,772 @@
+[
+  {
+    "id": "mario",
+    "title": "Super Mario Bros. — Overworld",
+    "category": "gaming",
+    "hook": "Introduction and first full melodic phrase",
+    "source": {
+      "file": "out/catalogue/sources/mario.mid",
+      "page": "https://www.vgmusic.com/file/b73385fb41dea37a2567fff5cf52a08c.html",
+      "url": "https://www.vgmusic.com/music/console/nintendo/nes/Smbtheme.mid",
+      "sha256": "ac059157543099d4a04ee1655001a5596358d7dbbdef88c86ec12bc6325dc0bb"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "evidence": {
+      "level": "source-compared",
+      "summary": "Opening matches the Kilgayne version in pitches and onsets. Shared ancestry cannot be excluded. Whole phrase spans E4–A5, so reject instead of truncating or folding notes.",
+      "urls": [
+        "https://www.vgmusic.com/file/001b9990fa8cdba33abd8d7e0b170b0b.html"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/gaming/mario-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "tetris",
+    "title": "Tetris — Music A",
+    "category": "gaming",
+    "hook": "First two complete phrases",
+    "source": {
+      "file": "out/catalogue/sources/tetris.mid",
+      "page": "https://www.vgmusic.com/file/e7c7b17ddb8a8be1b3f3f6634bca7ff0.html",
+      "url": "https://www.vgmusic.com/music/console/nintendo/gameboy/gbtetris-Atheme.mid",
+      "sha256": "b07fc5018752f0d9c58e6573e649a43a4744fc6950a221988e9314d8682869c3"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ],
+    "evidence": {
+      "level": "source-compared",
+      "summary": "All selected pitch/onset pairs occur in King Meteor’s arrangement. That arrangement additionally inserts two short notes at beats 2.5 and 2.75; those are not imported into the selected voice. Articulation differs between arrangements.",
+      "urls": [
+        "https://www.vgmusic.com/file/205052264895e2154c378b5b829032b0.html"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/gaming/tetris-reference.mid",
+      "trackIndex": 3,
+      "matchOnset": true,
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      19
+    ]
+  },
+  {
+    "id": "pokemon-route1",
+    "title": "Pokémon — Route 1",
+    "category": "gaming",
+    "hook": "First two phrases of the lead channel",
+    "source": {
+      "file": "out/catalogue/gaming/pokemon-route1-reference.mid",
+      "page": "https://www.vgmusic.com/file/6e87142ccb23534fe5c01fc4e8b4410e.html",
+      "url": "https://www.vgmusic.com/music/console/nintendo/gameboy/PkmRB-1.mid",
+      "sha256": "620ea95340f761c2ecafb32288617b0f7cde9a27c273a37303e251be03cf903a"
+    },
+    "trackIndex": 3,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ],
+    "evidence": {
+      "level": "game-sequence-compared",
+      "summary": "Selected Johnnyz version rather than the embellished MuyoTofu arrangement. All 37 pitches and onset spacings match channel 2 sub1 + sub2 in pret/pokered, up one octave. MIDI note-offs retain its staccato arrangement; game envelope/timbre is not inferred from MIDI.",
+      "urls": [
+        "https://github.com/pret/pokered/blob/master/audio/music/routes1.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/gaming/routes1.asm",
+      "assembly": true
+    },
+    "phraseStarts": [
+      0,
+      17
+    ]
+  },
+  {
+    "id": "megalovania",
+    "title": "Undertale — Megalovania",
+    "category": "gaming",
+    "hook": "Four-bar opening riff with its four bass-note variants",
+    "source": {
+      "file": "out/catalogue/sources/megalovania.mid",
+      "page": "https://www.vgmusic.com/file/e84eb434ddd44a792ec9f6e837f904b6.html",
+      "url": "https://www.vgmusic.com/music/computer/microsoft/windows/Undertale_-_Megalovania_v1_2.mid",
+      "sha256": "9cf75ba0dfefcc610c25ad03533e0de5fc8171253312e07a35fbf6d9cd535ff3"
+    },
+    "trackIndex": 2,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "evidence": {
+      "level": "source-compared",
+      "summary": "All 40 pitches and relative onset spacings match fakt13’s separately credited arrangement. Its constant pickup offset is removed only for comparison.",
+      "urls": [
+        "https://www.vgmusic.com/file/3e64559c315f11156bf8f8d5ccad635c.html"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/gaming/megalovania-reference.mid",
+      "trackIndex": 1,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      10,
+      20,
+      30
+    ]
+  },
+  {
+    "id": "naruto",
+    "title": "Naruto — Sadness and Sorrow",
+    "category": "anime",
+    "hook": "First main-theme phrase, after the string introduction",
+    "source": {
+      "file": "out/catalogue/anime/naruto.mid",
+      "page": "https://bitmidi.com/naruto-sadness-and-sorrow-mid",
+      "url": "https://bitmidi.com/uploads/79353.mid",
+      "sha256": "af9d2d1ff73bd4ac19e68d45cb9b9ef75618edfaf3eeedd3890c88747f728e6d"
+    },
+    "trackIndex": 0,
+    "indices": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "evidence": {
+      "level": "score-compared",
+      "summary": "Corrected the provisional introduction selection. Violin 1 events 10–23 match bars 3–6 of the Un Pianiste melody score, one octave up: all 14 pitches and the short-short-held opening and following rhythmic figure. Original recording tempo and expression have not been independently measured.",
+      "urls": [
+        "https://unpianiste.com/wp-content/uploads/partitions/Sadness_and_sorrow_2.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        66,
+        64,
+        59,
+        64,
+        67,
+        69,
+        64,
+        67,
+        66,
+        67,
+        69,
+        62,
+        71,
+        69
+      ],
+      "pitchShift": 12
+    },
+    "phraseStarts": [
+      0,
+      5,
+      7,
+      12
+    ]
+  },
+  {
+    "id": "evangelion",
+    "title": "Evangelion — A Cruel Angel’s Thesis",
+    "category": "anime",
+    "hook": "Opening vocal phrase",
+    "source": {
+      "file": "out/catalogue/anime/evangelion.mid",
+      "page": "https://bitmidi.com/evangelion-cruel-angels-thesis-mid",
+      "url": "https://bitmidi.com/uploads/44454.mid",
+      "sha256": "145148cc61979e134f070f0c2bcfb2dc37fd9c34711dfc0fdeea4c797033834e"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      4,
+      5,
+      9,
+      10,
+      11,
+      15,
+      16,
+      17,
+      18,
+      21,
+      22,
+      23,
+      27,
+      28,
+      33,
+      34,
+      35,
+      41,
+      42,
+      43,
+      44,
+      49
+    ],
+    "evidence": {
+      "level": "contour-compared",
+      "summary": "Manually separated upper voice. Phrase 1 of the SuperPartituras melody preview corroborates its complete pitch contour. The preview omits a repeated B-flat attack present in the MIDI; repeated-note articulation and original recording timing remain unverified.",
+      "urls": [
+        "https://www.superpartituras.com.br/misc-cartoons/a-cruel-angel-s-thesis---melody"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        75,
+        77,
+        75,
+        77,
+        77,
+        77,
+        82,
+        80,
+        79,
+        77,
+        79,
+        79,
+        82,
+        84,
+        77,
+        75,
+        82,
+        79,
+        82,
+        82,
+        84
+      ],
+      "collapseRepeated": true,
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      12
+    ]
+  },
+  {
+    "id": "lilium",
+    "title": "Elfen Lied — Lilium",
+    "category": "anime",
+    "hook": "First vocal phrase",
+    "source": {
+      "file": "out/catalogue/anime/lilium.mid",
+      "page": "https://bitmidi.com/elfen-lied-lilium-mid",
+      "url": "https://bitmidi.com/uploads/43044.mid",
+      "sha256": "bab0c404e89037265b0ee5d207e28f29125149a4383a790f8352d4f04c836891"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "evidence": {
+      "level": "score-compared",
+      "summary": "Violin voice matches all 12 pitches in Sondagger’s first five bars. Rhythmic values, tied final F-sharp and pickup match; source note-off articulation is retained.",
+      "urls": [
+        "http://symphony.atspace.com/Elfenlied_Lilium(violin).pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        66,
+        73,
+        68,
+        69,
+        69,
+        66,
+        73,
+        68,
+        69,
+        71,
+        69,
+        66
+      ],
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      5
+    ]
+  },
+  {
+    "id": "never-gonna",
+    "title": "Never Gonna Give You Up",
+    "category": "pop",
+    "hook": "First chorus phrase",
+    "source": {
+      "file": "out/catalogue/pop/ocarina-audit-never-gonna.mid",
+      "page": "https://bitmidi.com/never-gonna-give-you-up-3-mid",
+      "url": "https://bitmidi.com/uploads/79829.mid",
+      "sha256": "859521efc29306d96cdc7e66b4d256602d537c25485a5a8d1969fb8528f3fad3"
+    },
+    "trackIndex": 26,
+    "indices": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87
+    ],
+    "evidence": {
+      "level": "source-compared",
+      "summary": "All 28 pitches agree with BitMidi version 2’s melody voice. Version 1 differs at two passing notes, which prompted this additional comparison. Versions may share ancestry, so agreement is corroboration rather than an independent original-recording audit. Source microtiming and articulation are retained.",
+      "urls": [
+        "https://bitmidi.com/never-gonna-give-you-up-2-mid",
+        "https://bitmidi.com/never-gonna-give-you-up-1-mid"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/pop/never-reference-2.mid",
+      "trackIndex": 8,
+      "indices": [
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85
+      ],
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      7,
+      16
+    ]
+  },
+  {
+    "id": "take-on-me",
+    "title": "Take On Me",
+    "category": "pop",
+    "hook": "Main synth riff",
+    "source": {
+      "file": "out/catalogue/pop/ocarina-audit-take-on-me.mid",
+      "page": "https://bitmidi.com/aha_-_take_on_me-mid",
+      "url": "https://bitmidi.com/uploads/4355.mid",
+      "sha256": "0953e473fdf03842ec11aec367034e1a50804aa223674899eab73d79cec9524e"
+    },
+    "trackIndex": 5,
+    "indices": [
+      0,
+      3,
+      5,
+      6,
+      9,
+      11,
+      12,
+      15,
+      17,
+      18,
+      21,
+      23,
+      24,
+      27,
+      29,
+      30,
+      33,
+      35,
+      36,
+      39,
+      41,
+      42,
+      45,
+      47
+    ],
+    "evidence": {
+      "level": "score-and-source-compared",
+      "summary": "Removed the first note of the next repetition from the provisional selection. All 24 pitches match the guitar-tab solo and the alternate MIDI’s riff voice. Alternate MIDI has a slower tempo and grid-aligned onsets; selected source microtiming is retained.",
+      "urls": [
+        "https://www.allthingscello.org/wp-content/uploads/2021/09/Aha-Take-On-Me-Lead-Sheet-Music.pdf",
+        "https://bitmidi.com/take_on_me-mid"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue/pop/take-reference.mid",
+      "trackIndex": 7,
+      "indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "pitchShift": 0
+    },
+    "phraseStarts": [
+      0,
+      6,
+      12,
+      18
+    ]
+  },
+  {
+    "id": "final-countdown",
+    "title": "The Final Countdown",
+    "category": "pop",
+    "hook": "First synth riff phrase",
+    "source": {
+      "file": "out/catalogue/pop/ocarina-audit-final-countdown.mid",
+      "page": "https://bitmidi.com/the-final-countdown-mid",
+      "url": "https://bitmidi.com/uploads/102453.mid",
+      "sha256": "10874d7449e08042002a93bddde9d14355a99c1103e2d2173b3ce9ef996a0048"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "evidence": {
+      "level": "score-compared",
+      "summary": "The 20-event riff agrees with Jesse Metzler’s low-version synth-riff score after uniform transposition. The score includes one preceding sustained setup note, outside this selected recurring four-part motif. Source short note-offs and rests are retained.",
+      "urls": [
+        "https://jessemetzler.com/wp-content/uploads/2025/02/The-Final-Countdown-Euphonium-C.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        57,
+        55,
+        57,
+        50,
+        58,
+        57,
+        58,
+        57,
+        55,
+        58,
+        57,
+        58,
+        50,
+        55,
+        53,
+        55,
+        53,
+        52,
+        55,
+        53
+      ],
+      "pitchShift": 16
+    },
+    "phraseStarts": [
+      0,
+      4,
+      9,
+      13
+    ]
+  }
+]

@@ -1,0 +1,1780 @@
+[
+  {
+    "id": "x-files",
+    "title": "The X-Files Theme",
+    "category": "film-tv",
+    "hook": "Opening whistle call and answering variation, including both cadences (score bars 2–7)",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/x-files-score-transcription.mid",
+      "page": "https://soundtrackmusicsheet.wordpress.com/wp-content/uploads/2016/01/the-x-files-theme.pdf",
+      "url": "https://soundtrackmusicsheet.wordpress.com/wp-content/uploads/2016/01/the-x-files-theme.pdf",
+      "sha256": "ea194683a760a95f2e073cc5f3bdfaade89efc9429a438eb6c969e7c486892b6"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "phraseStarts": [
+      0,
+      6
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription from piano score bars 2–7, treble melody only; score PDF SHA-256 b330ab7d5ae7eca867ac0db1d11b9727aaa485e5701b3e27c748456b02099431. Two complete calls including their dotted-half cadences; excludes later distinct material. Score notes are quarters except the 3-beat cadences. Independent whistle MIDI matches all pitches (+12) and relative onsets; its short played releases differ, including approximately 1.97 and 2.04 beats at cadences. The other MIDI matches attacks and pitches (+13), with cadence releases 4 and 3 beats. Source ancestry is unknown.",
+      "urls": [
+        "https://soundtrackmusicsheet.wordpress.com/wp-content/uploads/2016/01/the-x-files-theme.pdf",
+        "https://bitmidi.com/theme-from-the-x-files-1-mid",
+        "https://v30.k1rsch.de/music/midis/xfiles.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/x-files-second.mid",
+      "trackIndex": 14,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "pitchShift": -12
+    }
+  },
+  {
+    "id": "mission-impossible",
+    "title": "Mission: Impossible Theme",
+    "category": "film-tv",
+    "hook": "Complete two-bar principal riff in 5/4",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/mission-impossible-score-transcription.mid",
+      "page": "https://enochsmusic.weebly.com/uploads/7/3/8/9/73894727/mission_impossible.pdf",
+      "url": "https://enochsmusic.weebly.com/uploads/7/3/8/9/73894727/mission_impossible.pdf",
+      "sha256": "b744b5beb2622b7790f7edfea35aaa60167a0f6def66d24d1f19aff9c440313f"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 5,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Michael Sweeney flute part, bars 15–16, score SHA-256 b6156a95bffe32d5dff38611302b3e6bd32185991d0a9bda076ee493ac89e968; two-bar call and answering variation, no repeats. Score pitches F F Ab Bb F F Eb E; two eighth notes and otherwise quarter notes, with rests preserved. Acquired MIDI orchestra-hit upper notes track 7 confirms pitches after +10 semitones and all relative onsets. MIDI note-offs are performed articulations and differ from notated lengths; score lengths are primary. Score has no numeric tempo; 180 BPM is taken from the independent MIDI's active tempo at the riff. Ancestry unknown.",
+      "urls": [
+        "https://enochsmusic.weebly.com/uploads/7/3/8/9/73894727/mission_impossible.pdf",
+        "https://bitmidi.com/mission_impossible_theme-mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/mission-impossible-reference.mid",
+      "trackIndex": 7,
+      "indices": [
+        0,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15
+      ],
+      "pitchShift": 10
+    }
+  },
+  {
+    "id": "pink-panther",
+    "title": "The Pink Panther Theme",
+    "category": "film-tv",
+    "hook": "Opening saxophone phrase through the tied cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/pink-panther-score-transcription.mid",
+      "page": "https://www.pianotunes.eu/resources/Free-Sheetmusic/Pink-Panther-Theme.pdf",
+      "url": "https://www.pianotunes.eu/resources/Free-Sheetmusic/Pink-Panther-Theme.pdf",
+      "sha256": "762a85fd9a226a475e378381c1b901e2b50146926afb106c76d49f7402824cb9"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of bass-clef melody, score bars 4–8, PDF SHA-256 7f555c15a2e490413e47422f3a73f9e5a1a565617963ecfaadd821c3a9e58466; the final E begins as a triplet in bar 7 and ties into bar 8. The independent alto-sax MIDI track 3 events 0–18 agrees on all pitches; its swung pairs use triplet spacing rather than the score's dotted-eighth/sixteenth rhythm, causing up to 1/12 beat relative onset deviation. Source MIDI's short releases differ from written articulation. Score has no numeric tempo; 111.000 BPM is from the MIDI. Arrangement ancestry unknown.",
+      "urls": [
+        "https://www.pianotunes.eu/resources/Free-Sheetmusic/Pink-Panther-Theme.pdf",
+        "https://v30.k1rsch.de/music/midis/ppanther.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/pink-panther.mid",
+      "trackIndex": 3,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "chariots-of-fire",
+    "title": "Chariots of Fire",
+    "category": "film-tv",
+    "hook": "First piano theme statement through its cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/chariots-of-fire-score-transcription.mid",
+      "page": "https://easymusicnotes.com/many-pdf/chariots-of-fire-piano.pdf",
+      "url": "https://easymusicnotes.com/many-pdf/chariots-of-fire-piano.pdf",
+      "sha256": "4c3db2b9f807b9a4e8286045ba088d0c1400f40d32e1171241926b98de30abfa"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of the melodic piano voice, score bars 5–9, PDF SHA-256 7fe9a51f6a5d1015053d1d94c17aa00d3302988e2d17a2f7e40e08c7c61e2da4. The first statement ends at the tied D-flat before the next pickup. The independent polyphonic piano MIDI track 1 event indices are explicit and match every pitch and attack within 0.025 beat; small release and quantization differences are performance variants. Score BPM is 72. Ancestry unknown.",
+      "urls": [
+        "https://easymusicnotes.com/many-pdf/chariots-of-fire-piano.pdf",
+        "https://v30.k1rsch.de/music/midis/chariots.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/chariots-of-fire.mid",
+      "trackIndex": 1,
+      "indices": [
+        2,
+        6,
+        7,
+        8,
+        12,
+        13,
+        14,
+        17,
+        19,
+        20,
+        24,
+        25,
+        28,
+        30,
+        31,
+        34,
+        36,
+        37,
+        41,
+        42,
+        43,
+        47
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "james-bond",
+    "title": "James Bond Theme",
+    "category": "film-tv",
+    "hook": "Complete two-bar guitar riff",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/james-bond-score-transcription.mid",
+      "page": "https://www.slleisureandculture.co.uk/download/downloads/id/1099/intermediate_guitar_week_3.pdf",
+      "url": "https://www.slleisureandculture.co.uk/download/downloads/id/1099/intermediate_guitar_week_3.pdf",
+      "sha256": "2b1a8f3e1272e99d6591cb0359c1eb730a0cebe6b59a9aec5354b1e527f10b13"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of two-bar repeated guitar riff in the guitar/tablature score, first system after the initial repeated figure, PDF SHA-256 60e7058b8fedf9892e0c73674acd5802ecb513805542d9bf9c11e1c17250ab1f; the repeat itself is not duplicated. Score pitch, attack and tied durations retained. The independent muted guitar MIDI track 5 notes 0–15 agrees in pitch, with attacks within 0.07 beat; performed release lengths differ. Arrangement ancestry unknown.",
+      "urls": [
+        "https://www.slleisureandculture.co.uk/download/downloads/id/1099/intermediate_guitar_week_3.pdf",
+        "https://v30.k1rsch.de/music/midis/james007.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/james-bond.mid",
+      "trackIndex": 5,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "raiders-march",
+    "title": "The Raiders March",
+    "category": "film-tv",
+    "hook": "First complete brass theme statement",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/raiders-march-score-transcription.mid",
+      "page": "https://content.alfred.com/catpages/00-31379.pdf",
+      "url": "https://content.alfred.com/catpages/00-31379.pdf",
+      "sha256": "ec5fba2cee4c4bede2d428563a0c48ae1b9adc562373e1fcc471fb254fd3056b"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of the upper melodic notes on score page 3, beginning at the final pickup of the fourth bar through the first four-bar statement; PDF SHA-256 909bad10596942d939d87a8500abc63eccb2f84cb7171e1fb06edcac859e6395. The score uses chords below the melodic line. Independent french-horn MIDI track 7 indices 0–15 agrees on all pitches and attacks; performed releases differ from notated values. Score tempo is 120 BPM. Ancestry unknown.",
+      "urls": [
+        "https://content.alfred.com/catpages/00-31379.pdf",
+        "https://v30.k1rsch.de/music/midis/indiana.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/raiders-march.mid",
+      "trackIndex": 7,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "gonna-fly-now",
+    "title": "Gonna Fly Now",
+    "category": "film-tv",
+    "hook": "First principal trumpet statement and cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/gonna-fly-now-score-transcription.mid",
+      "page": "https://resources.finalsite.net/images/v1743068685/bvsdk12paus/nnvmaxmwjrgtw0klzm1t/Rocky.pdf",
+      "url": "https://resources.finalsite.net/images/v1743068685/bvsdk12paus/nnvmaxmwjrgtw0klzm1t/Rocky.pdf",
+      "sha256": "cef66c642a825943f5266c771794ab4cf39927593df5c95241c5edd6f8e5b154"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of Mike Story 1st B-flat trumpet, page 4, pickup to bars 5–8; score PDF SHA-256 3b98a71c2b5150fc37b8ba348760304fa8e0c0ff3a2e688f525eca6c3caff272. Written pitches are converted uniformly down two semitones to concert pitch; two-note pickups and four sustained answers make one complete statement. Separate trumpet MIDI track 13 indices 37–48 matches every pitch and attack. The score's last dotted half lasts three beats followed by a rest; MIDI holds that note four beats, and short note-offs also differ. No numeric tempo is printed; 96 BPM from the MIDI. Ancestry unknown.",
+      "urls": [
+        "https://resources.finalsite.net/images/v1743068685/bvsdk12paus/nnvmaxmwjrgtw0klzm1t/Rocky.pdf",
+        "https://v30.k1rsch.de/music/midis/rocky.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/gonna-fly-now.mid",
+      "trackIndex": 13,
+      "indices": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "mandalorian",
+    "title": "The Mandalorian",
+    "category": "film-tv",
+    "hook": "Two-part opening bass-recorder ostinato",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/mandalorian-score-transcription.mid",
+      "page": "https://publications-prairial.fr/emergences/?do=_pdfgen_get&document=88&lang=en",
+      "url": "https://publications-prairial.fr/emergences/?do=_pdfgen_get&document=88&lang=en",
+      "sha256": "298f10b78d882d7c99a62be7d5ee36700494abf1b1ce176bba42506b456b31d5"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "phraseStarts": [
+      0,
+      11
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-scores",
+      "summary": "Direct transcription from academic article figure 5, PDF page 222, bass-recorder lead only; original PDF SHA-256 62bb91d140666aa82f85b4eaceccee375218af97d35238a271f4e1fe14786e1e. It contains the first two complete statements, with high note D then F, natural inter-statement rest and tied notes merged. Guitar arrangement by Nathan Mills / Jason Gutierrez, page 1, pickup and bars 1–3, independently confirms pitches (academic +3 semitones) and the subsequent rhythm; its opening pickup is a quarter note rather than the academic 16th, so its later attacks occur 0.75 beat later relative to that pickup. Guitar is written an octave above sounding register, here its sounding notes are transcribed. Guitar PDF SHA-256 9ee6ef860e8cc498facf49bf6ed76a85e844c7e31832456182e6bb4772e93f9f. Academic score has no numeric tempo; 80 BPM from the guitar score. Each generated MIDI represents its corresponding score; ancestry unknown.",
+      "urls": [
+        "https://publications-prairial.fr/emergences/?do=_pdfgen_get&document=88&lang=en",
+        "https://davidstanleyguitar.com.au/wp-content/uploads/2020/09/Misc-Television-The-Mandalorian-Main-Theme-1.pdf-1.pdf"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/mandalorian-guitar-score-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "pitchShift": 3
+    }
+  },
+  {
+    "id": "cornfield-chase",
+    "title": "Cornfield Chase",
+    "category": "film-tv",
+    "hook": "Complete principal theme statement",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/cornfield-chase-score-transcription.mid",
+      "page": "https://truongca.com/images/sheet/pdf/interstellar/interstellar-ost-cornfield-chase-piano-hans-zimmer-truongca.com.pdf",
+      "url": "https://truongca.com/images/sheet/pdf/interstellar/interstellar-ost-cornfield-chase-piano-hans-zimmer-truongca.com.pdf",
+      "sha256": "0857f245530a645d944472e91536b4383ca7777e237258e88710d346176c6201"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "independent-scores",
+      "summary": "Direct transcription of upper staff marked Theme, bars 17–24, score PDF SHA-256 b34ea670259af9dfcc8b55837de790a164d92adb2434b3404df312d7c630c4d6; 17 attacks through the last B before the variation. A separate piano score preview, page 2 bars 2–9, PDF SHA-256 99de37ddda7ebaaa33f98465e1e23eee97b342ae47d25908b29d19095eab1140, confirms every pitch and relative onset. It writes each high E as a quarter plus a rest, while the primary uses half notes; the score alternatives are preserved rather than averaged. The scores set 80 and 96 BPM respectively. Both are piano arrangements; exact organ instrumentation is not independently established and source ancestry is unknown.",
+      "urls": [
+        "https://truongca.com/images/sheet/pdf/interstellar/interstellar-ost-cornfield-chase-piano-hans-zimmer-truongca.com.pdf",
+        "https://bach.oktav.com/en/14051ecb.pdf"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/cornfield-reference-score-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "seven-nation-army",
+    "title": "Seven Nation Army",
+    "category": "pop",
+    "hook": "Complete principal guitar riff",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/seven-band-transcribed.mid",
+      "page": "https://ymuclassroom.org/wp-content/uploads/2022/09/music_seven-nation-army_beginning-band-packet.pdf",
+      "url": "https://ymuclassroom.org/wp-content/uploads/2022/09/music_seven-nation-army_beginning-band-packet.pdf",
+      "sha256": "c8b79d8355490a97ffa59838064a375d6ae458e57066b3d2375f450b2f762495"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-score-pitch-and-onset",
+      "summary": "Direct score transcription: YMU band score p14 electric bass bars 1–2, 124 BPM. Bolton guitar tab p1 verse riff independently agrees on seven pitches and attack grid; articulation and final hold differ. Master The Art p1 agrees on pitches but places middle attacks differently. Staccato dots in YMU are realized at half written value, a documented performance convention rather than an exact score release.",
+      "urls": [
+        "https://boltonmusicservice.com/wp-content/uploads/2020/10/Seven-Nation-Army.pdf",
+        "https://ymuclassroom.org/wp-content/uploads/2022/09/music_seven-nation-army_beginning-band-packet.pdf",
+        "https://www.mastertheart.net/uploads/4/6/3/5/46354705/the_white_stripes_-_seven_nation_army.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        52,
+        52,
+        55,
+        52,
+        50,
+        48,
+        47
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "another-one-bites-the-dust",
+    "title": "Another One Bites the Dust",
+    "category": "pop",
+    "hook": "Complete bass riff",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/another-bass-transcribed.mid",
+      "page": "https://onlinebasscourses.com/wp-content/uploads/2019/10/Another-One-Bites-The-Dust.pdf",
+      "url": "https://onlinebasscourses.com/wp-content/uploads/2019/10/Another-One-Bites-The-Dust.pdf",
+      "sha256": "cb9e136ff7afe12a6f6af3df6988dfa1eacaf6f164d15792d139c9da1218db4e"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-score-pitch-and-onset",
+      "summary": "Online Bass Courses score p1 pickup and first full riff; Herwig Scheck score p1 independently agrees on all pitches and attacks. Staccato note values differ in first three main E attacks; half-value gate realizes the primary score staccato marks. The final two pickup notes on both scores belong to the next iteration and are not duplicated. 110 BPM follows the published bass lesson, not a tempo printed in either score. Bass clef written register retained; actual electric bass commonly sounds an octave lower.",
+      "urls": [
+        "https://herwig.scheck.be/100basslines/pdf/Queen%20-%20Another%20One%20Bites%20the%20Dust.pdf",
+        "https://onlinebasscourses.com/wp-content/uploads/2019/10/Another-One-Bites-The-Dust.pdf",
+        "https://slapnpopmusic.com/bass-songs/queen-another-one-bites-the-dust/"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        45,
+        43,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        43,
+        40,
+        45
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "blinding-lights",
+    "title": "Blinding Lights",
+    "category": "pop",
+    "hook": "Complete synth hook",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/blinding-prepared.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/the-weeknd/blinding-lights",
+      "url": "https://www.hooktheory.com/v1/songs/public/veoYXZDVGxd?fields=ID,xmlData,song,jsonData",
+      "sha256": "aa0a1294e742f9f8bae961923a5d58ea480cb25652bc750ad22a6ca170d64480"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "Complete symbolic theme with independent MIDI pitch/onset comparison",
+      "summary": "Complete 23-attack synth theme through its sustained F cadence, before the next pickup. Hooktheory lead-out section indices 0–22 is independently matched event by event by MIDI DB demo track 25 indices 0–22, at a constant octave offset and identical relative attacks. MIDI releases are generally shorter and its final F lasts 1.494 rather than 4.5 beats; primary timing is preserved, not averaged. Distinct source authorship is indicated, but common transcription ancestry is unknown. Synthesized, original-recording and physical-game playback remain unverified.",
+      "urls": [
+        "https://www.mididb.com/the-weeknd/blinding-lights-midi/",
+        "https://www.hooktheory.com/theorytab/view/the-weeknd/blinding-lights"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/blinding-mididb.mid",
+      "trackIndex": 25,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "pitchShift": -12
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "sandstorm",
+    "title": "Sandstorm",
+    "category": "pop",
+    "hook": "Complete principal lead hook",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/sand-cprato.mid",
+      "page": "https://www.cprato.com/en/midi/details/223/darude-sandstorm",
+      "url": "https://www.cprato.com/en/midi/file/223/darude-sandstorm/My4yMjIyNTc0NDk2NDk0RSsxNg==",
+      "sha256": "927fe6af24f564d6a861c316348380aaadbaf52cf3eec5c9268393352c11c9b3"
+    },
+    "trackIndex": 2,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "56-event MIDI and independent symbolic score comparison",
+      "summary": "One four-bar principal lead statement before its literal repetition: Carlo Prato lead track 2 events 0–55. All 56 pitches and attacks agree with Hooktheory chorus events 0–55; source staccato releases are 0.09375 beat shorter than the notated subdivision. No repeated attacks are collapsed. Tempo 136 BPM; exact physical or synthesized articulation and original-recording alignment remain unverified. Distinct source families are not proven.",
+      "urls": [
+        "https://www.hooktheory.com/theorytab/view/darude/sandstorm",
+        "https://www.cprato.com/en/midi/details/223/darude-sandstorm"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        76,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        74,
+        69,
+        69,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        76,
+        76,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        76,
+        76
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "astronomia",
+    "title": "Astronomia / Coffin Dance",
+    "category": "pop",
+    "hook": "Complete principal lead refrain",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/astronomia-cprato.mid",
+      "page": "https://www.cprato.com/en/midi/details/369/vicetone-tony-igy-astronomia",
+      "url": "https://www.cprato.com/en/midi/details/369/vicetone-tony-igy-astronomia",
+      "sha256": "5d34f2d0b6585b82ae885b0b778ab071043b33f9cbd946839d02951bbbc00781"
+    },
+    "trackIndex": 2,
+    "indices": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "25-event MIDI and independent score pitch/onset comparison",
+      "summary": "Complete four-bar lead refrain, before its repetition: Carlo Prato Vicetone/Tony Igy arrangement track 2 indices 80–104. All 25 pitches and attacks agree with the separately published upper piano staff bars 9–12 after a constant octave shift. MIDI note gates are uniformly 0.375 beat while score values vary; these are disclosed release differences. The score uses 122 BPM and MIDI 126 BPM. The arrangement is the Vicetone version associated with Coffin Dance; no original recording was audited. Source-family ancestry remains unknown.",
+      "urls": [
+        "https://truongca.com/images/sheet/pdf/astronomia/astronomia-piano-vicentone-tony-igy-truongca.com.pdf",
+        "https://www.cprato.com/en/midi/details/369/vicetone-tony-igy-astronomia"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        67,
+        67,
+        74,
+        72,
+        70,
+        69,
+        69,
+        69,
+        72,
+        70,
+        69,
+        67,
+        67,
+        82,
+        81,
+        82,
+        81,
+        82,
+        67,
+        67,
+        82,
+        81,
+        82,
+        81,
+        82
+      ],
+      "pitchShift": -12
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "children",
+    "title": "Children",
+    "category": "pop",
+    "hook": "Complete principal piano motif",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/children-score-transcribed.mid",
+      "page": "https://www.thepianonotes.com/wp-content/uploads/2022/05/Children-Sheet-Music-Robert-Miles-thepianonotes.com_.pdf",
+      "url": "https://www.thepianonotes.com/wp-content/uploads/2022/05/Children-Sheet-Music-Robert-Miles-thepianonotes.com_.pdf",
+      "sha256": "0493f6d0f9a6a7b0590f6cf501653bd0b77c1624e7cdbafe3990f2223d13bd3a"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "Score-transcribed tied melody with MIDI pitch/onset corroboration",
+      "summary": "Complete main piano theme: score upper voice bars 34–41, with long ties merged and the four rising sixteenths of the next pickup excluded. All 10 pitches and attacks match the independent children.mid piano track 2 indices 0–9. That MIDI encodes the long sustained notes as approximately one-beat gates; the score retains 6, 6.5, 6.5 and 7.5 beat holds. Score tempo is 130 BPM versus MIDI 135 BPM. This is a score transcription, not a silent alteration of MIDI; distinct authorship or ancestry is not established. No original recording, synthesized playback or game audit.",
+      "urls": [
+        "https://v30.k1rsch.de/music/midis/children.mid",
+        "https://www.thepianonotes.com/wp-content/uploads/2022/05/Children-Sheet-Music-Robert-Miles-thepianonotes.com_.pdf"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/pop/sources/children.mid",
+      "trackIndex": 2,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pitchShift": 0
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip or alignment audit."
+    }
+  },
+  {
+    "id": "pokemon-caught",
+    "title": "Wild Pokémon Caught",
+    "category": "gaming-jingle",
+    "hook": "Complete original event fanfare",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/pokemon-caught.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/gameboy/PkmRB-Caught.mid",
+      "url": "https://www.vgmusic.com/music/console/nintendo/gameboy/PkmRB-Caught.mid",
+      "sha256": "337f27f4b44e59afe4e10e12d5f542c6f43f71e2508a127dbe049409dbe5ad1f"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "game-sequence",
+      "summary": "Complete melody pitches and relative attacks checked against game sequence; source MIDI release differences are recorded in comparisons.json.",
+      "urls": [
+        "https://github.com/pret/pokered/blob/master/audio/sfx/caught_mon.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/pokemon-caught-game-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No matching original clip or alignment audit."
+    }
+  },
+  {
+    "id": "sonic-extra-life",
+    "title": "Extra Life / 1UP",
+    "category": "gaming-jingle",
+    "hook": "Complete original event fanfare",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/sonic-extra-life.mid",
+      "page": "https://www.vgmusic.com/new-files/SonicTH_1UP.mid",
+      "url": "https://www.vgmusic.com/new-files/SonicTH_1UP.mid",
+      "sha256": "36e89e0a9fe2191e8df24b783ee094aacc3a08ee95b364eb625bd4f116165983"
+    },
+    "trackIndex": 1,
+    "indices": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "game-sequence",
+      "summary": "FM1 lead, doubled by FM4, selected explicitly over FM2 harmony; every pitch and relative attack checked against game FM1. MIDI release differences recorded in comparisons.json.",
+      "urls": [
+        "https://github.com/sonicretro/s1disasm/blob/AS/sound/music/Mus88%20-%20Extra%20Life.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/sonic-extra-life-game-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No matching original clip or alignment audit."
+    }
+  },
+  {
+    "id": "sonic3-act-complete",
+    "title": "Act Complete",
+    "category": "gaming-jingle",
+    "hook": "Complete original event fanfare",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/sonic3-act-complete.mid",
+      "page": "https://media.solanum.works/midi/gen/STH3-ActComplete.mid",
+      "url": "https://media.solanum.works/midi/gen/STH3-ActComplete.mid",
+      "sha256": "50f5a90c921b6b597c0c64aa4952d3e2ccf2cebcf2e93ede4efb68b706735f3b"
+    },
+    "trackIndex": 5,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "game-sequence",
+      "summary": "FM2 lead, repeated by PSG1/FM5 with detune, checked against the original game command sequence; MIDI release differences are documented in comparisons.json.",
+      "urls": [
+        "https://github.com/sonicretro/skdisasm/blob/master/Sound/Music/Level%20Outro.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/sonic3-act-complete-game-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No matching original clip or alignment audit."
+    }
+  },
+  {
+    "id": "super-metroid-item",
+    "title": "Item Acquisition",
+    "category": "gaming-jingle",
+    "hook": "Complete original item-acquisition soprano fanfare",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/super-metroid-item.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/snes/M3-item.mid",
+      "url": "https://www.vgmusic.com/music/console/nintendo/snes/M3-item.mid",
+      "sha256": "d7ca7f14b3f64500cf020c534c9f0e1ddfea03255c62082de668550685cdebb1"
+    },
+    "trackIndex": 8,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "evidence": {
+      "level": "independent-score",
+      "summary": "Tom Jensen dissertation figure 29 identifies the soprano as the main melody. All 13 pitches and onset rhythms match track 8 after converting one source beat to one scored eighth. MIDI begins at 200 BPM vs score quarter 95 (equivalent MIDI 190 BPM), then ritardando; fermata and releases are not independently timed.",
+      "urls": [
+        "https://tom-jensen.com/doc/Music%20in%20Metroid.pdf"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/super-metroid-score-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No matching original clip or alignment audit."
+    }
+  },
+  {
+    "id": "smb-stage-clear",
+    "title": "Super Mario Bros. — Stage Clear",
+    "category": "gaming",
+    "hook": "Complete original NES event fanfare, including its terminal cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/smb-stage-clear-game-derived.mid",
+      "page": "https://github.com/Xkeeper0/smb1/blob/master/src/music-data.asm",
+      "url": "https://raw.githubusercontent.com/Xkeeper0/smb1/master/src/music-data.asm",
+      "sha256": "0501792c711061e41f53e84abf141df035c37fb6d0e2e48a61aefaced2476a1b"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "decoded-game-sequence-and-independent-score",
+      "summary": "The complete 27-attack Square1 melody is decoded from the original game's frequency/length tables and compared with Mikhail Hogrefe's separately authored Pulse-staff transcription: every pitch agrees and all attacks are within 0.007880 seconds. Source is a named game-derived MIDI, not an untouched community MIDI. Nominal game command durations are retained; score articulation, final holds and MIDI tempo encoding differ and are documented per event. No acoustic envelope, original-audio alignment or physical gameplay audit is claimed.",
+      "urls": [
+        "https://github.com/mhogrefe/accurate-video-game-sheet-music/tree/main/nes/super-mario-bros/06-level-cleared",
+        "https://github.com/Xkeeper0/smb1/blob/master/src/music-engine.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/06-level-cleared.midi",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        15,
+        17,
+        19,
+        21,
+        23,
+        25,
+        27,
+        29,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        43,
+        45,
+        46,
+        47
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original recording clip acquired; game-derived symbolic events are not validated audio labels."
+    }
+  },
+  {
+    "id": "smb-world-clear",
+    "title": "Super Mario Bros. — Castle Clear",
+    "category": "gaming",
+    "hook": "Complete original NES event fanfare, including its terminal cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/smb-world-clear-game-derived.mid",
+      "page": "https://github.com/Xkeeper0/smb1/blob/master/src/music-data.asm",
+      "url": "https://raw.githubusercontent.com/Xkeeper0/smb1/master/src/music-data.asm",
+      "sha256": "a433158bd6e57fb4e8c69fe774cf82820856e6a16ae804042deb5e4066105e3c"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "decoded-game-sequence-and-independent-score",
+      "summary": "The complete 25-attack Square2 melody is decoded from the original game's frequency/length tables and compared with Mikhail Hogrefe's separately authored Pulse-staff transcription: every pitch agrees and all attacks are within 0.008210 seconds. Source is a named game-derived MIDI, not an untouched community MIDI. Nominal game command durations are retained; score articulation, final holds and MIDI tempo encoding differ and are documented per event. No acoustic envelope, original-audio alignment or physical gameplay audit is claimed.",
+      "urls": [
+        "https://github.com/mhogrefe/accurate-video-game-sheet-music/tree/main/nes/super-mario-bros/07-castle-cleared",
+        "https://github.com/Xkeeper0/smb1/blob/master/src/music-engine.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/07-castle-cleared.midi",
+      "trackIndex": 0,
+      "indices": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        12,
+        21,
+        23,
+        25,
+        27,
+        29,
+        31,
+        32,
+        41,
+        43,
+        45,
+        47,
+        49,
+        51,
+        52,
+        58,
+        60,
+        62,
+        64
+      ]
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/smb-world-clear/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Matching event excerpt retained externally as an original-recording candidate; identity and complete alignment require separate audit."
+    }
+  },
+  {
+    "id": "smb-game-over",
+    "title": "Super Mario Bros. — Game Over",
+    "category": "gaming",
+    "hook": "Complete original NES event fanfare, including its terminal cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/smb-game-over-game-derived.mid",
+      "page": "https://github.com/Xkeeper0/smb1/blob/master/src/music-data.asm",
+      "url": "https://raw.githubusercontent.com/Xkeeper0/smb1/master/src/music-data.asm",
+      "sha256": "39a3dd5293c8b91b29078895405e0757d3678ea1842dbdf966fbf0dbfe558720"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "decoded-game-sequence-and-independent-score",
+      "summary": "The complete 10-attack Square2 melody is decoded from the original game's frequency/length tables and compared with Mikhail Hogrefe's separately authored Pulse-staff transcription: every pitch agrees and all attacks are within 0.002960 seconds. Source is a named game-derived MIDI, not an untouched community MIDI. Nominal game command durations are retained; score articulation, final holds and MIDI tempo encoding differ and are documented per event. No acoustic envelope, original-audio alignment or physical gameplay audit is claimed.",
+      "urls": [
+        "https://github.com/mhogrefe/accurate-video-game-sheet-music/tree/main/nes/super-mario-bros/09-game-over",
+        "https://github.com/Xkeeper0/smb1/blob/master/src/music-engine.asm"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/09-game-over.midi",
+      "trackIndex": 0,
+      "indices": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14
+      ]
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/smb-game-over/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Matching event excerpt retained externally as an original-recording candidate; identity and complete alignment require separate audit."
+    }
+  },
+  {
+    "id": "pokemon-gym-victory",
+    "title": "Pokémon Gold / Silver — Gym Battle Victory",
+    "category": "gaming",
+    "hook": "Opening fanfare and complete first eight-bar principal melody statement, through its D cadence",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/root-gaming/pokemon-gym-first-statement.mid",
+      "page": "https://github.com/pret/pokegold/blob/master/audio/music/gymleadervictory.asm",
+      "url": "https://raw.githubusercontent.com/pret/pokegold/master/audio/music/gymleadervictory.asm",
+      "sha256": "b2240333ff6d8a000cde7ca1013a9975e6ed90312d91fd4e5af28e4badd92427"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "game-sequence-and-independent-melody-transcription",
+      "summary": "The requested first principal statement consists of the complete seven-attack opening fanfare plus all eight bars of the first A section, ending at source unit160 before the distinct .sub2 B section. This is55events and40quarter beats; no repeat is manufactured. Every pitch and attack matches IronInvoker47 Main Melody indices0–54. Original game command lengths are retained; independently sequenced staccato note-offs are shorter. The full later A+B looping song was inspected but is not the requested first statement; its six disputed repeated attacks occur in B after unit176. Tempo164.899947BPM follows the independent performance, not a claim of acoustically measured game tempo. Game octave convention is normalized by+12. Source-family ancestry uncertain.",
+      "urls": [
+        "https://github.com/pret/pokegold/blob/master/audio/music/gymleadervictory.asm",
+        "https://www.youtube.com/watch?v=tIlSP2X_cyA",
+        "https://drive.google.com/file/d/1v3_-6SEdHMouRkGJInK0bTLN3t8BzdqR/view",
+        "https://drive.google.com/drive/folders/1FG79U9wAX6sNTBGgOctlTVtJNHVhTpnU"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/gaming-jingle/sources/pokemon-gym-victory-independent.mid",
+      "trackIndex": 1,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No matching original clip acquired or aligned."
+    }
+  }
+]

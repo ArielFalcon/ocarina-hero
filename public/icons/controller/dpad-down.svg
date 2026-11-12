@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104">
+  <title>D-pad down</title>
+  <path d="M33 20h14q4 0 4 4v10q0 4 4 4h10q4 0 4 4v16q0 4-4 4H55q-4 0-4 4v10q0 4-4 4H33q-4 0-4-4V66q0-4-4-4H15q-4 0-4-4V42q0-4 4-4h10q4 0 4-4V24q0-4 4-4Z" transform="matrix(1 0 0 .92 0 6)" fill="#101211" stroke="#101211" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M33 20h14q4 0 4 4v10q0 4 4 4h10q4 0 4 4v16q0 4-4 4H55q-4 0-4 4v10q0 4-4 4H33q-4 0-4-4V66q0-4-4-4H15q-4 0-4-4V42q0-4 4-4h10q4 0 4-4V24q0-4 4-4Z" transform="matrix(1 0 0 .92 0 0)" fill="#454544" stroke="#151615" stroke-width="4" stroke-linejoin="round"/>
+  <g transform="matrix(1 0 0 .86 0 13)">
+    <path d="M33 20h14q4 0 4 4v10q0 4 4 4h10q4 0 4 4v16q0 4-4 4H55q-4 0-4 4v10q0 4-4 4H33q-4 0-4-4V66q0-4-4-4H15q-4 0-4-4V42q0-4 4-4h10q4 0 4-4V24q0-4 4-4Z" fill="#969190" stroke="#151615" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M33 20h14q4 0 4 4v10q0 4 4 4h10q4 0 4 4v16q0 4-4 4H55q-4 0-4 4v10q0 4-4 4H33q-4 0-4-4V66q0-4-4-4H15q-4 0-4-4V42q0-4 4-4h10q4 0 4-4V24q0-4 4-4Z" transform="translate(40 52) scale(.78) translate(-40 -50)" fill="none" stroke="#bcb5b1" stroke-opacity=".45" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M33 24h14" fill="none" stroke="#d0c9c5" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <polygon points="40,101 28,88 52,88" fill="#111312" stroke="#bcb6b1" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,377 @@
+{
+  "title": "Never Gonna Give You Up",
+  "tempoBpm": 114.00125401379415,
+  "beatsPerBar": 4,
+  "notes": [
+    {
+      "midi": 61,
+      "startBeat": 0.469,
+      "durationBeats": 0.292
+    },
+    {
+      "midi": 61,
+      "startBeat": 0.969,
+      "durationBeats": 0.479
+    },
+    {
+      "midi": 58,
+      "startBeat": 1.458,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 61,
+      "startBeat": 1.979,
+      "durationBeats": 0.479
+    },
+    {
+      "midi": 63,
+      "startBeat": 2.469,
+      "durationBeats": 0.729
+    },
+    {
+      "midi": 60,
+      "startBeat": 4.469,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 58,
+      "startBeat": 4.969,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 60,
+      "startBeat": 5.5,
+      "durationBeats": 0.24
+    },
+    {
+      "midi": 58,
+      "startBeat": 5.75,
+      "durationBeats": 0.26
+    },
+    {
+      "midi": 56,
+      "startBeat": 6.021,
+      "durationBeats": 1.802
+    },
+    {
+      "midi": 58,
+      "startBeat": 8.427,
+      "durationBeats": 0.302
+    },
+    {
+      "midi": 58,
+      "startBeat": 8.958,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 60,
+      "startBeat": 9.469,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 61,
+      "startBeat": 9.99,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 58,
+      "startBeat": 10.469,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 56,
+      "startBeat": 10.99,
+      "durationBeats": 0.719
+    },
+    {
+      "midi": 68,
+      "startBeat": 12.479,
+      "durationBeats": 0.385
+    },
+    {
+      "midi": 68,
+      "startBeat": 13.021,
+      "durationBeats": 0.521
+    },
+    {
+      "midi": 63,
+      "startBeat": 13.552,
+      "durationBeats": 0.729
+    },
+    {
+      "midi": 65,
+      "startBeat": 14.521,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 63,
+      "startBeat": 15,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 61,
+      "startBeat": 15.479,
+      "durationBeats": 0.656
+    },
+    {
+      "midi": 61,
+      "startBeat": 16.469,
+      "durationBeats": 0.313
+    },
+    {
+      "midi": 61,
+      "startBeat": 16.969,
+      "durationBeats": 0.458
+    },
+    {
+      "midi": 58,
+      "startBeat": 17.448,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 61,
+      "startBeat": 17.948,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 58,
+      "startBeat": 18.458,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 61,
+      "startBeat": 18.979,
+      "durationBeats": 0.542
+    },
+    {
+      "midi": 63,
+      "startBeat": 19.531,
+      "durationBeats": 0.521
+    },
+    {
+      "midi": 60,
+      "startBeat": 20.521,
+      "durationBeats": 0.479
+    },
+    {
+      "midi": 58,
+      "startBeat": 21.01,
+      "durationBeats": 0.479
+    },
+    {
+      "midi": 60,
+      "startBeat": 21.5,
+      "durationBeats": 0.208
+    },
+    {
+      "midi": 58,
+      "startBeat": 21.719,
+      "durationBeats": 0.229
+    },
+    {
+      "midi": 56,
+      "startBeat": 21.958,
+      "durationBeats": 1.146
+    },
+    {
+      "midi": 58,
+      "startBeat": 24.469,
+      "durationBeats": 0.302
+    },
+    {
+      "midi": 58,
+      "startBeat": 24.948,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 60,
+      "startBeat": 25.469,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 61,
+      "startBeat": 25.99,
+      "durationBeats": 0.479
+    },
+    {
+      "midi": 58,
+      "startBeat": 26.479,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 56,
+      "startBeat": 26.99,
+      "durationBeats": 0.74
+    },
+    {
+      "midi": 63,
+      "startBeat": 28.521,
+      "durationBeats": 0.542
+    },
+    {
+      "midi": 65,
+      "startBeat": 29.073,
+      "durationBeats": 0.344
+    },
+    {
+      "midi": 65,
+      "startBeat": 29.573,
+      "durationBeats": 0.927
+    },
+    {
+      "midi": 63,
+      "startBeat": 30.51,
+      "durationBeats": 1.031
+    },
+    {
+      "midi": 61,
+      "startBeat": 32.01,
+      "durationBeats": 2.458
+    },
+    {
+      "midi": 63,
+      "startBeat": 34.479,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 65,
+      "startBeat": 34.99,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 61,
+      "startBeat": 35.49,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 63,
+      "startBeat": 35.99,
+      "durationBeats": 0.396
+    },
+    {
+      "midi": 63,
+      "startBeat": 36.521,
+      "durationBeats": 0.281
+    },
+    {
+      "midi": 63,
+      "startBeat": 36.969,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 65,
+      "startBeat": 37.479,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 63,
+      "startBeat": 37.958,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 56,
+      "startBeat": 38.438,
+      "durationBeats": 0.417
+    },
+    {
+      "midi": 56,
+      "startBeat": 39,
+      "durationBeats": 0.99
+    },
+    {
+      "midi": 58,
+      "startBeat": 42,
+      "durationBeats": 0.469
+    },
+    {
+      "midi": 60,
+      "startBeat": 42.479,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 61,
+      "startBeat": 42.99,
+      "durationBeats": 0.49
+    },
+    {
+      "midi": 58,
+      "startBeat": 43.49,
+      "durationBeats": 0.51
+    },
+    {
+      "midi": 63,
+      "startBeat": 44.531,
+      "durationBeats": 0.5
+    },
+    {
+      "midi": 65,
+      "startBeat": 45.042,
+      "durationBeats": 0.448
+    },
+    {
+      "midi": 63,
+      "startBeat": 45.5,
+      "durationBeats": 0.917
+    },
+    {
+      "midi": 56,
+      "startBeat": 47,
+      "durationBeats": 0.24
+    },
+    {
+      "midi": 58,
+      "startBeat": 47.25,
+      "durationBeats": 0.208
+    },
+    {
+      "midi": 61,
+      "startBeat": 47.469,
+      "durationBeats": 0.198
+    },
+    {
+      "midi": 58,
+      "startBeat": 47.677,
+      "durationBeats": 0.24
+    },
+    {
+      "midi": 65,
+      "startBeat": 47.958,
+      "durationBeats": 0.542
+    },
+    {
+      "midi": 65,
+      "startBeat": 48.802,
+      "durationBeats": 0.688
+    },
+    {
+      "midi": 63,
+      "startBeat": 49.5,
+      "durationBeats": 1.031
+    },
+    {
+      "midi": 56,
+      "startBeat": 51,
+      "durationBeats": 0.177
+    },
+    {
+      "midi": 58,
+      "startBeat": 51.188,
+      "durationBeats": 0.229
+    },
+    {
+      "midi": 60,
+      "startBeat": 51.427,
+      "durationBeats": 0.24
+    },
+    {
+      "midi": 58,
+      "startBeat": 51.677,
+      "durationBeats": 0.25
+    },
+    {
+      "midi": 63,
+      "startBeat": 51.979,
+      "durationBeats": 0.656
+    }
+  ]
+}

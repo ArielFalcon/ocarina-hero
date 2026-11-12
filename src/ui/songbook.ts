@@ -89,6 +89,9 @@ group('James Bond', ['Film'], 'film', [['catalogue-james-bond', 'James Bond Them
 group('Indiana Jones', ['Film'], 'film', [['catalogue-raiders-march', 'The Raiders March', { artist: 'John Williams' }]]);
 group('Rocky', ['Film'], 'film', [['catalogue-gonna-fly-now', 'Gonna Fly Now', { artist: 'Bill Conti' }]]);
 group('Interstellar', ['Film'], 'film', [['catalogue-cornfield-chase', 'Cornfield Chase', { artist: 'Hans Zimmer' }]]);
+group('Jurassic Park', ['Film'], 'film', [['catalogue-jurassic-park', 'Main Theme', { artist: 'John Williams' }]]);
+group('Knight Rider', ['Film'], 'film', [['catalogue-knight-rider', 'Main Theme']]);
+group('The Simpsons', ['Film'], 'film', [['catalogue-simpsons', 'Main Theme', { artist: 'Danny Elfman' }]]);
 group('Pop', ['Pop'], 'microphone', [
   ['catalogue-never-gonna', 'Never Gonna Give You Up', { artist: 'Rick Astley', icon: 'heart' }],
   ['catalogue-take-on-me', 'Take On Me', { artist: 'a-ha', icon: 'cassette' }],

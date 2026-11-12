@@ -1,6 +1,6 @@
 # Tapestry design system
 
-This is the approved visual identity for Ocarina Tabs, established on November 12,
+This is the approved visual identity for Ocarina Hero, established on November 12,
 2026. All UI styling work must follow it. The interface should appear woven into
 an aged forest-green tapestry, with matte ochre cord, cream embroidered lettering,
 and restrained rust-red emphasis. Preserve real text and native controls.

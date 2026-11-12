@@ -861,7 +861,7 @@ function showView(next: AppView, pushHistory = true): void {
   }
   if (pushHistory && location.hash !== `#${route}`) history.pushState(null, '', `#${route}`);
   if (next === 'lesson') updateLessonHeading();
-  document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Tabs` : 'Ocarina Tabs';
+  document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
   must('#main-content').scrollTop = 0;
 }
 

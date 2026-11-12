@@ -1,4 +1,4 @@
-# Objetivo del proyecto — Ocarina Tabs
+# Objetivo del proyecto — Ocarina Hero
 
 Documento de producto. Recoge qué queremos construir, con qué criterio de fidelidad y
 por qué se tomaron las decisiones técnicas que se tomaron. El detalle de ejecución y el

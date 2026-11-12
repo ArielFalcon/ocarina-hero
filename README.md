@@ -1,4 +1,4 @@
-# Ocarina Tabs
+# Ocarina Hero
 
 Turn a song into a button tab playable on the ocarina of
 *The Legend of Zelda: Ocarina of Time* (Switch 2, 2026 remake).

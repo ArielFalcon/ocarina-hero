@@ -1776,5 +1776,245 @@
       "originalRecordingAudited": false,
       "notes": "No matching original clip acquired or aligned."
     }
+  },
+  {
+    "title": "Theme from Jurassic Park",
+    "hook": "Complete first main-theme statement (Sweeney score m9-17)",
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of the main theme as labelled by the arranger (\"main theme begins at measure 9 ... clarinets and horns\"), Bb clarinet 1 and F horn read and converted to concert pitch, score PDF SHA-256 f9cd1033d182ded147591c6c85ce01d43c86e84eb35e6a5f4cbba072220d4cc8. Robert Durfee orchestral MIDI flute track 1 events 22-47 agrees on all 26 pitches (two octaves higher) and relative attacks after converting its quarter-note unit to the score half note. MIDI adds a Bb-A pickup before m9 and shortens releases. Score tempo half=108 is retained; the MIDI plays this passage at 55 MIDI-quarters (score halves) per minute.",
+      "urls": [
+        "https://www.abel.at/shop/prme/182338.pdf",
+        "https://v30.k1rsch.de/music/midis/jurassic.mid"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/jurassic-park.mid",
+      "trackIndex": 1,
+      "indices": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "pitchShift": -24
+    },
+    "id": "jurassic-park",
+    "category": "film-tv",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/parallel-film/tv/sources/jurassic-park-score-transcription.mid",
+      "page": "https://www.abel.at/shop/prme/182338.pdf",
+      "url": "https://www.abel.at/shop/prme/182338.pdf",
+      "sha256": "3d0893ad53caa7e85610fc1532bbfa93b28d7f3efee600b6f74cc08aca2414a9"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    }
+  },
+  {
+    "title": "Knight Rider Main Theme",
+    "hook": "Lead synth riff, one complete three-call statement (lead sheet bars 9-11)",
+    "phraseStarts": [
+      0,
+      4,
+      8
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of the lead melody from the freely displayed first page of the Hal Leonard TV Fake Book lead sheet (Musicnotes MN0144871), image SHA-256 9d808d9734451fde0d4990ba0a748526b3de561f737746a30c10faab506d8544; the 16th-note ostinato printed in the same staff is excluded. bitmidi 106553 track 22 events 0-13 (duplicated by track 7) matches all 14 pitches and attacks; its releases are longer. The requested k1rsch MIDI has the same pitches (+3) but spaces the calls every 2 beats instead of every bar and is kept as a diagnostic rhythm variant. Tempo from the reference MIDI (110 BPM; the lead sheet says Moderately fast).",
+      "urls": [
+        "https://www.musicnotes.com/sheetmusic/knight-rider/knight-rider-theme/MN0144871",
+        "https://bitmidi.com/knightrider-mid-1",
+        "https://v30.k1rsch.de/music/midis/knight.mid"
+      ]
+    },
+    "reference": {
+      "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/knight-rider-reference.mid",
+      "trackIndex": 22,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "pitchShift": 0
+    },
+    "id": "knight-rider",
+    "category": "film-tv",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/parallel-film/tv/sources/knight-rider-score-transcription.mid",
+      "page": "https://www.musicnotes.com/sheetmusic/knight-rider/knight-rider-theme/MN0144871",
+      "url": "https://www.musicnotes.com/images/productimages/large/mtd/mn0144871.gif",
+      "sha256": "86e50b28d71570d544c090191f98dc6f409df7d8a8b39e859aaf4cac02d4908f"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    }
+  },
+  {
+    "title": "The Simpsons Theme",
+    "hook": "Complete opening melodic phrase through the Bb-B resolution (piano score bars 8-12)",
+    "phraseStarts": [
+      0,
+      12
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Direct transcription of the right-hand melody (top notes) from the freely displayed first page of the Musicnotes MN0101343 piano solo (Fox Film Music Corporation), image SHA-256 dbd349c31beb5a839108b0706b3705fe2cc3da4841caecf10f5e458e6e903a50. The MN0106510 lead sheet preview gives the same 18 pitches and phrase end (B quarter then rests). k1rsch MIDI flute track 13 events 1-17 matches all pitches and attacks; its flute rests on the final B, which is the horn chord top voice (track 2 event 17). Larry Clark's band medley raises the line by an octave from the bar-53 A onward (C6 instead of A4); three sources keep the descending A4, so it is treated as an arrangement variant. Tempo from the MIDI (171 BPM).",
+      "urls": [
+        "https://www.musicnotes.com/sheetmusic/the-simpsons/theme-from-the-simpsons/MN0101343",
+        "https://api.musicnotes.com/sheetmusic/the-simpsons/theme-from-the-simpsons/MN0106510",
+        "https://v30.k1rsch.de/music/midis/simpsons.mid",
+        "https://camdencommunityband.org.au/wp-content/uploads/2019/08/Cartoon-Symphony-Flute.pdf"
+      ]
+    },
+    "reference": {
+      "scorePitches": [
+        72,
+        76,
+        78,
+        81,
+        79,
+        76,
+        72,
+        69,
+        66,
+        66,
+        66,
+        67,
+        66,
+        66,
+        66,
+        67,
+        70,
+        71
+      ],
+      "pitchShift": 0
+    },
+    "id": "simpsons",
+    "category": "film-tv",
+    "source": {
+      "file": "out/catalogue-pop-culture-42/parallel-film/tv/sources/simpsons-score-transcription.mid",
+      "page": "https://www.musicnotes.com/sheetmusic/the-simpsons/theme-from-the-simpsons/MN0101343",
+      "url": "https://www.musicnotes.com/images/productimages/large/mtd/mn0101343.gif",
+      "sha256": "10354edebe7783e5da5d1a1977ca30b07f132eeaa8fb67e2d97938dbd87eb052"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    }
   }
 ]

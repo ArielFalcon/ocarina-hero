@@ -10,7 +10,8 @@
  * Default: scores the first fifteen seconds and prints both note lists side by side with the cause of each error,
  * then the runner-up placements. A fourth or a fifth away shares most harmonics and can fit almost as well, so among
  * such near ties the placement whose decoded notes agree most is used and the choice is printed.
- * --transposition fixes the semitones from the melody to the recording instead.
+ * --transposition fixes the semitones from the melody to the recording instead, in any octave.
+ * Notes decoded before or after the placed melody belong to the neighbouring phrases and are not scored.
  * --locate: scans up to 120 seconds and prints where the phrase most likely starts, to choose the fragment.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -25,6 +26,8 @@ import { RATE, decode } from './instrument-dataset';
 import { alignReference, scoreNotes, type Alignment, type TimedNote } from './melody-metrics';
 
 const STATES = MIDI_HIGH - MIDI_LOW + 1;
+/** Seconds around the placed melody inside which decoded notes are scored. */
+const MARGIN = 0.15;
 const NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const name = (midi: number) => `${NAMES[((midi % 12) + 12) % 12]}${Math.floor(midi / 12) - 1}`;
 
@@ -140,17 +143,19 @@ if (locate) {
   const placements = place(frames, melody, seconds, 3);
   const best = placements[0];
   if (!best) throw new Error('The melody could not be placed on the recording');
-  const estimate: TimedNote[] = decodeFrames(frames, seconds).notes.map(note => ({ start: note.startBeat, duration: note.durationBeats, midi: note.midi }));
+  const decoded: TimedNote[] = decodeFrames(frames, seconds).notes.map(note => ({ start: note.startBeat, duration: note.durationBeats, midi: note.midi }));
   const evaluate = (placed: Fit) => {
-    const alignment = { ...placed, offset: placed.offset + onsetBias(alignReference(melody, placed, seconds), estimate) };
+    const alignment = { ...placed, offset: placed.offset + onsetBias(alignReference(melody, placed, seconds), decoded) };
     const reference = alignReference(melody, alignment, seconds).filter(note => note.start >= -0.05);
-    return { alignment, reference, scores: scoreNotes(reference, estimate, seconds) };
+    const from = (reference[0]?.start ?? 0) - MARGIN, to = reference.length ? reference.at(-1)!.start + reference.at(-1)!.duration + MARGIN : seconds;
+    const estimate = decoded.filter(note => note.start >= from && note.start <= to);
+    return { alignment, reference, estimate, scores: scoreNotes(reference, estimate, seconds) };
   };
   const relatedKeys = transposition === undefined ? [-7, -5, 5, 7].flatMap(interval => fit(frames, melody, {
     offsets: range(best.offset - 0.3, best.offset + 0.3, 0.01), scales: range(best.scale - 0.04, best.scale + 0.04, 0.0025), shifts: [best.shift + interval],
   }, 1, 0)).filter(other => other.score >= 0.9 * best.score) : [];
   const chosen = [best, ...relatedKeys].map(evaluate).sort((a, b) => b.scores.f1 - a.scores.f1)[0]!;
-  const { alignment, reference, scores } = chosen;
+  const { alignment, reference, estimate, scores } = chosen;
   const shifted = estimate.map(note => ({ ...note, midi: note.midi + 12 * scores.octave }));
   const posterior = (grid: BasicPitchFrames['notes'], midi: number, from: number, to: number) => {
     const state = midi - 12 * scores.octave - MIDI_LOW;
@@ -202,7 +207,7 @@ if (locate) {
   for (const row of rows.sort((a, b) => a.time - b.time)) console.log(row.text);
   const covered = reference.length ? (reference.at(-1)!.start + reference.at(-1)!.duration - reference[0]!.start) : 0;
   console.log(`\nfit ${alignment.score.toFixed(3)}  offset ${alignment.offset.toFixed(2)} s  tempo scale ${alignment.scale.toFixed(3)}  transposition ${alignment.shift}  octave of the estimate ${scores.octave}`);
-  console.log(`reference ${reference.length} of ${melody.length} notes over ${covered.toFixed(1)} s  estimate ${estimate.length} notes`);
+  console.log(`reference ${reference.length} of ${melody.length} notes over ${covered.toFixed(1)} s  estimate ${estimate.length} notes (${decoded.length - estimate.length} outside the phrase, not scored)`);
   console.log(`F1 ${scores.f1.toFixed(2)}  precision ${scores.precision.toFixed(2)}  recall ${scores.recall.toFixed(2)}  frame pitch accuracy ${scores.pitchAccuracy.toFixed(2)}`);
   for (const [label, total] of Object.entries(counts).sort((a, b) => b[1] - a[1])) console.log(`${String(total).padStart(3)}  ${label}`);
   if (alignment.shift !== best.shift) console.log(`transposition ${best.shift} fits slightly better (${best.score.toFixed(3)}) but the decoded notes agree with ${alignment.shift}: F1 ${evaluate(best).scores.f1.toFixed(2)} against ${scores.f1.toFixed(2)}`);

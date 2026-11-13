@@ -64,7 +64,7 @@ A sustained note is not silence. Short articulation gaps stay inside their group
 
 ## 7. Export and verify
 
-Run `npx tsx scripts/build-catalogue.ts --audio` from the project root. The builder verifies source hashes and reference checks, selects phrases, rejects incompatible mappings, emits generated catalogue entries, and creates per-song arrangement JSON, source MIDI, adapted MIDI, tab and synthesized ocarina WAV with measurement output.
+Run `npx tsx scripts/build-catalogue.ts --audio` from the project root. The builder verifies source hashes and reference checks, selects phrases, rejects incompatible mappings, emits the generated catalogue (a light index in `src/core/songs/catalogue-index.ts` with precomputed difficulty, plus one notes file per song in `src/core/songs/catalogue/<id>.json`, loaded by the app on demand), and creates per-song arrangement JSON, source MIDI, adapted MIDI, tab and synthesized ocarina WAV with measurement output.
 
 The synthesized WAV uses the shared voice model, short-note envelope and gap-limited release; preserve those fixes. Apply only uniform output gain to avoid clipping. A synthesized pitch check compares playback with configured frequencies, including calibration; it does not compare against an original recording. An equal-tempered adapted MIDI is a symbolic interchange artifact and does not encode calibrated in-game tuning.
 

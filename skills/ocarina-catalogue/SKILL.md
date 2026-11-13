@@ -58,7 +58,7 @@ Every bundled song gets an explicit entry in `src/ui/songbook.ts`; none may fall
 
 - A franchise theme without a proper name is titled `Main Theme`; keep the full name as an alias.
 - Verify the franchise of a new song from a primary source; manifest categories such as `Anime / 2026` are not enough.
-- The generated title in `catalogue.ts` never replaces this entry. `scripts/songbook.test.ts` enforces these rules for every bundled song.
+- The generated title in `src/core/songs/catalogue-index.ts` never replaces this entry. `scripts/songbook.test.ts` enforces these rules for every bundled song.
 
 ## Output Contract
 

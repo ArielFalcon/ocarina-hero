@@ -130,7 +130,8 @@ details[open] summary { color: var(--text); }
 .catalog-filters { border-bottom: 1px dashed #a2824959; padding-bottom: 10px; }
 .catalog-filters > summary { font-size: 19px; margin-bottom: 10px; }
 .category-selector { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
-.category-selector legend { padding: 0; margin-bottom: 9px; font-size: 17px; }
+.category-selector legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
+.category-panel .category-grid { padding: 12px 2px 4px; }
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 /* Two compact rows: icon + name, then the noun with its count aligned right. */
 /* One row: icon, name, then the count badge pushed to the end. */
@@ -165,9 +166,11 @@ details[open] summary { color: var(--text); }
 .universe-toggle .universe-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .universe-chevron { width: 9px; height: 9px; margin: -4px 4px 0 4px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform .2s ease, margin .2s ease; }
 .universe-toggle[aria-expanded='true'] .universe-chevron { margin-top: 4px; transform: rotate(-135deg); }
-.universe-panel { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .26s ease, opacity .2s ease, visibility 0s linear .26s; visibility: hidden; }
-.universe-panel.is-open { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition: grid-template-rows .26s ease, opacity .2s ease .04s, visibility 0s; }
-.universe-panel-inner { min-height: 0; overflow: hidden; }
+/* Never animate the panel's height: it re-rasters the filtered list below on every frame. */
+.universe-panel { display: none; opacity: 0; transform: translateY(-6px); transition: opacity .16s ease-out, transform .16s ease-out, display .16s allow-discrete; }
+.universe-panel.is-open { display: block; opacity: 1; transform: none; }
+@starting-style { .universe-panel.is-open { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .universe-panel { transition: none; } }
 .universe-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 2px 4px; }
 .universe-row .universe-chip { min-width: 0; white-space: normal; }
 .universe-row .universe-name { flex: 1; min-width: 0; font-size: 15px; line-height: 1.15; overflow-wrap: anywhere; }
@@ -388,6 +391,31 @@ progress::-moz-progress-bar { background: var(--cord); }
 #lesson-universe { display: flex; gap: 10px; align-items: center; }
 #lesson-universe .thread-icon { width: 20px; height: 22px; }
 .song-seal .thread-icon { width: 25px; height: 29px; }
+/* Difficulty frame: an embroidered overlay with a 12px margin around a 43×50 seal (67:74 art). */
+.song-seal { position: relative; }
+.seal-frame { position: absolute; inset: -24% -28%; background: center / 100% 100% no-repeat; pointer-events: none; }
+[data-difficulty='easy'] > .seal-frame { background-image: url('/art/difficulty/easy.webp'); }
+[data-difficulty='medium'] > .seal-frame { background-image: url('/art/difficulty/medium.webp'); }
+[data-difficulty='hard'] > .seal-frame { background-image: url('/art/difficulty/hard.webp'); }
+[data-difficulty='expert'] > .seal-frame { background-image: url('/art/difficulty/expert.webp'); }
+.song-open { gap: 17px; padding-left: 6px; }
+/* Difficulty range: five steps, each centred over the thumb's stop (thumb box is 23px). */
+.difficulty-filter { min-width: 0; margin: 18px 0 0; padding: 0; border: 0; }
+.difficulty-filter legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
+.difficulty-scale { max-width: 520px; padding: 12px 2px 4px; }
+.universe-toggle .mini-seal { flex: 0 0 22px; width: 22px; height: 26px; border-radius: 2px 2px 7px 7px; }
+.universe-toggle .mini-seal .thread-icon { width: 14px; height: 16px; }
+.universe-toggle .mini-seal .seal-frame { inset: -22% -26%; }
+.difficulty-scale input[type='range'] { display: block; width: calc(80% + 23px); margin: 0 calc(10% - 11.5px); }
+.difficulty-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding-top: 6px; }
+.difficulty-step { display: grid; justify-items: center; gap: 12px; padding: 10px 0 4px; cursor: pointer; opacity: .62; transition: opacity .15s ease; }
+.difficulty-step:hover, .difficulty-step.is-current { opacity: 1; }
+.difficulty-step .song-seal.mini-seal { width: 27px; height: 31px; flex-basis: 27px; border-radius: 2px 2px 8px 8px; }
+.mini-seal .thread-icon { width: 16px; height: 18px; }
+.difficulty-step.is-current .mini-seal { border-color: var(--text); box-shadow: var(--slot-raised); background-color: #604620; background-image: var(--weave), var(--selected-cloth); }
+.difficulty-name { font-size: 15px; line-height: 1.1; white-space: nowrap; }
+.difficulty-step.is-current .difficulty-name { text-decoration: underline 1px dashed; text-underline-offset: 4px; }
+@media (forced-colors: active) { .seal-frame { display: none; } .difficulty-step.is-current .mini-seal { outline: 2px solid Highlight; } }
 #main-content::-webkit-scrollbar { width: 12px; }
 #main-content::-webkit-scrollbar-track { background: #18251b; border-left: 1px dashed #94733c66; }
 #main-content::-webkit-scrollbar-thumb { border: 3px solid #18251b; border-radius: 6px; background: var(--cord); }
@@ -537,7 +565,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .category-count { margin-left: 2px; }
   .count-badge { min-width: 24px; padding-inline: 5px; font-size: 14px; }
   .song-title { font-size: 20px; }
-  .song-open { gap: 9px; }
+  .song-open { gap: 14px; padding-left: 5px; }
   .song-seal { flex-basis: 35px; width: 35px; height: 43px; }
   .song-meta { font-size: 15px; }
   .lesson-view { padding-inline: 13px; }

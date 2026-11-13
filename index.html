@@ -46,16 +46,26 @@
               <span class="input-frame"><input id="song-search" type="search" placeholder="Song, artist or universe…" autocomplete="off" /></span>
             </div>
             <details id="catalog-filters" class="catalog-filters" open>
-            <summary id="filter-summary" class="stitched-label">Categories &amp; universes</summary>
+            <summary id="filter-summary" class="stitched-label">Filters</summary>
             <fieldset class="category-selector">
-              <legend class="stitched-label">Explore by category</legend>
-              <div id="categories" class="category-grid"></div>
+              <legend class="stitched-label">Category</legend>
+              <button id="category-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="category-panel"></button>
+              <div id="category-panel" class="universe-panel category-panel" inert><div class="universe-panel-inner"><div id="categories" class="category-grid"></div></div></div>
             </fieldset>
             <div class="catalog-facets">
               <fieldset class="universe-filter">
                 <legend class="stitched-label">Universe</legend>
                 <button id="universe-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="universe-panel"></button>
                 <div id="universe-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="universes" class="universe-row"></div></div></div>
+              </fieldset>
+              <fieldset class="difficulty-filter">
+                <legend class="stitched-label">Difficulty</legend>
+                <button id="difficulty-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="difficulty-panel"></button>
+                <div id="difficulty-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="difficulty-scale" class="difficulty-scale">
+                  <label for="difficulty-range" class="visually-hidden">Difficulty</label>
+                  <input id="difficulty-range" type="range" min="0" max="4" step="1" value="0" />
+                  <div id="difficulty-steps" class="difficulty-steps" aria-hidden="true"></div>
+                </div></div></div>
               </fieldset>
             </div>
             </details>

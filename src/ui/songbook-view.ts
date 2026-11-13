@@ -1,10 +1,20 @@
 import { threadIcon, type ThreadIcon } from './thread-icons';
 import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, type SongbookEntry, type SongCategory } from './songbook';
 import type { DemoTrack } from '../core/demo';
+import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 
 const SAVED_KEY = 'ocarina.saved.v1';
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
+/** Range steps: 0 is every difficulty, then one step per tier. */
+const DIFFICULTY_STEPS = ['', ...DIFFICULTY_LEVELS] as const;
+const DIFFICULTY_NAMES: Record<DifficultyLevel | '', string> = { '': 'Any', easy: 'Easy', medium: 'Medium', hard: 'Hard', expert: 'Expert' };
+
+/** A song seal; its tier frame is a decorative overlay outside the slot. */
+function sealHtml(icon: ThreadIcon, level: DifficultyLevel | '', extraClass = ''): string {
+  return `<span class="song-seal${extraClass ? ` ${extraClass}` : ''}"${level ? ` data-difficulty="${level}"` : ''} aria-hidden="true">${threadIcon(icon)}${level ? '<span class="seal-frame"></span>' : ''}</span>`;
+}
+
 const CATEGORY_ICONS: Record<SongCategory, ThreadIcon> = { All: 'songbook', Games: 'gamepad', Anime: 'anime', Film: 'film', Pop: 'microphone', Classics: 'lyre', Other: 'collection' };
 
 /** A visible count badge; the noun stays available to assistive technology only. */
@@ -16,6 +26,50 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]!);
 }
 
+/**
+ * A field-like toggle that opens its panel below it. Folded, the panel is inert;
+ * opening scrolls only as much as needed to show it below the toggle.
+ */
+class Fold {
+  constructor(readonly toggle: HTMLButtonElement, readonly panel: HTMLElement, private content: HTMLElement, focusSelector: string) {
+    toggle.addEventListener('click', () => {
+      const open = !this.isOpen();
+      this.setOpen(open);
+      if (!open) return;
+      content.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true });
+      this.reveal();
+    });
+    panel.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); this.fold(); }
+    });
+  }
+
+  isOpen(): boolean { return this.toggle.getAttribute('aria-expanded') === 'true'; }
+
+  setOpen(open: boolean): void {
+    this.toggle.setAttribute('aria-expanded', String(open));
+    this.panel.classList.toggle('is-open', open);
+    this.panel.inert = !open;
+  }
+
+  /** Fold and return focus to the toggle. */
+  fold(): void {
+    this.setOpen(false);
+    this.toggle.focus();
+  }
+
+  private reveal(): void {
+    const scroller = this.toggle.closest('main') ?? document.scrollingElement!;
+    const nav = document.querySelector('.app-nav')?.getBoundingClientRect();
+    const bottomEdge = nav && nav.top > innerHeight / 2 ? nav.top : innerHeight;
+    const toggle = this.toggle.getBoundingClientRect();
+    const overflow = toggle.bottom + this.content.scrollHeight - bottomEdge;
+    if (overflow <= 0) return;
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scroller.scrollBy({ top: Math.min(overflow + 16, toggle.top - 72), behavior: smooth ? 'smooth' : 'auto' });
+  }
+}
+
 export class SongbookView {
   readonly entries: SongbookEntry[];
   private category: SongCategory = 'All';
@@ -25,8 +79,9 @@ export class SongbookView {
   private search: HTMLInputElement;
   private universe = '';
   private universes: HTMLElement;
-  private universeToggle: HTMLButtonElement;
-  private universePanel: HTMLElement;
+  private universeFold: Fold;
+  private categoryFold: Fold;
+  private difficultyFold: Fold;
   private list: HTMLElement;
   private categories: HTMLElement;
   private count: HTMLElement;
@@ -37,6 +92,8 @@ export class SongbookView {
   private reset: HTMLButtonElement;
   private filters: HTMLDetailsElement;
   private filterSummary: HTMLElement;
+  private difficulty: DifficultyLevel | '' = '';
+  private difficultyRange: HTMLInputElement;
 
   constructor(private root: HTMLElement, tracks: readonly DemoTrack[], private callbacks: {
     select(entry: SongbookEntry): void;
@@ -45,10 +102,10 @@ export class SongbookView {
     this.entries = createSongbookEntries(tracks).sort((a, b) => a.title.localeCompare(b.title, 'en') || a.id.localeCompare(b.id, 'en'));
     this.search = root.querySelector('#song-search')!;
     this.universes = root.querySelector('#universes')!;
-    this.universeToggle = root.querySelector('#universe-toggle')!;
-    this.universePanel = root.querySelector('#universe-panel')!;
     this.list = root.querySelector('#demos')!;
     this.categories = root.querySelector('#categories')!;
+    this.universeFold = new Fold(root.querySelector('#universe-toggle')!, root.querySelector('#universe-panel')!, this.universes, 'input:checked');
+    this.categoryFold = new Fold(root.querySelector('#category-toggle')!, root.querySelector('#category-panel')!, this.categories, '[aria-pressed="true"]');
     this.count = root.querySelector('#catalog-count')!;
     this.rail = root.querySelector('#letter-rail')!;
     this.bubble = root.querySelector('#letter-bubble')!;
@@ -56,6 +113,25 @@ export class SongbookView {
     this.reset = root.querySelector('#reset-search')!;
     this.filters = root.querySelector('#catalog-filters')!;
     this.filterSummary = root.querySelector('#filter-summary')!;
+    this.difficultyRange = root.querySelector('#difficulty-range')!;
+    const steps = root.querySelector<HTMLElement>('#difficulty-steps')!;
+    steps.innerHTML = DIFFICULTY_STEPS.map((level, index) => `<span class="difficulty-step" data-step="${index}">${sealHtml(level ? 'music' : 'songbook', level, 'mini-seal')}<span class="difficulty-name stitched-label">${DIFFICULTY_NAMES[level]}</span></span>`).join('');
+    this.difficultyFold = new Fold(root.querySelector('#difficulty-toggle')!, root.querySelector('#difficulty-panel')!, root.querySelector('#difficulty-scale')!, '#difficulty-range');
+    this.difficultyRange.addEventListener('input', () => this.setDifficulty(Number(this.difficultyRange.value)));
+    let dragging = false;
+    this.difficultyRange.addEventListener('pointerdown', () => { dragging = true; });
+    this.difficultyRange.addEventListener('change', () => { if (dragging) this.difficultyFold.fold(); dragging = false; });
+    this.difficultyFold.panel.addEventListener('keydown', event => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      this.difficultyFold.fold();
+    });
+    steps.addEventListener('click', event => {
+      const step = (event.target as Element).closest<HTMLElement>('[data-step]');
+      if (!step) return;
+      this.setDifficulty(Number(step.dataset.step));
+      this.difficultyFold.fold();
+    });
     try {
       const value: unknown = JSON.parse(localStorage.getItem(SAVED_KEY) ?? '[]');
       if (Array.isArray(value)) this.saved = new Set(value.filter((id): id is string => typeof id === 'string'));
@@ -70,20 +146,13 @@ export class SongbookView {
     this.universes.addEventListener('change', event => {
       this.universe = (event.target as HTMLInputElement).value;
       this.filterChanged();
-      if (pointerPick) this.foldUniverses();
+      if (pointerPick) this.universeFold.fold();
       pointerPick = false;
     });
-    this.universeToggle.addEventListener('click', () => {
-      const open = this.universeToggle.getAttribute('aria-expanded') !== 'true';
-      this.setUniversesOpen(open);
-      if (!open) return;
-      this.universes.querySelector<HTMLInputElement>('input:checked')?.focus({ preventScroll: true });
-      this.revealPanel();
-    });
-    this.universePanel.addEventListener('keydown', event => {
-      if (event.key !== 'Escape' && event.key !== 'Enter' && event.key !== ' ') return;
+    this.universeFold.panel.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
-      this.foldUniverses();
+      this.universeFold.fold();
     });
     this.bindRail();
     this.reset.addEventListener('click', () => {
@@ -91,6 +160,7 @@ export class SongbookView {
       this.universe = '';
       this.onlySaved = false;
       this.category = 'All';
+      this.difficulty = '';
       this.filters.open = true;
       this.filterChanged();
       this.search.focus();
@@ -101,6 +171,7 @@ export class SongbookView {
       this.onlySaved = button.dataset.savedFilter !== undefined;
       this.category = this.onlySaved ? 'All' : button.dataset.category as SongCategory;
       this.filterChanged();
+      this.categoryFold.fold();
     });
     this.list.addEventListener('click', event => {
       const button = (event.target as Element).closest<HTMLButtonElement>('[data-song], [data-save]');
@@ -108,6 +179,11 @@ export class SongbookView {
       const entry = button && this.entries.find(item => item.id === button.dataset.song);
       if (entry) this.callbacks.select(entry);
     });
+    this.filterChanged();
+  }
+
+  private setDifficulty(step: number): void {
+    this.difficulty = DIFFICULTY_STEPS[step] ?? '';
     this.filterChanged();
   }
 
@@ -119,6 +195,7 @@ export class SongbookView {
     try { localStorage.setItem(SAVED_KEY, JSON.stringify([...this.saved])); }
     catch { this.sessionOnly = true; }
     this.updateSavedCard();
+    this.renderCategoryToggle();
     this.renderResults();
     this.callbacks.savedChanged();
   }
@@ -148,32 +225,15 @@ export class SongbookView {
     const checked = this.universes.querySelector<HTMLInputElement>('input:checked');
     if (focused) checked?.focus({ preventScroll: true });
     const current = groups.flatMap(group => group.universes).find(option => option.name === this.universe);
-    this.universeToggle.innerHTML = (current
+    this.universeFold.toggle.innerHTML = (current
       ? face(current.name === 'The Legend of Zelda' ? 'Zelda' : current.name, current.icon, current.count)
       : face('Every universe', 'songbook', total)) + '<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change universe</span>';
   }
 
-  /** Bring the opening panel into view without pushing its toggle off the top. */
-  private revealPanel(): void {
-    const scroller = this.universeToggle.closest('main') ?? document.scrollingElement!;
-    const nav = document.querySelector('.app-nav')?.getBoundingClientRect();
-    const bottomEdge = nav && nav.top > innerHeight / 2 ? nav.top : innerHeight;
-    const toggle = this.universeToggle.getBoundingClientRect();
-    const overflow = toggle.bottom + this.universes.scrollHeight - bottomEdge;
-    if (overflow <= 0) return;
-    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
-    scroller.scrollBy({ top: Math.min(overflow + 16, toggle.top - 72), behavior: smooth ? 'smooth' : 'auto' });
-  }
-
-  private foldUniverses(): void {
-    this.setUniversesOpen(false);
-    this.universeToggle.focus();
-  }
-
-  private setUniversesOpen(open: boolean): void {
-    this.universeToggle.setAttribute('aria-expanded', String(open));
-    this.universePanel.classList.toggle('is-open', open);
-    this.universePanel.inert = !open;
+  /** The folded category field shows the chosen card's icon, name and count. */
+  private renderCategoryToggle(): void {
+    const chosen = this.categories.querySelector('[aria-pressed="true"]');
+    this.categoryFold.toggle.innerHTML = `<span class="universe-icon" aria-hidden="true">${chosen?.querySelector('.category-symbol')?.innerHTML ?? ''}</span><span class="universe-name">${chosen?.querySelector('.category-name')?.textContent ?? 'All songs'}</span>${chosen?.querySelector('.category-count')?.innerHTML ?? ''}<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change category</span>`;
   }
 
   private filterChanged(): void {
@@ -190,6 +250,7 @@ export class SongbookView {
       button.setAttribute('aria-pressed', String(!this.onlySaved && button.dataset.category === this.category));
     }
     this.categories.querySelector('[data-saved-filter]')?.setAttribute('aria-pressed', String(this.onlySaved));
+    this.renderCategoryToggle();
     this.renderUniverses();
     this.renderResults();
   }
@@ -199,17 +260,23 @@ export class SongbookView {
     const focusedIndex = focused ? [...this.list.querySelectorAll('button')].indexOf(focused) : -1;
     const focusedId = focused?.dataset.save ?? focused?.dataset.song;
     this.root.classList.toggle('has-query', !!this.search.value.trim());
-    this.filterSummary.textContent = ['Categories & universes', this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe].filter(Boolean).join(' · ');
-    const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved });
+    const step = DIFFICULTY_STEPS.indexOf(this.difficulty);
+    this.difficultyRange.value = String(step);
+    this.difficultyRange.setAttribute('aria-valuetext', this.difficulty ? DIFFICULTY_NAMES[this.difficulty] : 'Any difficulty');
+    for (const element of this.root.querySelectorAll<HTMLElement>('.difficulty-step')) element.classList.toggle('is-current', Number(element.dataset.step) === step);
+    const name = DIFFICULTY_NAMES[this.difficulty];
+    this.difficultyFold.toggle.innerHTML = `${sealHtml(this.difficulty ? 'music' : 'songbook', this.difficulty, 'mini-seal')}<span class="universe-name">${this.difficulty ? name : 'Any difficulty'}</span><span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change difficulty</span>`;
+    this.filterSummary.textContent = ['Filters', this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe, this.difficulty && DIFFICULTY_NAMES[this.difficulty]].filter(Boolean).join(' · ');
+    const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved, difficulty: this.difficulty || undefined });
     this.count.textContent = `${result.length} ${result.length === 1 ? 'melody' : 'melodies'}${this.sessionOnly ? ' · Saves last for this session only' : ''}`;
-    this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All';
+    this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty;
     const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));
     this.list.innerHTML = result.length ? result.map(entry => {
       const title = escapeHtml(entry.title);
       const universe = escapeHtml(entry.universe === 'The Legend of Zelda' ? 'Zelda' : entry.universe);
       const detail = [entry.artist, entry.version].filter(Boolean).map(value => escapeHtml(value!)).join(' · ');
       const letter = anchors.get(entry.id);
-      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}"><span class="song-seal" aria-hidden="true">${threadIcon(entry.icon)}</span><span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${universe}${detail ? ` · ${detail}` : ''}</span></span></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${this.saved.has(entry.id) ? '♥' : '♡'}</button></article>`;
+      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${universe}${detail ? ` · ${detail}` : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${this.saved.has(entry.id) ? '♥' : '♡'}</button></article>`;
     }).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? 'No saved songs yet. Tap ♡ next to a song to keep it here.' : 'No melodies found. Try another title or clear your filters.'}</p>`;
     if (focused) {
       const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];

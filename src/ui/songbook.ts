@@ -1,5 +1,7 @@
 import type { ThreadIcon } from './thread-icons';
 import type { DemoTrack } from '../core/demo';
+import { rateDifficulty, type Difficulty, type DifficultyLevel } from '../core/difficulty';
+import { prepareMelody } from '../core/prepare';
 
 export type SongCategory = 'All' | 'Games' | 'Anime' | 'Film' | 'Pop' | 'Classics' | 'Other';
 type EntryCategory = Exclude<SongCategory, 'All'>;
@@ -16,9 +18,11 @@ export interface SongbookEntry {
   version?: string;
   artist?: string;
   aliases: readonly string[];
+  /** Rated on the arrangement the lesson opens with: bends on, ornaments kept. */
+  difficulty: Difficulty;
 }
 
-type Metadata = Omit<SongbookEntry, 'track' | 'id'>;
+type Metadata = Omit<SongbookEntry, 'track' | 'id' | 'difficulty'>;
 const metadata = new Map<string, Metadata>();
 
 function group(universe: string, categories: readonly EntryCategory[], icon: ThreadIcon,
@@ -225,6 +229,7 @@ group('Classics', ['Classics'], 'lyre', [
 export function createSongbookEntries(tracks: readonly DemoTrack[]): SongbookEntry[] {
   return tracks.map((track) => ({
     track, id: track.id,
+    difficulty: rateDifficulty(prepareMelody(track, { simplify: false, maxBend: 2 }).notes, track.tempoBpm),
     ...(metadata.get(track.id) ?? { title: track.title, universe: 'Other melodies', categories: ['Other'] as const, icon: 'music', universeIcon: 'music', aliases: [] }),
   }));
 }
@@ -253,12 +258,14 @@ function normalize(value: string): string {
 
 export function filterSongbook(entries: readonly SongbookEntry[], options: {
   query?: string; category?: SongCategory; universe?: string; savedIds?: ReadonlySet<string>; onlySaved?: boolean;
+  difficulty?: DifficultyLevel;
 }): SongbookEntry[] {
   const words = normalize(options.query ?? '').split(' ').filter(Boolean);
   return entries.filter((entry) => {
     if (options.category && options.category !== 'All' && !entry.categories.includes(options.category)) return false;
     if (options.universe && entry.universe !== options.universe) return false;
     if (options.onlySaved && !options.savedIds?.has(entry.id)) return false;
+    if (options.difficulty && entry.difficulty.level !== options.difficulty) return false;
     const searchable = normalize([entry.title, entry.track.title, entry.universe, entry.artist ?? '', entry.version ?? '', ...entry.aliases].join(' '));
     return words.every((word) => searchable.includes(word));
   });

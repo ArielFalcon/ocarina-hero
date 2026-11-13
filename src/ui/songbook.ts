@@ -106,7 +106,7 @@ group('The Elder Scrolls', ['Games'], 'gamepad', [
 ]);
 
 // Anime
-group('Naruto', ['Anime'], 'leaf', [
+group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-naruto', 'Sadness and Sorrow'],
   ['catalogue-blue-bird', 'Blue Bird', { version: 'Shippuden', aliases: ['Ikimono-gakari'] }],
   ['catalogue-naruto-hokage-funeral', 'Grief and Sorrow', { aliases: ['Toshio Masuda', 'Hokage’s Funeral', 'Hokages Funeral', 'Ai to Shū', '哀と愁'] }],
@@ -117,7 +117,7 @@ group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
 group('Death Note', ['Anime'], 'notebook', [['catalogue-l-theme', 'L’s Theme']]);
 group('Sailor Moon', ['Anime'], 'moon', [['catalogue-moonlight', 'Moonlight Densetsu']]);
 group('Dragon Ball Z', ['Anime'], 'dragonball', [['catalogue-tapion', 'Tapion’s Theme']]);
-group('Attack on Titan', ['Anime'], 'wings', [['catalogue-shinzou', 'Shinzou wo Sasageyo!']]);
+group('Attack on Titan', ['Anime'], 'wingsOfFreedom', [['catalogue-shinzou', 'Shinzou wo Sasageyo!']]);
 group('Jujutsu Kaisen', ['Anime'], 'anime', [['catalogue-aizo', 'AIZO', { version: 'Culling Game opening', aliases: ['King Gnu'] }]]);
 group('Dandadan', ['Anime'], 'anime', [['catalogue-kakumei-douchuu', 'Kakumei Douchuu', { version: 'Season 2 opening', aliases: ['On The Way', 'AiNA THE END'] }]]);
 group('Chainsaw Man', ['Anime', 'Film'], 'anime', [['catalogue-iris-out', 'IRIS OUT', { version: 'The Movie: Reze Arc', aliases: ['Kenshi Yonezu'] }]]);
@@ -207,7 +207,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-fate-of-ophelia', 'The Fate of Ophelia', { artist: 'Taylor Swift', icon: 'flower' }],
   ['catalogue-stateside', 'Stateside', { artist: 'PinkPantheress & Zara Larsson' }],
   ['catalogue-man-i-need', 'Man I Need', { artist: 'Olivia Dean' }],
-  ['catalogue-wind-of-change-whistle', 'Wind of Change', { artist: 'Scorpions', aliases: ['Klaus Meine'], icon: 'leaf' }],
+  ['catalogue-wind-of-change-whistle', 'Wind of Change', { artist: 'Scorpions', aliases: ['Klaus Meine'], icon: 'cassette' }],
   ['catalogue-cant-help-falling-in-love', 'Can’t Help Falling in Love', { artist: 'Elvis Presley', aliases: ['Cant Help Falling in Love'], icon: 'heart' }],
   ['catalogue-hey-jude-opening', 'Hey Jude', { artist: 'The Beatles', aliases: ['Lennon-McCartney', 'Paul McCartney'] }],
   ['catalogue-lambada', 'Lambada', { artist: 'Kaoma', aliases: ['Chorando se foi', 'Llorando se fue', 'Los Kjarkas', 'Gonzalo Hermosa', 'Ulises Hermosa'], icon: 'waveform' }],
@@ -224,12 +224,12 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-vivaldi-spring-ritornello', 'Spring', { artist: 'Antonio Vivaldi', version: 'The Four Seasons, I. Allegro', aliases: ['Vivaldi', 'La Primavera', 'The Four Seasons', 'Le quattro stagioni', 'RV 269', 'Op. 8 No. 1'], icon: 'flower' }],
   ['catalogue-mozart-rondo-alla-turca', 'Rondo alla Turca', { artist: 'Wolfgang Amadeus Mozart', version: 'Piano Sonata No. 11, K. 331', aliases: ['Mozart', 'Turkish March', 'Alla Turca', 'K. 331', 'Marcia alla turca'] }],
   ['catalogue-bach-minuet-in-g', 'Minuet in G', { artist: 'Christian Petzold', version: 'Notebook for Anna Magdalena Bach, BWV Anh. 114', aliases: ['Johann Sebastian Bach', 'Bach', 'BWV Anh. 114', 'Minuet in G major', 'Menuet', 'Petzold'] }],
-  ['catalogue-greensleeves-verse', 'Greensleeves', { artist: 'Traditional', aliases: ['Green Sleeves', 'English folk song'], icon: 'leaf' }],
+  ['catalogue-greensleeves-verse', 'Greensleeves', { artist: 'Traditional', aliases: ['Green Sleeves', 'English folk song'], icon: 'flower' }],
   ['catalogue-brahms-lullaby', 'Lullaby', { artist: 'Johannes Brahms', version: 'Wiegenlied, Op. 49 No. 4', aliases: ['Brahms', 'Brahms’ Lullaby', 'Wiegenlied', 'Cradle Song', 'Op. 49 No. 4'], icon: 'moon' }],
-  ['catalogue-swan-lake-theme', 'Swan Lake', { artist: 'Pyotr Ilyich Tchaikovsky', version: 'Swan theme, Op. 20', aliases: ['Tchaikovsky', 'Swan Theme', 'Le Lac des cygnes', 'Lebedinoye ozero', 'Op. 20'], icon: 'wings' }],
+  ['catalogue-swan-lake-theme', 'Swan Lake', { artist: 'Pyotr Ilyich Tchaikovsky', version: 'Swan theme, Op. 20', aliases: ['Tchaikovsky', 'Swan Theme', 'Le Lac des cygnes', 'Lebedinoye ozero', 'Op. 20'] }],
   ['catalogue-we-wish-you-a-merry-christmas', 'We Wish You a Merry Christmas', { artist: 'Traditional', aliases: ['English carol', 'West Country carol', 'Christmas carol'], icon: 'star' }],
   ['catalogue-joy-to-the-world', 'Joy to the World', { artist: 'George Frideric Handel & Isaac Watts', version: 'Hymn tune Antioch', aliases: ['Handel', 'Isaac Watts', 'Lowell Mason', 'Antioch'], icon: 'star' }],
-  ['catalogue-deck-the-halls', 'Deck the Halls', { artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'leaf' }],
+  ['catalogue-deck-the-halls', 'Deck the Halls', { artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'star' }],
   ['catalogue-pachelbel-canon', 'Canon in D', { artist: 'Johann Pachelbel', version: 'Canon per 3 Violini e Basso', aliases: ['Pachelbel', 'Pachelbel’s Canon', 'Kanon und Gigue', 'P. 37'] }],
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
 ]);

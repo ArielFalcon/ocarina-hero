@@ -85,3 +85,14 @@ test('song meta shortens Zelda and appends only the artist and version present',
   assert.equal(songMeta(entry('The Legend of Zelda', undefined, 'Ocarina of Time')), 'Zelda · Ocarina of Time');
   assert.equal(songMeta(entry('Pop', 'Queen')), 'Pop · Queen');
 });
+
+test('a song never wears another franchise emblem', () => {
+  // Universe marks that are plain drawings, not emblems, may be reused by other songs.
+  const generic = new Set(['anime', 'film', 'gamepad', 'heart', 'moon', 'clock']);
+  const markOwners = new Map<string, Set<string>>();
+  for (const entry of entries) markOwners.set(entry.universeIcon, (markOwners.get(entry.universeIcon) ?? new Set()).add(entry.universe));
+  const borrowed = entries
+    .filter(entry => !generic.has(entry.icon) && [...markOwners.get(entry.icon) ?? []].some(universe => universe !== entry.universe))
+    .map(entry => `${entry.title}: ${entry.icon}`);
+  assert.deepEqual(borrowed, []);
+});

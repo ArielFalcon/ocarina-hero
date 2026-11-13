@@ -54,6 +54,7 @@ Every bundled song gets an explicit entry in `src/ui/songbook.ts`; none may fall
 | `artist` | Only in `Pop` and `Classics`; join performers with `&` | `PinkPantheress & Zara Larsson` |
 | `aliases` | Composers and performers of franchise songs, alternate and original titles, so they stay searchable | `['Hans Zimmer']`, `['On The Way']` |
 | `categories` | Primary first: `Games`, `Anime`, `Film` (includes TV), `Pop`, `Classics`. Add a second only when the song genuinely belongs to both | Studio Ghibli: `['Anime', 'Film']` |
+| `icon` | Optional per-song patch. Never another franchise's emblem; emblem icons are named after what they depict, so look at the SVG, not the name | Greensleeves: `flower`, not `konohaLeaf` |
 
 - A franchise theme without a proper name is titled `Main Theme`; keep the full name as an alias.
 - Verify the franchise of a new song from a primary source; manifest categories such as `Anime / 2026` are not enough.

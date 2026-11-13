@@ -21,7 +21,7 @@ const ICONS = [
   'hourglass',
   'hunter',
   'keyboard',
-  'leaf',
+  'konohaLeaf',
   'lily',
   'lyre',
   'meteor',
@@ -49,7 +49,7 @@ const ICONS = [
   'triforce',
   'unit',
   'waveform',
-  'wings',
+  'wingsOfFreedom',
   'wizard',
 ] as const;
 

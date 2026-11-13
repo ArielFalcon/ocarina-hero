@@ -1,5 +1,5 @@
 /**
- * Every recording with a usable reference for the Isolated instrument benchmark.
+ * Every recording with a usable reference for the audio extraction benchmark.
  *
  * - corpus: the first fifteen seconds of each corpus clip (plus extra entries) against its curated melody,
  *   placed by out/melody-benchmark/alignment.json (unvalidated arrangements, with accompaniment);

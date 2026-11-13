@@ -497,7 +497,7 @@ progress::-moz-progress-bar { background: var(--cord); }
 .workshop-step-fragment:has(.audio-editor:not([hidden])) .step-placeholder { display: none; }
 .step-placeholder { padding: 18px 16px; border: 1px dashed #a2824966; border-radius: 6px; text-align: center; }
 .analysis-controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; }
-.analysis-controls .field { flex: 1 1 260px; max-width: 360px; }
+.analysis-controls .analysis-note { flex: 1 1 260px; max-width: 360px; min-width: 0; }
 .analyze-button { min-height: 56px; padding-inline: 24px; }
 .analysis-progress { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 10px 14px; border-radius: 6px; background: #16251b99; }
 .analysis-progress[hidden] { display: none; }

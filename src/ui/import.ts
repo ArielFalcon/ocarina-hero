@@ -3,7 +3,6 @@ import type { AudioSelection, SourceWindow } from '../core/audio-window';
 import * as toneMidi from '@tonejs/midi';
 const Midi = (toneMidi as unknown as { default?: typeof toneMidi }).default?.Midi ?? toneMidi.Midi;
 import { extractMelody } from '../core/midi-import';
-import { analyzeModelPitchTrack, parseModelPitchTrack, type SourceAnalysis } from '../core/melody-analysis';
 import type { MelodyNote } from '../core/project';
 import { transcribeAudio, type Transcription } from '../core/transcribe';
 import { transcribeWithBasicPitch, type BasicPitchModel, type BasicPitchTranscription } from '../core/basic-pitch';
@@ -12,12 +11,12 @@ import { BASIC_PITCH_MODEL_SHA256, loadBrowserBasicPitch } from '../audio/basic-
 /** Identifies the Basic Pitch decoding rules in src/core/melody-decoder.ts; change it when they change. */
 export const BASIC_PITCH_DECODER = 'basic-pitch-viterbi-v2';
 
-export type AudioImportMode = 'isolated' | 'main-melody';
 export interface PreparedAudio { readonly file: File; readonly buffer: AudioBuffer }
-export interface IsolatedAnalysis {
+/** The downloadable record of one audio analysis; times are seconds from the start of the analysed fragment. */
+export interface AudioSourceAnalysis {
   sourceWindow?: SourceWindow;
   schemaVersion: 1;
-  /** `basic-pitch` runs in the browser; `isolated-periodicity` is the fallback detector when the model cannot load or run. */
+  /** `basic-pitch` is the melody model; `isolated-periodicity` is the fallback detector when the model cannot load or run. */
   engine: { id: 'basic-pitch'; modelSha256: string; decoder: string } | { id: 'isolated-periodicity' };
   sampleRate: number;
   durationSeconds: number;
@@ -27,7 +26,6 @@ export interface IsolatedAnalysis {
   contourAvailable: false;
   warnings: string[];
 }
-export type AudioSourceAnalysis = SourceAnalysis | IsolatedAnalysis;
 export interface ImportedSource {
   title: string;
   subtitle: string;
@@ -40,14 +38,12 @@ export interface ImportedSource {
 type Context = Pick<AudioContext, 'decodeAudioData' | 'close'>;
 interface Dependencies {
   createContext?: () => Context;
-  fetch?: typeof fetch;
   transcribe?: (samples: Float32Array, sampleRate: number) => Transcription | null;
   basicPitch?: () => Promise<BasicPitchModel>;
 }
 
 export class SourceImporter {
   private generation = 0;
-  private controller: AbortController | undefined;
   private busy = false;
   private prepared: PreparedAudio | undefined;
   constructor(private callbacks: { onSource(source: ImportedSource): void; onStatus(message: string): void; onPending?(pending: boolean): void }, private dependencies: Dependencies = {}) {}
@@ -62,8 +58,6 @@ export class SourceImporter {
 
   invalidate(): void {
     this.generation++;
-    this.controller?.abort();
-    this.controller = undefined;
     this.setPending(false);
   }
 
@@ -93,7 +87,7 @@ export class SourceImporter {
     }
   }
 
-  async analyzeAudio(audio: PreparedAudio, mode: AudioImportMode, selection: AudioSelection): Promise<void> {
+  async analyzeAudio(audio: PreparedAudio, selection: AudioSelection): Promise<void> {
     if (audio !== this.prepared) return;
     const { buffer, file } = audio;
     const { startIndex, endIndex } = selection;
@@ -101,24 +95,22 @@ export class SourceImporter {
       this.callbacks.onStatus('Invalid audio window.');
       return;
     }
-    await this.runAnalysis(file, mode, buffer, startIndex, endIndex);
+    await this.runAnalysis(file, buffer, startIndex, endIndex);
   }
 
-  async load(file: File, mode: AudioImportMode): Promise<void> {
+  async load(file: File): Promise<void> {
     if (!/\.midi?$/i.test(file.name)) {
       const audio = await this.prepareAudio(file);
-      if (audio) await this.analyzeAudio(audio, mode, { startIndex: 0, endIndex: Math.min(audio.buffer.length, Math.floor(audio.buffer.sampleRate * audioLimits.maxDurationSeconds)) });
+      if (audio) await this.analyzeAudio(audio, { startIndex: 0, endIndex: Math.min(audio.buffer.length, Math.floor(audio.buffer.sampleRate * audioLimits.maxDurationSeconds)) });
       return;
     }
     this.releaseAudio();
-    await this.runAnalysis(file, mode);
+    await this.runAnalysis(file);
   }
 
-  private async runAnalysis(file: File, mode: AudioImportMode, buffer?: AudioBuffer, startIndex = 0, endIndex = 0): Promise<void> {
+  private async runAnalysis(file: File, buffer?: AudioBuffer, startIndex = 0, endIndex = 0): Promise<void> {
     this.invalidate();
     const generation = this.generation;
-    const controller = new AbortController();
-    this.controller = controller;
     this.setPending(true);
     const current = () => this.generation === generation;
     const status = (message: string) => { if (current()) this.callbacks.onStatus(message); };
@@ -145,59 +137,33 @@ export class SourceImporter {
         for (let i = 0; i < length; i++) samples[i] = samples[i]! + data[startIndex + i]! / buffer.numberOfChannels;
       }
       const duration = length / buffer.sampleRate;
-      let analysis: AudioSourceAnalysis;
-      if (mode === 'isolated') {
-        const common = { schemaVersion: 1 as const, sampleRate: buffer.sampleRate, durationSeconds: duration, tempoBpm: 60 as const, contourAvailable: false as const };
-        let result: BasicPitchTranscription | undefined;
-        let modelFailure = '';
-        try {
-          const model = await (this.dependencies.basicPitch ?? loadBrowserBasicPitch)();
-          if (!current()) return;
-          result = await transcribeWithBasicPitch(samples, buffer.sampleRate, model);
-        } catch (error) { modelFailure = error instanceof Error ? error.message : 'unknown error'; }
+      const common = { schemaVersion: 1 as const, sampleRate: buffer.sampleRate, durationSeconds: duration, tempoBpm: 60 as const, contourAvailable: false as const };
+      let result: BasicPitchTranscription | undefined;
+      let modelFailure = '';
+      try {
+        const model = await (this.dependencies.basicPitch ?? loadBrowserBasicPitch)();
         if (!current()) return;
-        if (result) {
-          if (!result.notes.length) { status('No melody found.'); return; }
-          analysis = { ...common, engine: { id: 'basic-pitch', modelSha256: BASIC_PITCH_MODEL_SHA256, decoder: BASIC_PITCH_DECODER }, notes: result.notes.map(note => ({ ...note })), voicedFrameFraction: result.voicedFrameFraction, warnings: [] };
-        } else {
-          // The periodicity detector reads only clear single-instrument recordings; say why it was used.
-          const fallback = (this.dependencies.transcribe ?? transcribeAudio)(samples, buffer.sampleRate);
-          if (!fallback?.notes.length) { status(`No melody found. The melody model could not load (${modelFailure}), so the basic detector was used.`); return; }
-          analysis = { ...common, engine: { id: 'isolated-periodicity' }, notes: fallback.notes.map(note => ({ ...note })), voicedFrameFraction: fallback.quality, warnings: [`Melody model unavailable (${modelFailure}); used the basic detector.`, 'Continuous reattacks may be unresolved.'] };
-        }
-      } else {
-        try {
-          const bytes = new ArrayBuffer(samples.length * 4);
-          const view = new DataView(bytes);
-          for (let i = 0; i < samples.length; i++) view.setFloat32(i * 4, samples[i]!, true);
-          let response: Response;
-          try { response = await (this.dependencies.fetch ?? fetch)(`/api/melody?sampleRate=${buffer.sampleRate}`, { method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: bytes, signal: controller.signal }); }
-          catch (error) { throw new Error(`Local melody runtime unavailable. Start app with npm run dev and run npm run setup:melody. ${error instanceof Error ? error.message : ''}`); }
-          if (!response.ok) {
-            const text = (await response.text()).slice(0, 500);
-            let message = text;
-            try { const parsed = JSON.parse(text); if (typeof parsed.error === 'string') message = parsed.error; } catch { /* text response */ }
-            throw new Error(message || `HTTP ${response.status}`);
-          }
-          const track = parseModelPitchTrack(await response.json());
-          if (Math.abs(track.durationSeconds - duration) > Math.max(1 / buffer.sampleRate, 1 / 44100)) throw new Error('Model returned a mismatched clip duration.');
-          analysis = analyzeModelPitchTrack(track);
-        } catch (error) {
-          status(`Melody analysis failed: ${error instanceof Error ? error.message : 'unknown error'}`);
-          return;
-        }
-        if (!current()) return;
-        if (!analysis.notes.length) { status('No melody found.'); return; }
-      }
+        result = await transcribeWithBasicPitch(samples, buffer.sampleRate, model);
+      } catch (error) { modelFailure = error instanceof Error ? error.message : 'unknown error'; }
       if (!current()) return;
+      let analysis: AudioSourceAnalysis;
+      if (result) {
+        if (!result.notes.length) { status('No melody found.'); return; }
+        analysis = { ...common, engine: { id: 'basic-pitch', modelSha256: BASIC_PITCH_MODEL_SHA256, decoder: BASIC_PITCH_DECODER }, notes: result.notes.map(note => ({ ...note })), voicedFrameFraction: result.voicedFrameFraction, warnings: [] };
+      } else {
+        // The periodicity detector reads only clear single-instrument recordings; say why it was used.
+        const fallback = (this.dependencies.transcribe ?? transcribeAudio)(samples, buffer.sampleRate);
+        if (!fallback?.notes.length) { status(`No melody found. The melody model could not load (${modelFailure}), so the basic detector was used.`); return; }
+        analysis = { ...common, engine: { id: 'isolated-periodicity' }, notes: fallback.notes.map(note => ({ ...note })), voicedFrameFraction: fallback.quality, warnings: [`Melody model unavailable (${modelFailure}); used the basic detector.`, 'Continuous reattacks may be unresolved.'] };
+      }
       analysis.sourceWindow = { startSeconds: startIndex / buffer.sampleRate, endSeconds: endIndex / buffer.sampleRate, sourceDurationSeconds: buffer.length / buffer.sampleRate };
       const clip = `${(startIndex / buffer.sampleRate).toFixed(2)}–${(endIndex / buffer.sampleRate).toFixed(2)}s selected`;
       const warning = analysis.warnings.length ? ` · ${analysis.warnings.join(' ')}` : '';
-      publish({ title: file.name, subtitle: `${mode === 'main-melody' ? 'Main melody' : 'Isolated instrument'} · ${analysis.notes.length} source notes · ${Math.round(analysis.voicedFrameFraction * 100)}% voiced frames · ${clip}${warning}`, tempoBpm: 60, beatsPerBar: 4, melody: analysis.notes, preserveTiming: true, analysis });
+      publish({ title: file.name, subtitle: `${analysis.notes.length} source notes · ${Math.round(analysis.voicedFrameFraction * 100)}% voiced frames · ${clip}${warning}`, tempoBpm: 60, beatsPerBar: 4, melody: analysis.notes, preserveTiming: true, analysis });
     } catch (error) {
       status(`Could not read that file: ${error instanceof Error ? error.message : 'unknown error'}`);
     } finally {
-      if (current()) { this.controller = undefined; this.setPending(false); }
+      if (current()) this.setPending(false);
     }
   }
 }

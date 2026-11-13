@@ -1,13 +1,11 @@
 /**
  * Monophonic melody decoding from Basic Pitch note posteriors.
  *
- * Started as the TypeScript counterpart of the Basic Pitch part of `scripts/melody_decoder.py`; the
- * onset bonus, the upper-voice preference and the weak-note filter exist only here. Posteriors are
- * used as absolute probabilities (never normalized per clip), with a mild preference for higher
- * pitches and for the upper sounding voice. A Viterbi pass finds one path that penalizes pitch
- * changes and voicing switches, and makes entering a pitch cheaper where Basic Pitch reports its
- * onset. Notes shorter than a minimum that follows the fragment's onset rate are then absorbed or
- * removed, notes far weaker than the rest of the fragment are dropped, and held notes are split
+ * Posteriors are used as absolute probabilities (never normalized per clip), with a mild preference
+ * for higher pitches and for the upper sounding voice. A Viterbi pass finds one path that penalizes
+ * pitch changes and voicing switches, and makes entering a pitch cheaper where Basic Pitch reports
+ * its onset. Notes shorter than a minimum that follows the fragment's onset rate are then absorbed
+ * or removed, notes far weaker than the rest of the fragment are dropped, and held notes are split
  * where Basic Pitch reports a strong new onset of the same pitch.
  * Parameters were chosen on `scripts/instrument-benchmark.ts`; see docs/transcription.md.
  */

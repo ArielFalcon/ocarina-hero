@@ -1,28 +1,24 @@
 /**
- * Isolated instrument benchmark over every recording with a reference (see scripts/instrument-dataset.ts).
+ * Audio extraction benchmark over every recording with a reference (see scripts/instrument-dataset.ts).
  *
- * Engines: `basic-pitch` (current Isolated instrument engine), `periodicity` (the earlier detector, now the
- * fallback) and `main-melody` (the local server model; slow, requires npm run setup:melody).
+ * Engines: `basic-pitch` (the melody model and its decoder) and `periodicity` (the fallback detector).
  * Note F1 uses exact pitch after one global octave and onsets within ±100 ms; TAB F1 compares the projected
  * TABs by sounding pitch. Controls report the number of notes, which must be zero.
  *
- * Usage: npx tsx scripts/instrument-benchmark.ts [--engines basic-pitch,periodicity,main-melody]
+ * Usage: npx tsx scripts/instrument-benchmark.ts [--engines basic-pitch,periodicity]
  *   [--json out/instrument-benchmark/<name>.json] [--cache <dir>] [id-prefix ...]
  * `--cache` stores Basic Pitch posteriors so decoder changes can be re-scored without inference.
  */
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import * as ort from 'onnxruntime-web';
 import { createBasicPitchModel } from '../src/audio/basic-pitch-model';
 import { BASIC_PITCH_RATE, basicPitchFrames, decodeFrames, resample, type BasicPitchFrames } from '../src/core/basic-pitch';
-import { analyzeModelPitchTrack, parseModelPitchTrack } from '../src/core/melody-analysis';
 import { emptyGrid } from '../src/core/melody-decoder';
 import { frequencyOf } from '../src/core/pitches';
 import { prepareMelody } from '../src/core/prepare';
 import type { MelodyNote } from '../src/core/project';
 import { transcribeAudio } from '../src/core/transcribe';
-import { runModel } from '../server/melody';
 import { RATE, loadBenchmarkItems, type BenchmarkItem } from './instrument-dataset';
 import { scoreAdapted, scoreNotes, type TimedNote } from './melody-metrics';
 
@@ -63,17 +59,9 @@ async function framesFor(item: BenchmarkItem, model: Parameters<typeof basicPitc
 
 const bytes = new Uint8Array(readFileSync('public/models/basic-pitch-nmp.onnx'));
 const model = engines.includes('basic-pitch') ? await createBasicPitchModel(ort, bytes) : undefined;
-const work = mkdtempSync(join(tmpdir(), 'instrument-benchmark-'));
 const run: Record<string, Engine> = {
   'basic-pitch': async item => decodeFrames(await framesFor(item, model!, cache), item.samples.length / RATE).notes,
   periodicity: async item => transcribeAudio(item.samples, RATE)?.notes ?? [],
-  'main-melody': async item => {
-    const input = join(work, 'clip.f32');
-    writeFileSync(input, Buffer.from(item.samples.buffer, item.samples.byteOffset, item.samples.byteLength));
-    const result = await runModel(input, RATE).result;
-    if (result.stdout === undefined) throw new Error(`${item.id}: ${result.error ?? 'oversized output'}`);
-    return analyzeModelPitchTrack(parseModelPitchTrack(JSON.parse(result.stdout))).notes;
-  },
 };
 
 /** Sounding pitch of the projected TAB. */
@@ -86,28 +74,26 @@ const asMelody = (notes: readonly TimedNote[]): MelodyNote[] => notes.map(n => (
 
 type Row = { f1?: number; precision?: number; recall?: number; tabF1?: number; notes: number; seconds: number };
 const rows: Record<string, Record<string, Row>> = {};
-try {
-  const items = loadBenchmarkItems(process.cwd()).filter(item => !prefixes.length || prefixes.some(p => item.id.startsWith(p)));
-  for (const item of items) {
-    rows[item.id] = {};
-    const line: string[] = [item.id.padEnd(30)];
-    for (const engine of engines) {
-      const started = performance.now();
-      let notes = await run[engine]!(item);
-      const seconds = (performance.now() - started) / 1000;
-      if (item.span) notes = notes.filter(n => n.startBeat >= item.span![0] && n.startBeat < item.span![1]);
-      const row: Row = { notes: notes.length, seconds };
-      if (item.reference) {
-        const scores = scoreNotes(item.reference, timed(notes), item.samples.length / RATE);
-        Object.assign(row, { f1: scores.f1, precision: scores.precision, recall: scores.recall,
-          tabF1: notes.length ? scoreAdapted(adapted(asMelody(item.reference)), adapted(notes)) : 0 });
-        line.push(`${engine} F1 ${scores.f1.toFixed(2)} TAB ${row.tabF1!.toFixed(2)} (${notes.length}/${item.reference.length})`);
-      } else line.push(`${engine} notes ${notes.length}`);
-      rows[item.id]![engine] = row;
-    }
-    console.log(line.join('  '));
+const items = loadBenchmarkItems(process.cwd()).filter(item => !prefixes.length || prefixes.some(p => item.id.startsWith(p)));
+for (const item of items) {
+  rows[item.id] = {};
+  const line: string[] = [item.id.padEnd(30)];
+  for (const engine of engines) {
+    const started = performance.now();
+    let notes = await run[engine]!(item);
+    const seconds = (performance.now() - started) / 1000;
+    if (item.span) notes = notes.filter(n => n.startBeat >= item.span![0] && n.startBeat < item.span![1]);
+    const row: Row = { notes: notes.length, seconds };
+    if (item.reference) {
+      const scores = scoreNotes(item.reference, timed(notes), item.samples.length / RATE);
+      Object.assign(row, { f1: scores.f1, precision: scores.precision, recall: scores.recall,
+        tabF1: notes.length ? scoreAdapted(adapted(asMelody(item.reference)), adapted(notes)) : 0 });
+      line.push(`${engine} F1 ${scores.f1.toFixed(2)} TAB ${row.tabF1!.toFixed(2)} (${notes.length}/${item.reference.length})`);
+    } else line.push(`${engine} notes ${notes.length}`);
+    rows[item.id]![engine] = row;
   }
-} finally { rmSync(work, { recursive: true, force: true }); }
+  console.log(line.join('  '));
+}
 
 const summary: Record<string, Record<string, Record<string, number>>> = {};
 for (const group of ['corpus', 'phoenix/flute', 'phoenix/violin', 'phoenix/mix', 'reference', 'delivery', 'synthetic', 'control']) {

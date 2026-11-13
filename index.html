@@ -163,12 +163,12 @@
             <li class="workshop-step">
               <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">3</span><span class="stitched-label">Find the melody</span></h2>
               <div class="analysis-controls">
-                <div class="field"><label for="audio-mode">Recording type</label><span class="input-frame select-frame"><select id="audio-mode"><option value="main-melody">Song with accompaniment</option><option value="isolated">Single instrument or voice</option></select><span class="select-chevron" aria-hidden="true"></span></span><p id="audio-mode-note" class="meta" hidden>This online version finds the melody in your browser. It is most accurate with a single instrument or voice; songs with accompaniment work with more errors than the local analysis server.</p></div>
+                <p class="analysis-note meta">The melody is found in your browser. It is most accurate with a single instrument or voice; with accompaniment, some notes can come from other instruments.</p>
                 <button id="analyze" class="action primary analyze-button" type="button" disabled><span data-thread-icon="play"></span><span class="stitched-label">Analyze fragment</span></button>
               </div>
               <div id="analysis-progress" class="analysis-progress" hidden>
                 <span class="thread-spinner" aria-hidden="true"></span>
-                <div class="analysis-progress-copy"><p id="analysis-progress-label" class="analysis-progress-label">Analysing the fragment…</p><p class="meta"><span id="analysis-elapsed" aria-hidden="true">0 s</span> · Usually takes about 10 seconds.</p></div>
+                <div class="analysis-progress-copy"><p id="analysis-progress-label" class="analysis-progress-label">Analysing the fragment…</p><p class="meta"><span id="analysis-elapsed" aria-hidden="true">0 s</span> · Usually takes a few seconds.</p></div>
                 <button id="cancel-analysis" class="text-button" type="button">Cancel</button>
               </div>
               <p id="workshop-status" class="song-hint" role="status" aria-live="polite">Choose a recording to begin.</p>

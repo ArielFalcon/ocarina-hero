@@ -647,7 +647,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 .mini-staff .tab { zoom: .72; margin: 0; height: 192px; }
 .mini-staff .tab:not(.has-modifiers) { height: 130px; }
 @media (min-width: 800px) {
-  .mini-player { left: 24px; right: 24px; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); align-items: center; column-gap: 24px; padding: 6px 20px; }
+  .mini-player { left: 24px; right: 24px; max-width: 1040px; margin-inline: auto; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); align-items: center; column-gap: 24px; padding: 6px 20px; }
   .mini-staff .tab { zoom: .7; height: 210px; }
   .mini-staff .tab:not(.has-modifiers) { height: 150px; }
 }

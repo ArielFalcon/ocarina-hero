@@ -29,7 +29,9 @@
     <link rel="apple-touch-icon" href="/icons/app/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/im-fell-english.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="/theme-init.js"></script>
     <link rel="stylesheet" href="/src/ui/styles.css" />
+    <link rel="stylesheet" href="/src/ui/retro.css" />
   </head>
   <body>
     <svg class="thread-filters" xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true"><defs>
@@ -43,11 +45,15 @@
         <source media="(min-width: 800px)" srcset="/art/tree-desktop.webp" width="2172" height="724" />
         <img src="/art/tree-mobile.webp" width="1200" height="800" alt="" decoding="async" />
       </picture>
+      <div class="retro-art" aria-hidden="true"></div>
       <div class="tapestry-edge" aria-hidden="true"></div>
       <main id="main-content" tabindex="-1">
         <header class="head">
-          <a class="brand" href="#catalog"><img class="brand-icon" src="/icons/app/icon-192.png" width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
+          <a class="brand" href="#catalog"><img class="brand-icon" src="/icons/app/icon-192.png" data-retro-src="/art/retro/ocarina.svg" width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
+          <span class="head-actions">
+          <a class="action settings-link" href="#settings" data-view-link="settings" aria-label="Settings"><span data-thread-icon="settings"></span></a>
           <a class="action repo-link" href="https://github.com/ArielFalcon/ocarina-hero" target="_blank" rel="noopener" aria-label="Star Ocarina Hero on GitHub (opens in a new tab)"><span data-thread-icon="star"></span><span><span class="repo-long">Star on </span>GitHub</span></a>
+          </span>
         </header>
         <section id="catalog-view" class="view" aria-labelledby="catalog-title">
           <div class="catalog-hero">
@@ -183,9 +189,18 @@
           </ol>
         </section>
 
+        <section id="settings-view" class="view padded-view settings-view" aria-labelledby="settings-title" hidden>
+          <div class="section-art"><p class="eyebrow stitched-label">Settings</p><h1 id="settings-title" class="embroidered">Make it yours</h1><p class="subtitle stitched-label">Choose the look of your songbook.</p></div>
+          <fieldset id="theme-picker" class="theme-picker">
+            <legend class="stitched-label">Look</legend>
+            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="tapestry" /><img class="theme-card-art" src="/art/theme/keycard-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">2026 remake</span><span class="theme-card-detail">Woven tapestry with Switch 2 controls</span></span></label>
+            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="retro" /><img class="theme-card-art" src="/art/theme/cartridge-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">1998 original</span><span class="theme-card-detail">Stone subscreen with N64 controls</span></span></label>
+          </fieldset>
+        </section>
+
       </main>
       <footer class="menu-footer">
-        <img class="menu-ornament" src="/art/sword-triforce-v2.webp" width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />
+        <img class="menu-ornament" src="/art/sword-triforce-v2.webp" data-retro-src="/art/retro/sword-triforce.svg" width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />
         <section id="mini-player" class="mini-player" aria-label="Quick play" hidden>
           <div class="mini-head">
             <button id="mini-toggle" class="patch-button mini-toggle" type="button" aria-label="Play"></button>

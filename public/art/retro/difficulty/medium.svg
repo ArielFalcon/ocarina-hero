@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201 222" fill="none" stroke-linejoin="round">
+<title>Golden bevelled frame with an open seal window</title>
+<defs><clipPath id="medium-seal-clearance"><path clip-rule="evenodd" d="M0 0H201V222H0Z M50 36H151Q165 36 165 50V172Q165 186 151 186H50Q36 186 36 172V50Q36 36 50 36Z"/></clipPath></defs><g clip-path="url(#medium-seal-clearance)"><rect x="30" y="30" width="141" height="162" rx="20" stroke="#120e08" stroke-width="10"/><rect x="30" y="30" width="141" height="162" rx="20" stroke="#f4c315" stroke-width="6"/><path d="M30 160V50Q30 30 50 30H151" stroke="#f3ecd2" stroke-width="2"/><path d="M171 60V172Q171 192 151 192H50" stroke="#9a7400" stroke-width="3"/><polygon points="30,23 38,31 30,39 22,31" fill="#f4c315" stroke="#120e08" stroke-width="3"/><polygon points="171,183 179,191 171,199 163,191" fill="#f4c315" stroke="#120e08" stroke-width="3"/></g>
+</svg>

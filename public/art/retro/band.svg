@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 64" fill="none" stroke-linejoin="round">
+<title>Repeating carved stone border with golden studs</title>
+<defs><pattern id="retro-stone-repeat" width="96" height="64" patternUnits="userSpaceOnUse"><path fill="#5f5745" d="M0 0H96V64H0Z"/><path fill="#8a7f63" d="M0 3H96V11H0Z"/><path fill="#2f2a1f" d="M0 51H96V61H0Z"/><path stroke="#120e08" stroke-width="3" d="M0 2H96M0 62H96M0 15H96M0 49H96"/><path fill="#c9bf9f" d="M0 11H96V14H0Z"/><path fill="#2f2a1f" d="M0 18H96V22H0Z"/><path fill="#8a7f63" d="M0 43H96V47H0Z"/><path fill="#f4c315" stroke="#120e08" stroke-width="3" d="M48 20 60 32 48 44 36 32Z"/><path fill="#f3ecd2" d="M48 22 48 32 38 32Z"/><path fill="#9a7400" d="M48 32 58 32 48 42Z"/><path fill="#8a7f63" d="M0 27 9 32 0 37ZM96 27 87 32 96 37Z"/><path fill="#2f2a1f" d="M18 23 25 27 22 38 27 41 19 39 22 29Z"/></pattern></defs><path fill="url(#retro-stone-repeat)" d="M0 0H1536V64H0Z"/>
+</svg>

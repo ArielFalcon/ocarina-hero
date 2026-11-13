@@ -10,6 +10,7 @@ test('earlier hash links to a song still parse, including ids that need encoding
 
 test('view routes parse, and unknown or empty hashes fall back to the songbook', () => {
   assert.deepEqual(parseRoute('#workshop'), { view: 'workshop' });
+  assert.deepEqual(parseRoute('#settings'), { view: 'settings' });
   assert.deepEqual(parseRoute('#free'), { view: 'free' });
   assert.deepEqual(parseRoute('#lesson'), { view: 'lesson' });
   assert.deepEqual(parseRoute('#saved'), { view: 'saved' });

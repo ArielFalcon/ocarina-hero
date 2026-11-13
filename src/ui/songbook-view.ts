@@ -4,8 +4,9 @@ import type { DemoTrack } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
 import { completedIds, lastOpened, type Progress } from './progress';
+import { isEmptyJourney, journey } from './journey';
+import { SAVED_STORAGE } from './local-data';
 
-const SAVED_KEY = 'ocarina.saved.v1';
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
 /** Range steps: 0 is every difficulty, then one step per tier. */
@@ -95,6 +96,7 @@ export class SongbookView {
   private categoryFold: Fold;
   private difficultyFold: Fold;
   private list: HTMLElement;
+  private journey: HTMLElement;
   private categories: HTMLElement;
   private count: HTMLElement;
   private rail: HTMLElement;
@@ -122,6 +124,7 @@ export class SongbookView {
     this.search = root.querySelector('#song-search')!;
     this.universes = root.querySelector('#universes')!;
     this.list = root.querySelector('#demos')!;
+    this.journey = root.querySelector('#journey')!;
     this.categories = root.querySelector('#categories')!;
     this.universeFold = new Fold(root.querySelector('#universe-toggle')!, root.querySelector('#universe-panel')!, this.universes, 'input:checked', () => this.foldOthers(this.universeFold));
     this.categoryFold = new Fold(root.querySelector('#category-toggle')!, root.querySelector('#category-panel')!, this.categories, '[aria-pressed="true"]', () => this.foldOthers(this.categoryFold));
@@ -159,7 +162,7 @@ export class SongbookView {
       this.difficultyFold.fold();
     });
     try {
-      const value: unknown = JSON.parse(localStorage.getItem(SAVED_KEY) ?? '[]');
+      const value: unknown = JSON.parse(localStorage.getItem(SAVED_STORAGE) ?? '[]');
       if (Array.isArray(value)) this.saved = new Set(value.filter((id): id is string => typeof id === 'string'));
     } catch { this.sessionOnly = true; }
     this.search.addEventListener('input', () => {
@@ -209,6 +212,11 @@ export class SongbookView {
       if (!entry) return;
       if (button!.dataset.quickPlay) this.callbacks.quickPlay(entry);
       else this.callbacks.select(entry);
+    });
+    this.journey.addEventListener('click', event => {
+      const id = (event.target as Element).closest<HTMLButtonElement>('[data-song]')?.dataset.song;
+      const entry = id && this.entries.find(item => item.id === id);
+      if (entry) this.callbacks.select(entry);
     });
     this.filterChanged();
   }
@@ -278,7 +286,21 @@ export class SongbookView {
   toggleSaved(id: string): void {
     if (this.saved.has(id)) this.saved.delete(id);
     else this.saved.add(id);
-    try { localStorage.setItem(SAVED_KEY, JSON.stringify([...this.saved])); }
+    this.savedEdited();
+  }
+
+  savedIds(): string[] { return this.entries.filter(entry => this.saved.has(entry.id)).map(entry => entry.id); }
+
+  /** Adds imported songs to Saved and returns how many were not saved yet. */
+  importSaved(ids: readonly string[]): number {
+    const before = this.saved.size;
+    for (const id of ids) this.saved.add(id);
+    this.savedEdited();
+    return this.saved.size - before;
+  }
+
+  private savedEdited(): void {
+    try { localStorage.setItem(SAVED_STORAGE, JSON.stringify([...this.saved])); }
     catch { this.sessionOnly = true; }
     this.updateSavedCard();
     this.renderCategoryToggle();
@@ -370,6 +392,26 @@ export class SongbookView {
     }
     for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
     this.renderRail([...anchors.values()], result.length);
+    this.renderJourney(progress);
+  }
+
+  /** The desktop side panel: resume, overall progress, the suggested next song and the first saved songs. */
+  private renderJourney(progress: Progress): void {
+    const state = journey(this.entries, progress, this.saved);
+    if (isEmptyJourney(state)) {
+      this.journey.innerHTML = '<h2 id="journey-title" class="embroidered">One passage<br>at a time.</h2><p>Listen to a melody, follow the staff and make it yours on the controller.</p>';
+      return;
+    }
+    const song = (entry: SongbookEntry, meta: string) => `<button class="song-open journey-song" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${escapeHtml(entry.title)}</span><span class="song-meta">${escapeHtml(meta)}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button>`;
+    const section = (label: string, body: string) => `<section class="journey-section"><h3 class="eyebrow stitched-label">${label}</h3>${body}</section>`;
+    const resume = state.resume;
+    const resumeMeta = resume && [songMeta(resume.entry), resume.progress.completed && 'Completed', resume.progress.bestCombo > 1 && `Best combo ×${resume.progress.bestCombo}`].filter(Boolean).join(' · ');
+    const ratio = state.total ? state.completed / state.total : 0;
+    this.journey.innerHTML = '<h2 id="journey-title" class="embroidered">Your journey</h2>'
+      + (resume ? section('Continue', song(resume.entry, resumeMeta || '')) : '')
+      + section('Progress', `<p class="progress-heading"><span>${state.completed} of ${state.total} songs completed</span><span aria-hidden="true">${Math.round(ratio * 100)}%</span></p><div class="progress-track" style="--progress-ratio: ${ratio}"><progress value="${state.completed}" max="${Math.max(1, state.total)}" aria-label="Songs completed"></progress></div>`)
+      + (state.next ? section('Up next', song(state.next, songMeta(state.next))) : '')
+      + (state.savedCount ? section('Saved', `<ul class="journey-saved">${state.saved.map(entry => `<li><button class="text-button" type="button" data-song="${escapeHtml(entry.id)}">${escapeHtml(entry.title)}</button></li>`).join('')}</ul>${state.savedCount > state.saved.length ? `<button class="text-button journey-all" type="button" data-view-link="saved">See all ${state.savedCount} saved</button>` : ''}`) : '');
   }
 
   private rowHtml(entry: SongbookEntry, completed: ReadonlySet<string>, letter?: string): string {
@@ -384,15 +426,16 @@ export class SongbookView {
     const resume = this.entries.filter(entry => entry.id === resumeId);
     const title = (text: string) => `<h2 class="shelf-title eyebrow stitched-label">${text}</h2>`;
     const shelf = (text: string, songs: readonly SongbookEntry[]) => songs.length ? title(text) + songs.map(song => this.rowHtml(song, completed)).join('') : '';
-    return shelf('Continue', resume) + shelf('Songs from the game', gameSongs(this.entries)) + title('All songs');
+    return `<div class="resume-shelf">${shelf('Continue', resume)}</div>` + shelf('Songs from the game', gameSongs(this.entries)) + title('All songs');
   }
 
   /** One stitched letter per initial present in the results; hidden when the list is short. */
   private renderRail(letters: readonly string[], total: number): void {
     this.rail.hidden = total < RAIL_MIN_RESULTS || letters.length < 2;
     this.rail.style.setProperty('--letters', String(letters.length));
+    // Knots between the letters are decorative seams; on desktop they stretch so the rail spans the list.
     this.rail.querySelector('.letter-list')!.innerHTML = this.rail.hidden ? '' : letters.map((letter, index) =>
-      `<button class="letter-slot" type="button" data-letter="${escapeHtml(letter)}" tabindex="${index ? -1 : 0}" aria-label="${letter === '#' ? 'Numbers and symbols' : `Songs starting with ${letter}`}"><span class="stitched-label" aria-hidden="true">${escapeHtml(letter)}</span></button>`).join('');
+      `<button class="letter-slot" type="button" data-letter="${escapeHtml(letter)}" tabindex="${index ? -1 : 0}" aria-label="${letter === '#' ? 'Numbers and symbols' : `Songs starting with ${letter}`}"><span class="stitched-label" aria-hidden="true">${escapeHtml(letter)}</span></button>`).join('<span class="letter-knot" aria-hidden="true"></span>');
     this.markCurrentLetter();
   }
 
@@ -438,9 +481,10 @@ export class SongbookView {
       this.railFrame = requestAnimationFrame(() => { this.railFrame = 0; this.markCurrentLetter(); });
     }, { passive: true });
     // Dragging along the rail scrubs through the letters, like a phone contact index.
+    // The nearest letter wins, so a pointer over a knot between two letters picks the closer one.
     const buttonAt = (y: number) => {
-      const buttons = this.letterButtons();
-      return buttons.find(button => y < button.getBoundingClientRect().bottom) ?? buttons.at(-1);
+      const distance = (button: HTMLButtonElement) => { const box = button.getBoundingClientRect(); return Math.abs(y - (box.top + box.height / 2)); };
+      return this.letterButtons().reduce<HTMLButtonElement | undefined>((best, button) => !best || distance(button) < distance(best) ? button : best, undefined);
     };
     const scrub = (event: PointerEvent) => {
       const button = buttonAt(event.clientY);

@@ -33,6 +33,7 @@ const ICONS = [
   'music',
   'next',
   'notebook',
+  'palette',
   'pause',
   'pirate',
   'play',

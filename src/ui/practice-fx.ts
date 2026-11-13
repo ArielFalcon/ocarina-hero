@@ -4,6 +4,12 @@
  * the practice status line remains the accessible source of truth.
  */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const enabled = { effects: true, haptics: true };
+
+/** Settings can turn the visual rewards or the vibration off; the status line keeps announcing. */
+export function setPracticeFeedback(options: { effects: boolean; haptics: boolean }): void {
+  Object.assign(enabled, options);
+}
 
 /** Restart a one-shot CSS animation class on an element that may still carry it. */
 export function retrigger(element: Element | null, className: string): void {
@@ -38,7 +44,7 @@ export function centreIn(container: HTMLElement, element: Element | null): { x: 
 
 /** Thread sparks that burst from a correctly played note; denser at higher tiers. */
 export function sparkBurst(tab: HTMLElement, point: { x: number; y: number }, tier: number): void {
-  if (reduceMotion.matches) return;
+  if (reduceMotion.matches || !enabled.effects) return;
   const burst = document.createElement('span');
   burst.className = 'hit-burst';
   burst.dataset.tier = String(tier);
@@ -64,6 +70,7 @@ export function sparkBurst(tab: HTMLElement, point: { x: number; y: number }, ti
  */
 export function ribbon(line: HTMLElement, title: string, detail: string, kind: 'combo' | 'passage' | 'song'): void {
   line.querySelector('.combo-ribbon')?.remove();
+  if (!enabled.effects) return;
   const banner = document.createElement('div');
   banner.className = `combo-ribbon is-${kind}`;
   banner.setAttribute('aria-hidden', 'true');
@@ -83,7 +90,7 @@ export function ribbon(line: HTMLElement, title: string, detail: string, kind: '
 
 /** A cream running stitch that ripples outward from a pressed control. */
 export function stitchRipple(control: Element | null): void {
-  if (!control || reduceMotion.matches) return;
+  if (!control || reduceMotion.matches || !enabled.effects) return;
   const ripple = document.createElement('span');
   ripple.className = 'key-ripple';
   ripple.setAttribute('aria-hidden', 'true');
@@ -92,5 +99,5 @@ export function stitchRipple(control: Element | null): void {
 }
 
 export function haptic(pattern: number | number[]): void {
-  navigator.vibrate?.(pattern);
+  if (enabled.haptics) navigator.vibrate?.(pattern);
 }

@@ -62,8 +62,7 @@
 :root[data-theme='retro'] .retro-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .55; background: url('/art/retro/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
 @media (min-width: 800px) { :root[data-theme='retro'] .retro-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/retro/tree-desktop.svg'); } }
 :root[data-theme='retro'] .brand-icon { filter: drop-shadow(1px 2px 0 var(--outline)); }
-:root[data-theme='retro'] .head, :root[data-theme='retro'] .catalog-filters, :root[data-theme='retro'] .song-row, :root[data-theme='retro'] .keyboard-settings, :root[data-theme='retro'] .binding-row { border-bottom: 2px solid #241f17; box-shadow: 0 1px 0 #8a7f6355; }
-:root[data-theme='retro'] .keyboard-settings { border-top: 2px solid #241f17; }
+:root[data-theme='retro'] .settings-section, :root[data-theme='retro'] .head, :root[data-theme='retro'] .catalog-filters, :root[data-theme='retro'] .song-row, :root[data-theme='retro'] .binding-row { border-bottom: 2px solid #241f17; box-shadow: 0 1px 0 #8a7f6355; }
 :root[data-theme='retro'] .app-nav { border-top: 2px solid #8a7f63; box-shadow: inset 0 2px 0 #241f17; }
 :root[data-theme='retro'] .menu-ornament { opacity: .7; }
 :root[data-theme='retro'] #main-content { scrollbar-color: var(--n64-yellow) #241f17; }
@@ -132,6 +131,8 @@
 :root[data-theme='retro'] :is(.combo-badge, .combo-ribbon)::after { border-style: solid; border-color: #f4c31599; }
 :root[data-theme='retro'] .letter-bubble { background-color: var(--n64-blue); color: #fff7dc; text-shadow: 2px 2px 0 var(--outline); }
 :root[data-theme='retro'] .letter-bubble::after { border-style: solid; border-color: #ffffff55; }
+:root[data-theme='retro'] .letter-knot::before { background: #6b5f48; opacity: 1; filter: none; }
+:root[data-theme='retro'] .letter-knot::after { background: var(--n64-yellow); box-shadow: 0 0 0 1px var(--outline); }
 
 /* Checkbox and range in the same stone and N64 yellow. */
 :root[data-theme='retro'] .toggle input { background-color: #241f17; box-shadow: inset 2px 2px 0 #0e0c08; }
@@ -161,6 +162,7 @@
 :root[data-theme='retro'] .rate-field select { font-size: 15px; letter-spacing: -.02em; }
 
 /* Panels and notices. */
+:root[data-theme='retro'] .settings-section:first-of-type { border-top: 2px solid #241f17; }
 :root[data-theme='retro'] .controller-panel { background: #241f17e6; border-color: #8a7f63; border-style: solid; }
 :root[data-theme='retro'] .notice { border-left-color: var(--n64-yellow); background: #241f17aa; }
 :root[data-theme='retro'] .step-number { border-color: var(--n64-yellow); background: #241f17; }

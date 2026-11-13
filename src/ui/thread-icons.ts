@@ -1,4 +1,6 @@
-/** Embroidered patch icons served from public/art/icons; one file per name. */
+import { assetDir } from './theme';
+
+/** Patch icons: public/art/icons (tapestry) and public/art/icons-retro (retro), one file per name in each. */
 const ICONS = [
   'anime',
   'back',
@@ -60,5 +62,12 @@ export type ThreadIcon = typeof ICONS[number];
  * referenced as an image instead of inlined; buttons keep their accessible names.
  */
 export function threadIcon(name: ThreadIcon, extraClass = ''): string {
-  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${import.meta.env.BASE_URL}art/icons/${name}.svg" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
+  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${assetDir('icons')}${name}.svg" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
+}
+
+/** Point every rendered patch icon at the active theme's set. */
+export function refreshThreadIcons(): void {
+  for (const image of document.querySelectorAll<HTMLImageElement>('img.thread-icon[data-icon]')) {
+    image.src = `${assetDir('icons')}${image.dataset.icon}.svg`;
+  }
 }

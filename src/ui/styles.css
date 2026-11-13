@@ -86,6 +86,23 @@ p { margin: 10px 0; }
 .repo-long { display: none; }
 @media (min-width: 480px) { .repo-long { display: inline; } }
 .head:has(.repo-link) .brand { white-space: nowrap; }
+/* Theme switch: the Switch 2 game-key card and the N64 cartridge in one slot. */
+.head-actions { display: flex; flex-shrink: 0; align-items: center; gap: 10px; }
+.theme-switch { position: relative; display: inline-flex; align-items: center; gap: 2px; min-height: 44px; margin-block: -6px; padding: 4px; border: 0; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); }
+.theme-switch::before { content: ''; position: absolute; inset: 0; padding: 1.5px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
+.theme-option { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 4px; opacity: .5; transition: opacity .15s ease; }
+.theme-option img { display: block; width: 24px; height: 24px; pointer-events: none; user-select: none; }
+.theme-switch:hover .theme-option { opacity: .75; }
+/* The active look sits in the shared selected slot; the other one stays dim. */
+.theme-switch[aria-pressed='false'] .theme-option--modern, .theme-switch[aria-pressed='true'] .theme-option--retro { opacity: 1; background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); }
+@media (max-width: 399px) {
+  /* Narrow phones: show only the look the switch leads to. */
+  .theme-switch { padding: 4px 5px; }
+  .theme-switch[aria-pressed='false'] .theme-option--modern, .theme-switch[aria-pressed='true'] .theme-option--retro { display: none; }
+  .theme-option { opacity: 1; }
+  .head-actions { gap: 8px; }
+}
+@media (forced-colors: active) { .theme-switch { border: 1px solid ButtonText; } .theme-switch::before { display: none; } .theme-switch[aria-pressed='true'] .theme-option--retro, .theme-switch[aria-pressed='false'] .theme-option--modern { outline: 2px solid Highlight; } }
 @media (max-width: 399px) {
   .head:has(.repo-link) { gap: 10px; }
   .head:has(.repo-link) .brand { font-size: 22px; }
@@ -116,6 +133,7 @@ summary::after { content: '+'; flex-shrink: 0; width: 1ch; font: 22px/1 Georgia,
 details[open] > summary::after { content: '−'; }
 details[open] summary { color: var(--text); }
 
+.retro-art { display: none; }
 .tapestry-art { position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .6; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
 /* Soft vignette keeps attention on the centre, like a framed menu, without hiding the cloth. */
 .app::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; box-shadow: inset 0 0 110px 18px #050a0673; }

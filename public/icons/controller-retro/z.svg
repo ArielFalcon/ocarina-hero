@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104">
+  <title>Z trigger: lower one semitone</title>
+  <path d="M23 29h34l6 9-5 35-10 10H32L22 73l-5-35Z" fill="#120e08"/>
+  <path d="M23 23h34l6 9-5 35-10 10H32L22 67l-5-35Z" fill="#8c8888" stroke="#120e08" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m23 27-2 9h38l-4-9Z" fill="#c9bf9f"/>
+  <text x="40" y="63" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700">Z</text>
+  <path d="m40 101-12-13h24Z" fill="#f4c315" stroke="#120e08" stroke-width="2" stroke-linejoin="round"/>
+</svg>

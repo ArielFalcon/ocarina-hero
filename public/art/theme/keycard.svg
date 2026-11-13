@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Game-key card</title>
+  <path d="M8 3h10v3h4V3h2v26H8Z" fill="#d81e2a" stroke="#120e08" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M9 4h8v3H9Z" fill="#f05a60"/>
+  <path d="M10 13h12v12H10Z" fill="#f3ecd2" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="m11 24 4-8 6 8Z" fill="#9a7400"/>
+  <path d="M10 27h12" stroke="#8f1420" stroke-width="2"/>
+  <circle cx="19" cy="9.5" r="1.5" fill="none" stroke="#fff" stroke-width="1.8"/>
+  <path d="m18 10.5-3 3m1.5-1.5 1 1" fill="none" stroke="#fff" stroke-width="1.8"/>
+</svg>

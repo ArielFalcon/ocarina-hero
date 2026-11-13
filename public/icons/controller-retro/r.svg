@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104">
+  <title>R shoulder: raise one semitone</title>
+  <path d="M11 47 18 36h44l7 11v25q0 9-9 9H20q-9 0-9-9Z" fill="#120e08"/>
+  <path d="M11 41 18 30h44l7 11v25q0 9-9 9H20q-9 0-9-9Z" fill="#8c8888" stroke="#120e08" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m15 42 6-8h38l6 8Z" fill="#c9bf9f"/>
+  <text x="40" y="67" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700">R</text>
+  <path d="m40 3-12 13h24Z" fill="#f4c315" stroke="#120e08" stroke-width="2" stroke-linejoin="round"/>
+</svg>

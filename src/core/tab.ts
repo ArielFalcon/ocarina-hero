@@ -1,5 +1,5 @@
 import type { Note } from './ir';
-import { pitchById, type ControllerButton, type PitchId } from './pitches';
+import { pitchById, pitchForButton, type ControllerButton, type PitchId } from './pitches';
 
 export interface TabToken {
   readonly noteIndex: number;
@@ -86,14 +86,29 @@ export function modifierForBend(bend: number): { control: 'dpad' | 'stick'; dire
   return { control: Math.abs(bend) === 1 ? 'dpad' : 'stick', direction: bend > 0 ? 'up' : 'down' };
 }
 
+/** Which controller the instructions name: the Switch 2 remake or the N64 original. */
+export type ControlScheme = 'switch' | 'n64';
+
 export function bendLabel(bend: number): string {
-  const modifier = modifierForBend(bend);
-  return modifier ? `${modifier.control === 'dpad' ? 'D-pad' : 'Stick'} ${modifier.direction}` : '';
+  return schemeBendLabel(bend, 'switch');
 }
 
-export function noteInstruction(button: ControllerButton, bend = 0): string {
-  const modifier = bendLabel(bend);
-  return modifier ? `${button} + ${modifier}` : button;
+/** On the N64, R and Z bend a semitone where the remake uses the D-pad; the stick bends a whole tone on both. */
+export function schemeBendLabel(bend: number, scheme: ControlScheme): string {
+  const modifier = modifierForBend(bend);
+  if (!modifier) return '';
+  if (modifier.control === 'dpad') return scheme === 'n64' ? (bend > 0 ? 'R' : 'Z') : `D-pad ${modifier.direction}`;
+  return `Stick ${modifier.direction}`;
+}
+
+export function buttonLabel(button: ControllerButton, scheme: ControlScheme = 'switch'): string {
+  return scheme === 'n64' ? pitchForButton(button).n64 : button;
+}
+
+export function noteInstruction(button: ControllerButton, bend = 0, scheme: ControlScheme = 'switch'): string {
+  const modifier = schemeBendLabel(bend, scheme);
+  const name = buttonLabel(button, scheme);
+  return modifier ? `${name} + ${modifier}` : name;
 }
 
 /** Plain-text tab, useful for tests, exports and terminal checks. */

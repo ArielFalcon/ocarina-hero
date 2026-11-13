@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<title>cassette</title>
+<g stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M2.5 5h19v14h-19Z" fill="#2d5bd2"/><path d="M2.5 5h19l-3 3h-13Z" fill="#f3ecd2" stroke="none"/><path d="M21.5 5v14h-19l3-3h13Z" fill="#19377f" stroke="none"/><path d="M5.5 8h13v5h-13Z" fill="#2f2a1f"/><circle cx="8" cy="10.5" r="1.5" fill="#f3ecd2" stroke="none"/><circle cx="16" cy="10.5" r="1.5" fill="#f3ecd2" stroke="none"/><path d="M9.5 10h5v1h-5Z" fill="#c9bf9f" stroke="none"/><path d="M8 16h8l1 3H7Z" fill="#8a7f63"/></g>
+</svg>

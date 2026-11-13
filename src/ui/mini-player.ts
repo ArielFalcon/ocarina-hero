@@ -4,7 +4,7 @@ import { createPassages, staffTransition } from './lesson';
 import type { Player } from './playback';
 import { QuickPlay, type QuickPlayState } from './quick-play';
 import { songMeta, type SongbookEntry } from './songbook';
-import { STAFF_CLEF, staffTokenHtml } from './staff';
+import { staffClef, staffTokenHtml } from './staff';
 import { swapStaff } from './staff-motion';
 import { threadIcon } from './thread-icons';
 
@@ -115,6 +115,13 @@ export class MiniPlayer {
     this.quick.toggle(id, this.loaded.arrangement);
   }
 
+  /** Re-render the staff with the active theme's glyphs and control names. */
+  refreshTheme(): void {
+    delete this.tab.dataset.notes;
+    this.renderedWindow = null;
+    this.render(this.quick.state);
+  }
+
   private render(state: QuickPlayState): void {
     const playing = state.playing || this.starting;
     this.callbacks.changed(state.id, playing);
@@ -185,7 +192,7 @@ export class MiniPlayer {
     if (this.tab.dataset.notes !== signature) {
       const next = { song: arrangement, indices };
       swapStaff(this.tab, staffTransition(this.renderedWindow, next), () => {
-        this.tab.innerHTML = STAFF_CLEF + indices.map((index, slot) => staffTokenHtml(arrangement.notes[index]!, index, slot, indices.length)).join('');
+        this.tab.innerHTML = staffClef() + indices.map((index, slot) => staffTokenHtml(arrangement.notes[index]!, index, slot, indices.length)).join('');
       });
       this.renderedWindow = next;
       this.tab.dataset.notes = signature;

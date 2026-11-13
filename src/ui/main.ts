@@ -10,7 +10,7 @@ import {
 } from '../core/pitches';
 import type { MelodyNote, Projection } from '../core/project';
 import { prepareMelody } from '../core/prepare';
-import { bendLabel, noteInstruction } from '../core/tab';
+import { buttonLabel, noteInstruction, schemeBendLabel } from '../core/tab';
 import { buttonIcon, modifierIcon } from './controller-icons';
 import { SourceImporter, type AudioImportMode, type AudioSourceAnalysis, type PreparedAudio } from './import';
 import { AudioFragmentEditor } from './audio-editor';
@@ -20,10 +20,11 @@ import { parseRoute, routeHash, shareUrl } from './route';
 import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
-import { STAFF_CLEF, staffTokenHtml } from './staff';
+import { staffClef, staffTokenHtml } from './staff';
 import { MiniPlayer } from './mini-player';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, readBindings, handleKeyDown, type KeyboardAction } from './keyboard';
-import { threadIcon, type ThreadIcon } from './thread-icons';
+import { refreshThreadIcons, threadIcon, type ThreadIcon } from './thread-icons';
+import { controlScheme, currentTheme, setTheme, syncStaticArt } from './theme';
 import { SongbookView } from './songbook-view';
 import type { SongbookEntry } from './songbook';
 
@@ -195,7 +196,7 @@ function must<T extends HTMLElement = HTMLElement>(selector: string): T {
 function keyHtml(pitch: PitchSpec): string {
   return `
     <button class="key" type="button" data-button="${pitch.button}"
-      aria-label="Play ${pitch.button}, keyboard ${keyLabel(bindings[pitch.button])}"
+      aria-label="Play ${buttonLabel(pitch.button, controlScheme())}, keyboard ${keyLabel(bindings[pitch.button])}"
       title="${pitch.id} · keyboard ${keyLabel(bindings[pitch.button])}">
       ${buttonIcon(pitch.button)}
       <kbd class="key-ref">${keyLabel(bindings[pitch.button])}</kbd>
@@ -203,21 +204,22 @@ function keyHtml(pitch: PitchSpec): string {
 }
 
 function buildPad(): void {
+  const retro = currentTheme() === 'retro';
   pad.innerHTML = `
     <div class="shoulders">
       ${keyHtml(pitchForButton('L'))}
-      ${keyHtml(pitchForButton('R'))}
+      ${retro ? '' : keyHtml(pitchForButton('R'))}
     </div>
     <div class="diamond">
       <span class="cell" aria-hidden="true"></span>
       ${keyHtml(pitchForButton('X'))}
       <span class="cell" aria-hidden="true"></span>
       ${keyHtml(pitchForButton('Y'))}
-      <span class="ghost" aria-hidden="true">B</span>
+      ${retro ? keyHtml(pitchForButton('R')) : '<span class="ghost" aria-hidden="true">B</span>'}
       ${keyHtml(pitchForButton('A'))}
     </div>`;
   bends.innerHTML = [1, -1, 2, -2].map(value => `
-    <button class="bend-key" type="button" data-bend="${value}" aria-label="${bendLabel(value)}" title="${bendLabel(value)}">
+    <button class="bend-key" type="button" data-bend="${value}" aria-label="${schemeBendLabel(value, controlScheme())}" title="${schemeBendLabel(value, controlScheme())}">
       ${modifierIcon(value)}
       <kbd class="key-ref" data-bend-label="${value}">${keyLabel(bindings[KEYBOARD_ACTIONS.find(action => BEND_ACTIONS[action as keyof typeof BEND_ACTIONS] === value)!])}</kbd>
     </button>`).join('');
@@ -238,7 +240,7 @@ let lastNoteLabel = '';
 function updateHint(): void {
   const parts: string[] = [];
   if (lastNoteLabel) parts.push(lastNoteLabel);
-  parts.push(bend ? `bend ${bendLabel(bend)}` : 'no bend');
+  parts.push(bend ? `bend ${schemeBendLabel(bend, controlScheme())}` : 'no bend');
   hint.textContent = parts.join(' · ');
 }
 
@@ -246,7 +248,7 @@ function press(pitch: PitchSpec): void {
   editor.stopPreview();
   if (isPlaying || repeatingTimer !== undefined) stopPlayback();
   engine.noteOn(pitch, bend);
-  lastNoteLabel = `${pitch.button} · ${pitch.id} · ${frequencyOf(pitch.id, bend).toFixed(1)} Hz`;
+  lastNoteLabel = `${buttonLabel(pitch.button, controlScheme())} · ${pitch.id} · ${frequencyOf(pitch.id, bend).toFixed(1)} Hz`;
   updateHint();
 
   if (songArrangement) {
@@ -278,7 +280,7 @@ function renderTab(): void {
     passageSelect.replaceChildren(new Option('1 of 1', '0'));
     must<HTMLButtonElement>('#previous-passage').disabled = true;
     must<HTMLButtonElement>('#next-passage').disabled = true;
-    tab.innerHTML = `${STAFF_CLEF}<p class="empty">Your notes will appear on this staff.</p>`;
+    tab.innerHTML = `${staffClef()}<p class="empty">Your notes will appear on this staff.</p>`;
     updateProgress();
     return;
   }
@@ -293,7 +295,7 @@ function renderTab(): void {
   if (tab.dataset.notes !== signature) {
     const focused = tab.contains(document.activeElement) ? (document.activeElement as HTMLElement).dataset.noteIndex : undefined;
     const nextWindow = { song: songArrangement, indices };
-    swapStaff(tab, staffTransition(renderedWindow, nextWindow), () => { tab.innerHTML = STAFF_CLEF + indices.map((index, slot) => {
+    swapStaff(tab, staffTransition(renderedWindow, nextWindow), () => { tab.innerHTML = staffClef() + indices.map((index, slot) => {
     const expected = practiceMode && !isPlaying && practiceCursor === index;
     const classes = [activeNote === index && 'is-playing', expected && 'is-expected', practiceMode && index < practiceCursor && 'is-played'].filter(Boolean).join(' ');
     return staffTokenHtml(recorded[index]!, index, slot, indices.length, classes, activeNote === index || expected);
@@ -472,8 +474,8 @@ function isEditingTarget(target: EventTarget | null): boolean {
 }
 
 function actionLabel(action: KeyboardAction): string {
-  if (!(action in BEND_ACTIONS)) return `Button ${action}`;
-  return bendLabel(BEND_ACTIONS[action as keyof typeof BEND_ACTIONS]);
+  if (!(action in BEND_ACTIONS)) return `Button ${buttonLabel(action as ControllerButton, controlScheme())}`;
+  return schemeBendLabel(BEND_ACTIONS[action as keyof typeof BEND_ACTIONS], controlScheme());
 }
 
 function renderBindings(): void {
@@ -488,7 +490,7 @@ function renderBindings(): void {
   for (const key of pad.querySelectorAll<HTMLElement>('[data-button]')) {
     const button = key.dataset.button as ControllerButton;
     key.querySelector('kbd')!.textContent = keyLabel(bindings[button]);
-    key.setAttribute('aria-label', `Play ${button}, keyboard ${keyLabel(bindings[button])}`);
+    key.setAttribute('aria-label', `Play ${buttonLabel(button, controlScheme())}, keyboard ${keyLabel(bindings[button])}`);
     key.title = `${pitchForButton(button).id} · keyboard ${keyLabel(bindings[button])}`;
   }
   for (const label of bends.querySelectorAll<HTMLElement>('[data-bend-label]')) {
@@ -814,7 +816,7 @@ function refreshPracticeStatus(lead = ''): void {
   } else {
     const expected = recorded[practiceCursor];
     practiceStatus.textContent = lead + (expected
-      ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}`
+      ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0, controlScheme())}`
       : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}. Choose a passage to practice again.`);
   }
 }
@@ -874,7 +876,7 @@ function practiceNote(button: ControllerButton): void {
     retrigger(pad.querySelector(`[data-button="${button}"]`), 'is-miss');
     if (result.broken) haptic(24);
     renderCombo(result.broken);
-    practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}.`;
+    practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0, controlScheme())}.`;
     return;
   }
   const hitIndex = practiceCursor;
@@ -1048,4 +1050,27 @@ window.addEventListener('visibilitychange', () => {
 for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]')) {
   icon.innerHTML = threadIcon(icon.dataset.threadIcon as ThreadIcon);
 }
+
+const themeSwitch = must<HTMLButtonElement>('#theme-switch');
+syncStaticArt();
+function syncThemeSwitch(): void {
+  themeSwitch.setAttribute('aria-pressed', String(currentTheme() === 'retro'));
+}
+syncThemeSwitch();
+themeSwitch.addEventListener('click', () => setTheme(currentTheme() === 'retro' ? 'tapestry' : 'retro'));
+document.addEventListener('themechange', () => {
+  syncThemeSwitch();
+  refreshThreadIcons();
+  buildPad();
+  must('#keyboard-bindings').replaceChildren();
+  renderBindings();
+  delete tab.dataset.notes;
+  renderedWindow = null;
+  renderTab();
+  updateProgress();
+  applyBend(bend);
+  updateHint();
+  refreshPracticeStatus();
+  miniPlayer.refreshTheme();
+});
 restoreView();

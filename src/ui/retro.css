@@ -1,0 +1,158 @@
+/*
+ * Retro 1998 theme: the N64 pause subscreen. Carved stone panels with a two-tone bevel,
+ * outlined rounded lettering, primary N64 face colors and a red-line staff.
+ * Everything here is scoped to :root[data-theme='retro']; the tapestry theme is untouched.
+ * Contract: docs/design-system-retro.md (local).
+ */
+@font-face { font-family: 'Nunito'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/nunito-latin.woff2') format('woff2'); }
+
+
+:root[data-theme='retro'] {
+  --bg: #2f2a1f;
+  --panel: #5f5745;
+  --line: #8a7f63;
+  --text: #f3ecd2;
+  --muted: #d2c8a6;
+  --accent: #f4c315;
+  --accent-soft: #f4c3152b;
+  --rust: #c8262a;
+  --stone-light: #8a7f63;
+  --stone-dark: #2f2a1f;
+  --void: #14120d;
+  --n64-yellow: #f4c315;
+  --n64-blue: #2d5bd2;
+  --n64-green: #1d9a45;
+  --outline: #120e08;
+  --selected-cloth: linear-gradient(180deg, #5c4c1c, #43380f);
+  --slot-recess: inset 2px 2px 0 #1c1812, inset -1px -1px 0 #8a7f6366;
+  --slot-raised: inset 1px 1px 0 #f7e28a66, inset -1px -1px 0 #1c1812;
+  --thread-rule: linear-gradient(180deg, transparent 3px, #241f17 3px 5px, #8a7f63 5px 6px, transparent 6px);
+  /* Bevel ring: light top-left edge, dark bottom-right edge, drawn by the shared masked ::before. */
+  --cord: linear-gradient(135deg, #d8cda4 0 30%, #8a7f63 45% 55%, #241f17 70%);
+  --satin: none;
+  --weave: linear-gradient(180deg, #ffffff0a, transparent 40%, #0000001f);
+  /* Faceted stone: a few low-contrast polygons repeat like an N64 wall texture. */
+  --cloth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cpath fill='%23635a47' d='M0 0h40L28 30 0 22Z'/%3E%3Cpath fill='%235b5342' d='M40 0h56v26L62 34 28 30Z'/%3E%3Cpath fill='%23655c49' d='M0 22l28 8 6 34L0 58Z'/%3E%3Cpath fill='%235d5543' d='M28 30l34 4 6 30-34 0Z'/%3E%3Cpath fill='%23615845' d='M62 34l34-8v40l-28-2Z'/%3E%3Cpath fill='%235c5442' d='M0 58l34 6-8 32H0Z'/%3E%3Cpath fill='%23625946' d='M34 64h34l-6 32H26Z'/%3E%3Cpath fill='%23595140' d='M68 64l28 2v30H62Z'/%3E%3C/svg%3E");
+  --cloth-size: 192px;
+  --story-font: 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+  font-family: var(--story-font);
+  font-weight: 600;
+  background: var(--void);
+}
+
+/* Lettering: solid cream with a dark outline instead of satin stitches. */
+:root[data-theme='retro'] .embroidered, :root[data-theme='retro'] .stitched-label {
+  background: none; -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0; filter: none;
+  text-shadow: 1px 1px 0 var(--outline), -1px 1px 0 var(--outline), 0 2px 0 var(--outline);
+}
+:root[data-theme='retro'] .embroidered { color: #fff7dc; text-shadow: 2px 2px 0 var(--outline), -1px 1px 0 var(--outline), 1px -1px 0 var(--outline), 0 3px 0 var(--outline); }
+:root[data-theme='retro'] :is(h1, h2, .brand, .song-title, .mini-title, .combo-count, .ribbon-title, .letter-slot, .letter-bubble, .count-badge, .step-number, summary::after) { font-family: var(--story-font); font-weight: 800; letter-spacing: -.01em; }
+:root[data-theme='retro'] .subtitle { font-style: normal; font-weight: 600; }
+:root[data-theme='retro'] .eyebrow { color: var(--n64-yellow); letter-spacing: .08em; }
+:root[data-theme='retro'] .eyebrow.stitched-label { color: var(--n64-yellow); }
+:root[data-theme='retro'] a, :root[data-theme='retro'] .text-button { text-decoration-color: var(--n64-yellow); }
+:root[data-theme='retro'] input::placeholder { color: #b5ab8b; }
+
+/* No fiber filters anywhere: frames are flat bevels. */
+:root[data-theme='retro'] ::before, :root[data-theme='retro'] ::after, :root[data-theme='retro'] .select-chevron { filter: none !important; }
+
+/* Shell: a carved stone wall with a stud band on top; the tree and sword are low-poly SVGs. */
+:root[data-theme='retro'] .app::after { box-shadow: inset 0 0 0 3px #241f17, inset 0 0 90px 10px #0a080599; }
+:root[data-theme='retro'] .tapestry-edge { background: url('/art/retro/band.svg') top left / auto 100% repeat-x; }
+:root[data-theme='retro'] .tapestry-art { display: none; }
+:root[data-theme='retro'] .retro-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .55; background: url('/art/retro/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
+@media (min-width: 800px) { :root[data-theme='retro'] .retro-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/retro/tree-desktop.svg'); } }
+:root[data-theme='retro'] .brand-icon { filter: drop-shadow(1px 2px 0 var(--outline)); }
+:root[data-theme='retro'] .head, :root[data-theme='retro'] .catalog-filters, :root[data-theme='retro'] .song-row, :root[data-theme='retro'] .keyboard-settings, :root[data-theme='retro'] .binding-row { border-bottom: 2px solid #241f17; box-shadow: 0 1px 0 #8a7f6355; }
+:root[data-theme='retro'] .keyboard-settings { border-top: 2px solid #241f17; }
+:root[data-theme='retro'] .app-nav { border-top: 2px solid #8a7f63; box-shadow: inset 0 2px 0 #241f17; }
+:root[data-theme='retro'] .menu-ornament { opacity: .7; }
+:root[data-theme='retro'] #main-content { scrollbar-color: var(--n64-yellow) #241f17; }
+:root[data-theme='retro'] #main-content::-webkit-scrollbar-track { background: #241f17; border-left: 0; }
+:root[data-theme='retro'] #main-content::-webkit-scrollbar-thumb { border-color: #241f17; background: var(--n64-yellow); }
+
+/* Controls: stone slabs with a bevel; the primary action is the blue A button. */
+:root[data-theme='retro'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .letter-list, .theme-switch) { background-color: #4a4335; }
+:root[data-theme='retro'] :is(.action, .step):hover:not(:disabled) { background-color: #5c5442; }
+:root[data-theme='retro'] .action.primary { background-color: var(--n64-blue); background-image: linear-gradient(180deg, #ffffff26, transparent 45%, #00000033); }
+:root[data-theme='retro'] .action.primary:hover:not(:disabled) { background-color: #3a6ce6; }
+:root[data-theme='retro'] .action.primary::before { background: linear-gradient(135deg, #9fb8ff 0 30%, #1b3a8f 60%, #0b1a45); }
+:root[data-theme='retro'] :is(.input-frame, .letter-list) { background-color: #241f17; }
+:root[data-theme='retro'] option { background: #241f17; }
+:root[data-theme='retro'] .select-chevron::before, :root[data-theme='retro'] .select-chevron::after { background: var(--n64-yellow); }
+:root[data-theme='retro'] .universe-chevron { border-color: var(--n64-yellow); }
+:root[data-theme='retro'] summary::after { color: var(--n64-yellow); -webkit-text-fill-color: var(--n64-yellow); }
+:root[data-theme='retro'] .count-badge { border-color: #f08a8c; background-color: var(--rust); font-family: var(--story-font); font-weight: 800; text-shadow: 1px 1px 0 var(--outline); }
+:root[data-theme='retro'] .song-seal { border-color: #8a7f63; background-color: #241f17; }
+
+/* Selection: the yellow cursor frame of the pause screen, never a glow. */
+:root[data-theme='retro'] :is(.category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-expected, .bend-key.is-expected, .universe-chip:has(input:checked), .app-nav a[aria-current='page'], .letter-slot[aria-current='true'], .tok.is-expected .staff-modifier, .tok.is-playing .staff-modifier)::after { border: 2px solid var(--n64-yellow); box-shadow: 0 0 0 1px var(--outline), inset 0 0 0 1px var(--outline); }
+:root[data-theme='retro'] .app-nav a[aria-current='page'] .thread-icon { opacity: 1; }
+:root[data-theme='retro'] .binding-key[aria-pressed='true'] { outline-color: var(--n64-yellow); }
+
+/* Staff: five red lines on a translucent black band, an orange clef, C-buttons as notes. */
+:root[data-theme='retro'] .tab { border-block: 2px solid #241f17; background: #000000d9; box-shadow: inset 0 2px 0 #00000080; }
+:root[data-theme='retro'] .tab::before { background: repeating-linear-gradient(0deg, #c8262a 0 2px, transparent 2px 18px); }
+:root[data-theme='retro'] .staff-clef img { width: 30px; height: 44px; margin-top: -8px; object-fit: contain; filter: none; }
+:root[data-theme='retro'] .tok.is-playing, :root[data-theme='retro'] .tok.is-expected { background: #f4c31533; }
+:root[data-theme='retro'] .tok::before { background: var(--n64-yellow); }
+:root[data-theme='retro'] .tok::after { background: conic-gradient(#fff7dc calc(var(--note-progress) * 1turn), transparent 0); }
+:root[data-theme='retro'] .note-order { font-family: var(--story-font); font-weight: 700; color: var(--muted); }
+:root[data-theme='retro'] .hit-burst i { background: var(--n64-yellow); }
+:root[data-theme='retro'] .hit-burst::before, :root[data-theme='retro'] .key-ripple { border-style: solid; border-color: var(--n64-yellow); }
+
+/* Progress and rewards. */
+:root[data-theme='retro'] .progress-track { border: 2px solid #241f17; background: #14120d; }
+:root[data-theme='retro'] progress::-webkit-progress-bar { background: #3a3326; }
+:root[data-theme='retro'] progress::-webkit-progress-value { background: linear-gradient(180deg, #ffe066, #d9a400); }
+:root[data-theme='retro'] progress::-moz-progress-bar { background: linear-gradient(180deg, #ffe066, #d9a400); }
+:root[data-theme='retro'] .progress-track::after { background: var(--n64-yellow); border-color: var(--outline); }
+:root[data-theme='retro'] .combo-badge[data-tier='2'], :root[data-theme='retro'] .combo-badge[data-tier='3'], :root[data-theme='retro'] .combo-badge[data-tier='4'], :root[data-theme='retro'] .combo-badge[data-tier='5'], :root[data-theme='retro'] .combo-ribbon { background-color: var(--rust); background-image: linear-gradient(180deg, #ffffff22, transparent 50%, #00000033); }
+:root[data-theme='retro'] .combo-ribbon { border-block: 2px solid var(--n64-yellow); border-image: none; }
+:root[data-theme='retro'] .combo-ribbon.is-passage { background-color: var(--n64-green); }
+:root[data-theme='retro'] :is(.combo-badge, .combo-ribbon)::after { border-style: solid; border-color: #f4c31599; }
+:root[data-theme='retro'] .letter-bubble { background-color: var(--n64-blue); color: #fff7dc; text-shadow: 2px 2px 0 var(--outline); }
+:root[data-theme='retro'] .letter-bubble::after { border-style: solid; border-color: #ffffff55; }
+
+/* Checkbox and range in the same stone and N64 yellow. */
+:root[data-theme='retro'] .toggle input { background-color: #241f17; box-shadow: inset 2px 2px 0 #0e0c08; }
+:root[data-theme='retro'] .toggle input::before { border: 2px solid #8a7f63; border-image: none; }
+:root[data-theme='retro'] .toggle input:checked { background-color: var(--n64-green); }
+:root[data-theme='retro'] .toggle input:checked::after { background: #fff7dc; }
+:root[data-theme='retro'] input[type='range']::-webkit-slider-runnable-track { background: linear-gradient(180deg, #241f17, #8a7f63); }
+:root[data-theme='retro'] input[type='range']::-moz-range-track { background: linear-gradient(180deg, #241f17, #8a7f63); }
+:root[data-theme='retro'] input[type='range']::-webkit-slider-thumb { border: 3px solid var(--outline); border-image: none; background: var(--n64-yellow); }
+:root[data-theme='retro'] input[type='range']::-moz-range-thumb { border: 3px solid var(--outline); background: var(--n64-yellow); }
+
+/* Difficulty frames: low-poly SVG overlays with the same seal window. */
+:root[data-theme='retro'] [data-difficulty='easy'] > .seal-frame { background-image: url('/art/retro/difficulty/easy.svg'); }
+:root[data-theme='retro'] [data-difficulty='medium'] > .seal-frame { background-image: url('/art/retro/difficulty/medium.svg'); }
+:root[data-theme='retro'] [data-difficulty='hard'] > .seal-frame { background-image: url('/art/retro/difficulty/hard.svg'); }
+:root[data-theme='retro'] [data-difficulty='expert'] > .seal-frame { background-image: url('/art/retro/difficulty/expert.svg'); }
+:root[data-theme='retro'] .difficulty-step.is-current .difficulty-name { text-decoration-style: solid; text-decoration-color: var(--n64-yellow); }
+
+/* The retro pad: blue A on its own row, the four C-buttons in a diamond. */
+:root[data-theme='retro'] .shoulders { grid-template-columns: clamp(60px, 18vw, 76px); }
+@media (min-width: 800px) { :root[data-theme='retro'] .key .control-icon--button { width: 36px; height: 38px; } }
+
+/* Nunito runs wider than IM Fell: keep the bottom tabs on one line on phones. */
+@media (max-width: 430px) { :root[data-theme='retro'] .app-nav a { font-size: 15px; gap: 5px; } :root[data-theme='retro'] .app-nav { gap: 4px; padding-inline: 8px; } }
+
+/* The rate select keeps its value clear of the chevron in the wider face. */
+:root[data-theme='retro'] .rate-field select { font-size: 15px; letter-spacing: -.02em; }
+
+/* Panels and notices. */
+:root[data-theme='retro'] .controller-panel { background: #241f17e6; border-color: #8a7f63; border-style: solid; }
+:root[data-theme='retro'] .notice { border-left-color: var(--n64-yellow); background: #241f17aa; }
+:root[data-theme='retro'] .step-number { border-color: var(--n64-yellow); background: #241f17; }
+:root[data-theme='retro'] .step-placeholder { border-style: solid; border-color: #8a7f6366; }
+:root[data-theme='retro'] .catalog-aside { border-left: 2px solid #241f17; }
+:root[data-theme='retro'] .quick-play[data-state='playing'] .thread-icon, :root[data-theme='retro'] .quick-play[data-state='paused'] .thread-icon { box-shadow: 0 0 0 2px var(--outline), 0 0 0 4px var(--n64-yellow); border-radius: 50%; }
+:root[data-theme='retro'] .thread-spinner::before { background: #8a7f63; }
+:root[data-theme='retro'] .thread-spinner::after { background: conic-gradient(var(--n64-yellow) 0 25%, transparent 25% 100%); }
+:root[data-theme='retro'] .mini-player::before { padding: 3px; }
+
+@media (forced-colors: active) {
+  :root[data-theme='retro'] .embroidered, :root[data-theme='retro'] .stitched-label { text-shadow: none; }
+  :root[data-theme='retro'] .retro-art { display: none; }
+}

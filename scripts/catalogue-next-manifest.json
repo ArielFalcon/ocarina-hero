@@ -1,7 +1,7 @@
 [
   {
     "id": "numb",
-    "title": "Linkin Park \u2014 Numb",
+    "title": "Linkin Park — Numb",
     "category": "pop",
     "hook": "Opening keyboard hook",
     "source": {
@@ -61,7 +61,7 @@
   },
   {
     "id": "imperial-march",
-    "title": "Star Wars \u2014 Imperial March",
+    "title": "Star Wars — Imperial March",
     "category": "film",
     "hook": "First march phrase",
     "source": {
@@ -133,7 +133,7 @@
   },
   {
     "id": "once-upon-a-time",
-    "title": "Undertale \u2014 Once Upon a Time",
+    "title": "Undertale — Once Upon a Time",
     "category": "gaming",
     "hook": "First opening phrase",
     "source": {
@@ -195,7 +195,7 @@
   },
   {
     "id": "fallen-down",
-    "title": "Undertale \u2014 Fallen Down",
+    "title": "Undertale — Fallen Down",
     "category": "gaming",
     "hook": "First main melody phrase",
     "source": {
@@ -319,7 +319,7 @@
   },
   {
     "id": "all-star",
-    "title": "Smash Mouth \u2014 All Star",
+    "title": "Smash Mouth — All Star",
     "category": "pop",
     "hook": "First chorus phrase",
     "source": {
@@ -403,7 +403,7 @@
   },
   {
     "id": "pirate",
-    "title": "Pirates of the Caribbean \u2014 He\u2019s a Pirate",
+    "title": "Pirates of the Caribbean — He’s a Pirate",
     "category": "film",
     "hook": "First lead theme phrase",
     "source": {
@@ -501,7 +501,7 @@
   },
   {
     "id": "laputa",
-    "title": "Castle in the Sky \u2014 Main Theme",
+    "title": "Castle in the Sky — Main Theme",
     "category": "anime",
     "hook": "First lyrical theme phrase",
     "source": {
@@ -531,7 +531,7 @@
     ],
     "evidence": {
       "level": "score-pitch-and-rhythm-comparison",
-      "summary": "Complete first two lyrical statements, including the opening pickup; all13 pitches and dotted/eighth/held rhythmic patterns match the rendered Laputa score, measures1\u20135. Source articulation is90% of score values in many notes; source timing is retained.",
+      "summary": "Complete first two lyrical statements, including the opening pickup; all13 pitches and dotted/eighth/held rhythmic patterns match the rendered Laputa score, measures1–5. Source articulation is90% of score values in many notes; source timing is retained.",
       "urls": [
         "https://barapartitions.com/wp-content/uploads/2022/11/Le-chateau-dans-le-ciel-Laputa.pdf"
       ]
@@ -563,7 +563,7 @@
   },
   {
     "id": "l-theme",
-    "title": "Death Note \u2014 L\u2019s Theme",
+    "title": "Death Note — L’s Theme",
     "category": "anime",
     "hook": "Piano motif",
     "source": {
@@ -653,7 +653,7 @@
   },
   {
     "id": "always-with-me",
-    "title": "Spirited Away \u2014 Always With Me",
+    "title": "Spirited Away — Always With Me",
     "category": "anime",
     "hook": "First vocal phrase",
     "source": {
@@ -710,7 +710,7 @@
     "beatsPerBar": 3,
     "evidence": {
       "level": "score-pitch-and-rhythm-comparison",
-      "summary": "First complete vocal phrase through the E5 cadence. Fourteen pitches and eighth/dotted-quarter/quarter/half rhythm match Schleicher's score, measures4\u20138. Explicit derived source corrects missing tempo and doubled rhythmic resolution; it is not an untouched MIDI timing claim.",
+      "summary": "First complete vocal phrase through the E5 cadence. Fourteen pitches and eighth/dotted-quarter/quarter/half rhythm match Schleicher's score, measures4–8. Explicit derived source corrects missing tempo and doubled rhythmic resolution; it is not an untouched MIDI timing claim.",
       "urls": [
         "https://easymusicnotes.com/many-pdf/Always_With_Me_Spirited_Away.pdf"
       ]
@@ -743,7 +743,7 @@
   },
   {
     "id": "merry-go-round",
-    "title": "Howl\u2019s Moving Castle \u2014 Merry-Go-Round of Life",
+    "title": "Howl’s Moving Castle — Merry-Go-Round of Life",
     "category": "anime",
     "hook": "First main waltz phrase",
     "source": {
@@ -799,7 +799,7 @@
   },
   {
     "id": "moonlight",
-    "title": "Sailor Moon \u2014 Moonlight Densetsu",
+    "title": "Sailor Moon — Moonlight Densetsu",
     "category": "anime",
     "hook": "First vocal hook",
     "source": {
@@ -877,7 +877,7 @@
   },
   {
     "id": "tapion",
-    "title": "Dragon Ball Z \u2014 Tapion\u2019s Theme",
+    "title": "Dragon Ball Z — Tapion’s Theme",
     "category": "anime",
     "hook": "Opening solo phrase",
     "source": {
@@ -971,7 +971,7 @@
   },
   {
     "id": "pallet-town",
-    "title": "Pok\u00e9mon \u2014 Pallet Town",
+    "title": "Pokémon — Pallet Town",
     "category": "gaming",
     "hook": "First main-theme phrase",
     "source": {
@@ -1051,9 +1051,9 @@
   },
   {
     "id": "pokemon-center",
-    "title": "Pok\u00e9mon \u2014 Pok\u00e9mon Center",
+    "title": "Pokémon — Pokémon Center",
     "category": "gaming",
-    "hook": "Complete opening Pok\u00e9mon Center theme statement",
+    "hook": "Complete opening Pokémon Center theme statement",
     "source": {
       "file": "out/catalogue-next/pokemon-center.mid",
       "page": "https://bitmidi.com/pokemon-redblueyellow-pokemon-center-mid",
@@ -1078,7 +1078,7 @@
     ],
     "evidence": {
       "level": "score-pitch-and-rhythm-comparison",
-      "summary": "Opening game melody channel2 sub1 plus its A/E response, not the separate healing sound effect. The ten source pitches match the game sequence one octave higher. The complete statement spans E4\u2013A5 (17semitones), so reject rather than omit its low response or fold octaves.",
+      "summary": "Opening game melody channel2 sub1 plus its A/E response, not the separate healing sound effect. The ten source pitches match the game sequence one octave higher. The complete statement spans E4–A5 (17semitones), so reject rather than omit its low response or fold octaves.",
       "urls": [
         "https://github.com/pret/pokered/blob/master/audio/music/pokecenter.asm"
       ]
@@ -1107,7 +1107,7 @@
   },
   {
     "id": "lavender-town",
-    "title": "Pok\u00e9mon \u2014 Lavender Town",
+    "title": "Pokémon — Lavender Town",
     "category": "gaming",
     "hook": "First complete theme phrase",
     "source": {
@@ -1175,7 +1175,7 @@
   },
   {
     "id": "green-hill",
-    "title": "Sonic \u2014 Green Hill Zone",
+    "title": "Sonic — Green Hill Zone",
     "category": "gaming",
     "hook": "First lead phrase",
     "source": {
@@ -1230,7 +1230,7 @@
   },
   {
     "id": "ff7-victory",
-    "title": "Final Fantasy VII \u2014 Victory Fanfare",
+    "title": "Final Fantasy VII — Victory Fanfare",
     "category": "gaming",
     "hook": "Opening fanfare",
     "source": {
@@ -1285,7 +1285,7 @@
   },
   {
     "id": "green-greens",
-    "title": "Kirby \u2014 Green Greens",
+    "title": "Kirby — Green Greens",
     "category": "gaming",
     "hook": "Opening lead phrase",
     "source": {
@@ -1321,7 +1321,7 @@
     ],
     "evidence": {
       "level": "score-pitch-and-rhythm-comparison",
-      "summary": "Complete first lead statement and its low G pickup, beginning after the accompaniment introduction. Drew's clarinet score confirms the octave-plus-fourth span from pickup to high climax. Source G5\u2013C7 is17semitones; reject the complete phrase rather than remove the pickup or fold the high C.",
+      "summary": "Complete first lead statement and its low G pickup, beginning after the accompaniment introduction. Drew's clarinet score confirms the octave-plus-fourth span from pickup to high climax. Source G5–C7 is17semitones; reject the complete phrase rather than remove the pickup or fold the high C.",
       "urls": [
         "https://drewm.com/sheetmusic/vg/kirby/",
         "https://drewm.com/sheetmusic/files/GreenGreens.pdf"
@@ -1360,7 +1360,7 @@
   },
   {
     "id": "wind-scene",
-    "title": "Chrono Trigger \u2014 Wind Scene",
+    "title": "Chrono Trigger — Wind Scene",
     "category": "gaming",
     "hook": "First lyrical melody phrase",
     "source": {
@@ -1420,7 +1420,7 @@
   },
   {
     "id": "gerudo-valley",
-    "title": "Zelda \u2014 Gerudo Valley",
+    "title": "Zelda — Gerudo Valley",
     "category": "gaming",
     "hook": "First main-theme phrase",
     "source": {
@@ -1515,9 +1515,9 @@
   },
   {
     "id": "blue-bird",
-    "title": "Naruto Shippuden \u2014 Blue Bird",
+    "title": "Naruto Shippuden — Blue Bird",
     "category": "anime",
-    "hook": "Complete opening vocal line, Habataitara",
+    "hook": "Complete opening chorus: four lines, from the Habataitara pickup to the held tonic F-sharp",
     "source": {
       "file": "out/catalogue-next/blue-bird.mid",
       "page": "https://bitmidi.com/naruto-shippuden-blue-bird-mid",
@@ -1531,39 +1531,95 @@
       2,
       5,
       6,
-      9
+      9,
+      12,
+      13,
+      14,
+      18,
+      19,
+      22,
+      23,
+      25,
+      32,
+      33,
+      34,
+      35,
+      38,
+      39,
+      42,
+      45,
+      46,
+      47,
+      50,
+      51,
+      52,
+      55,
+      56,
+      57,
+      61
     ],
     "phraseStarts": [
       0
     ],
     "evidence": {
-      "level": "score-pitch-and-rhythm-comparison",
-      "summary": "Complete first vocal line, ending on the held F-sharp before the next answering line. The six pitches and pickup/held-note rhythm match the inspected Binh-Nam La score, measures1\u20133. This is a short complete hook; no repeated material is inserted.",
+      "level": "theorytab-and-score-event-comparison",
+      "summary": "bitmidi 79365 R.H track 0, 31 explicit events (four lines, beats 2.5-35 at 150 BPM, 13 s): the opening TV-size chorus from the pickup to the held tonic F#4 before the bar-10 instrumental riff. Hooktheory chorus tab (F# minor) agrees on all 30 of its pitches and 29 onsets exactly (one held B instead of the A attack, C#5 half a beat earlier). Hooktheory TV-size opening tab (G# minor, -2) agrees on all 28 events it covers with identical onsets; it omits the pickup and re-attacks the line-2 peak. Binh-Nam La score bars 1-9 fix the boundary and agree on 30 of 31 pitches (passing G#4 vs A4) with two half-beat onset variants.",
       "urls": [
+        "https://www.hooktheory.com/theorytab/view/ikimono-gakari/blue-bird",
+        "https://www.hooktheory.com/theorytab/view/ikimono-gakari/naruto-opening-bluebird",
         "https://truongca.com/images/sheet/pdf/blue/blue-bird-piano-ikimonogakari-truongca.com.pdf"
       ]
     },
-    "reference": {
-      "scorePitches": [
-        61,
-        66,
-        68,
-        69,
-        68,
-        66
-      ],
-      "pitchShift": 0
-    },
     "corpus": {
-      "clip": "corpus/original-clips/blue-bird/clip.wav",
+      "clip": null,
       "alignmentValidated": false,
       "originalRecordingAudited": false,
-      "notes": "Original excerpt localization and note-level alignment are separate checks; source and adapted pitches are not interchangeable labels."
+      "notes": "Previous clip covered only the first chorus line; matching extended excerpt not yet retained."
+    },
+    "reference": {
+      "file": "out/catalogue-fix-blue-bird/sources/blue-bird-hooktheory-chorus.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "pitchShift": 0,
+      "absentIndices": [
+        11
+      ]
     }
   },
   {
     "id": "totoro",
-    "title": "My Neighbor Totoro \u2014 Tonari no Totoro",
+    "title": "My Neighbor Totoro — Tonari no Totoro",
     "category": "anime",
     "hook": "Title chorus melody",
     "source": {
@@ -1642,7 +1698,7 @@
     ],
     "evidence": {
       "level": "score-contour-with-rhythm-and-articulation-differences",
-      "summary": "Title chorus with its four-eighth pickup and both Totoro calls, using the isolated violin voice. The EOP score page2 measures28\u201332 corroborates the whole contour transposed-5; it repeats some held notes and simplifies syncopation, so full onset/duration equivalence is not claimed. Short overlapping MIDI tails are transparently closed in a derived source.",
+      "summary": "Title chorus with its four-eighth pickup and both Totoro calls, using the isolated violin voice. The EOP score page2 measures28–32 corroborates the whole contour transposed-5; it repeats some held notes and simplifies syncopation, so full onset/duration equivalence is not claimed. Short overlapping MIDI tails are transparently closed in a derived source.",
       "urls": [
         "https://www.everyonepiano.com/Music-5916-Tonari-no-Totoro-My-Neighbor-Totoro.html",
         "https://www.everyonepiano.com/pianomusic/006/0005916/0005916-w-b-2.png"
@@ -1681,7 +1737,7 @@
   },
   {
     "id": "mii-channel",
-    "title": "Wii \u2014 Mii Channel",
+    "title": "Wii — Mii Channel",
     "category": "gaming",
     "hook": "Opening motif",
     "source": {

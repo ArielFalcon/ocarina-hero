@@ -6658,7 +6658,7 @@ export const CURATED_SONGS = [
   {
     "id": "catalogue-blue-bird",
     "title": "Naruto Shippuden — Blue Bird",
-    "subtitle": "Complete opening vocal line, Habataitara",
+    "subtitle": "Complete opening chorus: four lines, from the Habataitara pickup to the held tonic F-sharp",
     "tempoBpm": 150,
     "beatsPerBar": 4,
     "melody": [
@@ -6691,6 +6691,131 @@ export const CURATED_SONGS = [
         "midi": 66,
         "startBeat": 5,
         "durationBeats": 3.0000000000000004
+      },
+      {
+        "midi": 61,
+        "startBeat": 8,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 66,
+        "startBeat": 8.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 68,
+        "startBeat": 9,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 69,
+        "startBeat": 9.500000000000002,
+        "durationBeats": 1.9999999999999996
+      },
+      {
+        "midi": 71,
+        "startBeat": 11.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 69,
+        "startBeat": 12.000000000000002,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 69,
+        "startBeat": 12.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 71,
+        "startBeat": 13,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 73,
+        "startBeat": 14.500000000000002,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 61,
+        "startBeat": 16,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 66,
+        "startBeat": 16.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "midi": 68,
+        "startBeat": 17,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 69,
+        "startBeat": 17.5,
+        "durationBeats": 2.0000000000000018
+      },
+      {
+        "midi": 68,
+        "startBeat": 19.5,
+        "durationBeats": 1.4999999999999991
+      },
+      {
+        "midi": 66,
+        "startBeat": 21,
+        "durationBeats": 3.0000000000000027
+      },
+      {
+        "midi": 66,
+        "startBeat": 24.000000000000004,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 73,
+        "startBeat": 24.5,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 71,
+        "startBeat": 25,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "midi": 66,
+        "startBeat": 26,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "midi": 73,
+        "startBeat": 26.500000000000004,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 71,
+        "startBeat": 27,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 64,
+        "startBeat": 28,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 64,
+        "startBeat": 29.000000000000004,
+        "durationBeats": 0.9999999999999964
+      },
+      {
+        "midi": 66,
+        "startBeat": 30,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "midi": 66,
+        "startBeat": 30.5,
+        "durationBeats": 1.9999999999999973
       }
     ],
     "fixedNotes": [
@@ -6729,6 +6854,156 @@ export const CURATED_SONGS = [
         "bend": 1,
         "startBeat": 5,
         "durationBeats": 3.0000000000000004
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 8,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 8.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 9,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 9.500000000000002,
+        "durationBeats": 1.9999999999999996
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 11.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 12.000000000000002,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 12.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 13,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "D5",
+        "bend": -1,
+        "startBeat": 14.500000000000002,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 16,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 16.5,
+        "durationBeats": 0.5000000000000004
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 17,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 17.5,
+        "durationBeats": 2.0000000000000018
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 19.5,
+        "durationBeats": 1.4999999999999991
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 21,
+        "durationBeats": 3.0000000000000027
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 24.000000000000004,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "D5",
+        "bend": -1,
+        "startBeat": 24.5,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 25,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 26,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "pitch": "D5",
+        "bend": -1,
+        "startBeat": 26.500000000000004,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 27,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 28,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 29.000000000000004,
+        "durationBeats": 0.9999999999999964
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 30,
+        "durationBeats": 0.5000000000000027
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 30.5,
+        "durationBeats": 1.9999999999999973
       }
     ],
     "phraseStarts": [

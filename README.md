@@ -6,7 +6,7 @@
 
 <p align="center">
   <em>Learn a melody on the ocarina, be the hylian rockstar.</em><br />
-  <a href="https://arielfalcon.github.io/ocarina-hero/"><strong>Play it in your browser →</strong></a>
+  <a href="https://ocarinahero.app/"><strong>Play it in your browser →</strong></a>
 </p>
 
 ---

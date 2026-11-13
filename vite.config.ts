@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { createMelodyPlugin } from './server/melody';
 
 export default defineConfig({
-  // GitHub Pages serves the site under /<repo>/; local and root hosting keep '/'.
+  // Optional subfolder hosting; ocarinahero.app and local development use '/'.
   base: process.env.BASE_PATH ?? '/',
   plugins: [createMelodyPlugin()],
   define: {

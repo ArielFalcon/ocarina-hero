@@ -1,4 +1,4 @@
-# Cloudflare Pages response headers (mirrors vercel.json).
+# Cloudflare Pages response headers.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 

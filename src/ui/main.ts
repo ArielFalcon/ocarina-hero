@@ -12,7 +12,7 @@ import type { MelodyNote, Projection } from '../core/project';
 import { prepareMelody } from '../core/prepare';
 import { bendLabel, noteInstruction } from '../core/tab';
 import { buttonIcon, modifierIcon } from './controller-icons';
-import { SourceImporter, type AudioImportMode, type AudioSourceAnalysis, type PreparedAudio } from './import';
+import { SourceImporter, type AudioSourceAnalysis, type PreparedAudio } from './import';
 import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { GamepadInput } from './gamepad';
@@ -67,13 +67,6 @@ const hint = must<HTMLParagraphElement>('#hint');
 const songHint = must<HTMLParagraphElement>('#song-hint');
 const fileName = must<HTMLSpanElement>('#file-name');
 const fileInput = must<HTMLInputElement>('#file');
-const audioMode = must<HTMLSelectElement>('#audio-mode');
-if (!__MELODY_SERVER__) {
-  audioMode.querySelector('option[value="main-melody"]')?.remove();
-  audioMode.value = 'isolated';
-  // One remaining mode is not a choice: show the explanation instead of the control.
-  for (const element of audioMode.closest('.field')!.children) (element as HTMLElement).hidden = element.id !== 'audio-mode-note';
-}
 const playbackRate = must<HTMLSelectElement>('#playback-rate');
 const analysisDownload = must<HTMLButtonElement>('#analysis-download');
 const bendsInput = must<HTMLInputElement>('#bends');
@@ -759,16 +752,9 @@ fileInput.addEventListener('change', () => {
   controls.reset();
   clearActive();
   fileName.textContent = file.name;
-  if (/\.midi?$/i.test(file.name)) { analysisPhase = 'importing'; void importer.load(file, audioMode.value as AudioImportMode); }
+  if (/\.midi?$/i.test(file.name)) { analysisPhase = 'importing'; void importer.load(file); }
   else void openAudioFile(file);
   fileInput.value = '';
-});
-
-audioMode.addEventListener('change', () => {
-  if (selectedAudio) {
-    editor.stopPreview();
-    invalidateAudioResult('Recording type changed. Choose Analyze fragment to generate a new TAB.');
-  }
 });
 
 analyzeButton.addEventListener('click', () => {
@@ -777,7 +763,7 @@ analyzeButton.addEventListener('click', () => {
   editor.stopPreview();
   invalidateAudioResult('');
   analysisPhase = 'analysing';
-  void importer.analyzeAudio(selectedAudio, audioMode.value as AudioImportMode, selection);
+  void importer.analyzeAudio(selectedAudio, selection);
 });
 
 must('#cancel-analysis').addEventListener('click', () => {

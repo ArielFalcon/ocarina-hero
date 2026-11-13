@@ -1,22 +1,17 @@
 # Cloudflare Pages response headers.
+# Only content-hashed build output gets a long cache. Files with stable names (art, icons, fonts)
+# keep Pages' default caching, which revalidates by ETag and refreshes on every deployment; a
+# custom max-age there lets the zone edge and browsers serve stale files after a deploy.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/art/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-
-/icons/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-
 # Security headers for every response. Cloudflare merges them with the cache rules above.
-# CSP: everything is same-origin. 'wasm-unsafe-eval' lets the Workshop compile the Basic Pitch
+# CSP: everything is same-origin except the Cloudflare Web Analytics beacon script, which the edge
+# injects with SRI and which reports to this origin's /cdn-cgi/rum. 'wasm-unsafe-eval' lets the Workshop compile the Basic Pitch
 # WebAssembly runtime; 'unsafe-inline' styles cover the staff's per-note style attributes;
 # blob: media plays the audio file a visitor picks in the Workshop.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY

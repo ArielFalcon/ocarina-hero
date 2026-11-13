@@ -7,11 +7,8 @@
     "test": "tsx --test scripts/*.test.ts",
     "dev": "vite",
     "build": "tsc --noEmit && vite build && tsx scripts/build-song-pages.ts",
-    "build:static": "MELODY_SERVER=off npm run build",
     "preview": "vite preview",
-    "preview:tab": "tsx scripts/preview.ts",
-    "setup:melody": "python3 scripts/setup-melody.py",
-    "test:melody": ".runtime-melody/venv/bin/python -m unittest discover -s scripts -p 'test_*.py'"
+    "preview:tab": "tsx scripts/preview.ts"
   },
   "devDependencies": {
     "tsx": "^4.23.15",

@@ -1,14 +1,34 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { DEMOS } from '../src/core/demo';
+import { toTabText } from '../src/core/tab';
+import { createPassages, lessonDetails } from '../src/ui/lesson';
 import { songDocumentTitle, songPath } from '../src/ui/route';
-import { createSongbookEntries, songMeta } from '../src/ui/songbook';
+import { createSongbookEntries, openingNotes, songMeta, type SongbookEntry } from '../src/ui/songbook';
 
 export interface SongPage {
   readonly id: string;
   readonly title: string;
   /** Universe, artist and version, as shown under the title in the Songbook. */
   readonly meta: string;
+  /** Shown above the lesson title. */
+  readonly universe: string;
+  /** Version and size of the arrangement, as a first visit shows them under the lesson title. */
+  readonly details: string;
+  /** Button tab of the arrangement the lesson opens with. */
+  readonly tab: string;
+}
+
+export function songPageOf(song: SongbookEntry): SongPage {
+  const notes = openingNotes(song.track);
+  return {
+    id: song.id,
+    title: song.title,
+    meta: songMeta(song),
+    universe: song.universe,
+    details: lessonDetails(song.version, notes.length, createPassages(notes, song.track.tempoBpm, song.track.phraseStarts).length).join(' · '),
+    tab: toTabText(notes, song.track.beatsPerBar, song.track.tempoBpm, { noteSeparator: ', ' }),
+  };
 }
 
 function escapeHtml(value: string): string {
@@ -26,7 +46,10 @@ function songUrl(siteUrl: string, id: string): string {
   return new URL(songPath('', id), siteUrl).href;
 }
 
-/** The app shell with the head of one song: title, description, canonical address and share preview. */
+/**
+ * The app shell opened on one song: its head (title, description, canonical address, share preview) and the
+ * lesson view with its heading and text tab, so the page says what it is before the app starts.
+ */
 export function songPageHtml(indexHtml: string, song: SongPage, siteUrl: string): string {
   const title = escapeHtml(songDocumentTitle(song.title, song.meta));
   const description = escapeHtml(`Learn to play ${song.title} (${song.meta}) on the ocarina: follow the button tab, listen to it and practice one passage at a time. Free, in your browser.`);
@@ -40,6 +63,13 @@ export function songPageHtml(indexHtml: string, song: SongPage, siteUrl: string)
     [/(<meta property="og:url" content=")[^"]*/, address],
     [/(<meta name="twitter:title" content=")[^"]*/, title],
     [/(<meta name="twitter:description" content=")[^"]*/, description],
+    [/(<div class="app)(?=">)/, ' is-lesson has-song'],
+    [/(<section id="catalog-view"[^>]*)(?=>)/, ' hidden'],
+    [/(<section id="lesson-view"[^>]*?) hidden(?=>)/, ''],
+    [/(<p id="lesson-universe"[^>]*>)[^<]*/, escapeHtml(song.universe)],
+    [/(<h1 id="lesson-title"[^>]*>)[^<]*/, escapeHtml(song.title)],
+    [/(<p id="lesson-meta"[^>]*>)[^<]*/, escapeHtml(song.details)],
+    [/(<p id="tab-text"[^>]*>)[^<]*/, escapeHtml(song.tab)],
   ];
   return values.reduce((html, [opening, value]) => {
     if (!opening.test(html)) throw new Error(`index.html has no tag matching ${opening} to describe a song page.`);
@@ -60,7 +90,7 @@ export function writeSongPages(outDir: string): void {
   for (const song of songs) {
     const directory = join(outDir, songPath('', song.id));
     mkdirSync(directory, { recursive: true });
-    writeFileSync(join(directory, 'index.html'), songPageHtml(indexHtml, { id: song.id, title: song.title, meta: songMeta(song) }, siteUrl));
+    writeFileSync(join(directory, 'index.html'), songPageHtml(indexHtml, songPageOf(song), siteUrl));
   }
   writeFileSync(join(outDir, 'sitemap.xml'), sitemapXml(siteUrl, songs.map(song => song.id)));
   writeFileSync(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}sitemap.xml\n`);

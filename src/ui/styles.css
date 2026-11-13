@@ -415,6 +415,8 @@ progress::-moz-progress-bar { background: transparent; }
 .rate-field .select-chevron { right: 11px; width: 12px; }
 .rate-field .select-chevron::before, .rate-field .select-chevron::after { width: 8px; }
 .lesson-options { font-size: 16px; margin: 4px 0; }
+.tab-text { margin: 8px 0 12px; color: var(--muted); overflow-wrap: anywhere; }
+.tab-text:empty { display: none; }
 .controller-panel { background: #18251ba6; border-top: 1px dashed #a2824959; padding-top: 14px; }
 .controller-panel h2 { font-size: 21px; margin: 0 0 10px; }
 .pad { display: flex; flex-direction: column; gap: 8px; align-items: center; touch-action: none; }

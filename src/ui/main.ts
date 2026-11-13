@@ -10,7 +10,7 @@ import {
 } from '../core/pitches';
 import type { MelodyNote, Projection } from '../core/project';
 import { prepareMelody } from '../core/prepare';
-import { buttonLabel, noteInstruction, schemeBendLabel, type ControlScheme } from '../core/tab';
+import { buttonLabel, noteInstruction, schemeBendLabel, toTabText, type ControlScheme } from '../core/tab';
 import { buttonIcon, modifierIcon } from './controller-icons';
 import { SourceImporter, type AudioSourceAnalysis, type PreparedAudio } from './import';
 import { AudioFragmentEditor } from './audio-editor';
@@ -18,7 +18,7 @@ import { Controls } from './input';
 import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
 import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
-import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
+import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, lessonDetails, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
 import { staffClef, staffTokenHtml } from './staff';
@@ -93,6 +93,7 @@ const practiceStatus = must<HTMLParagraphElement>('#practice-status');
 const comboBadge = must<HTMLParagraphElement>('#combo');
 const practiceLine = must<HTMLDivElement>('.practice-line');
 const statusSlot = must<HTMLDivElement>('.status-slot');
+const tabText = must<HTMLParagraphElement>('#tab-text');
 const progressTrack = must<HTMLDivElement>('.progress-track');
 let comboHideTimer: number | undefined;
 const songComplete = must<HTMLDivElement>('#song-complete');
@@ -270,6 +271,7 @@ function press(pitch: PitchSpec): void {
 function renderTab(): void {
   playButton.disabled = importer.pending || recorded.length === 0;
   passages = createPassages(recorded, current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, current?.phraseStarts);
+  tabText.textContent = current ? toTabText(recorded, undefined, current.tempoBpm, { scheme: controlScheme(), noteSeparator: ', ' }) : '';
   bends.hidden = current !== null && !recorded.some(note => !!note.bend);
   passageIndex = Math.max(0, Math.min(passageIndex, passages.length - 1));
   // Keep the staff and its passage controls at a stable size: free play can add a bend at any time.
@@ -821,7 +823,7 @@ function updateProgress(): void {
 function renderLessonMeta(): void {
   const songProgress = selectedEntry ? progress[selectedEntry.id] : undefined;
   must('#lesson-meta').textContent = current
-    ? [selectedEntry?.version, `${recorded.length} notes`, `${passages.length} ${passages.length === 1 ? 'passage' : 'passages'}`, songProgress?.completed && 'Completed', songProgress && songProgress.bestCombo > 1 && `Best combo ×${songProgress.bestCombo}`].filter(Boolean).join(' · ')
+    ? [...lessonDetails(selectedEntry?.version, recorded.length, passages.length), songProgress?.completed && 'Completed', songProgress && songProgress.bestCombo > 1 && `Best combo ×${songProgress.bestCombo}`].filter(Boolean).join(' · ')
     : 'Make a little music.';
 }
 

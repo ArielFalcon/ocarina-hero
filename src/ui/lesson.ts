@@ -35,6 +35,11 @@ export function advancePractice(notes: readonly Note[], cursor: number, button: 
     : cursor;
 }
 
+/** What a lesson states under its title, apart from the player's progress. */
+export function lessonDetails(version: string | undefined, noteCount: number, passageCount: number): string[] {
+  return [version, `${noteCount} notes`, `${passageCount} ${passageCount === 1 ? 'passage' : 'passages'}`].filter((part): part is string => !!part);
+}
+
 /** Passage a reset goes back to: a practice run starts over from the first one, unless a single passage is being repeated. */
 export function resetPassage(current: number, mode: { practice: boolean; repeating: boolean }): number {
   return mode.practice && !mode.repeating ? 0 : current;

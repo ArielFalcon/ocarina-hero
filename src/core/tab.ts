@@ -111,12 +111,12 @@ export function noteInstruction(button: ControllerButton, bend = 0, scheme: Cont
   return modifier ? `${name} + ${modifier}` : name;
 }
 
-/** Plain-text tab, useful for tests, exports and terminal checks. */
-export function toTabText(notes: readonly Note[], beatsPerBar = 4, sourceTempoBpm?: number): string {
+/** Plain-text tab for tests, exports and reading; `noteSeparator` keeps notes apart when their names hold spaces. */
+export function toTabText(notes: readonly Note[], beatsPerBar = 4, sourceTempoBpm?: number, { scheme = 'switch', noteSeparator = ' ' }: { scheme?: ControlScheme; noteSeparator?: string } = {}): string {
   const groups = sourceTempoBpm === undefined ? toTabBars(notes, beatsPerBar) : toTabRestGroups(notes, sourceTempoBpm);
   return groups
     .map((bar) =>
-      bar.tokens.map((token) => noteInstruction(token.button, token.bend)).join(' '),
+      bar.tokens.map((token) => noteInstruction(token.button, token.bend, scheme)).join(noteSeparator),
     )
     .join(' | ');
 }

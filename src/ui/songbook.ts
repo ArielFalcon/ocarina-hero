@@ -1,6 +1,7 @@
 import type { ThreadIcon } from './thread-icons';
 import type { DemoTrack } from '../core/demo';
 import { rateDifficulty, type Difficulty, type DifficultyLevel } from '../core/difficulty';
+import type { Note } from '../core/ir';
 import { prepareMelody } from '../core/prepare';
 
 export type SongCategory = 'All' | 'Games' | 'Anime' | 'Film' | 'Pop' | 'Classics' | 'Other';
@@ -270,10 +271,15 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
 ]);
 
+/** Notes of the arrangement a lesson opens with: bends on, ornaments kept. */
+export function openingNotes(track: DemoTrack): Note[] {
+  return prepareMelody(track, { simplify: false, maxBend: 2 }).notes;
+}
+
 export function createSongbookEntries(tracks: readonly DemoTrack[]): SongbookEntry[] {
   return tracks.map((track) => ({
     track, id: track.id,
-    difficulty: rateDifficulty(prepareMelody(track, { simplify: false, maxBend: 2 }).notes, track.tempoBpm),
+    difficulty: rateDifficulty(openingNotes(track), track.tempoBpm),
     ...(metadata.get(track.id) ?? { title: track.title, universe: 'Other melodies', categories: ['Other'] as const, icon: 'music', universeIcon: 'music', aliases: [] }),
   }));
 }

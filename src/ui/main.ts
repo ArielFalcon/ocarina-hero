@@ -1131,7 +1131,8 @@ function restoreView(): void {
     if (!entry) { history.replaceState(null, '', `${APP_BASE}#catalog`); showView('catalog', false); return; }
     if (entry === selectedEntry && current) showView('lesson', false);
     else openSong(entry, false);
-    history.replaceState(null, '', songPath(APP_BASE, entry.id));
+    const address = songPath(APP_BASE, entry.id);
+    if (location.pathname !== address || location.hash) history.replaceState(null, '', address + location.search);
   } else if (route.view === 'free') openFreePlay();
   else if (route.view === 'saved' || route.view === 'catalog') {
     catalogue.showSaved(route.view === 'saved');

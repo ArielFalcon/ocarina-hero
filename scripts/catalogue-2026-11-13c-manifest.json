@@ -409,6 +409,91 @@
     }
   },
   {
+    "id": "naruto-raising-fighting-spirit",
+    "title": "Naruto — The Raising Fighting Spirit",
+    "category": "anime",
+    "hook": "The two-bar riff: E E E G F# E B A G A G F#, then E E E G F# E and the closing D and A below the riff",
+    "source": {
+      "file": "out/catalogue-2026-11-13c/scores-b/sources/naruto-raising-fighting-spirit-trumpet-score-bars2-3.mid",
+      "page": "https://www.youtube.com/watch?v=NZkmW62nZDs",
+      "url": "https://www.youtube.com/watch?v=NZkmW62nZDs",
+      "sha256": "0e3374700843784845d3049136907ae4a24a3da09efb187ace8c056ab1e156bf"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 6,
+    "evidence": {
+      "level": "notation-frame-transcription-with-midi-event-comparison",
+      "summary": "Alex Sib trumpet score bars 2-3 (sounding E4 riff closing D4 A3; 20 attacks, A3-B4, span 14, 3.199992 s at dotted quarter 150). bm1 piano agrees on all 18 riff-body pitches and onsets within 0.06 beat (its D5 C#5 ending is not paired); bm2 guitar agrees on the 18-note body at +24 and on the pitch classes D and A of its chord roots, an octave higher relative to the riff; the Christofu flute score agrees on the body and closes F#5 E5. Closing voicing: user decision 2026-11-13: trumpet-score voicing.",
+      "urls": [
+        "https://www.youtube.com/watch?v=NZkmW62nZDs",
+        "https://bitmidi.com/naruto-the-rising-fighting-spirit-mid",
+        "https://bitmidi.com/naruto-the-raising-fight-spirit-mid",
+        "https://www.youtube.com/watch?v=X5GYqlJQbWc",
+        "https://www.generasia.com/wiki/NARUTO_The_Original_Soundtrack"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-franchises-rap/midi/naruto-rfs-bm1.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        4,
+        5,
+        6,
+        10,
+        11,
+        12,
+        16,
+        17,
+        18,
+        22,
+        23,
+        24,
+        28,
+        29,
+        30,
+        34,
+        35
+      ],
+      "pitchShift": 0,
+      "absentIndices": [
+        18,
+        19
+      ]
+    }
+  },
+  {
     "id": "hobbit-misty-mountains",
     "title": "The Hobbit — Misty Mountains",
     "category": "film-tv",

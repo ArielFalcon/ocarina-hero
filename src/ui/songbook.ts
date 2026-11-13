@@ -110,6 +110,7 @@ group('Naruto', ['Anime'], 'leaf', [
   ['catalogue-naruto', 'Sadness and Sorrow'],
   ['catalogue-blue-bird', 'Blue Bird', { version: 'Shippuden', aliases: ['Ikimono-gakari'] }],
   ['catalogue-naruto-hokage-funeral', 'Grief and Sorrow', { aliases: ['Toshio Masuda', 'Hokage’s Funeral', 'Hokages Funeral', 'Ai to Shū', '哀と愁'] }],
+  ['catalogue-naruto-raising-fighting-spirit', 'The Raising Fighting Spirit', { aliases: ['Toshio Masuda', 'The Rising Fighting Spirit', 'Raising Fighting Spirit', 'Wakiagaru Tōshi', '湧き上がる闘志'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);

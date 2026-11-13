@@ -39210,6 +39210,240 @@ export const CURATED_SONGS = [
     ]
   },
   {
+    "id": "catalogue-naruto-raising-fighting-spirit",
+    "title": "Naruto — The Raising Fighting Spirit",
+    "subtitle": "The two-bar riff: E E E G F# E B A G A G F#, then E E E G F# E and the closing D and A below the riff",
+    "tempoBpm": 225.00056250140625,
+    "beatsPerBar": 6,
+    "melody": [
+      {
+        "midi": 64,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 64,
+        "startBeat": 0.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 64,
+        "startBeat": 1,
+        "durationBeats": 0.4999999999999999
+      },
+      {
+        "midi": 67,
+        "startBeat": 1.5,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "midi": 66,
+        "startBeat": 2,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "midi": 64,
+        "startBeat": 2.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 71,
+        "startBeat": 3,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "midi": 69,
+        "startBeat": 3.5,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "midi": 67,
+        "startBeat": 4,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 69,
+        "startBeat": 4.5,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "midi": 67,
+        "startBeat": 5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 66,
+        "startBeat": 5.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 64,
+        "startBeat": 6,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "midi": 64,
+        "startBeat": 6.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 64,
+        "startBeat": 7,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "midi": 67,
+        "startBeat": 7.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 66,
+        "startBeat": 8,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 64,
+        "startBeat": 8.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "midi": 62,
+        "startBeat": 9,
+        "durationBeats": 1.5000000000000007
+      },
+      {
+        "midi": 57,
+        "startBeat": 10.5,
+        "durationBeats": 1.4999999999999991
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 0.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 1,
+        "durationBeats": 0.4999999999999999
+      },
+      {
+        "pitch": "A4",
+        "bend": 1,
+        "startBeat": 1.5,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 2,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 2.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 3,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 3.5,
+        "durationBeats": 0.5000000000000001
+      },
+      {
+        "pitch": "A4",
+        "bend": 1,
+        "startBeat": 4,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 4.5,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "pitch": "A4",
+        "bend": 1,
+        "startBeat": 5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 5.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 6,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 6.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 7,
+        "durationBeats": 0.5000000000000006
+      },
+      {
+        "pitch": "A4",
+        "bend": 1,
+        "startBeat": 7.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 8,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 8.5,
+        "durationBeats": 0.49999999999999967
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 9,
+        "durationBeats": 1.5000000000000007
+      },
+      {
+        "pitch": "D4",
+        "bend": -2,
+        "startBeat": 10.5,
+        "durationBeats": 1.4999999999999991
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
     "id": "catalogue-hobbit-misty-mountains",
     "title": "The Hobbit — Misty Mountains",
     "subtitle": "Sung stanza, first two lines: D F G B-flat C D C B-flat A G, then D G A A B-flat C B-flat A G, each ending on the tonic G",

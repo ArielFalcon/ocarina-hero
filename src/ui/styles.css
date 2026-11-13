@@ -394,7 +394,6 @@ progress::-moz-progress-bar { background: var(--cord); }
 .bend-key { min-width: 53px; min-height: 64px; padding: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; touch-action: none; user-select: none; }
 .hint { font-size: 14px; text-align: center; margin: 9px 0 2px; color: var(--muted); }
 .keyboard-settings { margin-top: 22px; font-size: 16px; border-top: 1px dashed #a2824980; }
-.keyboard-settings summary::after { margin-left: auto; }
 .keyboard-bindings { display: grid; gap: 8px; }
 .binding-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed #a2824933; }
 .binding-control { display: flex; align-items: center; gap: 12px; }

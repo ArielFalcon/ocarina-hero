@@ -1,5 +1,5 @@
 import { threadIcon, type ThreadIcon } from './thread-icons';
-import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, type SongbookEntry, type SongCategory } from './songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta, universeLabel, type SongbookEntry, type SongCategory } from './songbook';
 import type { DemoTrack } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 
@@ -94,9 +94,11 @@ export class SongbookView {
   private filterSummary: HTMLElement;
   private difficulty: DifficultyLevel | '' = '';
   private difficultyRange: HTMLInputElement;
+  private nowPlaying: { id: string | null; playing: boolean } = { id: null, playing: false };
 
   constructor(private root: HTMLElement, tracks: readonly DemoTrack[], private callbacks: {
     select(entry: SongbookEntry): void;
+    quickPlay(entry: SongbookEntry): void;
     savedChanged(): void;
   }) {
     this.entries = createSongbookEntries(tracks).sort((a, b) => a.title.localeCompare(b.title, 'en') || a.id.localeCompare(b.id, 'en'));
@@ -174,10 +176,13 @@ export class SongbookView {
       this.categoryFold.fold();
     });
     this.list.addEventListener('click', event => {
-      const button = (event.target as Element).closest<HTMLButtonElement>('[data-song], [data-save]');
+      const button = (event.target as Element).closest<HTMLButtonElement>('[data-song], [data-save], [data-quick-play]');
       if (button?.dataset.save) { this.toggleSaved(button.dataset.save); return; }
-      const entry = button && this.entries.find(item => item.id === button.dataset.song);
-      if (entry) this.callbacks.select(entry);
+      const id = button?.dataset.quickPlay ?? button?.dataset.song;
+      const entry = id && this.entries.find(item => item.id === id);
+      if (!entry) return;
+      if (button!.dataset.quickPlay) this.callbacks.quickPlay(entry);
+      else this.callbacks.select(entry);
     });
     this.filterChanged();
   }
@@ -188,6 +193,21 @@ export class SongbookView {
   }
 
   isSaved(id: string): boolean { return this.saved.has(id); }
+
+  /** Mark the song loaded in the quick player; its row button switches between play and pause. */
+  setNowPlaying(id: string | null, playing: boolean): void {
+    this.nowPlaying = { id, playing };
+    for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
+  }
+
+  private paintQuickPlay(button: HTMLButtonElement): void {
+    const sounding = this.nowPlaying.playing && button.dataset.quickPlay === this.nowPlaying.id;
+    const state = sounding ? 'playing' : button.dataset.quickPlay === this.nowPlaying.id ? 'paused' : 'idle';
+    if (button.dataset.state === state) return;
+    button.dataset.state = state;
+    button.innerHTML = threadIcon(sounding ? 'pause' : 'play');
+    button.setAttribute('aria-label', `${sounding ? 'Pause' : 'Play'} ${button.dataset.title}`);
+  }
 
   toggleSaved(id: string): void {
     if (this.saved.has(id)) this.saved.delete(id);
@@ -221,12 +241,12 @@ export class SongbookView {
     const focused = this.universes.contains(document.activeElement);
     this.universes.innerHTML = chip('', 'Every universe', 'songbook', total) + groups.map(group =>
       (showGroups ? `<span class="universe-group" aria-hidden="true">${group.category}</span>` : '')
-      + group.universes.map(option => chip(option.name, option.name === 'The Legend of Zelda' ? 'Zelda' : option.name, option.icon, option.count)).join('')).join('');
+      + group.universes.map(option => chip(option.name, universeLabel(option.name), option.icon, option.count)).join('')).join('');
     const checked = this.universes.querySelector<HTMLInputElement>('input:checked');
     if (focused) checked?.focus({ preventScroll: true });
     const current = groups.flatMap(group => group.universes).find(option => option.name === this.universe);
     this.universeFold.toggle.innerHTML = (current
-      ? face(current.name === 'The Legend of Zelda' ? 'Zelda' : current.name, current.icon, current.count)
+      ? face(universeLabel(current.name), current.icon, current.count)
       : face('Every universe', 'songbook', total)) + '<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change universe</span>';
   }
 
@@ -258,7 +278,7 @@ export class SongbookView {
   private renderResults(): void {
     const focused = this.list.contains(document.activeElement) ? document.activeElement as HTMLButtonElement : null;
     const focusedIndex = focused ? [...this.list.querySelectorAll('button')].indexOf(focused) : -1;
-    const focusedId = focused?.dataset.save ?? focused?.dataset.song;
+    const focusedId = focused?.dataset.save ?? focused?.dataset.quickPlay ?? focused?.dataset.song;
     this.root.classList.toggle('has-query', !!this.search.value.trim());
     const step = DIFFICULTY_STEPS.indexOf(this.difficulty);
     this.difficultyRange.value = String(step);
@@ -273,16 +293,16 @@ export class SongbookView {
     const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));
     this.list.innerHTML = result.length ? result.map(entry => {
       const title = escapeHtml(entry.title);
-      const universe = escapeHtml(entry.universe === 'The Legend of Zelda' ? 'Zelda' : entry.universe);
-      const detail = [entry.artist, entry.version].filter(Boolean).map(value => escapeHtml(value!)).join(' · ');
       const letter = anchors.get(entry.id);
-      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${universe}${detail ? ` · ${detail}` : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${this.saved.has(entry.id) ? '♥' : '♡'}</button></article>`;
-    }).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? 'No saved songs yet. Tap ♡ next to a song to keep it here.' : 'No melodies found. Try another title or clear your filters.'}</p>`;
+      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${threadIcon(this.saved.has(entry.id) ? 'heart-filled' : 'heart-empty')}</button></article>`;
+    }).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`;
     if (focused) {
       const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];
-      const replacement = buttons.find(button => focused.dataset.save ? button.dataset.save === focusedId : button.dataset.song === focusedId);
+      const key = focused.dataset.save ? 'save' : focused.dataset.quickPlay ? 'quickPlay' : 'song';
+      const replacement = buttons.find(button => button.dataset[key] === focusedId);
       (replacement ?? buttons[Math.min(focusedIndex, buttons.length - 1)] ?? this.reset).focus({ preventScroll: true });
     }
+    for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
     this.renderRail([...anchors.values()], result.length);
   }
 

@@ -243,6 +243,16 @@ function indexLetter(title: string): string {
 }
 
 /** The first entry of each run of index letters, in list order, for the letter rail. */
+/** Universe name as shown on compact labels. */
+export function universeLabel(universe: string): string {
+  return universe === 'The Legend of Zelda' ? 'Zelda' : universe;
+}
+
+/** One-line song detail: universe, then artist and version when present. */
+export function songMeta(entry: SongbookEntry): string {
+  return [universeLabel(entry.universe), entry.artist, entry.version].filter(Boolean).join(' · ');
+}
+
 export function letterAnchors(entries: readonly SongbookEntry[]): LetterAnchor[] {
   const anchors: LetterAnchor[] = [];
   for (const entry of entries) {

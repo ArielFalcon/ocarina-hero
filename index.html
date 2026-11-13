@@ -104,7 +104,7 @@
         </section>
 
         <section id="lesson-view" class="view lesson-view" aria-labelledby="lesson-title" hidden>
-          <div class="lesson-top"><button class="text-button back-link" type="button" data-view-link="catalog"><span aria-hidden="true">←</span><span class="back-label"> Songbook</span></button><span class="lesson-actions"><button id="share-song" class="text-button" type="button" aria-label="Share link to this song" hidden><span data-thread-icon="share"></span><span class="share-label">Share</span></button><button id="save-song" class="text-button" type="button" aria-pressed="false" hidden>Save song</button></span></div>
+          <div class="lesson-top"><button class="text-button back-link" type="button" data-view-link="catalog"><span data-thread-icon="back"></span><span class="back-label"> Songbook</span></button><span class="lesson-actions"><button id="share-song" class="text-button" type="button" aria-label="Share link to this song" hidden><span data-thread-icon="share"></span><span class="share-label">Share</span></button><button id="save-song" class="text-button" type="button" aria-pressed="false" hidden>Save song</button></span></div>
           <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">Your instrument</p><h1 id="lesson-title" class="embroidered">Free play</h1><p id="lesson-meta" class="subtitle stitched-label">Make a little music.</p></div>
           <div id="song-modes" class="mode-switch" role="group" aria-label="Learning mode" hidden>
             <button id="listen-mode" class="action" type="button" aria-pressed="true"><span class="stitched-label">Listen</span></button>
@@ -181,6 +181,16 @@
       </main>
       <footer class="menu-footer">
         <img class="menu-ornament" src="/art/sword-triforce-v2.webp" width="1920" height="819" alt="" aria-hidden="true" draggable="false" decoding="async" />
+        <section id="mini-player" class="mini-player" aria-label="Quick play" hidden>
+          <div class="mini-head">
+            <button id="mini-toggle" class="patch-button mini-toggle" type="button" aria-label="Play"></button>
+            <button id="mini-open" class="mini-open" type="button" aria-describedby="mini-open-hint"><span class="mini-title"></span><span class="mini-meta"></span><span id="mini-open-hint" class="visually-hidden">Open the full lesson</span></button>
+            <button id="mini-expand" class="patch-button" type="button" aria-label="Open lesson"><span data-thread-icon="expand"></span></button>
+            <button id="mini-close" class="patch-button" type="button" aria-label="Close quick play"><span data-thread-icon="close"></span></button>
+          </div>
+          <div class="mini-staff" aria-hidden="true" inert><div class="tab"></div></div>
+          <p id="mini-status" class="visually-hidden" role="status" aria-live="polite"></p>
+        </section>
         <nav class="app-nav" aria-label="Main navigation"><a href="#catalog" data-view-link="catalog" aria-current="page"><span data-thread-icon="songbook"></span><span>Songbook</span></a><a href="#free" data-view-link="free"><span data-thread-icon="music"></span><span>Free play</span></a><a href="#workshop" data-view-link="workshop"><span data-thread-icon="waveform"></span><span>Workshop</span></a></nav>
       </footer>
     </div>

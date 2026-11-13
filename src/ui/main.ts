@@ -20,6 +20,8 @@ import { parseRoute, routeHash, shareUrl } from './route';
 import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
+import { STAFF_CLEF, staffTokenHtml } from './staff';
+import { MiniPlayer } from './mini-player';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, readBindings, handleKeyDown, type KeyboardAction } from './keyboard';
 import { threadIcon, type ThreadIcon } from './thread-icons';
 import { SongbookView } from './songbook-view';
@@ -276,7 +278,7 @@ function renderTab(): void {
     passageSelect.replaceChildren(new Option('1 of 1', '0'));
     must<HTMLButtonElement>('#previous-passage').disabled = true;
     must<HTMLButtonElement>('#next-passage').disabled = true;
-    tab.innerHTML = `<span class="staff-clef">${threadIcon('music')}</span><p class="empty">Your notes will appear on this staff.</p>`;
+    tab.innerHTML = `${STAFF_CLEF}<p class="empty">Your notes will appear on this staff.</p>`;
     updateProgress();
     return;
   }
@@ -287,16 +289,14 @@ function renderTab(): void {
   must<HTMLButtonElement>('#previous-passage').disabled = passageIndex === 0;
   must<HTMLButtonElement>('#next-passage').disabled = passageIndex === passages.length - 1;
   const indices = passages[passageIndex]!;
-  const levels: Record<ControllerButton, number> = { L: 96, R: 78, A: 60, Y: 42, X: 24 };
   const signature = indices.map(index => `${index}:${recorded[index]!.pitch}:${recorded[index]!.bend ?? 0}`).join('|');
   if (tab.dataset.notes !== signature) {
     const focused = tab.contains(document.activeElement) ? (document.activeElement as HTMLElement).dataset.noteIndex : undefined;
     const nextWindow = { song: songArrangement, indices };
-    swapStaff(tab, staffTransition(renderedWindow, nextWindow), () => { tab.innerHTML = `<span class="staff-clef">${threadIcon('music')}</span>` + indices.map((index, slot) => {
-    const note = recorded[index]!;
-    const spec = pitchById(note.pitch);
+    swapStaff(tab, staffTransition(renderedWindow, nextWindow), () => { tab.innerHTML = STAFF_CLEF + indices.map((index, slot) => {
     const expected = practiceMode && !isPlaying && practiceCursor === index;
-    return `<button type="button" class="tok${activeNote === index ? ' is-playing' : ''}${expected ? ' is-expected' : ''}${practiceMode && index < practiceCursor ? ' is-played' : ''}" data-note-index="${index}" style="--staff-x:calc(42px + (100% - 64px) * ${(slot + .5) / indices.length});--staff-y:${levels[spec.button]}px" aria-label="Note ${index + 1}: ${noteInstruction(spec.button, note.bend ?? 0)}"${activeNote === index || expected ? ' aria-current="true"' : ''}>${buttonIcon(spec.button)}<span class="note-order" aria-hidden="true">${index + 1}</span>${note.bend ? `<span class="staff-modifier">${modifierIcon(note.bend)}</span>` : ''}</button>`;
+    const classes = [activeNote === index && 'is-playing', expected && 'is-expected', practiceMode && index < practiceCursor && 'is-played'].filter(Boolean).join(' ');
+    return staffTokenHtml(recorded[index]!, index, slot, indices.length, classes, activeNote === index || expected);
     }).join(''); });
     renderedWindow = nextWindow;
     tab.dataset.notes = signature;
@@ -794,7 +794,7 @@ function updateLessonHeading(): void {
   const save = must<HTMLButtonElement>('#save-song');
   const saved = !!selectedEntry && catalogue.isSaved(selectedEntry.id);
   save.hidden = selectedEntry === null;
-  save.textContent = saved ? '♥ Saved' : '♡ Save';
+  save.innerHTML = `${threadIcon(saved ? 'heart-filled' : 'heart-empty')}<span>${saved ? 'Saved' : 'Save'}</span>`;
   save.setAttribute('aria-pressed', String(saved));
   save.setAttribute('aria-label', saved ? 'Remove from saved songs' : 'Save song');
   must('#share-song').hidden = selectedEntry === null;
@@ -914,6 +914,7 @@ function showView(next: AppView, pushHistory = true): void {
   const scroller = must('#main-content');
   const returningToCatalog = view !== next && next === 'catalog';
   if (view === 'catalog' && next !== 'catalog') catalogScroll = scroller.scrollTop;
+  if (next !== 'catalog') miniPlayer.close();
   if (view !== next) {
     stopPlayback();
     controls.reset();
@@ -951,7 +952,13 @@ function openSong(entry: SongbookEntry, pushHistory = true): void {
 
 const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
   select: entry => openSong(entry),
+  quickPlay: entry => miniPlayer.toggle(entry),
   savedChanged: updateLessonHeading,
+});
+
+const miniPlayer = new MiniPlayer(must('#mini-player'), engine, {
+  open: entry => openSong(entry),
+  changed: (id, playing) => catalogue.setNowPlaying(id, playing),
 });
 
 must('#save-song').addEventListener('click', () => {
@@ -1036,7 +1043,7 @@ function restoreView(): void {
 }
 window.addEventListener('popstate', restoreView);
 window.addEventListener('visibilitychange', () => {
-  if (document.hidden) { stopPlayback(); controls.reset(); clearActive(); editor.stopPreview(); }
+  if (document.hidden) { stopPlayback(); miniPlayer.pause(); controls.reset(); clearActive(); editor.stopPreview(); }
 });
 for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]')) {
   icon.innerHTML = threadIcon(icon.dataset.threadIcon as ThreadIcon);

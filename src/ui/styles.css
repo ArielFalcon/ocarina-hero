@@ -82,7 +82,7 @@ p { margin: 10px 0; }
 .full { width: 100%; }
 /* Header repository link: a compact corded slot that never grows the header. */
 .repo-link { flex-shrink: 0; gap: 7px; min-height: 44px; margin-block: -6px; padding: 6px 13px 6px 11px; font-size: 16px; text-decoration: none; white-space: nowrap; }
-.repo-link .thread-icon { width: 18px; height: 18px; color: var(--accent); }
+.repo-link .thread-icon { width: 18px; height: 18px; }
 .repo-long { display: none; }
 @media (min-width: 480px) { .repo-long { display: inline; } }
 .head:has(.repo-link) .brand { white-space: nowrap; }
@@ -150,11 +150,9 @@ details[open] summary { color: var(--text); }
 .category-count { flex-shrink: 0; margin-left: 6px; }
 /* Rust cloth badge with an ochre thread edge: it reads apart from the name on either card state. */
 .count-badge { display: block; min-width: 28px; padding: 1px 7px; border: 1px solid var(--accent); border-radius: 4px; background-color: var(--rust); background-image: var(--weave); color: var(--text); font: 15px/1.35 Georgia, serif; text-align: center; font-variant-numeric: tabular-nums; box-shadow: inset 0 1px 0 #f0d6a233; }
-.category-symbol { flex-shrink: 0; display: flex; color: var(--accent); }
+.category-symbol { flex-shrink: 0; display: flex; }
 .category-symbol .thread-icon { width: 22px; height: 24px; }
 @media (max-width: 380px) { .category-card { padding: 7px 8px; gap: 6px; } .category-name { font-size: 16px; } }
-.category-symbol .icon-cord, .song-seal .icon-cord { stroke-width: 1.8; }
-.category-symbol .icon-stitches, .song-seal .icon-stitches { stroke-width: .65; stroke-dasharray: 1.5 .9; }
 .catalog-facets { display: grid; grid-template-columns: minmax(0, 1fr); }
 /* Universe chips: one scrolling row on phones, wrapping lines on desktop. */
 .universe-filter { min-width: 0; margin: 0; padding: 0; border: 0; }
@@ -181,10 +179,8 @@ details[open] summary { color: var(--text); }
 .universe-chip:has(input:checked)::before { padding: 2.5px; opacity: 1; filter: url('#cord-edge'); }
 .universe-chip:has(input:checked)::after { content: ''; position: absolute; inset: 5px; border: 1px dashed #e5c993b3; border-radius: 3px; pointer-events: none; }
 .universe-chip:has(input:focus-visible) { outline: 2px solid var(--text); outline-offset: 3px; }
-.universe-icon { display: flex; color: var(--accent); }
+.universe-icon { display: flex; }
 .universe-icon .thread-icon { width: 20px; height: 22px; }
-.universe-icon .icon-cord { stroke-width: 1.8; }
-.universe-icon .icon-stitches { stroke-width: .65; stroke-dasharray: 1.5 .9; }
 .universe-name { font-size: 16px; }
 .universe-chip .count-badge { min-width: 24px; padding-inline: 5px; font-size: 13px; }
 .universe-group { grid-column: 1 / -1; padding: 6px 2px 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -199,12 +195,17 @@ details[open] summary { color: var(--text); }
 .song-title { display: block; font: 22px/1.15 Georgia, serif; color: var(--text); overflow-wrap: anywhere; }
 .song-open:hover .song-title { text-decoration: underline; text-underline-offset: 5px; }
 .song-meta { display: block; color: var(--muted); font-size: 16px; line-height: 1.3; margin-top: 4px; }
-.song-seal { width: 43px; height: 50px; flex: 0 0 43px; display: grid; place-items: center; border: 1px solid #a88342; border-radius: 3px 3px 13px 13px; font: 23px Georgia, serif; color: var(--accent); background-color: var(--bg); background-image: var(--weave); }
+.song-seal { width: 43px; height: 50px; flex: 0 0 43px; display: grid; place-items: center; border: 1px solid #a88342; border-radius: 3px 3px 13px 13px; background-color: var(--panel); background-image: var(--weave); }
 .empty { padding: 20px 0; color: var(--muted); }
-.save-button { flex-shrink: 0; min-width: 44px; min-height: 48px; padding: 5px; border: 0; background: transparent; color: var(--accent); font: 29px Georgia, serif; }
-.save-button[aria-pressed='true'] { color: #e4b270; }
-.saved-card .category-symbol { color: #e4b270; }
-#save-song[aria-pressed='true'] { color: #e4b270; text-decoration-color: currentColor; }
+.save-button { flex-shrink: 0; display: grid; place-items: center; width: 38px; min-height: 48px; padding: 0; border: 0; background: transparent; }
+.save-button .thread-icon { width: 30px; height: 30px; }
+.save-button:active .thread-icon { translate: 0 1px; }
+#save-song { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+#save-song span { text-decoration: underline; text-decoration-color: #b48d4a; text-underline-offset: 5px; }
+#save-song .thread-icon { width: 20px; height: 20px; }
+#save-song[aria-pressed='true'] { color: #e4b270; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; }
+.back-link .thread-icon { width: 22px; height: 22px; }
 /* Letter rail: a recessed cord-framed strip of stitched initials beside the full song list. */
 .song-index { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
 .song-row { scroll-margin-top: 12px; }
@@ -245,7 +246,7 @@ details[open] summary { color: var(--text); }
 .lesson-actions { display: flex; align-items: center; gap: 28px; }
 #share-song { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
 #share-song .share-label { text-decoration: underline; text-decoration-color: #b48d4a; text-underline-offset: 5px; }
-#share-song .thread-icon { width: 18px; height: 18px; color: var(--accent); }
+#share-song .thread-icon { width: 18px; height: 18px; }
 .lesson-heading h1 { font-size: 29px; margin: 3px 0 5px; }
 .lesson-heading .eyebrow { font-size: 12px; }
 .lesson-heading .subtitle { font-size: 17px; margin: 0; }
@@ -254,7 +255,13 @@ details[open] summary { color: var(--text); }
 .passage-controls { display: flex; gap: 10px; justify-content: space-between; align-items: center; }
 .passage-controls > button { min-width: 44px; }
 .passage-arrow { min-height: 48px; padding: 9px 12px; gap: 8px; }
-@media (max-width: 450px) { .passage-arrow .stitched-label { display: none; } }
+@media (max-width: 450px) {
+  .passage-arrow .stitched-label { display: none; }
+  .action.passage-arrow, .action.passage-arrow:hover:not(:disabled) { min-width: 44px; padding: 0; background: transparent; }
+  .action.passage-arrow::before { display: none; }
+  .passage-arrow .thread-icon { width: 38px; height: 38px; border-radius: 5px; }
+  .passage-arrow:disabled .thread-icon { opacity: .45; }
+}
 .passage-field { display: flex; gap: 8px; align-items: center; }
 .passage-field label { font-size: 16px; }
 .passage-field .input-frame { width: 112px; }
@@ -384,13 +391,14 @@ progress::-moz-progress-bar { background: var(--cord); }
 .binding-key { min-width: 64px; min-height: 44px; padding: 6px 12px; }
 .binding-key kbd { font: inherit; }
 .binding-key[aria-pressed='true'] { outline: 2px solid var(--text); outline-offset: 3px; }
-.thread-icon { display: block; width: 24px; height: 24px; flex-shrink: 0; fill: none; stroke-linecap: round; stroke-linejoin: round; filter: url('#soft-thread'); }
-.icon-cord { stroke: var(--accent); stroke-width: 2.8; }
-.icon-stitches { stroke: var(--text); stroke-width: 1; stroke-dasharray: 2 .9; }
+.thread-icon { display: block; width: 24px; height: 24px; flex-shrink: 0; object-fit: contain; user-select: none; -webkit-user-select: none; pointer-events: none; }
+.inline-icon { display: inline-block; width: 1.25em; height: 1.25em; vertical-align: -.25em; }
 .action { gap: 9px; }
 #lesson-universe { display: flex; gap: 10px; align-items: center; }
 #lesson-universe .thread-icon { width: 20px; height: 22px; }
-.song-seal .thread-icon { width: 25px; height: 29px; }
+.song-seal .thread-icon { width: 31px; height: 31px; clip-path: inset(11% round 2px); }
+.mini-seal .thread-icon { width: 20px; height: 20px; }
+.universe-toggle .mini-seal .thread-icon { width: 17px; height: 17px; }
 /* Difficulty frame: an embroidered overlay with a 12px margin around a 43×50 seal (67:74 art). */
 .song-seal { position: relative; }
 .seal-frame { position: absolute; inset: -24% -28%; background: center / 100% 100% no-repeat; pointer-events: none; }
@@ -404,14 +412,12 @@ progress::-moz-progress-bar { background: var(--cord); }
 .difficulty-filter legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
 .difficulty-scale { max-width: 520px; padding: 12px 2px 4px; }
 .universe-toggle .mini-seal { flex: 0 0 22px; width: 22px; height: 26px; border-radius: 2px 2px 7px 7px; }
-.universe-toggle .mini-seal .thread-icon { width: 14px; height: 16px; }
 .universe-toggle .mini-seal .seal-frame { inset: -22% -26%; }
 .difficulty-scale input[type='range'] { display: block; width: calc(80% + 23px); margin: 0 calc(10% - 11.5px); }
 .difficulty-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding-top: 6px; }
 .difficulty-step { display: grid; justify-items: center; gap: 12px; padding: 10px 0 4px; cursor: pointer; opacity: .62; transition: opacity .15s ease; }
 .difficulty-step:hover, .difficulty-step.is-current { opacity: 1; }
 .difficulty-step .song-seal.mini-seal { width: 27px; height: 31px; flex-basis: 27px; border-radius: 2px 2px 8px 8px; }
-.mini-seal .thread-icon { width: 16px; height: 18px; }
 .difficulty-step.is-current .mini-seal { border-color: var(--text); box-shadow: var(--slot-raised); background-color: #604620; background-image: var(--weave), var(--selected-cloth); }
 .difficulty-name { font-size: 15px; line-height: 1.1; white-space: nowrap; }
 .difficulty-step.is-current .difficulty-name { text-decoration: underline 1px dashed; text-underline-offset: 4px; }
@@ -420,7 +426,7 @@ progress::-moz-progress-bar { background: var(--cord); }
 #main-content::-webkit-scrollbar-track { background: #18251b; border-left: 1px dashed #94733c66; }
 #main-content::-webkit-scrollbar-thumb { border: 3px solid #18251b; border-radius: 6px; background: var(--cord); }
 #main-content::-webkit-scrollbar-thumb:hover { background: #c19845; }
-@media (forced-colors: active) { #main-content { scrollbar-color: auto; } .icon-cord, .icon-stitches { stroke: currentColor; } }
+@media (forced-colors: active) { #main-content { scrollbar-color: auto; } }
 
 @media (max-width: 799px) {
   .lesson-heading h1 { font-size: 27px; }
@@ -615,3 +621,36 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .app::after { display: none; }
 }
 @supports not (background-clip: text) { .embroidered, .stitched-label { -webkit-text-fill-color: currentColor; background: none; filter: none; } }
+
+/* Icon-only controls: the embroidered patch is the frame. */
+.patch-button { flex-shrink: 0; display: grid; place-items: center; width: 44px; min-height: 44px; padding: 0; border: 0; border-radius: 6px; background: transparent; }
+.patch-button .thread-icon { width: 38px; height: 38px; border-radius: 5px; }
+.patch-button:hover:not(:disabled) .thread-icon { filter: brightness(1.12); }
+.patch-button:active:not(:disabled) .thread-icon { translate: 0 1px; }
+.quick-play { width: 38px; min-height: 48px; }
+.quick-play .thread-icon { width: 30px; height: 30px; }
+.quick-play[data-state='playing'] .thread-icon, .quick-play[data-state='paused'] .thread-icon { box-shadow: 0 0 0 2px #604620, 0 0 0 3.5px #c19845; }
+.song-row .quick-play { margin-right: -9px; }
+
+.mini-player { position: absolute; bottom: calc(100% + 8px); left: 10px; right: 10px; z-index: 10; display: grid; gap: 2px; padding: 8px 12px 6px; border-radius: 6px; background: var(--bg) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-raised), 0 6px 16px #050a0699; }
+.mini-player::before { content: ''; position: absolute; inset: 0; padding: 2.5px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; filter: url('#cord-edge'); }
+#main-content::after { content: ''; display: block; height: var(--mini-player-space, 0px); }
+.mini-head { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.mini-toggle .thread-icon { width: 42px; height: 42px; }
+.mini-open { flex: 1; margin-left: 4px; min-width: 0; min-height: 44px; display: flex; flex-direction: column; justify-content: center; padding: 0; border: 0; background: transparent; text-align: left; }
+.mini-title, .mini-meta { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-title { font: 19px/1.2 Georgia, serif; color: var(--text); }
+.mini-meta { font-size: 14px; line-height: 1.3; color: var(--muted); }
+.mini-open:hover .mini-title { text-decoration: underline; text-underline-offset: 4px; }
+.mini-staff { min-width: 0; overflow: hidden; }
+.mini-staff .tab { zoom: .72; margin: 0; height: 188px; }
+.mini-staff .tab:not(.has-modifiers) { height: 130px; }
+@media (min-width: 800px) {
+  .mini-player { left: 24px; right: 24px; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); align-items: center; column-gap: 24px; padding: 6px 20px; }
+  .mini-staff .tab { zoom: .7; height: 206px; }
+  .mini-staff .tab:not(.has-modifiers) { height: 150px; }
+}
+@media (forced-colors: active) { .mini-player { border: 2px solid CanvasText; } .mini-player::before { display: none; } }
+@media (forced-colors: active) { .quick-play[data-state='playing'], .quick-play[data-state='paused'] { outline: 2px solid Highlight; } }
+.thread-icon { forced-color-adjust: none; }
+.mini-player.is-leaving { pointer-events: none; }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DEMOS, type DemoTrack } from '../src/core/demo';
-import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses } from '../src/ui/songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta } from '../src/ui/songbook';
 
 const entries = createSongbookEntries(DEMOS);
 const ids = (result: ReturnType<typeof filterSongbook>) => result.map((entry) => entry.id);
@@ -78,4 +78,10 @@ test('letter anchors mark the first song of each initial, folding accents and no
   const make = (id: string, title: string) => createSongbookEntries([{ id, title, subtitle: '', tempoBpm: 100, melody: [] }])[0]!;
   const anchors = letterAnchors([make('a', 'Étoile'), make('b', 'eagle'), make('c', '1UP'), make('d', '¡Ya!'), make('e', 'Zebra')]);
   assert.deepEqual(anchors, [{ letter: 'E', id: 'a' }, { letter: '#', id: 'c' }, { letter: 'Y', id: 'd' }, { letter: 'Z', id: 'e' }]);
+});
+
+test('song meta shortens Zelda and appends only the artist and version present', () => {
+  const entry = (universe: string, artist?: string, version?: string) => ({ ...entries[0]!, universe, artist, version });
+  assert.equal(songMeta(entry('The Legend of Zelda', undefined, 'Ocarina of Time')), 'Zelda · Ocarina of Time');
+  assert.equal(songMeta(entry('Pop', 'Queen')), 'Pop · Queen');
 });

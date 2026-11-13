@@ -1,6 +1,6 @@
 import type { Arrangement } from '../core/ir';
 
-interface Player {
+export interface Player {
   play(arrangement: Arrangement): Promise<number>;
   stopAll(): void;
   getPlaybackState(): { playing: boolean; noteIndex: number | null };
@@ -13,7 +13,7 @@ interface Callbacks {
   complete?(): void;
 }
 
-interface Frames {
+export interface Frames {
   request(callback: FrameRequestCallback): number;
   cancel(id: number): void;
 }

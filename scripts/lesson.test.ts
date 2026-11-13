@@ -116,6 +116,19 @@ test('a free play release never edits notes it did not record', () => {
   assert.deepEqual(notes, [{ pitch: 'F4', startBeat: 0, durationBeats: 3 }, { pitch: 'A4', bend: 0, startBeat: 3, durationBeats: 1 }]);
 });
 
+test('clearing a free play take empties it, even while a note is held, and the next note starts the melody', () => {
+  const notes: Note[] = [];
+  const take = new FreePlayTake(notes, 60);
+  take.press('D4', 0, 0);
+  take.release(1000);
+  take.press('F4', 0, 2000); // still held when the take is cleared
+  take.clear();
+  assert.deepEqual(notes, []);
+  take.release(2500);
+  take.press('A4', 0, 3000);
+  assert.deepEqual(notes, [{ pitch: 'A4', bend: 0, startBeat: 0, durationBeats: 1 }]);
+});
+
 test('reset restarts a practice run from the first passage, and otherwise the passage in view', () => {
   assert.equal(resetPassage(3, { practice: true, repeating: false }), 0);
   assert.equal(resetPassage(3, { practice: true, repeating: true }), 3);

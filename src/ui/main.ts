@@ -1139,7 +1139,15 @@ nextSongButton.addEventListener('click', () => {
 passageSelect.addEventListener('change', () => selectPassage(Number(passageSelect.value)));
 must('#previous-passage').addEventListener('click', () => selectPassage(passageIndex - 1));
 must('#next-passage').addEventListener('click', () => selectPassage(passageIndex + 1));
-must('#restart').addEventListener('click', () => selectPassage(resetPassage(passageIndex, { practice: practiceMode, repeating: repeatPassage.checked })));
+must('#restart').addEventListener('click', () => {
+  // Free play has nothing to rewind to: reset discards the take.
+  if (!songArrangement) {
+    take.clear();
+    selectPassage(0);
+    return;
+  }
+  selectPassage(resetPassage(passageIndex, { practice: practiceMode, repeating: repeatPassage.checked }));
+});
 tab.addEventListener('click', event => {
   const target = (event.target as Element).closest<HTMLElement>('[data-note-index]');
   if (!target) return;

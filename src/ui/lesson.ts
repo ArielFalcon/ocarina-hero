@@ -77,6 +77,13 @@ export class FreePlayTake {
     this.last = { note, endMs: atMs };
   }
 
+  /** Start over: drop every note, including one still held. */
+  clear(): void {
+    this.notes.length = 0;
+    this.held = null;
+    this.last = null;
+  }
+
   private beats(ms: number): number {
     return Math.max(0, ms) * this.tempoBpm / 60000;
   }

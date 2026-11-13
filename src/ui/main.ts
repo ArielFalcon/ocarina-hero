@@ -400,6 +400,10 @@ renderTab();
 function applyBend(value: number, glide = 0): void {
   bend = value;
   engine.setBend(value, glide);
+  if (!songArrangement && take.bend(value, performance.now())) {
+    passageIndex = Number.MAX_SAFE_INTEGER; // renderTab clamps to the passage holding the newest note
+    renderTab();
+  }
 
   for (const element of bends.querySelectorAll<HTMLElement>('.bend-key')) {
     element.classList.toggle('is-active', Number(element.dataset.bend) === value);

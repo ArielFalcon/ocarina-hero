@@ -67,6 +67,25 @@ export class FreePlayTake {
     this.held = { note, atMs };
   }
 
+  /** One bend per note: a held note records its first bend, and letting that bend go starts an unbent note of the same pitch. */
+  /** Returns whether the take changed. */
+  bend(value: number, atMs: number): boolean {
+    const held = this.held;
+    if (!held || this.notes.at(-1) !== held.note) return false;
+    const recorded = held.note.bend ?? 0;
+    if (value && !recorded) {
+      const note = { ...held.note, bend: value };
+      this.notes[this.notes.length - 1] = note;
+      this.held = { ...held, note };
+      return true;
+    }
+    if (!value && recorded) {
+      this.press(held.note.pitch, 0, atMs);
+      return true;
+    }
+    return false;
+  }
+
   /** Close the sounding note; one release ends the sound, so it ends the note too. */
   release(atMs: number): void {
     const held = this.held;

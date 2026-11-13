@@ -116,6 +116,28 @@ test('a free play release never edits notes it did not record', () => {
   assert.deepEqual(notes, [{ pitch: 'F4', startBeat: 0, durationBeats: 3 }, { pitch: 'A4', bend: 0, startBeat: 3, durationBeats: 1 }]);
 });
 
+test('a held free play note keeps its first bend, and letting the bend go starts another note', () => {
+  const notes: Note[] = [];
+  const take = new FreePlayTake(notes, 60);
+  take.bend(1, 0); // no note held: the next press already carries the bend
+  take.press('D4', 0, 1000);
+  take.bend(1, 1500); // first bend while held: the note records it
+  take.bend(-1, 1700); // a second bend on the same note is not recorded
+  take.bend(0, 2000); // letting go starts an unbent note of the same pitch
+  take.bend(0, 2200); // no bend to let go of: nothing changes
+  take.release(3000);
+  take.bend(1, 3500); // nothing held
+  take.press('F4', -1, 4000);
+  take.bend(0, 4500);
+  take.release(5000);
+  assert.deepEqual(notes, [
+    { pitch: 'D4', bend: 1, startBeat: 0, durationBeats: 1 },
+    { pitch: 'D4', bend: 0, startBeat: 1, durationBeats: 1 },
+    { pitch: 'F4', bend: -1, startBeat: 3, durationBeats: 0.5 },
+    { pitch: 'F4', bend: 0, startBeat: 3.5, durationBeats: 0.5 },
+  ]);
+});
+
 test('clearing a free play take empties it, even while a note is held, and the next note starts the melody', () => {
   const notes: Note[] = [];
   const take = new FreePlayTake(notes, 60);

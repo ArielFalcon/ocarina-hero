@@ -26,6 +26,8 @@ import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_
 import { threadIcon, type ThreadIcon } from './thread-icons';
 import { SongbookView } from './songbook-view';
 import type { SongbookEntry } from './songbook';
+import { nextSong } from './featured';
+import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
 
 const engine = new OcarinaEngine();
 let bindings = (() => {
@@ -33,6 +35,10 @@ let bindings = (() => {
   catch { return { ...DEFAULT_BINDINGS }; }
 })();
 let bindingTarget: KeyboardAction | null = null;
+let progress = (() => {
+  try { return readProgress(JSON.parse(localStorage.getItem(PROGRESS_STORAGE) ?? 'null')); }
+  catch { return {}; }
+})();
 const desktop = window.matchMedia('(min-width: 800px)');
 const recorded: Note[] = [];
 let bend = 0;
@@ -90,6 +96,8 @@ const practiceStatus = must<HTMLParagraphElement>('#practice-status');
 const comboBadge = must<HTMLParagraphElement>('#combo');
 const practiceLine = must<HTMLDivElement>('.practice-line');
 let comboHideTimer: number | undefined;
+const songComplete = must<HTMLDivElement>('#song-complete');
+const nextSongButton = must<HTMLButtonElement>('#next-song');
 const passageSelect = must<HTMLSelectElement>('#passage');
 const repeatPassage = must<HTMLInputElement>('#repeat-passage');
 let selectedAudio: PreparedAudio | null = null;
@@ -328,6 +336,7 @@ function arrangementLabel(projection: Projection): string {
 
 function show(arrangement: Arrangement, label: string, play = false): void {
   songArrangement = arrangement;
+  songComplete.hidden = true;
   practiceCursor = 0;
   combo = { streak: 0, best: 0 };
   playbackCursor = 0;
@@ -783,14 +792,19 @@ function updateProgress(): void {
   }
 }
 
+function renderLessonMeta(): void {
+  const songProgress = selectedEntry ? progress[selectedEntry.id] : undefined;
+  must('#lesson-meta').textContent = current
+    ? [selectedEntry?.version, `${recorded.length} notes`, `${passages.length} ${passages.length === 1 ? 'passage' : 'passages'}`, songProgress?.completed && 'Completed', songProgress && songProgress.bestCombo > 1 && `Best combo ×${songProgress.bestCombo}`].filter(Boolean).join(' · ')
+    : 'Make a little music.';
+}
+
 function updateLessonHeading(): void {
   must('#lesson-title').textContent = selectedEntry?.title ?? current?.title ?? 'Free play';
   const universe = must('#lesson-universe');
   universe.innerHTML = threadIcon(selectedEntry?.icon ?? 'music');
   universe.append(document.createTextNode(selectedEntry?.universe ?? (current ? 'Your melody' : 'Your instrument')));
-  must('#lesson-meta').textContent = current
-    ? [selectedEntry?.version, `${recorded.length} notes`, `${passages.length} ${passages.length === 1 ? 'passage' : 'passages'}`].filter(Boolean).join(' · ')
-    : 'Make a little music.';
+  renderLessonMeta();
   const save = must<HTMLButtonElement>('#save-song');
   const saved = !!selectedEntry && catalogue.isSaved(selectedEntry.id);
   save.hidden = selectedEntry === null;
@@ -815,7 +829,7 @@ function refreshPracticeStatus(lead = ''): void {
     const expected = recorded[practiceCursor];
     practiceStatus.textContent = lead + (expected
       ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}`
-      : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}. Choose a passage to practice again.`);
+      : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}.`);
   }
 }
 
@@ -864,6 +878,32 @@ function rewardHit(point: { x: number; y: number } | null, button: ControllerBut
   }
 }
 
+function saveProgress(next: Progress): void {
+  progress = next;
+  try { localStorage.setItem(PROGRESS_STORAGE, JSON.stringify(progress)); }
+  catch { catalogue.noteSessionOnly(); }
+}
+
+function recordPractice(finished: boolean): void {
+  if (!selectedEntry) return;
+  const next = markPractice(progress, selectedEntry.id, { finished, bestCombo: combo.best });
+  if (next === progress) return;
+  saveProgress(next);
+  renderLessonMeta();
+}
+
+/** After the last note, offer another run and the next song of the same collection. */
+function offerNextStep(): void {
+  const upcoming = selectedEntry && nextSong(catalogue.entries, selectedEntry.id, completedIds(progress));
+  nextSongButton.hidden = !upcoming;
+  if (upcoming) {
+    nextSongButton.querySelector('.stitched-label')!.textContent = upcoming.title;
+    nextSongButton.setAttribute('aria-label', `Next song: ${upcoming.title}`);
+    nextSongButton.dataset.song = upcoming.id;
+  }
+  songComplete.hidden = false;
+}
+
 function practiceNote(button: ControllerButton): void {
   const expected = recorded[practiceCursor];
   if (!expected) return;
@@ -887,8 +927,11 @@ function practiceNote(button: ControllerButton): void {
   renderTab();
   renderCombo();
   const stillDrawnHit = centreIn(tab, tab.querySelector(`[data-note-index="${hitIndex}"]`));
-  rewardHit(stillDrawnHit, button, expected.bend ?? 0, result.milestone, cleared, finished && !repeatPassage.checked);
+  const songFinished = finished && !repeatPassage.checked;
+  rewardHit(stillDrawnHit, button, expected.bend ?? 0, result.milestone, cleared, songFinished);
   refreshPracticeStatus(result.milestone ? `${result.milestone.label}! ` : '');
+  recordPractice(songFinished);
+  if (songFinished) offerNextStep();
 }
 
 function selectPassage(index: number): void {
@@ -897,6 +940,7 @@ function selectPassage(index: number): void {
   controls.reset();
   clearActive();
   passageIndex = Math.max(0, Math.min(passages.length - 1, index));
+  songComplete.hidden = true;
   practiceCursor = passages[passageIndex]?.[0] ?? 0;
   playbackCursor = practiceCursor;
   activeNote = null;
@@ -933,6 +977,7 @@ function showView(next: AppView, pushHistory = true): void {
   }
   syncRoute(pushHistory);
   if (next === 'lesson') updateLessonHeading();
+  if (returningToCatalog) catalogue.refresh();
   document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
@@ -951,6 +996,7 @@ function syncRoute(pushHistory: boolean): void {
 function openSong(entry: SongbookEntry, pushHistory = true): void {
   selectedEntry = entry;
   practiceMode = false;
+  saveProgress(markOpened(progress, entry.id, Date.now()));
   runDemo(entry.track);
   showView('lesson', pushHistory);
 }
@@ -960,6 +1006,7 @@ const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
   quickPlay: entry => miniPlayer.toggle(entry),
   savedChanged: updateLessonHeading,
   savedFilterChanged: () => { if (view === 'catalog') syncRoute(true); },
+  progress: () => progress,
 });
 
 const miniPlayer = new MiniPlayer(must('#mini-player'), engine, {
@@ -996,9 +1043,15 @@ must('#practice-mode').addEventListener('click', () => {
   selectPassage(passageIndex);
   updateLessonHeading();
 });
+must('#practice-again').addEventListener('click', () => selectPassage(0));
+nextSongButton.addEventListener('click', () => {
+  const entry = catalogue.entries.find(item => item.id === nextSongButton.dataset.song);
+  if (entry) openSong(entry);
+});
 must('#listen-mode').addEventListener('click', () => {
   stopPlayback();
   practiceMode = false;
+  songComplete.hidden = true;
   resetCombo();
   renderTab();
   updateLessonHeading();
@@ -1011,6 +1064,7 @@ tab.addEventListener('click', event => {
   const target = (event.target as Element).closest<HTMLElement>('[data-note-index]');
   if (!target) return;
   stopPlayback();
+  songComplete.hidden = true;
   practiceCursor = Number(target.dataset.noteIndex);
   playbackCursor = practiceCursor;
   resetCombo();

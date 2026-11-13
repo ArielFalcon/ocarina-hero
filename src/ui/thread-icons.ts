@@ -37,6 +37,7 @@ const ICONS = [
   'pokeball',
   'previous',
   'remote',
+  'repeat',
   'reset',
   'ring',
   'rocket',

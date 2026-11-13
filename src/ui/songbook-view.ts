@@ -2,10 +2,14 @@ import { threadIcon, type ThreadIcon } from './thread-icons';
 import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta, universeLabel, type SongbookEntry, type SongCategory } from './songbook';
 import type { DemoTrack } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
+import { gameSongs } from './featured';
+import { completedIds, lastOpened, type Progress } from './progress';
 
 const SAVED_KEY = 'ocarina.saved.v1';
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
+/** From this width the filters rest open; below it they rest folded so the songs start on the first screen. */
+const ROOMY_LAYOUT = window.matchMedia('(min-width: 800px)');
 /** Range steps: 0 is every difficulty, then one step per tier. */
 const DIFFICULTY_STEPS = ['', ...DIFFICULTY_LEVELS] as const;
 const DIFFICULTY_NAMES: Record<DifficultyLevel | '', string> = { '': 'Any', easy: 'Easy', medium: 'Medium', hard: 'Hard', expert: 'Expert' };
@@ -101,6 +105,7 @@ export class SongbookView {
     quickPlay(entry: SongbookEntry): void;
     savedChanged(): void;
     savedFilterChanged(): void;
+    progress(): Progress;
   }) {
     this.entries = createSongbookEntries(tracks).sort((a, b) => a.title.localeCompare(b.title, 'en') || a.id.localeCompare(b.id, 'en'));
     this.search = root.querySelector('#song-search')!;
@@ -139,8 +144,9 @@ export class SongbookView {
       const value: unknown = JSON.parse(localStorage.getItem(SAVED_KEY) ?? '[]');
       if (Array.isArray(value)) this.saved = new Set(value.filter((id): id is string => typeof id === 'string'));
     } catch { this.sessionOnly = true; }
+    this.filters.open = ROOMY_LAYOUT.matches;
     this.search.addEventListener('input', () => {
-      this.filters.open = !this.search.value.trim();
+      this.filters.open = ROOMY_LAYOUT.matches && !this.search.value.trim();
       this.filterChanged();
     });
     // Pointer picks fold the panel; arrow keys only browse, so keyboard users fold with Enter or Space.
@@ -165,7 +171,7 @@ export class SongbookView {
         this.onlySaved = false;
         this.category = 'All';
         this.difficulty = '';
-        this.filters.open = true;
+        this.filters.open = ROOMY_LAYOUT.matches;
       });
       this.search.focus();
     });
@@ -198,6 +204,15 @@ export class SongbookView {
   isSaved(id: string): boolean { return this.saved.has(id); }
 
   get showingSaved(): boolean { return this.onlySaved; }
+
+  /** Redraw the list after progress changed elsewhere. */
+  refresh(): void { this.renderResults(); }
+
+  /** Browser storage rejected a write: the count line tells the user nothing will be kept. */
+  noteSessionOnly(): void {
+    this.sessionOnly = true;
+    this.renderResults();
+  }
 
   /** Enter or leave the Saved list from outside the Songbook; the other filters are kept. */
   showSaved(only: boolean): void {
@@ -312,19 +327,34 @@ export class SongbookView {
     this.count.textContent = `${result.length} ${result.length === 1 ? 'melody' : 'melodies'}${this.sessionOnly ? ' · Saves last for this session only' : ''}`;
     this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty;
     const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));
-    this.list.innerHTML = result.length ? result.map(entry => {
-      const title = escapeHtml(entry.title);
-      const letter = anchors.get(entry.id);
-      return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${this.saved.has(entry.id) ? 'Remove' : 'Save'} ${title}${this.saved.has(entry.id) ? ' from saved songs' : ''}" aria-pressed="${this.saved.has(entry.id)}">${threadIcon(this.saved.has(entry.id) ? 'heart-filled' : 'heart-empty')}</button></article>`;
-    }).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`;
+    const progress = this.callbacks.progress();
+    const completed = completedIds(progress);
+    const shelves = this.reset.hidden ? this.shelvesHtml(progress, completed) : '';
+    this.list.innerHTML = result.length ? shelves + result.map(entry => this.rowHtml(entry, completed, anchors.get(entry.id))).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`;
     if (focused) {
       const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];
       const key = focused.dataset.save ? 'save' : focused.dataset.quickPlay ? 'quickPlay' : 'song';
-      const replacement = buttons.find(button => button.dataset[key] === focusedId);
+      const sameSpot = buttons[focusedIndex]?.dataset[key] === focusedId ? buttons[focusedIndex] : undefined;
+      const replacement = sameSpot ?? buttons.find(button => button.dataset[key] === focusedId);
       (replacement ?? buttons[Math.min(focusedIndex, buttons.length - 1)] ?? this.reset).focus({ preventScroll: true });
     }
     for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
     this.renderRail([...anchors.values()], result.length);
+  }
+
+  private rowHtml(entry: SongbookEntry, completed: ReadonlySet<string>, letter?: string): string {
+    const title = escapeHtml(entry.title);
+    const saved = this.saved.has(entry.id);
+    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
+  }
+
+  /** Shown above the full list while no search or filter is active: the song to resume, then the in-game songs. */
+  private shelvesHtml(progress: Progress, completed: ReadonlySet<string>): string {
+    const resumeId = lastOpened(progress, new Set(this.entries.map(entry => entry.id)));
+    const resume = this.entries.filter(entry => entry.id === resumeId);
+    const title = (text: string) => `<h2 class="shelf-title eyebrow stitched-label">${text}</h2>`;
+    const shelf = (text: string, songs: readonly SongbookEntry[]) => songs.length ? title(text) + songs.map(song => this.rowHtml(song, completed)).join('') : '';
+    return shelf('Continue', resume) + shelf('Songs from the game', gameSongs(this.entries)) + title('All songs');
   }
 
   /** One stitched letter per initial present in the results; hidden when the list is short. */

@@ -4,7 +4,8 @@
  * Everything here is scoped to :root[data-theme='retro']; the tapestry theme is untouched.
  * Contract: docs/design-system-retro.md (local).
  */
-@font-face { font-family: 'Nunito'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/nunito-latin.woff2') format('woff2'); }
+/* Commissioner (OFL) fixed at full flare: the closest free match to FOT-Chiaro, the 1998 in-game text face. */
+@font-face { font-family: 'Commissioner'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/commissioner-latin.woff2') format('woff2'); }
 
 
 :root[data-theme='retro'] {
@@ -33,7 +34,7 @@
   --weave: linear-gradient(180deg, #ffffff0a, transparent 40%, #0000001f);
   --cloth: url('/art/retro/stone.svg');
   --cloth-size: 256px;
-  --story-font: 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
+  --story-font: 'Commissioner', 'Optima', 'Trebuchet MS', sans-serif;
   font-family: var(--story-font);
   font-weight: 600;
   background: var(--void);
@@ -155,7 +156,7 @@
 :root[data-theme='retro'] .shoulders { grid-template-columns: clamp(60px, 18vw, 76px); }
 @media (min-width: 800px) { :root[data-theme='retro'] .key .control-icon--button { width: 36px; height: 38px; } }
 
-/* Nunito runs wider than IM Fell: keep the bottom tabs on one line on phones. */
+/* Commissioner runs wider than IM Fell: keep the bottom tabs on one line on phones. */
 @media (max-width: 430px) { :root[data-theme='retro'] .app-nav a { font-size: 15px; gap: 5px; } :root[data-theme='retro'] .app-nav { gap: 4px; padding-inline: 8px; } }
 
 /* The rate select keeps its value clear of the chevron in the wider face. */

@@ -93,5 +93,7 @@ export function writeSongPages(outDir: string): void {
     writeFileSync(join(directory, 'index.html'), songPageHtml(indexHtml, songPageOf(song), siteUrl));
   }
   writeFileSync(join(outDir, 'sitemap.xml'), sitemapXml(siteUrl, songs.map(song => song.id)));
+  // The popularity Function only scores songs listed here.
+  writeFileSync(join(outDir, 'song-ids.json'), JSON.stringify(songs.map(song => song.id)));
   writeFileSync(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}sitemap.xml\n`);
 }

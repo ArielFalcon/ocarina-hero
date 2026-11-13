@@ -931,16 +931,21 @@ function showView(next: AppView, pushHistory = true): void {
   for (const name of ['catalog', 'lesson', 'workshop'] as const) {
     must(`#${name}-view`).hidden = next !== name;
   }
-  const route = next === 'lesson' && !current ? 'free' : next;
-  for (const link of document.querySelectorAll<HTMLElement>('.app-nav [data-view-link]')) {
-    if (link.dataset.viewLink === route || next === 'lesson' && current && link.dataset.viewLink === 'catalog') link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
-  }
-  const hash = next === 'lesson' && selectedEntry ? routeHash({ view: 'song', songId: selectedEntry.id }) : `#${route}`;
-  if (pushHistory && location.hash !== hash) history.pushState(null, '', hash);
+  syncRoute(pushHistory);
   if (next === 'lesson') updateLessonHeading();
   document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
+}
+
+/** Mark the current destination in the navigation and, optionally, record it in the history. */
+function syncRoute(pushHistory: boolean): void {
+  const route = view === 'lesson' && !current ? 'free' : view === 'catalog' && catalogue.showingSaved ? 'saved' : view;
+  for (const link of document.querySelectorAll<HTMLElement>('.app-nav [data-view-link]')) {
+    if (link.dataset.viewLink === route || view === 'lesson' && current && link.dataset.viewLink === 'catalog') link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  const hash = view === 'lesson' && selectedEntry ? routeHash({ view: 'song', songId: selectedEntry.id }) : `#${route}`;
+  if (pushHistory && location.hash !== hash) history.pushState(null, '', hash);
 }
 
 function openSong(entry: SongbookEntry, pushHistory = true): void {
@@ -954,6 +959,7 @@ const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
   select: entry => openSong(entry),
   quickPlay: entry => miniPlayer.toggle(entry),
   savedChanged: updateLessonHeading,
+  savedFilterChanged: () => { if (view === 'catalog') syncRoute(true); },
 });
 
 const miniPlayer = new MiniPlayer(must('#mini-player'), engine, {
@@ -1023,7 +1029,11 @@ document.addEventListener('click', event => {
   event.preventDefault();
   const next = link.dataset.viewLink ?? 'catalog';
   if (next === 'free') openFreePlay();
-  else if (['catalog', 'lesson', 'workshop'].includes(next)) showView(next as AppView);
+  else if (next === 'saved') { catalogue.showSaved(true); showView('catalog'); }
+  else if (['catalog', 'lesson', 'workshop'].includes(next)) {
+    if (next === 'catalog' && link.closest('.app-nav')) catalogue.showSaved(false);
+    showView(next as AppView);
+  }
 });
 
 function openFreePlay(): void {
@@ -1039,7 +1049,10 @@ function restoreView(): void {
     else if (entry === selectedEntry && current) showView('lesson', false);
     else openSong(entry, false);
   } else if (route.view === 'free') openFreePlay();
-  else showView(route.view, false);
+  else if (route.view === 'saved' || route.view === 'catalog') {
+    catalogue.showSaved(route.view === 'saved');
+    showView('catalog', false);
+  } else showView(route.view, false);
 }
 window.addEventListener('popstate', restoreView);
 window.addEventListener('visibilitychange', () => {

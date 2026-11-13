@@ -12,6 +12,7 @@ test('view routes parse, and unknown or empty hashes fall back to the songbook',
   assert.deepEqual(parseRoute('#workshop'), { view: 'workshop' });
   assert.deepEqual(parseRoute('#free'), { view: 'free' });
   assert.deepEqual(parseRoute('#lesson'), { view: 'lesson' });
+  assert.deepEqual(parseRoute('#saved'), { view: 'saved' });
   assert.deepEqual(parseRoute('#song/'), { view: 'catalog' });
   assert.deepEqual(parseRoute('#nope'), { view: 'catalog' });
   assert.deepEqual(parseRoute(''), { view: 'catalog' });

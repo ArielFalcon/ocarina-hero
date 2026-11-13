@@ -1,6 +1,6 @@
-/** Hash routes: `#catalog`, `#lesson`, `#free`, `#workshop`, and `#song/<id>` for a shareable song lesson. */
+/** Hash routes: `#catalog`, `#saved`, `#lesson`, `#free`, `#workshop`, and `#song/<id>` for a shareable song lesson. */
 export type Route =
-  | { view: 'catalog' | 'lesson' | 'free' | 'workshop' }
+  | { view: 'catalog' | 'saved' | 'lesson' | 'free' | 'workshop' }
   | { view: 'song'; songId: string };
 
 const SONG_PREFIX = 'song/';
@@ -11,7 +11,7 @@ export function parseRoute(hash: string): Route {
     const songId = decodeURIComponent(route.slice(SONG_PREFIX.length));
     return songId ? { view: 'song', songId } : { view: 'catalog' };
   }
-  return route === 'lesson' || route === 'free' || route === 'workshop' ? { view: route } : { view: 'catalog' };
+  return route === 'saved' || route === 'lesson' || route === 'free' || route === 'workshop' ? { view: route } : { view: 'catalog' };
 }
 
 export function routeHash(route: Route): string {

@@ -232,7 +232,8 @@ details[open] summary { color: var(--text); }
 .app-nav a { position: relative; display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 6px; color: var(--muted); }
 .app-nav .thread-icon { width: 20px; height: 20px; opacity: .75; }
 .app-nav a span:last-child { white-space: nowrap; }
-@media (max-width: 380px) { .app-nav { gap: 4px; padding-inline: 8px; } .app-nav a { gap: 5px; font-size: 16px; } .app-nav .thread-icon { width: 18px; height: 18px; } }
+@media (max-width: 520px) { .app-nav a { flex-direction: column; gap: 2px; padding: 5px 2px 4px; font-size: 14px; line-height: 1.2; } }
+@media (max-width: 380px) { .app-nav { gap: 4px; padding-inline: 8px; } }
 /* The current tab is a sunken cloth pocket with a stitched ochre edge. */
 /* The current tab is a selected slot: ochre cloth, cord ring and cream seam, like the category cards. */
 .app-nav a[aria-current='page'] { color: var(--text); background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); }

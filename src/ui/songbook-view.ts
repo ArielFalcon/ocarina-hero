@@ -100,6 +100,7 @@ export class SongbookView {
     select(entry: SongbookEntry): void;
     quickPlay(entry: SongbookEntry): void;
     savedChanged(): void;
+    savedFilterChanged(): void;
   }) {
     this.entries = createSongbookEntries(tracks).sort((a, b) => a.title.localeCompare(b.title, 'en') || a.id.localeCompare(b.id, 'en'));
     this.search = root.querySelector('#song-search')!;
@@ -158,21 +159,23 @@ export class SongbookView {
     });
     this.bindRail();
     this.reset.addEventListener('click', () => {
-      this.search.value = '';
-      this.universe = '';
-      this.onlySaved = false;
-      this.category = 'All';
-      this.difficulty = '';
-      this.filters.open = true;
-      this.filterChanged();
+      this.applyUserFilter(() => {
+        this.search.value = '';
+        this.universe = '';
+        this.onlySaved = false;
+        this.category = 'All';
+        this.difficulty = '';
+        this.filters.open = true;
+      });
       this.search.focus();
     });
     this.categories.addEventListener('click', event => {
       const button = (event.target as Element).closest<HTMLButtonElement>('[data-category], [data-saved-filter]');
       if (!button) return;
-      this.onlySaved = button.dataset.savedFilter !== undefined;
-      this.category = this.onlySaved ? 'All' : button.dataset.category as SongCategory;
-      this.filterChanged();
+      this.applyUserFilter(() => {
+        this.onlySaved = button.dataset.savedFilter !== undefined;
+        this.category = this.onlySaved ? 'All' : button.dataset.category as SongCategory;
+      });
       this.categoryFold.fold();
     });
     this.list.addEventListener('click', event => {
@@ -193,6 +196,24 @@ export class SongbookView {
   }
 
   isSaved(id: string): boolean { return this.saved.has(id); }
+
+  get showingSaved(): boolean { return this.onlySaved; }
+
+  /** Enter or leave the Saved list from outside the Songbook; the other filters are kept. */
+  showSaved(only: boolean): void {
+    if (this.onlySaved === only) return;
+    this.onlySaved = only;
+    if (only) this.category = 'All';
+    this.filterChanged();
+  }
+
+  /** Apply a filter change made inside the Songbook and report when it enters or leaves Saved. */
+  private applyUserFilter(change: () => void): void {
+    const wasSaved = this.onlySaved;
+    change();
+    this.filterChanged();
+    if (wasSaved !== this.onlySaved) this.callbacks.savedFilterChanged();
+  }
 
   /** Mark the song loaded in the quick player; its row button switches between play and pause. */
   setNowPlaying(id: string | null, playing: boolean): void {

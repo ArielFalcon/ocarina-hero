@@ -15,6 +15,7 @@ import { buttonIcon, modifierIcon } from './controller-icons';
 import { SourceImporter, type AudioImportMode, type AudioSourceAnalysis, type PreparedAudio } from './import';
 import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
+import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
 import { parseRoute, routeHash, shareUrl } from './route';
 import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
@@ -419,6 +420,32 @@ const controls = new Controls(
   applyBend,
   (button) => setActive(button, false),
 );
+
+const gamepads = new GamepadInput(controls);
+const gamepadStatus = must<HTMLParagraphElement>('#gamepad-status');
+let gamepadFrame: number | undefined;
+
+/** Poll while the lesson is on screen and a usable pad is connected; one last empty poll releases what was held. */
+function pollGamepads(): void {
+  gamepadFrame = undefined;
+  const playable = view === 'lesson' && !document.hidden;
+  const connected = gamepads.update(playable ? navigator.getGamepads?.() ?? [] : []);
+  if (playable && connected) gamepadFrame = requestAnimationFrame(pollGamepads);
+}
+
+function watchGamepads(): void {
+  if (gamepadFrame === undefined) pollGamepads();
+}
+
+window.addEventListener('gamepadconnected', event => {
+  gamepadStatus.textContent = event.gamepad.mapping === 'standard'
+    ? 'Controller connected: L, R, A, Y and X play; the D-pad and the sticks bend.'
+    : 'This browser does not recognise the layout of that controller.';
+  watchGamepads();
+});
+window.addEventListener('gamepaddisconnected', () => {
+  gamepadStatus.textContent = 'Controller disconnected.';
+});
 
 const touchCapable = 'ontouchstart' in window;
 if (touchCapable) {
@@ -977,6 +1004,7 @@ function showView(next: AppView, pushHistory = true): void {
   }
   syncRoute(pushHistory);
   if (next === 'lesson') updateLessonHeading();
+  if (next === 'lesson') watchGamepads();
   if (returningToCatalog) catalogue.refresh();
   document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
@@ -1111,6 +1139,7 @@ function restoreView(): void {
 window.addEventListener('popstate', restoreView);
 window.addEventListener('visibilitychange', () => {
   if (document.hidden) { stopPlayback(); miniPlayer.pause(); controls.reset(); clearActive(); editor.stopPreview(); }
+  else watchGamepads();
 });
 for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]')) {
   icon.innerHTML = threadIcon(icon.dataset.threadIcon as ThreadIcon);

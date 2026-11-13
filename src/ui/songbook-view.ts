@@ -326,11 +326,20 @@ export class SongbookView {
     this.markCurrentLetter(letter);
   }
 
-  /** The letter whose first row is the last one at or above the top of the visible list. */
+  /**
+   * The letter whose first row is the last one at or above the reading line. The line sits near the
+   * top of the visible list, but during the last screen of scroll it slides down to the bottom edge:
+   * the final rows can never scroll up to the top, so otherwise their letters would never be marked.
+   */
   private markCurrentLetter(forced?: string): void {
     let current = forced;
     if (!current) {
-      const top = this.scroller.getBoundingClientRect().top + 24;
+      const { scrollTop, scrollHeight, clientHeight } = this.scroller;
+      const maxScroll = Math.max(0, scrollHeight - clientHeight);
+      // Slide over the last screen of scroll, or the whole range when it is shorter than a screen.
+      const span = Math.min(clientHeight, maxScroll);
+      const progress = span > 0 ? Math.max(0, 1 - (maxScroll - scrollTop) / span) : 0;
+      const top = this.scroller.getBoundingClientRect().top + 24 + progress * Math.max(0, clientHeight - 48);
       for (const row of this.list.querySelectorAll<HTMLElement>('.song-row[data-letter]')) {
         if (row.getBoundingClientRect().top > top && current) break;
         current = row.dataset.letter;

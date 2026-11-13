@@ -336,3 +336,16 @@ test('isolated mode falls back to the periodicity detector and says why when the
   await silent.load(fakeFile('quiet.wav'), 'isolated');
   assert.match(messages.at(-1)!, /No melody found.*could not load \(offline\)/);
 });
+
+test('isolated mode falls back to the periodicity detector when the loaded model fails during inference', async () => {
+  let source: import('../src/ui/import').ImportedSource | undefined;
+  const importer = new SourceImporter({ onSource: x => { source = x; }, onStatus: () => {} }, {
+    createContext: () => ({ decodeAudioData: async () => oneSecond, close: async () => {} }),
+    basicPitch: async () => async () => { throw new Error('out of memory'); },
+    transcribe: () => ({ notes: [{ midi: 64, startBeat: 0.2, durationBeats: 0.3 }], tempoBpm: 60, quality: 0.5 }),
+  });
+  await importer.load(fakeFile('flute.wav'), 'isolated');
+  assert.deepEqual(source!.analysis!.engine, { id: 'isolated-periodicity' });
+  assert.deepEqual(source!.melody.map(note => note.midi), [64]);
+  assert.match(source!.analysis!.warnings[0]!, /out of memory/);
+});

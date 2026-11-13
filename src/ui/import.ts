@@ -6,18 +6,18 @@ import { extractMelody } from '../core/midi-import';
 import { analyzeModelPitchTrack, parseModelPitchTrack, type SourceAnalysis } from '../core/melody-analysis';
 import type { MelodyNote } from '../core/project';
 import { transcribeAudio, type Transcription } from '../core/transcribe';
-import { transcribeWithBasicPitch, type BasicPitchModel } from '../core/basic-pitch';
+import { transcribeWithBasicPitch, type BasicPitchModel, type BasicPitchTranscription } from '../core/basic-pitch';
 import { BASIC_PITCH_MODEL_SHA256, loadBrowserBasicPitch } from '../audio/basic-pitch-model';
 
 /** Identifies the Basic Pitch decoding rules in src/core/melody-decoder.ts; change it when they change. */
-export const BASIC_PITCH_DECODER = 'basic-pitch-viterbi-v1';
+export const BASIC_PITCH_DECODER = 'basic-pitch-viterbi-v2';
 
 export type AudioImportMode = 'isolated' | 'main-melody';
 export interface PreparedAudio { readonly file: File; readonly buffer: AudioBuffer }
 export interface IsolatedAnalysis {
   sourceWindow?: SourceWindow;
   schemaVersion: 1;
-  /** `basic-pitch` runs in the browser; `isolated-periodicity` is the fallback detector when the model cannot load. */
+  /** `basic-pitch` runs in the browser; `isolated-periodicity` is the fallback detector when the model cannot load or run. */
   engine: { id: 'basic-pitch'; modelSha256: string; decoder: string } | { id: 'isolated-periodicity' };
   sampleRate: number;
   durationSeconds: number;
@@ -148,21 +148,22 @@ export class SourceImporter {
       let analysis: AudioSourceAnalysis;
       if (mode === 'isolated') {
         const common = { schemaVersion: 1 as const, sampleRate: buffer.sampleRate, durationSeconds: duration, tempoBpm: 60 as const, contourAvailable: false as const };
-        let model: BasicPitchModel | undefined;
-        let unavailable = '';
-        try { model = await (this.dependencies.basicPitch ?? loadBrowserBasicPitch)(); }
-        catch (error) { unavailable = error instanceof Error ? error.message : 'unknown error'; }
-        if (!current()) return;
-        if (model) {
-          const result = await transcribeWithBasicPitch(samples, buffer.sampleRate, model);
+        let result: BasicPitchTranscription | undefined;
+        let modelFailure = '';
+        try {
+          const model = await (this.dependencies.basicPitch ?? loadBrowserBasicPitch)();
           if (!current()) return;
+          result = await transcribeWithBasicPitch(samples, buffer.sampleRate, model);
+        } catch (error) { modelFailure = error instanceof Error ? error.message : 'unknown error'; }
+        if (!current()) return;
+        if (result) {
           if (!result.notes.length) { status('No melody found.'); return; }
           analysis = { ...common, engine: { id: 'basic-pitch', modelSha256: BASIC_PITCH_MODEL_SHA256, decoder: BASIC_PITCH_DECODER }, notes: result.notes.map(note => ({ ...note })), voicedFrameFraction: result.voicedFrameFraction, warnings: [] };
         } else {
           // The periodicity detector reads only clear single-instrument recordings; say why it was used.
-          const result = (this.dependencies.transcribe ?? transcribeAudio)(samples, buffer.sampleRate);
-          if (!result?.notes.length) { status(`No melody found. The melody model could not load (${unavailable}), so the basic detector was used.`); return; }
-          analysis = { ...common, engine: { id: 'isolated-periodicity' }, notes: result.notes.map(note => ({ ...note })), voicedFrameFraction: result.quality, warnings: [`Melody model unavailable (${unavailable}); used the basic detector.`, 'Continuous reattacks may be unresolved.'] };
+          const fallback = (this.dependencies.transcribe ?? transcribeAudio)(samples, buffer.sampleRate);
+          if (!fallback?.notes.length) { status(`No melody found. The melody model could not load (${modelFailure}), so the basic detector was used.`); return; }
+          analysis = { ...common, engine: { id: 'isolated-periodicity' }, notes: fallback.notes.map(note => ({ ...note })), voicedFrameFraction: fallback.quality, warnings: [`Melody model unavailable (${modelFailure}); used the basic detector.`, 'Continuous reattacks may be unresolved.'] };
         }
       } else {
         try {

@@ -6,19 +6,24 @@
  * - phoenix: MedleyDB Phoenix_ScotchMorris flute and violin stems and the mix, in fifteen-second windows,
  *   against notes grouped from the annotated f0;
  * - reference: the 1998 isolated ocarina lullaby and the accompanied 2026 excerpt (out/transcription-benchmark);
+ * - delivery: the first fifteen seconds of each synthesized ocarina preview (out/catalogue/delivery) against the
+ *   arrangement it was rendered from, so notes and times are exact;
  * - synthetic: oscillator fixtures with exact events;
  * - control: silence, noise and clicks, which must produce no notes.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import type { Note } from '../src/core/ir';
+import { frequencyOf } from '../src/core/pitches';
+import { buildSchedule } from '../src/core/schedule';
 import { ensureExternalMedia } from './media-directory';
 import { alignReference, type Alignment, type TimedNote } from './melody-metrics';
 
 export const RATE = 44100;
 export interface BenchmarkItem {
   readonly id: string;
-  readonly group: 'corpus' | 'phoenix' | 'reference' | 'synthetic' | 'control';
+  readonly group: 'corpus' | 'phoenix' | 'reference' | 'delivery' | 'synthetic' | 'control';
   readonly samples: Float32Array;
   /** Reference notes, or undefined for controls that must stay silent. */
   readonly reference?: readonly TimedNote[];
@@ -104,6 +109,23 @@ function references(root: string): BenchmarkItem[] {
     .map(f => ({ id: f.id, group: 'reference' as const, samples: decode(join(root, f.file)), reference: f.reference, ...(f.span ? { span: f.span } : {}) }));
 }
 
+function delivery(media: string): BenchmarkItem[] {
+  const base = join(media, 'catalogue/delivery');
+  if (!existsSync(base)) return [];
+  return readdirSync(base).sort().flatMap(name => {
+    const audio = join(base, name, 'ocarina.wav');
+    const arrangement = join(base, name, 'arrangement.json');
+    if (!existsSync(audio) || !existsSync(arrangement)) return [];
+    const source = JSON.parse(readFileSync(arrangement, 'utf8')) as { tempoBpm: number; fixedNotes: Note[] };
+    const samples = decode(audio);
+    const seconds = samples.length / RATE;
+    const reference = buildSchedule(source.fixedNotes, source.tempoBpm).filter(note => note.startTime < seconds - 0.05).map(note => ({
+      start: note.startTime, duration: Math.min(note.duration, seconds - note.startTime),
+      midi: Math.round(69 + 12 * Math.log2(frequencyOf(note.pitch, note.bend) / 440)) }));
+    return [{ id: `delivery/${name}`, group: 'delivery' as const, samples, reference }];
+  });
+}
+
 /** Deterministic linear congruential noise in -1..1. */
 function noise(length: number, seed = 12345): Float32Array {
   const out = new Float32Array(length);
@@ -153,5 +175,5 @@ function controls(): BenchmarkItem[] {
 
 export function loadBenchmarkItems(root: string): BenchmarkItem[] {
   const media = ensureExternalMedia();
-  return [...corpus(media), ...phoenix(media), ...references(root), ...synthetic(), ...controls()];
+  return [...corpus(media), ...phoenix(media), ...references(root), ...delivery(media), ...synthetic(), ...controls()];
 }

@@ -110,7 +110,7 @@ try {
 } finally { rmSync(work, { recursive: true, force: true }); }
 
 const summary: Record<string, Record<string, Record<string, number>>> = {};
-for (const group of ['corpus', 'phoenix/flute', 'phoenix/violin', 'phoenix/mix', 'reference', 'synthetic', 'control']) {
+for (const group of ['corpus', 'phoenix/flute', 'phoenix/violin', 'phoenix/mix', 'reference', 'delivery', 'synthetic', 'control']) {
   const ids = Object.keys(rows).filter(id => id.startsWith(group));
   if (!ids.length) continue;
   summary[group] = {};

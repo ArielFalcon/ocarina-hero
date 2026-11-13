@@ -48,6 +48,12 @@ group('The Legend of Zelda', ['Games'], 'triforce', [
   ['catalogue-alttp-kakariko-village', 'Kakariko Village', { version: 'A Link to the Past', aliases: ['Koji Kondo'] }],
   ['catalogue-oot-bolero-of-fire', 'Bolero of Fire', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
   ['catalogue-oot-minuet-of-forest', 'Minuet of Forest', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
+  ['catalogue-oot-song-of-time', 'Song of Time', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Temple of Time'] }],
+  ['catalogue-oot-prelude-of-light', 'Prelude of Light', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
+  ['catalogue-oot-requiem-of-spirit', 'Requiem of Spirit', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
+  ['catalogue-oot-nocturne-of-shadow', 'Nocturne of Shadow', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
+  ['catalogue-mm-elegy-of-emptiness', 'Elegy of Emptiness', { version: 'Majora’s Mask', aliases: ['Koji Kondo'] }],
+  ['catalogue-ss-ballad-of-the-goddess', 'Ballad of the Goddess', { version: 'Skyward Sword', aliases: ['Hajime Wakai', 'Takeshi Hama'] }],
 ]);
 group('Pokémon', ['Games'], 'pokeball', [
   ['catalogue-pokemon-route1', 'Route 1'],
@@ -63,6 +69,7 @@ group('Undertale', ['Games'], 'heart', [
   ['catalogue-megalovania', 'Megalovania'],
   ['catalogue-once-upon-a-time', 'Once Upon a Time'],
   ['catalogue-fallen-down', 'Fallen Down'],
+  ['catalogue-undertale-hopes-and-dreams', 'Hopes and Dreams', { aliases: ['Toby Fox'] }],
 ]);
 group('Tetris', ['Games'], 'tetromino', [['catalogue-tetris', 'Music A', { aliases: ['Korobeiniki'] }]]);
 group('Sonic', ['Games'], 'ring', [
@@ -76,13 +83,20 @@ group('Super Mario', ['Games'], 'mushroom', [
   ['catalogue-smb-world-clear', 'Castle Clear', { version: 'Super Mario Bros.', aliases: ['World Clear'] }],
   ['catalogue-smb-game-over', 'Game Over', { version: 'Super Mario Bros.' }],
   ['catalogue-smw-overworld', 'Overworld', { version: 'Super Mario World', aliases: ['Koji Kondo'] }],
+  ['catalogue-sm64-select-a-file', 'Select a File', { version: 'Super Mario 64', aliases: ['Koji Kondo', 'File Select', 'SM64'] }],
 ]);
 group('Metroid', ['Games'], 'gamepad', [['catalogue-super-metroid-item', 'Item Acquisition', { version: 'Super Metroid' }]]);
 group('Donkey Kong Country', ['Games'], 'gamepad', [
   ['catalogue-dkc-bonus-win', 'Bonus Win', { aliases: ['Boss Defeated', 'Bonus Victory'] }],
 ]);
 group('Final Fantasy VII', ['Games'], 'meteor', [['catalogue-ff7-victory', 'Victory Fanfare', { aliases: ['FF7'] }]]);
-group('Chrono Trigger', ['Games'], 'clock', [['catalogue-wind-scene', 'Wind Scene']]);
+group('Chrono Trigger', ['Games'], 'clock', [
+  ['catalogue-wind-scene', 'Wind Scene'],
+  ['catalogue-chrono-trigger-main-theme', 'Main Theme', { aliases: ['Chrono Trigger Theme', 'Opening Theme', 'Yasunori Mitsuda'] }],
+]);
+group('Fire Emblem', ['Games'], 'gamepad', [
+  ['catalogue-fire-emblem-theme', 'Main Theme', { version: 'Series theme', aliases: ['Fire Emblem Theme', 'Yuka Tsujiyoko', 'Fire Emblem Main Theme'] }],
+]);
 group('Minecraft', ['Games'], 'grassBlock', [
   ['catalogue-wet-hands', 'Wet Hands', { aliases: ['C418'] }],
   ['catalogue-sweden', 'Sweden', { aliases: ['C418'] }],
@@ -185,6 +199,12 @@ group('Animaniacs', ['Film'], 'film', [
 group('Winnie the Pooh', ['Film'], 'film', [
   ['catalogue-winnie-the-pooh-theme', 'Winnie the Pooh', { version: 'Winnie the Pooh and the Honey Tree (1966)', aliases: ['Sherman Brothers', 'Richard M. Sherman', 'Robert B. Sherman', 'Winnie the Pooh Theme'] }],
 ]);
+group('Forrest Gump', ['Film'], 'film', [
+  ['catalogue-forrest-gump-feather-theme', 'Feather Theme', { version: 'Film (1994)', aliases: ['Alan Silvestri', 'Forrest Gump Theme', 'Forrest Gump Suite', 'Main Title'] }],
+]);
+group('Stranger Things', ['Film'], 'film', [
+  ['catalogue-stranger-things-arpeggio', 'Main Title', { version: 'TV series (2016)', aliases: ['Kyle Dixon', 'Michael Stein', 'Kyle Dixon & Michael Stein', 'Stranger Things Theme', 'Main Theme', 'Survive'] }],
+]);
 
 // Pop: no franchise, so the artist is the context shown with each song.
 group('Pop', ['Pop'], 'microphone', [
@@ -213,6 +233,17 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-lambada', 'Lambada', { artist: 'Kaoma', aliases: ['Chorando se foi', 'Llorando se fue', 'Los Kjarkas', 'Gonzalo Hermosa', 'Ulises Hermosa'], icon: 'waveform' }],
   ['catalogue-tide-is-high-chorus', 'The Tide Is High', { artist: 'Atomic Kitten', aliases: ['The Tide Is High (Get the Feeling)', 'Blondie', 'The Paragons', 'John Holt'], icon: 'waveform' }],
   ['catalogue-next-episode-riff', 'The Next Episode', { artist: 'Dr. Dre & Snoop Dogg', aliases: ['Dr. Dre feat. Snoop Dogg', 'Snoop Dogg', '2001', 'David McCallum', 'Next Episode'], icon: 'microphone' }],
+  ['catalogue-hips-dont-lie-horn-riff', 'Hips Don’t Lie', { artist: 'Shakira & Wyclef Jean', aliases: ['Hips Dont Lie', 'Shakira', 'Wyclef Jean'], icon: 'waveform' }],
+  ['catalogue-eleanor-rigby-verse', 'Eleanor Rigby', { artist: 'The Beatles', aliases: ['Revolver', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-yesterday-first-line', 'Yesterday', { artist: 'The Beatles', aliases: ['Help!', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-obladi-chorus', 'Ob-La-Di, Ob-La-Da', { artist: 'The Beatles', aliases: ['Obladi Oblada', 'White Album', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-yellow-submarine-verse', 'Yellow Submarine', { artist: 'The Beatles', aliases: ['Revolver', 'Lennon-McCartney', 'Ringo Starr'] }],
+  ['catalogue-come-as-you-are-riff', 'Come As You Are', { artist: 'Nirvana', aliases: ['Nevermind', 'Kurt Cobain'], icon: 'waveform' }],
+  ['catalogue-beat-it-bass-riff', 'Beat It', { artist: 'Michael Jackson', aliases: ['Thriller', 'Quincy Jones'], icon: 'waveform' }],
+  ['catalogue-dont-look-back-in-anger-chorus', 'Don’t Look Back in Anger', { artist: 'Oasis', aliases: ['Dont Look Back in Anger', 'Noel Gallagher', 'Morning Glory'] }],
+  ['catalogue-shape-of-you-marimba', 'Shape of You', { artist: 'Ed Sheeran', aliases: ['Divide', 'Marimba'], icon: 'cassette' }],
+  ['catalogue-we-are-the-champions-chorus', 'We Are the Champions', { artist: 'Queen', aliases: ['Freddie Mercury', 'News of the World'], icon: 'star' }],
+  ['catalogue-fix-you-chorus', 'Fix You', { artist: 'Coldplay', aliases: ['X&Y', 'Chris Martin'], icon: 'heart' }],
 ]);
 
 // Classics
@@ -234,6 +265,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-deck-the-halls', 'Deck the Halls', { artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'star' }],
   ['catalogue-pachelbel-canon', 'Canon in D', { artist: 'Johann Pachelbel', version: 'Canon per 3 Violini e Basso', aliases: ['Pachelbel', 'Pachelbel’s Canon', 'Kanon und Gigue', 'P. 37'] }],
   ['catalogue-chopin-nocturne-op9-no2-opening', 'Nocturne in E-flat major', { artist: 'Frédéric Chopin', version: 'Op. 9 No. 2', aliases: ['Chopin', 'Nocturne Op. 9 No. 2', 'Nocturne No. 2', 'Nocturne in Eb'], icon: 'moon' }],
+  ['catalogue-air-on-the-g-string', 'Air on the G String', { artist: 'Johann Sebastian Bach', version: 'Orchestral Suite No. 3, BWV 1068', aliases: ['Bach', 'Air', 'BWV 1068', 'Aria', 'Suite No. 3 in D major'] }],
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
 ]);
 

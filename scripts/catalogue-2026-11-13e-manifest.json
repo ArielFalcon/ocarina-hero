@@ -1,0 +1,2089 @@
+[
+  {
+    "id": "hips-dont-lie-horn-riff",
+    "title": "Hips Don't Lie",
+    "category": "pop",
+    "hook": "Intro horn riff, four bars and the held tail: C#-C-A#-F# | F#-G#-A#-F# | C-A#-G#-F | F-F#-G#-F | A#-G#-F#-C | A#-G#-A# (held). Instrumental, no lyric.",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/latin/sources/hips-dont-lie-horn-riff-fm-track7-explicit.mid",
+      "page": "https://freemidi.org/download3-8297-hips-dont-lie-shakira",
+      "url": "https://freemidi.org/getter-8297",
+      "sha256": "37edbb9005cf38f82031f16b13448542a2fbc9cb9b880d70ce9c8bd8dd0470ee"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "hips-fm track 7 explicit raw indices (riff = the 23 notes of velocity 0.787 in the window) compared event by event with the Hooktheory intro transcription (id yvgPBBdEoYq, B-flat minor, 100 BPM): all 23 pitches equal (shift 0), onsets equal in beats; releases differ because the MIDI plays the riff staccato (about 0.1 beat) while Hooktheory writes full values. musicalnexus mn-hips agrees on 23/23 at +11 on explicit indices.",
+      "urls": [
+        "https://freemidi.org/getter-8297",
+        "https://www.hooktheory.com/v1/songs/public/yvgPBBdEoYq?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/shakira/hips-dont-lie-ft-wyclef-jean",
+        "https://musicalnexus.net/songs/1357/download/midi"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/latin/sources/hips-dont-lie-horn-riff-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "oot-song-of-time",
+    "title": "Song of Time",
+    "category": "gaming",
+    "hook": "First complete statement: A-D-F-A-D-F (the in-game ocarina song), then A-C-B-G-F-G-A-D-C-E and the long closing D",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/tot-vg1-time_bgm.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/time_bgm.mid",
+      "sha256": "6e30d4a05447f7a6fd9d6b383d47266e74af3187803933e1e54a36692435c905"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "two-MIDI exact pitch/onset comparison, three further sequences, and decompiled game note table for the first six notes",
+      "summary": "vg1 time_bgm.mid track 1 events 0-16 (120 BPM, quarter beats) vs vg3 Temple_of_Time.mid track 0 events 0-16 (100 BPM, -24): 17 pitches and metrical attacks identical. Third sources (pitches asserted, onsets within the stated tolerance): vg2 upper-octave notes (max 0 beat), bitmidi flute (0.060547), bitmidi piano (0.019531), bitmidi piano top voice (0.017578). zeldaret/oot 14759ab sOcarinaSongNotes[OCARINA_SONG_TIME] decodes A4 D4 F4 A4 D4 F4 (+12 = MIDI A5 D5 F5 ...) at 32/66/33/32/65/99 frames; attacks within one frame at 32.5 frames per beat. The statement boundary: the in-game song is the first six notes; events 6-16 rest on the MIDIs.",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/time_bgm.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/Temple_of_Time.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/temple.mid",
+        "https://bitmidi.com/uploads/112984.mid",
+        "https://bitmidi.com/uploads/101407.mid",
+        "https://bitmidi.com/uploads/101409.mid",
+        "https://github.com/zeldaret/oot/blob/14759abf9abb4295de142cdc1452998630ea70fb/src/audio/game/general.c"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/tot-vg3-Temple_of_Time.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "pitchShift": 24
+    }
+  },
+  {
+    "id": "oot-prelude-of-light",
+    "title": "Prelude of Light",
+    "category": "gaming",
+    "hook": "The complete six-note warp song D-A-D-A-B-D, closing on a held D",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/prel-vg2-LoZOoT_-_Prelude_of_Light_Piano_Only_-_By_DaDude.mid",
+      "page": "https://www.vgmusic.com/music/other/miscellaneous/piano/",
+      "url": "https://www.vgmusic.com/music/other/miscellaneous/piano/LoZOoT_-_Prelude_of_Light_Piano_Only_-_By_DaDude.mid",
+      "sha256": "e362c87c806fff82ca9753608417092b042898ab6f3f98018107eeefc85b17ab"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "two-MIDI pitch/onset comparison plus decompiled game note table for the whole song",
+      "summary": "DaDude piano track 0 events 0-5 (120 BPM, exact grid) vs VGMusic Prelude_Of_Light.mid track 5 (ocarina, program 79) events 0-5: 6 pitches equal, onsets within 0.029167 beat (performed jitter). zeldaret/oot 14759ab sOcarinaSongNotes[OCARINA_SONG_PRELUDE] decodes D5 A4 D5 A4 B4 D5 (+12 = MIDI D6 A5 D6 A5 B5 D6) at 15/46/15/15/15/60 frames (an eighth is 15 frames): attacks within one frame (max 1). bitmidi 101399 piano top voice agrees within 0.023438 beat.",
+      "urls": [
+        "https://www.vgmusic.com/music/other/miscellaneous/piano/LoZOoT_-_Prelude_of_Light_Piano_Only_-_By_DaDude.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/Prelude_Of_Light.mid",
+        "https://bitmidi.com/uploads/101399.mid",
+        "https://github.com/zeldaret/oot/blob/14759abf9abb4295de142cdc1452998630ea70fb/src/audio/game/general.c"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/prel-vg1-Prelude_Of_Light.mid",
+      "trackIndex": 5,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "oot-requiem-of-spirit",
+    "title": "Requiem of Spirit",
+    "category": "gaming",
+    "hook": "The complete six-note warp song D-F-D-A-F-D, closing on a held D",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/requ-vg2-OoTRoS.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/OoTRoS.mid",
+      "sha256": "37dc35f728ea005a3a33ad0dfc4c1d9e8db7b2bc5c373ce3ed9cb03159c8efff"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "two-MIDI exact pitch/onset comparison, two further sequences and decompiled game note table for the whole song",
+      "summary": "OoTRoS.mid track 1 events 0-5 (80 BPM, quarter beats) vs requiemspirit.mid track 5 events 0-5 (152 BPM, sixteenth ticks; scale 0.5): 6 pitches and metrical attacks identical. requiem_of_spiritseq.mid track 11 (a fifth lower, +7) identical; bitmidi 101400 piano top voice within 0.019531 beat. zeldaret/oot 14759ab sOcarinaSongNotes[OCARINA_SONG_REQUIEM] decodes D4 F4 D4 A4 F4 D4 (+12 = MIDI D5 F5 D5 A5 F5 D5) at 45/24/22/45/45/180 frames (quarter 45 = 80 BPM, the primary tempo): attacks within 1.5 frames (the tolerance is 2: the 23+1 and 22 frame eighths are performed, not quantized).",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/OoTRoS.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/requiemspirit.mid",
+        "https://www.vgmusic.com/music/console/nintendo/wii/requiem_of_spiritseq.mid",
+        "https://bitmidi.com/uploads/101400.mid",
+        "https://github.com/zeldaret/oot/blob/14759abf9abb4295de142cdc1452998630ea70fb/src/audio/game/general.c"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/requ-vg1-requiemspirit.mid",
+      "trackIndex": 5,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "oot-nocturne-of-shadow",
+    "title": "Nocturne of Shadow",
+    "category": "gaming",
+    "hook": "The complete seven-note warp song B-A-A-D-B-A-F, closing on a held F",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/noct-vg2-nocturneofshadow.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/nocturneofshadow.mid",
+      "sha256": "57153af6d6ee18dee6d8e15fad836f6f3f6858920cd9c95254c4aeac865ffb30"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "MIDI pitch/onset comparison with an independent piano file plus decompiled game note table for the whole song",
+      "summary": "nocturneofshadow.mid track 1 events 0-6 (80 BPM, exact grid) vs bitmidi 101396 piano top voice (events 0,4,5,9,10,11,12; -12): 7 pitches equal, onsets within 0.01953125 beat. zeldaret/oot 14759ab sOcarinaSongNotes[OCARINA_SONG_NOCTURNE] decodes B4 A4 A4 D4 B4 A4 F4 (+12 = MIDI B5 A5 A5 D5 B5 A5 F5) at 36/34/(3 rest)/18/18/18/18/144 frames (quarter 36, eighth 18): attacks within 1 frame. Z5NocturneOfShadow.mid track 7 has identical pitches and onsets (probably the same grid family).",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/nocturneofshadow.mid",
+        "https://bitmidi.com/uploads/101396.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/Z5NocturneOfShadow.mid",
+        "https://github.com/zeldaret/oot/blob/14759abf9abb4295de142cdc1452998630ea70fb/src/audio/game/general.c"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/noct-b1-bm-the-legend-of-zelda-ocarina-of-time-nocturne-of-shadow.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        4,
+        5,
+        9,
+        10,
+        11,
+        12
+      ],
+      "pitchShift": 12
+    }
+  },
+  {
+    "id": "mm-elegy-of-emptiness",
+    "title": "Elegy of Emptiness",
+    "category": "gaming",
+    "hook": "The complete seven-note ocarina song A-B-A-F-A-D-B (high D), closing on a held B",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/elegy-vg2-MMElegyComplete.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/MMElegyComplete.mid",
+      "sha256": "6d07abfbce7795304187d1582af97b7304b02bb0834fe8466f5cac56fecbd381"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "MIDI pitch/onset comparison with an independent piano file plus decompiled game note table for the whole song",
+      "summary": "MMElegyComplete.mid track 1 events 0-6 (88 BPM, exact grid) vs bitmidi 101333 piano top voice (events 0,3,6,7,10,11,12; -12): 7 pitches equal, onsets within 0.0234375 beat. zeldaret/mm 3be2e24 src/audio/code_8019AF00.c sOcarinaSongNotes[OCARINA_SONG_ELEGY] decodes A4 B4 A4 F4 A4 D5 B4 (the written pitches are the MIDI pitches: 69 71 69 65 69 74 71) at 85/44/43/21/21/43/85 frames (quarter 43, eighth 21): attacks within 1 frame at 43 frames per beat. Elegy_of_Emptiness.mid (a slower, humanized performance) follows the same grid after x2/3 within 0.1 beat.",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/MMElegyComplete.mid",
+        "https://bitmidi.com/uploads/101333.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/Elegy_of_Emptiness.mid",
+        "https://github.com/zeldaret/mm/blob/3be2e24123f5e71fd13f939ecc0f9d7f73252639/src/audio/code_8019AF00.c"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/elegy-b3-bm-the-legend-of-zelda-majoras-mask-elegy-of-emptiness.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        3,
+        6,
+        7,
+        10,
+        11,
+        12
+      ],
+      "pitchShift": -12
+    }
+  },
+  {
+    "id": "ss-ballad-of-the-goddess",
+    "title": "Ballad of the Goddess",
+    "category": "gaming",
+    "hook": "The whole eight-bar section: D-E-F-G, C-D, G-E, D, then G-E, D-C-D, G-E",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/ball-b2-bm-zelda-skyward-sword-ballad-of-the-goddess-transcribed-by-tnrea.mid",
+      "page": "https://bitmidi.com/zelda-skyward-sword-ballad-of-the-goddess-transcribed-by-tnrea-mid",
+      "url": "https://bitmidi.com/uploads/112989.mid",
+      "sha256": "384cff5c7611d34c97b31baa60e8b35b207bbe6e87be6bf730c5a52a4eca008f"
+    },
+    "trackIndex": 0,
+    "indices": [
+      22,
+      23,
+      24,
+      26,
+      29,
+      30,
+      33,
+      35,
+      36,
+      38,
+      40,
+      42,
+      44,
+      45,
+      47,
+      49
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "score-confirmed piano voice plus two independent transcriptions",
+      "summary": "bitmidi 112989 (TNREA piano, 132 BPM, 3/4) track 0 events 22,23,24,26,29,30,33,35,36,38,40,42,44,45,47,49 compared with a direct reading of the VGLeadSheets C lead sheet (Jer Roque, quarter = 130; section A bars 1-8, image inspected): 16 pitches, attacks and durations exact (onsets within 5.329070518200751e-15 beat). Hooktheory nintendo/ballad-of-the-goddess verse (D minor, 3/4, 128 BPM) events 0-15 resolve to the same 16 pitches, onsets and durations. The lead sheet header names the game (The Legend of Zelda: Skyward Sword).",
+      "urls": [
+        "https://bitmidi.com/uploads/112989.mid",
+        "https://www.vgleadsheets.com/view/the-legend-of-zelda-skyward-sword/ballad-of-the-goddess",
+        "https://www.hooktheory.com/theorytab/view/nintendo/ballad-of-the-goddess#verse"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/zelda/sources/ss-ballad-of-the-goddess-score-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "fire-emblem-theme",
+    "title": "Main Theme",
+    "category": "gaming",
+    "hook": "First 8-bar period of the Fire Emblem series theme: C F A A D D E F G F E, then C F A C(high) B-flat A D E F G G, ending on the G held four beats",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/fe-vg1-Fire_Emblem_Theme.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/gba/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/gba/Fire_Emblem_Theme.mid",
+      "sha256": "5f0f9dade3b5237b312b18690f88bf5e3cb4ce27990583e4cca586b655e175e1"
+    },
+    "trackIndex": 2,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "two-independent-sequences",
+      "summary": "VGMusic fe-vg1 \"Fire_Emblem_Theme.mid\" lead track 2 events 0-21 against VGMusic fe-vg3 \"FESS_Main_Theme.mid\" (Fire Emblem: The Sacred Stones arrangement, melody in E-flat) track 0 events 42-63: 22 pitches equal after one constant shift of -3 semitones and every onset equal in ticks/PPQ (both PPQ 192, 120 BPM). Releases differ (the Sacred Stones notes stop 1/8 beat early or hold 3 instead of 4 beats at the end). fe-vg4 (piano) carries the same grid and is treated as the same family as the primary. No printed score.",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/gba/Fire_Emblem_Theme.mid",
+        "https://www.vgmusic.com/music/console/nintendo/gba/FESS_Main_Theme.mid",
+        "https://www.vgmusic.com/music/other/miscellaneous/piano/FireEmblemTheme1_1.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/fe-vg3-FESS_Main_Theme.mid",
+      "trackIndex": 0,
+      "indices": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "pitchShift": -3
+    }
+  },
+  {
+    "id": "undertale-hopes-and-dreams",
+    "title": "Hopes and Dreams",
+    "category": "gaming",
+    "hook": "The 16-beat guitar riff cycle: F high, B-flat C B-flat F(low) B-flat C D, C B-flat F B-flat C E-flat D E-flat D C B-flat F, played once",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/uthd-vg1-Undertale_Hopes-and-Dreams.mid",
+      "page": "https://www.vgmusic.com/music/computer/microsoft/windows/",
+      "url": "https://www.vgmusic.com/music/computer/microsoft/windows/Undertale_Hopes-and-Dreams.mid",
+      "sha256": "0d6dad25ff579886736f89ad149d56d17a710f4b8db9125da6a7739854e40be2"
+    },
+    "trackIndex": 10,
+    "indices": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "sequence-and-human-transcription",
+      "summary": "VGMusic \"Undertale_Hopes-and-Dreams.mid\" (Dracula9AntiChapel) lead guitar track 10 events 7-26 against the Hooktheory \"Hopes and Dreams\" chorus (B-flat major): notes 20-39 (second pass) and notes 0-19 (first pass) both give the same 20 pitches and onsets on the 1-beat grid with zero deviation. The Hooktheory transcription is a human reading and is independent of the fan MIDI; both are fan transcriptions with no printed score.",
+      "urls": [
+        "https://www.vgmusic.com/music/computer/microsoft/windows/Undertale_Hopes-and-Dreams.mid",
+        "https://www.hooktheory.com/v1/songs/public/nLgawwbwboY?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/toby-fox/hopes-and-dreams#chorus"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/games/sources/undertale-hopes-and-dreams-hooktheory-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "chrono-trigger-main-theme",
+    "title": "Main Theme",
+    "category": "gaming",
+    "hook": "The Chrono Trigger opening theme first statement: pickup B, then E F-sharp G B F-sharp D, A B E A B B A G-sharp, ending on the E held five and a half beats (E minor)",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/ct-vg3-cttitle.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/snes/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/snes/cttitle.mid",
+      "sha256": "07d3a3ae1910a75146bf14a88209f8a1f30439a64a167ec10c190d843ea0aa7d"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "sequence-human-transcription-and-second-sequence",
+      "summary": "VGMusic \"cttitle.mid\" (Masashi Ito, \"Chrono Trigger / Opening Theme / Original by Yasunori Mitsuda\") saxophone events 0-15 against the Hooktheory \"Chrono Trigger - Main Theme\" verse restatement (notes 17-33, E minor): identical 16 pitches and onsets. bitmidi 24025 (piano, +12) statement 2 (events 31-46) also matches every pitch and onset; its statement 1 matches from the downbeat E and has a different pickup. Hooktheory notes 0-14 give the proposal's 15-note statement without pickup with identical pitches and onsets.",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/snes/cttitle.mid",
+        "https://www.hooktheory.com/v1/songs/public/ZbgOZWnamnY?fields=ID,xmlData,song,jsonData",
+        "https://bitmidi.com/uploads/24025.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/games/sources/chrono-trigger-main-theme-hooktheory-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "sm64-select-a-file",
+    "title": "Select a File",
+    "category": "gaming",
+    "hook": "The complete Select a File piano loop: G D D A D B D B C D | G D D A D B, then the same figures over a held D, ending on G A G A G B G",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/sm64file-vg1-m64file.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/m64file.mid",
+      "sha256": "1f13fdedc232021044c332e23abf7590bfa34475153b23169507d2d5e44173aa"
+    },
+    "trackIndex": 3,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "phraseStarts": [
+      0,
+      16,
+      32,
+      38,
+      44,
+      50
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "five-sequences-agree",
+      "summary": "VGMusic m64file.mid (Carey Jensen) track 3 events 0-55 against SM64-FileSelect.mid (DoctorJ) track 1: 56 pitches and onsets identical. sm64begin.mid (192 BPM) matches all pitches and onsets except rows 6-15 and 22-31, which start 0.5 beat earlier; SelectFile.mid (210 BPM) and fileselectbcr.mid (110 BPM, melody on odd events, beat doubled) match with a -1 semitone key. No printed score.",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/m64file.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/SM64-FileSelect.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/sm64begin.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/SelectFile.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/fileselectbcr.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-round3/games/midi/sm64file-vg3-SM64-FileSelect.mid",
+      "trackIndex": 1,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "forrest-gump-feather-theme",
+    "title": "Feather Theme",
+    "category": "film-tv",
+    "hook": "Feather theme statement in C: E F G G E G C G E F G A A F A | F G A A F A D B G E F G G C G | A B C C A C A C A | F G A A F A | F G A A F D E F D, closing on the tonic C (55 notes, Hooktheory 54 plus the tonic confirmed by the free score and the MIDI)",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/screen/sources/forrest-gump-feather-theme-quantised.mid",
+      "page": "https://freemidi.org/download3-1514-forrest-gump-movie-themes",
+      "url": "https://freemidi.org/getter-1514",
+      "sha256": "3271358c1cd3dcab3c600e926584e16334a5000191f81cb26ab78624921dac71"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "phraseStarts": [
+      0,
+      21,
+      30,
+      45
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-score-and-midi",
+      "summary": "forrest-fm.mid piano right events 0-54, onsets and releases snapped to the half-beat grid in a derivative (maximum onset move 0.125 beat), compared event by event with the public Hooktheory chorus transcription (hash WeglXYWJgrY, 54 notes): all 54 pitches equal and every snapped onset identical. The free Musicomedia flute score (video frame at 30 s) gives the same 55 pitches in order and decides the cadence: the theme closes on the tonic C4, not on the D4 where the Hooktheory tab stops. The score straightens the rhythm of bars 1 and 3 (E, G and the F before the held A placed a half beat later than the MIDI and the Hooktheory tab); the two agreeing sources are adopted, see discrepancies.",
+      "urls": [
+        "https://freemidi.org/getter-1514",
+        "https://www.hooktheory.com/v1/songs/public/WeglXYWJgrY?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/alan-silvestri/forest-gump-theme#chorus",
+        "https://www.youtube.com/watch?v=08d6s3nPW4Q"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/screen/sources/forrest-gump-feather-theme-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "pitchShift": 19,
+      "absentIndices": [
+        54
+      ]
+    }
+  },
+  {
+    "id": "stranger-things-arpeggio",
+    "title": "Main Title",
+    "category": "film-tv",
+    "hook": "Synth arpeggio of the main title in C: four cycles of C E G B C B G E in sixteenth notes (32 attacks, two bars of 4/4, one Hooktheory chord segment), instrumental",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/screen/sources/stranger-things-arpeggio-extract.mid",
+      "page": "https://freemidi.org/download3-28746-stranger-things-theme-tv-themes",
+      "url": "https://freemidi.org/getter-28746",
+      "sha256": "9dafb1aca29a04c7bc7d5dd07a6aab48c4d7bb0a9dc1accf6dbe298b966fb889"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "stranger-fm.mid track 8 (prog 81) events 0-31 compared event by event with the public Hooktheory instrumental tab (hash DpgvrwyRgad, notes 0-31 of 240 arpeggio notes): all 32 pitches equal (C E G B C B G E x 4) and every onset identical at sixteenth-note spacing; the tab and the lead track both continue the cycle unchanged. The tab chord segment (8 beats) and four cycles coincide.",
+      "urls": [
+        "https://freemidi.org/getter-28746",
+        "https://www.hooktheory.com/v1/songs/public/DpgvrwyRgad?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/kyle-dixon-and-michael-stein/stranger-things#instrumental",
+        "https://en.wikipedia.org/wiki/Stranger_Things"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/screen/sources/stranger-things-arpeggio-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "eleanor-rigby-verse",
+    "title": "Eleanor Rigby",
+    "category": "pop",
+    "hook": "First verse couplet of Eleanor Rigby in E minor: the A-A-B-G-E-G opening, the rising B-D then C-sharp/B/C-sharp/B/A/B/A descent to the held A, then (after the rest) the answering G-A-B-C-B",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/beatles-eleanor-bm3.mid",
+      "page": "https://bitmidi.com/eleanor-rigby-3-mid",
+      "url": "https://bitmidi.com/uploads/42981.mid",
+      "sha256": "d6ea8aed12c211cdbc8068fdf0c6bfe7c03b2375250694fe8286174534ff6a64"
+    },
+    "trackIndex": 0,
+    "indices": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+    ],
+    "phraseStarts": [
+      0,
+      5,
+      18
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "bitmidi 42981 (track 0 events 57-79, 384 PPQ, 138 BPM) compared event by event with the public Hooktheory verse of Eleanor Rigby (hash nLgajBaGxYp, E minor, 136 BPM, 23 notes after skipping rests): all 23 pitches and onsets identical. bitmidi 42982 (Melody track 2 events 18-40) and freemidi 1101 (track 20 events 0-22) carry the same 23 pitches a octave higher; bitmidi 42982 delays only the final B by 0.5 beat.",
+      "urls": [
+        "https://bitmidi.com/uploads/42981.mid",
+        "https://www.hooktheory.com/v1/songs/public/nLgajBaGxYp?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/the-beatles/eleanor-rigby#verse",
+        "https://bitmidi.com/uploads/42982.mid",
+        "https://freemidi.org/getter-1101"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/eleanor-rigby-verse-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "yesterday-first-line",
+    "title": "Yesterday",
+    "category": "pop",
+    "hook": "First sentence of the Yesterday verse: the G-F-F call with its long held F, the rising A-B-C-sharp-D-E-F answer that falls back E-D to the held D, then the second line D-D-C-B-flat-A-G that turns up to B-flat and settles on A-A",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/beatles-yesterday-bm2.mid",
+      "page": "https://bitmidi.com/beatles-yesterday-2-k-mid",
+      "url": "https://bitmidi.com/uploads/16448.mid",
+      "sha256": "3c858e742363bf419001cb16c3152ac2ab3fdf2d1416d41eb2b849dcd988126f"
+    },
+    "trackIndex": 4,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "bitmidi 16448 (track 4 events 0-20, 384 PPQ, 90 BPM, in a key 7 semitones above the written F) compared event by event with the public Hooktheory verse of Yesterday (hash kygzLJyboKB, F major, 98 BPM): all 21 pitches equal after one 7-semitone shift and every onset within 0.006 beat. Hooktheory adds one extra repeated G after the 18th note that all three MIDI files omit; it is not paired. bitmidi 100895 (track 1) and freemidi 1202 (track 1) carry the same 21 pitches in other keys.",
+      "urls": [
+        "https://bitmidi.com/uploads/16448.mid",
+        "https://www.hooktheory.com/v1/songs/public/kygzLJyboKB?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/the-beatles/yesterday#verse",
+        "https://bitmidi.com/uploads/100895.mid",
+        "https://freemidi.org/getter-1202"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/yesterday-first-line-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "pitchShift": 7
+    }
+  },
+  {
+    "id": "obladi-chorus",
+    "title": "Ob-La-Di, Ob-La-Da",
+    "category": "pop",
+    "hook": "Chorus line of Ob-La-Di, Ob-La-Da in the original key family: three rising B-flat/D/F figures (the third held), the leap up to the high B-flat, the F-E-flat-D-E-flat-D-C stepwise descent and the closing B-flat pair",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/beatles-obladi-bm1.mid",
+      "page": "https://bitmidi.com/the-beatles-obladi-oblada-k-mid",
+      "url": "https://bitmidi.com/uploads/100845.mid",
+      "sha256": "fdc89b71ef99df5747c8f9439acab60508f82954d42d3f5118bae0da0925e631"
+    },
+    "trackIndex": 0,
+    "indices": [
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "bitmidi 100845 (track 0 events 120-137, 384 PPQ, 117 BPM, F major) compared event by event with the second chorus statement of the public Hooktheory chorus (hash jDgXvVEqoKl, B-flat major, 114 BPM): all 18 pitches equal after one 7-semitone shift and 16 onsets exact; the closing two attacks sit 0.5 beat later in the MIDI (documented). freemidi 25891 (track 1, a different sequence) agrees with the primary on the first 17 pitches and onsets exactly. The Hooktheory first chorus statement lacks the first rising figure, so only its second statement is used.",
+      "urls": [
+        "https://bitmidi.com/uploads/100845.mid",
+        "https://www.hooktheory.com/v1/songs/public/jDgXvVEqoKl?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/the-beatles/ob-la-di-ob-la-da#chorus",
+        "https://freemidi.org/getter-25891",
+        "https://freemidi.org/getter-1179"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/obladi-chorus-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pitchShift": 7
+    }
+  },
+  {
+    "id": "come-as-you-are-riff",
+    "title": "Come As You Are",
+    "category": "pop",
+    "hook": "Main riff of Come As You Are: one 8-beat guitar cycle in E minor, E G E G E E | D# D A D D A D D# (14 attacks, five pitches), the loop that repeats under the whole intro and verse",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/come-as-you-are-hooktheory-transcription.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/nirvana/come-as-you-are#intro",
+      "url": "https://www.hooktheory.com/v1/songs/public/d_gw__JdMgG?fields=ID,xmlData,song,jsonData",
+      "sha256": "f99162327f5860b5d0fadb17002844ef218da24fe3e504e91a5ea19b8fcf7089"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "Hooktheory \"Intro\" of Come As You Are (synced to the official Nirvana video vabnZ9-ex7o, yt-dlp metadata retained) notes 0-13 compared event by event with freemidi fm2 track 3 (clean guitar) events 3-16: all 14 pitches equal (same key), onsets within 0.05 beat (exact). fm2 sustains its notes (up to 250 ms over the next attack), so the tab durations are used; the power-chord track of bm1/fm1 agrees on roots and rhythm. No listening review.",
+      "urls": [
+        "https://www.hooktheory.com/v1/songs/public/d_gw__JdMgG?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/nirvana/come-as-you-are#intro",
+        "https://freemidi.org/download3-26753-come-as-you-are-nirvana",
+        "https://bitmidi.com/uploads/25132.mid",
+        "https://freemidi.org/download3-5409-come-as-you-are-nirvana",
+        "https://www.youtube.com/watch?v=vabnZ9-ex7o"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/nirvana-caya-fm2.mid",
+      "trackIndex": 3,
+      "indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "beat-it-bass-riff",
+    "title": "Beat It",
+    "category": "pop",
+    "hook": "Opening riff of Beat It: D#2 F#2 A#2 (rise), F#3 (octave-plus leap), D#3 F3 D#3 C#3 C#3 (stepwise fall), then the second statement without its last C#3 (17 attacks, two 8-beat statements, D# minor)",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/mj-beatit-fm1.mid",
+      "page": "https://freemidi.org/download3-5168-beat-it-michael-jackson",
+      "url": "https://freemidi.org/getter-5168",
+      "sha256": "89033ab19b0a227c7bf491353dcf5e18d64a6ad3401166e53f06f8b0fa2b530a"
+    },
+    "trackIndex": 11,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "freemidi fm1 track 11 events 0-16 compared event by event with the Hooktheory \"Instrumental\" riff of Beat It (synced to the official Michael Jackson video oRdxUFDoQe0): all 17 pitches equal (no shift), onsets within 0.05 beat. bm2 (E minor, -11 semitones) and fm3 agree on all pitches with performance timing. Span 15 of 16 semitones.",
+      "urls": [
+        "https://freemidi.org/download3-5168-beat-it-michael-jackson",
+        "https://www.hooktheory.com/v1/songs/public/aoGVlEEXAxe?fields=ID,xmlData,song,jsonData",
+        "https://www.youtube.com/watch?v=oRdxUFDoQe0",
+        "https://bitmidi.com/uploads/62025.mid",
+        "https://freemidi.org/download3-26467-michael-jackson-beat-it-michael-jackson"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/beat-it-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "yellow-submarine-verse",
+    "title": "Yellow Submarine",
+    "category": "pop",
+    "hook": "Verse couplet of Yellow Submarine: the A-sharp-B-C-sharp rise with its held C-sharp, A-sharp-G-sharp-A-sharp falling to the held F-sharp, then the second line A-sharp-A-sharp-G-sharp-F-sharp down to the low D-sharp pair and back up to A-sharp-A-sharp-G-sharp",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/beatles-ys-bm1.mid",
+      "page": "https://bitmidi.com/the-beatles-yellow-submarine-k-mid",
+      "url": "https://bitmidi.com/uploads/100893.mid",
+      "sha256": "c1977a31759775465b3adbac0e19d51eb010d7509f7a4a5010bb82e8bf65262a"
+    },
+    "trackIndex": 12,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "bitmidi 100893 (track 12 events 0-15, 384 PPQ, 108 BPM, swung eighths) compared event by event with the first cycle of the public Hooktheory verse of Yellow Submarine (hash nvgyvXErZxk, F-sharp major, 109 BPM, 16 notes): all 16 pitches equal after one 12-semitone shift; onsets on the beat are exact and the off-beat eighths sit 1/6 beat later in the MIDI (triplet swing against Hooktheory straight eighths with a declared 0.64 swing factor). freemidi 1111 (track 3 events 0-15, a semitone higher, lighter swing) agrees on every pitch with onsets within 0.12 beat.",
+      "urls": [
+        "https://bitmidi.com/uploads/100893.mid",
+        "https://www.hooktheory.com/v1/songs/public/nvgyvXErZxk?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/the-beatles/yellow-submarine#verse",
+        "https://freemidi.org/getter-1111"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/yellow-submarine-verse-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "pitchShift": 12
+    }
+  },
+  {
+    "id": "dont-look-back-in-anger-chorus",
+    "title": "Don’t Look Back in Anger",
+    "category": "pop",
+    "hook": "Closing line of the Don't Look Back in Anger chorus: G3 pickup, then G4 F4 G4 E4 (held), E4 A4 E4 G4 E4 D4 C4 and the C4 D4 E4 C4 tag (16 attacks, C major, resolving on the held tonic)",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/dont-look-back-in-anger-hooktheory-transcription.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/oasis/dont-look-back-in-anger#chorus",
+      "url": "https://www.hooktheory.com/v1/songs/public/vgPXlrMvAgY?fields=ID,xmlData,song,jsonData",
+      "sha256": "05c9fab9130c7586d981cbd7f82e30bbf5598ae4b1c31fb48357c124e12cc9c8"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "phraseStarts": [
+      0,
+      5
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "Hooktheory \"Chorus\" notes 19-34 of Don't Look Back in Anger (synced to the official Oasis video cmpRLQZkTb8) compared event by event with bitmidi 40597 (bm2) track 7 events 128-139 and 141-143: 15 pitches equal (no shift), onsets within 0.1 beat except three rows documented about a quarter beat early in the MIDI; bm2 event 140 is B3 where the tab and the bm1 alto sax have C4 (the row is listed as absent). The bm1 sax equals the tab pitch for pitch on rows 1-15. No listening review.",
+      "urls": [
+        "https://www.hooktheory.com/v1/songs/public/vgPXlrMvAgY?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/oasis/dont-look-back-in-anger#chorus",
+        "https://bitmidi.com/uploads/40597.mid",
+        "https://bitmidi.com/uploads/81652.mid",
+        "https://www.youtube.com/watch?v=cmpRLQZkTb8"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/oasis-dlbia-bm2.mid",
+      "trackIndex": 7,
+      "indices": [
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143
+      ],
+      "pitchShift": 0,
+      "absentIndices": [
+        12
+      ]
+    }
+  },
+  {
+    "id": "shape-of-you-marimba",
+    "title": "Shape of You",
+    "category": "pop",
+    "hook": "Marimba riff of Shape of You: C#4 E4 C#4 | C#4 E4 C#4 | C#4 E4 C#4 D#4 C#4 B3, the two-bar loop of the intro (12 attacks, C# minor, four pitches)",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/shape-of-you-hooktheory-transcription.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/ed-sheeran/shape-of-you#intro",
+      "url": "https://www.hooktheory.com/v1/songs/public/Dpgvp_KABoa?fields=ID,xmlData,song,jsonData",
+      "sha256": "eb2c8cd5a7e5921e17149461ea04767289ad2a165b0248df77ba703207f1635f"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "Hooktheory \"Intro\" of Shape of You (marimba loop, synced to the official Ed Sheeran video JGwWNGJdvx8) notes 0-11 compared event by event with Musical Nexus 7405 track 1 upper voice (odd events 1-23): all 12 pitches and onsets equal (tolerance 0.02 beat). Musical Nexus 292 (double-time grid, beats halved) agrees. Both MIDI files are chordal; the tab confirms which voice is the riff. No listening review.",
+      "urls": [
+        "https://www.hooktheory.com/v1/songs/public/Dpgvp_KABoa?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/ed-sheeran/shape-of-you#intro",
+        "https://musicalnexus.net/songs/7405",
+        "https://musicalnexus.net/songs/292",
+        "https://www.youtube.com/watch?v=JGwWNGJdvx8"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/sheeran-shape-mn7405.mid",
+      "trackIndex": 1,
+      "indices": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        19,
+        21,
+        23
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "we-are-the-champions-chorus",
+    "title": "We Are the Champions",
+    "category": "pop",
+    "hook": "Chorus of We Are the Champions: the full 41-attack melody over its four phrases in F major (F E F E C A D A | C F G A C A D E D | D C D C Bb Bb A Bb A G A F Bb A F Bb Ab F Bb Ab F | Eb C F), 12/8 ballad feel",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/queen-watc-fm1.mid",
+      "page": "https://freemidi.org/download3-5859-we-are-the-champions-queen",
+      "url": "https://freemidi.org/getter-5859",
+      "sha256": "7ca4c70baceb4e7e9b8433b4846829cf99d31e85bab09cad58799474ecbcd6b2"
+    },
+    "trackIndex": 0,
+    "indices": [
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98
+    ],
+    "phraseStarts": [
+      0,
+      8,
+      17,
+      38
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "freemidi fm1 track 0 (recorder) events 58-98 compared event by event with the Hooktheory \"Chorus\" of We Are the Champions (synced to the official Queen video 04854XqcfCY; 6/8, one tab beat = one eighth = half an fm1 quarter): all 41 pitches equal (no shift), onsets within 0.05 beat except four documented rows (the D4 E4 D4 turn and the final F4); bm2 and bm1 agree on all pitches. Span 15 of 16 semitones; 30 seconds long. No listening review.",
+      "urls": [
+        "https://freemidi.org/getter-5859",
+        "https://www.hooktheory.com/v1/songs/public/WeglNAEAorY?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/queen/we-are-the-champions#chorus",
+        "https://bitmidi.com/uploads/22949.mid",
+        "https://bitmidi.com/uploads/87219.mid",
+        "https://www.youtube.com/watch?v=04854XqcfCY"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/we-are-the-champions-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "air-on-the-g-string",
+    "title": "Air on the G String",
+    "category": "pop",
+    "hook": "First section of the Air (bars 1-6): the long high F-sharp, the B-G-F-sharp-E-D-C-sharp-D-C-sharp-B-A descent with its graces, the A-F-sharp-C-B-E-D-sharp-A-G rising-falling bar over the long G, the E-B-A-D-C-sharp-G-F-sharp run into the F-sharp, G-sharp-A, and the cadential run D-F-sharp-E to the closing A",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/air-mutopia.mid",
+      "page": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1534",
+      "url": "https://www.mutopiaproject.org/ftp/BachJS/BWV1068/bach_air_bmv_1068/bach_air_bmv_1068.mid",
+      "sha256": "5f7763dd4d29f309cac6d670c22aa029aca23c8c97743a0511d4b9c6d3435f1c"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "score-and-performed-midi",
+      "summary": "Mutopia piece 1534 (flute and guitar adaptation from the Bach-Gesellschaft edition, PDF page 1 read directly, LilyPond source and MIDI of the same edition) flute track events 0-44 = bars 1-6 first ending, including the printed acciaccaturas on bars 2 and the half-note A that closes bar 6. bitmidi 27677 (performed orchestral MIDI, Violin track 0, 240 PPQ) carries the same 45 pitches in the same order with one extra re-struck D (the tie of bar 6), onsets within 0.075 beat of the score beats except the grace notes and the bar-2 cadence (documented, at most 0.28 beat). Hooktheory confirms bars 1-2 at half-length beats. Mutopia PDF and MIDI count as ONE source.",
+      "urls": [
+        "https://www.mutopiaproject.org/ftp/BachJS/BWV1068/bach_air_bmv_1068/bach_air_bmv_1068-let.pdf",
+        "https://www.mutopiaproject.org/ftp/BachJS/BWV1068/bach_air_bmv_1068/bach_air_bmv_1068.mid",
+        "https://www.mutopiaproject.org/ftp/BachJS/BWV1068/bach_air_bmv_1068/bach_air_bmv_1068.ly",
+        "https://bitmidi.com/uploads/27677.mid",
+        "https://www.hooktheory.com/v1/songs/public/bWgMPGpkmlX?fields=ID,xmlData,song,jsonData"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-a/sources/raw/bach-air-bm1.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        43,
+        44,
+        45
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "fix-you-chorus",
+    "title": "Fix You",
+    "category": "pop",
+    "hook": "Falling chorus line of Fix You, stated twice: Ab5 G5 F5 Eb5 D5 C5 Bb4 C5 Eb5 (held) | Ab5 G5 F5 Eb5 D5 C5 Bb4 C5 Eb5 (held) (18 attacks, E-flat major, a stepwise descent of a sixth-plus then a turn back up to the tonic)",
+    "source": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/raw/coldplay-fixyou-fm2.mid",
+      "page": "https://freemidi.org/download3-17690-fix-you-2-coldplay",
+      "url": "https://freemidi.org/getter-17690",
+      "sha256": "faae5baecfba26fb005dcef7efb7888e3d655f30415cb017cac102baddad4b3f"
+    },
+    "trackIndex": 16,
+    "indices": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "freemidi fm2 track 16 (flute) events 76-93 compared event by event with the Hooktheory \"Chorus\" of Fix You (notes 1-9 and 11-19; Hooktheory is synced to YouTube RnN84De-mSo, now unavailable; the official Coldplay video k4V3Mo61fJM metadata was retained for the artist): all 18 pitches equal (no shift), onsets within 0.05 beat after the 2x half-time conversion (fm2 counts at 137 BPM, the tab at 69). Only one MIDI exists; the file's own repeats are not independent. No listening review.",
+      "urls": [
+        "https://freemidi.org/getter-17690",
+        "https://www.hooktheory.com/v1/songs/public/JNgqQQXvegr?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/coldplay/fix-you#chorus",
+        "https://www.youtube.com/watch?v=k4V3Mo61fJM",
+        "https://www.youtube.com/watch?v=RnN84De-mSo"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13e/pop-b/sources/fix-you-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pitchShift": 0
+    }
+  }
+]

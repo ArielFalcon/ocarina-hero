@@ -39665,6 +39665,763 @@ export const CURATED_SONGS = [
     "phraseStarts": [
       0
     ]
+  },
+  {
+    "id": "catalogue-chopin-nocturne-op9-no2-opening",
+    "title": "Nocturne in E-flat major",
+    "subtitle": "Opening statement of the Nocturne: B-flat pickup, then bars 1-4 (G-F-G-F-E-flat-B-flat, the C-turn-C-G-B-flat-A-flat-G rise, F-G-D-E-flat-C-B-flat, the D-C-B-flat-A-flat-G-A-flat descent and the cadence on the held E-flat before the rest)",
+    "tempoBpm": 66.000066000066,
+    "beatsPerBar": 6,
+    "melody": [
+      {
+        "midi": 70,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 79,
+        "startBeat": 0.5,
+        "durationBeats": 2.0000000000000004
+      },
+      {
+        "midi": 77,
+        "startBeat": 2.5,
+        "durationBeats": 0.49999999999999994
+      },
+      {
+        "midi": 79,
+        "startBeat": 3,
+        "durationBeats": 0.49999999999999994
+      },
+      {
+        "midi": 77,
+        "startBeat": 3.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "midi": 75,
+        "startBeat": 5,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "midi": 70,
+        "startBeat": 6,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "midi": 79,
+        "startBeat": 6.5,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "midi": 72,
+        "startBeat": 7.5,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "midi": 73,
+        "startBeat": 7.583333333333333,
+        "durationBeats": 0.08333333333333422
+      },
+      {
+        "midi": 72,
+        "startBeat": 7.666666666666667,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "midi": 71,
+        "startBeat": 7.75,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "midi": 72,
+        "startBeat": 7.833333333333334,
+        "durationBeats": 0.1666666666666665
+      },
+      {
+        "midi": 84,
+        "startBeat": 8,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "midi": 79,
+        "startBeat": 9,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "midi": 82,
+        "startBeat": 9.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "midi": 80,
+        "startBeat": 11,
+        "durationBeats": 1.0000000000000009
+      },
+      {
+        "midi": 79,
+        "startBeat": 12,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "midi": 77,
+        "startBeat": 12.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "midi": 79,
+        "startBeat": 14,
+        "durationBeats": 0.9999999999999989
+      },
+      {
+        "midi": 74,
+        "startBeat": 15,
+        "durationBeats": 0.5000000000000014
+      },
+      {
+        "midi": 75,
+        "startBeat": 15.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "midi": 72,
+        "startBeat": 17,
+        "durationBeats": 1.4999999999999984
+      },
+      {
+        "midi": 70,
+        "startBeat": 18.5,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "midi": 86,
+        "startBeat": 19,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "midi": 84,
+        "startBeat": 19.499999999999996,
+        "durationBeats": 0.5000000000000033
+      },
+      {
+        "midi": 82,
+        "startBeat": 20,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "midi": 80,
+        "startBeat": 20.25,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "midi": 79,
+        "startBeat": 20.5,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "midi": 80,
+        "startBeat": 20.75,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "midi": 72,
+        "startBeat": 21,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "midi": 74,
+        "startBeat": 21.249999999999996,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "midi": 75,
+        "startBeat": 21.5,
+        "durationBeats": 1.4999999999999984
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "D4",
+        "bend": -2,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 0.5,
+        "durationBeats": 2.0000000000000004
+      },
+      {
+        "pitch": "A4",
+        "bend": -2,
+        "startBeat": 2.5,
+        "durationBeats": 0.49999999999999994
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 3,
+        "durationBeats": 0.49999999999999994
+      },
+      {
+        "pitch": "A4",
+        "bend": -2,
+        "startBeat": 3.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 5,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "pitch": "D4",
+        "bend": -2,
+        "startBeat": 6,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 6.5,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 7.5,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "pitch": "D4",
+        "bend": 1,
+        "startBeat": 7.583333333333333,
+        "durationBeats": 0.08333333333333422
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 7.666666666666667,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 7.75,
+        "durationBeats": 0.08333333333333325
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 7.833333333333334,
+        "durationBeats": 0.1666666666666665
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 8,
+        "durationBeats": 0.9999999999999999
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 9,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 9.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "pitch": "B4",
+        "bend": -1,
+        "startBeat": 11,
+        "durationBeats": 1.0000000000000009
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 12,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "pitch": "A4",
+        "bend": -2,
+        "startBeat": 12.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 14,
+        "durationBeats": 0.9999999999999989
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 15,
+        "durationBeats": 0.5000000000000014
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 15.5,
+        "durationBeats": 1.5000000000000002
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 17,
+        "durationBeats": 1.4999999999999984
+      },
+      {
+        "pitch": "D4",
+        "bend": -2,
+        "startBeat": 18.5,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 19,
+        "durationBeats": 0.49999999999999944
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 19.499999999999996,
+        "durationBeats": 0.5000000000000033
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 20,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "pitch": "A4",
+        "bend": 1,
+        "startBeat": 20.25,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 20.5,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "pitch": "B4",
+        "bend": -1,
+        "startBeat": 20.75,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 21,
+        "durationBeats": 0.24999999999999778
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 21.249999999999996,
+        "durationBeats": 0.25000000000000167
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 21.5,
+        "durationBeats": 1.4999999999999984
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "catalogue-tide-is-high-chorus",
+    "title": "The Tide Is High",
+    "subtitle": "Chorus of The Tide Is High (Atomic Kitten version): the high G-E-D-C descent with the D-E rise, the E-D-C-B-C-D-D-E answer, and the last line G-G-F-E-F-G",
+    "tempoBpm": 104.00001386666851,
+    "beatsPerBar": 4,
+    "melody": [
+      {
+        "midi": 79,
+        "startBeat": 0,
+        "durationBeats": 1.3291666666666673
+      },
+      {
+        "midi": 76,
+        "startBeat": 1.333333333333337,
+        "durationBeats": 0.28958333333333475
+      },
+      {
+        "midi": 74,
+        "startBeat": 1.6666666666666665,
+        "durationBeats": 0.21874999999999908
+      },
+      {
+        "midi": 72,
+        "startBeat": 2.000000000000002,
+        "durationBeats": 0.33333333333333576
+      },
+      {
+        "midi": 74,
+        "startBeat": 2.333333333333338,
+        "durationBeats": 0.3333333333333296
+      },
+      {
+        "midi": 76,
+        "startBeat": 2.666666666666668,
+        "durationBeats": 0.4875000000000038
+      },
+      {
+        "midi": 77,
+        "startBeat": 4.000000000000004,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "midi": 74,
+        "startBeat": 4.66666666666667,
+        "durationBeats": 0.8291666666666605
+      },
+      {
+        "midi": 72,
+        "startBeat": 5.5,
+        "durationBeats": 0.4958333333333309
+      },
+      {
+        "midi": 71,
+        "startBeat": 6.000000000000001,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "midi": 72,
+        "startBeat": 6.666666666666666,
+        "durationBeats": 0.8291666666666666
+      },
+      {
+        "midi": 74,
+        "startBeat": 7.500000000000003,
+        "durationBeats": 0.339583333333328
+      },
+      {
+        "midi": 74,
+        "startBeat": 8.000000000000004,
+        "durationBeats": 1.000000000000001
+      },
+      {
+        "midi": 76,
+        "startBeat": 9.000000000000004,
+        "durationBeats": 1.0270833333333296
+      },
+      {
+        "midi": 79,
+        "startBeat": 11,
+        "durationBeats": 0.6875000000000016
+      },
+      {
+        "midi": 79,
+        "startBeat": 12.000000000000002,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "midi": 77,
+        "startBeat": 12.666666666666666,
+        "durationBeats": 0.8333333333333364
+      },
+      {
+        "midi": 76,
+        "startBeat": 13.500000000000004,
+        "durationBeats": 0.24583333333332752
+      },
+      {
+        "midi": 77,
+        "startBeat": 13.75,
+        "durationBeats": 0.24583333333333368
+      },
+      {
+        "midi": 79,
+        "startBeat": 14.000000000000004,
+        "durationBeats": 0.8416666666666696
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 0,
+        "durationBeats": 1.3291666666666673
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 1.333333333333337,
+        "durationBeats": 0.28958333333333475
+      },
+      {
+        "pitch": "F4",
+        "bend": -2,
+        "startBeat": 1.6666666666666665,
+        "durationBeats": 0.21874999999999908
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 2.000000000000002,
+        "durationBeats": 0.33333333333333576
+      },
+      {
+        "pitch": "F4",
+        "bend": -2,
+        "startBeat": 2.333333333333338,
+        "durationBeats": 0.3333333333333296
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 2.666666666666668,
+        "durationBeats": 0.4875000000000038
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 4.000000000000004,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "pitch": "D4",
+        "bend": 1,
+        "startBeat": 4.66666666666667,
+        "durationBeats": 0.8291666666666605
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 5.5,
+        "durationBeats": 0.4958333333333309
+      },
+      {
+        "pitch": "D4",
+        "bend": -2,
+        "startBeat": 6.000000000000001,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 6.666666666666666,
+        "durationBeats": 0.8291666666666666
+      },
+      {
+        "pitch": "F4",
+        "bend": -2,
+        "startBeat": 7.500000000000003,
+        "durationBeats": 0.339583333333328
+      },
+      {
+        "pitch": "F4",
+        "bend": -2,
+        "startBeat": 8.000000000000004,
+        "durationBeats": 1.000000000000001
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 9.000000000000004,
+        "durationBeats": 1.0270833333333296
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 11,
+        "durationBeats": 0.6875000000000016
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 12.000000000000002,
+        "durationBeats": 0.6625000000000019
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 12.666666666666666,
+        "durationBeats": 0.8333333333333364
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 13.500000000000004,
+        "durationBeats": 0.24583333333332752
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 13.75,
+        "durationBeats": 0.24583333333333368
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 14.000000000000004,
+        "durationBeats": 0.8416666666666696
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "catalogue-next-episode-riff",
+    "title": "The Next Episode",
+    "subtitle": "The instrumental riff of The Next Episode, one complete 12-attack cycle (two bars): A-E-E-D-E-D-C-D-D-C-A-C in the MIDI key (D#-A#-A#-G#-A#-G#-F#-G#-G#-F#-D#-F# in the recording key D# minor)",
+    "tempoBpm": 100,
+    "beatsPerBar": 4,
+    "melody": [
+      {
+        "midi": 69,
+        "startBeat": 0,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 76,
+        "startBeat": 0.9999999999999994,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 76,
+        "startBeat": 1.999999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 74,
+        "startBeat": 2.5,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 76,
+        "startBeat": 3.0000000000000013,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 74,
+        "startBeat": 4.000000000000001,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 72,
+        "startBeat": 4.499999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 74,
+        "startBeat": 5,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 74,
+        "startBeat": 6,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 72,
+        "startBeat": 6.500000000000001,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "midi": 69,
+        "startBeat": 6.999999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "midi": 72,
+        "startBeat": 7.5,
+        "durationBeats": 0.4999999999999982
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 0,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 0.9999999999999994,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 1.999999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 2.5,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 3.0000000000000013,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 4.000000000000001,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 4.499999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 5,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 6,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": -2,
+        "startBeat": 6.500000000000001,
+        "durationBeats": 0.4999999999999982
+      },
+      {
+        "pitch": "B4",
+        "bend": -2,
+        "startBeat": 6.999999999999999,
+        "durationBeats": 0.5000000000000012
+      },
+      {
+        "pitch": "D5",
+        "bend": -2,
+        "startBeat": 7.5,
+        "durationBeats": 0.4999999999999982
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
   }
 ] satisfies readonly {
   id: string; title: string; subtitle: string; tempoBpm: number; beatsPerBar: number;

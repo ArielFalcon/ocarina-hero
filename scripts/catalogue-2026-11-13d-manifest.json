@@ -1,0 +1,258 @@
+[
+  {
+    "id": "chopin-nocturne-op9-no2-opening",
+    "title": "Nocturne in E-flat major",
+    "category": "pop",
+    "hook": "Opening statement of the Nocturne: B-flat pickup, then bars 1-4 (G-F-G-F-E-flat-B-flat, the C-turn-C-G-B-flat-A-flat-G rise, F-G-D-E-flat-C-B-flat, the D-C-B-flat-A-flat-G-A-flat descent and the cadence on the held E-flat before the rest)",
+    "source": {
+      "file": "out/catalogue-2026-11-13d/tiktok/sources/chopin-nocturne-op9-no2-turn-realised.mid",
+      "page": "https://www.mutopiaproject.org/cgibin/piece-info.cgi?id=1590",
+      "url": "https://www.mutopiaproject.org/ftp/ChopinFF/O9/chopin_nocturne_op9_n2/chopin_nocturne_op9_n2.mid",
+      "sha256": "edb66b2de4394bbd33ed9b8280e821c09bd9dfc5cd803281bf857f945e4c5841"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 6,
+    "evidence": {
+      "level": "score-and-independent-midi",
+      "summary": "Mutopia piece 1590 (G. Schirmer 1881, LilyPond source and PDF, SHA-256 3ff1dda16c3c39896355505ceb95d34c6307aaf9f713f6b0f530eee2526a2bf7) upper staff events 0-28; the printed PDF page 1 was read directly: pickup Bb, bars 1-4 and the turn sign of bar 2 (finger 12121, flat above, natural below = C Db C B C), phrase ending \"ef4. r4\" before the next pickup. The derivative realises the turn with the grid of bitmidi 28233 RIGHT HAND events 0-32, which matches all 33 pitches and every onset exactly (ticks/PPQ). Mutopia MIDI plus score are one source; bitmidi 28233 is independently sequenced (PPQ 48, rubato tempo map, ornament written out).",
+      "urls": [
+        "https://www.mutopiaproject.org/ftp/ChopinFF/O9/chopin_nocturne_op9_n2/chopin_nocturne_op9_n2-let.pdf",
+        "https://www.mutopiaproject.org/ftp/ChopinFF/O9/chopin_nocturne_op9_n2/chopin_nocturne_op9_n2.mid",
+        "https://www.mutopiaproject.org/ftp/ChopinFF/O9/chopin_nocturne_op9_n2/chopin_nocturne_op9_n2.ly",
+        "https://bitmidi.com/uploads/28233.mid"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-research-next/2026-11-13-tiktok/src/bitmidi-28233.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "pitchShift": 0
+    }
+  },
+  {
+    "id": "tide-is-high-chorus",
+    "title": "The Tide Is High",
+    "category": "pop",
+    "hook": "Chorus of The Tide Is High (Atomic Kitten version): the high G-E-D-C descent with the D-E rise, the E-D-C-B-C-D-D-E answer, and the last line G-G-F-E-F-G",
+    "source": {
+      "file": "out/catalogue-2026-11-13d/tiktok/sources/tide-is-high-chorus-prepared.mid",
+      "page": "https://bitmidi.com/api/midi/search (id 8215)",
+      "url": "https://bitmidi.com/uploads/8215.mid",
+      "sha256": "b7ff168665205e330538c16ae84667e9f91be7a04eb478a4fa3c3e0ee88ca897"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-transcription-and-midi",
+      "summary": "bitmidi 8215 (Atomic Kitten version, key of C, 104 BPM) track 17 events 31-50, four legato tails of at most 29 ms closed in a derivative, compared event by event with a direct transcription of the public Hooktheory Atomic Kitten chorus (hash nLganLzlxYp, synced to the official video 1w2kaQUNLNY): all 20 pitches equal after one octave shift, onsets within 0.25 beat. Third sources: bitmidi 102722 (Blondie arrangement, quantized) and bitmidi 18319 (oboe, 18 attacks) agree on every pitch they contain.",
+      "urls": [
+        "https://bitmidi.com/uploads/8215.mid",
+        "https://www.hooktheory.com/v1/songs/public/nLganLzlxYp?fields=ID,xmlData,song,jsonData",
+        "https://www.hooktheory.com/theorytab/view/atomic-kitten/the-tide-is-high#chorus",
+        "https://bitmidi.com/uploads/102722.mid",
+        "https://bitmidi.com/uploads/18319.mid",
+        "https://www.youtube.com/watch?v=1w2kaQUNLNY"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13d/tiktok/sources/tide-is-high-hooktheory-transcription.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "pitchShift": 12
+    }
+  },
+  {
+    "id": "next-episode-riff",
+    "title": "The Next Episode",
+    "category": "pop",
+    "hook": "The instrumental riff of The Next Episode, one complete 12-attack cycle (two bars): A-E-E-D-E-D-C-D-D-C-A-C in the MIDI key (D#-A#-A#-G#-A#-G#-F#-G#-G#-F#-D#-F# in the recording key D# minor)",
+    "source": {
+      "file": "out/catalogue-research-next/2026-11-13-franchises-rap/midi/dre-nextepisode-fm.mid",
+      "page": "https://freemidi.org/download3-21924-the-next-episode-dr-dre",
+      "url": "https://freemidi.org/getter-21924",
+      "sha256": "12adce3731062cfad057d92e8b5892bd677aa1115d1510207a5bb6be9e9d7528"
+    },
+    "trackIndex": 16,
+    "indices": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "independent-midi-and-tab",
+      "summary": "dre-nextepisode-fm.mid track 16 (lead, program 81) events 17-28 compared event by event with the Hooktheory public TheoryTab \"The Next Episode\" intro (notes 0-11 of 48, D# minor, 94 BPM): all 12 pitches agree after one constant +6 and all 12 onsets are exact. Both sources state the riff four times (midi events 17-64, tab notes 0-47) with identical interval and onset patterns. Recognizability metrics: 4 distinct pitches, repeated-attack share 0.182, longest repeated run 2; no listening review.",
+      "urls": [
+        "https://freemidi.org/download3-21924-the-next-episode-dr-dre",
+        "https://www.hooktheory.com/theorytab/view/dr-dre/the-next-episode#intro"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "No original clip or alignment audit."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13d/rap/sources/next-episode-riff-hooktheory-cycle.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "pitchShift": 6
+    }
+  }
+]

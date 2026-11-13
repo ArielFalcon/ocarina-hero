@@ -211,6 +211,8 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-cant-help-falling-in-love', 'Can’t Help Falling in Love', { artist: 'Elvis Presley', aliases: ['Cant Help Falling in Love'], icon: 'heart' }],
   ['catalogue-hey-jude-opening', 'Hey Jude', { artist: 'The Beatles', aliases: ['Lennon-McCartney', 'Paul McCartney'] }],
   ['catalogue-lambada', 'Lambada', { artist: 'Kaoma', aliases: ['Chorando se foi', 'Llorando se fue', 'Los Kjarkas', 'Gonzalo Hermosa', 'Ulises Hermosa'], icon: 'waveform' }],
+  ['catalogue-tide-is-high-chorus', 'The Tide Is High', { artist: 'Atomic Kitten', aliases: ['The Tide Is High (Get the Feeling)', 'Blondie', 'The Paragons', 'John Holt'], icon: 'waveform' }],
+  ['catalogue-next-episode-riff', 'The Next Episode', { artist: 'Dr. Dre & Snoop Dogg', aliases: ['Dr. Dre feat. Snoop Dogg', 'Snoop Dogg', '2001', 'David McCallum', 'Next Episode'], icon: 'microphone' }],
 ]);
 
 // Classics
@@ -231,6 +233,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-joy-to-the-world', 'Joy to the World', { artist: 'George Frideric Handel & Isaac Watts', version: 'Hymn tune Antioch', aliases: ['Handel', 'Isaac Watts', 'Lowell Mason', 'Antioch'], icon: 'star' }],
   ['catalogue-deck-the-halls', 'Deck the Halls', { artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'star' }],
   ['catalogue-pachelbel-canon', 'Canon in D', { artist: 'Johann Pachelbel', version: 'Canon per 3 Violini e Basso', aliases: ['Pachelbel', 'Pachelbel’s Canon', 'Kanon und Gigue', 'P. 37'] }],
+  ['catalogue-chopin-nocturne-op9-no2-opening', 'Nocturne in E-flat major', { artist: 'Frédéric Chopin', version: 'Op. 9 No. 2', aliases: ['Chopin', 'Nocturne Op. 9 No. 2', 'Nocturne No. 2', 'Nocturne in Eb'], icon: 'moon' }],
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
 ]);
 

@@ -58,6 +58,9 @@ if (existsSync('scripts/catalogue-2026-11-13b-manifest.json')) {
 if (existsSync('scripts/catalogue-2026-11-13c-manifest.json')) {
   manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13c-manifest.json', 'utf8')));
 }
+if (existsSync('scripts/catalogue-2026-11-13d-manifest.json')) {
+  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13d-manifest.json', 'utf8')));
+}
 const songs = [];
 const report = [];
 

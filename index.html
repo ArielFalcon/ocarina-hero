@@ -69,7 +69,8 @@
               <span class="input-frame"><input id="song-search" type="search" placeholder="Song, artist or universe…" autocomplete="off" /></span>
             </div>
             <details id="catalog-filters" class="catalog-filters" open>
-            <summary id="filter-summary" class="stitched-label">Filters</summary>
+            <summary id="filter-summary" class="stitched-label"><span>Filters<span id="filter-summary-detail" class="filter-summary-detail"></span></span></summary>
+            <div class="filter-grid">
             <fieldset class="category-selector">
               <legend class="stitched-label">Category</legend>
               <button id="category-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="category-panel"></button>
@@ -90,6 +91,7 @@
                   <div id="difficulty-steps" class="difficulty-steps" aria-hidden="true"></div>
                 </div></div></div>
               </fieldset>
+            </div>
             </div>
             </details>
             <div class="catalog-layout">

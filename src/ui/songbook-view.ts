@@ -8,8 +8,6 @@ import { completedIds, lastOpened, type Progress } from './progress';
 const SAVED_KEY = 'ocarina.saved.v1';
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
-/** From this width the filters rest open; below it they rest folded so the songs start on the first screen. */
-const ROOMY_LAYOUT = window.matchMedia('(min-width: 800px)');
 /** Range steps: 0 is every difficulty, then one step per tier. */
 const DIFFICULTY_STEPS = ['', ...DIFFICULTY_LEVELS] as const;
 const DIFFICULTY_NAMES: Record<DifficultyLevel | '', string> = { '': 'Any', easy: 'Easy', medium: 'Medium', hard: 'Hard', expert: 'Expert' };
@@ -34,12 +32,16 @@ function escapeHtml(value: string): string {
  * A field-like toggle that opens its panel below it. Folded, the panel is inert;
  * opening scrolls only as much as needed to show it below the toggle.
  */
+/** Below this height a floating panel is too cramped, so the page scrolls to make room instead. */
+const MIN_FLOATING_PANEL_PX = 240;
+
 class Fold {
-  constructor(readonly toggle: HTMLButtonElement, readonly panel: HTMLElement, private content: HTMLElement, focusSelector: string) {
+  constructor(readonly toggle: HTMLButtonElement, readonly panel: HTMLElement, private content: HTMLElement, focusSelector: string, private onOpen = (): void => {}) {
     toggle.addEventListener('click', () => {
       const open = !this.isOpen();
       this.setOpen(open);
       if (!open) return;
+      this.onOpen();
       content.querySelector<HTMLElement>(focusSelector)?.focus({ preventScroll: true });
       this.reveal();
     });
@@ -67,7 +69,13 @@ class Fold {
     const nav = document.querySelector('.app-nav')?.getBoundingClientRect();
     const bottomEdge = nav && nav.top > innerHeight / 2 ? nav.top : innerHeight;
     const toggle = this.toggle.getBoundingClientRect();
-    const overflow = toggle.bottom + this.content.scrollHeight - bottomEdge;
+    // A floating panel (desktop) fits the room below its toggle and scrolls inside, so the page stays put.
+    if (getComputedStyle(this.panel).position === 'absolute') {
+      this.panel.style.maxHeight = `min(62vh, 560px, ${Math.max(MIN_FLOATING_PANEL_PX, bottomEdge - toggle.bottom - 24)}px)`;
+    } else {
+      this.panel.style.removeProperty('max-height');
+    }
+    const overflow = toggle.bottom + this.panel.offsetHeight - bottomEdge;
     if (overflow <= 0) return;
     const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
     scroller.scrollBy({ top: Math.min(overflow + 16, toggle.top - 72), behavior: smooth ? 'smooth' : 'auto' });
@@ -96,6 +104,9 @@ export class SongbookView {
   private reset: HTMLButtonElement;
   private filters: HTMLDetailsElement;
   private filterSummary: HTMLElement;
+  private filterSummaryDetail: HTMLElement;
+  /** Desktop keeps the filters unfolded and floats one panel at a time over the list. */
+  private desktop = matchMedia('(min-width: 800px)');
   private difficulty: DifficultyLevel | '' = '';
   private difficultyRange: HTMLInputElement;
   private nowPlaying: { id: string | null; playing: boolean } = { id: null, playing: false };
@@ -112,8 +123,8 @@ export class SongbookView {
     this.universes = root.querySelector('#universes')!;
     this.list = root.querySelector('#demos')!;
     this.categories = root.querySelector('#categories')!;
-    this.universeFold = new Fold(root.querySelector('#universe-toggle')!, root.querySelector('#universe-panel')!, this.universes, 'input:checked');
-    this.categoryFold = new Fold(root.querySelector('#category-toggle')!, root.querySelector('#category-panel')!, this.categories, '[aria-pressed="true"]');
+    this.universeFold = new Fold(root.querySelector('#universe-toggle')!, root.querySelector('#universe-panel')!, this.universes, 'input:checked', () => this.foldOthers(this.universeFold));
+    this.categoryFold = new Fold(root.querySelector('#category-toggle')!, root.querySelector('#category-panel')!, this.categories, '[aria-pressed="true"]', () => this.foldOthers(this.categoryFold));
     this.count = root.querySelector('#catalog-count')!;
     this.rail = root.querySelector('#letter-rail')!;
     this.bubble = root.querySelector('#letter-bubble')!;
@@ -121,10 +132,17 @@ export class SongbookView {
     this.reset = root.querySelector('#reset-search')!;
     this.filters = root.querySelector('#catalog-filters')!;
     this.filterSummary = root.querySelector('#filter-summary')!;
+    this.filterSummaryDetail = root.querySelector('#filter-summary-detail')!;
+    this.desktop.addEventListener('change', () => this.syncFilterDisclosure());
+    this.syncFilterDisclosure();
+    document.addEventListener('pointerdown', event => {
+      if (!this.desktop.matches || (event.target instanceof Node && this.filters.contains(event.target))) return;
+      for (const fold of this.folds()) fold.setOpen(false);
+    });
     this.difficultyRange = root.querySelector('#difficulty-range')!;
     const steps = root.querySelector<HTMLElement>('#difficulty-steps')!;
     steps.innerHTML = DIFFICULTY_STEPS.map((level, index) => `<span class="difficulty-step" data-step="${index}">${sealHtml(level ? 'music' : 'songbook', level, 'mini-seal')}<span class="difficulty-name stitched-label">${DIFFICULTY_NAMES[level]}</span></span>`).join('');
-    this.difficultyFold = new Fold(root.querySelector('#difficulty-toggle')!, root.querySelector('#difficulty-panel')!, root.querySelector('#difficulty-scale')!, '#difficulty-range');
+    this.difficultyFold = new Fold(root.querySelector('#difficulty-toggle')!, root.querySelector('#difficulty-panel')!, root.querySelector('#difficulty-scale')!, '#difficulty-range', () => this.foldOthers(this.difficultyFold));
     this.difficultyRange.addEventListener('input', () => this.setDifficulty(Number(this.difficultyRange.value)));
     let dragging = false;
     this.difficultyRange.addEventListener('pointerdown', () => { dragging = true; });
@@ -144,9 +162,8 @@ export class SongbookView {
       const value: unknown = JSON.parse(localStorage.getItem(SAVED_KEY) ?? '[]');
       if (Array.isArray(value)) this.saved = new Set(value.filter((id): id is string => typeof id === 'string'));
     } catch { this.sessionOnly = true; }
-    this.filters.open = ROOMY_LAYOUT.matches;
     this.search.addEventListener('input', () => {
-      this.filters.open = ROOMY_LAYOUT.matches && !this.search.value.trim();
+      if (!this.desktop.matches) this.filters.open = false;
       this.filterChanged();
     });
     // Pointer picks fold the panel; arrow keys only browse, so keyboard users fold with Enter or Space.
@@ -171,7 +188,7 @@ export class SongbookView {
         this.onlySaved = false;
         this.category = 'All';
         this.difficulty = '';
-        this.filters.open = ROOMY_LAYOUT.matches;
+        this.syncFilterDisclosure();
       });
       this.search.focus();
     });
@@ -194,6 +211,19 @@ export class SongbookView {
       else this.callbacks.select(entry);
     });
     this.filterChanged();
+  }
+
+  private folds(): Fold[] { return [this.categoryFold, this.universeFold, this.difficultyFold]; }
+
+  /** Floating desktop panels would overlap, so opening one folds the rest. */
+  private foldOthers(opened: Fold): void {
+    if (!this.desktop.matches) return;
+    for (const fold of this.folds()) if (fold !== opened) fold.setOpen(false);
+  }
+
+  /** Desktop keeps the filters open, as folding them would move the list (its summary is hidden); phones rest them folded so the songs start on the first screen. */
+  private syncFilterDisclosure(): void {
+    this.filters.open = this.desktop.matches;
   }
 
   private setDifficulty(step: number): void {
@@ -322,7 +352,7 @@ export class SongbookView {
     for (const element of this.root.querySelectorAll<HTMLElement>('.difficulty-step')) element.classList.toggle('is-current', Number(element.dataset.step) === step);
     const name = DIFFICULTY_NAMES[this.difficulty];
     this.difficultyFold.toggle.innerHTML = `${sealHtml(this.difficulty ? 'music' : 'songbook', this.difficulty, 'mini-seal')}<span class="universe-name">${this.difficulty ? name : 'Any difficulty'}</span><span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change difficulty</span>`;
-    this.filterSummary.textContent = ['Filters', this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe, this.difficulty && DIFFICULTY_NAMES[this.difficulty]].filter(Boolean).join(' · ');
+    this.filterSummaryDetail.textContent = [this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe, this.difficulty && DIFFICULTY_NAMES[this.difficulty]].filter(Boolean).map(part => ` · ${part}`).join('');
     const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved, difficulty: this.difficulty || undefined });
     this.count.textContent = `${result.length} ${result.length === 1 ? 'melody' : 'melodies'}${this.sessionOnly ? ' · Saves last for this session only' : ''}`;
     this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty;

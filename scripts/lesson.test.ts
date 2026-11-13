@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { Note } from '../src/core/ir';
-import { advancePractice, comboTier, createPassages, scoreCombo, passageArrangement, playbackSelection, staffTransition } from '../src/ui/lesson';
+import { advancePractice, comboTier, FreePlayTake, createPassages, scoreCombo, passageArrangement, playbackSelection, staffTransition } from '../src/ui/lesson';
 
 const notes: Note[] = [0, 1, 2, 3, 4, 5, 9, 10].map((startBeat, index) => ({
   pitch: index === 2 ? 'F4' : 'D4', startBeat, durationBeats: 1,
@@ -85,4 +85,33 @@ test('combo milestones fire once when a tier threshold is reached', () => {
 
 test('combo tier rises at each threshold boundary', () => {
   assert.deepEqual([0, 4, 5, 9, 10, 19, 20, 29, 30, 49, 50, 200].map(comboTier), [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]);
+});
+
+test('free play keeps the performed rhythm: held lengths, rests capped, overlaps closed', () => {
+  const notes: Note[] = [];
+  const take = new FreePlayTake(notes, 60); // one beat per second
+  take.press('D4', 0, 1000);
+  take.release(1500); // half a beat held
+  take.press('F4', 1, 2500); // one-beat rest
+  take.press('A4', 0, 4500); // pressed while F4 still sounds: F4 lasts two beats
+  take.release(5000);
+  take.press('D4', 0, 60000); // a long pause shrinks to the rest cap
+  take.release(60010); // a tap keeps a minimum length
+  assert.deepEqual(notes, [
+    { pitch: 'D4', bend: 0, startBeat: 0, durationBeats: 0.5 },
+    { pitch: 'F4', bend: 1, startBeat: 1.5, durationBeats: 2 },
+    { pitch: 'A4', bend: 0, startBeat: 3.5, durationBeats: 0.5 },
+    { pitch: 'D4', bend: 0, startBeat: 8, durationBeats: 0.125 },
+  ]);
+});
+
+test('a free play release never edits notes it did not record', () => {
+  const notes: Note[] = [];
+  const take = new FreePlayTake(notes, 60);
+  take.press('D4', 0, 0);
+  notes.length = 0;
+  notes.push({ pitch: 'F4', startBeat: 0, durationBeats: 3 });
+  take.release(500);
+  take.press('A4', 0, 1000);
+  assert.deepEqual(notes, [{ pitch: 'F4', startBeat: 0, durationBeats: 3 }, { pitch: 'A4', bend: 0, startBeat: 3, durationBeats: 1 }]);
 });

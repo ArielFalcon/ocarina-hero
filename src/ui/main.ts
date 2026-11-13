@@ -17,7 +17,7 @@ import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { Playback } from './playback';
 import { parseRoute, routeHash, shareUrl } from './route';
-import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
+import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
 import { staffClef, staffTokenHtml } from './staff';
@@ -36,6 +36,7 @@ let bindings = (() => {
 let bindingTarget: KeyboardAction | null = null;
 const desktop = window.matchMedia('(min-width: 800px)');
 const recorded: Note[] = [];
+const take = new FreePlayTake(recorded);
 let bend = 0;
 let songArrangement: Arrangement | null = null;
 
@@ -249,19 +250,14 @@ function press(pitch: PitchSpec): void {
     return;
   }
 
-  recorded.push({
-    pitch: pitch.id,
-    bend,
-    startBeat: recorded.length,
-    durationBeats: 1,
-  });
-  passageIndex = Math.floor((recorded.length - 1) / 5);
+  take.press(pitch.id, bend, performance.now());
+  passageIndex = Number.MAX_SAFE_INTEGER; // renderTab clamps to the passage holding the newest note
   renderTab();
 }
 
 function renderTab(): void {
   playButton.disabled = importer.pending || recorded.length === 0;
-  passages = createPassages(recorded, current?.tempoBpm ?? 96, current?.phraseStarts);
+  passages = createPassages(recorded, current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, current?.phraseStarts);
   bends.hidden = current !== null && !recorded.some(note => !!note.bend);
   passageIndex = Math.max(0, Math.min(passageIndex, passages.length - 1));
   // Keep the staff and its passage controls at a stable size: free play can add a bend at any time.
@@ -401,6 +397,7 @@ const controls = new Controls(
   (button) => {
     setActive(button, false);
     engine.noteOff();
+    if (!songArrangement) take.release(performance.now());
   },
   applyBend,
   (button) => setActive(button, false),
@@ -659,7 +656,7 @@ function replay(): void {
   editor.stopPreview();
   controls.reset();
   clearActive();
-  const arrangement = songArrangement ?? (recorded.length ? { title: 'live', tempoBpm: 96, notes: recorded } : null);
+  const arrangement = songArrangement ?? (recorded.length ? { title: 'live', tempoBpm: FREE_PLAY_TEMPO_BPM, notes: recorded } : null);
   if (!arrangement) { stopPlayback(); return; }
   const cursor = practiceMode ? practiceCursor : playbackCursor;
   const selection = playbackSelection(arrangement, passages[passageIndex] ?? [], cursor, !!current && repeatPassage.checked);

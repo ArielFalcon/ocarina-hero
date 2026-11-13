@@ -1,5 +1,5 @@
 import type { Arrangement, Note } from '../core/ir';
-import { pitchById, type ControllerButton } from '../core/pitches';
+import { pitchById, type ControllerButton, type PitchId } from '../core/pitches';
 import { toTabPhrases, toTabRestGroups } from '../core/tab';
 
 /** Divide source groups into display windows without changing the arrangement. */
@@ -33,6 +33,43 @@ export function advancePractice(notes: readonly Note[], cursor: number, button: 
   return expected && pitchById(expected.pitch).button === button && (expected.bend ?? 0) === bend
     ? cursor + 1
     : cursor;
+}
+
+export const FREE_PLAY_TEMPO_BPM = 96;
+/** A tap still sounds on replay. */
+const MIN_TAKE_BEATS = 0.125;
+/** A pause to think is not rhythm: longer silences replay at this length. */
+const MAX_TAKE_REST_BEATS = 4;
+
+/** Record free play with its performed timing, measured in beats at a fixed tempo. */
+export class FreePlayTake {
+  private held: { note: Note; atMs: number } | null = null;
+  private last: { note: Note; endMs: number } | null = null;
+
+  constructor(private readonly notes: Note[], private readonly tempoBpm = FREE_PLAY_TEMPO_BPM) {}
+
+  press(pitch: PitchId, bend: number, atMs: number): void {
+    this.release(atMs);
+    const previous = this.notes.at(-1);
+    const rest = previous && previous === this.last?.note ? Math.min(MAX_TAKE_REST_BEATS, this.beats(atMs - this.last.endMs)) : 0;
+    const note: Note = { pitch, bend, startBeat: previous ? previous.startBeat + previous.durationBeats + rest : 0, durationBeats: 1 };
+    this.notes.push(note);
+    this.held = { note, atMs };
+  }
+
+  /** Close the sounding note; one release ends the sound, so it ends the note too. */
+  release(atMs: number): void {
+    const held = this.held;
+    this.held = null;
+    if (!held || this.notes.at(-1) !== held.note) return;
+    const note = { ...held.note, durationBeats: Math.max(MIN_TAKE_BEATS, this.beats(atMs - held.atMs)) };
+    this.notes[this.notes.length - 1] = note;
+    this.last = { note, endMs: atMs };
+  }
+
+  private beats(ms: number): number {
+    return Math.max(0, ms) * this.tempoBpm / 60000;
+  }
 }
 
 /** Keep the timing within a passage while moving its first onset to beat zero. */

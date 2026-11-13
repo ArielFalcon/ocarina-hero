@@ -1,5 +1,5 @@
 import type { ThreadIcon } from './thread-icons';
-import type { DemoTrack } from '../core/demo';
+import type { DemoTrack, TrackSummary } from '../core/demo';
 import { rateDifficulty, type Difficulty, type DifficultyLevel } from '../core/difficulty';
 import type { Note } from '../core/ir';
 import { prepareMelody } from '../core/prepare';
@@ -8,7 +8,8 @@ export type SongCategory = 'All' | 'Games' | 'Anime' | 'Film' | 'Pop' | 'Classic
 type EntryCategory = Exclude<SongCategory, 'All'>;
 
 export interface SongbookEntry {
-  track: DemoTrack;
+  /** Listing data; the notes arrive through the track loader unless the track is an inline demo. */
+  track: DemoTrack | TrackSummary;
   id: string;
   title: string;
   universe: string;
@@ -390,10 +391,14 @@ export function openingNotes(track: DemoTrack): Note[] {
   return prepareMelody(track, { simplify: false, maxBend: 2 }).notes;
 }
 
-export function createSongbookEntries(tracks: readonly DemoTrack[]): SongbookEntry[] {
+/** Entries of tracks that carry their notes; the difficulty is rated from them. */
+export function createSongbookEntries(tracks: readonly DemoTrack[]): (SongbookEntry & { track: DemoTrack })[];
+/** Entries of a listing; a summary brings its difficulty, rated ahead of time from the same notes. */
+export function createSongbookEntries(tracks: readonly (DemoTrack | TrackSummary)[]): SongbookEntry[];
+export function createSongbookEntries(tracks: readonly (DemoTrack | TrackSummary)[]): SongbookEntry[] {
   return tracks.map((track) => ({
     track, id: track.id,
-    difficulty: rateDifficulty(openingNotes(track), track.tempoBpm),
+    difficulty: 'melody' in track ? rateDifficulty(openingNotes(track), track.tempoBpm) : track.difficulty,
     ...(metadata.get(track.id) ?? { title: track.title, universe: 'Other melodies', categories: ['Other'] as const, icon: 'music', universeIcon: 'music', aliases: [] }),
   }));
 }

@@ -1,6 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { toTabText } from '../src/core/tab';
 import { createPassages, lessonDetails } from '../src/ui/lesson';
 import { songDocumentTitle, songPath } from '../src/ui/route';

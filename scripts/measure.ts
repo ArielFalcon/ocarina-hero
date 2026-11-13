@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { ensureExternalMedia } from './media-directory';
 import { VOICE, VOICE_PARTIAL_SUM, releaseForGap } from '../src/audio/voice-model';
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { frequencyOf } from '../src/core/pitches';
 import { prepareMelody } from '../src/core/prepare';
 import type { ScheduledNote } from '../src/core/schedule';

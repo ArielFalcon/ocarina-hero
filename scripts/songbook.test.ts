@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DEMOS, type DemoTrack } from '../src/core/demo';
+import type { DemoTrack } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta } from '../src/ui/songbook';
 
 const entries = createSongbookEntries(DEMOS);

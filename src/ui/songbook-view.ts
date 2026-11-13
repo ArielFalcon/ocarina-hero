@@ -1,6 +1,6 @@
 import { threadIcon, type ThreadIcon } from './thread-icons';
 import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta, universeLabel, type SongbookEntry, type SongCategory } from './songbook';
-import type { DemoTrack } from '../core/demo';
+import type { DemoTrack, TrackSummary } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
 import { completedIds, lastOpened, type Progress } from './progress';
@@ -94,6 +94,11 @@ class Fold {
   }
 }
 
+function idle(run: () => void): void {
+  if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(run, { timeout: 1500 });
+  else window.setTimeout(run, 50);
+}
+
 export class SongbookView {
   readonly entries: SongbookEntry[];
   private category: SongCategory = 'All';
@@ -126,10 +131,22 @@ export class SongbookView {
   private difficulty: DifficultyLevel | '' = '';
   private difficultyRange: HTMLInputElement;
   private nowPlaying: { id: string | null; playing: boolean } = { id: null, playing: false };
+  /** Rows that scroll into view warm their notes while the browser is idle. */
+  private visibility = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver(rows => {
+    for (const row of rows) {
+      if (!row.isIntersecting) continue;
+      this.visibility!.unobserve(row.target);
+      const id = (row.target as HTMLElement).dataset.song;
+      const entry = id && this.entries.find(item => item.id === id);
+      if (entry) idle(() => this.callbacks.prefetch(entry));
+    }
+  }, { rootMargin: '120px 0px' });
 
-  constructor(private root: HTMLElement, tracks: readonly DemoTrack[], private callbacks: {
+  constructor(private root: HTMLElement, tracks: readonly (DemoTrack | TrackSummary)[], private callbacks: {
     select(entry: SongbookEntry): void;
     quickPlay(entry: SongbookEntry): void;
+    /** Warm the notes of a song the player is likely to open next. */
+    prefetch(entry: SongbookEntry): void;
     savedChanged(): void;
     savedFilterChanged(): void;
     progress(): Progress;
@@ -229,6 +246,15 @@ export class SongbookView {
     };
     this.list.addEventListener('click', onRowClick);
     this.popularList?.addEventListener('click', onRowClick);
+    // Pointing at a row, pressing it or tabbing to it is the strongest hint that its song opens next.
+    const onRowIntent = (event: Event) => {
+      const id = (event.target as Element).closest<HTMLElement>('[data-song], [data-quick-play]')?.dataset;
+      const entry = id && this.entries.find(item => item.id === (id.quickPlay ?? id.song));
+      if (entry) this.callbacks.prefetch(entry);
+    };
+    for (const list of [this.list, this.popularList, this.journey]) {
+      for (const type of ['pointerover', 'pointerdown', 'focusin']) list?.addEventListener(type, onRowIntent);
+    }
     this.journey.addEventListener('click', event => {
       const id = (event.target as Element).closest<HTMLButtonElement>('[data-song]')?.dataset.song;
       const entry = id && this.entries.find(item => item.id === id);
@@ -416,6 +442,16 @@ export class SongbookView {
     this.renderRail([...anchors.values()], result.length);
     this.renderJourney(progress);
     this.renderPopularView(progress, completed);
+    this.watchRows();
+  }
+
+  /** Observes the rows of the list so the ones on screen prefetch their notes. */
+  private watchRows(): void {
+    if (!this.visibility) return;
+    this.visibility.disconnect();
+    for (const list of [this.list, this.popularList]) {
+      for (const row of list?.querySelectorAll('[data-song]') ?? []) this.visibility.observe(row);
+    }
   }
 
   /** Show the shared ranking; it arrives best first and may name songs this build no longer has. */
@@ -426,6 +462,7 @@ export class SongbookView {
     const progress = this.callbacks.progress();
     this.renderJourney(progress);
     this.renderPopularView(progress, completedIds(progress));
+    this.watchRows();
   }
 
   /** The phone "Popular" view: the same ranking as full Songbook rows, with quick play and save. */

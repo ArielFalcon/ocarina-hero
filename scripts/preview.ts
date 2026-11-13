@@ -1,4 +1,4 @@
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { prepareMelody } from '../src/core/prepare';
 import { toTabText } from '../src/core/tab';
 

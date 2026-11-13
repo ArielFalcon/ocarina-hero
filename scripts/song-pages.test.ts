@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { songDocumentTitle } from '../src/ui/route';
 import { createSongbookEntries, songMeta } from '../src/ui/songbook';
 import { siteUrlOf, sitemapXml, songPageHtml, songPageOf } from './song-pages';

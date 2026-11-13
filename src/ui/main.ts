@@ -1,5 +1,6 @@
 import { OcarinaEngine } from '../audio/engine';
-import { DEMOS, type DemoTrack } from '../core/demo';
+import { LISTING, type DemoTrack, type SongData } from '../core/demo';
+import { createTrackLoader, latestRequest, sourcesByFile } from '../core/track-loader';
 import type { Arrangement, Note } from '../core/ir';
 import {
   frequencyOf,
@@ -1010,6 +1011,7 @@ let catalogScroll = 0;
 let settingsReturn: AppView = 'catalog';
 
 function showView(next: AppView, pushHistory = true): void {
+  songOpening.cancel();
   if (next === 'settings' && view !== 'settings') settingsReturn = view;
   cancelBinding();
   const scroller = must('#main-content');
@@ -1052,17 +1054,32 @@ function syncRoute(pushHistory: boolean): void {
   if (pushHistory && location.pathname + location.hash !== address) history.pushState(null, '', address);
 }
 
+/** Notes of curated songs are separate files, fetched on demand and warmed when a song is likely to open. */
+const trackLoader = createTrackLoader(LISTING, sourcesByFile(import.meta.glob<SongData>('../core/songs/catalogue/*.json', { import: 'default' })));
+const songOpening = latestRequest();
+
+/** Opens the lesson once the song's notes are in; a newer choice, or leaving the lesson, drops a slower earlier one. */
 function openSong(entry: SongbookEntry, pushHistory = true): void {
-  selectedEntry = entry;
-  practiceMode = false;
-  saveProgress(markOpened(progress, entry.id, Date.now()));
-  reportPlay(entry.id, 'open');
-  runDemo(entry.track);
-  showView('lesson', pushHistory);
+  const latest = songOpening.begin();
+  const begin = (track: DemoTrack): void => {
+    if (!latest()) return;
+    selectedEntry = entry;
+    practiceMode = false;
+    saveProgress(markOpened(progress, entry.id, Date.now()));
+    reportPlay(entry.id, 'open');
+    runDemo(track);
+    showView('lesson', pushHistory);
+  };
+  const ready = trackLoader.cached(entry.id);
+  if (ready) { begin(ready); return; }
+  trackLoader.load(entry.id).then(begin, error => {
+    if (latest()) console.error(`Could not load ${entry.title}`, error);
+  });
 }
 
-const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
+const catalogue = new SongbookView(must('#catalog-view'), LISTING, {
   select: entry => openSong(entry),
+  prefetch: entry => trackLoader.prefetch(entry.id),
   quickPlay: entry => {
     reportPlay(entry.id, 'quick-play');
     miniPlayer.toggle(entry);
@@ -1077,7 +1094,7 @@ function refreshPopular(): void {
   void loadPopular().then(ids => catalogue.setPopular(ids));
 }
 
-const miniPlayer = new MiniPlayer(must('#mini-player'), engine, {
+const miniPlayer = new MiniPlayer(must('#mini-player'), engine, trackLoader, {
   open: entry => openSong(entry),
   changed: (id, playing) => catalogue.setNowPlaying(id, playing),
 });

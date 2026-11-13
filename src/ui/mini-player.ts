@@ -1,4 +1,6 @@
+import type { DemoTrack } from '../core/demo';
 import type { Arrangement } from '../core/ir';
+import { latestRequest, type TrackLoader } from '../core/track-loader';
 import { prepareMelody } from '../core/prepare';
 import { createPassages, staffTransition } from './lesson';
 import type { Player } from './playback';
@@ -36,8 +38,11 @@ export class MiniPlayer {
   /** True while the player rises in; the song starts once the entrance ends. */
   private starting = false;
   private readonly space = new ResizeObserver(() => this.reserveSpace());
+  /** Only the latest song asked for may start once its notes arrive. */
+  private readonly requests = latestRequest();
+  private requesting: string | null = null;
 
-  constructor(private readonly root: HTMLElement, player: Player, private readonly callbacks: {
+  constructor(private readonly root: HTMLElement, player: Player, private readonly tracks: Pick<TrackLoader, 'cached' | 'load'>, private readonly callbacks: {
     open(entry: SongbookEntry): void;
     changed(id: string | null, playing: boolean): void;
   }) {
@@ -62,15 +67,39 @@ export class MiniPlayer {
     this.expandButton.addEventListener('click', openLesson);
   }
 
-  /** Play or pause a song; a different song replaces the current one. A closed player opens before it sounds. */
+  /**
+   * Play or pause a song; a different song replaces the current one. A closed player opens before it sounds.
+   * A song whose notes are not loaded yet starts when they arrive, unless another song was asked for meanwhile.
+   */
   toggle(entry: SongbookEntry): void {
+    const track = this.loaded?.entry.id === entry.id ? undefined : this.tracks.cached(entry.id);
+    if (this.loaded?.entry.id === entry.id || track) {
+      this.requests.cancel();
+      this.requesting = null;
+      this.apply(entry, track);
+      return;
+    }
+    if (this.requesting === entry.id) return;
+    this.requesting = entry.id;
+    const current = this.requests.begin();
+    this.tracks.load(entry.id).then(loaded => {
+      if (!current()) return;
+      this.requesting = null;
+      this.apply(entry, loaded);
+    }, error => {
+      if (!current()) return;
+      this.requesting = null;
+      this.status.textContent = `Could not load ${entry.title}: ${error instanceof Error ? error.message : 'unknown error'}`;
+    });
+  }
+
+  private apply(entry: SongbookEntry, track?: DemoTrack): void {
     if (this.starting && this.loaded?.entry.id === entry.id) {
       this.starting = false;
       this.render(this.quick.state);
       return;
     }
-    if (this.loaded?.entry.id !== entry.id) {
-      const track = entry.track;
+    if (track) {
       const notes = prepareMelody(track, { simplify: false, maxBend: 2 }).notes;
       this.loaded = {
         entry,
@@ -84,6 +113,7 @@ export class MiniPlayer {
       this.renderedWindow = null;
       delete this.tab.dataset.notes;
     }
+    if (!this.loaded) return;
     if (this.isOpen()) {
       this.starting = false;
       this.quick.toggle(entry.id, this.loaded.arrangement);
@@ -100,6 +130,8 @@ export class MiniPlayer {
   }
 
   close(): void {
+    this.requests.cancel();
+    this.requesting = null;
     this.starting = false;
     this.quick.close();
     this.loaded = null;

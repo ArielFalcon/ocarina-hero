@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import { deepStrictEqual, ok } from 'node:assert';
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import { pitchById } from '../src/core/pitches';
 import { prepareMelody } from '../src/core/prepare';
 

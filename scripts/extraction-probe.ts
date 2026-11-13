@@ -21,7 +21,8 @@ import audioLimits from '../src/core/audio-limits.json';
 import { BASIC_PITCH_HOP_SECONDS as HOP, BASIC_PITCH_RATE, basicPitchFrames, decodeFrames, resample, type BasicPitchFrames } from '../src/core/basic-pitch';
 import { MIDI_HIGH, MIDI_LOW } from '../src/core/melody-decoder';
 import type { MelodyNote } from '../src/core/project';
-import { CURATED_SONGS } from '../src/core/songs/catalogue';
+import { CATALOGUE_INDEX } from '../src/core/songs/catalogue-index';
+import { catalogueTrack } from './catalogue-loader';
 import { RATE, decode } from './instrument-dataset';
 import { alignReference, scoreNotes, type Alignment, type TimedNote } from './melody-metrics';
 
@@ -45,7 +46,7 @@ if (!audio || (!song && !referenceFile)) throw new Error('Usage: extraction-prob
 function loadMelody(): TimedNote[] {
   const source: { tempoBpm: number; melody: readonly MelodyNote[] } | undefined = referenceFile
     ? JSON.parse(readFileSync(referenceFile, 'utf8'))
-    : CURATED_SONGS.find(entry => entry.id === song || entry.id === `catalogue-${song}`);
+    : CATALOGUE_INDEX.map(entry => entry.id).filter(id => id === song || id === `catalogue-${song}`).map(catalogueTrack)[0];
   if (!source?.melody?.length) throw new Error(`No melody found for ${song ?? referenceFile}`);
   const beat = 60 / source.tempoBpm;
   const first = Math.min(...source.melody.map(note => note.startBeat));

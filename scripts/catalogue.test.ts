@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import toneMidi from '@tonejs/midi';
-import { DEMOS } from '../src/core/demo';
-import { CURATED_SONGS } from '../src/core/songs/catalogue';
+import { DEMOS } from './catalogue-loader';
+import { CATALOGUE_INDEX } from '../src/core/songs/catalogue-index';
+import { catalogueTrack } from './catalogue-loader';
 import { pitchById } from '../src/core/pitches';
 import { prepareMelody } from '../src/core/prepare';
 import { projectFaithfully, selectPhrase } from './catalogue-tools';
@@ -38,7 +39,7 @@ test('faithful projection accepts the full range and rejects wider phrases inclu
 });
 
 test('delivered catalogue plays the exact source events with a single shift even when simplification is enabled', () => {
-  for (const source of CURATED_SONGS) {
+  for (const source of CATALOGUE_INDEX.map(song => catalogueTrack(song.id))) {
     const demo = DEMOS.find(item => item.id === source.id);
     assert.ok(demo, source.id);
     const prepared = prepareMelody(demo, { simplify: true, maxBend: 0 });

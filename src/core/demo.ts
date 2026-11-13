@@ -4,7 +4,8 @@ import { BEND_LIMIT, PITCHES, pitchById } from './pitches';
 import lullaby from './songs/lullaby-reference.json';
 import littleroot from './songs/littleroot.json';
 import videoDemos from './songs/from-videos.json';
-import { CURATED_SONGS } from './songs/catalogue';
+import { CATALOGUE_INDEX } from './songs/catalogue-index';
+import type { Difficulty } from './difficulty';
 
 const LULLABY_TRIGGER: readonly Note[] = [0, 4.52].flatMap((offset) => [
   { pitch: 'B4', startBeat: offset, durationBeats: 1.17 },
@@ -76,8 +77,21 @@ export interface DemoTrack {
   readonly phraseStarts?: readonly number[];
 }
 
-export const DEMOS: readonly DemoTrack[] = [
-  ...CURATED_SONGS,
+/** The notes of a curated song, stored apart from its summary and loaded on demand. */
+export type SongData = Required<Pick<DemoTrack, 'melody' | 'fixedNotes' | 'phraseStarts'>>;
+
+/** A curated song as listed: everything but its notes, with the difficulty rated ahead of time. */
+export interface TrackSummary {
+  readonly id: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly tempoBpm: number;
+  readonly beatsPerBar?: number;
+  readonly difficulty: Difficulty;
+}
+
+/** Demos defined in code; the curated catalogue lives in per-song files. */
+export const INLINE_DEMOS: readonly DemoTrack[] = [
   {
     id: 'lullaby-game',
     title: 'Lullaby (complete, adapted)',
@@ -142,3 +156,6 @@ export const DEMOS: readonly DemoTrack[] = [
     melody: littleroot.notes,
   },
 ];
+
+/** Everything the Songbook lists, in display-source order: curated summaries, then inline demos with their notes. */
+export const LISTING: readonly (DemoTrack | TrackSummary)[] = [...CATALOGUE_INDEX, ...INLINE_DEMOS];

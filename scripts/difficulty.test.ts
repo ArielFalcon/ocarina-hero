@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DEMOS } from '../src/core/demo';
+import { DEMOS } from './catalogue-loader';
 import type { Note } from '../src/core/ir';
 import { difficultyOf, rateDifficulty } from '../src/core/difficulty';
 import { createSongbookEntries, filterSongbook } from '../src/ui/songbook';

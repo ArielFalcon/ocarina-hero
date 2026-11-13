@@ -434,7 +434,7 @@ function watchGamepads(): void {
 
 window.addEventListener('gamepadconnected', event => {
   gamepadStatus.textContent = event.gamepad.mapping === 'standard'
-    ? 'Controller connected: L, R, A, Y and X play; the D-pad and the sticks bend.'
+    ? 'Controller connected: the shoulder and face buttons play; the D-pad and the sticks bend.'
     : 'This browser does not recognise the layout of that controller.';
   watchGamepads();
 });

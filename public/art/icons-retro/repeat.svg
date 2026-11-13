@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
   <title>Repeat arrows</title>
-  <path fill="#f3ecd2" d="M3 11V8a3 3 0 0 1 3-3h9V2l6 4.5-6 4.5V8H7a1 1 0 0 0-1 1v2Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f4c315" d="M21 13v3a3 3 0 0 1-3 3H9v3l-6-4.5 6-4.5v3h8a1 1 0 0 0 1-1v-2Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
+  <path fill="#f3ecd2" d="M3 12V9a4 4 0 0 1 4-4h7.5V3L21 7.5 14.5 12V9H8a1 1 0 0 0-1 1v2Z"/>
+  <path fill="#f4c315" d="M3 10a3 3 0 0 1 3-3h14.28l.72.5-6.5 4.5V9H8a1 1 0 0 0-1 1v2H3Z"/>
+  <path fill="none" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" d="M3 12V9a4 4 0 0 1 4-4h7.5V3L21 7.5 14.5 12V9H8a1 1 0 0 0-1 1v2Z"/>
+  <path fill="#f3ecd2" d="M21 12v3a4 4 0 0 1-4 4H9.5v2L3 16.5 9.5 12v3H16a1 1 0 0 0 1-1v-2Z"/>
+  <path fill="#f4c315" d="M3 16.5h13a5 5 0 0 0 5-4.5v3a4 4 0 0 1-4 4H9.5v2Z"/>
+  <path fill="none" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" d="M21 12v3a4 4 0 0 1-4 4H9.5v2L3 16.5 9.5 12v3H16a1 1 0 0 0 1-1v-2Z"/>
 </svg>

@@ -1,15 +1,9 @@
 # Cloudflare Pages response headers.
+# Only content-hashed build output gets a long cache. Files with stable names (art, icons, fonts)
+# keep Pages' default caching, which revalidates by ETag and refreshes on every deployment; a
+# custom max-age there lets the zone edge and browsers serve stale files after a deploy.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/art/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-
-/icons/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 # Security headers for every response. Cloudflare merges them with the cache rules above.
 # CSP: everything is same-origin. 'wasm-unsafe-eval' lets the Workshop compile the Basic Pitch

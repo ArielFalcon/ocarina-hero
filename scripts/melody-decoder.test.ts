@@ -83,6 +83,34 @@ test('a strong onset of the held pitch splits a repeat only when splitting is en
   assert.deepEqual(notesOf(notes, onsets, { ...DEFAULT_DECODER, repeatOnsetThreshold: 0.5 }), [[69, 10, 60], [69, 60, 110]]);
 });
 
+test('a stronger pitch takes over a sounding note only when it starts with an onset', () => {
+  const notes = grid(200, [[72, 20, 180, 0.6], [76, 80, 95, 0.8]]);
+  assert.deepEqual(notesOf(notes).map(n => n[0]), [72]);
+  assert.deepEqual(notesOf(notes, grid(200, [[76, 80, 81, 0.9]])).map(n => n[0]), [72, 76, 72]);
+});
+
+test('a held upper note keeps the melody while a stronger lower note sounds below it', () => {
+  const notes = grid(200, [[79, 20, 180, 0.35], [67, 80, 110, 0.6]]);
+  const onsets = grid(200, [[67, 80, 81, 0.9]]);
+  assert.deepEqual(notesOf(notes, onsets).map(n => n[0]), [79]);
+  assert.deepEqual(notesOf(notes, onsets, { ...DEFAULT_DECODER, skylineFactor: 1 }).map(n => n[0]), [79, 67, 79]);
+});
+
+test('the upper-voice preference is bounded, so a crowded frame cannot silence the melody', () => {
+  // Eight pitches sound above the melody note; only `skylineLimit` of them may count against it.
+  const above: [number, number, number, number][] = [75, 76, 77, 78, 79, 80, 81, 82].map(midi => [midi, 20, 180, 0.2]);
+  const notes = grid(200, [[72, 20, 180, 0.4], ...above]);
+  assert.deepEqual(notesOf(notes).map(n => n[0]), [72]);
+  assert.notDeepEqual(notesOf(notes, undefined, { ...DEFAULT_DECODER, skylineLimit: 99 }).map(n => n[0]), [72]);
+});
+
+test('a note far weaker than the others of the fragment is dropped, one just above the ratio is kept', () => {
+  const strong: [number, number, number, number][] = [[84, 10, 40, 0.8], [86, 60, 90, 0.8], [88, 110, 140, 0.8]];
+  const notes = grid(300, [...strong, [84, 160, 190, 0.3], [86, 210, 240, 0.5]]);
+  assert.deepEqual(notesOf(notes).map(n => [n[0], n[1]]), [[84, 10], [86, 60], [88, 110], [86, 210]]);
+  assert.equal(notesOf(notes, undefined, { ...DEFAULT_DECODER, weakNoteRatio: 0 }).length, 5);
+});
+
 test('Basic Pitch windows stitch in order without overlap duplicates and map piano keys to MIDI rows', async () => {
   const calls: Float32Array[] = [];
   const model = async (window: Float32Array) => {

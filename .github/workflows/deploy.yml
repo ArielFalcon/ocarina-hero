@@ -1,4 +1,4 @@
-# Builds the static site (no melody server) and publishes it to Cloudflare Pages (ocarinahero.app).
+# Builds the static site and publishes it to Cloudflare Pages (ocarinahero.app).
 # Requires the CLOUDFLARE_API_TOKEN secret (Account > Cloudflare Pages > Edit) and the
 # CLOUDFLARE_ACCOUNT_ID repository variable.
 name: Deploy
@@ -27,7 +27,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npm run build:static
+      - run: npm run build
       - name: Publish to Cloudflare Pages
         run: npx --yes wrangler@4 pages deploy dist --project-name ocarina-hero --branch main --commit-hash "$GITHUB_SHA" --commit-message "$(git log -1 --pretty=%s)"
         env:

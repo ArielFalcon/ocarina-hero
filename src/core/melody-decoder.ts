@@ -1,11 +1,12 @@
 /**
  * Monophonic melody decoding from Basic Pitch note posteriors.
  *
- * TypeScript counterpart of the Basic Pitch part of `scripts/melody_decoder.py`. Posteriors are used
- * as absolute probabilities (never normalized per clip), with a mild preference for higher voices.
- * A Viterbi pass finds one path that penalizes pitch changes and voicing switches. Notes shorter
- * than a minimum that follows the fragment's onset rate are then absorbed or removed, and held
- * notes are split where Basic Pitch reports a strong new onset of the same pitch.
+ * Posteriors are used as absolute probabilities (never normalized per clip), with a mild preference
+ * for higher pitches and for the upper sounding voice. A Viterbi pass finds one path that penalizes
+ * pitch changes and voicing switches, and makes entering a pitch cheaper where Basic Pitch reports
+ * its onset. Notes shorter than a minimum that follows the fragment's onset rate are then absorbed
+ * or removed, notes far weaker than the rest of the fragment are dropped, and held notes are split
+ * where Basic Pitch reports a strong new onset of the same pitch.
  * Parameters were chosen on `scripts/instrument-benchmark.ts`; see docs/transcription.md.
  */
 
@@ -33,13 +34,27 @@ export interface DecoderParameters {
   readonly activeNoteThreshold: number;
   /** Onset posterior of the held pitch that splits a note into a repeat; above 1 disables splitting. */
   readonly repeatOnsetThreshold: number;
+  /** Discount on entering a pitch, times its strongest onset posterior within `onsetBonusFrames` frames; 0 disables. */
+  readonly onsetBonus: number;
+  readonly onsetBonusFrames: number;
+  /**
+   * Emission multiplier per pitch sounding (posterior at or above `skylineThreshold`) at least
+   * `skylineGapSemitones` higher, counted up to `skylineLimit`; 1 disables. The limit keeps a crowded
+   * frame from silencing the melody.
+   */
+  readonly skylineFactor: number;
+  readonly skylineThreshold: number;
+  readonly skylineGapSemitones: number;
+  readonly skylineLimit: number;
+  /** Notes whose mean posterior is below this fraction of the fragment's median note are dropped; 0 disables. */
+  readonly weakNoteRatio: number;
 }
 
 export const DEFAULT_DECODER: DecoderParameters = {
   scale: 2,
   heightBias: 0.04,
   silence: 0.5,
-  changePenalty: 2,
+  changePenalty: 4,
   distancePenalty: 0.05,
   voicingPenalty: 2,
   minNoteSeconds: 0.06,
@@ -49,6 +64,13 @@ export const DEFAULT_DECODER: DecoderParameters = {
   onsetMinSpacingSeconds: 0.05,
   activeNoteThreshold: 0.3,
   repeatOnsetThreshold: 0.7,
+  onsetBonus: 4,
+  onsetBonusFrames: 2,
+  skylineFactor: 0.9,
+  skylineThreshold: 0.2,
+  skylineGapSemitones: 3,
+  skylineLimit: 3,
+  weakNoteRatio: 0.6,
 };
 
 const SCORE_FLOOR = 1e-4;
@@ -65,7 +87,7 @@ function at(grid: PitchGrid, frame: number, state: number): number {
 }
 
 /** Returns the most likely state per frame: -1 for unvoiced, else the MIDI offset from MIDI_LOW. */
-function viterbi(notes: PitchGrid, parameters: DecoderParameters): Int32Array {
+function viterbi(notes: PitchGrid, onsets: PitchGrid, parameters: DecoderParameters): Int32Array {
   const { frames } = notes;
   const path = new Int32Array(frames).fill(-1);
   if (frames === 0) return path;
@@ -76,7 +98,25 @@ function viterbi(notes: PitchGrid, parameters: DecoderParameters): Int32Array {
     let strongest = 0;
     for (let s = 0; s < STATES; s++) strongest = Math.max(strongest, at(notes, frame, s));
     out[0] = Math.log(parameters.silence * Math.min(1, Math.max(0, 1 - strongest)) + SCORE_FLOOR);
-    for (let s = 0; s < STATES; s++) out[s + 1] = Math.log(parameters.scale * bias[s]! * at(notes, frame, s) + SCORE_FLOOR);
+    // Walking down from the top pitch counts the pitches sounding at least the gap above each state.
+    let above = 0;
+    for (let s = STATES - 1; s >= 0; s--) {
+      const upper = s + parameters.skylineGapSemitones;
+      if (upper < STATES && at(notes, frame, upper) >= parameters.skylineThreshold) above++;
+      const skyline = parameters.skylineFactor ** Math.min(parameters.skylineLimit, above);
+      out[s + 1] = Math.log(parameters.scale * bias[s]! * skyline * at(notes, frame, s) + SCORE_FLOOR);
+    }
+  };
+  /** Per voiced state, the discount for entering it at this frame: its strongest nearby onset posterior. */
+  const entry = new Float64Array(all);
+  const onsetBonus = (frame: number) => {
+    const first = Math.max(0, frame - parameters.onsetBonusFrames);
+    const last = Math.min(frames - 1, frame + parameters.onsetBonusFrames);
+    for (let s = 0; s < STATES; s++) {
+      let strongest = 0;
+      for (let f = first; f <= last; f++) strongest = Math.max(strongest, at(onsets, f, s));
+      entry[s + 1] = parameters.onsetBonus * strongest;
+    }
   };
   const back = new Int16Array(frames * all);
   let total = new Float64Array(all);
@@ -85,16 +125,16 @@ function viterbi(notes: PitchGrid, parameters: DecoderParameters): Int32Array {
   emission(0, total);
   for (let j = 1; j < frames; j++) {
     emission(j, e);
-    // Best voiced predecessor overall, used for the distance-penalized pitch change.
+    if (parameters.onsetBonus > 0) onsetBonus(j);
     for (let to = 0; to < all; to++) {
       let best = -Infinity;
       let from = 0;
       for (let k = 0; k < all; k++) {
         let transition: number;
-        if (k === 0 && to === 0) transition = 0;
-        else if (k === 0 || to === 0) transition = -parameters.voicingPenalty;
-        else if (k === to) transition = 0;
-        else transition = -parameters.changePenalty - parameters.distancePenalty * Math.abs(k - to);
+        if (k === to) transition = 0;
+        else if (to === 0) transition = -parameters.voicingPenalty;
+        else if (k === 0) transition = entry[to]! - parameters.voicingPenalty;
+        else transition = entry[to]! - parameters.changePenalty - parameters.distancePenalty * Math.abs(k - to);
         const candidate = total[k]! + transition;
         if (candidate > best) { best = candidate; from = k; }
       }
@@ -195,13 +235,25 @@ function splitRepeats(notes: DecodedNote[], onsets: PitchGrid, minFrames: number
   });
 }
 
+/** Drops notes whose mean posterior is below `ratio` of the median note; fragments of one or two notes are kept whole. */
+function dropWeakNotes(decoded: DecodedNote[], notes: PitchGrid, ratio: number): DecodedNote[] {
+  if (ratio <= 0 || decoded.length <= 2) return decoded;
+  const means = decoded.map(note => {
+    let sum = 0;
+    for (let j = note.startFrame; j < note.endFrame; j++) sum += at(notes, j, note.midi - MIDI_LOW);
+    return sum / (note.endFrame - note.startFrame);
+  });
+  const median = [...means].sort((a, b) => a - b)[Math.floor(means.length / 2)]!;
+  return decoded.filter((_, i) => means[i]! >= ratio * median);
+}
+
 /** Decodes one melody line from note and onset posteriors on a uniform frame clock. */
 export function decodeMelody(notes: PitchGrid, onsets: PitchGrid, hopSeconds: number, parameters: DecoderParameters = DEFAULT_DECODER): DecodedNote[] {
   if (notes.frames === 0) return [];
   const minSeconds = minimumNoteSeconds(onsets, notes, hopSeconds, parameters);
   const minFrames = Math.max(1, Math.round(minSeconds / hopSeconds));
-  const path = enforceMinimum(viterbi(notes, parameters), minFrames);
+  const path = enforceMinimum(viterbi(notes, onsets, parameters), minFrames);
   const decoded = runs(path).filter(run => run.state >= 0)
     .map(run => ({ midi: run.state + MIDI_LOW, startFrame: run.start, endFrame: run.end }));
-  return splitRepeats(decoded, onsets, minFrames, parameters.repeatOnsetThreshold);
+  return splitRepeats(dropWeakNotes(decoded, notes, parameters.weakNoteRatio), onsets, minFrames, parameters.repeatOnsetThreshold);
 }

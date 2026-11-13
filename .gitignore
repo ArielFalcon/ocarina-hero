@@ -1,7 +1,5 @@
-.runtime-melody/
 /out
 .atl/
-__pycache__/
 node_modules/
 dist/
 .DS_Store

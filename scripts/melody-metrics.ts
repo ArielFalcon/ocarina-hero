@@ -1,4 +1,4 @@
-/** Note-level evaluation helpers for the Main melody benchmark. Times are seconds. */
+/** Note-level evaluation helpers for the audio extraction benchmark. Times are seconds. */
 export interface TimedNote { readonly start: number; readonly duration: number; readonly midi: number }
 export interface Alignment { readonly offset: number; readonly scale: number; readonly shift: number }
 

@@ -27,9 +27,6 @@ npm install
 npm run dev   # http://localhost:5173
 ```
 
-The most precise analysis of songs with accompaniment uses local models that are not available in the
-online version: run `npm run setup:melody` first ([details](docs/local-melody.md)).
-
 ## Learn more
 
 [Project notes](docs/project-notes.md) · [Product objective](docs/objetivo.md) · [Design system](docs/design-system.md)

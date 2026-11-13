@@ -16,7 +16,7 @@ Ocarina Hero turns songs into button tabs for the ocarina of
 tapestry-style interface that works on phones and desktop.
 
 - **Songbook**: curated game, anime, film, pop and classic melodies, filterable by category and universe, with saved favourites.
-- **Lessons**: listen to or practise each passage on a button staff, at 100%, 75% or 50% speed.
+- **Lessons**: listen to or practice each passage on a button staff, at 100%, 75% or 50% speed.
 - **Free play**: improvise on the on-screen pad or the keyboard.
 - **Workshop**: import a MIDI file, or a short fragment of a recording, as a playable tab. The melody is found in your browser; it is most accurate with a single instrument or voice.
 

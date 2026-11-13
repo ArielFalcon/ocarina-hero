@@ -103,7 +103,7 @@ const importer = new SourceImporter({
     must<HTMLButtonElement>('#open-import').disabled = false;
     updateLessonHeading();
     showView('lesson');
-    if (source.analysis) setWorkshopStatus(`TAB ready: ${source.melody.length} notes. Open the melody to play or practise it.`);
+    if (source.analysis) setWorkshopStatus(`TAB ready: ${source.melody.length} notes. Open the melody to play or practice it.`);
   },
   onStatus(message) {
     songHint.textContent = message;
@@ -250,7 +250,7 @@ function press(pitch: PitchSpec): void {
   updateHint();
 
   if (songArrangement) {
-    if (practiceMode && !isPlaying) practise(pitch.button);
+    if (practiceMode && !isPlaying) practiceNote(pitch.button);
     return;
   }
 
@@ -815,7 +815,7 @@ function refreshPracticeStatus(lead = ''): void {
     const expected = recorded[practiceCursor];
     practiceStatus.textContent = lead + (expected
       ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0)}`
-      : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}. Choose a passage to practise again.`);
+      : `You reached the end${combo.best > 1 ? ` with a best combo of ${combo.best}` : ''}. Choose a passage to practice again.`);
   }
 }
 
@@ -864,7 +864,7 @@ function rewardHit(point: { x: number; y: number } | null, button: ControllerBut
   }
 }
 
-function practise(button: ControllerButton): void {
+function practiceNote(button: ControllerButton): void {
   const expected = recorded[practiceCursor];
   if (!expected) return;
   const next = advancePractice(recorded, practiceCursor, button, bend);

@@ -97,6 +97,8 @@ let isPlaying = false;
 const practiceStatus = must<HTMLParagraphElement>('#practice-status');
 const comboBadge = must<HTMLParagraphElement>('#combo');
 const practiceLine = must<HTMLDivElement>('.practice-line');
+const statusSlot = must<HTMLDivElement>('.status-slot');
+const progressTrack = must<HTMLDivElement>('.progress-track');
 let comboHideTimer: number | undefined;
 const songComplete = must<HTMLDivElement>('#song-complete');
 const nextSongButton = must<HTMLButtonElement>('#next-song');
@@ -805,7 +807,7 @@ function updateProgress(): void {
   const position = Math.min(recorded.length, practiceMode ? practiceCursor : playbackCursor);
   progress.max = Math.max(1, recorded.length);
   progress.value = position;
-  must('.progress-track').style.setProperty('--progress-position', `${position / Math.max(1, recorded.length) * 100}%`);
+  progressTrack.style.setProperty('--progress-ratio', String(position / Math.max(1, recorded.length)));
   must('#song-progress').hidden = current === null || recorded.length === 0;
   must('#progress-label').textContent = `${position} / ${recorded.length} notes`;
   must('#progress-percent').textContent = `${Math.round(position / Math.max(1, recorded.length) * 100)}%`;
@@ -861,23 +863,37 @@ function refreshPracticeStatus(lead = ''): void {
   }
 }
 
-/** Show the running streak from the second hit; a broken streak drops away. */
+/** One-shot motions of the combo slot; only one plays at a time. */
+function moveCombo(motion: 'is-entering' | 'is-bumped' | 'is-raised' | 'is-broken'): void {
+  comboBadge.classList.remove('is-entering', 'is-bumped', 'is-raised', 'is-broken');
+  retrigger(comboBadge, motion);
+}
+
+/**
+ * Show the running streak from the second hit: the slot is sewn in, each hit rolls the
+ * count, a new tier stamps the slot and a broken streak drops away.
+ */
 function renderCombo(broken = false): void {
   window.clearTimeout(comboHideTimer);
   comboBadge.classList.remove('is-broken');
   if (broken && !comboBadge.hidden) {
-    retrigger(comboBadge, 'is-broken');
-    comboHideTimer = window.setTimeout(() => { comboBadge.hidden = true; comboBadge.classList.remove('is-broken'); }, 450);
+    moveCombo('is-broken');
+    comboHideTimer = window.setTimeout(() => { comboBadge.hidden = true; comboBadge.classList.remove('is-broken'); }, 500);
     return;
   }
   const visible = practiceMode && combo.streak >= 2;
   const count = comboBadge.querySelector('.combo-count')!;
+  const entering = comboBadge.hidden;
   comboBadge.hidden = !visible;
   if (!visible) { count.textContent = ''; return; }
   if (count.textContent === `×${combo.streak}`) return;
-  comboBadge.dataset.tier = String(comboTier(combo.streak));
+  const tier = String(comboTier(combo.streak));
+  const raised = !entering && comboBadge.dataset.tier !== tier;
+  comboBadge.dataset.tier = tier;
   count.textContent = `×${combo.streak}`;
-  retrigger(comboBadge, 'is-bumped');
+  retrigger(count, 'is-rolled');
+  moveCombo(entering ? 'is-entering' : raised ? 'is-raised' : 'is-bumped');
+  if (raised) stitchRipple(comboBadge);
 }
 
 function resetCombo(): void {
@@ -891,15 +907,16 @@ function rewardHit(point: { x: number; y: number } | null, button: ControllerBut
   if (point) sparkBurst(tab, point, tier);
   stitchRipple(pad.querySelector(`[data-button="${button}"]`));
   if (noteBend) stitchRipple(bends.querySelector(`[data-bend="${noteBend}"]`));
-  retrigger(must('.progress-track'), 'is-hit');
+  retrigger(progressTrack, 'is-hit');
+  if (cleared || finished) retrigger(progressTrack, 'is-swept');
   if (finished) {
     ribbon(practiceLine, 'Song complete', combo.best > 1 ? `Best combo ×${combo.best}` : '', 'song');
     haptic([18, 50, 18, 50, 40]);
   } else if (milestone) {
-    ribbon(practiceLine, `${milestone.label}!`, `×${milestone.streak} combo`, 'combo');
+    ribbon(statusSlot, `${milestone.label}!`, '', 'combo');
     haptic([14, 40, 22]);
   } else if (cleared) {
-    ribbon(practiceLine, 'Passage clear', combo.streak > 1 ? `×${combo.streak} in a row` : '', 'passage');
+    ribbon(statusSlot, 'Passage clear', '', 'passage');
     haptic([10, 30, 10]);
   } else {
     haptic(8);

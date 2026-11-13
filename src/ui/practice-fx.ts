@@ -58,12 +58,12 @@ export function sparkBurst(tab: HTMLElement, point: { x: number; y: number }, ti
 }
 
 /**
- * A rust ribbon unrolled over the practice status line for milestones, passages and
- * the final note. It repeats what the status announces, so it never covers the staff
- * or the controller.
+ * A rust ribbon unrolled over the practice status for milestones, passages and the
+ * final note, replacing any ribbon still inside `line`. It repeats what the status
+ * announces, so it never covers the staff or the controller.
  */
 export function ribbon(line: HTMLElement, title: string, detail: string, kind: 'combo' | 'passage' | 'song'): void {
-  line.querySelector(':scope > .combo-ribbon')?.remove();
+  line.querySelector('.combo-ribbon')?.remove();
   const banner = document.createElement('div');
   banner.className = `combo-ribbon is-${kind}`;
   banner.setAttribute('aria-hidden', 'true');

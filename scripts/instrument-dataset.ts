@@ -31,7 +31,8 @@ export interface BenchmarkItem {
   readonly span?: readonly [number, number];
 }
 
-function decode(file: string, start = 0, seconds = 15): Float32Array {
+/** Mono samples at `RATE` of a window of an audio file, decoded with ffmpeg. */
+export function decode(file: string, start = 0, seconds = 15): Float32Array {
   const pcm = execFileSync('ffmpeg', ['-v', 'error', '-ss', String(start), '-t', String(seconds), '-i', file, '-ac', '1', '-ar', String(RATE), '-f', 'f32le', '-'], { maxBuffer: 1 << 27 });
   return new Float32Array(pcm.buffer.slice(pcm.byteOffset, pcm.byteOffset + pcm.byteLength));
 }

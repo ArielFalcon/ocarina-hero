@@ -30,9 +30,14 @@ test('a song lives at its own path under the app base, and other views stay on h
   assert.deepEqual(parseLocation('/app/', '/song/ode-to-joy/', ''), { view: 'catalog' });
 });
 
-test('a hash decides over the path, so links shared before song paths existed still open', () => {
+test('a hash that names a route decides over the path, so links shared before song paths existed still open', () => {
   assert.deepEqual(parseLocation('/', '/', '#song/ode'), { view: 'song', songId: 'ode' });
   assert.deepEqual(parseLocation('/', '/song/ode/', '#free'), { view: 'free' });
+  assert.deepEqual(parseLocation('/', '/song/ode/', '#catalog'), { view: 'catalog' });
+});
+
+test('an in-page anchor on a song page keeps the song', () => {
+  assert.deepEqual(parseLocation('/', '/song/ode/', '#main-content'), { view: 'song', songId: 'ode' });
 });
 
 test('a malformed song address falls back to the songbook instead of throwing', () => {

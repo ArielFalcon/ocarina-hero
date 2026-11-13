@@ -26,7 +26,7 @@ import { MiniPlayer } from './mini-player';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, readBindings, handleKeyDown, type KeyboardAction } from './keyboard';
 import { threadIcon, type ThreadIcon } from './thread-icons';
 import { SongbookView } from './songbook-view';
-import type { SongbookEntry } from './songbook';
+import { songMeta, type SongbookEntry } from './songbook';
 import { nextSong } from './featured';
 import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
 
@@ -1007,7 +1007,7 @@ function showView(next: AppView, pushHistory = true): void {
   if (next === 'lesson') updateLessonHeading();
   if (next === 'lesson') watchGamepads();
   if (returningToCatalog) catalogue.refresh();
-  document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title) : `${current.title} · Ocarina Hero`;
+  document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title, songMeta(selectedEntry)) : `${current.title} · Ocarina Hero`;
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
 
@@ -1133,7 +1133,10 @@ function restoreView(): void {
     else openSong(entry, false);
     const address = songPath(APP_BASE, entry.id);
     if (location.pathname !== address || location.hash) history.replaceState(null, '', address + location.search);
-  } else if (route.view === 'free') openFreePlay();
+    return;
+  }
+  if (location.pathname !== APP_BASE) history.replaceState(null, '', APP_BASE + location.search + location.hash);
+  if (route.view === 'free') openFreePlay();
   else if (route.view === 'saved' || route.view === 'catalog') {
     catalogue.showSaved(route.view === 'saved');
     showView('catalog', false);

@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { DEMOS } from '../src/core/demo';
-import { siteUrlOf, sitemapXml, songPageHtml } from '../server/song-pages';
+import { songDocumentTitle } from '../src/ui/route';
+import { createSongbookEntries, songMeta } from '../src/ui/songbook';
+import { siteUrlOf, sitemapXml, songPageHtml } from './song-pages';
 
 const indexHtml = readFileSync('index.html', 'utf8');
 const song = { id: 'song-of-storms', title: 'Song of "Storms" & Rain', meta: 'Zelda · Ocarina of Time' };
@@ -11,7 +13,7 @@ const withoutRewrittenValues = (html: string) => html.replace(/<title>.*?<\/titl
 test('a song page carries its own title, description, canonical address and share preview', () => {
   const html = songPageHtml(indexHtml, song, 'https://ocarinahero.app/');
   const address = 'https://ocarinahero.app/song/song-of-storms/';
-  assert.ok(html.includes('<title>Song of &quot;Storms&quot; &amp; Rain ocarina tab · Ocarina Hero</title>'));
+  assert.ok(html.includes('<title>Song of &quot;Storms&quot; &amp; Rain (Zelda · Ocarina of Time) ocarina tab · Ocarina Hero</title>'));
   assert.ok(html.includes(`<link rel="canonical" href="${address}"`));
   assert.ok(html.includes(`<meta property="og:url" content="${address}"`));
   for (const tag of ['<meta name="description"', '<meta property="og:title"', '<meta property="og:description"', '<meta name="twitter:title"', '<meta name="twitter:description"']) {
@@ -31,6 +33,11 @@ test('the site address comes from the canonical link, and the sitemap lists the 
   const xml = sitemapXml('https://ocarinahero.app/', ['ode', 'song-of-storms']);
   assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map(match => match[1]),
     ['https://ocarinahero.app/', 'https://ocarinahero.app/song/ode/', 'https://ocarinahero.app/song/song-of-storms/']);
+});
+
+test('no two bundled songs share a page title', () => {
+  const titles = createSongbookEntries(DEMOS).map(song => songDocumentTitle(song.title, songMeta(song)));
+  assert.deepEqual(titles.filter((title, index) => titles.indexOf(title) !== index), []);
 });
 
 test('every bundled song id is safe as a directory and URL segment', () => {

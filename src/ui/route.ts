@@ -27,9 +27,10 @@ export function songPath(base: string, songId: string): string {
   return `${base}${SONG_PREFIX}${encodeURIComponent(songId)}/`;
 }
 
-/** The route of a page address; a hash decides over the path. */
+/** The route of a page address. A hash that names a route decides over the path; any other hash is an in-page anchor. */
 export function parseLocation(base: string, pathname: string, hash: string): Route {
-  if (hash.length > 1) return parseRoute(hash);
+  const named = parseRoute(hash);
+  if (named.view !== 'catalog' || hash === '#catalog') return named;
   if (!pathname.startsWith(base + SONG_PREFIX)) return { view: 'catalog' };
   const songId = decodeSongId(pathname.slice(base.length + SONG_PREFIX.length).split('/')[0]!);
   return songId ? { view: 'song', songId } : { view: 'catalog' };
@@ -40,7 +41,7 @@ export function shareUrl(pageUrl: string, base: string, songId: string): string 
   return new URL(songPath(base, songId), pageUrl).href;
 }
 
-/** Document title of a song lesson, shared by the app and its prerendered page. */
-export function songDocumentTitle(title: string): string {
-  return `${title} ocarina tab · Ocarina Hero`;
+/** Document title of a song lesson, shared by the app and its prerendered page; `meta` tells apart songs that share a title. */
+export function songDocumentTitle(title: string, meta: string): string {
+  return `${title} (${meta}) ocarina tab · Ocarina Hero`;
 }

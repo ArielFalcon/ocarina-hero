@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tsx --test scripts/*.test.ts",
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && tsx scripts/build-song-pages.ts",
     "build:static": "MELODY_SERVER=off npm run build",
     "preview": "vite preview",
     "preview:tab": "tsx scripts/preview.ts",

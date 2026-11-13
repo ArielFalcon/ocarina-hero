@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite';
 import { createMelodyPlugin } from './server/melody';
-import { createSongPagesPlugin } from './server/song-pages';
 
 export default defineConfig({
   // Optional subfolder hosting; ocarinahero.app and local development use '/'.
   base: process.env.BASE_PATH ?? '/',
-  plugins: [createMelodyPlugin(), createSongPagesPlugin()],
+  plugins: [createMelodyPlugin()],
   define: {
     // Static hosting (MELODY_SERVER=off) has no /api/melody, so the build drops that mode.
     __MELODY_SERVER__: JSON.stringify(process.env.MELODY_SERVER !== 'off'),

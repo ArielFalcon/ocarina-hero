@@ -47078,6 +47078,175 @@ export const CURATED_SONGS = [
     "phraseStarts": [
       0
     ]
+  },
+  {
+    "id": "catalogue-oot-nocturne-of-shadow",
+    "title": "Nocturne of Shadow",
+    "subtitle": "Complete ocarina line of the duet: B-A-A-D-B-A-F (the in-game ocarina song), a rest while the strings answer, then G#-F#-F#-C#-G#-F# and the closing F",
+    "tempoBpm": 80,
+    "beatsPerBar": 4,
+    "melody": [
+      {
+        "midi": 83,
+        "startBeat": 0,
+        "durationBeats": 1
+      },
+      {
+        "midi": 81,
+        "startBeat": 1,
+        "durationBeats": 1
+      },
+      {
+        "midi": 81,
+        "startBeat": 2,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 74,
+        "startBeat": 2.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 83,
+        "startBeat": 3,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 81,
+        "startBeat": 3.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 77,
+        "startBeat": 4,
+        "durationBeats": 3
+      },
+      {
+        "midi": 80,
+        "startBeat": 12,
+        "durationBeats": 1
+      },
+      {
+        "midi": 78,
+        "startBeat": 13,
+        "durationBeats": 1
+      },
+      {
+        "midi": 78,
+        "startBeat": 14,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 73,
+        "startBeat": 14.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 80,
+        "startBeat": 15,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 78,
+        "startBeat": 15.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 77,
+        "startBeat": 16,
+        "durationBeats": 4
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 0,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 1,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 2,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 2.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 3,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 3.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 4,
+        "durationBeats": 3
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 12,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 13,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 14,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 14.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 15,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 15.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 16,
+        "durationBeats": 4
+      }
+    ],
+    "phraseStarts": [
+      0,
+      7
+    ]
   }
 ] satisfies readonly {
   id: string; title: string; subtitle: string; tempoBpm: number; beatsPerBar: number;

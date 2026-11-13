@@ -1,0 +1,75 @@
+[
+  {
+    "id": "oot-nocturne-of-shadow",
+    "title": "Nocturne of Shadow",
+    "category": "gaming",
+    "hook": "Complete ocarina line of the duet: B-A-A-D-B-A-F (the in-game ocarina song), a rest while the strings answer, then G#-F#-F#-C#-G#-F# and the closing F",
+    "source": {
+      "file": "out/catalogue-2026-11-13g/sources/raw/nocturne-nocturneofshadow.mid",
+      "page": "https://www.vgmusic.com/music/console/nintendo/n64/",
+      "url": "https://www.vgmusic.com/music/console/nintendo/n64/nocturneofshadow.mid",
+      "sha256": "57153af6d6ee18dee6d8e15fad836f6f3f6858920cd9c95254c4aeac865ffb30"
+    },
+    "trackIndex": 1,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "phraseStarts": [
+      0,
+      7
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "two-MIDI exact pitch/onset comparison of the dedicated ocarina tracks, a third sequence, the decompiled game note table and the official Nintendo score for the seven in-game notes, and an inspection of the original recording",
+      "summary": "VGMusic nocturneofshadow.mid (Graeme Stewart) track 1 (ocarina, program 79; the whole 14-note line, no overlaps) events 0-13 (80 BPM, exact grid) vs Z5NocturneOfShadow.mid (Eddie1989) track 7 (ocarina, program 79; the whole track) events 0-13 (95 BPM): 14 pitches and metrical attacks identical. Both files give the answer G-F-F-C-G-F, four beats before the sequence, to another instrument (strings an octave lower in the primary), so it is not part of the ocarina line. bitmidi 112979, a flute reduction in octave pairs, has the same 14 events (upper notes, the answer skipped) within 0.025391 beat. zeldaret/oot 14759ab sOcarinaSongNotes[OCARINA_SONG_NOCTURNE] decodes B4 A4 A4 D4 B4 A4 F4 (+12 = MIDI B5 A5 A5 D5 B5 A5 F5) at 36/33(+1)/(3 rest)/18/18/18/18/144 frames (a quarter is 36 frames): attacks within 1 frame. Nintendo's official score of the song (4/4: two quarters, four eighths, a dotted half) has the same seven pitches and attacks. The table and the score hold only the seven in-game notes; events 7-13 rest on the MIDIs. Original recording (attributed soundtrack upload, inspection only): the expected pitch is the strongest semitone in 13 of 14 note windows and the second strongest in the other (the D5, the quietest note of the game table).",
+      "urls": [
+        "https://www.vgmusic.com/music/console/nintendo/n64/nocturneofshadow.mid",
+        "https://www.vgmusic.com/music/console/nintendo/n64/Z5NocturneOfShadow.mid",
+        "https://bitmidi.com/uploads/112979.mid",
+        "https://github.com/zeldaret/oot/blob/14759abf9abb4295de142cdc1452998630ea70fb/src/audio/game/general.c",
+        "https://www.nintendo.com/jp/games/switch2/aa9ja/melody/index.html",
+        "https://www.youtube.com/watch?v=nnhcyVSL80c"
+      ]
+    },
+    "corpus": {
+      "clip": "corpus/original-clips/oot-nocturne-of-shadow/clip.wav",
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Attributed soundtrack upload, 5-20 s of a 21 s track: the ocarina phrase without the opening harp statement. Inspected per note window only; upload identity and note-level alignment are not validated. The recording runs at about 90 BPM with a closing ritardando; the arrangement keeps the 80 BPM of the primary."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-13g/sources/raw/nocturne-Z5NocturneOfShadow.mid",
+      "trackIndex": 7,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "pitchShift": 0
+    }
+  }
+]

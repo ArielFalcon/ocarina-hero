@@ -135,8 +135,7 @@ details[open] summary { color: var(--text); }
 .search-field { margin-bottom: 23px; }
 .catalog-filters { border-bottom: 1px dashed #a2824959; padding-bottom: 10px; }
 .catalog-filters > summary { font-size: 19px; margin-bottom: 10px; }
-.category-selector { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
-.category-selector legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
+.category-selector { border: 0; padding: 0; margin: 0; min-width: 0; }
 .category-panel .category-grid { padding: 12px 2px 4px; }
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 /* Two compact rows: icon + name, then the noun with its count aligned right. */
@@ -159,10 +158,15 @@ details[open] summary { color: var(--text); }
 .category-symbol { flex-shrink: 0; display: flex; }
 .category-symbol .thread-icon { width: 22px; height: 24px; }
 @media (max-width: 380px) { .category-card { padding: 7px 8px; gap: 6px; } .category-name { font-size: 16px; } }
-.catalog-facets { display: grid; grid-template-columns: minmax(0, 1fr); }
+/* Compact filter list: each label sits beside its toggle; an open panel spans the row beneath. */
+.filter-grid { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 14px; row-gap: 8px; align-items: center; }
+.filter-grid > fieldset, .catalog-facets, .catalog-facets > fieldset { display: contents; }
+.filter-grid legend { grid-column: 1; margin: 0; padding: 0; font-size: 16px; }
+.filter-grid .universe-toggle { grid-column: 2; justify-self: start; }
+.filter-grid .universe-panel { grid-column: 1 / -1; }
+@media (max-width: 350px) { .filter-grid { column-gap: 8px; } .filter-grid legend { font-size: 15px; } .filter-grid .universe-toggle { padding-left: 8px; padding-right: 8px; } }
 /* Universe chips: one scrolling row on phones, wrapping lines on desktop. */
 .universe-filter { min-width: 0; margin: 0; padding: 0; border: 0; }
-.universe-filter legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
 /* Folded, the toggle shows the current universe; open, the panel grows downward in place. */
 .universe-toggle { width: fit-content; max-width: 100%; min-height: 48px; padding-right: 12px; border: 0; color: var(--text); text-align: left; }
 .universe-toggle::before { padding: 2px; opacity: 1; filter: url('#cord-edge'); }
@@ -415,8 +419,7 @@ progress::-moz-progress-bar { background: var(--cord); }
 [data-difficulty='expert'] > .seal-frame { background-image: url('/art/difficulty/expert.webp'); }
 .song-open { gap: 17px; padding-left: 6px; }
 /* Difficulty range: five steps, each centred over the thumb's stop (thumb box is 23px). */
-.difficulty-filter { min-width: 0; margin: 18px 0 0; padding: 0; border: 0; }
-.difficulty-filter legend { padding: 0; margin-bottom: 8px; font-size: 17px; }
+.difficulty-filter { min-width: 0; margin: 0; padding: 0; border: 0; }
 .difficulty-scale { max-width: 520px; padding: 12px 2px 4px; }
 .universe-toggle .mini-seal { flex: 0 0 22px; width: 22px; height: 26px; border-radius: 2px 2px 7px 7px; }
 .universe-toggle .mini-seal .seal-frame { inset: -22% -26%; }
@@ -543,6 +546,9 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 @media (min-width: 640px) { .theme-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 @media (min-width: 800px) {
+  /* A slimmer band from a longer weave: 64px art shown at 32px stays sharp on 2x screens and never upscales. */
+  :root { --tapestry-band-height: 32px; }
+  .tapestry-edge { background: url('/art/tapestry-band-desktop.webp') center top / auto 100% repeat-x; }
   .head { padding: 12px 36px; }
   .brand { font-size: 30px; }
   .catalog-hero { min-height: 280px; padding: 36px 38px; }
@@ -552,12 +558,30 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .catalog-filters > summary { width: fit-content; }
   .universe-row { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
   .universe-row .universe-name { font-size: 16px; }
-  .category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .category-grid { grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; }
   .category-card { padding: 10px; gap: 7px; }
   .category-name { font-size: 17px; }
-  .category-selector { margin-bottom: 24px; }
+  /* Toggles share one row; panels float over the list, so opening one never moves the page. */
+  .filter-grid { position: relative; grid-template-columns: repeat(3, max-content) minmax(0, 1fr); column-gap: 24px; row-gap: 0; align-items: stretch; }
+  .filter-grid legend { grid-row: 1; font-size: 17px; }
+  .filter-grid .universe-toggle { grid-row: 2; }
+  .category-selector > *:not(.universe-panel) { grid-column: 1; }
+  .universe-filter > *:not(.universe-panel) { grid-column: 2; }
+  .difficulty-filter > *:not(.universe-panel) { grid-column: 3; }
+  .filter-grid .universe-panel {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 6; margin-top: 8px; padding: 2px 14px 12px;
+    max-height: min(62vh, 560px); overflow-y: auto; overscroll-behavior: contain; scrollbar-color: #aa8341 #18251b; scrollbar-width: thin;
+    border: 1px solid #a2824980; border-radius: 6px; background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-raised), 0 14px 30px #050a06b3;
+  }
+  .filter-grid .category-panel { grid-column: 1 / -1; }
+  .filter-grid #universe-panel { grid-column: 1 / -1; }
+  /* The difficulty scale is short: it opens under its own toggle at its natural width. */
+  .filter-grid #difficulty-panel { grid-column: 3 / -1; left: 0; right: auto; width: max-content; }
+  /* Filters stay unfolded on desktop, so the section labels are enough: no disclosure summary. */
+  .filter-grid legend { line-height: 24px; margin-bottom: 8px; }
+  .catalog-filters > summary { display: none; }
   .catalog-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(210px, .85fr); gap: 32px; }
-  .catalog-aside { display: block; position: relative; margin-top: 66px; padding: 24px 18px; border-left: 1px dashed #a2824959; overflow: hidden; min-height: 430px; }
+  .catalog-aside { display: block; position: relative; margin-top: 66px; padding: 24px 18px; border-left: 1px dashed #a2824959; overflow: hidden; min-height: 430px; background: #18251ba6; }
   .catalog-aside h2 { font-size: 31px; }
   .catalog-aside p { font-size: 18px; color: var(--muted); }
   .lesson-view { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr); column-gap: 32px; align-content: start; padding: 20px 34px 32px; }
@@ -572,8 +596,25 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .app-nav { padding: 14px 24px; }
   .section-art { margin: -28px -38px 24px; padding: 34px 38px 44px; }
 }
-@media (min-width: 1400px) { .category-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+/* Short desktop windows: let the hero hug its copy so the list starts sooner. */
+@media (min-width: 800px) and (max-height: 900px) {
+  .catalog-hero { min-height: 0; padding: 24px 38px 8px; }
+  .catalog-hero h1 { font-size: 50px; }
+}
+/* Wide screens: search and filters share the first row. */
 @media (min-width: 1100px) {
+  /* Search sits beside the hero copy; the filters keep a row of their own below. */
+  #catalog-view { display: grid; grid-template-columns: minmax(0, max-content) minmax(320px, 520px) minmax(0, 1fr); align-items: end; }
+  .catalog-hero { grid-column: 1; padding-bottom: 24px; }
+  .hero-copy { width: auto; }
+  .catalog-content { display: contents; }
+  .search-field { grid-column: 2; max-width: none; margin: 0 0 24px 8px; }
+  .catalog-filters, .catalog-layout { grid-column: 1 / -1; align-self: start; padding-inline: 38px; }
+  .catalog-filters { padding-top: 4px; }
+  .catalog-filters[open] > summary { left: 38px; }
+  .catalog-layout { padding-bottom: 28px; }
+}
+@media (min-width: 1280px) {
   .song-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
   .song-list .empty { grid-column: 1 / -1; }
 }

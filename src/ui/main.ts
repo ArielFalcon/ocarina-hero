@@ -969,19 +969,15 @@ must('#share-song').addEventListener('click', async () => {
   shareResetTimer = window.setTimeout(() => { button.textContent = 'Share'; }, 1800);
 });
 
-must('#practice-mode').addEventListener('click', () => {
+function switchLessonMode(practice: boolean): void {
+  if (practiceMode === practice) return;
   stopPlayback();
-  practiceMode = true;
-  selectPassage(passageIndex);
+  practiceMode = practice;
+  selectPassage(0);
   updateLessonHeading();
-});
-must('#listen-mode').addEventListener('click', () => {
-  stopPlayback();
-  practiceMode = false;
-  resetCombo();
-  renderTab();
-  updateLessonHeading();
-});
+}
+must('#practice-mode').addEventListener('click', () => switchLessonMode(true));
+must('#listen-mode').addEventListener('click', () => switchLessonMode(false));
 passageSelect.addEventListener('change', () => selectPassage(Number(passageSelect.value)));
 must('#previous-passage').addEventListener('click', () => selectPassage(passageIndex - 1));
 must('#next-passage').addEventListener('click', () => selectPassage(passageIndex + 1));

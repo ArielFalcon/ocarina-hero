@@ -46536,6 +46536,799 @@ export const CURATED_SONGS = [
     "phraseStarts": [
       0
     ]
+  },
+  {
+    "id": "catalogue-oot-eponas-song",
+    "title": "Epona’s Song",
+    "subtitle": "Complete taught phrase: D-B-A twice (the in-game ocarina song), then D-B-A-B and the long closing A",
+    "tempoBpm": 96,
+    "beatsPerBar": 3,
+    "melody": [
+      {
+        "midi": 86,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 83,
+        "startBeat": 0.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 81,
+        "startBeat": 1,
+        "durationBeats": 2
+      },
+      {
+        "midi": 86,
+        "startBeat": 3,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 83,
+        "startBeat": 3.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 81,
+        "startBeat": 4,
+        "durationBeats": 2
+      },
+      {
+        "midi": 86,
+        "startBeat": 6,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 83,
+        "startBeat": 6.5,
+        "durationBeats": 0.5
+      },
+      {
+        "midi": 81,
+        "startBeat": 7,
+        "durationBeats": 1
+      },
+      {
+        "midi": 83,
+        "startBeat": 8,
+        "durationBeats": 1
+      },
+      {
+        "midi": 81,
+        "startBeat": 9,
+        "durationBeats": 3
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 0,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 0.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 1,
+        "durationBeats": 2
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 3,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 3.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 4,
+        "durationBeats": 2
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 6,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 6.5,
+        "durationBeats": 0.5
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 7,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 8,
+        "durationBeats": 1
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 9,
+        "durationBeats": 3
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "catalogue-oot-sarias-song",
+    "title": "Saria’s Song",
+    "subtitle": "Complete taught phrase: F-A-B twice (the in-game ocarina song), then F-A-B-E-D, B-C-B-G-E and the closing D-E-G-E",
+    "tempoBpm": 140.00014000014,
+    "beatsPerBar": 4,
+    "melody": [
+      {
+        "midi": 77,
+        "startBeat": 0,
+        "durationBeats": 0.40000000000000085
+      },
+      {
+        "midi": 81,
+        "startBeat": 0.4999999999999997,
+        "durationBeats": 0.4499999999999998
+      },
+      {
+        "midi": 83,
+        "startBeat": 0.9999999999999994,
+        "durationBeats": 0.9500000000000005
+      },
+      {
+        "midi": 77,
+        "startBeat": 1.999999999999999,
+        "durationBeats": 0.40000000000000185
+      },
+      {
+        "midi": 81,
+        "startBeat": 2.500000000000001,
+        "durationBeats": 0.44999999999999873
+      },
+      {
+        "midi": 83,
+        "startBeat": 3.0000000000000004,
+        "durationBeats": 0.9499999999999985
+      },
+      {
+        "midi": 77,
+        "startBeat": 4,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "midi": 81,
+        "startBeat": 4.5,
+        "durationBeats": 0.4062500000000007
+      },
+      {
+        "midi": 83,
+        "startBeat": 4.999999999999999,
+        "durationBeats": 0.4062500000000007
+      },
+      {
+        "midi": 88,
+        "startBeat": 5.499999999999999,
+        "durationBeats": 0.4500000000000008
+      },
+      {
+        "midi": 86,
+        "startBeat": 6.000000000000001,
+        "durationBeats": 0.9999999999999994
+      },
+      {
+        "midi": 83,
+        "startBeat": 7.000000000000001,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "midi": 84,
+        "startBeat": 7.5,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "midi": 83,
+        "startBeat": 8,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "midi": 79,
+        "startBeat": 8.5,
+        "durationBeats": 0.35000000000000087
+      },
+      {
+        "midi": 76,
+        "startBeat": 9,
+        "durationBeats": 2.500000000000001
+      },
+      {
+        "midi": 74,
+        "startBeat": 11.5,
+        "durationBeats": 0.44999999999999873
+      },
+      {
+        "midi": 76,
+        "startBeat": 11.999999999999998,
+        "durationBeats": 0.5000000000000018
+      },
+      {
+        "midi": 79,
+        "startBeat": 12.5,
+        "durationBeats": 0.35000000000000087
+      },
+      {
+        "midi": 76,
+        "startBeat": 13.000000000000002,
+        "durationBeats": 2.4999999999999964
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 0,
+        "durationBeats": 0.40000000000000085
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 0.4999999999999997,
+        "durationBeats": 0.4499999999999998
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 0.9999999999999994,
+        "durationBeats": 0.9500000000000005
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 1.999999999999999,
+        "durationBeats": 0.40000000000000185
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 2.500000000000001,
+        "durationBeats": 0.44999999999999873
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 3.0000000000000004,
+        "durationBeats": 0.9499999999999985
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 4,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 4.5,
+        "durationBeats": 0.4062500000000007
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 4.999999999999999,
+        "durationBeats": 0.4062500000000007
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 5.499999999999999,
+        "durationBeats": 0.4500000000000008
+      },
+      {
+        "pitch": "D5",
+        "bend": 0,
+        "startBeat": 6.000000000000001,
+        "durationBeats": 0.9999999999999994
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 7.000000000000001,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "pitch": "B4",
+        "bend": 1,
+        "startBeat": 7.5,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "pitch": "A4",
+        "bend": 2,
+        "startBeat": 8,
+        "durationBeats": 0.4999999999999997
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 8.5,
+        "durationBeats": 0.35000000000000087
+      },
+      {
+        "pitch": "D4",
+        "bend": 2,
+        "startBeat": 9,
+        "durationBeats": 2.500000000000001
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 11.5,
+        "durationBeats": 0.44999999999999873
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 11.999999999999998,
+        "durationBeats": 0.5000000000000018
+      },
+      {
+        "pitch": "A4",
+        "bend": -2,
+        "startBeat": 12.5,
+        "durationBeats": 0.35000000000000087
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 13.000000000000002,
+        "durationBeats": 2.4999999999999964
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "catalogue-oot-song-of-storms",
+    "title": "Song of Storms",
+    "subtitle": "Complete taught phrase: D-F-D twice (the in-game ocarina song), then E-F-E-F-E-C-A and the answers A-D-F-G-A and A-D-F-G-E",
+    "tempoBpm": 200,
+    "beatsPerBar": 3,
+    "melody": [
+      {
+        "midi": 74,
+        "startBeat": 0,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 77,
+        "startBeat": 0.5000000000000012,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 86,
+        "startBeat": 1.0000000000000024,
+        "durationBeats": 1.7500000000000013
+      },
+      {
+        "midi": 74,
+        "startBeat": 3.0000000000000013,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 77,
+        "startBeat": 3.5000000000000027,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 86,
+        "startBeat": 4.0000000000000036,
+        "durationBeats": 1.7499999999999953
+      },
+      {
+        "midi": 88,
+        "startBeat": 6.000000000000003,
+        "durationBeats": 1.3333333333333286
+      },
+      {
+        "midi": 89,
+        "startBeat": 7.5,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 88,
+        "startBeat": 8.000000000000002,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "midi": 89,
+        "startBeat": 8.500000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 88,
+        "startBeat": 9.000000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 84,
+        "startBeat": 9.5,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "midi": 81,
+        "startBeat": 10,
+        "durationBeats": 1.7500000000000013
+      },
+      {
+        "midi": 81,
+        "startBeat": 12,
+        "durationBeats": 1.0000000000000024
+      },
+      {
+        "midi": 74,
+        "startBeat": 13.000000000000002,
+        "durationBeats": 0.8333333333333334
+      },
+      {
+        "midi": 77,
+        "startBeat": 14.000000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "midi": 79,
+        "startBeat": 14.5,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "midi": 81,
+        "startBeat": 15,
+        "durationBeats": 2.7500000000000036
+      },
+      {
+        "midi": 81,
+        "startBeat": 18.000000000000004,
+        "durationBeats": 1.0000000000000024
+      },
+      {
+        "midi": 74,
+        "startBeat": 19.000000000000004,
+        "durationBeats": 0.8333333333333334
+      },
+      {
+        "midi": 77,
+        "startBeat": 20,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "midi": 79,
+        "startBeat": 20.500000000000004,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "midi": 76,
+        "startBeat": 21.000000000000004,
+        "durationBeats": 2.749999999999998
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 0,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 0.5000000000000012,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "D5",
+        "bend": -1,
+        "startBeat": 1.0000000000000024,
+        "durationBeats": 1.7500000000000013
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 3.0000000000000013,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 3.5000000000000027,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "D5",
+        "bend": -1,
+        "startBeat": 4.0000000000000036,
+        "durationBeats": 1.7499999999999953
+      },
+      {
+        "pitch": "D5",
+        "bend": 1,
+        "startBeat": 6.000000000000003,
+        "durationBeats": 1.3333333333333286
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 7.5,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "D5",
+        "bend": 1,
+        "startBeat": 8.000000000000002,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "pitch": "D5",
+        "bend": 2,
+        "startBeat": 8.500000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "D5",
+        "bend": 1,
+        "startBeat": 9.000000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 9.5,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 10,
+        "durationBeats": 1.7500000000000013
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 12,
+        "durationBeats": 1.0000000000000024
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 13.000000000000002,
+        "durationBeats": 0.8333333333333334
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 14.000000000000004,
+        "durationBeats": 0.48958333333333215
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 14.5,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 15,
+        "durationBeats": 2.7500000000000036
+      },
+      {
+        "pitch": "A4",
+        "bend": -1,
+        "startBeat": 18.000000000000004,
+        "durationBeats": 1.0000000000000024
+      },
+      {
+        "pitch": "D4",
+        "bend": -1,
+        "startBeat": 19.000000000000004,
+        "durationBeats": 0.8333333333333334
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 20,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 20.500000000000004,
+        "durationBeats": 0.4895833333333381
+      },
+      {
+        "pitch": "D4",
+        "bend": 1,
+        "startBeat": 21.000000000000004,
+        "durationBeats": 2.749999999999998
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
+  },
+  {
+    "id": "catalogue-oot-serenade-of-water",
+    "title": "Serenade of Water",
+    "subtitle": "Complete taught phrase: D-F-A-A-B (the in-game ocarina song), then the answer A-D-F-G-F-E-G and the closing F#",
+    "tempoBpm": 96,
+    "beatsPerBar": 3,
+    "melody": [
+      {
+        "midi": 74,
+        "startBeat": 0,
+        "durationBeats": 0.9916666666666657
+      },
+      {
+        "midi": 77,
+        "startBeat": 1,
+        "durationBeats": 0.9916666666666657
+      },
+      {
+        "midi": 81,
+        "startBeat": 2,
+        "durationBeats": 0.9916666666666671
+      },
+      {
+        "midi": 81,
+        "startBeat": 3,
+        "durationBeats": 0.9916666666666671
+      },
+      {
+        "midi": 83,
+        "startBeat": 4,
+        "durationBeats": 1.9916666666666671
+      },
+      {
+        "midi": 81,
+        "startBeat": 6,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "midi": 74,
+        "startBeat": 7,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "midi": 77,
+        "startBeat": 8,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "midi": 79,
+        "startBeat": 9,
+        "durationBeats": 0.4916666666666686
+      },
+      {
+        "midi": 77,
+        "startBeat": 9.5,
+        "durationBeats": 0.4916666666666686
+      },
+      {
+        "midi": 76,
+        "startBeat": 10,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "midi": 79,
+        "startBeat": 11,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "midi": 78,
+        "startBeat": 12,
+        "durationBeats": 8.348381066666672
+      }
+    ],
+    "fixedNotes": [
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 0,
+        "durationBeats": 0.9916666666666657
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 1,
+        "durationBeats": 0.9916666666666657
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 2,
+        "durationBeats": 0.9916666666666671
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 3,
+        "durationBeats": 0.9916666666666671
+      },
+      {
+        "pitch": "B4",
+        "bend": 0,
+        "startBeat": 4,
+        "durationBeats": 1.9916666666666671
+      },
+      {
+        "pitch": "A4",
+        "bend": 0,
+        "startBeat": 6,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "pitch": "D4",
+        "bend": 0,
+        "startBeat": 7,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 8,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 9,
+        "durationBeats": 0.4916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": 0,
+        "startBeat": 9.5,
+        "durationBeats": 0.4916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": -1,
+        "startBeat": 10,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": 2,
+        "startBeat": 11,
+        "durationBeats": 0.9916666666666686
+      },
+      {
+        "pitch": "F4",
+        "bend": 1,
+        "startBeat": 12,
+        "durationBeats": 8.348381066666672
+      }
+    ],
+    "phraseStarts": [
+      0
+    ]
   }
 ] satisfies readonly {
   id: string; title: string; subtitle: string; tempoBpm: number; beatsPerBar: number;

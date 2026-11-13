@@ -52,6 +52,10 @@ group('The Legend of Zelda', ['Games'], 'triforce', [
   ['catalogue-oot-prelude-of-light', 'Prelude of Light', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
   ['catalogue-oot-requiem-of-spirit', 'Requiem of Spirit', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
   ['catalogue-oot-nocturne-of-shadow', 'Nocturne of Shadow', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
+  ['catalogue-oot-eponas-song', 'Epona’s Song', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Lon Lon Ranch'] }],
+  ['catalogue-oot-sarias-song', 'Saria’s Song', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Lost Woods'] }],
+  ['catalogue-oot-song-of-storms', 'Song of Storms', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Windmill Hut'] }],
+  ['catalogue-oot-serenade-of-water', 'Serenade of Water', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
   ['catalogue-mm-elegy-of-emptiness', 'Elegy of Emptiness', { version: 'Majora’s Mask', aliases: ['Koji Kondo'] }],
   ['catalogue-ss-ballad-of-the-goddess', 'Ballad of the Goddess', { version: 'Skyward Sword', aliases: ['Hajime Wakai', 'Takeshi Hama'] }],
 ]);

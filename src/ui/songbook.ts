@@ -57,6 +57,8 @@ group('The Legend of Zelda', ['Games'], 'triforce', [
   ['catalogue-oot-nocturne-of-shadow', 'Nocturne of Shadow', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Warp song'] }],
   ['catalogue-mm-elegy-of-emptiness', 'Elegy of Emptiness', { version: 'Majora’s Mask', aliases: ['Koji Kondo'] }],
   ['catalogue-ss-ballad-of-the-goddess', 'Ballad of the Goddess', { version: 'Skyward Sword', aliases: ['Hajime Wakai', 'Takeshi Hama'] }],
+  ['catalogue-oot-kokiri-forest', 'Kokiri Forest', { version: 'Ocarina of Time', aliases: ['Koji Kondo', 'Kokiri Forest Theme'] }],
+  ['catalogue-zelda-alttp-hyrule-castle', 'Hyrule Castle', { version: 'A Link to the Past', aliases: ['Koji Kondo', 'Hyrule Castle Theme', 'Castle Theme', 'Nintendo'] }],
 ]);
 group('Pokémon', ['Games'], 'pokeball', [
   ['catalogue-pokemon-route1', 'Route 1'],
@@ -67,6 +69,8 @@ group('Pokémon', ['Games'], 'pokeball', [
   ['catalogue-pokemon-gym-victory', 'Gym Battle Victory', { version: 'Gold / Silver' }],
   ['catalogue-pokemon-rby-bicycle', 'Cycling', { version: 'Red / Blue / Yellow', aliases: ['Bicycle', 'Bike Riding', 'Junichi Masuda'] }],
   ['catalogue-pokemon-rby-celadon-city', 'Celadon City', { version: 'Red / Blue / Yellow', aliases: ['Junichi Masuda'] }],
+  ['catalogue-pokemon-rby-trainer-battle', 'Trainer Battle', { version: 'Red / Blue / Yellow', aliases: ['Junichi Masuda', 'Pokémon Red and Blue', 'Battle theme'] }],
+  ['catalogue-pokemon-rby-mt-moon', 'Mt. Moon', { version: 'Red / Blue / Yellow', aliases: ['Junichi Masuda', 'Mt Moon', 'Pokémon Red and Blue'] }],
 ]);
 group('Undertale', ['Games'], 'heart', [
   ['catalogue-megalovania', 'Megalovania'],
@@ -80,6 +84,8 @@ group('Sonic', ['Games'], 'ring', [
   ['catalogue-sonic-extra-life', 'Extra Life', { version: 'Sonic the Hedgehog', aliases: ['1UP'] }],
   ['catalogue-sonic3-act-complete', 'Act Complete', { version: 'Sonic the Hedgehog 3' }],
   ['catalogue-sonic2-emerald-hill', 'Emerald Hill Zone', { version: 'Sonic the Hedgehog 2', aliases: ['Masato Nakamura'] }],
+  ['catalogue-sonic1-marble-zone', 'Marble Zone', { version: 'Sonic the Hedgehog', aliases: ['Masato Nakamura', 'Marble Zone Act 1'] }],
+  ['catalogue-sonic1-scrap-brain-zone', 'Scrap Brain Zone', { version: 'Sonic the Hedgehog', aliases: ['Masato Nakamura', 'Scrap Brain Zone Act 1'] }],
 ]);
 group('Super Mario', ['Games'], 'mushroom', [
   ['catalogue-dire-dire-docks', 'Dire, Dire Docks', { version: 'Super Mario 64' }],
@@ -87,15 +93,22 @@ group('Super Mario', ['Games'], 'mushroom', [
   ['catalogue-smb-game-over', 'Game Over', { version: 'Super Mario Bros.' }],
   ['catalogue-smw-overworld', 'Overworld', { version: 'Super Mario World', aliases: ['Koji Kondo'] }],
   ['catalogue-sm64-select-a-file', 'Select a File', { version: 'Super Mario 64', aliases: ['Koji Kondo', 'File Select', 'SM64'] }],
+  ['catalogue-smario-64-bob-omb-battlefield', 'Bob-omb Battlefield', { version: 'Super Mario 64', aliases: ['Koji Kondo', 'SM64', 'Course 1', 'Super Mario 64 Main Theme'] }],
 ]);
 group('Metroid', ['Games'], 'gamepad', [['catalogue-super-metroid-item', 'Item Acquisition', { version: 'Super Metroid' }]]);
 group('Donkey Kong Country', ['Games'], 'gamepad', [
   ['catalogue-dkc-bonus-win', 'Bonus Win', { aliases: ['Boss Defeated', 'Bonus Victory'] }],
+  ['catalogue-donkey-kong-country-main-theme', 'Main Theme', { aliases: ['Donkey Kong Country Theme', 'Theme Song', 'David Wise', 'Rare'] }],
 ]);
-group('Final Fantasy VII', ['Games'], 'meteor', [['catalogue-ff7-victory', 'Victory Fanfare', { aliases: ['FF7'] }]]);
+group('Final Fantasy VII', ['Games'], 'meteor', [
+  ['catalogue-ff7-victory', 'Victory Fanfare', { aliases: ['FF7'] }],
+  ['catalogue-ff7-main-theme', 'Main Theme', { aliases: ['Nobuo Uematsu', 'Main Theme of Final Fantasy VII', 'FF7', 'World Map'] }],
+  ['catalogue-ff7-fighting', 'Fighting', { aliases: ['Nobuo Uematsu', 'Battle Theme', 'Standard Battle', 'FF7'] }],
+]);
 group('Chrono Trigger', ['Games'], 'clock', [
   ['catalogue-wind-scene', 'Wind Scene'],
   ['catalogue-chrono-trigger-main-theme', 'Main Theme', { aliases: ['Chrono Trigger Theme', 'Opening Theme', 'Yasunori Mitsuda'] }],
+  ['catalogue-chrono-cross-scars-of-time', 'Scars of Time', { version: 'Chrono Cross', aliases: ['Yasunori Mitsuda', 'Chrono Cross ~Scars Left by Time~', 'Scars Left by Time', 'Chrono Cross'] }],
 ]);
 group('Fire Emblem', ['Games'], 'gamepad', [
   ['catalogue-fire-emblem-theme', 'Main Theme', { version: 'Series theme', aliases: ['Fire Emblem Theme', 'Yuka Tsujiyoko', 'Fire Emblem Main Theme'] }],
@@ -107,12 +120,15 @@ group('Minecraft', ['Games'], 'grassBlock', [
 group('Wii', ['Games'], 'remote', [['catalogue-mii-channel', 'Mii Channel']]);
 group('EarthBound', ['Games'], 'gamepad', [
   ['catalogue-earthbound-eight-melodies', 'Eight Melodies', { aliases: ['Mother 2', 'Keiichi Suzuki', 'Hirokazu Tanaka'] }],
+  ['catalogue-earthbound-onett', 'Onett', { aliases: ['Mother 2', 'Onett Theme', 'Keiichi Suzuki', 'Hirokazu Tanaka'] }],
 ]);
 group('Castlevania', ['Games'], 'gamepad', [
   ['catalogue-castlevania-ii-bloody-tears', 'Bloody Tears', { version: 'Castlevania II: Simon’s Quest', aliases: ['Kenichi Matsubara'] }],
+  ['catalogue-castlevania-3-beginning', 'Beginning', { version: 'Castlevania III: Dracula’s Curse', aliases: ['Akumajō Densetsu', 'Stage 1', 'Konami'] }],
 ]);
 group('Kirby', ['Games'], 'gamepad', [
   ['catalogue-kirby-butter-building', 'Butter Building', { version: 'Kirby’s Adventure', aliases: ['Hirokazu Ando'] }],
+  ['catalogue-kirby-king-dededes-theme', 'King Dedede’s Theme', { version: 'Kirby Super Star', aliases: ['King Dedede\'s Theme', 'Dedede', 'King Dedede', 'Kirby Super Star Ultra'] }],
 ]);
 group('Professor Layton', ['Games'], 'gamepad', [
   ['catalogue-layton-theme', 'Professor Layton’s Theme', { version: 'Professor Layton and the Curious Village', aliases: ['Tomohito Nishiura', 'Layton’s Theme'] }],
@@ -121,6 +137,42 @@ group('The Elder Scrolls', ['Games'], 'gamepad', [
   ['catalogue-morrowind-nerevar-rising', 'Nerevar Rising', { version: 'Morrowind', aliases: ['Jeremy Soule', 'Call of Magic', 'Main Theme', 'The Elder Scrolls III: Morrowind', 'Morrowind Theme'] }],
   ['catalogue-oblivion-reign-of-the-septims', 'Reign of the Septims', { version: 'Oblivion', aliases: ['Jeremy Soule', 'Main Theme', 'The Elder Scrolls IV: Oblivion', 'Oblivion Theme'] }],
 ]);
+group('Bubble Bobble', ['Games'], 'gamepad', [
+  ['catalogue-bubble-bobble-main-stage-theme', 'Main Theme', { aliases: ['Main Stage Theme', 'Stage Theme', 'Tadashi Kimijima', 'Taito'] }],
+]);
+group('Street Fighter', ['Games'], 'gamepad', [
+  ['catalogue-sf2-kens-theme', 'Ken’s Theme', { version: 'Street Fighter II', aliases: ['Ken\'s Theme', 'Ken Stage', 'Yoko Shimomura', 'Capcom'] }],
+  ['catalogue-sf2-ryus-theme', 'Ryu’s Theme', { version: 'Street Fighter II', aliases: ['Ryu\'s Theme', 'Ryu Stage', 'Yoko Shimomura', 'Capcom'] }],
+]);
+group('F-Zero', ['Games'], 'gamepad', [
+  ['catalogue-fzero-mute-city', 'Mute City', { aliases: ['Yumiko Kanki', 'F-Zero X', 'F-Zero GP Legend'] }],
+]);
+group('Mega Man', ['Games'], 'gamepad', [
+  ['catalogue-mm2-wood-man-stage', 'Wood Man Stage', { version: 'Mega Man 2', aliases: ['Woodman', 'Takashi Tateishi', 'Capcom'] }],
+  ['catalogue-mega-man-3-spark-man', 'Spark Man Stage', { version: 'Mega Man 3', aliases: ['Spark Man', 'Rockman 3', 'Capcom'] }],
+  ['catalogue-mega-man-3-snake-man', 'Snake Man Stage', { version: 'Mega Man 3', aliases: ['Snake Man', 'Rockman 3', 'Capcom'] }],
+]);
+group('Kid Icarus', ['Games'], 'gamepad', [
+  ['catalogue-kid-icarus-underworld', 'Underworld', { aliases: ['Stage 1 Underworld', 'Hirokazu Tanaka', 'Nintendo'] }],
+]);
+group('Kingdom Hearts', ['Games'], 'gamepad', [
+  ['catalogue-kh-traverse-town', 'Traverse Town', { aliases: ['Yoko Shimomura', 'Square'] }],
+]);
+group('Doom', ['Games'], 'gamepad', [
+  ['catalogue-doom-at-dooms-gate', 'At Doom’s Gate', { aliases: ['At Doom\'s Gate', 'E1M1', 'Bobby Prince', 'id Software'] }],
+]);
+group('Super Smash Bros.', ['Games'], 'gamepad', [
+  ['catalogue-smash-melee-menu', 'Menu', { version: 'Super Smash Bros. Melee', aliases: ['Main Menu', 'Melee Menu', 'SSBM', 'Nintendo'] }],
+]);
+group('Animal Crossing', ['Games'], 'gamepad', [
+  ['catalogue-animal-crossing-8-am', '8:00 AM', { aliases: ['Hourly Music', '8 AM', 'Kazumi Totaka', 'Nintendo'] }],
+]);
+group('Excitebike', ['Games'], 'gamepad', [
+  ['catalogue-excitebike-title-theme', 'Title Theme', { aliases: ['Title Screen', 'Nintendo'] }],
+]);
+group('Cave Story', ['Games'], 'gamepad', [
+  ['catalogue-cave-story-main-theme', 'Main Theme', { aliases: ['Cave Story', 'Daisuke Amaya', 'Pixel', 'Studio Pixel'] }],
+]);
 
 // Anime
 group('Naruto', ['Anime'], 'konohaLeaf', [
@@ -128,6 +180,7 @@ group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-blue-bird', 'Blue Bird', { version: 'Shippuden', aliases: ['Ikimono-gakari'] }],
   ['catalogue-naruto-hokage-funeral', 'Grief and Sorrow', { aliases: ['Toshio Masuda', 'Hokage’s Funeral', 'Hokages Funeral', 'Ai to Shū', '哀と愁'] }],
   ['catalogue-naruto-raising-fighting-spirit', 'The Raising Fighting Spirit', { aliases: ['Toshio Masuda', 'The Rising Fighting Spirit', 'Raising Fighting Spirit', 'Wakiagaru Tōshi', '湧き上がる闘志'] }],
+  ['catalogue-naruto-go', 'GO!!!', { version: 'Opening 4', aliases: ['FLOW', 'Go', 'Naruto opening 4', 'GO!!! FLOW'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
@@ -151,9 +204,22 @@ group('Studio Ghibli', ['Anime', 'Film'], 'forestSpirit', [
   ['catalogue-path-of-the-wind-totoro', 'Path of the Wind', { version: 'My Neighbor Totoro', aliases: ['Joe Hisaishi', 'Kaze no Toorimichi', '風のとおり道'] }],
   ['catalogue-nausicaa-legend-of-the-wind', 'Legend of the Wind', { version: 'Nausicaä of the Valley of the Wind', aliases: ['Joe Hisaishi', 'Kaze no Densetsu', '風の伝説', 'Nausicaä Opening Theme'] }],
 ]);
+group('Digimon', ['Anime'], 'anime', [
+  ['catalogue-digimon-butter-fly', 'Butter-Fly', { version: 'Digimon Adventure opening', aliases: ['Kouji Wada', 'Wada Kouji', 'Digimon Adventure', 'Digimon Theme', 'Butterfly'] }],
+]);
+group('Cowboy Bebop', ['Anime'], 'anime', [
+  ['catalogue-bebop-tank', 'Tank!', { version: 'Opening', aliases: ['Yoko Kanno', 'Seatbelts', 'Cowboy Bebop opening', 'Tank'] }],
+]);
+group('One Piece', ['Anime'], 'anime', [
+  ['catalogue-one-piece-we-are', 'We Are!', { version: 'Opening 1', aliases: ['Hiroshi Kitadani', 'We Are', 'One Piece opening 1'] }],
+  ['catalogue-one-piece-binks-sake', 'Binks’ Sake', { version: 'Thriller Bark', aliases: ['Binks\' Sake', 'Bink\'s Sake', 'Binks no Sake', 'Yohoho', 'Brook', 'Kohei Tanaka'] }],
+]);
 
 // Film and TV
-group('KPop Demon Hunters', ['Film', 'Pop'], 'hunter', [['catalogue-golden', 'Golden', { aliases: ['HUNTR/X'] }]]);
+group('KPop Demon Hunters', ['Film', 'Pop'], 'hunter', [
+  ['catalogue-golden', 'Golden', { aliases: ['HUNTR/X'] }],
+  ['catalogue-saja-boys-soda-pop-chorus', 'Soda Pop', { aliases: ['Saja Boys', 'Soda Pop Saja Boys'] }],
+]);
 group('Star Wars', ['Film'], 'empire', [
   ['catalogue-imperial-march', 'The Imperial March', { aliases: ['John Williams'] }],
   ['catalogue-mandalorian', 'Main Theme', { version: 'The Mandalorian', aliases: ['Ludwig Göransson'], icon: 'film' }],
@@ -208,6 +274,27 @@ group('Forrest Gump', ['Film'], 'film', [
 group('Stranger Things', ['Film'], 'film', [
   ['catalogue-stranger-things-arpeggio', 'Main Title', { version: 'TV series (2016)', aliases: ['Kyle Dixon', 'Michael Stein', 'Kyle Dixon & Michael Stein', 'Stranger Things Theme', 'Main Theme', 'Survive'] }],
 ]);
+group('Breakfast at Tiffany’s', ['Film'], 'film', [
+  ['catalogue-moon-river', 'Moon River', { version: 'Film (1961)', aliases: ['Henry Mancini', 'Johnny Mercer', 'Audrey Hepburn'] }],
+]);
+group('The Sound of Music', ['Film'], 'film', [
+  ['catalogue-my-favorite-things', 'My Favorite Things', { version: 'Film (1965)', aliases: ['Richard Rodgers', 'Oscar Hammerstein II', 'Rodgers and Hammerstein', 'Julie Andrews'] }],
+]);
+group('Beauty and the Beast', ['Film'], 'film', [
+  ['catalogue-belle-beauty-and-the-beast', 'Belle', { version: 'Film (1991)', aliases: ['Alan Menken', 'Howard Ashman', 'Little Town'] }],
+]);
+group('Aladdin', ['Film'], 'film', [
+  ['catalogue-prince-ali', 'Prince Ali', { version: 'Film (1992)', aliases: ['Alan Menken', 'Howard Ashman', 'Robin Williams'] }],
+]);
+group('Pocahontas', ['Film'], 'film', [
+  ['catalogue-just-around-the-riverbend', 'Just Around the Riverbend', { version: 'Film (1995)', aliases: ['Alan Menken', 'Stephen Schwartz', 'Judy Kuhn', 'Riverbend'] }],
+]);
+group('Jeopardy!', ['Film'], 'film', [
+  ['catalogue-jeopardy-think', 'Think!', { version: 'Final Jeopardy!', aliases: ['Final Jeopardy', 'Jeopardy Theme', 'Think Music', 'Merv Griffin'] }],
+]);
+group('Les Misérables', ['Film'], 'film', [
+  ['catalogue-do-you-hear-the-people-sing', 'Do You Hear the People Sing?', { version: 'Musical (1980)', aliases: ['Claude-Michel Schönberg', 'Alain Boublil', 'Herbert Kretzmer', 'Les Mis', 'Les Miserables'] }],
+]);
 
 // Pop: no franchise, so the artist is the context shown with each song.
 group('Pop', ['Pop'], 'microphone', [
@@ -247,6 +334,31 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-shape-of-you-marimba', 'Shape of You', { artist: 'Ed Sheeran', aliases: ['Divide', 'Marimba'], icon: 'cassette' }],
   ['catalogue-we-are-the-champions-chorus', 'We Are the Champions', { artist: 'Queen', aliases: ['Freddie Mercury', 'News of the World'], icon: 'star' }],
   ['catalogue-fix-you-chorus', 'Fix You', { artist: 'Coldplay', aliases: ['X&Y', 'Chris Martin'], icon: 'heart' }],
+  ['catalogue-cotton-eye-joe-fiddle', 'Cotton Eye Joe', { artist: 'Rednex', aliases: ['Cotton-Eye Joe', 'Rednex', 'Sex & Violins'] }],
+  ['catalogue-the-sign-synth-hook', 'The Sign', { artist: 'Ace of Base', aliases: ['Ace of Base', 'Happy Nation'] }],
+  ['catalogue-what-is-love-chorus', 'What Is Love', { artist: 'Haddaway', aliases: ['Haddaway', 'The Album', 'Night at the Roxbury'] }],
+  ['catalogue-let-it-be-verse', 'Let It Be', { artist: 'The Beatles', aliases: ['Beatles', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-bohemian-rhapsody-mama', 'Bohemian Rhapsody', { artist: 'Queen', aliases: ['Queen', 'Freddie Mercury', 'A Night at the Opera'] }],
+  ['catalogue-time-after-time-chorus', 'Time After Time', { artist: 'Cyndi Lauper', aliases: ['She’s So Unusual', 'Rob Hyman'] }],
+  ['catalogue-lean-on-me-opening', 'Lean on Me', { artist: 'Bill Withers', aliases: ['Still Bill'] }],
+  ['catalogue-have-you-ever-seen-the-rain-verse', 'Have You Ever Seen the Rain?', { artist: 'Creedence Clearwater Revival', aliases: ['Pendulum', 'John Fogerty', 'CCR'] }],
+  ['catalogue-enter-sandman-riff', 'Enter Sandman', { artist: 'Metallica', aliases: ['Metallica (Black Album)', 'James Hetfield'] }],
+  ['catalogue-aqua-barbie-girl-verse', 'Barbie Girl', { artist: 'Aqua', aliases: ['Aquarium'] }],
+  ['catalogue-ewf-september-chorus', 'September', { artist: 'Earth, Wind & Fire', aliases: ['The Best of Earth, Wind & Fire Vol. 1', 'Maurice White'] }],
+  ['catalogue-do-i-wanna-know-riff', 'Do I Wanna Know?', { artist: 'Arctic Monkeys', aliases: ['AM', 'Alex Turner', 'Do I Wanna Know'] }],
+  ['catalogue-ymca-verse', 'Y.M.C.A.', { artist: 'Village People', aliases: ['YMCA', 'Village People', 'Cruisin', 'Jacques Morali', 'Victor Willis'] }],
+  ['catalogue-cant-buy-me-love-chorus', 'Can’t Buy Me Love', { artist: 'The Beatles', aliases: ['Can\'t Buy Me Love', 'Beatles', 'A Hard Day\'s Night', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-eight-days-a-week-verse', 'Eight Days a Week', { artist: 'The Beatles', aliases: ['Beatles', 'Beatles for Sale', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-michelle-verse', 'Michelle', { artist: 'The Beatles', aliases: ['Beatles', 'Rubber Soul', 'Michelle Ma Belle', 'Lennon-McCartney', 'Paul McCartney'] }],
+  ['catalogue-still-havent-found-chorus', 'I Still Haven’t Found What I’m Looking For', { artist: 'U2', aliases: ['I Still Haven\'t Found What I\'m Looking For', 'U2', 'The Joshua Tree', 'Still Haven\'t Found'] }],
+  ['catalogue-sunday-bloody-sunday-intro', 'Sunday Bloody Sunday', { artist: 'U2', aliases: ['U2', 'War'] }],
+  ['catalogue-yesterday-once-more-chorus', 'Yesterday Once More', { artist: 'The Carpenters', aliases: ['Carpenters', 'Karen Carpenter', 'Now & Then', 'Richard Carpenter', 'John Bettis'] }],
+  ['catalogue-another-day-in-paradise-intro', 'Another Day in Paradise', { artist: 'Phil Collins', aliases: ['Phil Collins', '...But Seriously'] }],
+  ['catalogue-daydream-believer-chorus', 'Daydream Believer', { artist: 'The Monkees', aliases: ['Monkees', 'John Stewart'] }],
+  ['catalogue-here-there-and-everywhere-verse', 'Here, There and Everywhere', { artist: 'The Beatles', aliases: ['Beatles', 'Lennon-McCartney', 'Paul McCartney', 'Revolver'] }],
+  ['catalogue-fool-on-the-hill-chorus', 'The Fool on the Hill', { artist: 'The Beatles', aliases: ['Beatles', 'Lennon-McCartney', 'Paul McCartney', 'Magical Mystery Tour'] }],
+  ['catalogue-knowing-me-verse', 'Knowing Me, Knowing You', { artist: 'ABBA', aliases: ['Abba', 'Arrival'] }],
+  ['catalogue-black-or-white-verse', 'Black or White', { artist: 'Michael Jackson', aliases: ['Michael Jackson', 'Dangerous'] }],
 ]);
 
 // Classics
@@ -270,6 +382,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-chopin-nocturne-op9-no2-opening', 'Nocturne in E-flat major', { artist: 'Frédéric Chopin', version: 'Op. 9 No. 2', aliases: ['Chopin', 'Nocturne Op. 9 No. 2', 'Nocturne No. 2', 'Nocturne in Eb'], icon: 'moon' }],
   ['catalogue-air-on-the-g-string', 'Air on the G String', { artist: 'Johann Sebastian Bach', version: 'Orchestral Suite No. 3, BWV 1068', aliases: ['Bach', 'Air', 'BWV 1068', 'Aria', 'Suite No. 3 in D major'] }],
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
+  ['catalogue-nokia-tune-grande-valse', 'Gran Vals', { version: 'Nokia tune', artist: 'Francisco Tárrega', aliases: ['Nokia Tune', 'Nokia ringtone', 'Grande Valse', 'Gran Vals (Nokia tune)', 'Tarrega'] }],
 ]);
 
 /** Notes of the arrangement a lesson opens with: bends on, ornaments kept. */

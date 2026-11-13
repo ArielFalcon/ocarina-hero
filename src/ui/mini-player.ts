@@ -33,6 +33,8 @@ export class MiniPlayer {
   private renderedWindow: { song: unknown; indices: readonly number[] } | null = null;
   private announced = '';
   private motion: Animation | null = null;
+  /** True while the player rises in; the song starts once the entrance ends. */
+  private starting = false;
   private readonly space = new ResizeObserver(() => this.reserveSpace());
 
   constructor(private readonly root: HTMLElement, player: Player, private readonly callbacks: {
@@ -60,8 +62,13 @@ export class MiniPlayer {
     this.expandButton.addEventListener('click', openLesson);
   }
 
-  /** Play or pause a song; a different song replaces the current one. */
+  /** Play or pause a song; a different song replaces the current one. A closed player opens before it sounds. */
   toggle(entry: SongbookEntry): void {
+    if (this.starting && this.loaded?.entry.id === entry.id) {
+      this.starting = false;
+      this.render(this.quick.state);
+      return;
+    }
     if (this.loaded?.entry.id !== entry.id) {
       const track = entry.track;
       const notes = prepareMelody(track, { simplify: false, maxBend: 2 }).notes;
@@ -77,18 +84,40 @@ export class MiniPlayer {
       this.renderedWindow = null;
       delete this.tab.dataset.notes;
     }
-    this.quick.toggle(entry.id, this.loaded.arrangement);
+    if (this.isOpen()) {
+      this.starting = false;
+      this.quick.toggle(entry.id, this.loaded.arrangement);
+      return;
+    }
+    this.starting = true;
+    this.quick.load(entry.id, this.loaded.arrangement);
+    this.motion?.finished.then(() => this.startAfterEntrance(entry.id), () => {});
   }
 
-  pause(): void { this.quick.pause(); }
+  pause(): void {
+    this.starting = false;
+    this.quick.pause();
+  }
 
   close(): void {
+    this.starting = false;
     this.quick.close();
     this.loaded = null;
   }
 
+  private isOpen(): boolean {
+    return !this.root.hidden && !this.root.classList.contains('is-leaving');
+  }
+
+  private startAfterEntrance(id: string): void {
+    if (!this.starting || this.quick.state.id !== id || !this.loaded) return;
+    this.starting = false;
+    this.quick.toggle(id, this.loaded.arrangement);
+  }
+
   private render(state: QuickPlayState): void {
-    this.callbacks.changed(state.id, state.playing);
+    const playing = state.playing || this.starting;
+    this.callbacks.changed(state.id, playing);
     if (state.id === null || !this.loaded) {
       this.announce('');
       if (this.root.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
@@ -97,15 +126,15 @@ export class MiniPlayer {
     }
     this.show();
     const title = this.loaded.entry.title;
-    this.toggleButton.innerHTML = threadIcon(state.playing ? 'pause' : 'play');
-    this.toggleButton.setAttribute('aria-label', `${state.playing ? 'Pause' : 'Play'} ${title}`);
-    this.announce(state.playing ? `Playing ${title}` : `Paused ${title}`);
+    this.toggleButton.innerHTML = threadIcon(playing ? 'pause' : 'play');
+    this.toggleButton.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} ${title}`);
+    this.announce(playing ? `Playing ${title}` : `Paused ${title}`);
     this.renderStaff(state);
   }
 
   /** Rise in from below the navigation; an interrupted exit reverses from where it is. */
   private show(): void {
-    if (!this.root.hidden && !this.root.classList.contains('is-leaving')) return;
+    if (this.isOpen()) return;
     this.motion?.cancel();
     this.root.classList.remove('is-leaving');
     this.root.hidden = false;
@@ -117,7 +146,7 @@ export class MiniPlayer {
   }
 
   private hide(): void {
-    if (this.root.hidden || this.root.classList.contains('is-leaving')) return;
+    if (!this.isOpen()) return;
     this.motion?.cancel();
     this.root.classList.add('is-leaving');
     this.space.unobserve(this.root);
@@ -137,7 +166,7 @@ export class MiniPlayer {
 
   /** Keep the Songbook's last rows reachable above the floating player. */
   private reserveSpace(): void {
-    if (this.root.hidden || this.root.classList.contains('is-leaving')) return;
+    if (!this.isOpen()) return;
     document.documentElement.style.setProperty('--mini-player-space', `${this.root.offsetHeight + 16}px`);
   }
 

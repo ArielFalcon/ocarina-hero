@@ -42,15 +42,20 @@ export class QuickPlay {
     return { id: this.id, playing: this.playing, activeNote: this.activeNote, cursor: this.cursor };
   }
 
+  /** Load a song paused at its start; the current song stops. */
+  load(id: string, arrangement: Arrangement): void {
+    if (id === this.id) return;
+    this.id = id;
+    this.arrangement = arrangement;
+    this.cursor = 0;
+    this.playback.stop();
+    this.emit();
+  }
+
   /** Play or pause the given song; another song replaces the current one from its start. */
   toggle(id: string, arrangement: Arrangement): void {
     if (id === this.id && this.playing) { this.pause(); return; }
-    if (id !== this.id) {
-      this.id = id;
-      this.arrangement = arrangement;
-      this.cursor = 0;
-      this.playback.stop();
-    }
+    this.load(id, arrangement);
     this.resume();
   }
 

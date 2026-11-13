@@ -81,3 +81,18 @@ test('finishing the song rewinds it and closing unloads it', async () => {
   assert.deepEqual(f.quick.state, { id: null, playing: false, activeNote: null, cursor: 0 });
   assert.equal(f.states.at(-1)!.id, null);
 });
+
+test('loading a song shows it paused at its start without playing', async () => {
+  const f = fixture();
+  f.quick.toggle('a', song('a'));
+  await f.settle();
+  f.sound(2);
+  f.quick.load('b', song('b'));
+  assert.deepEqual(f.quick.state, { id: 'b', playing: false, activeNote: null, cursor: 0 });
+  assert.equal(f.played.length, 1, 'loading never starts playback');
+
+  f.quick.toggle('b', song('b'));
+  await f.settle();
+  assert.equal(f.played[1]!.title, 'b');
+  assert.equal(f.played[1]!.notes.length, 4, 'the loaded song then plays from its start');
+});

@@ -17,7 +17,7 @@ import { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
-import { parseRoute, routeHash, shareUrl } from './route';
+import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
 import { createPassages, advancePractice, comboTier, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
@@ -30,6 +30,7 @@ import type { SongbookEntry } from './songbook';
 import { nextSong } from './featured';
 import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
 
+const APP_BASE = import.meta.env.BASE_URL;
 const engine = new OcarinaEngine();
 let bindings = (() => {
   try { return readBindings(JSON.parse(localStorage.getItem(KEY_BINDINGS_STORAGE) ?? 'null')); }
@@ -1006,7 +1007,7 @@ function showView(next: AppView, pushHistory = true): void {
   if (next === 'lesson') updateLessonHeading();
   if (next === 'lesson') watchGamepads();
   if (returningToCatalog) catalogue.refresh();
-  document.title = next === 'lesson' && current ? `${selectedEntry?.title ?? current.title} · Ocarina Hero` : 'Ocarina Hero';
+  document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title) : `${current.title} · Ocarina Hero`;
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
 
@@ -1017,8 +1018,8 @@ function syncRoute(pushHistory: boolean): void {
     if (link.dataset.viewLink === route || view === 'lesson' && current && link.dataset.viewLink === 'catalog') link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
-  const hash = view === 'lesson' && selectedEntry ? routeHash({ view: 'song', songId: selectedEntry.id }) : `#${route}`;
-  if (pushHistory && location.hash !== hash) history.pushState(null, '', hash);
+  const address = view === 'lesson' && selectedEntry ? songPath(APP_BASE, selectedEntry.id) : `${APP_BASE}#${route}`;
+  if (pushHistory && location.pathname + location.hash !== address) history.pushState(null, '', address);
 }
 
 function openSong(entry: SongbookEntry, pushHistory = true): void {
@@ -1050,7 +1051,7 @@ let shareResetTimer: number | undefined;
 must('#share-song').addEventListener('click', async () => {
   if (!selectedEntry) return;
   const button = must('#share-song .share-label');
-  const url = shareUrl(location.href, selectedEntry.id);
+  const url = shareUrl(location.href, APP_BASE, selectedEntry.id);
   const title = `${selectedEntry.title} · Ocarina Hero`;
   let label = 'Copied!';
   try {
@@ -1124,12 +1125,13 @@ function openFreePlay(): void {
 }
 
 function restoreView(): void {
-  const route = parseRoute(location.hash);
+  const route = parseLocation(APP_BASE, location.pathname, location.hash);
   if (route.view === 'song') {
     const entry = catalogue.entries.find(item => item.id === route.songId);
-    if (!entry) { history.replaceState(null, '', '#catalog'); showView('catalog', false); }
-    else if (entry === selectedEntry && current) showView('lesson', false);
+    if (!entry) { history.replaceState(null, '', `${APP_BASE}#catalog`); showView('catalog', false); return; }
+    if (entry === selectedEntry && current) showView('lesson', false);
     else openSong(entry, false);
+    history.replaceState(null, '', songPath(APP_BASE, entry.id));
   } else if (route.view === 'free') openFreePlay();
   else if (route.view === 'saved' || route.view === 'catalog') {
     catalogue.showSaved(route.view === 'saved');

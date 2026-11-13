@@ -1,9 +1,9 @@
 /**
- * Routes: `#catalog`, `#saved`, `#lesson`, `#free`, `#workshop` and `#settings` on the app root, and the path
+ * Routes: `#catalog`, `#saved`, `#popular`, `#lesson`, `#free`, `#workshop` and `#settings` on the app root, and the path
  * `song/<id>/` for a song lesson. `#song/<id>` is the earlier form of a song link and still opens.
  */
 export type Route =
-  | { view: 'catalog' | 'saved' | 'lesson' | 'free' | 'workshop' | 'settings' }
+  | { view: 'catalog' | 'saved' | 'popular' | 'lesson' | 'free' | 'workshop' | 'settings' }
   | { view: 'song'; songId: string };
 
 const SONG_PREFIX = 'song/';
@@ -19,7 +19,7 @@ export function parseRoute(hash: string): Route {
     const songId = decodeSongId(route.slice(SONG_PREFIX.length));
     return songId ? { view: 'song', songId } : { view: 'catalog' };
   }
-  return route === 'saved' || route === 'lesson' || route === 'free' || route === 'workshop' || route === 'settings' ? { view: route } : { view: 'catalog' };
+  return route === 'saved' || route === 'popular' || route === 'lesson' || route === 'free' || route === 'workshop' || route === 'settings' ? { view: route } : { view: 'catalog' };
 }
 
 /** Path of a song lesson under the app base, which ends with a slash. */

@@ -45,7 +45,7 @@
   text-shadow: 1px 1px 0 var(--outline), -1px 1px 0 var(--outline), 0 2px 0 var(--outline);
 }
 :root[data-theme='retro'] .embroidered { color: #fff7dc; text-shadow: 2px 2px 0 var(--outline), -1px 1px 0 var(--outline), 1px -1px 0 var(--outline), 0 3px 0 var(--outline); }
-:root[data-theme='retro'] :is(h1, h2, .brand, .song-title, .theme-card-title, .mini-title, .combo-count, .ribbon-title, .letter-slot, .letter-bubble, .count-badge, .step-number, summary::after) { font-family: var(--story-font); font-weight: 800; letter-spacing: -.01em; }
+:root[data-theme='retro'] :is(h1, h2, .brand, .song-title, .popular-title, .theme-card-title, .mini-title, .combo-count, .ribbon-title, .letter-slot, .letter-bubble, .count-badge, .step-number, summary::after) { font-family: var(--story-font); font-weight: 800; letter-spacing: -.01em; }
 :root[data-theme='retro'] .subtitle { font-style: normal; font-weight: 600; }
 :root[data-theme='retro'] .eyebrow { color: var(--n64-yellow); letter-spacing: .08em; }
 :root[data-theme='retro'] .eyebrow.stitched-label { color: var(--n64-yellow); }

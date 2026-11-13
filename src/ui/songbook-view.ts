@@ -4,7 +4,8 @@ import type { DemoTrack } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
 import { completedIds, lastOpened, type Progress } from './progress';
-import { isEmptyJourney, journey } from './journey';
+import { journey, playsLabel } from './journey';
+import type { PopularEntry } from './popularity';
 import { SAVED_STORAGE } from './local-data';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
@@ -23,6 +24,16 @@ const CATEGORY_ICONS: Record<SongCategory, ThreadIcon> = { All: 'songbook', Game
 /** A visible count badge; the noun stays available to assistive technology only. */
 function countHtml(count: number, noun: string): string {
   return `<span class="count-badge" aria-hidden="true">${count}</span><span class="visually-hidden">${count} ${noun}</span>`;
+}
+
+/** The rank count badge: rust for the top three, forest cloth after. */
+function rankHtml(rank: number): string {
+  return `<span class="count-badge popular-rank${rank > 3 ? ' is-trailing' : ''}" aria-hidden="true">${rank}</span>`;
+}
+
+function playsHtml(plays: number): string {
+  const label = playsLabel(plays);
+  return label ? `<span class="popular-plays">${label}</span>` : '';
 }
 
 function escapeHtml(value: string): string {
@@ -97,6 +108,9 @@ export class SongbookView {
   private difficultyFold: Fold;
   private list: HTMLElement;
   private journey: HTMLElement;
+  private popular: readonly PopularEntry[] = [];
+  /** The phone "Popular" view's list; it shares the row markup and actions with the Songbook list. */
+  private popularList: HTMLElement | null = document.querySelector('#popular-list');
   private categories: HTMLElement;
   private count: HTMLElement;
   private rail: HTMLElement;
@@ -204,7 +218,7 @@ export class SongbookView {
       });
       this.categoryFold.fold();
     });
-    this.list.addEventListener('click', event => {
+    const onRowClick = (event: Event) => {
       const button = (event.target as Element).closest<HTMLButtonElement>('[data-song], [data-save], [data-quick-play]');
       if (button?.dataset.save) { this.toggleSaved(button.dataset.save); return; }
       const id = button?.dataset.quickPlay ?? button?.dataset.song;
@@ -212,7 +226,9 @@ export class SongbookView {
       if (!entry) return;
       if (button!.dataset.quickPlay) this.callbacks.quickPlay(entry);
       else this.callbacks.select(entry);
-    });
+    };
+    this.list.addEventListener('click', onRowClick);
+    this.popularList?.addEventListener('click', onRowClick);
     this.journey.addEventListener('click', event => {
       const id = (event.target as Element).closest<HTMLButtonElement>('[data-song]')?.dataset.song;
       const entry = id && this.entries.find(item => item.id === id);
@@ -271,7 +287,13 @@ export class SongbookView {
   /** Mark the song loaded in the quick player; its row button switches between play and pause. */
   setNowPlaying(id: string | null, playing: boolean): void {
     this.nowPlaying = { id, playing };
-    for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
+    this.paintQuickPlays();
+  }
+
+  private paintQuickPlays(): void {
+    for (const list of [this.list, this.popularList]) {
+      for (const button of list?.querySelectorAll<HTMLButtonElement>('[data-quick-play]') ?? []) this.paintQuickPlay(button);
+    }
   }
 
   private paintQuickPlay(button: HTMLButtonElement): void {
@@ -390,34 +412,47 @@ export class SongbookView {
       const replacement = sameSpot ?? buttons.find(button => button.dataset[key] === focusedId);
       (replacement ?? buttons[Math.min(focusedIndex, buttons.length - 1)] ?? this.reset).focus({ preventScroll: true });
     }
-    for (const button of this.list.querySelectorAll<HTMLButtonElement>('[data-quick-play]')) this.paintQuickPlay(button);
+    this.paintQuickPlays();
     this.renderRail([...anchors.values()], result.length);
     this.renderJourney(progress);
+    this.renderPopularView(progress, completed);
   }
 
-  /** The desktop side panel: resume, overall progress, the suggested next song and the first saved songs. */
+  /** Show the shared ranking; it arrives best first and may name songs this build no longer has. */
+  setPopular(ranking: readonly PopularEntry[]): void {
+    const same = ranking.length === this.popular.length && ranking.every((song, index) => song.id === this.popular[index]!.id && song.plays === this.popular[index]!.plays);
+    if (same) return;
+    this.popular = ranking;
+    const progress = this.callbacks.progress();
+    this.renderJourney(progress);
+    this.renderPopularView(progress, completedIds(progress));
+  }
+
+  /** The phone "Popular" view: the same ranking as full Songbook rows, with quick play and save. */
+  private renderPopularView(progress: Progress, completed: ReadonlySet<string>): void {
+    if (!this.popularList) return;
+    const { popular } = journey(this.entries, progress, this.popular);
+    this.popularList.innerHTML = popular.map(({ entry, plays }, index) => this.rowHtml(entry, completed, undefined, { rank: index + 1, plays })).join('');
+    this.paintQuickPlays();
+  }
+
+  /** The desktop side panel: the song to resume, then what everyone plays most (or the welcome copy before any ranking). */
   private renderJourney(progress: Progress): void {
-    const state = journey(this.entries, progress, this.saved);
-    if (isEmptyJourney(state)) {
-      this.journey.innerHTML = '<h2 id="journey-title" class="embroidered">One passage<br>at a time.</h2><p>Listen to a melody, follow the staff and make it yours on the controller.</p>';
-      return;
-    }
-    const song = (entry: SongbookEntry, meta: string) => `<button class="song-open journey-song" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${escapeHtml(entry.title)}</span><span class="song-meta">${escapeHtml(meta)}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button>`;
-    const section = (label: string, body: string) => `<section class="journey-section"><h3 class="eyebrow stitched-label">${label}</h3>${body}</section>`;
-    const resume = state.resume;
+    const { resume, popular } = journey(this.entries, progress, this.popular);
     const resumeMeta = resume && [songMeta(resume.entry), resume.progress.completed && 'Completed', resume.progress.bestCombo > 1 && `Best combo ×${resume.progress.bestCombo}`].filter(Boolean).join(' · ');
-    const ratio = state.total ? state.completed / state.total : 0;
-    this.journey.innerHTML = '<h2 id="journey-title" class="embroidered">Your journey</h2>'
-      + (resume ? section('Continue', song(resume.entry, resumeMeta || '')) : '')
-      + section('Progress', `<p class="progress-heading"><span>${state.completed} of ${state.total} songs completed</span><span aria-hidden="true">${Math.round(ratio * 100)}%</span></p><div class="progress-track" style="--progress-ratio: ${ratio}"><progress value="${state.completed}" max="${Math.max(1, state.total)}" aria-label="Songs completed"></progress></div>`)
-      + (state.next ? section('Up next', song(state.next, songMeta(state.next))) : '')
-      + (state.savedCount ? section('Saved', `<ul class="journey-saved">${state.saved.map(entry => `<li><button class="text-button" type="button" data-song="${escapeHtml(entry.id)}">${escapeHtml(entry.title)}</button></li>`).join('')}</ul>${state.savedCount > state.saved.length ? `<button class="text-button journey-all" type="button" data-view-link="saved">See all ${state.savedCount} saved</button>` : ''}`) : '');
+    const resumeHtml = resume ? `<section class="journey-section"><p class="eyebrow stitched-label">Continue</p><button class="song-open" type="button" data-song="${escapeHtml(resume.entry.id)}">${sealHtml(resume.entry.icon, resume.entry.difficulty.level)}<span class="song-copy"><span class="song-title">${escapeHtml(resume.entry.title)}</span><span class="song-meta">${escapeHtml(resumeMeta || '')}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[resume.entry.difficulty.level]} difficulty</span></span></span></button></section>` : '';
+    const body = popular.length
+      ? `<section class="journey-section"><h2 id="journey-title" class="embroidered">Most popular</h2><p class="journey-note">What players have been playing lately.</p><ol class="popular-list">${popular.map(({ entry, plays }, index) => `<li><button class="popular-song" type="button" data-song="${escapeHtml(entry.id)}" title="${escapeHtml(entry.title)} · ${escapeHtml(entry.universe)}">${rankHtml(index + 1)}<span class="popular-copy"><span class="popular-title">${escapeHtml(entry.title)}</span><span class="popular-meta">${escapeHtml(entry.universe)}</span></span>${playsHtml(plays)}</button></li>`).join('')}</ol></section>`
+      : '<h2 id="journey-title" class="embroidered">One passage<br>at a time.</h2><p>Listen to a melody, follow the staff and make it yours on the controller.</p>';
+    this.journey.innerHTML = resumeHtml + body;
   }
 
-  private rowHtml(entry: SongbookEntry, completed: ReadonlySet<string>, letter?: string): string {
+  private rowHtml(entry: SongbookEntry, completed: ReadonlySet<string>, letter?: string, ranked?: { rank: number; plays: number }): string {
     const title = escapeHtml(entry.title);
     const saved = this.saved.has(entry.id);
-    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}><button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
+    const rank = ranked ? rankHtml(ranked.rank) : '';
+    const plays = ranked && playsLabel(ranked.plays);
+    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${plays ? ` · ${plays}` : ''}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
   }
 
   /** Shown above the full list while no search or filter is active: the song to resume, then the in-game songs. */

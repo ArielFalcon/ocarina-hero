@@ -29,6 +29,7 @@ import { controlScheme, currentTheme, setTheme, syncStaticArt } from './theme';
 import { SongbookView } from './songbook-view';
 import { songMeta, type SongbookEntry } from './songbook';
 import { nextSong } from './featured';
+import { loadPopular, reportPlay } from './popularity';
 import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
 import { DEFAULT_PREFERENCES, PREFERENCES_STORAGE, readPreferences, type Preferences } from './preferences';
 import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from './local-data';
@@ -76,7 +77,7 @@ const analysisDownload = must<HTMLButtonElement>('#analysis-download');
 const bendsInput = must<HTMLInputElement>('#bends');
 const simplifyInput = must<HTMLInputElement>('#simplify');
 const playButton = must<HTMLButtonElement>('#play');
-type AppView = 'catalog' | 'lesson' | 'workshop' | 'settings';
+type AppView = 'catalog' | 'popular' | 'lesson' | 'workshop' | 'settings';
 let view: AppView = 'catalog';
 let selectedEntry: SongbookEntry | null = null;
 let practiceMode = false;
@@ -937,6 +938,7 @@ function saveProgress(next: Progress): void {
 
 function recordPractice(finished: boolean): void {
   if (!selectedEntry) return;
+  if (finished) reportPlay(selectedEntry.id, 'complete');
   const next = markPractice(progress, selectedEntry.id, { finished, bestCombo: combo.best });
   if (next === progress) return;
   saveProgress(next);
@@ -1013,7 +1015,7 @@ function showView(next: AppView, pushHistory = true): void {
   const scroller = must('#main-content');
   const returningToCatalog = view !== next && next === 'catalog';
   if (view === 'catalog' && next !== 'catalog') catalogScroll = scroller.scrollTop;
-  if (next !== 'catalog') miniPlayer.close();
+  if (next !== 'catalog' && next !== 'popular') miniPlayer.close();
   if (view !== next) {
     stopPlayback();
     controls.reset();
@@ -1027,13 +1029,14 @@ function showView(next: AppView, pushHistory = true): void {
   }
   view = next;
   must('.app').classList.toggle('is-lesson', next === 'lesson');
-  for (const name of ['catalog', 'lesson', 'workshop', 'settings'] as const) {
+  for (const name of ['catalog', 'popular', 'lesson', 'workshop', 'settings'] as const) {
     must(`#${name}-view`).hidden = next !== name;
   }
   syncRoute(pushHistory);
   if (next === 'lesson') updateLessonHeading();
   if (next === 'lesson') watchGamepads();
   if (returningToCatalog) catalogue.refresh();
+  if (next === 'catalog' || next === 'popular') refreshPopular();
   document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title, songMeta(selectedEntry)) : `${current.title} · Ocarina Hero`;
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
@@ -1053,17 +1056,26 @@ function openSong(entry: SongbookEntry, pushHistory = true): void {
   selectedEntry = entry;
   practiceMode = false;
   saveProgress(markOpened(progress, entry.id, Date.now()));
+  reportPlay(entry.id, 'open');
   runDemo(entry.track);
   showView('lesson', pushHistory);
 }
 
 const catalogue = new SongbookView(must('#catalog-view'), DEMOS, {
   select: entry => openSong(entry),
-  quickPlay: entry => miniPlayer.toggle(entry),
+  quickPlay: entry => {
+    reportPlay(entry.id, 'quick-play');
+    miniPlayer.toggle(entry);
+  },
   savedChanged: updateLessonHeading,
   savedFilterChanged: () => { if (view === 'catalog') syncRoute(true); },
   progress: () => progress,
 });
+
+/** The shared ranking is fetched when the Songbook shows, at most once a minute. */
+function refreshPopular(): void {
+  void loadPopular().then(ids => catalogue.setPopular(ids));
+}
 
 const miniPlayer = new MiniPlayer(must('#mini-player'), engine, {
   open: entry => openSong(entry),
@@ -1136,7 +1148,7 @@ document.addEventListener('click', event => {
   if (next === 'free') openFreePlay();
   else if (next === 'saved') { catalogue.showSaved(true); showView('catalog'); }
   else if (next === 'settings' && view === 'settings') showView(settingsReturn);
-  else if (['catalog', 'lesson', 'workshop', 'settings'].includes(next)) {
+  else if (['catalog', 'popular', 'lesson', 'workshop', 'settings'].includes(next)) {
     if (next === 'catalog' && link.closest('.app-nav')) catalogue.showSaved(false);
     showView(next as AppView);
   }

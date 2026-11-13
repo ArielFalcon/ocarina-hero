@@ -95,12 +95,31 @@
 :root[data-theme='retro'] .tab { border-block: 2px solid #241f17; background: #000000d9; box-shadow: inset 0 2px 0 #00000080; }
 :root[data-theme='retro'] .tab::before { background: repeating-linear-gradient(0deg, #c8262a 0 2px, transparent 2px 18px); }
 :root[data-theme='retro'] .staff-clef img { width: 30px; height: 44px; margin-top: -8px; object-fit: contain; filter: none; }
-:root[data-theme='retro'] .tok.is-playing, :root[data-theme='retro'] .tok.is-expected { background: #f4c31533; }
-:root[data-theme='retro'] .tok::before { background: var(--n64-yellow); }
-:root[data-theme='retro'] .tok::after { background: conic-gradient(#fff7dc calc(var(--note-progress) * 1turn), transparent 0); }
 :root[data-theme='retro'] .note-order { font-family: var(--story-font); font-weight: 700; color: var(--muted); }
-:root[data-theme='retro'] .hit-burst i { background: var(--n64-yellow); }
-:root[data-theme='retro'] .hit-burst::before, :root[data-theme='retro'] .key-ripple { border-style: solid; border-color: var(--n64-yellow); }
+
+/* Sounding note: the C-button is pressed (it dips, then pops) inside a solid yellow cursor ring. */
+:root[data-theme='retro'] .tok.is-playing, :root[data-theme='retro'] .tok.is-expected { background: #f4c31526; }
+:root[data-theme='retro'] .tok::before { inset: -3px; padding: 3px; background: var(--n64-yellow); box-shadow: 0 0 0 1px var(--outline); scale: 1.25; transition: opacity .1s steps(2), scale .12s steps(3); }
+:root[data-theme='retro'] .tok.is-playing > .control-icon { translate: none; animation: n64-press .24s steps(4, end) both; }
+@keyframes n64-press { 0% { translate: 0 3px; scale: .9; } 50% { translate: 0 -4px; scale: 1.14; } 100% { translate: 0 -2px; scale: 1.06; } }
+/* The note's length lights eight square pips around it, one step at a time. */
+:root[data-theme='retro'] .tok::after {
+  inset: -12px; padding: 4px; background: conic-gradient(#fff7dc calc(var(--note-progress) * 1turn), #00000080 0);
+  -webkit-mask: repeating-conic-gradient(#000 0 28deg, transparent 28deg 45deg), linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: source-in, xor;
+  mask: repeating-conic-gradient(#000 0 28deg, transparent 28deg 45deg), linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: intersect, exclude;
+}
+:root[data-theme='retro'] .tok.is-playing::after { opacity: 1; animation: note-thread var(--note-ms, .4s) steps(8, end) both; }
+
+/* A hit throws four-point sparkles that turn into the N64 face colors as the combo grows. */
+:root[data-theme='retro'] .hit-burst::before { border: 3px solid var(--n64-yellow); box-shadow: 0 0 0 1px var(--outline), inset 0 0 0 1px var(--outline); animation-timing-function: steps(5, end); }
+:root[data-theme='retro'] .hit-burst i { left: -7px; top: -7px; width: 14px; height: 14px; background: #fff7dc; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+:root[data-theme='retro'] .hit-burst[data-tier='1'] i:nth-child(odd) { background: var(--n64-yellow); }
+:root[data-theme='retro'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 1) { background: var(--n64-yellow); }
+:root[data-theme='retro'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 2) { background: #6f97ff; }
+:root[data-theme='retro'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 3) { background: #3cc46a; }
+:root[data-theme='retro'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n) { background: #ff5a5e; }
+:root[data-theme='retro'] .key-ripple { border: 3px solid var(--n64-yellow); border-radius: 6px; animation-timing-function: steps(4, end); }
+@media (prefers-reduced-motion: reduce) { :root[data-theme='retro'] .tok.is-playing > .control-icon { animation: none; translate: 0 -2px; } }
 
 /* Progress and rewards. */
 :root[data-theme='retro'] .progress-track { border: 2px solid #241f17; background: #14120d; }

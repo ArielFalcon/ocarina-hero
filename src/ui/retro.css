@@ -31,9 +31,8 @@
   --cord: linear-gradient(135deg, #d8cda4 0 30%, #8a7f63 45% 55%, #241f17 70%);
   --satin: none;
   --weave: linear-gradient(180deg, #ffffff0a, transparent 40%, #0000001f);
-  /* Faceted stone: a few low-contrast polygons repeat like an N64 wall texture. */
-  --cloth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Cpath fill='%23635a47' d='M0 0h40L28 30 0 22Z'/%3E%3Cpath fill='%235b5342' d='M40 0h56v26L62 34 28 30Z'/%3E%3Cpath fill='%23655c49' d='M0 22l28 8 6 34L0 58Z'/%3E%3Cpath fill='%235d5543' d='M28 30l34 4 6 30-34 0Z'/%3E%3Cpath fill='%23615845' d='M62 34l34-8v40l-28-2Z'/%3E%3Cpath fill='%235c5442' d='M0 58l34 6-8 32H0Z'/%3E%3Cpath fill='%23625946' d='M34 64h34l-6 32H26Z'/%3E%3Cpath fill='%23595140' d='M68 64l28 2v30H62Z'/%3E%3C/svg%3E");
-  --cloth-size: 192px;
+  --cloth: url('/art/retro/stone.svg');
+  --cloth-size: 256px;
   --story-font: 'Nunito', 'Arial Rounded MT Bold', 'Trebuchet MS', sans-serif;
   font-family: var(--story-font);
   font-weight: 600;

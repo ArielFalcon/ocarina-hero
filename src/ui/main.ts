@@ -72,7 +72,7 @@ const analysisDownload = must<HTMLButtonElement>('#analysis-download');
 const bendsInput = must<HTMLInputElement>('#bends');
 const simplifyInput = must<HTMLInputElement>('#simplify');
 const playButton = must<HTMLButtonElement>('#play');
-type AppView = 'catalog' | 'lesson' | 'workshop';
+type AppView = 'catalog' | 'lesson' | 'workshop' | 'settings';
 let view: AppView = 'catalog';
 let selectedEntry: SongbookEntry | null = null;
 let practiceMode = false;
@@ -930,11 +930,11 @@ function showView(next: AppView, pushHistory = true): void {
   }
   view = next;
   must('.app').classList.toggle('is-lesson', next === 'lesson');
-  for (const name of ['catalog', 'lesson', 'workshop'] as const) {
+  for (const name of ['catalog', 'lesson', 'workshop', 'settings'] as const) {
     must(`#${name}-view`).hidden = next !== name;
   }
   const route = next === 'lesson' && !current ? 'free' : next;
-  for (const link of document.querySelectorAll<HTMLElement>('.app-nav [data-view-link]')) {
+  for (const link of document.querySelectorAll<HTMLElement>('.app-nav [data-view-link], .settings-link')) {
     if (link.dataset.viewLink === route || next === 'lesson' && current && link.dataset.viewLink === 'catalog') link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
@@ -1025,7 +1025,7 @@ document.addEventListener('click', event => {
   event.preventDefault();
   const next = link.dataset.viewLink ?? 'catalog';
   if (next === 'free') openFreePlay();
-  else if (['catalog', 'lesson', 'workshop'].includes(next)) showView(next as AppView);
+  else if (['catalog', 'lesson', 'workshop', 'settings'].includes(next)) showView(next as AppView);
 });
 
 function openFreePlay(): void {
@@ -1051,15 +1051,15 @@ for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]'))
   icon.innerHTML = threadIcon(icon.dataset.threadIcon as ThreadIcon);
 }
 
-const themeSwitch = must<HTMLButtonElement>('#theme-switch');
+const themePicker = must<HTMLFieldSetElement>('#theme-picker');
 syncStaticArt();
-function syncThemeSwitch(): void {
-  themeSwitch.setAttribute('aria-pressed', String(currentTheme() === 'retro'));
+function syncThemePicker(): void {
+  for (const option of themePicker.querySelectorAll<HTMLInputElement>('input[name="theme"]')) option.checked = option.value === currentTheme();
 }
-syncThemeSwitch();
-themeSwitch.addEventListener('click', () => setTheme(currentTheme() === 'retro' ? 'tapestry' : 'retro'));
+syncThemePicker();
+themePicker.addEventListener('change', event => setTheme((event.target as HTMLInputElement).value === 'retro' ? 'retro' : 'tapestry'));
 document.addEventListener('themechange', () => {
-  syncThemeSwitch();
+  syncThemePicker();
   refreshThreadIcons();
   buildPad();
   must('#keyboard-bindings').replaceChildren();

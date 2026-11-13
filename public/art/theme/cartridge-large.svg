@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <title>Grey game cartridge</title>
+  <path d="M6 34Q6 29 11 27L25 21Q48 15 71 21L85 27Q90 29 90 34V77Q90 81 86 81H10Q6 81 6 77Z" fill="#92918c" stroke="#120e08" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="m8 34 4-5 14-6q22-6 44 0l14 6 4 5-16-5q-24-8-48 0Z" fill="#cfcdc4"/>
+  <path d="m8 35 7-4v44l-7 4Z" fill="#b1b0a9"/>
+  <path d="m81 31 7 4v42l-7 2Z" fill="#6f706c"/>
+  <path d="M24 25v53H15l4-5V28Zm48 0v53h9l-4-5V28Z" fill="#a5a49e"/>
+  <path d="M24 26v52m48-52v52" fill="none" stroke="#64655f" stroke-width="1.5"/>
+  <path d="M30 29Q48 24 66 29Q68 30 68 33V72Q68 75 65 75H31Q28 75 28 72V33Q28 30 30 29Z" fill="#5c5b50"/>
+  <path d="M31 31Q48 27 65 31V72H31Z" fill="#b58b3c"/>
+  <path d="M31 31Q48 27 65 31L60 36H36Z" fill="#d6ad59"/>
+  <path d="m31 60 34-19v31H31Z" fill="#a27932"/>
+  <path d="m35 64 13-26 13 26-13 5Z" fill="#554d39"/>
+  <path d="m48 38 0 23-13 3Z" fill="#f3ecd2"/>
+  <path d="m48 38 13 26-13-3Z" fill="#d5c28d"/>
+  <path d="m35 64 13-3 13 3-13 5Z" fill="#8a7f63"/>
+  <path d="m48 46 5 12-5 4-5-4Z" fill="#b58b3c"/>
+  <path d="m48 46 0 16-5-4Z" fill="#d6ad59"/>
+  <path d="M31 72h34" stroke="#dcc078" stroke-width="1"/>
+  <g fill="none" stroke-linecap="round" stroke-width="2">
+    <path d="M9 49h10m-10 5h10M9 59h10m-10 5h10m58-15h10m-10 5h10m-10 5h10m-10 5h10" stroke="#60615b"/>
+    <path d="M9 47h10m-10 5h10M9 57h10m-10 5h10m58-15h10m-10 5h10m-10 5h10m-10 5h10" stroke="#c5c3b9"/>
+  </g>
+  <path d="M9 77h78l-2 2H11Z" fill="#666862"/>
+  <path d="M28 78h40" stroke="#bdbbb2" stroke-width="1.5"/>
+</svg>

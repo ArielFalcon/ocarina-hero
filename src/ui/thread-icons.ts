@@ -41,6 +41,7 @@ const ICONS = [
   'remote',
   'reset',
   'ring',
+  'settings',
   'rocket',
   'share',
   'songbook',

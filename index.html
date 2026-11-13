@@ -51,7 +51,7 @@
         <header class="head">
           <a class="brand" href="#catalog"><img class="brand-icon" src="/icons/app/icon-192.png" data-retro-src="/art/retro/ocarina.svg" width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
           <span class="head-actions">
-          <button id="theme-switch" class="theme-switch" type="button" aria-pressed="false" aria-label="Retro 1998 look" title="Switch between the 2026 and 1998 looks"><span class="theme-option theme-option--modern"><img src="/art/theme/keycard.svg" width="22" height="22" alt="" draggable="false" /></span><span class="theme-option theme-option--retro"><img src="/art/theme/cartridge.svg" width="22" height="22" alt="" draggable="false" /></span></button>
+          <a class="action settings-link" href="#settings" data-view-link="settings" aria-label="Settings"><span data-thread-icon="settings"></span></a>
           <a class="action repo-link" href="https://github.com/ArielFalcon/ocarina-hero" target="_blank" rel="noopener" aria-label="Star Ocarina Hero on GitHub (opens in a new tab)"><span data-thread-icon="star"></span><span><span class="repo-long">Star on </span>GitHub</span></a>
           </span>
         </header>
@@ -182,6 +182,15 @@
               <p class="notice">Audio extraction is experimental. Some notes may be missed or misidentified; review the result before practicing.</p>
             </li>
           </ol>
+        </section>
+
+        <section id="settings-view" class="view padded-view settings-view" aria-labelledby="settings-title" hidden>
+          <div class="section-art"><p class="eyebrow stitched-label">Settings</p><h1 id="settings-title" class="embroidered">Make it yours</h1><p class="subtitle stitched-label">Choose the look of your songbook.</p></div>
+          <fieldset id="theme-picker" class="theme-picker">
+            <legend class="stitched-label">Look</legend>
+            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="tapestry" /><img class="theme-card-art" src="/art/theme/keycard-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">2026 remake</span><span class="theme-card-detail">Woven tapestry with Switch 2 controls</span></span></label>
+            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="retro" /><img class="theme-card-art" src="/art/theme/cartridge-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">1998 original</span><span class="theme-card-detail">Stone subscreen with N64 controls</span></span></label>
+          </fieldset>
         </section>
 
       </main>

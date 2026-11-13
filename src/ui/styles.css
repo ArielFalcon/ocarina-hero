@@ -225,7 +225,7 @@ details[open] summary { color: var(--text); }
 .letter-list { position: relative; display: flex; flex-direction: column; width: 36px; height: min(calc(var(--letters, 26) * 28px + 12px), calc(100dvh - 240px)); padding: 6px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
 .letter-list::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
 .letter-slot { position: relative; flex: 1 1 0; min-height: 0; display: grid; place-items: center; padding: 0; border: 0; border-radius: 4px; background: transparent; font: 600 17px/1 Georgia, serif; letter-spacing: 0; }
-.letter-slot + .letter-slot::before { content: ''; position: absolute; top: 0; left: 30%; right: 30%; border-top: 1px dashed #a2824940; }
+.letter-knot { flex: none; height: 0; margin-inline: 30%; border-top: 1px dashed #a2824940; pointer-events: none; }
 .letter-slot .stitched-label { opacity: .78; }
 .letter-slot:hover .stitched-label { opacity: 1; }
 .letter-slot[aria-current='true'] { background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); }
@@ -430,7 +430,17 @@ progress::-moz-progress-bar { background: transparent; }
 .bends { display: flex; justify-content: center; gap: 10px; margin-top: 12px; touch-action: none; }
 .bend-key { min-width: 53px; min-height: 64px; padding: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; touch-action: none; user-select: none; }
 .hint { font-size: 14px; text-align: center; margin: 9px 0 2px; color: var(--muted); }
-.keyboard-settings { margin-top: 22px; font-size: 16px; border-top: 1px dashed #a2824980; }
+.settings-section { max-width: 760px; font-size: 16px; border-bottom: 1px dashed #a2824959; }
+.settings-section:first-of-type { margin-top: 8px; border-top: 1px dashed #a2824959; }
+.settings-section > summary.settings-heading { min-height: 56px; margin: 0; padding: 8px 0; font-size: 23px; color: var(--text); }
+.settings-heading .thread-icon { width: 24px; height: 24px; }
+.settings-body { padding: 2px 0 20px; }
+.settings-body > .meta:first-child { margin-top: 0; }
+.settings-section .toggle { margin-top: 4px; }
+.settings-rate { max-width: 220px; margin-top: 10px; }
+.settings-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 12px; }
+.keyboard-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; }
+.keyboard-link .thread-icon { width: 20px; height: 20px; }
 .keyboard-bindings { display: grid; gap: 8px; }
 .binding-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed #a2824933; }
 .binding-control { display: flex; align-items: center; gap: 12px; }
@@ -617,9 +627,33 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .filter-grid legend { line-height: 24px; margin-bottom: 8px; }
   .catalog-filters > summary { display: none; }
   .catalog-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(210px, .85fr); gap: 32px; }
-  .catalog-aside { display: block; position: relative; margin-top: 66px; padding: 24px 18px; border-left: 1px dashed #a2824959; overflow: hidden; min-height: 430px; background: #18251ba6; }
-  .catalog-aside h2 { font-size: 31px; }
+  /* The side panel follows the list while it scrolls; the in-list Continue shelf moves into it.
+     It is capped to the scroller (viewport minus the ~105px bottom navigation and its 16px insets) and scrolls only as a fallback. */
+  .catalog-aside { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; align-self: start; margin-top: 66px; padding: 18px; max-height: calc(100dvh - 137px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #aa8341 transparent; border-left: 1px dashed #a2824959; background: #18251ba6; }
+  .catalog-aside h2 { margin: 0; font-size: 28px; line-height: 1.15; }
   .catalog-aside p { font-size: 18px; color: var(--muted); }
+  .catalog-aside .action { align-self: flex-start; }
+  /* The rail spans the visible list (the scroller is the viewport minus ~105px of chrome, plus 12px insets).
+     Letters keep a fixed slot; the knots between them absorb the rest as cord seams tied with a satin diamond. */
+  .letter-list { height: calc(100dvh - 129px); padding-block: 8px; }
+  /* In short windows the knots collapse first, then the slots shrink, so every letter always fits. */
+  .letter-slot { flex: 0 1 24px; }
+  .letter-knot { position: relative; flex: 1 1 0; min-height: 0; margin: 0; border: 0; overflow: hidden; }
+  .letter-knot::before { content: ''; position: absolute; left: 50%; top: 1px; bottom: 1px; width: 2px; translate: -50% 0; background: var(--cord); opacity: .55; filter: url('#soft-thread'); }
+  .letter-knot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; translate: -50% -50%; rotate: 45deg; background: var(--satin); background-size: 2.8px 2.8px, auto; box-shadow: 0 0 0 1px #6f5226; }
+  .journey { display: grid; gap: 12px; }
+  .journey-section { position: relative; display: grid; gap: 6px; padding-top: 14px; }
+  .journey-section::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--thread-rule); pointer-events: none; }
+  .journey-section h3 { margin: 0; }
+  .journey-section .song-title { font-size: 19px; }
+  .journey-section .song-meta { font-size: 15px; }
+  .journey-section .song-open { min-height: 54px; }
+  .journey-section .progress-heading { margin: 0 0 2px; font-size: 16px; color: var(--text); }
+  .journey-section .progress-heading span:last-child { font-variant-numeric: tabular-nums; }
+  .journey-saved { display: grid; margin: 0; padding: 0; list-style: none; }
+  .journey-saved .text-button, .journey-all { min-height: 36px; padding: 2px 0; text-align: left; font-size: 17px; }
+  .journey-all { justify-self: start; color: var(--muted); }
+  .resume-shelf { display: none; }
   .lesson-view { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr); column-gap: 32px; align-content: start; padding: 20px 34px 32px; }
   .lesson-top, .lesson-layout { grid-column: 1 / -1; }
   .lesson-heading h1 { font-size: 32px; }

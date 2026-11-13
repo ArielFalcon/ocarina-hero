@@ -19,7 +19,7 @@ import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
 import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
 import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, lessonDetails, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
-import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
+import { centreIn, haptic, setPracticeFeedback, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
 import { staffClef, staffTokenHtml } from './staff';
 import { MiniPlayer } from './mini-player';
@@ -30,6 +30,8 @@ import { SongbookView } from './songbook-view';
 import { songMeta, type SongbookEntry } from './songbook';
 import { nextSong } from './featured';
 import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
+import { DEFAULT_PREFERENCES, PREFERENCES_STORAGE, readPreferences, type Preferences } from './preferences';
+import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from './local-data';
 
 const APP_BASE = import.meta.env.BASE_URL;
 const engine = new OcarinaEngine();
@@ -565,6 +567,9 @@ must('#keyboard-bindings').addEventListener('click', event => {
   renderBindings();
   must('#keyboard-status').textContent = `Press a key for ${actionLabel(bindingTarget)}. Escape cancels.`;
 });
+must<HTMLDetailsElement>('#keyboard-settings').addEventListener('toggle', event => {
+  if (!(event.target as HTMLDetailsElement).open) cancelBinding();
+});
 must('#reset-bindings').addEventListener('click', () => {
   controls.reset();
   clearActive();
@@ -572,9 +577,6 @@ must('#reset-bindings').addEventListener('click', () => {
   bindings = { ...DEFAULT_BINDINGS };
   saveBindings();
   renderBindings();
-});
-must<HTMLDetailsElement>('#keyboard-settings').addEventListener('toggle', event => {
-  if (!(event.target as HTMLDetailsElement).open) cancelBinding();
 });
 document.addEventListener('pointerdown', event => {
   if (!(event.target as Element).closest('#keyboard-settings')) cancelBinding();
@@ -657,10 +659,12 @@ must<HTMLButtonElement>('#clear').addEventListener('click', () => {
 });
 
 bendsInput.addEventListener('change', () => {
+  savePreferences({ ...preferences, bends: bendsInput.checked });
   if (current) renderSource(current);
 });
 
 simplifyInput.addEventListener('change', () => {
+  savePreferences({ ...preferences, simplify: simplifyInput.checked });
   if (current) renderSource(current);
 });
 
@@ -724,6 +728,7 @@ playButton.addEventListener('click', () => {
 });
 
 playbackRate.addEventListener('change', () => {
+  savePreferences({ ...preferences, rate: readPreferences({ rate: playbackRate.value }).rate });
   const speed = playbackRate.selectedOptions[0]?.text ?? playbackRate.value;
   if (playback.playing) {
     replay();
@@ -789,15 +794,18 @@ must('#cancel-analysis').addEventListener('click', () => {
   analyzeButton.focus();
 });
 
-analysisDownload.addEventListener('click', () => {
-  if (importer.pending || !current?.analysis) return;
-  const blob = new Blob([JSON.stringify(current.analysis, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
+function downloadJson(fileName: string, json: string): void {
+  const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
   const link = document.createElement('a');
   link.href = url;
-  link.download = `${current.title.replace(/\.[^.]+$/, '')}-analysis.json`;
+  link.download = fileName;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+analysisDownload.addEventListener('click', () => {
+  if (importer.pending || !current?.analysis) return;
+  downloadJson(`${current.title.replace(/\.[^.]+$/, '')}-analysis.json`, JSON.stringify(current.analysis, null, 2));
 });
 
 function updateProgress(): void {
@@ -996,7 +1004,11 @@ function selectPassage(index: number): void {
 /** Songbook scroll position, kept while a lesson or the workshop is open so returning lands where the user left. */
 let catalogScroll = 0;
 
+/** The view the Settings gear returns to when it is pressed again. */
+let settingsReturn: AppView = 'catalog';
+
 function showView(next: AppView, pushHistory = true): void {
+  if (next === 'settings' && view !== 'settings') settingsReturn = view;
   cancelBinding();
   const scroller = must('#main-content');
   const returningToCatalog = view !== next && next === 'catalog';
@@ -1123,6 +1135,7 @@ document.addEventListener('click', event => {
   const next = link.dataset.viewLink ?? 'catalog';
   if (next === 'free') openFreePlay();
   else if (next === 'saved') { catalogue.showSaved(true); showView('catalog'); }
+  else if (next === 'settings' && view === 'settings') showView(settingsReturn);
   else if (['catalog', 'lesson', 'workshop', 'settings'].includes(next)) {
     if (next === 'catalog' && link.closest('.app-nav')) catalogue.showSaved(false);
     showView(next as AppView);
@@ -1184,4 +1197,73 @@ document.addEventListener('themechange', () => {
   renderGamepadStatus();
   miniPlayer.refreshTheme();
 });
+
+const preferenceStatus = must<HTMLParagraphElement>('#preferences-status');
+const preferenceInputs = {
+  bends: must<HTMLInputElement>('#pref-bends'),
+  simplify: must<HTMLInputElement>('#pref-simplify'),
+  rate: must<HTMLSelectElement>('#pref-rate'),
+  effects: must<HTMLInputElement>('#pref-effects'),
+  haptics: must<HTMLInputElement>('#pref-haptics'),
+};
+let preferences: Preferences = (() => {
+  try { return readPreferences(JSON.parse(localStorage.getItem(PREFERENCES_STORAGE) ?? 'null')); }
+  catch { return DEFAULT_PREFERENCES; }
+})();
+
+function showPreferences(): void {
+  bendsInput.checked = preferenceInputs.bends.checked = preferences.bends;
+  simplifyInput.checked = preferenceInputs.simplify.checked = preferences.simplify;
+  playbackRate.value = preferenceInputs.rate.value = preferences.rate;
+  preferenceInputs.effects.checked = preferences.effects;
+  preferenceInputs.haptics.checked = preferences.haptics;
+  setPracticeFeedback(preferences);
+}
+
+function savePreferences(next: Preferences): void {
+  preferences = next;
+  showPreferences();
+  try { localStorage.setItem(PREFERENCES_STORAGE, JSON.stringify(preferences)); }
+  catch { preferenceStatus.textContent = 'Preferences apply for this session; browser storage is unavailable.'; }
+}
+
+showPreferences();
+preferenceInputs.haptics.closest('label')!.hidden = !('vibrate' in navigator);
+for (const [preference, lessonInput] of [[preferenceInputs.bends, bendsInput], [preferenceInputs.simplify, simplifyInput], [preferenceInputs.rate, playbackRate]] as const) {
+  preference.addEventListener('change', () => {
+    if (preference instanceof HTMLInputElement) (lessonInput as HTMLInputElement).checked = preference.checked;
+    else lessonInput.value = preference.value;
+    lessonInput.dispatchEvent(new Event('change'));
+  });
+}
+preferenceInputs.effects.addEventListener('change', () => savePreferences({ ...preferences, effects: preferenceInputs.effects.checked }));
+preferenceInputs.haptics.addEventListener('change', () => savePreferences({ ...preferences, haptics: preferenceInputs.haptics.checked }));
+
+const dataStatus = must<HTMLParagraphElement>('#data-status');
+must('#export-saved').addEventListener('click', () => {
+  const ids = catalogue.savedIds();
+  if (!ids.length) { dataStatus.textContent = 'There are no saved songs to export yet.'; return; }
+  downloadJson('ocarina-hero-saved-songs.json', savedExport(ids));
+  dataStatus.textContent = `Exported ${ids.length} saved ${ids.length === 1 ? 'song' : 'songs'}.`;
+});
+must<HTMLInputElement>('#import-saved').addEventListener('change', async event => {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  input.value = '';
+  if (!file) return;
+  try {
+    const ids = parseSavedExport(await file.text(), new Set(catalogue.entries.map(entry => entry.id)));
+    const added = catalogue.importSaved(ids);
+    dataStatus.textContent = added ? `Added ${added} ${added === 1 ? 'song' : 'songs'} to Saved.` : 'Every song in that file is already saved.';
+  } catch {
+    dataStatus.textContent = 'That file is not an Ocarina Hero saved-songs export.';
+  }
+});
+must('#clear-data').addEventListener('click', () => {
+  if (!window.confirm('Remove saved songs, progress, keyboard keys, preferences and the chosen look from this browser?')) return;
+  try { for (const key of LOCAL_DATA_KEYS) localStorage.removeItem(key); }
+  catch { dataStatus.textContent = 'Browser storage is unavailable, so there is nothing stored to clear.'; return; }
+  location.reload();
+});
+
 restoreView();

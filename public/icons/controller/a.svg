@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 68">
-  <title>A button</title>
-  <circle cx="32" cy="37" r="29" fill="#101211"/>
-  <circle cx="32" cy="31" r="28" fill="#8c8888" stroke="#151615" stroke-width="4"/>
-  <path d="M12 15a25 25 0 0 1 39 0" fill="none" stroke="#b9b3b0" stroke-opacity=".28" stroke-width="1.5"/>
-  <text x="32" y="47" text-anchor="middle" fill="#f7f6f2" font-family="Arial, sans-serif" font-size="44" font-weight="400">A</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 68"><circle cx="32" cy="37" r="29" fill="#101211"/><circle cx="32" cy="31" r="28" fill="#8c8888" stroke="#151615" stroke-width="4"/><path fill="none" stroke="#b9b3b0" stroke-opacity=".28" stroke-width="1.5" d="M12 15a25 25 0 0 1 39 0"/><text x="32" y="47" fill="#f7f6f2" font-family="Arial, sans-serif" font-size="44" font-weight="400" text-anchor="middle">A</text></svg>

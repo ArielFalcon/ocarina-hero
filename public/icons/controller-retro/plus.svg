@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-  <title>Plus</title>
-  <path d="M15 4h10v11h11v10H25v11H15V25H4V15h11Z" transform="translate(0 2)" fill="#120e08" stroke="#120e08" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M15 3h10v11h11v10H25v11H15V24H4V14h11Z" fill="#f3ecd2" stroke="#120e08" stroke-width="3" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path fill="#120e08" stroke="#120e08" stroke-linejoin="round" stroke-width="3" d="M15 6h10v11h11v10H25v11H15V27H4V17h11Z"/><path fill="#f3ecd2" stroke="#120e08" stroke-linejoin="round" stroke-width="3" d="M15 3h10v11h11v10H25v11H15V24H4V14h11Z"/></svg>

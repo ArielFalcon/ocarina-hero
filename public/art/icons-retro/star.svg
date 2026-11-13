@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Gold star</title>
-  <path fill="#f4c315" d="m12 2 3 6 7 1-5 5 1 8-6-4-6 4 1-8-5-5 7-1Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f3ecd2" stroke="none" d="m12 2 0 10-10-3 7-1Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="#9a7400" stroke="none" d="m12 12 5 2 1 8-6-4-6 4Z" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="m12 2 3 6 7 1-5 5 1 8-6-4-6 4 1-8-5-5 7-1Z"/><path fill="#f3ecd2" d="M12 2v10L2 9l7-1Z"/><path fill="#9a7400" d="m12 12 5 2 1 8-6-4-6 4Z"/></svg>

@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<title>hunter</title>
-<g stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M6 17 14 5 21 2.5 19 9 8 19Z" fill="#f3ecd2"/><path d="M21 2.5 19 9 8 19 6 17Z" fill="#2d5bd2" stroke="none"/><path d="M5 15 9 19M3.5 20.5 7 17" fill="none" stroke="#f4c315"/><path d="M3 4.5 5 3l1 2 2 1-2 1-1 2-1-2-2-1Z" fill="#f4c315"/></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke="#120e08" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path fill="#f3ecd2" d="m6 17 8-12 7-2.5L19 9 8 19Z"/><path fill="#2d5bd2" stroke="none" d="M21 2.5 19 9 8 19l-2-2Z"/><path fill="none" stroke="#f4c315" d="m5 15 4 4m-5.5 1.5L7 17"/><path fill="#f4c315" d="M3 4.5 5 3l1 2 2 1-2 1-1 2-1-2-2-1Z"/></g></svg>

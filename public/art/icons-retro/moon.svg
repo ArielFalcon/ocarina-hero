@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Crescent moon and star</title>
-  <path fill="#f4c315" d="M13 2.8 8.5 6 7 11l2 5 4 2 5-1-3.5 4-6 .3-5-3.5L2 12l1.7-5.5L8 3Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f3ecd2" stroke="none" d="m13 2.8-4.5 3.2L7 11l-3 4-1-3L4 7l4-4Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="#9a7400" stroke="none" d="m7 11 2 5 4 2 5-1-3.5 4-6 .3Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f4c315" d="m18 3 1.3 3.7L22 8l-2.7 1.3L18 13l-1.3-3.7L14 8l2.7-1.3Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="M13 2.8 8.5 6 7 11l2 5 4 2 5-1-3.5 4-6 .3-5-3.5L2 12l1.7-5.5L8 3Z"/><path fill="#f3ecd2" d="M13 2.8 8.5 6 7 11l-3 4-1-3 1-5 4-4Z"/><path fill="#9a7400" d="m7 11 2 5 4 2 5-1-3.5 4-6 .3Z"/><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="m18 3 1.3 3.7L22 8l-2.7 1.3L18 13l-1.3-3.7L14 8l2.7-1.3Z"/></svg>

@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Audio waveform</title>
-  <path fill="#f4c315" d="M2 10h3v4H2Zm4-4h3v12H6Zm5-4h3v20h-3Zm5 5h3v10h-3Zm4 3h2v4h-2Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f3ecd2" stroke="none" d="M2.8 10.8h1.4V12H2.8Zm4-4h1.4V12H6.8Zm5-4h1.4V12h-1.4Zm5 5h1.4V12h-1.4Z" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="M2 10h3v4H2Zm4-4h3v12H6Zm5-4h3v20h-3Zm5 5h3v10h-3Zm4 3h2v4h-2Z"/><path fill="#f3ecd2" d="M2.8 10.8h1.4V12H2.8Zm4-4h1.4V12H6.8Zm5-4h1.4V12h-1.4Zm5 5h1.4V12h-1.4Z"/></svg>

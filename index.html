@@ -102,9 +102,8 @@
                   <nav id="letter-rail" class="letter-rail" aria-label="Jump to letter" hidden><div class="letter-list"></div><span id="letter-bubble" class="letter-bubble" aria-hidden="true"></span></nav>
                 </div>
               </div>
-              <aside class="catalog-aside">
-                <h2 class="embroidered">One passage<br>at a time.</h2>
-                <p>Listen to a melody, follow the staff and make it yours on the controller.</p>
+              <aside class="catalog-aside" aria-labelledby="journey-title">
+                <div id="journey" class="journey"></div>
                 <button class="action" type="button" data-view-link="free"><span class="stitched-label">Try free play</span></button>
               </aside>
             </div>
@@ -152,7 +151,7 @@
               <div id="pad" class="pad"></div><div id="bend-pad" class="bends"></div>
               <p id="hint" class="hint" aria-live="off">Press a note to begin.</p>
               <p id="gamepad-status" class="hint desktop-only" role="status" aria-live="polite">Connect a controller and press any of its buttons to play with it.</p>
-              <details id="keyboard-settings" class="keyboard-settings desktop-only"><summary><span data-thread-icon="keyboard"></span><span class="stitched-label">Keyboard mapping</span></summary><p class="meta">Choose a control, then press its new key. Each key can control one action.</p><div id="keyboard-bindings" class="keyboard-bindings"></div><p id="keyboard-status" class="meta" role="status" aria-live="polite">Changes are saved in this browser. Escape cancels an assignment.</p><button id="reset-bindings" class="text-button" type="button">Restore default keys</button></details>
+              <a class="text-button keyboard-link desktop-only" href="#settings" data-view-link="settings"><span data-thread-icon="keyboard"></span><span>Change keyboard keys</span></a>
             </section>
           </div>
         </section>
@@ -193,12 +192,54 @@
         </section>
 
         <section id="settings-view" class="view padded-view settings-view" aria-labelledby="settings-title" hidden>
-          <div class="section-art"><p class="eyebrow stitched-label">Settings</p><h1 id="settings-title" class="embroidered">Make it yours</h1><p class="subtitle stitched-label">Choose the look of your songbook.</p></div>
-          <fieldset id="theme-picker" class="theme-picker">
-            <legend class="stitched-label">Look</legend>
-            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="tapestry" /><img class="theme-card-art" src="/art/theme/keycard-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">2026 remake</span><span class="theme-card-detail">Woven tapestry with Switch 2 controls</span></span></label>
-            <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="retro" /><img class="theme-card-art" src="/art/theme/cartridge-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">1998 original</span><span class="theme-card-detail">Stone subscreen with N64 controls</span></span></label>
-          </fieldset>
+          <div class="section-art"><p class="eyebrow stitched-label">Settings</p><h1 id="settings-title" class="embroidered">Make it yours</h1><p class="subtitle stitched-label">Choose your look and your keys.</p></div>
+          <details class="settings-section" name="settings-panel" open>
+            <summary class="settings-heading"><span data-thread-icon="palette"></span><span class="stitched-label">Look</span></summary>
+            <div class="settings-body">
+              <fieldset id="theme-picker" class="theme-picker">
+                <legend class="visually-hidden">Look</legend>
+                <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="tapestry" /><img class="theme-card-art" src="/art/theme/keycard-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">2026 remake</span><span class="theme-card-detail">Woven tapestry with Switch 2 controls</span></span></label>
+                <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="retro" /><img class="theme-card-art" src="/art/theme/cartridge-large.svg" width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">1998 original</span><span class="theme-card-detail">Stone subscreen with N64 controls</span></span></label>
+              </fieldset>
+            </div>
+          </details>
+          <details class="settings-section" name="settings-panel">
+            <summary class="settings-heading"><span data-thread-icon="songbook"></span><span class="stitched-label">Lessons</span></summary>
+            <div class="settings-body">
+            <p class="meta">Every lesson opens with these. Changing them inside a lesson updates them here too.</p>
+            <label class="toggle"><input id="pref-bends" type="checkbox" /><span class="stitched-label">Use bends</span></label>
+            <label class="toggle"><input id="pref-simplify" type="checkbox" /><span class="stitched-label">Simplify ornaments</span></label>
+            <div class="field settings-rate"><label for="pref-rate">Playback speed</label><span class="input-frame select-frame"><select id="pref-rate"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option></select><span class="select-chevron" aria-hidden="true"></span></span></div>
+            </div>
+          </details>
+          <details class="settings-section" name="settings-panel">
+            <summary class="settings-heading"><span data-thread-icon="star"></span><span class="stitched-label">Practice feedback</span></summary>
+            <div class="settings-body">
+            <p class="meta">The status line always tells you how you did; these only add to it.</p>
+            <label class="toggle"><input id="pref-effects" type="checkbox" /><span class="stitched-label">Celebration effects (sparks, ribbons)</span></label>
+            <label class="toggle"><input id="pref-haptics" type="checkbox" /><span class="stitched-label">Vibration on hits and milestones</span></label>
+            <p id="preferences-status" class="meta" role="status" aria-live="polite"></p>
+            </div>
+          </details>
+          <details id="keyboard-settings" class="settings-section keyboard-settings desktop-only" name="settings-panel">
+            <summary class="settings-heading"><span data-thread-icon="keyboard"></span><span class="stitched-label">Keyboard mapping</span></summary>
+            <div class="settings-body">
+            <p class="meta">Choose a control, then press its new key. Each key can control one action.</p><div id="keyboard-bindings" class="keyboard-bindings"></div><p id="keyboard-status" class="meta" role="status" aria-live="polite">Changes are saved in this browser. Escape cancels an assignment.</p><button id="reset-bindings" class="text-button" type="button">Restore default keys</button>
+            </div>
+          </details>
+          <details class="settings-section" name="settings-panel">
+            <summary class="settings-heading"><span data-thread-icon="collection"></span><span class="stitched-label">Your data</span></summary>
+            <div class="settings-body">
+            <p class="meta">Everything stays in this browser. Export your saved songs to move them to another device.</p>
+            <div class="settings-actions">
+              <button id="export-saved" class="action" type="button"><span data-thread-icon="share"></span><span class="stitched-label">Export saved songs</span></button>
+              <label class="action" for="import-saved"><span data-thread-icon="heart"></span><span class="stitched-label">Import saved songs</span></label>
+              <input id="import-saved" type="file" accept="application/json,.json" class="visually-hidden" />
+              <button id="clear-data" class="text-button" type="button">Clear local data</button>
+            </div>
+            <p id="data-status" class="meta" role="status" aria-live="polite"></p>
+            </div>
+          </details>
         </section>
 
       </main>

@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104">
-  <title>Analog stick</title>
-  <g transform="translate(0 5)" stroke-linejoin="round">
-    <path d="m25 28 30 0 16 16v25L55 85H25L9 69V44Z" fill="#120e08"/>
-    <path d="M25 22h30l16 16v25L55 79H25L9 63V38Z" fill="#5f5745" stroke="#120e08" stroke-width="4"/>
-    <path d="M27 29h26l11 12v19L52 72H28L16 60V41Z" fill="#2f2a1f"/>
-    <path d="m33 48 14 0 4 18H29Z" fill="#8c8888" stroke="#120e08" stroke-width="3"/>
-    <path d="m40 24 7 6 10-1 1 9 7 6-7 6-1 9-10-1-7 6-7-6-10 1-1-9-7-6 7-6 1-9 10 1Z" fill="#c9c5bd" stroke="#120e08" stroke-width="4"/>
-    <path d="m40 24 7 6 10-1-7 12-10 3-12-5-5-10 10 1Z" fill="#eeeae1"/>
-    <path d="m28 39 12 5 10-3 8-3-1 12-10-1-7 6-7-6-10 1-1-9Z" fill="#aaa59d"/>
-    <path d="m40 36 9 8-9 8-9-8Z" fill="#c9c5bd" stroke="#8c8888" stroke-width="2"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104"><g stroke-linejoin="round"><path fill="#120e08" d="M25 33h30l16 16v25L55 90H25L9 74V49Z"/><path fill="#5f5745" stroke="#120e08" stroke-width="4" d="M25 27h30l16 16v25L55 84H25L9 68V43Z"/><path fill="#2f2a1f" d="M27 34h26l11 12v19L52 77H28L16 65V46Z"/><path fill="#8c8888" stroke="#120e08" stroke-width="3" d="M33 53h14l4 18H29Z"/><path fill="#c9c5bd" stroke="#120e08" stroke-width="4" d="m40 29 7 6 10-1 1 9 7 6-7 6-1 9-10-1-7 6-7-6-10 1-1-9-7-6 7-6 1-9 10 1Z"/><path fill="#eeeae1" d="m40 29 7 6 10-1-7 12-10 3-12-5-5-10 10 1Z"/><path fill="#aaa59d" d="m28 44 12 5 10-3 8-3-1 12-10-1-7 6-7-6-10 1-1-9Z"/><path fill="#c9c5bd" stroke="#8c8888" stroke-width="2" d="m40 41 9 8-9 8-9-8Z"/></g></svg>

@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104">
-  <title>Joystick up</title>
-  <ellipse cx="40" cy="59" rx="32" ry="29" fill="#101211"/>
-  <ellipse cx="40" cy="54" rx="31" ry="28" fill="#454544" stroke="#151615" stroke-width="4"/>
-  <ellipse cx="40" cy="44" rx="29" ry="25" fill="#9a9494" stroke="#151615" stroke-width="4.5"/>
-  <ellipse cx="40" cy="42" rx="22" ry="19" fill="#918b8c" stroke="#454342" stroke-width="2.5"/>
-  <path d="M20 33q20-20 40 0" fill="none" stroke="#d0c9c5" stroke-opacity=".3" stroke-width="1.5" stroke-linecap="round"/>
-  <polygon points="40,3 28,16 52,16" fill="#111312" stroke="#bcb6b1" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 104"><ellipse cx="40" cy="59" fill="#101211" rx="32" ry="29"/><ellipse cx="40" cy="54" fill="#454544" stroke="#151615" stroke-width="4" rx="31" ry="28"/><ellipse cx="40" cy="44" fill="#9a9494" stroke="#151615" stroke-width="4.5" rx="29" ry="25"/><ellipse cx="40" cy="42" fill="#918b8c" stroke="#454342" stroke-width="2.5" rx="22" ry="19"/><path fill="none" stroke="#d0c9c5" stroke-linecap="round" stroke-opacity=".3" stroke-width="1.5" d="M20 33q20-20 40 0"/><path fill="#111312" stroke="#bcb6b1" stroke-linejoin="round" stroke-width="1.5" d="M40 3 28 16h24z"/></svg>

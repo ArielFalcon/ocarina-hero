@@ -1,17 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>Blue faceted ocarina</title>
-  <path d="m29 25 16-16 10 6-9 18 9 6-3 10-13 8H22L10 49 6 38l7-11 11-3Z" fill="#2d5bd2" stroke="#120e08" stroke-width="4" stroke-linejoin="round"/>
-  <path d="m29 25 16-16 5 6-13 19Z" fill="#5b86ea"/>
-  <path d="m50 15 5 0-9 18-9 1Z" fill="#1b3a8f"/>
-  <path d="m13 27 11-3 13 10-14 6L6 38Z" fill="#5b86ea"/>
-  <path d="m6 38 17 2 16 17H22L10 49Z" fill="#1b3a8f"/>
-  <path d="m23 40 14-6 18 5-3 10-13 8Z" fill="#2d5bd2"/>
-  <path d="m23 40 29 9-13 8Z" fill="#1b3a8f"/>
-  <path d="m40 25 6-7 2 8Z" fill="#f4c315" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
-  <g fill="#120e08">
-    <ellipse cx="19" cy="32" rx="3" ry="2.5" transform="rotate(-20 19 32)"/>
-    <ellipse cx="28" cy="30" rx="3" ry="2.5" transform="rotate(-20 28 30)"/>
-    <ellipse cx="31" cy="40" rx="3.3" ry="2.7" transform="rotate(-20 31 40)"/>
-    <ellipse cx="41" cy="39" rx="3.3" ry="2.7" transform="rotate(-20 41 39)"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#2d5bd2" stroke="#120e08" stroke-linejoin="round" stroke-width="4" d="M29 25 45 9l10 6-9 18 9 6-3 10-13 8H22l-12-8-4-11 7-11 11-3Z"/><path fill="#5b86ea" d="M29 25 45 9l5 6-13 19Z"/><path fill="#1b3a8f" d="M50 15h5l-9 18-9 1Z"/><path fill="#5b86ea" d="m13 27 11-3 13 10-14 6-17-2Z"/><path fill="#1b3a8f" d="m6 38 17 2 16 17H22l-12-8Z"/><path fill="#2d5bd2" d="m23 40 14-6 18 5-3 10-13 8Z"/><path fill="#1b3a8f" d="m23 40 29 9-13 8Z"/><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="m40 25 6-7 2 8Z"/><g fill="#120e08"><ellipse cx="19" cy="32" rx="3" ry="2.5" transform="rotate(-20 19 32)"/><ellipse cx="28" cy="30" rx="3" ry="2.5" transform="rotate(-20 28 30)"/><ellipse cx="31" cy="40" rx="3.3" ry="2.7" transform="rotate(-20 31 40)"/><ellipse cx="41" cy="39" rx="3.3" ry="2.7" transform="rotate(-20 41 39)"/></g></svg>

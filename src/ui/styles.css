@@ -45,7 +45,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .visually-hidden:focus-visible { position: static; width: auto; height: auto; clip-path: none; }
 .skip-link:focus { position: fixed; top: 12px; left: 12px; z-index: 20; display: block; padding: 12px; background: var(--bg); }
 .app { position: relative; isolation: isolate; display: flex; flex-direction: column; width: 100%; height: 100vh; height: 100dvh; margin: auto; overflow: hidden; background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); }
-#main-content { scrollbar-color: #aa8341 #18251b; scrollbar-width: thin; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior-y: contain; scrollbar-gutter: stable; }
+#main-content { scrollbar-color: #aa8341 #18251b; scrollbar-width: thin; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior-y: contain; scrollbar-gutter: stable; container-type: size; }
+/* The scroller is a size container: sticky panels size against its real height (cqh), minus the space reserved for the mini player. */
 .tapestry-edge { flex-shrink: 0; height: var(--tapestry-band-height); background: url('/art/tapestry-band.jpg') top / 100% auto; }
 .head { flex-shrink: 0; display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 22px; border-bottom: 1px dashed #a5824259; }
 .brand { display: inline-flex; gap: .3em; align-items: center; font: 600 25px/1.2 Georgia, serif; text-decoration: none; letter-spacing: -.045em; }
@@ -222,7 +223,7 @@ details[open] summary { color: var(--text); }
 .song-index { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
 .song-row { scroll-margin-top: 12px; }
 .letter-rail { position: sticky; top: 12px; margin-top: 10px; }
-.letter-list { position: relative; display: flex; flex-direction: column; width: 36px; height: min(calc(var(--letters, 26) * 28px + 12px), calc(100dvh - 240px)); padding: 6px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
+.letter-list { position: relative; display: flex; flex-direction: column; width: 36px; height: min(calc(var(--letters, 26) * 28px + 12px), calc(100cqh - max(161px, 24px + var(--mini-player-space, 0px)))); padding: 6px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
 .letter-list::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
 .letter-slot { position: relative; flex: 1 1 0; min-height: 0; display: grid; place-items: center; padding: 0; border: 0; border-radius: 4px; background: transparent; font: 600 17px/1 Georgia, serif; letter-spacing: 0; }
 .letter-knot { flex: none; height: 0; margin-inline: 30%; border-top: 1px dashed #a2824940; pointer-events: none; }
@@ -631,14 +632,16 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .catalog-filters > summary { display: none; }
   .catalog-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(210px, .85fr); gap: 32px; }
   /* The side panel follows the list while it scrolls; the in-list Continue shelf moves into it.
-     It is capped to the scroller (viewport minus the ~105px bottom navigation and its 16px insets) and scrolls only as a fallback. */
-  .catalog-aside { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; align-self: start; margin-top: 66px; padding: 18px; max-height: calc(100dvh - 137px); overflow: hidden auto; scrollbar-width: thin; scrollbar-color: #aa8341 transparent; border-left: 1px dashed #a2824959; background: #18251ba6; }
+     It is capped to the scroller height, less its 16px insets and the mini player's space, and scrolls only as a fallback. */
+  .catalog-aside { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; align-self: start; margin-top: 66px; padding: 18px; max-height: calc(100cqh - 32px - var(--mini-player-space, 0px)); overflow: hidden auto; scrollbar-width: thin; scrollbar-color: #aa8341 transparent; border-left: 1px dashed #a2824959; background: #18251ba6; }
   .catalog-aside h2 { margin: 0; font-size: 28px; line-height: 1.15; }
   .catalog-aside p { font-size: 18px; color: var(--muted); }
   .catalog-aside .action { align-self: flex-start; }
-  /* The rail spans the visible list (the scroller is the viewport minus ~105px of chrome, plus 12px insets).
+  /* The rail spans the visible scroller (minus 12px insets) but never outgrows the list: the rail cell adds no
+     height to its grid row (height 0, min-height 100% of the row), and the sticky strip shrinks to fit it.
      Letters keep a fixed slot; the knots between them absorb the rest as cord seams tied with a satin diamond. */
-  .letter-list { height: calc(100dvh - 129px); padding-block: 8px; }
+  .letter-rail { position: relative; top: auto; height: 0; min-height: 100%; display: flex; flex-direction: column; margin-top: 0; padding-top: 10px; }
+  .letter-list { position: sticky; top: 12px; flex: 0 1 calc(100cqh - 24px - var(--mini-player-space, 0px)); height: auto; min-height: 0; padding-block: 8px; }
   /* In short windows the knots collapse first, then the slots shrink, so every letter always fits. */
   .letter-slot { flex: 0 1 24px; }
   .letter-knot { position: relative; flex: 1 1 0; min-height: 0; margin: 0; border: 0; overflow: hidden; }

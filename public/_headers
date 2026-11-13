@@ -10,3 +10,16 @@
 
 /icons/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# Security headers for every response. Cloudflare merges them with the cache rules above.
+# CSP: everything is same-origin. 'wasm-unsafe-eval' lets the Workshop compile the Basic Pitch
+# WebAssembly runtime; 'unsafe-inline' styles cover the staff's per-note style attributes;
+# blob: media plays the audio file a visitor picks in the Workshop.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=(), hid=(), bluetooth=(), midi=(), browsing-topics=()

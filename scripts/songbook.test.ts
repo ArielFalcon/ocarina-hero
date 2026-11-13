@@ -71,7 +71,7 @@ test('franchise composers and full theme names stay searchable without being dis
   assert.deepEqual(ids(filterSongbook(entries, { query: 'zimmer interstellar' })), ['catalogue-cornfield-chase']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'jujutsu aizo' })), ['catalogue-aizo']);
   assert.deepEqual(ids(filterSongbook(entries, { category: 'Games', universe: 'Super Mario' })),
-    ['catalogue-dire-dire-docks', 'catalogue-smb-world-clear', 'catalogue-smb-game-over']);
+    ['catalogue-dire-dire-docks', 'catalogue-smb-world-clear', 'catalogue-smb-game-over', 'catalogue-smw-overworld']);
 });
 
 test('letter anchors mark the first song of each initial, folding accents and non-letters', () => {

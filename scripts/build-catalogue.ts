@@ -30,6 +30,8 @@ interface Selection {
     assembly?: boolean;
     scorePitches?: number[];
     collapseRepeated?: boolean;
+    /** Selection positions the reference omits or merges into the previous attack; documented per row in the curation evidence. */
+    absentIndices?: number[];
   };
 }
 
@@ -170,7 +172,7 @@ if (process.argv.includes('--audio')) {
 
 function compareReference(selection: Selection, midi: InstanceType<typeof Midi>) {
   const reference = selection.reference;
-  const selected = selection.indices.map(index => midi.tracks[selection.trackIndex]!.notes[index]!);
+  let selected = selection.indices.map(index => midi.tracks[selection.trackIndex]!.notes[index]!);
   if (reference.assembly) {
     const text = readFileSync(reference.file!, 'utf8');
     const section = text.split('Music_Routes1_Ch2::')[1]!.split('.sub1:')[1]!.split('.sub3:')[0]!;
@@ -203,6 +205,10 @@ function compareReference(selection: Selection, midi: InstanceType<typeof Midi>)
   }
   const other = new Midi(readFileSync(reference.file!));
   const track = other.tracks[reference.trackIndex!]!;
+  if (reference.absentIndices) {
+    const absent = new Set(reference.absentIndices);
+    selected = selected.filter((_, position) => !absent.has(position));
+  }
   const matched = reference.matchOnset ? selected.map(note => {
     const found = track.notes.find(otherNote => otherNote.midi === note.midi
       && Math.abs(otherNote.ticks / other.header.ppq - note.ticks / midi.header.ppq) < 1e-8);

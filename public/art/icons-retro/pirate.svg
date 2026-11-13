@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Pirate skull</title>
-  <path fill="#f3ecd2" d="m4 6 4-3h8l4 3 1 7-4 3v5H7v-5l-4-3Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#c9bf9f" stroke="none" d="m16 3 4 3 1 7-4 3v5h-4V8Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="#120e08" stroke="none" d="m5.5 8 4.5 1v4H6Zm13 0L14 9v4h4Zm-6.5 5-2 4h4Zm-2 6h1v3h-1Zm3 0h1v3h-1Z" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f3ecd2" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="m4 6 4-3h8l4 3 1 7-4 3v5H7v-5l-4-3Z"/><path fill="#c9bf9f" d="m16 3 4 3 1 7-4 3v5h-4V8Z"/><path fill="#120e08" d="M5.5 8 10 9v4H6Zm13 0L14 9v4h4ZM12 13l-2 4h4Zm-2 6h1v3h-1Zm3 0h1v3h-1Z"/></svg>

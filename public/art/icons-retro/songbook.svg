@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Open songbook</title>
-  <path fill="#f3ecd2" d="M2.5 4 7 3l5 2 5-2 4.5 1v16L17 19l-5 2-5-2-4.5 1Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#c9bf9f" stroke="none" d="M12 5v16l5-2 4.5 1v-3L17 16Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="none" d="M12 5v16M5 8h4m-4 4h4m6-4h4m-4 4h4" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f3ecd2" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="M2.5 4 7 3l5 2 5-2 4.5 1v16L17 19l-5 2-5-2-4.5 1Z"/><path fill="#c9bf9f" d="M12 5v16l5-2 4.5 1v-3L17 16Z"/><path fill="none" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="M12 5v16M5 8h4m-4 4h4m6-4h4m-4 4h4"/></svg>

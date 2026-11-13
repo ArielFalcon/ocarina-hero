@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <title>Speed gauge</title>
-  <path fill="#f3ecd2" d="M2.5 18v-4L5 8l7-4 7 4 2.5 6v4h-5v-4l-2-3h-5l-2 3v4Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f4c315" stroke="none" d="m12 4 7 4 2.5 6v4h-5v-4l-2-3H12Z" stroke-width="1.5" stroke-linejoin="round"/><path fill="#f4c315" d="m10 15 8-6-4 9-3 1-2-2Z" stroke="#120e08" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f3ecd2" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="M2.5 18v-4L5 8l7-4 7 4 2.5 6v4h-5v-4l-2-3h-5l-2 3v4Z"/><path fill="#f4c315" d="m12 4 7 4 2.5 6v4h-5v-4l-2-3H12Z"/><path fill="#f4c315" stroke="#120e08" stroke-linejoin="round" stroke-width="1.5" d="m10 15 8-6-4 9-3 1-2-2Z"/></svg>

@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<title>microphone</title>
-<g stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M5 11v2l2 5 5 2 5-2 2-5v-2M12 20v1.5M8 21.5h8" fill="none" stroke="#f3ecd2"/><path d="M9 2.5h6l2 3v7l-2 3H9l-2-3v-7Z" fill="#8a7f63"/><path d="M9 2.5h6l-3 3H9v7l-2 0v-7Z" fill="#f3ecd2" stroke="none"/><path d="M15 2.5 17 5.5v7l-2 3H9l3-3V5.5Z" fill="#2f2a1f" stroke="none"/><path d="M10 7h4m-4 3h4" fill="none" stroke="#120e08"/></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke="#120e08" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path fill="none" stroke="#f3ecd2" d="M5 11v2l2 5 5 2 5-2 2-5v-2m-7 9v1.5m-4 0h8"/><path fill="#8a7f63" d="M9 2.5h6l2 3v7l-2 3H9l-2-3v-7Z"/><path fill="#f3ecd2" stroke="none" d="M9 2.5h6l-3 3H9v7H7v-7Z"/><path fill="#2f2a1f" stroke="none" d="m15 2.5 2 3v7l-2 3H9l3-3v-7Z"/><path fill="none" d="M10 7h4m-4 3h4"/></g></svg>

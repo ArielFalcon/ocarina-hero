@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<title>film</title>
-<g stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M3 9h18v12H3Z" fill="#8a7f63"/><path d="M3 9h18v3H3Z" fill="#f3ecd2" stroke="none"/><path d="M21 12v9H3l3-3h12v-6Z" fill="#2f2a1f" stroke="none"/><path d="M2.5 4.5 20 2l1 5L3 9.5Z" fill="#f3ecd2"/><path d="M6 4 9 3.5 12 8 9 8.5ZM14 3 17 2.5 20 7 17 7.5Z" fill="#2f2a1f" stroke="none"/><path d="M6.5 14.5h11M6.5 17.5h7" fill="none" stroke="#f3ecd2"/></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke="#120e08" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path fill="#8a7f63" d="M3 9h18v12H3Z"/><path fill="#f3ecd2" stroke="none" d="M3 9h18v3H3Z"/><path fill="#2f2a1f" stroke="none" d="M21 12v9H3l3-3h12v-6Z"/><path fill="#f3ecd2" d="M2.5 4.5 20 2l1 5L3 9.5Z"/><path fill="#2f2a1f" stroke="none" d="m6 4 3-.5L12 8l-3 .5Zm8-1 3-.5L20 7l-3 .5Z"/><path fill="none" stroke="#f3ecd2" d="M6.5 14.5h11m-11 3h7"/></g></svg>

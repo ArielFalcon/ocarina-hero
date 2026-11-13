@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-<title>empire</title>
-<g stroke="#120e08" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8 2.5h8L21.5 8v8L16 21.5H8L2.5 16V8Z" fill="#c9bf9f"/><path d="M16 2.5 21.5 8v8L16 21.5H8L2.5 16 8 18h8l2-2V8Z" fill="#8a7f63" stroke="none"/><path d="M8.5 6h7L18 8.5v7L15.5 18h-7L6 15.5v-7Z" fill="#2f2a1f"/><path d="M12 5v14M6 8.5l12 7M6 15.5l12-7" fill="none" stroke="#f3ecd2"/><path d="M9 9h6v6H9Z" fill="#c9bf9f"/><path d="M11 11h2v2h-2Z" fill="#2f2a1f" stroke="none"/></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke="#120e08" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path fill="#c9bf9f" d="M8 2.5h8L21.5 8v8L16 21.5H8L2.5 16V8Z"/><path fill="#8a7f63" stroke="none" d="M16 2.5 21.5 8v8L16 21.5H8L2.5 16 8 18h8l2-2V8Z"/><path fill="#2f2a1f" d="M8.5 6h7L18 8.5v7L15.5 18h-7L6 15.5v-7Z"/><path fill="none" stroke="#f3ecd2" d="M12 5v14M6 8.5l12 7m-12 0 12-7"/><path fill="#c9bf9f" d="M9 9h6v6H9Z"/><path fill="#2f2a1f" stroke="none" d="M11 11h2v2h-2Z"/></g></svg>

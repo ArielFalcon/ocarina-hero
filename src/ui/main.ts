@@ -18,7 +18,7 @@ import { Controls } from './input';
 import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
 import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
-import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, playbackSelection, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
+import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff } from './staff-motion';
 import { staffClef, staffTokenHtml } from './staff';
@@ -1085,7 +1085,7 @@ nextSongButton.addEventListener('click', () => {
 passageSelect.addEventListener('change', () => selectPassage(Number(passageSelect.value)));
 must('#previous-passage').addEventListener('click', () => selectPassage(passageIndex - 1));
 must('#next-passage').addEventListener('click', () => selectPassage(passageIndex + 1));
-must('#restart').addEventListener('click', () => selectPassage(passageIndex));
+must('#restart').addEventListener('click', () => selectPassage(resetPassage(passageIndex, { practice: practiceMode, repeating: repeatPassage.checked })));
 tab.addEventListener('click', event => {
   const target = (event.target as Element).closest<HTMLElement>('[data-note-index]');
   if (!target) return;

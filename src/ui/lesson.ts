@@ -35,6 +35,11 @@ export function advancePractice(notes: readonly Note[], cursor: number, button: 
     : cursor;
 }
 
+/** Passage a reset goes back to: a practice run starts over from the first one, unless a single passage is being repeated. */
+export function resetPassage(current: number, mode: { practice: boolean; repeating: boolean }): number {
+  return mode.practice && !mode.repeating ? 0 : current;
+}
+
 export const FREE_PLAY_TEMPO_BPM = 96;
 /** A tap still sounds on replay. */
 const MIN_TAKE_BEATS = 0.125;

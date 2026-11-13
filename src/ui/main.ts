@@ -10,7 +10,7 @@ import {
 } from '../core/pitches';
 import type { MelodyNote, Projection } from '../core/project';
 import { prepareMelody } from '../core/prepare';
-import { buttonLabel, noteInstruction, schemeBendLabel } from '../core/tab';
+import { buttonLabel, noteInstruction, schemeBendLabel, type ControlScheme } from '../core/tab';
 import { buttonIcon, modifierIcon } from './controller-icons';
 import { SourceImporter, type AudioSourceAnalysis, type PreparedAudio } from './import';
 import { AudioFragmentEditor } from './audio-editor';
@@ -418,13 +418,24 @@ const controls = new Controls(
 
 const gamepads = new GamepadInput(controls);
 const gamepadStatus = must<HTMLParagraphElement>('#gamepad-status');
+const GAMEPAD_HELP: Record<ControlScheme, string> = {
+  switch: 'Controller connected: the shoulder and face buttons play; the D-pad and the sticks bend.',
+  n64: 'Controller connected: A and the right stick, as the C buttons, play; R, Z and the left stick bend.',
+};
+/** Whether the connected pad has a layout the app can read; null while none is connected. */
+let gamepadReadable: boolean | null = null;
 let gamepadFrame: number | undefined;
+
+function renderGamepadStatus(): void {
+  if (gamepadReadable === null) return;
+  gamepadStatus.textContent = gamepadReadable ? GAMEPAD_HELP[controlScheme()] : 'This browser does not recognise the layout of that controller.';
+}
 
 /** Poll while the lesson is on screen and a usable pad is connected; one last empty poll releases what was held. */
 function pollGamepads(): void {
   gamepadFrame = undefined;
   const playable = view === 'lesson' && !document.hidden;
-  const connected = gamepads.update(playable ? navigator.getGamepads?.() ?? [] : []);
+  const connected = gamepads.update(playable ? navigator.getGamepads?.() ?? [] : [], controlScheme());
   if (playable && connected) gamepadFrame = requestAnimationFrame(pollGamepads);
 }
 
@@ -433,12 +444,12 @@ function watchGamepads(): void {
 }
 
 window.addEventListener('gamepadconnected', event => {
-  gamepadStatus.textContent = event.gamepad.mapping === 'standard'
-    ? 'Controller connected: the shoulder and face buttons play; the D-pad and the sticks bend.'
-    : 'This browser does not recognise the layout of that controller.';
+  gamepadReadable = event.gamepad.mapping === 'standard';
+  renderGamepadStatus();
   watchGamepads();
 });
 window.addEventListener('gamepaddisconnected', () => {
+  gamepadReadable = null;
   gamepadStatus.textContent = 'Controller disconnected.';
 });
 
@@ -1168,6 +1179,7 @@ document.addEventListener('themechange', () => {
   applyBend(bend);
   updateHint();
   refreshPracticeStatus();
+  renderGamepadStatus();
   miniPlayer.refreshTheme();
 });
 restoreView();

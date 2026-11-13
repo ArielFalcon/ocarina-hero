@@ -17,7 +17,7 @@ tapestry-style interface that works on phones and desktop.
 
 - **Songbook**: curated game, anime, film, pop and classic melodies, filterable by category and universe, with the songs the game teaches first, saved favourites and the song you last opened.
 - **Lessons**: listen to or practice each passage on a button staff, at 100%, 75% or 50% speed. Completed songs and your best combo are kept in the browser.
-- **Controller**: connect a gamepad and play with the same buttons, D-pad and stick as in the game; the keyboard and the on-screen pad work everywhere.
+- **Controller**: connect a gamepad and play with the same buttons, D-pad and stick as in the game; with the 1998 look it follows the N64 layout (A, the C buttons on the right stick, R and Z). The keyboard and the on-screen pad work everywhere.
 - **Free play**: improvise on the on-screen pad, the keyboard or a controller.
 - **Workshop**: import a MIDI file, or a short fragment of a recording, as a playable tab. The melody is found in your browser; it is most accurate with a single instrument or voice.
 

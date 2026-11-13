@@ -19,10 +19,16 @@ function fixture() {
     stopAll: () => { engine = { playing: false, noteIndex: null }; },
     getPlaybackState: () => engine,
   };
+  const timers = new Map<number, { run: () => void; ms: number }>();
   const quick = new QuickPlay(player, state => states.push(state), error => { throw error; }, {
     request: callback => { const id = ++nextId; frames.set(id, callback); return id; },
     cancel: id => { frames.delete(id); },
+  }, {
+    set: (run, ms) => { const id = ++nextId; timers.set(id, { run, ms }); return id; },
+    clear: id => { timers.delete(id); },
   });
+  /** Fire every pending timer, as if the pause between songs elapsed. */
+  const elapse = () => { const due = [...timers.values()]; timers.clear(); for (const timer of due) timer.run(); };
   const settle = () => new Promise(resolve => setImmediate(resolve));
   /** Advance the engine to a note of the started arrangement, then run one animation frame. */
   const sound = (noteIndex: number | null, playing = true) => {
@@ -31,7 +37,7 @@ function fixture() {
     frames.delete(id);
     callback(0);
   };
-  return { quick, played, states, settle, sound };
+  return { quick, played, states, settle, sound, timers, elapse };
 }
 
 test('pausing keeps the position and resuming restarts at the sounding note', async () => {
@@ -58,6 +64,12 @@ test('another song replaces the current one from its start', async () => {
   await f.settle();
   f.sound(3);
   f.quick.toggle('b', song('b'));
+  await f.settle();
+  assert.equal(f.played.length, 1, 'the next song waits for a brief pause');
+  assert.deepEqual(f.quick.state, { id: 'b', playing: false, activeNote: null, cursor: 0 });
+  const [pause] = [...f.timers.values()];
+  assert.ok(pause && pause.ms >= 200 && pause.ms <= 600, 'the pause is brief');
+  f.elapse();
   await f.settle();
   assert.equal(f.played[1]!.title, 'b');
   assert.equal(f.played[1]!.notes.length, 4);
@@ -95,4 +107,35 @@ test('loading a song shows it paused at its start without playing', async () => 
   await f.settle();
   assert.equal(f.played[1]!.title, 'b');
   assert.equal(f.played[1]!.notes.length, 4, 'the loaded song then plays from its start');
+});
+
+test('the pause between songs can be skipped or cancelled, and never applies from silence', async () => {
+  const f = fixture();
+  f.quick.toggle('a', song('a'));
+  await f.settle();
+  assert.equal(f.played.length, 1, 'nothing was playing: the first song starts at once');
+  f.quick.toggle('b', song('b'));
+  f.quick.toggle('b', song('b'));
+  await f.settle();
+  assert.equal(f.played.at(-1)!.title, 'b', 'tapping the waiting song again starts it now');
+  assert.equal(f.timers.size, 0);
+  f.elapse();
+  await f.settle();
+  assert.equal(f.played.length, 2, 'the skipped pause never starts it twice');
+
+  f.quick.toggle('c', song('c'));
+  f.quick.pause();
+  f.elapse();
+  await f.settle();
+  assert.equal(f.played.length, 2, 'pausing during the pause cancels the pending start');
+  assert.equal(f.quick.state.id, 'c');
+
+  f.quick.toggle('a', song('a'));
+  await f.settle();
+  f.quick.toggle('c', song('c'));
+  f.quick.close();
+  f.elapse();
+  await f.settle();
+  assert.equal(f.played.length, 3, 'closing during the pause cancels the pending start');
+  assert.equal(f.quick.state.id, null);
 });

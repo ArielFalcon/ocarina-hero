@@ -100,11 +100,16 @@ group('Kirby', ['Games'], 'gamepad', [
 group('Professor Layton', ['Games'], 'gamepad', [
   ['catalogue-layton-theme', 'Professor Layton’s Theme', { version: 'Professor Layton and the Curious Village', aliases: ['Tomohito Nishiura', 'Layton’s Theme'] }],
 ]);
+group('The Elder Scrolls', ['Games'], 'gamepad', [
+  ['catalogue-morrowind-nerevar-rising', 'Nerevar Rising', { version: 'Morrowind', aliases: ['Jeremy Soule', 'Call of Magic', 'Main Theme', 'The Elder Scrolls III: Morrowind', 'Morrowind Theme'] }],
+  ['catalogue-oblivion-reign-of-the-septims', 'Reign of the Septims', { version: 'Oblivion', aliases: ['Jeremy Soule', 'Main Theme', 'The Elder Scrolls IV: Oblivion', 'Oblivion Theme'] }],
+]);
 
 // Anime
 group('Naruto', ['Anime'], 'leaf', [
   ['catalogue-naruto', 'Sadness and Sorrow'],
   ['catalogue-blue-bird', 'Blue Bird', { version: 'Shippuden', aliases: ['Ikimono-gakari'] }],
+  ['catalogue-naruto-hokage-funeral', 'Grief and Sorrow', { aliases: ['Toshio Masuda', 'Hokage’s Funeral', 'Hokages Funeral', 'Ai to Shū', '哀と愁'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
@@ -134,6 +139,7 @@ group('KPop Demon Hunters', ['Film', 'Pop'], 'hunter', [['catalogue-golden', 'Go
 group('Star Wars', ['Film'], 'empire', [
   ['catalogue-imperial-march', 'The Imperial March', { aliases: ['John Williams'] }],
   ['catalogue-mandalorian', 'Main Theme', { version: 'The Mandalorian', aliases: ['Ludwig Göransson'], icon: 'film' }],
+  ['catalogue-duel-of-the-fates-brass', 'Duel of the Fates', { version: 'The Phantom Menace', aliases: ['John Williams', 'Episode I', 'Star Wars: Episode I – The Phantom Menace'] }],
 ]);
 group('Pirates of the Caribbean', ['Film'], 'pirate', [['catalogue-pirate', 'He’s a Pirate', { aliases: ['Hans Zimmer', 'Klaus Badelt'] }]]);
 group('Harry Potter', ['Film'], 'wizard', [['catalogue-hedwig', 'Hedwig’s Theme', { aliases: ['John Williams'] }]]);
@@ -141,6 +147,7 @@ group('The Lord of the Rings', ['Film'], 'film', [
   ['catalogue-concerning-hobbits', 'Concerning Hobbits', { aliases: ['Howard Shore'] }],
   ['catalogue-evenstar', 'Evenstar', { aliases: ['Howard Shore'] }],
   ['catalogue-may-it-be', 'May It Be', { aliases: ['Enya'] }],
+  ['catalogue-hobbit-misty-mountains', 'Misty Mountains', { version: 'The Hobbit: An Unexpected Journey', aliases: ['Howard Shore', 'Plan 9', 'David Donaldson', 'David Long', 'Steve Roche', 'Janet Roddick', 'Richard Armitage', 'Far Over the Misty Mountains Cold', 'Misty Mountains Cold', 'The Hobbit'] }],
 ]);
 group('Indiana Jones', ['Film'], 'film', [['catalogue-raiders-march', 'The Raiders March', { aliases: ['John Williams'] }]]);
 group('Jurassic Park', ['Film'], 'film', [['catalogue-jurassic-park', 'Main Theme', { aliases: ['John Williams'] }]]);

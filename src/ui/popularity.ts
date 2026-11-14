@@ -1,4 +1,5 @@
 import type { PopularityAction } from '../server/popularity';
+import { createRankingCache } from './ranking-cache';
 
 export interface PopularEntry { id: string; plays: number }
 
@@ -21,23 +22,16 @@ export function reportMissedSearch(query: string): void {
     .catch(() => {});
 }
 
-let latest: { at: number; songs: PopularEntry[] } | null = null;
+/** The ranking, refreshed at most once a minute unless forced; the last good list, or none, when the API fails. */
+const cachedRanking = createRankingCache(async (): Promise<PopularEntry[]> => {
+  const response = await fetch(ENDPOINT, { headers: { Accept: 'application/json' } });
+  if (!response.ok) throw new Error(String(response.status));
+  const { songs } = await response.json() as { songs?: unknown };
+  return Array.isArray(songs)
+    ? songs.flatMap(song => typeof song?.id === 'string' ? [{ id: song.id as string, plays: Number.isFinite(song.plays) ? Number(song.plays) : 0 }] : [])
+    : [];
+}, REFRESH_MS);
 
-/** The ranking, refreshed at most once a minute; the last good list, or none, when the API fails. */
-export async function loadPopular(now = Date.now()): Promise<PopularEntry[]> {
-  if (!enabled) return [];
-  if (latest && now - latest.at < REFRESH_MS) return latest.songs;
-  try {
-    const response = await fetch(ENDPOINT, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error(String(response.status));
-    const { songs } = await response.json() as { songs?: unknown };
-    const parsed = Array.isArray(songs)
-      ? songs.flatMap(song => typeof song?.id === 'string' ? [{ id: song.id as string, plays: Number.isFinite(song.plays) ? Number(song.plays) : 0 }] : [])
-      : [];
-    latest = { at: now, songs: parsed };
-    return latest.songs;
-  } catch {
-    latest = { at: now, songs: latest?.songs ?? [] };
-    return latest.songs;
-  }
+export async function loadPopular(options: { force?: boolean } = {}): Promise<PopularEntry[]> {
+  return enabled ? cachedRanking(options) : [];
 }

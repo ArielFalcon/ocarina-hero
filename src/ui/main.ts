@@ -31,6 +31,7 @@ import { SongbookView } from './songbook-view';
 import { songMeta, type SongbookEntry } from './songbook';
 import { nextSong } from './featured';
 import { loadPopular, reportPlay } from './popularity';
+import { bindPullToRefresh } from './pull-refresh';
 import { completedIds, markOpened, markPractice, PROGRESS_STORAGE, readProgress, type Progress } from './progress';
 import { DEFAULT_PREFERENCES, PREFERENCES_STORAGE, readPreferences, type Preferences } from './preferences';
 import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from './local-data';
@@ -1096,6 +1097,30 @@ const catalogue = new SongbookView(must('#catalog-view'), LISTING, {
 function refreshPopular(): void {
   void loadPopular().then(ids => catalogue.setPopular(ids));
 }
+
+let popularReload: Promise<void> | null = null;
+/** Fetch the ranking now, past the once-a-minute cache: the pull gesture and the Refresh button share one request. */
+function reloadPopular(): Promise<void> {
+  popularReload ??= (async () => {
+    const button = must<HTMLButtonElement>('#refresh-popular');
+    const status = must('#popular-status');
+    button.disabled = true;
+    status.textContent = '';
+    try {
+      catalogue.setPopular(await loadPopular({ force: true }));
+      status.textContent = 'Ranking updated.';
+    } catch {
+      status.textContent = 'Could not refresh the ranking. Try again later.';
+    } finally {
+      button.disabled = false;
+      popularReload = null;
+    }
+  })();
+  return popularReload;
+}
+
+must('#refresh-popular').addEventListener('click', () => void reloadPopular());
+bindPullToRefresh(must('#main-content'), must('#popular-pull'), { active: () => view === 'popular', refresh: reloadPopular });
 
 const miniPlayer = new MiniPlayer(must('#mini-player'), engine, trackLoader, {
   open: entry => openSong(entry),

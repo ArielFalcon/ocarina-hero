@@ -3,8 +3,6 @@ import { lastOpened, type Progress, type SongProgress } from './progress';
 interface Song { readonly id: string }
 
 export const POPULAR_SHOWN = 20;
-/** Play counts appear only past this many, where they say something. */
-export const PLAYS_SHOWN_ABOVE = 100;
 
 export interface Journey<T extends Song> {
   /** The last opened song, with its progress; null before any lesson was opened. */
@@ -31,8 +29,9 @@ export function journey<T extends Song>(entries: readonly T[], progress: Progres
   };
 }
 
-/** "1.2K plays" once a song passes the threshold; null below it. */
+/** "1 play", "15 plays", "1.2K plays"; null before the first play. */
 export function playsLabel(plays: number): string | null {
-  if (plays <= PLAYS_SHOWN_ABOVE) return null;
+  if (plays <= 0) return null;
+  if (plays === 1) return '1 play';
   return `${new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(plays)} plays`;
 }

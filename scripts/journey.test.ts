@@ -20,8 +20,9 @@ test('popular keeps the server order and plays, skips unknown and repeated ids a
   assert.deepEqual(result.popular.slice(0, 3).map(item => [item.entry.id, item.plays]), [['z', 0], ['a', 2], ['b', 4]]);
 });
 
-test('play counts show only above one hundred, in compact form', () => {
-  assert.equal(playsLabel(100), null);
-  assert.equal(playsLabel(101), '101 plays');
+test('play counts show from the first play, in compact form past a thousand', () => {
+  assert.equal(playsLabel(0), null);
+  assert.equal(playsLabel(1), '1 play');
+  assert.equal(playsLabel(15), '15 plays');
   assert.equal(playsLabel(1234), '1.2K plays');
 });

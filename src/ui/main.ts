@@ -943,7 +943,6 @@ function saveProgress(next: Progress): void {
 
 function recordPractice(finished: boolean): void {
   if (!selectedEntry) return;
-  if (finished) reportPlay(selectedEntry.id, 'complete');
   const next = markPractice(progress, selectedEntry.id, { finished, bestCombo: combo.best });
   if (next === progress) return;
   saveProgress(next);

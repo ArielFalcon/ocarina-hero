@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { DemoTrack } from '../src/core/demo';
 import { DEMOS } from './catalogue-loader';
-import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta } from '../src/ui/songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listPatch, listUniverses, songMeta } from '../src/ui/songbook';
 
 const entries = createSongbookEntries(DEMOS);
 const ids = (result: ReturnType<typeof filterSongbook>) => result.map((entry) => entry.id);
@@ -96,4 +96,16 @@ test('a song never wears another franchise emblem', () => {
     .filter(entry => !generic.has(entry.icon) && [...markOwners.get(entry.icon) ?? []].some(universe => universe !== entry.universe))
     .map(entry => `${entry.title}: ${entry.icon}`);
   assert.deepEqual(borrowed, []);
+});
+
+test('the song list rewrites only the rows that changed; a new song to resume replaces only its shelf', () => {
+  const shown = { resume: '<a>', rows: ['<x>', '<y>', '<z>'] };
+  assert.deepEqual(listPatch(shown, { resume: '<a>', rows: ['<x>', '<y>', '<z>'] }), { full: false, resume: false, rows: [] });
+  assert.deepEqual(listPatch(shown, { resume: '<b>', rows: ['<x>', '<y>', '<z>'] }), { full: false, resume: true, rows: [] });
+  assert.deepEqual(listPatch(shown, { resume: '<a>', rows: ['<x>', '<y done>', '<z done>'] }), { full: false, resume: false, rows: [1, 2] });
+  // Another set of rows, or gaining or losing the shelf (filters hide it), reshapes the whole list.
+  assert.deepEqual(listPatch(shown, { resume: '<a>', rows: ['<x>', '<y>'] }), { full: true });
+  assert.deepEqual(listPatch(shown, { resume: null, rows: ['<x>', '<y>', '<z>'] }), { full: true });
+  assert.deepEqual(listPatch({ resume: null, rows: ['<x>'] }, { resume: '', rows: ['<x>'] }), { full: true });
+  assert.deepEqual(listPatch(null, { resume: null, rows: ['<x>'] }), { full: true });
 });

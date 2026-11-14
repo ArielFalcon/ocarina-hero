@@ -472,3 +472,16 @@ export function listUniverses(entries: readonly SongbookEntry[], category: SongC
     universes: [...groups.get(name)!.values()].sort((a, b) => a.name.localeCompare(b.name, 'en')),
   }));
 }
+
+/**
+ * The Songbook list markup: the inside of the "Continue" shelf (null while filters hide the shelves)
+ * and each element after it, one string per element.
+ */
+export interface ListMarkup { readonly resume: string | null; readonly rows: readonly string[] }
+export type ListPatch = { readonly full: true } | { readonly full: false; readonly resume: boolean; readonly rows: readonly number[] };
+
+/** The least that must be rewritten to turn the shown list into the next one. */
+export function listPatch(shown: ListMarkup | null, next: ListMarkup): ListPatch {
+  if (!shown || shown.rows.length !== next.rows.length || (shown.resume === null) !== (next.resume === null)) return { full: true };
+  return { full: false, resume: shown.resume !== next.resume, rows: next.rows.flatMap((row, index) => row === shown.rows[index] ? [] : [index]) };
+}

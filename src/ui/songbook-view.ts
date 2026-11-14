@@ -1,5 +1,5 @@
 import { threadIcon, type ThreadIcon } from './thread-icons';
-import { createSongbookEntries, filterSongbook, letterAnchors, listUniverses, songMeta, universeLabel, type SongbookEntry, type SongCategory } from './songbook';
+import { createSongbookEntries, filterSongbook, letterAnchors, listPatch, listUniverses, songMeta, universeLabel, type ListMarkup, type SongbookEntry, type SongCategory } from './songbook';
 import type { DemoTrack, TrackSummary } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
@@ -11,6 +11,8 @@ import { SAVED_STORAGE } from './local-data';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
+/** Frames a letter jump keeps its row aligned while the rows around it are drawn for the first time. */
+const JUMP_SETTLE_FRAMES = 6;
 /** Range steps: 0 is every difficulty, then one step per tier. */
 const DIFFICULTY_STEPS = ['', ...DIFFICULTY_LEVELS] as const;
 const DIFFICULTY_NAMES: Record<DifficultyLevel | '', string> = { '': 'Any', easy: 'Easy', medium: 'Medium', hard: 'Hard', expert: 'Expert' };
@@ -35,6 +37,10 @@ function rankHtml(rank: number): string {
 function playsHtml(plays: number): string {
   const label = playsLabel(plays);
   return label ? `<span class="popular-plays">${label}</span>` : '';
+}
+
+function shelfTitle(text: string): string {
+  return `<h2 class="shelf-title eyebrow stitched-label">${text}</h2>`;
 }
 
 function escapeHtml(value: string): string {
@@ -125,6 +131,10 @@ export class SongbookView {
   private bubble: HTMLElement;
   private scroller: HTMLElement;
   private railFrame = 0;
+  private jumpFrame = 0;
+  /** The markup the list and the letter rail show. */
+  private shownList: ListMarkup | null = null;
+  private shownRail = '';
   private reset: HTMLButtonElement;
   private filters: HTMLDetailsElement;
   private filterSummary: HTMLElement;
@@ -439,9 +449,12 @@ export class SongbookView {
     const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));
     const progress = this.callbacks.progress();
     const completed = completedIds(progress);
-    const shelves = this.reset.hidden ? this.shelvesHtml(progress, completed) : '';
-    this.list.innerHTML = result.length ? shelves + result.map(entry => this.rowHtml(entry, completed, anchors.get(entry.id))).join('') : `<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`;
-    if (focused) {
+    const shelves = this.reset.hidden && result.length > 0;
+    this.writeList({
+      resume: shelves ? this.resumeShelfHtml(progress, completed) : null,
+      rows: result.length ? [...shelves ? this.featuredShelvesHtml(completed) : [], ...result.map(entry => this.rowHtml(entry, completed, anchors.get(entry.id)))] : [`<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`],
+    });
+    if (focused && !focused.isConnected) {
       const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];
       const key = focused.dataset.save ? 'save' : focused.dataset.quickPlay ? 'quickPlay' : 'song';
       const sameSpot = buttons[focusedIndex]?.dataset[key] === focusedId ? buttons[focusedIndex] : undefined;
@@ -453,6 +466,18 @@ export class SongbookView {
     this.renderJourney(progress);
     this.renderPopularView(progress, completed);
     this.watchRows();
+  }
+
+  private writeList(next: ListMarkup): void {
+    const patch = listPatch(this.shownList, next);
+    this.shownList = next;
+    if (patch.full) {
+      this.list.innerHTML = (next.resume === null ? '' : `<div class="resume-shelf">${next.resume}</div>`) + next.rows.join('');
+      return;
+    }
+    if (patch.resume) this.list.querySelector('.resume-shelf')!.innerHTML = next.resume!;
+    const first = next.resume === null ? 0 : 1;
+    for (const index of patch.rows) this.list.children[first + index]!.outerHTML = next.rows[index]!;
   }
 
   /** Observes the rows of the list so the ones on screen prefetch their notes. */
@@ -503,12 +528,17 @@ export class SongbookView {
   }
 
   /** Shown above the full list while no search or filter is active: the song to resume, then the in-game songs. */
-  private shelvesHtml(progress: Progress, completed: ReadonlySet<string>): string {
+  private resumeShelfHtml(progress: Progress, completed: ReadonlySet<string>): string {
     const resumeId = lastOpened(progress, new Set(this.entries.map(entry => entry.id)));
-    const resume = this.entries.filter(entry => entry.id === resumeId);
-    const title = (text: string) => `<h2 class="shelf-title eyebrow stitched-label">${text}</h2>`;
-    const shelf = (text: string, songs: readonly SongbookEntry[]) => songs.length ? title(text) + songs.map(song => this.rowHtml(song, completed)).join('') : '';
-    return `<div class="resume-shelf">${shelf('Continue', resume)}</div>` + shelf('Songs from the game', gameSongs(this.entries)) + title('All songs');
+    return this.shelfHtml('Continue', this.entries.filter(entry => entry.id === resumeId), completed).join('');
+  }
+
+  private featuredShelvesHtml(completed: ReadonlySet<string>): string[] {
+    return [...this.shelfHtml('Songs from the game', gameSongs(this.entries), completed), shelfTitle('All songs')];
+  }
+
+  private shelfHtml(text: string, songs: readonly SongbookEntry[], completed: ReadonlySet<string>): string[] {
+    return songs.length ? [shelfTitle(text), ...songs.map(song => this.rowHtml(song, completed))] : [];
   }
 
   /** One stitched letter per initial present in the results; hidden when the list is short. */
@@ -516,9 +546,16 @@ export class SongbookView {
     this.rail.hidden = total < RAIL_MIN_RESULTS || letters.length < 2;
     this.rail.style.setProperty('--letters', String(letters.length));
     // Knots between the letters are decorative seams; on desktop they stretch so the rail spans the list.
-    this.rail.querySelector('.letter-list')!.innerHTML = this.rail.hidden ? '' : letters.map((letter, index) =>
+    const markup = this.rail.hidden ? '' : letters.map((letter, index) =>
       `<button class="letter-slot" type="button" data-letter="${escapeHtml(letter)}" tabindex="${index ? -1 : 0}" aria-label="${letter === '#' ? 'Numbers and symbols' : `Songs starting with ${letter}`}"><span class="stitched-label" aria-hidden="true">${escapeHtml(letter)}</span></button>`).join('<span class="letter-knot" aria-hidden="true"></span>');
-    this.markCurrentLetter();
+    if (markup !== this.shownRail) this.rail.querySelector('.letter-list')!.innerHTML = markup;
+    this.shownRail = markup;
+    this.markLetterAfterLayout();
+  }
+
+  private markLetterAfterLayout(): void {
+    if (this.rail.hidden || this.railFrame) return;
+    this.railFrame = requestAnimationFrame(() => { this.railFrame = 0; this.markCurrentLetter(); });
   }
 
   private letterButtons(): HTMLButtonElement[] {
@@ -528,8 +565,17 @@ export class SongbookView {
   private jumpToLetter(letter: string): void {
     const row = this.list.querySelector<HTMLElement>(`.song-row[data-letter="${CSS.escape(letter)}"]`);
     if (!row) return;
-    this.scroller.scrollTop += row.getBoundingClientRect().top - this.scroller.getBoundingClientRect().top - 12;
+    this.alignRow(row);
     this.markCurrentLetter(letter);
+    cancelAnimationFrame(this.jumpFrame);
+    const keepAligned = (frames: number): void => {
+      this.jumpFrame = frames ? requestAnimationFrame(() => { if (row.isConnected) { this.alignRow(row); keepAligned(frames - 1); } }) : 0;
+    };
+    keepAligned(JUMP_SETTLE_FRAMES);
+  }
+
+  private alignRow(row: HTMLElement): void {
+    this.scroller.scrollTop += row.getBoundingClientRect().top - this.scroller.getBoundingClientRect().top - 12;
   }
 
   /**
@@ -559,8 +605,7 @@ export class SongbookView {
 
   private bindRail(): void {
     this.scroller.addEventListener('scroll', () => {
-      if (this.rail.hidden || this.railFrame) return;
-      this.railFrame = requestAnimationFrame(() => { this.railFrame = 0; this.markCurrentLetter(); });
+      this.markLetterAfterLayout();
     }, { passive: true });
     // Dragging along the rail scrubs through the letters, like a phone contact index.
     // The nearest letter wins, so a pointer over a knot between two letters picks the closer one.

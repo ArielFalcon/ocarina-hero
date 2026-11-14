@@ -222,6 +222,14 @@ details[open] summary { color: var(--text); }
 /* Letter rail: a recessed cord-framed strip of stitched initials beside the full song list. */
 .song-index { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
 .song-row { scroll-margin-top: 12px; }
+/* Off-screen rows skip rendering: until drawn once, their content box takes the average row height,
+   and the clip margin keeps seal frames and focus rings that overflow a row visible. */
+@supports (overflow-clip-margin: 1px) {
+  #demos > .song-row { content-visibility: auto; contain-intrinsic-block-size: auto 76px; overflow-clip-margin: 16px; }
+}
+@media (min-width: 1100px) {
+  #demos > .song-row { contain-intrinsic-block-size: auto 68px; }
+}
 .letter-rail { position: sticky; top: 12px; margin-top: 10px; }
 .letter-list { position: relative; display: flex; flex-direction: column; width: 36px; height: min(calc(var(--letters, 26) * 28px + 12px), calc(100cqh - max(161px, 24px + var(--mini-player-space, 0px)))); padding: 6px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
 .letter-list::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }

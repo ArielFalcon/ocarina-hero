@@ -14,6 +14,13 @@ export function reportPlay(song: string, action: PopularityAction): void {
     .catch(() => {});
 }
 
+/** Report a search that found no song. Fire and forget, like plays. */
+export function reportMissedSearch(query: string): void {
+  if (!enabled) return;
+  fetch('/api/missed-searches', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query }), keepalive: true })
+    .catch(() => {});
+}
+
 let latest: { at: number; songs: PopularEntry[] } | null = null;
 
 /** The ranking, refreshed at most once a minute; the last good list, or none, when the API fails. */

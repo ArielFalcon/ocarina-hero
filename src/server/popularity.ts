@@ -3,6 +3,7 @@
  * Runs in the Pages Function `functions/api/popularity.ts`; storage is the D1 schema in `migrations/`.
  * Only structural types are used so the code also runs under Node tests.
  */
+import { empty, readSameOriginJson } from './request';
 
 /** Actions that count as one play each: a quick-player play and a lesson opened. */
 export const PLAY_ACTIONS = ['quick-play', 'open'] as const;
@@ -65,21 +66,14 @@ async function knownSongs(env: PopularityEnv): Promise<Set<string>> {
 /** Test hook: forget the cached catalogue ids. */
 export function resetSongIds(): void { songIds = null; }
 
-const empty = (status: number) => new Response(null, { status, headers: { 'Cache-Control': 'no-store' } });
-
 export async function handlePost(context: PopularityContext): Promise<Response> {
   const { request, env } = context;
-  const origin = request.headers.get('Origin');
-  if (!origin || new URL(origin).host !== new URL(request.url).host) return empty(403);
-  if (Number(request.headers.get('Content-Length') ?? 0) > MAX_BODY_BYTES) return empty(413);
-  const text = await request.text();
-  if (text.length > MAX_BODY_BYTES) return empty(413);
-  let body: unknown;
-  try { body = JSON.parse(text); } catch { return empty(400); }
+  const read = await readSameOriginJson(request, MAX_BODY_BYTES);
+  if ('status' in read) return empty(read.status);
   if (!env.DB || !env.ASSETS) return empty(503);
   let ids: Set<string>;
   try { ids = await knownSongs(env); } catch { return empty(503); }
-  const event = parseEvent(body, ids);
+  const event = parseEvent(read.body, ids);
   if (!event) return empty(400);
   try { await recordEvent(env.DB, event); } catch { return empty(503); }
   return empty(204);

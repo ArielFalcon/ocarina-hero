@@ -5,7 +5,8 @@ import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
 import { completedIds, lastOpened, type Progress } from './progress';
 import { journey, playsLabel } from './journey';
-import type { PopularEntry } from './popularity';
+import { missedSearchNoter } from '../core/search-text';
+import { reportMissedSearch, type PopularEntry } from './popularity';
 import { SAVED_STORAGE } from './local-data';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
@@ -114,6 +115,7 @@ export class SongbookView {
   private list: HTMLElement;
   private journey: HTMLElement;
   private popular: readonly PopularEntry[] = [];
+  private readonly noteSearch = missedSearchNoter(reportMissedSearch);
   /** The phone "Popular" view's list; it shares the row markup and actions with the Songbook list. */
   private popularList: HTMLElement | null = document.querySelector('#popular-list');
   private categories: HTMLElement;
@@ -424,6 +426,7 @@ export class SongbookView {
     this.difficultyFold.toggle.innerHTML = `${sealHtml(this.difficulty ? 'music' : 'songbook', this.difficulty, 'mini-seal')}<span class="universe-name">${this.difficulty ? name : 'Any difficulty'}</span><span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change difficulty</span>`;
     this.filterSummaryDetail.textContent = [this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe, this.difficulty && DIFFICULTY_NAMES[this.difficulty]].filter(Boolean).map(part => ` · ${part}`).join('');
     const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved, difficulty: this.difficulty || undefined });
+    this.noteSearch(this.search.value, !result.length && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty);
     this.count.textContent = `${result.length} ${result.length === 1 ? 'melody' : 'melodies'}${this.sessionOnly ? ' · Saves last for this session only' : ''}`;
     this.reset.hidden = !this.search.value && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty;
     const anchors = new Map(letterAnchors(result).map(anchor => [anchor.id, anchor.letter]));

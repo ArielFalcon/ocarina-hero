@@ -201,7 +201,7 @@ details[open] summary { color: var(--text); }
 .catalog-count::after { content: ''; position: absolute; left: 0; right: 0; bottom: -5px; height: 10px; background: var(--thread-rule); pointer-events: none; }
 .song-list { padding-top: 4px; }
 .song-row { display: flex; gap: 9px; align-items: center; border-bottom: 1px dashed #a2824959; padding: 13px 0; }
-.song-open { display: flex; flex: 1; min-width: 0; align-items: center; gap: 13px; min-height: 62px; padding: 0; border: 0; text-align: left; background: transparent; }
+.song-open { display: flex; flex: 1; min-width: 0; align-items: center; gap: 13px; min-height: 62px; padding: 0; border: 0; text-align: left; background: transparent; color: inherit; text-decoration: none; }
 .song-copy { min-width: 0; }
 .song-title { display: block; font: 22px/1.15 Georgia, serif; color: var(--text); overflow-wrap: anywhere; }
 .song-open:hover .song-title { text-decoration: underline; text-underline-offset: 5px; }

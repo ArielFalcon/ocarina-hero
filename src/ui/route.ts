@@ -43,5 +43,5 @@ export function shareUrl(pageUrl: string, base: string, songId: string): string 
 
 /** Document title of a song lesson, shared by the app and its prerendered page; `meta` tells apart songs that share a title. */
 export function songDocumentTitle(title: string, meta: string): string {
-  return `${title} (${meta}) ocarina tab · Ocarina Hero`;
+  return `${title} (${meta}) · Zelda ocarina tab · Ocarina Hero`;
 }

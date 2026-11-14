@@ -8,9 +8,12 @@ import { journey, playsLabel } from './journey';
 import { missedSearchNoter } from '../core/search-text';
 import { reportMissedSearch, type PopularEntry } from './popularity';
 import { SAVED_STORAGE } from './local-data';
+import { songPath } from './route';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
+/** Every control in a song row: the title link, quick play and save. */
+const FOCUSABLE_ROW_CONTROLS = 'button, a[href]';
 /** Frames a letter jump keeps its row aligned while the rows around it are drawn for the first time. */
 const JUMP_SETTLE_FRAMES = 6;
 /** Range steps: 0 is every difficulty, then one step per tier. */
@@ -37,6 +40,11 @@ function rankHtml(rank: number): string {
 function playsHtml(plays: number): string {
   const label = playsLabel(plays);
   return label ? `<span class="popular-plays">${label}</span>` : '';
+}
+
+/** A click the browser would follow as a link in place, not into a new tab or window. */
+function isPlainClick(event: MouseEvent): boolean {
+  return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
 }
 
 function shelfTitle(text: string): string {
@@ -248,14 +256,16 @@ export class SongbookView {
       });
       this.categoryFold.fold();
     });
-    const onRowClick = (event: Event) => {
-      const button = (event.target as Element).closest<HTMLButtonElement>('[data-song], [data-save], [data-quick-play]');
+    const onRowClick = (event: MouseEvent) => {
+      const button = (event.target as Element).closest<HTMLElement>('[data-song], [data-save], [data-quick-play]');
       if (button?.dataset.save) { this.toggleSaved(button.dataset.save); return; }
       const id = button?.dataset.quickPlay ?? button?.dataset.song;
       const entry = id && this.entries.find(item => item.id === id);
       if (!entry) return;
-      if (button!.dataset.quickPlay) this.callbacks.quickPlay(entry);
-      else this.callbacks.select(entry);
+      if (button!.dataset.quickPlay) { this.callbacks.quickPlay(entry); return; }
+      if (!isPlainClick(event)) return;
+      event.preventDefault();
+      this.callbacks.select(entry);
     };
     this.list.addEventListener('click', onRowClick);
     this.popularList?.addEventListener('click', onRowClick);
@@ -431,8 +441,8 @@ export class SongbookView {
   }
 
   private renderResults(): void {
-    const focused = this.list.contains(document.activeElement) ? document.activeElement as HTMLButtonElement : null;
-    const focusedIndex = focused ? [...this.list.querySelectorAll('button')].indexOf(focused) : -1;
+    const focused = this.list.contains(document.activeElement) ? document.activeElement as HTMLElement : null;
+    const focusedIndex = focused ? [...this.list.querySelectorAll(FOCUSABLE_ROW_CONTROLS)].indexOf(focused) : -1;
     const focusedId = focused?.dataset.save ?? focused?.dataset.quickPlay ?? focused?.dataset.song;
     this.root.classList.toggle('has-query', !!this.search.value.trim());
     const step = DIFFICULTY_STEPS.indexOf(this.difficulty);
@@ -455,7 +465,7 @@ export class SongbookView {
       rows: result.length ? [...shelves ? this.featuredShelvesHtml(completed) : [], ...result.map(entry => this.rowHtml(entry, completed, anchors.get(entry.id)))] : [`<p class="empty">${this.onlySaved && !this.savedCount() ? `No saved songs yet. Tap ${threadIcon('heart-empty', 'inline-icon')}<span class="visually-hidden">the heart</span> next to a song to keep it here.` : 'No melodies found. Try another title or clear your filters.'}</p>`],
     });
     if (focused && !focused.isConnected) {
-      const buttons = [...this.list.querySelectorAll<HTMLButtonElement>('button')];
+      const buttons = [...this.list.querySelectorAll<HTMLElement>(FOCUSABLE_ROW_CONTROLS)];
       const key = focused.dataset.save ? 'save' : focused.dataset.quickPlay ? 'quickPlay' : 'song';
       const sameSpot = buttons[focusedIndex]?.dataset[key] === focusedId ? buttons[focusedIndex] : undefined;
       const replacement = sameSpot ?? buttons.find(button => button.dataset[key] === focusedId);
@@ -524,7 +534,7 @@ export class SongbookView {
     const saved = this.saved.has(entry.id);
     const rank = ranked ? rankHtml(ranked.rank) : '';
     const plays = ranked && playsLabel(ranked.plays);
-    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<button class="song-open" type="button" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${plays ? ` · ${plays}` : ''}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></button><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
+    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<a class="song-open" href="${escapeHtml(songPath(import.meta.env.BASE_URL, entry.id))}" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${plays ? ` · ${plays}` : ''}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></a><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
   }
 
   /** Shown above the full list while no search or filter is active: the song to resume, then the in-game songs. */

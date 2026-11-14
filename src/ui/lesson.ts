@@ -172,3 +172,13 @@ export function scoreCombo(combo: Combo, hit: boolean): { combo: Combo; mileston
     broken: false,
   };
 }
+
+const NOTE_THREAD_STEPS_PER_SECOND = 30;
+/** Notes shorter than this are drawn at this length, so the ring stays visible. */
+const MIN_NOTE_THREAD_MS = 120;
+
+/** How long the sounding note's ring takes to close, and in how many steps. */
+export function noteThreadTiming(durationMs: number): { ms: number; steps: number } {
+  const ms = Math.max(MIN_NOTE_THREAD_MS, durationMs);
+  return { ms, steps: Math.max(1, Math.round(ms / 1000 * NOTE_THREAD_STEPS_PER_SECOND)) };
+}

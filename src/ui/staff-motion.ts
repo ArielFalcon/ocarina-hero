@@ -1,4 +1,4 @@
-import type { StaffTransition } from './lesson';
+import { noteThreadTiming, type StaffTransition } from './lesson';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const EASE_OUT = 'cubic-bezier(.22, .72, .18, 1)';
@@ -76,4 +76,17 @@ export function swapStaff(tab: HTMLElement, transition: StaffTransition, render:
     { opacity: [0, 1], translate: [`${direction * SLIDE}px 0`, '0 0'] },
     { duration: 280, delay: 110 + slot * 30, easing: EASE_OUT, fill: 'backwards' },
   ));
+}
+
+/** Time the ring of the token that starts sounding; tokens that stop drop their timing. */
+export function timeNoteThread(token: HTMLElement, sounding: boolean, durationMs: number): void {
+  if (!sounding) {
+    token.style.removeProperty('--note-ms');
+    token.style.removeProperty('--note-steps');
+    return;
+  }
+  if (token.style.getPropertyValue('--note-ms')) return;
+  const { ms, steps } = noteThreadTiming(durationMs);
+  token.style.setProperty('--note-ms', `${ms}ms`);
+  token.style.setProperty('--note-steps', String(steps));
 }

@@ -314,7 +314,7 @@ details[open] summary { color: var(--text); }
 @keyframes note-thread { from { --note-progress: 0; } to { --note-progress: 1; } }
 .tok.is-playing, .tok.is-expected { background-color: #6f562c; background-image: var(--weave); }
 .tok.is-playing::before, .tok.is-expected::before { opacity: 1; scale: 1; }
-.tok.is-playing::after { opacity: .9; animation: note-thread var(--note-ms, .4s) linear both; }
+.tok.is-playing::after { opacity: .9; animation: note-thread var(--note-ms, .4s) steps(var(--note-steps, 12), end) both; }
 .tok.is-playing > .control-icon { translate: 0 -2px; }
 .tok.is-played, .tok.is-past { opacity: .55; }
 .tok-leaving { pointer-events: none; }

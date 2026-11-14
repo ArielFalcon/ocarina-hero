@@ -21,7 +21,7 @@ import { Playback } from './playback';
 import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
 import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, lessonDetails, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, setPracticeFeedback, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
-import { swapStaff } from './staff-motion';
+import { swapStaff, timeNoteThread } from './staff-motion';
 import { staffClef, staffTokenHtml } from './staff';
 import { MiniPlayer } from './mini-player';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, readBindings, handleKeyDown, type KeyboardAction } from './keyboard';
@@ -321,9 +321,7 @@ function renderTab(): void {
     token.classList.toggle('is-expected', expected);
     token.classList.toggle('is-played', practiceMode && index < practiceCursor);
     token.classList.toggle('is-past', !practiceMode && activeNote !== null && index < activeNote);
-    if (activeNote === index && !token.style.getPropertyValue('--note-ms')) {
-      token.style.setProperty('--note-ms', `${Math.max(120, (recorded[index]!.durationBeats || 1) * playbackBeatMs)}ms`);
-    } else if (activeNote !== index) token.style.removeProperty('--note-ms');
+    timeNoteThread(token, activeNote === index, (recorded[index]!.durationBeats || 1) * playbackBeatMs);
     if (activeNote === index || expected) token.setAttribute('aria-current', 'true');
     else token.removeAttribute('aria-current');
   }

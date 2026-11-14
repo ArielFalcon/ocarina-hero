@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { Note } from '../src/core/ir';
-import { advancePractice, comboTier, FreePlayTake, createPassages, scoreCombo, passageArrangement, playbackSelection, resetPassage, staffTransition } from '../src/ui/lesson';
+import { advancePractice, comboTier, createPassages, FreePlayTake, noteThreadTiming, passageArrangement, playbackSelection, resetPassage, scoreCombo, staffTransition } from '../src/ui/lesson';
 
 const notes: Note[] = [0, 1, 2, 3, 4, 5, 9, 10].map((startBeat, index) => ({
   pitch: index === 2 ? 'F4' : 'D4', startBeat, durationBeats: 1,
@@ -155,4 +155,11 @@ test('reset restarts a practice run from the first passage, and otherwise the pa
   assert.equal(resetPassage(3, { practice: true, repeating: false }), 0);
   assert.equal(resetPassage(3, { practice: true, repeating: true }), 3);
   assert.equal(resetPassage(3, { practice: false, repeating: false }), 3);
+});
+
+test('the sounding note ring sews about 30 steps a second and never runs shorter than 120 ms', () => {
+  assert.deepEqual(noteThreadTiming(1000), { ms: 1000, steps: 30 });
+  assert.deepEqual(noteThreadTiming(400), { ms: 400, steps: 12 });
+  // A very short note keeps the 120 ms floor and still advances in steps rather than jumping straight to full.
+  assert.deepEqual(noteThreadTiming(40), { ms: 120, steps: 4 });
 });

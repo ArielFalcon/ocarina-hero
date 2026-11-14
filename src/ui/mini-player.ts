@@ -7,7 +7,7 @@ import type { Player } from './playback';
 import { QuickPlay, type QuickPlayState } from './quick-play';
 import { songMeta, type SongbookEntry } from './songbook';
 import { staffClef, staffTokenHtml } from './staff';
-import { swapStaff } from './staff-motion';
+import { swapStaff, timeNoteThread } from './staff-motion';
 import { threadIcon } from './thread-icons';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -243,9 +243,7 @@ export class MiniPlayer {
       const playing = state.activeNote === index;
       token.classList.toggle('is-playing', playing);
       token.classList.toggle('is-past', index < (state.activeNote ?? state.cursor));
-      if (playing && !token.style.getPropertyValue('--note-ms')) {
-        token.style.setProperty('--note-ms', `${Math.max(120, (arrangement.notes[index]!.durationBeats || 1) * beatMs)}ms`);
-      } else if (!playing) token.style.removeProperty('--note-ms');
+      timeNoteThread(token, playing, (arrangement.notes[index]!.durationBeats || 1) * beatMs);
     }
   }
 }

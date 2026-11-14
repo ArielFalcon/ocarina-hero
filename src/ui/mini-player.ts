@@ -34,6 +34,8 @@ export class MiniPlayer {
   private loaded: Loaded | null = null;
   private renderedWindow: { song: unknown; indices: readonly number[] } | null = null;
   private announced = '';
+  /** The song and play state the toggle button and the Songbook rows show; notes change neither. */
+  private shown: string | null = null;
   private motion: Animation | null = null;
   /** True while the player rises in; the song starts once the entrance ends. */
   private starting = false;
@@ -151,12 +153,16 @@ export class MiniPlayer {
   refreshTheme(): void {
     delete this.tab.dataset.notes;
     this.renderedWindow = null;
+    this.shown = null;
     this.render(this.quick.state);
   }
 
   private render(state: QuickPlayState): void {
     const playing = state.playing || this.starting;
-    this.callbacks.changed(state.id, playing);
+    const shown = `${state.id}:${playing}`;
+    const changed = shown !== this.shown;
+    this.shown = shown;
+    if (changed) this.callbacks.changed(state.id, playing);
     if (state.id === null || !this.loaded) {
       this.announce('');
       if (this.root.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
@@ -165,8 +171,10 @@ export class MiniPlayer {
     }
     this.show();
     const title = this.loaded.entry.title;
-    this.toggleButton.innerHTML = threadIcon(playing ? 'pause' : 'play');
-    this.toggleButton.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} ${title}`);
+    if (changed) {
+      this.toggleButton.innerHTML = threadIcon(playing ? 'pause' : 'play');
+      this.toggleButton.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} ${title}`);
+    }
     this.announce(playing ? `Playing ${title}` : `Paused ${title}`);
     this.renderStaff(state);
   }

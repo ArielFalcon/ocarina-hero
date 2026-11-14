@@ -115,6 +115,7 @@ export class SongbookView {
   private list: HTMLElement;
   private journey: HTMLElement;
   private popular: readonly PopularEntry[] = [];
+  private filterFrame = 0;
   private readonly noteSearch = missedSearchNoter(reportMissedSearch);
   /** The phone "Popular" view's list; it shares the row markup and actions with the Songbook list. */
   private popularList: HTMLElement | null = document.querySelector('#popular-list');
@@ -200,7 +201,7 @@ export class SongbookView {
     } catch { this.sessionOnly = true; }
     this.search.addEventListener('input', () => {
       if (!this.desktop.matches) this.filters.open = false;
-      this.filterChanged();
+      this.filterAfterPaint();
     });
     // Pointer picks fold the panel; arrow keys only browse, so keyboard users fold with Enter or Space.
     let pointerPick = false;
@@ -392,6 +393,12 @@ export class SongbookView {
   private renderCategoryToggle(): void {
     const chosen = this.categories.querySelector('[aria-pressed="true"]');
     this.categoryFold.toggle.innerHTML = `<span class="universe-icon" aria-hidden="true">${chosen?.querySelector('.category-symbol')?.innerHTML ?? ''}</span><span class="universe-name">${chosen?.querySelector('.category-name')?.textContent ?? 'All songs'}</span>${chosen?.querySelector('.category-count')?.innerHTML ?? ''}<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change category</span>`;
+  }
+
+  /** Typing paints its character first; the list follows in the next task, once for a burst of keystrokes. */
+  private filterAfterPaint(): void {
+    if (this.filterFrame) return;
+    this.filterFrame = requestAnimationFrame(() => setTimeout(() => { this.filterFrame = 0; this.filterChanged(); }));
   }
 
   private filterChanged(): void {

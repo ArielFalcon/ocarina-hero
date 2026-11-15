@@ -31,6 +31,11 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
+/* The song lists keep their computed layout while another view shows: content-visibility hides them like
+   display: none (no painting, no focus, out of the accessibility tree) but returning does not rebuild 240 rows.
+   The hidden box must take no room, so its block-axis padding goes; the display value mirrors the visible one. */
+#catalog-view[hidden], #popular-view[hidden] { display: block !important; content-visibility: hidden; padding-block: 0; }
+@media (min-width: 1100px) { #catalog-view[hidden] { display: grid !important; } }
 html, body { height: 100%; overflow: hidden; }
 body { margin: 0; background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); }
 button, input, select { font: inherit; }

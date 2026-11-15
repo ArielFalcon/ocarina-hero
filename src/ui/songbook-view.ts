@@ -564,7 +564,8 @@ export class SongbookView {
   }
 
   private markLetterAfterLayout(): void {
-    if (this.rail.hidden || this.railFrame) return;
+    // The list stays laid out while hidden; measuring its rows then would only cost time.
+    if (this.root.hidden || this.rail.hidden || this.railFrame) return;
     this.railFrame = requestAnimationFrame(() => { this.railFrame = 0; this.markCurrentLetter(); });
   }
 

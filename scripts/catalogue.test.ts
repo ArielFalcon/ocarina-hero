@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import toneMidi from '@tonejs/midi';
-import { DEMOS } from './catalogue-loader';
+import { DEMOS, readSongData } from './catalogue-loader';
 import { CATALOGUE_INDEX } from '../src/core/songs/catalogue-index';
 import { catalogueTrack } from './catalogue-loader';
 import { pitchById } from '../src/core/pitches';
 import { prepareMelody } from '../src/core/prepare';
 import { projectFaithfully, selectPhrase } from './catalogue-tools';
+import { isDeepStrictEqual } from 'node:util';
+import { toTabRestGroups } from '../src/core/tab';
 
 const { Midi } = toneMidi as unknown as { Midi: typeof import('@tonejs/midi').Midi };
 
@@ -51,4 +53,28 @@ test('delivered catalogue plays the exact source events with a single shift even
       assert.equal(note.durationBeats * 60 / demo.tempoBpm, source.melody[index]!.durationBeats * 60 / source.tempoBpm);
     }
   }
+});
+
+/** Ids rendered for a failure message: the first few, then the remaining count. */
+function describeIds(ids: readonly string[]): string {
+  return `${ids.length} songs differ: ${ids.slice(0, 10).join(', ')}${ids.length > 10 ? `, and ${ids.length - 10} more` : ''}`;
+}
+
+test('stored fixedNotes equal what the projector generates from the stored melody', () => {
+  const drifted = CATALOGUE_INDEX.filter(song => {
+    const stored = readSongData(song.id);
+    const projection = projectFaithfully(stored.melody);
+    const asStored = projection && JSON.parse(JSON.stringify(projection.notes));
+    return !isDeepStrictEqual(stored.fixedNotes, asStored);
+  }).map(song => song.id);
+  assert.equal(drifted.length, 0, describeIds(drifted));
+});
+
+test('stored phraseStarts equal the first note of each rest group of the stored notes', () => {
+  const drifted = CATALOGUE_INDEX.filter(song => {
+    const stored = readSongData(song.id);
+    const starts = toTabRestGroups(stored.fixedNotes, song.tempoBpm).map(group => group.tokens[0]!.noteIndex);
+    return !isDeepStrictEqual(stored.phraseStarts, starts);
+  }).map(song => song.id);
+  assert.equal(drifted.length, 0, describeIds(drifted));
 });

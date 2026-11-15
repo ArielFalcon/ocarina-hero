@@ -2,10 +2,27 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { DemoTrack } from '../src/core/demo';
 import { DEMOS } from './catalogue-loader';
+import { withinOneEdit } from '../src/core/search-text';
 import { createSongbookEntries, filterSongbook, letterAnchors, listPatch, listUniverses, songMeta } from '../src/ui/songbook';
 
 const entries = createSongbookEntries(DEMOS);
 const ids = (result: ReturnType<typeof filterSongbook>) => result.map((entry) => entry.id);
+
+test('search ignores spaces between title words and forgives one wrong letter only when nothing matched', () => {
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'dragonball' })), ['catalogue-tapion']);
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'guerudo valley' })), ['catalogue-gerudo-valley']);
+  const zelda = filterSongbook(entries, { query: 'zelsa' });
+  assert.ok(zelda.length > 0 && zelda.every((entry) => entry.universe === 'The Legend of Zelda'));
+  // An exact match wins outright: the typo pass must not add near-misses next to it.
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'gerudo valley' })), ['catalogue-gerudo-valley']);
+  // A loose word cannot rescue a query whose other word matches nothing.
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'zelsa xyzzy' })), []);
+});
+
+test('withinOneEdit accepts one replaced, missing, extra or swapped letter and nothing further', () => {
+  for (const [a, b] of [['zelsa', 'zelda'], ['guerudo', 'gerudo'], ['gerudo', 'guerudo'], ['zleda', 'zelda'], ['zelda', 'zelda']]) assert.ok(withinOneEdit(a, b), `${a} ~ ${b}`);
+  for (const [a, b] of [['zelsa', 'zelad'], ['zeld', 'zelda!!'], ['abcde', 'xyzde']]) assert.ok(!withinOneEdit(a, b), `${a} !~ ${b}`);
+});
 
 test('search matches all normalized words across title, franchise, artist and aliases', () => {
   assert.deepEqual(ids(filterSongbook(entries, { query: '  POKEMON   rÓute ' })), ['catalogue-pokemon-route1']);

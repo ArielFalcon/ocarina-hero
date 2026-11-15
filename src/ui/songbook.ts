@@ -2,7 +2,7 @@ import type { ThreadIcon } from './thread-icons';
 import type { DemoTrack, TrackSummary } from '../core/demo';
 import { rateDifficulty, type Difficulty, type DifficultyLevel } from '../core/difficulty';
 import type { Note } from '../core/ir';
-import { normalizeSearch } from '../core/search-text';
+import { matchesSearch, normalizeSearch } from '../core/search-text';
 import { prepareMelody } from '../core/prepare';
 
 export type SongCategory = 'All' | 'Games' | 'Anime' | 'Film' | 'Pop' | 'Classics' | 'Other';
@@ -437,14 +437,18 @@ export function filterSongbook(entries: readonly SongbookEntry[], options: {
   difficulty?: DifficultyLevel;
 }): SongbookEntry[] {
   const words = normalizeSearch(options.query ?? '').split(' ').filter(Boolean);
-  return entries.filter((entry) => {
+  const candidates = entries.filter((entry) => {
     if (options.category && options.category !== 'All' && !entry.categories.includes(options.category)) return false;
     if (options.universe && entry.universe !== options.universe) return false;
     if (options.onlySaved && !options.savedIds?.has(entry.id)) return false;
     if (options.difficulty && entry.difficulty.level !== options.difficulty) return false;
-    const searchable = normalizeSearch([entry.title, entry.track.title, entry.universe, entry.artist ?? '', entry.version ?? '', ...entry.aliases].join(' '));
-    return words.every((word) => searchable.includes(word));
+    return true;
   });
+  if (!words.length) return candidates;
+  const searchable = (entry: SongbookEntry) => normalizeSearch([entry.title, entry.track.title, entry.universe, entry.artist ?? '', entry.version ?? '', ...entry.aliases].join(' '));
+  const found = candidates.filter((entry) => matchesSearch(searchable(entry), words));
+  // Typos are forgiven only when nothing matched, so they never reorder or pad a normal result.
+  return found.length ? found : candidates.filter((entry) => matchesSearch(searchable(entry), words, true));
 }
 
 export interface UniverseOption { name: string; icon: ThreadIcon; count: number }

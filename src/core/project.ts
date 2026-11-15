@@ -35,8 +35,13 @@ interface State {
 
 const EMISSION_WEIGHT = 1;
 const TRANSITION_WEIGHT = 0.55;
-const BEND_EMISSION = 0.004;
-const BEND_TRANSITION = 0.02;
+/**
+ * Bend costs mirror the difficulty model (src/core/difficulty.ts): one gesture per bend change,
+ * a quarter of that per note held bent. A change costs the same whatever the distance, so holding
+ * the stick through equivalent fingerings (A-2 Y-2) beats releasing and re-engaging it (A-2 A R+2).
+ */
+const BEND_CHANGE = 0.08;
+const BEND_HELD = 0.02;
 
 /** Middle of the instrument's sounding range (C5..E6 with bends). */
 const INSTRUMENT_CENTER = 80;
@@ -80,7 +85,7 @@ function projectAt(melody: readonly MelodyNote[], shift: number, states: readonl
       const octaveCost = Math.min(Math.abs(midi - state.midi), 12) / 12;
       return (
         EMISSION_WEIGHT * (0.85 * pcCost + 0.15 * octaveCost) +
-        BEND_EMISSION * Math.abs(state.bend)
+        (state.bend !== 0 ? BEND_HELD : 0)
       );
     });
   });
@@ -88,7 +93,8 @@ function projectAt(melody: readonly MelodyNote[], shift: number, states: readonl
   const cost: number[][] = [];
   const back: number[][] = [];
 
-  cost.push((emission[0] ?? states.map(() => 0)).slice());
+  // The first note starts from the neutral stick, so a bent first note is already a gesture.
+  cost.push((emission[0] ?? states.map(() => 0)).map((value, index) => value + (states[index]!.bend !== 0 ? BEND_CHANGE : 0)));
   back.push(states.map(() => -1));
 
   for (let i = 1; i < melody.length; i += 1) {
@@ -108,7 +114,7 @@ function projectAt(melody: readonly MelodyNote[], shift: number, states: readonl
         const outputInterval = targetState.midi - fromState.midi;
         const transitionCost =
           (TRANSITION_WEIGHT * Math.abs(sourceInterval - outputInterval)) / 12 +
-          BEND_TRANSITION * Math.abs(targetState.bend - fromState.bend);
+          (targetState.bend !== fromState.bend ? BEND_CHANGE : 0);
 
         const total = (cost[i - 1]?.[from] ?? Number.POSITIVE_INFINITY) + transitionCost;
         if (total < best) {

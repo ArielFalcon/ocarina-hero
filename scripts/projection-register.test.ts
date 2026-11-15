@@ -95,3 +95,13 @@ test('original two-note fragmentation preserves the coverage tie', () => {
   assert.equal(projectMelody(original, { maxBend: 0 }).transpositionSemitones, 1);
   assert.equal(projectMelody(fragmented, { maxBend: 0 }).transpositionSemitones, 1);
 });
+
+test('a held bend carries across notes when an equivalent fingering keeps it', () => {
+  // G A G F#: holding the stick down (A-2 Y-2 A-2) beats releasing it for A and flipping it up for G.
+  const result = projectMelody(melody([79, 81, 79, 78], [1, 1, 1, 1]));
+  assert.equal(result.transpositionSemitones, 0);
+  assert.deepEqual(result.notes.map(n => Math.round(sounding(n))), [79, 81, 79, 78]);
+  const bends = result.notes.map(n => n.bend);
+  const changes = bends.filter((bend, i) => bend !== (i ? bends[i - 1] : 0)).length;
+  assert.equal(changes, 2, `bends ${bends.join(' ')}`);
+});

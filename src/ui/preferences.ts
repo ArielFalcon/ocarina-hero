@@ -10,18 +10,21 @@ export interface Preferences {
   readonly rate: PlaybackRate;
   readonly effects: boolean;
   readonly haptics: boolean;
+  /** The felt Link that hangs from the top of the app. */
+  readonly link: boolean;
 }
 
-export const DEFAULT_PREFERENCES: Preferences = Object.freeze({ bends: true, simplify: false, rate: '1', effects: true, haptics: true });
+export const DEFAULT_PREFERENCES: Preferences = Object.freeze({ bends: true, simplify: false, rate: '1', effects: true, haptics: true, link: true });
 
 export function readPreferences(stored: unknown): Preferences {
   const value = typeof stored === 'object' && stored !== null ? stored as Record<string, unknown> : {};
-  const flag = (key: 'bends' | 'simplify' | 'effects' | 'haptics') => typeof value[key] === 'boolean' ? value[key] : DEFAULT_PREFERENCES[key];
+  const flag = (key: 'bends' | 'simplify' | 'effects' | 'haptics' | 'link') => typeof value[key] === 'boolean' ? value[key] : DEFAULT_PREFERENCES[key];
   return {
     bends: flag('bends'),
     simplify: flag('simplify'),
     rate: PLAYBACK_RATES.includes(value.rate as PlaybackRate) ? value.rate as PlaybackRate : DEFAULT_PREFERENCES.rate,
     effects: flag('effects'),
     haptics: flag('haptics'),
+    link: flag('link'),
   };
 }

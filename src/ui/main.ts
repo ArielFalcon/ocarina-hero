@@ -19,6 +19,8 @@ import { Controls } from './input';
 import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
 import { parseLocation, shareUrl, songDocumentTitle, songPath } from './route';
+import { createHangingLink } from './hanging-link';
+import { clearGone, goneThisSession, markGone } from './rope';
 import { createPassages, advancePractice, comboTier, FreePlayTake, FREE_PLAY_TEMPO_BPM, lessonDetails, playbackSelection, resetPassage, scoreCombo, staffTransition, type Combo, type ComboMilestone } from './lesson';
 import { centreIn, haptic, setPracticeFeedback, retrigger, ribbon, sparkBurst, stitchRipple } from './practice-fx';
 import { swapStaff, timeNoteThread } from './staff-motion';
@@ -1268,7 +1270,19 @@ const preferenceInputs = {
   rate: must<HTMLSelectElement>('#pref-rate'),
   effects: must<HTMLInputElement>('#pref-effects'),
   haptics: must<HTMLInputElement>('#pref-haptics'),
+  link: must<HTMLInputElement>('#pref-link'),
 };
+/** Session storage can be blocked; without it the figure simply returns on every load. */
+const session: Storage | undefined = (() => { try { return window.sessionStorage; } catch { return undefined; } })();
+const hangingLink = createHangingLink(must('.app'), {
+  src: `${APP_BASE}art/link-hanging.webp`,
+  onGone() { markGone(session); preferenceInputs.link.checked = false; },
+  onRestore() { clearGone(session); preferenceInputs.link.checked = true; },
+});
+function syncLink(): void {
+  if (preferences.link) hangingLink.show(goneThisSession(session) ? 'snapped' : 'hanging');
+  else hangingLink.hide();
+}
 let preferences: Preferences = (() => {
   try { return readPreferences(JSON.parse(localStorage.getItem(PREFERENCES_STORAGE) ?? 'null')); }
   catch { return DEFAULT_PREFERENCES; }
@@ -1280,6 +1294,7 @@ function showPreferences(): void {
   playbackRate.value = preferenceInputs.rate.value = preferences.rate;
   preferenceInputs.effects.checked = preferences.effects;
   preferenceInputs.haptics.checked = preferences.haptics;
+  preferenceInputs.link.checked = preferences.link && !goneThisSession(session);
   setPracticeFeedback(preferences);
 }
 
@@ -1301,6 +1316,11 @@ for (const [preference, lessonInput] of [[preferenceInputs.bends, bendsInput], [
 }
 preferenceInputs.effects.addEventListener('change', () => savePreferences({ ...preferences, effects: preferenceInputs.effects.checked }));
 preferenceInputs.haptics.addEventListener('change', () => savePreferences({ ...preferences, haptics: preferenceInputs.haptics.checked }));
+preferenceInputs.link.addEventListener('change', () => {
+  if (preferenceInputs.link.checked) clearGone(session);
+  savePreferences({ ...preferences, link: preferenceInputs.link.checked });
+  syncLink();
+});
 
 const dataStatus = must<HTMLParagraphElement>('#data-status');
 must('#export-saved').addEventListener('click', () => {
@@ -1330,3 +1350,6 @@ must('#clear-data').addEventListener('click', () => {
 });
 
 restoreView();
+// After the page has loaded and gone idle, so the first paint and the song lists never wait for the drop.
+const startLink = (): void => { if ('requestIdleCallback' in window) window.requestIdleCallback(syncLink); else setTimeout(syncLink, 200); };
+if (document.readyState === 'complete') startLink(); else window.addEventListener('load', startLink, { once: true });

@@ -790,6 +790,17 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .practice-status { margin-block: 2px; }
   .controller-panel { padding-top: 6px; }
 }
+/* Link on his thread: the root is a zero-size pivot at the top edge of the app; only the figure takes pointer input. */
+.hanging-link { --link-h: 96px; --link-cord: 72px; --link-stub: 68px; position: absolute; top: 0; right: calc(clamp(36px, 10vw, 120px) + var(--link-h) * .3); z-index: 8; width: 0; height: 0; pointer-events: none; }
+@media (min-width: 700px) { .hanging-link { --link-h: 140px; --link-cord: 100px; --link-stub: 96px; } }
+.hanging-link-cord { position: absolute; left: -1.5px; top: 0; width: 3px; height: var(--link-cord); transform-origin: 50% 0; background: var(--cord); box-shadow: 1px 0 1px #050a0680; will-change: transform; }
+.hanging-link-figure { position: absolute; left: calc(var(--link-h) * -.27); top: 0; display: block; height: var(--link-h); aspect-ratio: 162 / 300; transform-origin: 50% 0; pointer-events: auto; touch-action: none; cursor: grab; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.hanging-link-figure.is-held { cursor: grabbing; }
+/* The loose end of the cut thread hangs just below the header, so it never sits over a header button; only the knot takes touches. */
+.hanging-link-stub { position: absolute; left: -22px; top: 0; width: 44px; height: calc(var(--link-stub) + 28px); transform-origin: 50% 0; pointer-events: none; }
+.hanging-link-stub::before { content: ''; position: absolute; left: 50%; top: 0; width: 3px; height: var(--link-stub); margin-left: -1.5px; background: var(--cord); box-shadow: 1px 0 1px #050a0680; }
+.hanging-link-knot { position: absolute; left: 0; top: calc(var(--link-stub) - 4px); width: 44px; height: 40px; padding: 0; border: 0; background: none; pointer-events: auto; cursor: pointer; }
+.hanging-link-knot::after { content: ''; position: absolute; left: 50%; top: 0; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--cord); box-shadow: inset -1px -1px 2px #0000006b, 1px 1px 2px #050a0680; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
   .combo-badge, .combo-count, .key.is-miss, .progress-track::before, .progress-track::after { animation: none !important; }

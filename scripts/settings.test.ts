@@ -9,6 +9,8 @@ test('stored preferences keep each valid field and fall back per field', () => {
     ...DEFAULT_PREFERENCES, bends: false, rate: '0.75', effects: false,
   });
   assert.equal(readPreferences({ rate: '2' }).rate, DEFAULT_PREFERENCES.rate);
+  assert.equal(readPreferences({ link: false }).link, false);
+  assert.equal(readPreferences({ link: 'no' }).link, true, 'an invalid stored flag falls back to showing Link');
 });
 
 test('a saved-songs export round-trips and import keeps only known, unique song ids', () => {

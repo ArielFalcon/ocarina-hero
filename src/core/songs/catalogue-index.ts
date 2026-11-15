@@ -2454,5 +2454,368 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 6.46,
       "level": "hard"
     }
+  },
+  {
+    "id": "catalogue-zelda-song-of-healing",
+    "title": "Song of Healing",
+    "subtitle": "The complete 43-note Song of Healing melody: four 3/4 lines (each stated twice with its answering ending), closing on the held G4",
+    "tempoBpm": 92.00012880018032,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 3.77,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-poke-flute",
+    "title": "Poké Flute",
+    "subtitle": "The complete Poké Flute jingle: E F G A G C D C G A F G, ending on the held G",
+    "tempoBpm": 80,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.63,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-healing-jingle",
+    "title": "Pokémon Healed",
+    "subtitle": "The complete Pokémon Center healing jingle: B B B G# E, the last E held",
+    "tempoBpm": 140.00014000014,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 1.88,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-center-hgss-lead",
+    "title": "Pokémon Center",
+    "subtitle": "The Pokémon Center lead melody as the HeartGold/SoulSilver flute voice: D A D A G F# E C# / C# A C# F# E C# D F# twice, ending on the long D (31 notes)",
+    "tempoBpm": 113.99995440001824,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.92,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-jigglypuff-song",
+    "title": "Jigglypuff’s Song",
+    "subtitle": "The complete in-game Jigglypuff lullaby: E B G# F# G# A G# F# G# E, slow, 14.5 beats",
+    "tempoBpm": 146.00032120070665,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-petalburg-city-rse",
+    "title": "Petalburg City",
+    "subtitle": "The first complete section of Petalburg City: four phrases, 51 notes, from the D#5 pickup to the held C#6 where the lead hands over",
+    "tempoBpm": 126.000126000126,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 6.42,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-dewford-town-rse",
+    "title": "Dewford Town",
+    "subtitle": "The first complete period of Dewford Town: four phrases, 44 notes, from the G5 entry to the long E5",
+    "tempoBpm": 94.00012846684224,
+    "beatsPerBar": 2,
+    "difficulty": {
+      "score": 5.76,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-sonic-casino-night-zone",
+    "title": "Casino Night Zone",
+    "subtitle": "Complete 16-bar main loop of the Sonic 2 pinball zone: held E4, E4-F4-E4 turn, A4-B4-A4-C5 climb, descending close (41 attacks, upper voice)",
+    "tempoBpm": 168.60089358473599,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.45,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-sonic-spring-yard-zone",
+    "title": "Spring Yard Zone",
+    "subtitle": "Spring Yard Zone theme: the two complete lines (F5-E5-D5-C5 descent with the A#4 turn, then the repeat closing A5-G5-F5), 27 attacks",
+    "tempoBpm": 150,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 6.66,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-hollow-knight-queens-gardens",
+    "title": "Queen's Gardens",
+    "subtitle": "Opening two-phrase cycle of Queen's Gardens: D5-C#5-A4-B4-D5-E5-C#5-B4 answered by D5-C#5-A4-B4-G4-A4-F#4-E4 (16 attacks, resolves to the tonic)",
+    "tempoBpm": 136.0001450668214,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.31,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-hollow-knight-greenpath",
+    "title": "Greenpath",
+    "subtitle": "Complete Greenpath verse: two statements of the theme with the descending close C4-A3 (25 attacks, long sustained notes)",
+    "tempoBpm": 170.0000850000425,
+    "beatsPerBar": 6,
+    "difficulty": {
+      "score": 1.9,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-deltarune-dark-sanctuary",
+    "title": "Dark Sanctuary",
+    "subtitle": "Dark Sanctuary chorus theme: one complete 20-note statement (the section repeats it identically), A#4-A4-A#4-C5 pickup, three D5 attacks, climb to A5, descent and close on E5",
+    "tempoBpm": 190.0002850004275,
+    "beatsPerBar": 6,
+    "difficulty": {
+      "score": 4.15,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pvz-zombies-on-your-lawn",
+    "title": "Zombies on Your Lawn",
+    "subtitle": "Chorus melody of the credits song, instrumental line only: the G-ending phrase (D-D#-F-D#-D-G-F-G) answered by the C-ending phrase closing on A#3 (17 attacks)",
+    "tempoBpm": 104.99992125005906,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.51,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-stardew-valley-overture",
+    "title": "Overture",
+    "subtitle": "Stardew Valley Overture opening theme statement: six bars of 3/4, D#5-F#5-E5-D#5-E5-F#5-D#5-B4 / D#5-F#5-E5-G#5-F#5-C#5 (14 attacks)",
+    "tempoBpm": 90.00009000009,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 2.66,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-clair-obscur-lumiere",
+    "title": "Lumière",
+    "subtitle": "Complete verse and pre-chorus line: the F#5 refrain twice, then the B5 descent and the rising B4-F#5 turn to the held E5",
+    "tempoBpm": 163.00007063336395,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.89,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-clair-obscur-alicia",
+    "title": "Alicia",
+    "subtitle": "First statement of the chorus theme: G4 C5 D#5 D5 sway into G4, then F4 G#4 C5 and the descent to the held B4",
+    "tempoBpm": 114.0001710002565,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.05,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-clair-obscur-une-vie-a-taimer",
+    "title": "Une vie à t'aimer",
+    "subtitle": "Verse line: the E5 D5 sway, the rising E-F#-G turn, the held D5 and the descent to G4 before the closing climb",
+    "tempoBpm": 180.00018000018,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 4.2,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-fma-brothers",
+    "title": "Brothers",
+    "subtitle": "Complete four-line theme: D F E F G A F E D, D F E F G C A G A, D F E F G A F E D, D C D E F E D",
+    "tempoBpm": 140.99997180000565,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 3.6,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-spider-man-1967-theme",
+    "title": "Spider-Man",
+    "subtitle": "Complete first strain: C D# G call and F# D# C answer, the G#-G line, the F G# C B G# F climb, the repeat of the call, and the closing eight-note tag back to C",
+    "tempoBpm": 192,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.85,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-jojo-giorno-theme",
+    "title": "Giorno's Theme (Il vento d'oro)",
+    "subtitle": "First eight-bar period of the theme: B C# D E F# rising run, B D A G# answer, F# E F#; then the same run with the A B continuation and the F# G# F# close",
+    "tempoBpm": 135.000135000135,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.98,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-caramelldansen",
+    "title": "Caramelldansen (chorus)",
+    "subtitle": "Complete first chorus period: two four-bar lines, from the A#3 pickup through G4 F4 D#4 to the A#4 G#4 G4 climb and the closing D#4 on the first beat of the next bar",
+    "tempoBpm": 138.00019320027047,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.95,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-hate-that-i-made-you-love-me",
+    "title": "hate that i made you love me",
+    "subtitle": "Complete chorus melody from the opening F down the F-D#-C#-G# cell through four two-bar lines to the final held D# (36 attacks, 32 beats)",
+    "tempoBpm": 96,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.98,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-dracula",
+    "title": "Dracula",
+    "subtitle": "Complete chorus riff stated twice: two eight-note statements A#-G#-F#-F-F#-F-C#-D#, each closing on the held D# (16 attacks, 15 beats)",
+    "tempoBpm": 115.00002875000719,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.16,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-manchild",
+    "title": "Manchild",
+    "subtitle": "First two chorus lines: the D-D-B pickup line and the rising A-B-B-A-G answer to the E-G-A-B-B-A-G close (19 attacks, 14 beats)",
+    "tempoBpm": 123.00022140039852,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.37,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-end-of-beginning",
+    "title": "End of Beginning",
+    "subtitle": "Chorus second half: the B-D pickup, the descending D-D-D-C#-B-A-B-C#-D-B-A line and the rising D-D-E-F#-G-A-E-D-F#-E-D hook ending on the long held D (23 attacks, 16.5 beats)",
+    "tempoBpm": 80,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-wildflower",
+    "title": "Wildflower",
+    "subtitle": "First two chorus lines: the E-F#-F#-C# pickup line held on C# and the E-F#-A-G#-F#-E line held on E (10 attacks, 7.5 beats)",
+    "tempoBpm": 74.000074000074,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.51,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-rockin-around-the-christmas-tree",
+    "title": "Rockin' Around the Christmas Tree",
+    "subtitle": "Opening eight bars of the recording: the neighbour-note figure, the ninth drop and the answering line, then the second four bars, ending on the held dominant before the next period",
+    "tempoBpm": 141.00030315065177,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.51,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-daisy-bell",
+    "title": "Daisy Bell",
+    "subtitle": "The complete 32-bar chorus tune in 3/4: the held descending triad call twice, the answer, the half-chorus cadence, then the stepwise second half with its turn and the closing scale-and-leap phrase on the tonic",
+    "tempoBpm": 170.00056666855556,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 3.53,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-cliff-richard-congratulations",
+    "title": "Congratulations",
+    "subtitle": "The first refrain statement: the rising scale pickup, the lilting answer, the long run of steps and the long tonic that closes the eight bars",
+    "tempoBpm": 93.00004185001883,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.76,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-christina-perri-a-thousand-years",
+    "title": "A Thousand Years",
+    "subtitle": "The full section as transcribed: two statements of the stepwise triplet-figure line, each with its falling answer, the rising low phrase and the held close; the low half-beat pickups where the sources disagree are not included",
+    "tempoBpm": 138.00019320027047,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.09,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-bts-butter-chorus",
+    "title": "Butter",
+    "subtitle": "The complete sung chorus, two statements: the stepwise descent from the high C, the low turn and the rising answer, then the repeated-note tail",
+    "tempoBpm": 110.00011000011,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.54,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-gorillaz-feel-good-inc-bass-riff",
+    "title": "Feel Good Inc.",
+    "subtitle": "The opening four-bar bass riff: two repeated low notes, a rising step pair, a jump to a note held across the bar, then the answering descent to the tonic",
+    "tempoBpm": 139.4998465501688,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.94,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-yiruma-river-flows-in-you-theme",
+    "title": "River Flows in You",
+    "subtitle": "The opening theme: the eight-note neighbour-tone motif ending on a held note, the two-note pickup and its repeat",
+    "tempoBpm": 72.00002880001152,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.6,
+      "level": "medium"
+    }
   }
 ];

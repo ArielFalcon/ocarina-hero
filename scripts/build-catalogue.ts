@@ -1,12 +1,12 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import toneMidi from '@tonejs/midi';
 import { BEND_LIMIT, PITCHES, frequencyOf, pitchById } from '../src/core/pitches';
 import { rateDifficulty } from '../src/core/difficulty';
 import { prepareMelody } from '../src/core/prepare';
 import { toTabText, bendLabel, toTabRestGroups } from '../src/core/tab';
-import { projectFaithfully, selectPhrase } from './catalogue-tools';
+import { assertExpectedRejections, projectFaithfully, readCatalogueManifests, selectPhrase } from './catalogue-tools';
 import { ensureExternalMedia } from './media-directory';
 
 const { Midi } = toneMidi as unknown as { Midi: typeof import('@tonejs/midi').Midi };
@@ -19,7 +19,8 @@ interface Selection {
   source: { file: string; page: string; url: string; sha256: string };
   trackIndex: number;
   indices: number[];
-  phraseStarts: number[];
+  /** Recorded in manifests but not read by the builder; phrase starts are derived from rests. */
+  phraseStarts?: number[];
   beatsPerBar?: number;
   evidence: { level: string; summary: string; urls: string[] };
   corpus?: { clip: string | null; alignmentValidated: boolean; originalRecordingAudited: boolean; notes: string };
@@ -41,51 +42,10 @@ ensureExternalMedia();
 const directory = 'out/catalogue';
 const delivery = `${directory}/delivery`;
 const instrumentConfigSha256 = createHash('sha256').update(readFileSync('src/core/pitches.ts')).digest('hex');
-const manifest: Selection[] = JSON.parse(readFileSync('scripts/catalogue-manifest.json', 'utf8'));
-if (existsSync('scripts/catalogue-next-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-next-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-pop-culture-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-pop-culture-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13b-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13b-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13c-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13c-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13d-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13d-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13e-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13e-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13f-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13f-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13g-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13g-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13h-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13h-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-13i-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-13i-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-15-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-15-manifest.json', 'utf8')));
-}
-if (existsSync('scripts/catalogue-2026-11-15b-manifest.json')) {
-  manifest.push(...JSON.parse(readFileSync('scripts/catalogue-2026-11-15b-manifest.json', 'utf8')));
-}
+const manifest = readCatalogueManifests<Selection>();
 const songs = [];
 const report = [];
+const rejected: string[] = [];
 
 for (const selection of manifest) {
   const bytes = readFileSync(selection.source.file);
@@ -123,7 +83,10 @@ for (const selection of manifest) {
   };
   report.push(summary);
   console.log(`${selection.id}: ${summary.status}, ${pitches.length} notes, ${summary.sourceSpanSemitones} semitones, ${durationSeconds.toFixed(3)} s`);
-  if (!projection) continue;
+  if (!projection) {
+    rejected.push(selection.id);
+    continue;
+  }
 
   const folder = `${delivery}/${selection.id}`;
   mkdirSync(folder, { recursive: true });
@@ -156,6 +119,8 @@ for (const selection of manifest) {
     writeFileSync(`${folder}/${name}.mid`, Buffer.from(exported.toArray()));
   }
 }
+
+assertExpectedRejections(rejected);
 
 mkdirSync(delivery, { recursive: true });
 writeFileSync(`${delivery}/instrument-config.json`, `${JSON.stringify({

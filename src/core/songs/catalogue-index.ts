@@ -2817,5 +2817,71 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 4.6,
       "level": "medium"
     }
+  },
+  {
+    "id": "catalogue-stop-the-wedding",
+    "title": "Stop The Wedding!",
+    "subtitle": "Complete sung chorus, both statements: a held low pickup, a rising answer, then a stepwise descent, repeated with the same closing high note held long",
+    "tempoBpm": 132.000132000132,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.98,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-oh-yeah",
+    "title": "oh yeah?",
+    "subtitle": "Two complete statements of the sung line: a low pickup, a gentle rise through five pitches with a quick turn, the long low hold, then the answer that rises and falls back with a held close",
+    "tempoBpm": 73.00007178340392,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.66,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-love-me-not",
+    "title": "Love Me Not",
+    "subtitle": "The complete sung chorus built on one repeated cell: a step up to the high F, a stepwise fall with repeated notes, and the low turn, repeated with small variations and a final held low note",
+    "tempoBpm": 114.0001710002565,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.7,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-five-hundred-miles",
+    "title": "500 Miles",
+    "subtitle": "Complete verse melody in D major, both stanzas: the rising D-D-F#-F#-E-D-F# line and its answer down to B, the A-B-D-E lift held on E, then the repeated refrain stanza ending on the held tonic D (54 attacks, about 64 beats)",
+    "tempoBpm": 97.00010993345792,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 2.92,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-mr-know-it-all",
+    "title": "Mr. Know It All",
+    "subtitle": "Complete sung chorus in B minor, two statements of a rising E-F#-G line that falls back through E to D with a held F#, answered by a lift to C#-D and a B4 drop (40 attacks, about 14 s at 126 BPM)",
+    "tempoBpm": 126.000126000126,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.58,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-carry-that-weight",
+    "title": "Carry That Weight",
+    "subtitle": "Complete refrain, two statements: the pickup C, the rising C-D-E-G and falling G-F-D line, the repeated G-G-F-D answer and the low G3-C-E closing figure (30 attacks, about 21 s at 84 BPM)",
+    "tempoBpm": 84.000084000084,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3,
+      "level": "easy"
+    }
   }
 ];

@@ -411,6 +411,12 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-bts-butter-chorus', 'Butter', { artist: 'BTS', aliases: ['Bangtan Boys', 'Bangtan Sonyeondan', 'Butter BTS'] }],
   ['catalogue-gorillaz-feel-good-inc-bass-riff', 'Feel Good Inc.', { artist: 'Gorillaz', aliases: ['Feel Good Inc', 'Demon Days', 'De La Soul', 'Damon Albarn'] }],
   ['catalogue-yiruma-river-flows-in-you-theme', 'River Flows in You', { artist: 'Yiruma', aliases: ['River Flows In You', 'First Love', 'Lee Ru-ma'] }],
+  ['catalogue-stop-the-wedding', 'Stop The Wedding!', { artist: 'Ashe', aliases: ['Stop The Wedding'] }],
+  ['catalogue-oh-yeah', 'oh yeah?', { artist: 'Steve Lacy', aliases: ['Oh Yeah'] }],
+  ['catalogue-love-me-not', 'Love Me Not', { artist: 'Ravyn Lenae' }],
+  ['catalogue-five-hundred-miles', '500 Miles', { artist: 'Peter, Paul & Mary', aliases: ['Peter, Paul and Mary', 'Hedy West', '500 Miles Away From Home', 'Five Hundred Miles'] }],
+  ['catalogue-mr-know-it-all', 'Mr. Know It All', { artist: 'Teddy Swims', aliases: ['Mr Know It All'] }],
+  ['catalogue-carry-that-weight', 'Carry That Weight', { artist: 'The Beatles', aliases: ['Beatles', 'Abbey Road'] }],
 ]);
 
 // Classics

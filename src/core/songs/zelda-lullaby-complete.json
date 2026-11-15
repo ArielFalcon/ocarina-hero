@@ -1,0 +1,190 @@
+{
+  "source": "Ocarina of Time theme, first period (bars 1-8), Aaron Marshall MIDI events 0-15 at 100 BPM, corroborated against three other MIDIs and Hooktheory ID 1329051; sounding pitches are the source plus 5 semitones",
+  "tempoBpm": 100,
+  "melody": [
+    {
+      "midi": 76,
+      "startBeat": 0,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 79,
+      "startBeat": 2,
+      "durationBeats": 0.833333
+    },
+    {
+      "midi": 74,
+      "startBeat": 3,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 72,
+      "startBeat": 5,
+      "durationBeats": 0.489583
+    },
+    {
+      "midi": 74,
+      "startBeat": 5.5,
+      "durationBeats": 0.489583
+    },
+    {
+      "midi": 76,
+      "startBeat": 6,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 79,
+      "startBeat": 8,
+      "durationBeats": 0.833333
+    },
+    {
+      "midi": 74,
+      "startBeat": 9,
+      "durationBeats": 2.75
+    },
+    {
+      "midi": 76,
+      "startBeat": 12,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 79,
+      "startBeat": 14,
+      "durationBeats": 0.833333
+    },
+    {
+      "midi": 86,
+      "startBeat": 15,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 84,
+      "startBeat": 17,
+      "durationBeats": 0.833333
+    },
+    {
+      "midi": 79,
+      "startBeat": 18,
+      "durationBeats": 1.75
+    },
+    {
+      "midi": 77,
+      "startBeat": 20,
+      "durationBeats": 0.489583
+    },
+    {
+      "midi": 76,
+      "startBeat": 20.5,
+      "durationBeats": 0.489583
+    },
+    {
+      "midi": 74,
+      "startBeat": 21,
+      "durationBeats": 2.75
+    }
+  ],
+  "fixedNotes": [
+    {
+      "pitch": "D4",
+      "bend": 2,
+      "startBeat": 0,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "F4",
+      "bend": 2,
+      "startBeat": 2,
+      "durationBeats": 0.833333
+    },
+    {
+      "pitch": "D4",
+      "bend": 0,
+      "startBeat": 3,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "D4",
+      "bend": -2,
+      "startBeat": 5,
+      "durationBeats": 0.489583
+    },
+    {
+      "pitch": "D4",
+      "bend": 0,
+      "startBeat": 5.5,
+      "durationBeats": 0.489583
+    },
+    {
+      "pitch": "D4",
+      "bend": 2,
+      "startBeat": 6,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "F4",
+      "bend": 2,
+      "startBeat": 8,
+      "durationBeats": 0.833333
+    },
+    {
+      "pitch": "D4",
+      "bend": 0,
+      "startBeat": 9,
+      "durationBeats": 2.75
+    },
+    {
+      "pitch": "D4",
+      "bend": 2,
+      "startBeat": 12,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "F4",
+      "bend": 2,
+      "startBeat": 14,
+      "durationBeats": 0.833333
+    },
+    {
+      "pitch": "D5",
+      "bend": 0,
+      "startBeat": 15,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "B4",
+      "bend": 1,
+      "startBeat": 17,
+      "durationBeats": 0.833333
+    },
+    {
+      "pitch": "F4",
+      "bend": 2,
+      "startBeat": 18,
+      "durationBeats": 1.75
+    },
+    {
+      "pitch": "F4",
+      "bend": 0,
+      "startBeat": 20,
+      "durationBeats": 0.489583
+    },
+    {
+      "pitch": "F4",
+      "bend": -1,
+      "startBeat": 20.5,
+      "durationBeats": 0.489583
+    },
+    {
+      "pitch": "D4",
+      "bend": 0,
+      "startBeat": 21,
+      "durationBeats": 2.75
+    }
+  ],
+  "phraseStarts": [
+    0,
+    3,
+    8,
+    11
+  ]
+}

@@ -2,6 +2,7 @@ import type { MelodyNote } from './project';
 import type { Note } from './ir';
 import { BEND_LIMIT, PITCHES, pitchById } from './pitches';
 import lullaby from './songs/lullaby-reference.json';
+import lullabyComplete from './songs/zelda-lullaby-complete.json';
 import littleroot from './songs/littleroot.json';
 import videoDemos from './songs/from-videos.json';
 import { CATALOGUE_INDEX } from './songs/catalogue-index';
@@ -105,14 +106,12 @@ export const INLINE_DEMOS: readonly DemoTrack[] = [
   },
   {
     id: 'lullaby-trigger',
-    title: 'Lullaby (manual trigger)',
-    subtitle: 'Y X A, repeated twice',
-    tempoBpm: 60,
-    phraseStarts: [0, 3],
-    fixedNotes: LULLABY_TRIGGER,
-    melody: LULLABY_TRIGGER.map(({ pitch, bend, startBeat, durationBeats }) => ({
-      midi: pitchById(pitch).midi + 12 + (bend ?? 0), startBeat, durationBeats,
-    })),
+    title: 'Lullaby (Ocarina of Time theme)',
+    subtitle: 'First theme period, bars 1-8 · transposed up 5 semitones',
+    tempoBpm: lullabyComplete.tempoBpm,
+    phraseStarts: lullabyComplete.phraseStarts,
+    fixedNotes: lullabyComplete.fixedNotes as readonly Note[],
+    melody: lullabyComplete.melody,
   },
   {
     id: 'ode',

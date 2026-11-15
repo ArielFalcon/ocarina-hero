@@ -48,7 +48,7 @@ test('unknown tracks remain searchable under Other', () => {
 });
 
 test('versions are distinct and Ghibli tracks belong to both Anime and Film', () => {
-  assert.deepEqual(ids(filterSongbook(entries, { query: 'lullaby manual' })), ['lullaby-trigger']);
+  assert.deepEqual(ids(filterSongbook(entries, { query: 'lullaby ocarina' })), ['lullaby-trigger']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'lullaby complete' })), ['lullaby-game']);
   for (const category of ['Anime', 'Film'] as const) {
     assert.ok(ids(filterSongbook(entries, { category, query: 'spirited' })).includes('catalogue-always-with-me'));

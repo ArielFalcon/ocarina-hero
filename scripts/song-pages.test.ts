@@ -40,8 +40,8 @@ test('a song page opens on the lesson of its song, with its heading and text tab
 
 test('the page of a bundled song carries the tab the lesson opens with', () => {
   const lullaby = songPageOf(createSongbookEntries(DEMOS).find(entry => entry.id === 'lullaby-trigger')!);
-  assert.equal(lullaby.tab, 'Y, X, A, Y, X, A');
-  assert.equal(lullaby.details, 'Manual trigger · 6 notes · 2 passages');
+  assert.equal(lullaby.tab, 'L + Stick up, R + Stick up, L, L + Stick down, L, L + Stick up, R + Stick up, L, L + Stick up, R + Stick up, X, Y + D-pad up, R + Stick up, R, R + D-pad down, L');
+  assert.equal(lullaby.details, 'Ocarina of Time · 16 notes · 4 passages');
 });
 
 test('a page whose head lost a tag to rewrite is refused instead of published half-described', () => {

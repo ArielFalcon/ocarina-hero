@@ -80,6 +80,9 @@ group('Pokémon', ['Games'], 'pokeball', [
   ['catalogue-pokemon-jigglypuff-song', 'Jigglypuff’s Song', { version: 'FireRed / LeafGreen', aliases: ['Jigglypuff Lullaby', 'Jigglypuff', 'Sleep song', 'Game Freak'] }],
   ['catalogue-pokemon-petalburg-city-rse', 'Petalburg City', { version: 'Ruby / Sapphire / Emerald', aliases: ['Morikazu Aoki', 'Go Ichinose', 'Junichi Masuda'] }],
   ['catalogue-pokemon-dewford-town-rse', 'Dewford Town', { version: 'Ruby / Sapphire / Emerald', aliases: ['Go Ichinose', 'Morikazu Aoki', 'Junichi Masuda'] }],
+  ['catalogue-pokemon-rby-vermilion-city', 'Vermilion City', { version: 'Red / Blue / Yellow', aliases: ['Vermillion City', 'Junichi Masuda'] }],
+  ['catalogue-pokemon-rse-route-101', 'Route 101', { version: 'Ruby / Sapphire / Emerald', aliases: ['Route 102', 'Route 103', 'Go Ichinose', 'Morikazu Aoki', 'Junichi Masuda'] }],
+  ['catalogue-pokemon-rby-gym-leader-battle', 'Gym Leader Battle', { version: 'Red / Blue / Yellow', aliases: ['Gym Leader', 'Elite Four', 'Junichi Masuda', 'Pokémon Red and Blue'] }],
 ]);
 group('Undertale', ['Games'], 'heart', [
   ['catalogue-megalovania', 'Megalovania'],
@@ -127,6 +130,9 @@ group('Fire Emblem', ['Games'], 'gamepad', [
 group('Minecraft', ['Games'], 'grassBlock', [
   ['catalogue-wet-hands', 'Wet Hands', { aliases: ['C418'] }],
   ['catalogue-sweden', 'Sweden', { aliases: ['C418'] }],
+]);
+group('Minecraft', ['Film', 'Games'], 'grassBlock', [
+  ['catalogue-steves-lava-chicken', 'Steve’s Lava Chicken', { version: 'A Minecraft Movie', aliases: ['Steve\'s Lava Chicken', 'Lava Chicken', 'Jack Black', 'Minecraft Movie'] }],
 ]);
 group('Wii', ['Games'], 'remote', [['catalogue-mii-channel', 'Mii Channel']]);
 group('EarthBound', ['Games'], 'gamepad', [
@@ -210,6 +216,8 @@ group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-naruto-hokage-funeral', 'Grief and Sorrow', { aliases: ['Toshio Masuda', 'Hokage’s Funeral', 'Hokages Funeral', 'Ai to Shū', '哀と愁'] }],
   ['catalogue-naruto-raising-fighting-spirit', 'The Raising Fighting Spirit', { aliases: ['Toshio Masuda', 'The Rising Fighting Spirit', 'Raising Fighting Spirit', 'Wakiagaru Tōshi', '湧き上がる闘志'] }],
   ['catalogue-naruto-go', 'GO!!!', { version: 'Opening 4', aliases: ['FLOW', 'Go', 'Naruto opening 4', 'GO!!! FLOW'] }],
+  ['catalogue-naruto-main-theme', 'Main Theme', { aliases: ['Naruto Main Theme', 'Toshio Masuda', 'Naruto Theme'] }],
+  ['catalogue-naruto-man-of-the-world', 'Man of the World', { version: 'Shippuden', aliases: ['Utsusemi', 'Yasuharu Takanashi', 'Naruto Shippuden OST'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
@@ -417,6 +425,16 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-five-hundred-miles', '500 Miles', { artist: 'Peter, Paul & Mary', aliases: ['Peter, Paul and Mary', 'Hedy West', '500 Miles Away From Home', 'Five Hundred Miles'] }],
   ['catalogue-mr-know-it-all', 'Mr. Know It All', { artist: 'Teddy Swims', aliases: ['Mr Know It All'] }],
   ['catalogue-carry-that-weight', 'Carry That Weight', { artist: 'The Beatles', aliases: ['Beatles', 'Abbey Road'] }],
+  ['catalogue-bloody-mary', 'Bloody Mary', { artist: 'Lady Gaga', aliases: ['Wednesday dance'] }],
+  ['catalogue-the-one-that-got-away', 'The One That Got Away', { artist: 'Katy Perry' }],
+  ['catalogue-swim', 'Swim', { artist: 'BTS' }],
+  ['catalogue-good-luck-babe', 'Good Luck, Babe!', { artist: 'Chappell Roan', aliases: ['Good Luck Babe'] }],
+  ['catalogue-choosin-texas', 'Choosin’ Texas', { artist: 'Ella Langley', aliases: ['Choosin\' Texas', 'Choosing Texas'] }],
+  ['catalogue-aperture', 'Aperture', { artist: 'Harry Styles' }],
+  ['catalogue-lose-control', 'Lose Control', { artist: 'Teddy Swims' }],
+  ['catalogue-mr-brightside', 'Mr. Brightside', { artist: 'The Killers', aliases: ['Mr Brightside', 'Mister Brightside'] }],
+  ['catalogue-creep', 'Creep', { artist: 'Radiohead' }],
+  ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
 ]);
 
 // Classics

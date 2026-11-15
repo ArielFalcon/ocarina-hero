@@ -25,7 +25,7 @@ test('withinOneEdit accepts one replaced, missing, extra or swapped letter and n
 });
 
 test('search matches all normalized words across title, franchise, artist and aliases', () => {
-  assert.deepEqual(ids(filterSongbook(entries, { query: '  POKEMON   rÓute ' })), ['catalogue-pokemon-route1']);
+  assert.deepEqual(ids(filterSongbook(entries, { query: '  POKEMON   rÓute ' })), ['catalogue-pokemon-route1', 'catalogue-pokemon-rse-route-101']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'ghibli spirited always' })), ['catalogue-always-with-me']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'linkin numb' })), ['catalogue-numb']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'pokemon route missing' })), []);

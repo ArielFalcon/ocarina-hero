@@ -2883,5 +2883,181 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 3,
       "level": "easy"
     }
+  },
+  {
+    "id": "catalogue-pokemon-rby-vermilion-city",
+    "title": "Vermilion City",
+    "subtitle": "First 4-bar period of the Vermilion City lead: A D C# B A B C# | A D C# B C# B A, to the held tonic A",
+    "tempoBpm": 122.5179897248246,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.15,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-rse-route-101",
+    "title": "Route 101",
+    "subtitle": "Route 101 first 4-bar period: A B A A G F# F# G A G F# E B, the held A, then the F# G A G A G A G F# E answer",
+    "tempoBpm": 114.0001710002565,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.13,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-rby-gym-leader-battle",
+    "title": "Gym Leader Battle",
+    "subtitle": "Gym Leader Battle introduction: the descending chromatic cascades (F5 to B4, then F#4 to C#4) and the B4 stabs, up to the loop entry",
+    "tempoBpm": 183.77735985444832,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 11.79,
+      "level": "expert"
+    }
+  },
+  {
+    "id": "catalogue-naruto-main-theme",
+    "title": "Main Theme",
+    "subtitle": "The flute-and-piano Naruto theme, first full period: a held A, the A-B-A-G turn onto a held E, the G-A pickup into a long D, the C-D-C turn onto A, then B and a closing G",
+    "tempoBpm": 120,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.94,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-naruto-man-of-the-world",
+    "title": "Man of the World",
+    "subtitle": "The slow flute melody, first four-bar period: F-G and a held E, D-E and a held F, the falling B-flat, A and G, then G-F and a final held E",
+    "tempoBpm": 48.38709677419355,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 1.42,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-bloody-mary",
+    "title": "Bloody Mary",
+    "subtitle": "Both statements of the pre-chorus and chorus: three repeated F4 attacks, an upward G4 and E4, a stepwise descent F-E-D-C-D, the rising G3-B3-D4-E4 lift, and a quick D-C-A fall onto a long low A3 (the second statement lengthens that last note)",
+    "tempoBpm": 100,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.95,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-the-one-that-got-away",
+    "title": "The One That Got Away",
+    "subtitle": "The complete chorus: a long held G#4, the three repeated A4s falling through G#4 to the held F#4, the answer that rises and falls G#4-F#4-E4 down to C#4, then the repeated statement with the B4 lift and the closing B3-B3-C#4-C#4-B3-B3 tag",
+    "tempoBpm": 134.00005806669182,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.96,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-swim",
+    "title": "Swim",
+    "subtitle": "The complete chorus built on short repeated cells: the A4-F#4 pairs, the three repeated A4s into the B4-C#5-B4-A4 turn and the long G#4, the G#4 run into the low E4, and the closing run of four E5 attacks twice over a held C#5",
+    "tempoBpm": 94.00012846684224,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.94,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-good-luck-babe",
+    "title": "Good Luck, Babe!",
+    "subtitle": "The complete sung chorus: a leap down from the high F#5 into a run of repeated D5s with the C#5 turn, the held D5-C#5 answer and the low F#4 landing, repeated with the F#5 pickup, and closing on the descending B4-C#5-D5 figure",
+    "tempoBpm": 117.000117000117,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.89,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-steves-lava-chicken",
+    "title": "Steve’s Lava Chicken",
+    "subtitle": "The whole sung verse in C minor: two short chants on one repeated pitch with a minor-third pivot, then four rising-and-falling lines that each end on a quick turn, closing on a long high held tonic an octave up",
+    "tempoBpm": 158.0003476007647,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 7.7,
+      "level": "expert"
+    }
+  },
+  {
+    "id": "catalogue-choosin-texas",
+    "title": "Choosin’ Texas",
+    "subtitle": "The complete sung chorus: a step up to the high note and a circling stepwise fall that restarts after a low pickup, repeated with small variations and closing on a long tonic",
+    "tempoBpm": 112.00005973336519,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.56,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-aperture",
+    "title": "Aperture",
+    "subtitle": "The sung chorus hook: an E-D-E turn that drops to a low B pair and climbs back to a bar-long high E, then a stepwise fall and a low dip, and the turn again",
+    "tempoBpm": 128,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.68,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-lose-control",
+    "title": "Lose Control",
+    "subtitle": "The complete sung chorus in two statements: three long rising notes, a quick turn that falls through the low register, a run of repeated notes and a chromatic climb, then the whole thing again",
+    "tempoBpm": 160,
+    "beatsPerBar": 6,
+    "difficulty": {
+      "score": 5.66,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-mr-brightside",
+    "title": "Mr. Brightside",
+    "subtitle": "The complete sung chorus: the rising-and-falling opening figure, the alternating two-note turn of each line, the repeated-note build into the long descent, and the held close on the title words",
+    "tempoBpm": 148.000148000148,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.97,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-creep",
+    "title": "Creep",
+    "subtitle": "The complete sung chorus: the first step up to the repeated high note, the stepwise fall, the repeated-note question line with its small upward turn, and the answer that closes on the held tonic",
+    "tempoBpm": 92.00012880018032,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.03,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-we-are-charlie-kirk",
+    "title": "We Are Charlie Kirk",
+    "subtitle": "The sung title refrain of the first chorus: a rising answer to a held high note, then a stepwise descent, repeated and closing on a held low note",
+    "tempoBpm": 136.0001450668214,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 2.69,
+      "level": "easy"
+    }
   }
 ];

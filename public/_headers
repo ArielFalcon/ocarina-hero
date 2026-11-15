@@ -1,9 +1,17 @@
 # Cloudflare Pages response headers.
-# Only content-hashed build output gets a long cache. Files with stable names (art, icons, fonts)
-# keep Pages' default caching, which revalidates by ETag and refreshes on every deployment; a
-# custom max-age there lets the zone edge and browsers serve stale files after a deploy.
+# Content-hashed build output gets a long cache; icons and art a short one (see below). Other stable
+# names (fonts, manifest, models) keep Pages' default caching, which revalidates by ETag and
+# refreshes on every deployment; a custom max-age there lets the zone edge and browsers serve
+# stale files after a deploy.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Icons and art change rarely but the staff renders hundreds of <img> per view; with revalidate-always
+# they were ~75 requests per page view (~275k a day of 304s). One hour of staleness after a deploy is accepted.
+/icons/*
+  Cache-Control: public, max-age=3600
+/art/*
+  Cache-Control: public, max-age=3600
 
 # Security headers for every response. Cloudflare merges them with the cache rules above.
 # CSP: everything is same-origin except the Cloudflare Web Analytics beacon script, which the edge

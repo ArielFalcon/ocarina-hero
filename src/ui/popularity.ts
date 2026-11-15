@@ -1,4 +1,5 @@
 import type { PopularityAction } from '../server/popularity';
+import { createPlayThrottle } from './play-throttle';
 import { createRankingCache } from './ranking-cache';
 
 export interface PopularEntry { id: string; plays: number }
@@ -8,9 +9,13 @@ const REFRESH_MS = 60_000;
 /** The Vite dev server has no Functions; only built pages (production or `wrangler pages dev`) talk to the API. */
 const enabled = import.meta.env.PROD;
 
+/** Each play is one D1 upsert (two rows written); the free plan allows 100k rows a day, so repeats are held back. */
+const PLAY_WINDOW_MS = 5 * 60_000;
+const allowPlay = createPlayThrottle(PLAY_WINDOW_MS);
+
 /** Report one play for the shared ranking. Fire and forget: failures never reach the player. */
 export function reportPlay(song: string, action: PopularityAction): void {
-  if (!enabled) return;
+  if (!enabled || !allowPlay(song, action)) return;
   fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ song, action }), keepalive: true })
     .catch(() => {});
 }

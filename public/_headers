@@ -13,6 +13,11 @@
 /art/*
   Cache-Control: public, max-age=3600
 
+# The pages.dev addresses (production and previews) serve the same pages as the custom domain: keep
+# them out of search results so only ocarinahero.app ranks.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
 # Security headers for every response. Cloudflare merges them with the cache rules above.
 # CSP: everything is same-origin except the Cloudflare Web Analytics beacon script, which the edge
 # injects with SRI and which reports to this origin's /cdn-cgi/rum. 'wasm-unsafe-eval' lets the Workshop compile the Basic Pitch

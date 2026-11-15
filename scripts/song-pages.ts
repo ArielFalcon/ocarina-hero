@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { DEMOS } from './catalogue-loader';
@@ -148,9 +149,35 @@ export function songPageHtml(indexHtml: string, song: SongPage, siteUrl: string,
   return withDirectory(withStructuredData(described, data), `<section>${more}<p><a href="${escapeHtml(siteUrl)}">Every song in the Ocarina Hero songbook</a></p></section>`);
 }
 
-export function sitemapXml(siteUrl: string, songIds: readonly string[]): string {
-  const urls = [siteUrl, ...songIds.map(id => songUrl(siteUrl, id))];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`;
+/**
+ * The sitemap: the home and every song. `lastModified` maps a song id to the day (YYYY-MM-DD) its notes last changed;
+ * the home carries the newest of them. Songs without a known day omit the tag rather than claim one.
+ */
+export function sitemapXml(siteUrl: string, songIds: readonly string[], lastModified: ReadonlyMap<string, string> = new Map()): string {
+  const newest = [...lastModified.values()].sort().at(-1);
+  const entries = [
+    { url: siteUrl, day: newest },
+    ...songIds.map(id => ({ url: songUrl(siteUrl, id), day: lastModified.get(id) })),
+  ];
+  const lines = entries.map(({ url, day }) => `  <url><loc>${escapeHtml(url)}</loc>${day ? `<lastmod>${day}</lastmod>` : ''}</url>`);
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${lines.join('\n')}\n</urlset>\n`;
+}
+
+/** Song id → day of the last commit touching its notes file (`<id>.json`), newest commit first; empty when git is unavailable. */
+export function songLastModified(): Map<string, string> {
+  const days = new Map<string, string>();
+  try {
+    const log = execFileSync('git', ['log', '--format=@%cs', '--name-only', '--', 'src/core/songs/catalogue'], { encoding: 'utf8', maxBuffer: 64 << 20 });
+    let day = '';
+    for (const line of log.split('\n')) {
+      if (line.startsWith('@')) day = line.slice(1);
+      else if (line.endsWith('.json')) {
+        const id = line.slice(line.lastIndexOf('/') + 1, -'.json'.length);
+        if (!days.has(id)) days.set(id, day);
+      }
+    }
+  } catch { /* a build outside a git checkout simply has no dates */ }
+  return days;
 }
 
 /** Writes one page per song, the home's song list, the sitemap, robots.txt and llms.txt next to the built app shell. */
@@ -167,7 +194,7 @@ export function writeSongPages(outDir: string): void {
   }
   writeFileSync(join(outDir, 'index.html'), homePageHtml(indexHtml, groups, siteUrl));
   writeFileSync(join(outDir, 'llms.txt'), llmsTxt(siteUrl, groups));
-  writeFileSync(join(outDir, 'sitemap.xml'), sitemapXml(siteUrl, songs.map(song => song.id)));
+  writeFileSync(join(outDir, 'sitemap.xml'), sitemapXml(siteUrl, songs.map(song => song.id), songLastModified()));
   // The popularity Function only scores songs listed here.
   writeFileSync(join(outDir, 'song-ids.json'), JSON.stringify(songs.map(song => song.id)));
   writeFileSync(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}sitemap.xml\n`);

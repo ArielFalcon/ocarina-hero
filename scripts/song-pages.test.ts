@@ -55,6 +55,21 @@ test('the site address comes from the canonical link, and the sitemap lists the 
     ['https://ocarinahero.app/', 'https://ocarinahero.app/song/ode/', 'https://ocarinahero.app/song/song-of-storms/']);
 });
 
+test('the sitemap dates a song only when its day is known, and the home carries the newest day', () => {
+  const xml = sitemapXml('https://ocarinahero.app/', ['ode', 'song-of-storms'], new Map([['ode', '2026-01-02'], ['other', '2026-03-04']]));
+  assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>(?:<lastmod>([^<]*)<\/lastmod>)?/g)].map(match => [match[1], match[2]]), [
+    ['https://ocarinahero.app/', '2026-03-04'],
+    ['https://ocarinahero.app/song/ode/', '2026-01-02'],
+    ['https://ocarinahero.app/song/song-of-storms/', undefined],
+  ]);
+});
+
+test('the pages.dev address is kept out of search results, the custom domain is not', () => {
+  const headers = readFileSync(new URL('../public/_headers', import.meta.url), 'utf8');
+  assert.match(headers, /^https:\/\/:project\.pages\.dev\/\*\n\s+X-Robots-Tag: noindex$/m);
+  assert.doesNotMatch(headers, /^\/\*\n(?:\s+.*\n)*?\s+X-Robots-Tag/m);
+});
+
 test('no two bundled songs share a page title', () => {
   const titles = createSongbookEntries(DEMOS).map(song => songDocumentTitle(song.title, songMeta(song)));
   assert.deepEqual(titles.filter((title, index) => titles.indexOf(title) !== index), []);

@@ -3028,6 +3028,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-smashing-pumpkins-1979",
+    "title": "1979",
+    "subtitle": "The complete chorus section: the long high held note and its stepwise fall, the three-note-and-stepwise-fall figure, the rising answer, and the second statement closing on repeated low notes",
+    "tempoBpm": 127.00025400050801,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.45,
+      "level": "easy"
+    }
+  },
+  {
     "id": "catalogue-mr-brightside",
     "title": "Mr. Brightside",
     "subtitle": "The complete sung chorus: the rising-and-falling opening figure, the alternating two-note turn of each line, the repeated-note build into the long descent, and the held close on the title words",

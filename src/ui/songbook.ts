@@ -434,6 +434,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-lose-control', 'Lose Control', { artist: 'Teddy Swims' }],
   ['catalogue-mr-brightside', 'Mr. Brightside', { artist: 'The Killers', aliases: ['Mr Brightside', 'Mister Brightside'] }],
   ['catalogue-creep', 'Creep', { artist: 'Radiohead' }],
+  ['catalogue-smashing-pumpkins-1979', '1979', { artist: 'The Smashing Pumpkins', aliases: ['Smashing Pumpkins', 'Nineteen Seventy-Nine'] }],
   ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
 ]);
 

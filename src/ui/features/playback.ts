@@ -1,4 +1,3 @@
-// Listening: plays the melody or the current passage and follows it on the staff.
 import { Playback } from '../playback';
 import { FREE_PLAY_TEMPO_BPM, playbackSelection } from '../lesson';
 import { threadIcon } from '../thread-icons';

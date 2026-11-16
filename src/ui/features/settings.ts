@@ -1,4 +1,3 @@
-// Settings: theme, preferences, the hanging figure and the saved-data tools.
 import { createHangingLink } from '../hanging-link';
 import { clearGone, goneThisSession, markGone } from '../rope';
 import { setPracticeFeedback } from '../practice-fx';

@@ -1,4 +1,3 @@
-// The on-screen controller and its inputs: pad, pointer, touch and gamepad.
 import { frequencyOf, pitchForButton, type ControllerButton, type PitchSpec } from '../../core/pitches';
 import { buttonLabel, schemeBendLabel, type ControlScheme } from '../../core/tab';
 import { buttonIcon, modifierIcon } from '../controller-icons';

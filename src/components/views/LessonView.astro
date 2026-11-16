@@ -2,7 +2,6 @@
 import { songArticleHtml } from '../../site/song-article';
 import type { SongLink, SongPage } from '../../site/song-pages';
 
-/** The lesson, shown free play until the app opens a song; a song page prerenders its heading, summary, text tab and related songs. */
 interface Props { song?: SongPage; related?: readonly SongLink[] }
 const { song, related = [] } = Astro.props;
 const Title = song ? 'h1' : 'h2';

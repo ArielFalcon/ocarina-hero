@@ -62,7 +62,7 @@ export const BEND_LIMIT = 2;
 /** Sounding pitches are one octave above the written names used in tabs. */
 const OCTAVE_SHIFT = 1;
 
-/** Provisional offsets from the isolated base-note recording; see docs/calibration.md. */
+/** Provisional offsets from the isolated base-note recording. */
 const NOTE_TUNING: Record<PitchId, number> = {
   D4: 23.92,
   F4: 4.31,

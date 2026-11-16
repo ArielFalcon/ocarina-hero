@@ -7,7 +7,7 @@
  * its onset. Notes shorter than a minimum that follows the fragment's onset rate are then absorbed
  * or removed, notes far weaker than the rest of the fragment are dropped, and held notes are split
  * where Basic Pitch reports a strong new onset of the same pitch.
- * Parameters were chosen on `scripts/instrument-benchmark.ts`; see docs/transcription.md.
+ * Parameters were chosen on `scripts/instrument-benchmark.ts`.
  */
 
 export const MIDI_LOW = 36;

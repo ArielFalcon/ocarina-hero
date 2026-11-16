@@ -1,4 +1,3 @@
-// Views and history: which view shows, the address it has and opening a song.
 import type { DemoTrack } from '../../core/demo';
 import { parseLocation, popularPath, songDocumentTitle, songPath } from '../route';
 import { POPULAR_TITLE } from '../../site/popular';

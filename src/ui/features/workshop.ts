@@ -1,4 +1,3 @@
-// Workshop: loads a MIDI file or a recording, edits the fragment and turns it into a playable melody. Its tools load on first use.
 import type { PreparedAudio, SourceImporter } from '../import';
 import type { AudioFragmentEditor } from '../audio-editor';
 import { analysisDownload, bendsInput, fileInput, fileName, playButton, recorded, simplifyInput, songHint, state } from './state';

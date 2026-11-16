@@ -1,4 +1,3 @@
-// Shared by every feature: the engine, the recorded melody, the lesson's elements and the state they act on.
 import { type KeyBindings, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, readBindings, type KeyboardAction } from '../keyboard';
 import { OcarinaEngine } from '../../audio/engine';
 import type { Arrangement, Note } from '../../core/ir';

@@ -1,4 +1,3 @@
-// The Songbook, its quick player and the shared Popular ranking.
 import { LISTING, type SongData } from '../../core/demo';
 import { createTrackLoader, latestRequest, sourcesByFile } from '../../core/track-loader';
 import { MiniPlayer } from '../mini-player';

@@ -1,4 +1,3 @@
-// The lesson's own buttons: mode, passages, reset, save and share.
 import { shareUrl } from '../route';
 import { resetPassage } from '../lesson';
 import { APP_BASE, analysisDownload, bendsInput, fileInput, fileName, nextSongButton, passageSelect, practiceStatus, recorded, repeatPassage, simplifyInput, songComplete, songHint, state, tab, take } from './state';

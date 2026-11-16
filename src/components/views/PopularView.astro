@@ -1,5 +1,4 @@
 ---
-/** The ranking; the page that opens on it (`/popular/`) prerenders its heading as the H1 and the rows of the build's snapshot. */
 interface Props { active?: boolean; rows?: string; ranking?: string }
 const { active = false, rows = '', ranking } = Astro.props;
 const Title = active ? 'h1' : 'h2';

@@ -1,4 +1,3 @@
-// Practice mode: scoring, combo, passages and what a hit rewards.
 import { pitchById, type ControllerButton } from '../../core/pitches';
 import { noteInstruction } from '../../core/tab';
 import { advancePractice, comboTier, scoreCombo, type ComboMilestone } from '../lesson';

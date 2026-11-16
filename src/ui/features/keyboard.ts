@@ -1,4 +1,3 @@
-// Keyboard play and the key bindings of Settings.
 import { pitchForButton, type ControllerButton } from '../../core/pitches';
 import { buttonLabel, schemeBendLabel } from '../../core/tab';
 import { buttonIcon, modifierIcon } from '../controller-icons';

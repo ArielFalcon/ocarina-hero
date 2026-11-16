@@ -1,4 +1,3 @@
-// The lesson's staff, progress, heading and the text article under the player.
 import type { DemoTrack } from '../../core/demo';
 import type { Arrangement } from '../../core/ir';
 import { pitchById } from '../../core/pitches';

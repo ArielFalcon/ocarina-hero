@@ -83,6 +83,9 @@ group('Pokémon', ['Games'], 'pokeball', [
   ['catalogue-pokemon-rby-vermilion-city', 'Vermilion City', { version: 'Red / Blue / Yellow', aliases: ['Vermillion City', 'Junichi Masuda'] }],
   ['catalogue-pokemon-rse-route-101', 'Route 101', { version: 'Ruby / Sapphire / Emerald', aliases: ['Route 102', 'Route 103', 'Go Ichinose', 'Morikazu Aoki', 'Junichi Masuda'] }],
   ['catalogue-pokemon-rby-gym-leader-battle', 'Gym Leader Battle', { version: 'Red / Blue / Yellow', aliases: ['Gym Leader', 'Elite Four', 'Junichi Masuda', 'Pokémon Red and Blue'] }],
+  ['catalogue-pokemon-gsc-new-bark-town', 'New Bark Town', { version: 'Gold / Silver / Crystal', aliases: ['Johto', 'Junichi Masuda'] }],
+  ['catalogue-pokemon-rby-cerulean-city', 'Cerulean City', { version: 'Red / Blue / Yellow', aliases: ['Fuchsia City', 'Junichi Masuda'] }],
+  ['catalogue-pokemon-dp-lake', 'Lake', { version: 'Diamond / Pearl', aliases: ['Lake Verity', 'Lake Valor', 'Lake Acuity', 'Go Ichinose'] }],
 ]);
 group('Undertale', ['Games'], 'heart', [
   ['catalogue-megalovania', 'Megalovania'],
@@ -108,6 +111,9 @@ group('Super Mario', ['Games'], 'mushroom', [
   ['catalogue-smw-overworld', 'Overworld', { version: 'Super Mario World', aliases: ['Koji Kondo'] }],
   ['catalogue-sm64-select-a-file', 'Select a File', { version: 'Super Mario 64', aliases: ['Koji Kondo', 'File Select', 'SM64'] }],
   ['catalogue-smario-64-bob-omb-battlefield', 'Bob-omb Battlefield', { version: 'Super Mario 64', aliases: ['Koji Kondo', 'SM64', 'Course 1', 'Super Mario 64 Main Theme'] }],
+]);
+group('Super Mario', ['Film', 'Games'], 'mushroom', [
+  ['catalogue-mario-movie-peaches', 'Peaches', { version: 'The Super Mario Bros. Movie', aliases: ['Jack Black', 'Bowser'] }],
 ]);
 group('Metroid', ['Games'], 'gamepad', [['catalogue-super-metroid-item', 'Item Acquisition', { version: 'Super Metroid' }]]);
 group('Donkey Kong Country', ['Games'], 'gamepad', [
@@ -153,6 +159,7 @@ group('Professor Layton', ['Games'], 'gamepad', [
 group('The Elder Scrolls', ['Games'], 'gamepad', [
   ['catalogue-morrowind-nerevar-rising', 'Nerevar Rising', { version: 'Morrowind', aliases: ['Jeremy Soule', 'Call of Magic', 'Main Theme', 'The Elder Scrolls III: Morrowind', 'Morrowind Theme'] }],
   ['catalogue-oblivion-reign-of-the-septims', 'Reign of the Septims', { version: 'Oblivion', aliases: ['Jeremy Soule', 'Main Theme', 'The Elder Scrolls IV: Oblivion', 'Oblivion Theme'] }],
+  ['catalogue-skyrim-dragonborn', 'Dragonborn', { version: 'Skyrim', aliases: ['Dovahkiin', 'Jeremy Soule', 'Skyrim Main Theme'] }],
 ]);
 group('Bubble Bobble', ['Games'], 'gamepad', [
   ['catalogue-bubble-bobble-main-stage-theme', 'Main Theme', { aliases: ['Main Stage Theme', 'Stage Theme', 'Tadashi Kimijima', 'Taito'] }],
@@ -194,6 +201,7 @@ group('Cave Story', ['Games'], 'gamepad', [
 group('Hollow Knight', ['Games'], 'gamepad', [
   ['catalogue-hollow-knight-queens-gardens', 'Queen’s Gardens', { version: 'Hollow Knight', aliases: ['Queen\'s Gardens', 'Christopher Larkin'] }],
   ['catalogue-hollow-knight-greenpath', 'Greenpath', { version: 'Hollow Knight', aliases: ['Christopher Larkin', 'Green Path'] }],
+  ['catalogue-hollow-knight-bonebottom', 'Bonebottom', { version: 'Silksong', aliases: ['Bone Bottom', 'Christopher Larkin'] }],
 ]);
 group('Deltarune', ['Games'], 'gamepad', [
   ['catalogue-deltarune-dark-sanctuary', 'Dark Sanctuary', { version: 'Chapters 3 and 4', aliases: ['Toby Fox'] }],
@@ -218,6 +226,8 @@ group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-naruto-go', 'GO!!!', { version: 'Opening 4', aliases: ['FLOW', 'Go', 'Naruto opening 4', 'GO!!! FLOW'] }],
   ['catalogue-naruto-main-theme', 'Main Theme', { aliases: ['Naruto Main Theme', 'Toshio Masuda', 'Naruto Theme'] }],
   ['catalogue-naruto-man-of-the-world', 'Man of the World', { version: 'Shippuden', aliases: ['Utsusemi', 'Yasuharu Takanashi', 'Naruto Shippuden OST'] }],
+  ['catalogue-naruto-samidare', 'Samidare', { version: 'Shippuden', aliases: ['Early Summer Rain', 'Yasuharu Takanashi', '五月雨'] }],
+  ['catalogue-naruto-loneliness', 'Loneliness', { aliases: ['Kodoku', '孤独', 'Toshio Masuda'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
@@ -316,6 +326,9 @@ group('Forrest Gump', ['Film'], 'film', [
 ]);
 group('Stranger Things', ['Film'], 'film', [
   ['catalogue-stranger-things-arpeggio', 'Main Title', { version: 'TV series (2016)', aliases: ['Kyle Dixon', 'Michael Stein', 'Kyle Dixon & Michael Stein', 'Stranger Things Theme', 'Main Theme', 'Survive'] }],
+]);
+group('Game of Thrones', ['Film'], 'film', [
+  ['catalogue-game-of-thrones-main-title', 'Main Title', { aliases: ['Game of Thrones Theme', 'Main Theme', 'Ramin Djawadi'] }],
 ]);
 group('Breakfast at Tiffany’s', ['Film'], 'film', [
   ['catalogue-moon-river', 'Moon River', { version: 'Film (1961)', aliases: ['Henry Mancini', 'Johnny Mercer', 'Audrey Hepburn'] }],
@@ -436,6 +449,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-creep', 'Creep', { artist: 'Radiohead' }],
   ['catalogue-smashing-pumpkins-1979', '1979', { artist: 'The Smashing Pumpkins', aliases: ['Smashing Pumpkins', 'Nineteen Seventy-Nine'] }],
   ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
+  ['catalogue-smells-like-teen-spirit', 'Smells Like Teen Spirit', { artist: 'Nirvana', aliases: ['Teen Spirit'] }],
 ]);
 
 // Classics

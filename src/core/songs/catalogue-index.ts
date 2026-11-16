@@ -3070,5 +3070,115 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 2.69,
       "level": "easy"
     }
+  },
+  {
+    "id": "catalogue-naruto-samidare",
+    "title": "Samidare",
+    "subtitle": "The slow piano melody of Samidare, first agreed statement: F, D, then A-G-A-G, C and a held A, A-G-F-E-F-G, a rising A and E, and the long closing D",
+    "tempoBpm": 108.30324909747293,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 1.97,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-naruto-loneliness",
+    "title": "Loneliness",
+    "subtitle": "The slow violin melody over the D-minor piano arpeggio, first four-bar phrase: F-G-A-F and B-flat, E, a held A, then A-G and a held E, E-F and a long D",
+    "tempoBpm": 54.00000540000054,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 1.6,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-gsc-new-bark-town",
+    "title": "New Bark Town",
+    "subtitle": "First 16-beat period of the New Bark Town lead (wave channel): D E pickup, F# A G F# E G F# D | A G A B D E D C# D E F# E",
+    "tempoBpm": 102.20751191143378,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.81,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-rby-cerulean-city",
+    "title": "Cerulean City",
+    "subtitle": "Cerulean City lead from the opening motif E D# C# B A B C# D# E through both statements to the long B5: first 21.5 beats",
+    "tempoBpm": 129.14056950991153,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 8.15,
+      "level": "expert"
+    }
+  },
+  {
+    "id": "catalogue-pokemon-dp-lake",
+    "title": "Lake",
+    "subtitle": "The Lake theme tune (Lake Verity / Valor / Acuity): G G# A F# D | A D B F# F D A A# | A# A G A# A (held) | B A G B A F# D | A D B G E F# G | F# C# E D E F, one complete statement",
+    "tempoBpm": 96,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.36,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-hollow-knight-bonebottom",
+    "title": "Bonebottom",
+    "subtitle": "The Bonebottom town theme: the G-G-G#-G-F-G call, its answer with the raised A#, then the F-D#-F fall and the G-G-F-D#-F-D close",
+    "tempoBpm": 55.85552038726494,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 2.41,
+      "level": "easy"
+    }
+  },
+  {
+    "id": "catalogue-skyrim-dragonborn",
+    "title": "Dragonborn",
+    "subtitle": "The Skyrim main theme melody: the D-C#-D figure, the step up to E and back, then the B-B-A-B figure, closing on a held B (the line repeated once with the D-D-E-F# variant)",
+    "tempoBpm": 104.99992125005906,
+    "beatsPerBar": 6,
+    "difficulty": {
+      "score": 7.16,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-game-of-thrones-main-title",
+    "title": "Main Title",
+    "subtitle": "The opening cello ostinato: the rising G-C-E-flat-F figure four times, then the same figure with the E natural four times",
+    "tempoBpm": 170.0000850000425,
+    "beatsPerBar": 6,
+    "difficulty": {
+      "score": 7.24,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-mario-movie-peaches",
+    "title": "Peaches",
+    "subtitle": "The complete chorus as sung by Bowser: the A#3-C#4 and C4-D#4 alternating figures, the rising F4-G#4-A#4 climb, the quick F4-D#4-C#4 descent onto a short low A#3, and the second statement that repeats it",
+    "tempoBpm": 92.00012880018032,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.24,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-smells-like-teen-spirit",
+    "title": "Smells Like Teen Spirit",
+    "subtitle": "The sung chorus melody (not the guitar riff): four-note cells that start on G#4-G4-G4-F4, climb to the repeated A#4 over a G#4 landing, drop to the repeated C#4 over a C4 landing and answer on A#4 again, played twice",
+    "tempoBpm": 117.000117000117,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.33,
+      "level": "easy"
+    }
   }
 ];

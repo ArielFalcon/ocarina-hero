@@ -3063,12 +3063,12 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   {
     "id": "catalogue-we-are-charlie-kirk",
     "title": "We Are Charlie Kirk",
-    "subtitle": "The sung title refrain of the first chorus: a rising answer to a held high note, then a stepwise descent, repeated and closing on a held low note",
+    "subtitle": "The whole first chorus: the sung title refrain (a rising answer to a held high note, then a stepwise descent, twice) and its descending answer down to a held low A",
     "tempoBpm": 136.0001450668214,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.74,
-      "level": "easy"
+      "score": 3.5,
+      "level": "medium"
     }
   },
   {

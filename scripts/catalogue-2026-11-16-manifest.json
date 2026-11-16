@@ -2090,12 +2090,12 @@
     "id": "we-are-charlie-kirk",
     "title": "We Are Charlie Kirk",
     "category": "pop",
-    "hook": "The sung title refrain of the first chorus: a rising answer to a held high note, then a stepwise descent, repeated and closing on a held low note",
+    "hook": "The whole first chorus: the sung title refrain (a rising answer to a held high note, then a stepwise descent, twice) and its descending answer down to a held low A",
     "source": {
       "file": "out/catalogue-2026-11-16/charlie-kirk/sources/we-are-charlie-kirk-refrain-derived.mid",
-      "page": "derived transcription of the first chorus (about 46.2-58.9 s of the recording)",
+      "page": "derived transcription of the first chorus (about 46.2-74.0 s of the recording)",
       "url": "https://www.youtube.com/watch?v=zwvRzjgahvI",
-      "sha256": "ff62d7fe59c0893e2dcdd4830006e6d3fe60b89e99a9e715cd11a4fad91a7acb"
+      "sha256": "0ca90426643322f7a5a1b695f2e444c829d9f58babaddc73e5706f97647821c9"
     },
     "trackIndex": 0,
     "indices": [
@@ -2117,18 +2117,43 @@
       15,
       16,
       17,
-      18
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
     ],
     "phraseStarts": [
       0,
-      4,
-      9,
-      13
+      5,
+      11,
+      16,
+      22,
+      26,
+      30,
+      36
     ],
     "beatsPerBar": 4,
     "evidence": {
       "level": "tutorial-roll-and-audio-pitch-track",
-      "summary": "Derived transcription (SHA-256 ff62d7fe59c0893e2dcdd4830006e6d3fe60b89e99a9e715cd11a4fad91a7acb) of the refrain: pitch order from the Top Piano Tutorials lit-key roll (https://www.youtube.com/watch?v=LsJNb1AecSg, roll SHA-256 70bd9023c844379e4bb3e478a5bcc9fa40c99d90aa57e9de2b568e08212320d7), checked against a second tutorial (https://www.youtube.com/watch?v=n354Xy17DFs), a Roblox letter sheet and a pyin pitch track of the original recording (clip kept, SHA-256 e98ce09d7e3c61bf67ff26845b59ff4dfc166c28aae6df2ed1ef19519c7e50bc). accepted by owner 2026-11-16 despite 4 unresolved repeated-pitch attack disagreements (tutorial rhythm kept). owner listening report 2026-11-16: \"revisa we are charlie kirk que esta bien casi entera excepto algunas notas que repite cuando son diferentes\"; re-audited against the kept clip and the second chorus: the second A at beat 20 is G4 in the recording (A4 then G4 in both choruses); F4 F4, G4 G4 and C5 C5 stay constant-pitch repeats (C5 has one unresolved 0.1-0.2 s dip in the first chorus only). Not independently validated; the track is reportedly AI-generated.",
+      "summary": "Derived transcription (SHA-256 0ca90426643322f7a5a1b695f2e444c829d9f58babaddc73e5706f97647821c9) of the refrain: pitch order from the Top Piano Tutorials lit-key roll (https://www.youtube.com/watch?v=LsJNb1AecSg, roll SHA-256 70bd9023c844379e4bb3e478a5bcc9fa40c99d90aa57e9de2b568e08212320d7), checked against a second tutorial (https://www.youtube.com/watch?v=n354Xy17DFs), a Roblox letter sheet, a pyin pitch track of the original recording (clip kept, SHA-256 e98ce09d7e3c61bf67ff26845b59ff4dfc166c28aae6df2ed1ef19519c7e50bc) and a pyin track of its Demucs lead-vocal stem over the whole chorus (clip 45.5-75.0 s kept, SHA-256 59dabfb4b80fb34dce491970a3db85933b2ef36a6cda08d0d8fd2545048e7aae). accepted by owner 2026-11-16 despite 4 unresolved repeated-pitch attack disagreements (tutorial rhythm kept). owner listening report 2026-11-16: \"revisa we are charlie kirk que esta bien casi entera excepto algunas notas que repite cuando son diferentes\"; re-audited against the kept clip and the second chorus: the second A at beat 20 is G4 in the recording (A4 then G4 in both choruses); F4 F4, G4 G4 and C5 C5 stay constant-pitch repeats (C5 has one unresolved 0.1-0.2 s dip in the first chorus only). Second owner report 2026-11-16: \"La nota inicial de ambas mitades no es una nota sostenida, son dos notas que juntas duran ese tiempo que tiene actualmente la nota sostenida [...] La segunda nota es un poco mas aguda que la primera [...] la melodia se termina rapido, ese verso sigue casi doblando la duracion completa\"; the Demucs vocal stem shows B4 into C5 at the openings and the chorus continues 32 more beats down to A3, so the answer is added. Third owner report 2026-11-16 (on the corrected preview): \"la primera nota del segundo bloque como te comente no se dividio en dos con la segunda mas aguda. Y la primera nota se dividio en dos pero la segunda no es mas aguda que la primera [...] la primera y segunda nota van en el orden inverso\"; the blocks are the 8-beat lines: block 1 is E4 (1.5) then G#4 (0.5) as the vocal glides into the A, and block 2 opens B4 (0.5) then C5 (1.5). Fourth owner report 2026-11-16: \"las dos primeras notas estan mal, la segunda es muy aguda\" (F#4 tried). Fifth owner report 2026-11-16: \"Sigue mal, prueba repitiendo la misma nota de la primera pero no sostenida sino cambiar el tono a la de la primera\"; block 1 now opens E4 E4 at beats 0 and 1, as both the Top Piano roll and the Roblox sheet have it. Not independently validated; the track is reportedly AI-generated.",
       "urls": [
         "https://www.youtube.com/watch?v=zwvRzjgahvI",
         "https://www.youtube.com/watch?v=LsJNb1AecSg",
@@ -2162,12 +2187,33 @@
         13,
         14,
         15,
-        16
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
       ],
       "pitchShift": -36,
       "absentIndices": [
-        12,
-        14
+        5,
+        11,
+        15,
+        17,
+        33
       ]
     }
   }

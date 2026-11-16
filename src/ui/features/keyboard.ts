@@ -1,8 +1,7 @@
 import { pitchForButton, type ControllerButton } from '../../core/pitches';
-import { buttonLabel, schemeBendLabel } from '../../core/tab';
 import { buttonIcon, modifierIcon } from '../controller-icons';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, handleKeyDown, type KeyboardAction } from '../keyboard';
-import { controlScheme } from '../theme';
+import { bendName, buttonName } from '../platform';
 import { bends, pad, state } from './state';
 import { must } from './dom';
 import { clearActive, controls } from './pad';
@@ -15,8 +14,8 @@ function isEditingTarget(target: EventTarget | null): boolean {
 }
 
 function actionLabel(action: KeyboardAction): string {
-  if (!(action in BEND_ACTIONS)) return `Button ${buttonLabel(action as ControllerButton, controlScheme())}`;
-  return schemeBendLabel(BEND_ACTIONS[action as keyof typeof BEND_ACTIONS], controlScheme());
+  if (!(action in BEND_ACTIONS)) return `Button ${buttonName(action as ControllerButton)}`;
+  return bendName(BEND_ACTIONS[action as keyof typeof BEND_ACTIONS]);
 }
 
 export function renderBindings(): void {
@@ -31,7 +30,7 @@ export function renderBindings(): void {
   for (const key of pad.querySelectorAll<HTMLElement>('[data-button]')) {
     const button = key.dataset.button as ControllerButton;
     key.querySelector('kbd')!.textContent = keyLabel(state.bindings[button]);
-    key.setAttribute('aria-label', `Play ${buttonLabel(button, controlScheme())}, keyboard ${keyLabel(state.bindings[button])}`);
+    key.setAttribute('aria-label', `Play ${buttonName(button)}, keyboard ${keyLabel(state.bindings[button])}`);
     key.title = `${pitchForButton(button).id} · keyboard ${keyLabel(state.bindings[button])}`;
   }
   for (const label of bends.querySelectorAll<HTMLElement>('[data-bend-label]')) {

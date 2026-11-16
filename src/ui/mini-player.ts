@@ -149,8 +149,8 @@ export class MiniPlayer {
     this.quick.toggle(id, this.loaded.arrangement);
   }
 
-  /** Re-render the staff with the active theme's glyphs and control names. */
-  refreshTheme(): void {
+  /** Re-render the staff with the active console's glyphs and control names. */
+  refreshPlatform(): void {
     delete this.tab.dataset.notes;
     this.renderedWindow = null;
     this.shown = null;

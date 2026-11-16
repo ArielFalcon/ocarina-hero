@@ -12,16 +12,12 @@ export type PitchId = (typeof PITCH_IDS)[number];
 /** Buttons used by the ocarina on the Switch 2 controller. */
 export type ControllerButton = 'L' | 'R' | 'A' | 'Y' | 'X';
 
-/** Buttons used by the ocarina on the N64 original. */
-export type N64Button = 'A' | 'C-Down' | 'C-Right' | 'C-Left' | 'C-Up';
-
 export interface PitchSpec {
   readonly id: PitchId;
   readonly hz: number;
   /** MIDI note number, for imports and projection. */
   readonly midi: number;
   readonly button: ControllerButton;
-  readonly n64: N64Button;
   /** Physical key, independent of the keyboard layout. */
   readonly code: string;
   /** Label shown to the user for the keyboard key. */
@@ -29,11 +25,11 @@ export interface PitchSpec {
 }
 
 export const PITCHES: readonly PitchSpec[] = [
-  { id: 'D4', hz: 293.66, midi: 62, button: 'L', n64: 'A', code: 'KeyQ', keyLabel: 'Q' },
-  { id: 'F4', hz: 349.23, midi: 65, button: 'R', n64: 'C-Down', code: 'KeyE', keyLabel: 'E' },
-  { id: 'A4', hz: 440.0, midi: 69, button: 'A', n64: 'C-Right', code: 'KeyD', keyLabel: 'D' },
-  { id: 'B4', hz: 493.88, midi: 71, button: 'Y', n64: 'C-Left', code: 'KeyA', keyLabel: 'A' },
-  { id: 'D5', hz: 587.33, midi: 74, button: 'X', n64: 'C-Up', code: 'KeyW', keyLabel: 'W' },
+  { id: 'D4', hz: 293.66, midi: 62, button: 'L', code: 'KeyQ', keyLabel: 'Q' },
+  { id: 'F4', hz: 349.23, midi: 65, button: 'R', code: 'KeyE', keyLabel: 'E' },
+  { id: 'A4', hz: 440.0, midi: 69, button: 'A', code: 'KeyD', keyLabel: 'D' },
+  { id: 'B4', hz: 493.88, midi: 71, button: 'Y', code: 'KeyA', keyLabel: 'A' },
+  { id: 'D5', hz: 587.33, midi: 74, button: 'X', code: 'KeyW', keyLabel: 'W' },
 ];
 
 const BY_CODE = new Map(PITCHES.map((pitch) => [pitch.code, pitch]));
@@ -62,17 +58,25 @@ export const BEND_LIMIT = 2;
 /** Sounding pitches are one octave above the written names used in tabs. */
 const OCTAVE_SHIFT = 1;
 
-/** Provisional offsets from the isolated base-note recording. */
-const NOTE_TUNING: Record<PitchId, number> = {
-  D4: 23.92,
-  F4: 4.31,
-  A4: 27.38,
-  B4: 23.59,
-  D5: 23.31,
-};
+/** Cent offsets that make the synthesized ocarina match one console's recording. */
+export interface TuningProfile {
+  readonly noteCents: Readonly<Record<PitchId, number>>;
+  /** Extra correction for a bend on a pitch, keyed by the bend in semitones. */
+  readonly bendCents: Readonly<Partial<Record<PitchId, Readonly<Record<number, number>>>>>;
+}
 
-const BEND_TUNING_CENTS: Partial<Record<PitchId, Readonly<Record<number, number>>>> = {
-  D5: { [-1]: -19, 1: 14 },
+/** Provisional offsets from the isolated Switch 2 base-note recording; see docs/calibration.md. */
+export const SWITCH2_TUNING: TuningProfile = {
+  noteCents: {
+    D4: 23.92,
+    F4: 4.31,
+    A4: 27.38,
+    B4: 23.59,
+    D5: 23.31,
+  },
+  bendCents: {
+    D5: { [-1]: -19, 1: 14 },
+  },
 };
 
 /** Extra offset on top of the measured table, for the user's own setup. */
@@ -87,8 +91,8 @@ export function getTuning(): number {
 }
 
 /** Frequency of a pitch with an optional bend in semitones. */
-export function frequencyOf(id: PitchId, bend = 0): number {
-  const correction = BEND_TUNING_CENTS[id]?.[bend] ?? 0;
-  const cents = NOTE_TUNING[id] + fineTuningCents + correction;
+export function frequencyOf(id: PitchId, bend = 0, tuning: TuningProfile = SWITCH2_TUNING): number {
+  const correction = tuning.bendCents[id]?.[bend] ?? 0;
+  const cents = tuning.noteCents[id] + fineTuningCents + correction;
   return pitchById(id).hz * 2 ** (OCTAVE_SHIFT + (bend + cents / 100) / 12);
 }

@@ -1,7 +1,7 @@
-import { assetDir, currentTheme } from './theme';
+import { patchIconUrl } from './platform';
 
-/** Patch icons: public/art/icons (tapestry, WebP rendered from its SVG by scripts/rasterize-icons.ts) and public/art/icons-retro (retro SVG), one file per name in each. */
-const ICONS = [
+/** Patch icons, one file per name in each console's set (see `assets.patchIcons` in platforms.ts); the tapestry WebP files are rendered from their SVG by scripts/rasterize-icons.ts. */
+export const THREAD_ICONS = [
   'anime',
   'back',
   'cake',
@@ -58,23 +58,24 @@ const ICONS = [
   'wizard',
 ] as const;
 
-export type ThreadIcon = typeof ICONS[number];
+export type ThreadIcon = typeof THREAD_ICONS[number];
 
 /**
  * A decorative embroidered patch. Each SVG keeps its own pattern ids, so it is
  * referenced as an image instead of inlined; buttons keep their accessible names.
  */
-function iconSrc(name: string): string {
-  return `${assetDir('icons')}${name}.${currentTheme() === 'retro' ? 'svg' : 'webp'}`;
+export function patchIconHtml(name: string, src: string, extraClass = ''): string {
+  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${src}" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
 }
 
+/** The patch icon of the active console. */
 export function threadIcon(name: ThreadIcon, extraClass = ''): string {
-  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${iconSrc(name)}" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
+  return patchIconHtml(name, patchIconUrl(name), extraClass);
 }
 
-/** Point every rendered patch icon at the active theme's set. */
+/** Point every rendered patch icon at the active console's set. */
 export function refreshThreadIcons(): void {
   for (const image of document.querySelectorAll<HTMLImageElement>('img.thread-icon[data-icon]')) {
-    image.src = iconSrc(image.dataset.icon!);
+    image.src = patchIconUrl(image.dataset.icon!);
   }
 }

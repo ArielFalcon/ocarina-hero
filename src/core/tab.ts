@@ -1,5 +1,6 @@
 import type { Note } from './ir';
-import { pitchById, pitchForButton, type ControllerButton, type PitchId } from './pitches';
+import { SWITCH_CONTROLS, type ControlScheme } from './control-schemes';
+import { pitchById, type ControllerButton, type PitchId } from './pitches';
 
 export interface TabToken {
   readonly noteIndex: number;
@@ -86,33 +87,28 @@ export function modifierForBend(bend: number): { control: 'dpad' | 'stick'; dire
   return { control: Math.abs(bend) === 1 ? 'dpad' : 'stick', direction: bend > 0 ? 'up' : 'down' };
 }
 
-/** Which controller the instructions name: the Switch 2 remake or the N64 original. */
-export type ControlScheme = 'switch' | 'n64';
-
 export function bendLabel(bend: number): string {
-  return schemeBendLabel(bend, 'switch');
+  return schemeBendLabel(bend, SWITCH_CONTROLS);
 }
 
-/** On the N64, R and Z bend a semitone where the remake uses the D-pad; the stick bends a whole tone on both. */
+/** The gesture a scheme names for a bend; an unsupported bend throws. */
 export function schemeBendLabel(bend: number, scheme: ControlScheme): string {
-  const modifier = modifierForBend(bend);
-  if (!modifier) return '';
-  if (modifier.control === 'dpad') return scheme === 'n64' ? (bend > 0 ? 'R' : 'Z') : `D-pad ${modifier.direction}`;
-  return `Stick ${modifier.direction}`;
+  if (!modifierForBend(bend)) return '';
+  return scheme.bendLabels[bend as keyof ControlScheme['bendLabels']];
 }
 
-export function buttonLabel(button: ControllerButton, scheme: ControlScheme = 'switch'): string {
-  return scheme === 'n64' ? pitchForButton(button).n64 : button;
+export function buttonLabel(button: ControllerButton, scheme: ControlScheme = SWITCH_CONTROLS): string {
+  return scheme.buttonLabels[button];
 }
 
-export function noteInstruction(button: ControllerButton, bend = 0, scheme: ControlScheme = 'switch'): string {
+export function noteInstruction(button: ControllerButton, bend = 0, scheme: ControlScheme = SWITCH_CONTROLS): string {
   const modifier = schemeBendLabel(bend, scheme);
   const name = buttonLabel(button, scheme);
   return modifier ? `${name} + ${modifier}` : name;
 }
 
 /** Plain-text tab for tests, exports and reading; `noteSeparator` keeps notes apart when their names hold spaces. */
-export function toTabText(notes: readonly Note[], beatsPerBar = 4, sourceTempoBpm?: number, { scheme = 'switch', noteSeparator = ' ' }: { scheme?: ControlScheme; noteSeparator?: string } = {}): string {
+export function toTabText(notes: readonly Note[], beatsPerBar = 4, sourceTempoBpm?: number, { scheme = SWITCH_CONTROLS, noteSeparator = ' ' }: { scheme?: ControlScheme; noteSeparator?: string } = {}): string {
   const groups = sourceTempoBpm === undefined ? toTabBars(notes, beatsPerBar) : toTabRestGroups(notes, sourceTempoBpm);
   return groups
     .map((bar) =>

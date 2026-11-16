@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { GamepadInput, type PadSnapshot } from '../src/ui/gamepad';
+import { platformById } from '../src/ui/platforms';
+import { N64_CONTROLS } from '../src/core/control-schemes';
 import { buttonLabel, schemeBendLabel } from '../src/core/tab';
 import type { ControllerButton } from '../src/core/pitches';
+
+const N64_PAD = platformById('retro')!.gamepad.layout;
 
 function fixture() {
   const calls: string[] = [];
@@ -68,9 +72,9 @@ test('under the N64 scheme the A button and the right stick play the notes the t
   const { calls, input } = fixture();
   const played = (snapshot: PadSnapshot) => {
     calls.length = 0;
-    input.update([snapshot], 'n64');
-    input.update([pad()], 'n64');
-    return calls.filter(call => call.startsWith('down')).map(call => buttonLabel(call.split(' ')[1] as ControllerButton, 'n64'));
+    input.update([snapshot], N64_PAD);
+    input.update([pad()], N64_PAD);
+    return calls.filter(call => call.startsWith('down')).map(call => buttonLabel(call.split(' ')[1] as ControllerButton, N64_CONTROLS));
   };
   assert.deepEqual(played(pad([0])), ['A']);
   assert.deepEqual(played(pad([1])), ['A']);
@@ -87,9 +91,9 @@ test('under the N64 scheme R and Z bend a semitone and only the left stick bends
   const { calls, input } = fixture();
   const bent = (snapshot: PadSnapshot) => {
     calls.length = 0;
-    input.update([snapshot], 'n64');
-    input.update([pad()], 'n64');
-    return calls.filter(call => call.startsWith('bend')).map(call => schemeBendLabel(Number(call.split(' ')[1]), 'n64'));
+    input.update([snapshot], N64_PAD);
+    input.update([pad()], N64_PAD);
+    return calls.filter(call => call.startsWith('bend')).map(call => schemeBendLabel(Number(call.split(' ')[1]), N64_CONTROLS));
   };
   assert.deepEqual(bent(pad([5])), ['R']);
   assert.deepEqual(bent(pad([7])), ['R']);
@@ -104,6 +108,6 @@ test('changing the scheme releases what the previous one held', () => {
   const { calls, input } = fixture();
   input.update([pad([4])]);
   calls.length = 0;
-  input.update([pad([4])], 'n64');
+  input.update([pad([4])], N64_PAD);
   assert.deepEqual(calls.map(call => call.split(' ')[0]), ['up', 'bend']);
 });

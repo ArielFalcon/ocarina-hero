@@ -1,10 +1,10 @@
 import { frequencyOf, pitchForButton, type ControllerButton, type PitchSpec } from '../../core/pitches';
-import { buttonLabel, schemeBendLabel, type ControlScheme } from '../../core/tab';
 import { buttonIcon, modifierIcon } from '../controller-icons';
 import { Controls } from '../input';
 import { GamepadInput } from '../gamepad';
 import { BEND_ACTIONS, KEYBOARD_ACTIONS, keyLabel } from '../keyboard';
-import { controlScheme, currentTheme } from '../theme';
+import { bendName, buttonName, platform } from '../platform';
+import type { PadSlot } from '../platforms';
 import { bends, engine, hint, pad, state, take } from './state';
 import { must } from './dom';
 import { renderTab } from './staff';
@@ -14,30 +14,31 @@ import { stopPlayback } from './playback';
 function keyHtml(pitch: PitchSpec): string {
   return `
     <button class="key" type="button" data-button="${pitch.button}"
-      aria-label="Play ${buttonLabel(pitch.button, controlScheme())}, keyboard ${keyLabel(state.bindings[pitch.button])}"
+      aria-label="Play ${buttonName(pitch.button)}, keyboard ${keyLabel(state.bindings[pitch.button])}"
       title="${pitch.id} · keyboard ${keyLabel(state.bindings[pitch.button])}">
       ${buttonIcon(pitch.button)}
       <kbd class="key-ref">${keyLabel(state.bindings[pitch.button])}</kbd>
     </button>`;
 }
 
+function slotHtml(slot: PadSlot): string {
+  if (slot === 'cell') return '<span class="cell" aria-hidden="true"></span>';
+  if (typeof slot === 'object') return `<span class="ghost" aria-hidden="true">${slot.ghost}</span>`;
+  return keyHtml(pitchForButton(slot));
+}
+
+/** The on-screen pad in the active console's arrangement. */
 export function buildPad(): void {
-  const retro = currentTheme() === 'retro';
+  const { shoulders, diamond } = platform().pad;
   pad.innerHTML = `
     <div class="shoulders">
-      ${keyHtml(pitchForButton('L'))}
-      ${retro ? '' : keyHtml(pitchForButton('R'))}
+      ${shoulders.map(slotHtml).join('\n      ')}
     </div>
     <div class="diamond">
-      <span class="cell" aria-hidden="true"></span>
-      ${keyHtml(pitchForButton('X'))}
-      <span class="cell" aria-hidden="true"></span>
-      ${keyHtml(pitchForButton('Y'))}
-      ${retro ? keyHtml(pitchForButton('R')) : '<span class="ghost" aria-hidden="true">B</span>'}
-      ${keyHtml(pitchForButton('A'))}
+      ${diamond.map(slotHtml).join('\n      ')}
     </div>`;
   bends.innerHTML = [1, -1, 2, -2].map(value => `
-    <button class="bend-key" type="button" data-bend="${value}" aria-label="${schemeBendLabel(value, controlScheme())}" title="${schemeBendLabel(value, controlScheme())}">
+    <button class="bend-key" type="button" data-bend="${value}" aria-label="${bendName(value)}" title="${bendName(value)}">
       ${modifierIcon(value)}
       <kbd class="key-ref" data-bend-label="${value}">${keyLabel(state.bindings[KEYBOARD_ACTIONS.find(action => BEND_ACTIONS[action as keyof typeof BEND_ACTIONS] === value)!])}</kbd>
     </button>`).join('');
@@ -58,7 +59,7 @@ let lastNoteLabel = '';
 export function updateHint(): void {
   const parts: string[] = [];
   if (lastNoteLabel) parts.push(lastNoteLabel);
-  parts.push(state.bend ? `bend ${schemeBendLabel(state.bend, controlScheme())}` : 'no bend');
+  parts.push(state.bend ? `bend ${bendName(state.bend)}` : 'no bend');
   hint.textContent = parts.join(' · ');
 }
 
@@ -66,7 +67,7 @@ function press(pitch: PitchSpec): void {
   state.editor?.stopPreview();
   if (state.isPlaying || state.repeatingTimer !== undefined) stopPlayback();
   engine.noteOn(pitch, state.bend);
-  lastNoteLabel = `${buttonLabel(pitch.button, controlScheme())} · ${pitch.id} · ${frequencyOf(pitch.id, state.bend).toFixed(1)} Hz`;
+  lastNoteLabel = `${buttonName(pitch.button)} · ${pitch.id} · ${frequencyOf(pitch.id, state.bend, platform().tuning).toFixed(1)} Hz`;
   updateHint();
 
   if (state.songArrangement) {
@@ -112,11 +113,6 @@ const gamepads = new GamepadInput(controls);
 
 const gamepadStatus = must<HTMLParagraphElement>('#gamepad-status');
 
-const GAMEPAD_HELP: Record<ControlScheme, string> = {
-  switch: 'Controller connected: the shoulder and face buttons play; the D-pad and the sticks bend.',
-  n64: 'Controller connected: A and the right stick, as the C buttons, play; R, Z and the left stick bend.',
-};
-
 /** Whether the connected pad has a layout the app can read; null while none is connected. */
 let gamepadReadable: boolean | null = null;
 
@@ -124,14 +120,14 @@ let gamepadFrame: number | undefined;
 
 export function renderGamepadStatus(): void {
   if (gamepadReadable === null) return;
-  gamepadStatus.textContent = gamepadReadable ? GAMEPAD_HELP[controlScheme()] : 'This browser does not recognise the layout of that controller.';
+  gamepadStatus.textContent = gamepadReadable ? platform().gamepad.help : 'This browser does not recognise the layout of that controller.';
 }
 
 /** Poll while the lesson is on screen and a usable pad is connected; one last empty poll releases what was held. */
 function pollGamepads(): void {
   gamepadFrame = undefined;
   const playable = state.view === 'lesson' && !document.hidden;
-  const connected = gamepads.update(playable ? navigator.getGamepads?.() ?? [] : [], controlScheme());
+  const connected = gamepads.update(playable ? navigator.getGamepads?.() ?? [] : [], platform().gamepad.layout);
   if (playable && connected) gamepadFrame = requestAnimationFrame(pollGamepads);
 }
 

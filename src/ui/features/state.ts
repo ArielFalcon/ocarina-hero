@@ -1,5 +1,6 @@
 import { type KeyBindings, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, readBindings, type KeyboardAction } from '../keyboard';
 import { OcarinaEngine } from '../../audio/engine';
+import { platform } from '../platform';
 import type { Arrangement, Note } from '../../core/ir';
 import type { MelodyNote } from '../../core/project';
 import type { AudioSourceAnalysis, SourceImporter } from '../import';
@@ -26,7 +27,7 @@ export type AppView = 'catalog' | 'popular' | 'lesson' | 'workshop' | 'settings'
 
 export const APP_BASE = import.meta.env.BASE_URL;
 
-export const engine = new OcarinaEngine();
+export const engine = new OcarinaEngine(() => platform().tuning);
 
 export const recorded: Note[] = [];
 

@@ -3,12 +3,11 @@ import type { Arrangement } from '../../core/ir';
 import { pitchById } from '../../core/pitches';
 import type { Projection } from '../../core/project';
 import { prepareMelody } from '../../core/prepare';
-import { noteInstruction, toTabText } from '../../core/tab';
 import { createPassages, FREE_PLAY_TEMPO_BPM, lessonDetails, staffTransition } from '../lesson';
 import { swapStaff, timeNoteThread } from '../staff-motion';
 import { staffClef, staffTokenHtml } from '../staff';
 import { threadIcon } from '../thread-icons';
-import { controlScheme } from '../theme';
+import { instruction, tabInstructions } from '../platform';
 import type { SongbookEntry } from '../songbook';
 import { songArticleHtml } from '../../site/song-article';
 import { relatedSongs, songGroups, type SongGroup } from '../../site/song-pages';
@@ -23,7 +22,7 @@ import { catalogue } from './songbook';
 let tabText = document.querySelector<HTMLParagraphElement>('#tab-text');
 
 function currentTabText(): string {
-  return state.current ? toTabText(recorded, undefined, state.current.tempoBpm, { scheme: controlScheme(), noteSeparator: ', ' }) : '';
+  return state.current ? tabInstructions(recorded, undefined, state.current.tempoBpm, ', ') : '';
 }
 
 export function renderTab(): void {
@@ -223,7 +222,7 @@ export function refreshPracticeStatus(lead = ''): void {
   } else {
     const expected = recorded[state.practiceCursor];
     practiceStatus.textContent = lead + (expected
-      ? `Next: ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0, controlScheme())}`
+      ? `Next: ${instruction(pitchById(expected.pitch).button, expected.bend ?? 0)}`
       : `You reached the end${state.combo.best > 1 ? ` with a best combo of ${state.combo.best}` : ''}.`);
   }
 }

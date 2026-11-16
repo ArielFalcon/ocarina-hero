@@ -1,22 +1,18 @@
 import type { ControllerButton } from '../core/pitches';
-import { modifierForBend, noteInstruction } from '../core/tab';
-import { assetDir, controlScheme, currentTheme } from './theme';
+import { modifierForBend } from '../core/tab';
+import { controllerIconUrl, instruction, platform } from './platform';
 
 type IconKind = 'button' | 'shoulder' | 'modifier' | 'plus';
 
-/** Retro glyphs for each remake glyph: notes become A and C-buttons, the D-pad becomes R and Z. */
-const N64_GLYPHS: Record<string, string> = {
-  l: 'a', r: 'c-down', a: 'c-right', y: 'c-left', x: 'c-up', 'dpad-up': 'r', 'dpad-down': 'z',
-};
-
+/** The active console's glyph for a remake glyph name. */
 function glyph(name: string, kind: IconKind): { file: string; kind: IconKind } {
-  if (currentTheme() !== 'retro') return { file: name, kind };
-  return { file: N64_GLYPHS[name] ?? name, kind: kind === 'shoulder' ? 'button' : kind };
+  const { glyphs, shoulderKind } = platform();
+  return { file: glyphs[name] ?? name, kind: kind === 'shoulder' ? shoulderKind : kind };
 }
 
 function icon(name: string, kind: IconKind): string {
   const shown = glyph(name, kind);
-  return `<img class="control-icon control-icon--${shown.kind}" src="${assetDir('controller')}${shown.file}.svg" alt="" aria-hidden="true" draggable="false" />`;
+  return `<img class="control-icon control-icon--${shown.kind}" src="${controllerIconUrl(shown.file)}" alt="" aria-hidden="true" draggable="false" />`;
 }
 
 export function buttonIcon(button: ControllerButton): string {
@@ -30,7 +26,7 @@ export function modifierIcon(bend: number): string {
 
 /** A single accessible instruction composed from independently reusable SVG assets. */
 export function noteIcons(button: ControllerButton, bend = 0): string {
-  return `<span class="note-instruction" role="img" aria-label="${noteInstruction(button, bend, controlScheme())}">${buttonIcon(button)}${
+  return `<span class="note-instruction" role="img" aria-label="${instruction(button, bend)}">${buttonIcon(button)}${
     bend ? `${icon('plus', 'plus')}${modifierIcon(bend)}` : ''
   }</span>`;
 }

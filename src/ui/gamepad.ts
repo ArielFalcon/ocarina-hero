@@ -1,9 +1,9 @@
 import type { ControllerButton } from '../core/pitches';
-import type { ControlScheme } from '../core/tab';
 import type { Controls } from './input';
+import { DEFAULT_PLATFORM } from './platforms';
 
-/** Where a control scheme puts its notes and bends on a pad with the standard layout. */
-interface PadLayout {
+/** Where a console puts its notes and bends on a pad with the standard layout. */
+export interface PadLayout {
   readonly noteButtons: readonly (readonly [index: number, button: ControllerButton])[];
   readonly bendButtons: readonly (readonly [index: number, bend: number])[];
   /** Vertical stick axes that bend a tone, up being positive. */
@@ -12,12 +12,6 @@ interface PadLayout {
   readonly noteStick?: readonly [x: number, y: number, right: ControllerButton, left: ControllerButton, up: ControllerButton, down: ControllerButton];
 }
 
-const LAYOUTS: Record<ControlScheme, PadLayout> = {
-  /** By position: a Nintendo pad labels the right face button A, the left one Y and the top one X; the D-pad bends a semitone. */
-  switch: { noteButtons: [[4, 'L'], [5, 'R'], [1, 'A'], [2, 'Y'], [3, 'X']], bendButtons: [[12, 1], [13, -1]], bendAxes: [1, 3] },
-  /** A is either lower face button, the right stick is the C buttons, and both right and both left shoulders are R and Z. */
-  n64: { noteButtons: [[0, 'L'], [1, 'L']], bendButtons: [[5, 1], [7, 1], [4, -1], [6, -1]], bendAxes: [1], noteStick: [2, 3, 'A', 'Y', 'X', 'R'] },
-};
 const STICK_DEAD_ZONE = 0.5;
 
 /** The part of a browser `Gamepad` this module reads. */
@@ -62,10 +56,10 @@ export class GamepadInput {
 
   constructor(private readonly controls: Pick<Controls, 'noteDown' | 'noteUp' | 'bendDown' | 'bendUp'>) {}
 
-  /** Apply one poll under a control scheme and report whether a pad with the standard layout is connected. */
-  update(pads: readonly (PadSnapshot | null)[], scheme: ControlScheme = 'switch'): boolean {
+  /** Apply one poll under a console's layout and report whether a pad with the standard layout is connected. */
+  update(pads: readonly (PadSnapshot | null)[], layout: PadLayout = DEFAULT_PLATFORM.gamepad.layout): boolean {
     const usable = pads.filter((pad): pad is PadSnapshot => pad?.mapping === 'standard');
-    const pressed = new Map(usable.flatMap(pad => [...pressesOf(pad, LAYOUTS[scheme])]));
+    const pressed = new Map(usable.flatMap(pad => [...pressesOf(pad, layout)]));
     for (const [source, press] of this.held) {
       if (pressed.has(source)) continue;
       if ('bend' in press) this.controls.bendUp(source);

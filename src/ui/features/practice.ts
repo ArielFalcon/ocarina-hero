@@ -1,8 +1,7 @@
 import { pitchById, type ControllerButton } from '../../core/pitches';
-import { noteInstruction } from '../../core/tab';
 import { advancePractice, comboTier, scoreCombo, type ComboMilestone } from '../lesson';
 import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from '../practice-fx';
-import { controlScheme } from '../theme';
+import { instruction } from '../platform';
 import { nextSong } from '../featured';
 import { completedIds, markPractice, PROGRESS_STORAGE, type Progress } from '../progress';
 import { bends, comboBadge, nextSongButton, pad, practiceLine, practiceStatus, progressTrack, recorded, repeatPassage, songComplete, state, statusSlot, tab } from './state';
@@ -109,7 +108,7 @@ export function practiceNote(button: ControllerButton): void {
     retrigger(pad.querySelector(`[data-button="${button}"]`), 'is-miss');
     if (result.broken) haptic(24);
     renderCombo(result.broken);
-    practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${noteInstruction(pitchById(expected.pitch).button, expected.bend ?? 0, controlScheme())}.`;
+    practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${instruction(pitchById(expected.pitch).button, expected.bend ?? 0)}.`;
     return;
   }
   const hitIndex = state.practiceCursor;

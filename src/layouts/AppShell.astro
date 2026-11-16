@@ -7,6 +7,7 @@ import WorkshopView from '../components/views/WorkshopView.astro';
 import ThreadFilters from '../components/ThreadFilters.astro';
 import Head from '../components/Head.astro';
 import { assetUrl, type PageHead } from '../site/site';
+import { DEFAULT_PLATFORM } from '../ui/platforms';
 import type { SongLink, SongPage } from '../site/song-pages';
 import '../ui/styles.css';
 import '../ui/retro.css';
@@ -41,7 +42,7 @@ const { page, song, related, popular, directory } = Astro.props;
       <div class="tapestry-edge" aria-hidden="true"></div>
       <main id="main-content" tabindex="-1">
         <header class="head">
-          <a class="brand" href="#catalog"><img class="brand-icon" src={assetUrl('icons/app/icon-192.png')} data-retro-src={assetUrl('art/retro/ocarina.svg')} width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
+          <a class="brand" href="#catalog"><img class="brand-icon" src={assetUrl(DEFAULT_PLATFORM.art.brand)} data-art="brand" width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
           <span class="head-actions">
           <a class="action settings-link" href="#settings" data-view-link="settings" aria-label="Settings"><span data-thread-icon="settings"></span></a>
           <a class="action repo-link" href="https://github.com/ArielFalcon/ocarina-hero" target="_blank" rel="noopener" aria-label="Star Ocarina Hero on GitHub (opens in a new tab)"><span data-thread-icon="star"></span><span><span class="repo-long">Star on </span>GitHub</span></a>
@@ -55,7 +56,7 @@ const { page, song, related, popular, directory } = Astro.props;
         {directory && <noscript id="song-directory" set:html={directory} />}
       </main>
       <footer class="menu-footer">
-        <img class="menu-ornament" src={assetUrl('art/sword-triforce-v2.webp')} data-retro-src={assetUrl('art/retro/sword-triforce.svg')} width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />
+        <img class="menu-ornament" src={assetUrl(DEFAULT_PLATFORM.art.ornament)} data-art="ornament" width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />
         <section id="mini-player" class="mini-player" aria-label="Quick play" hidden>
           <div class="mini-head">
             <button id="mini-toggle" class="patch-button mini-toggle" type="button" aria-label="Play"></button>

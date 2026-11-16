@@ -2,7 +2,7 @@ import { createHangingLink } from '../hanging-link';
 import { clearGone, goneThisSession, markGone } from '../rope';
 import { setPracticeFeedback } from '../practice-fx';
 import { refreshThreadIcons } from '../thread-icons';
-import { currentTheme, setTheme, syncStaticArt } from '../theme';
+import { onPlatformChange, platform, setPlatform, syncStaticArt } from '../platform';
 import { PREFERENCES_STORAGE, type Preferences } from '../preferences';
 import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from '../local-data';
 import { APP_BASE, bendsInput, playbackRate, simplifyInput, state, tab } from './state';
@@ -15,7 +15,7 @@ import { catalogue, miniPlayer } from './songbook';
 const themePicker = must<HTMLFieldSetElement>('#theme-picker');
 
 function syncThemePicker(): void {
-  for (const option of themePicker.querySelectorAll<HTMLInputElement>('input[name="theme"]')) option.checked = option.value === currentTheme();
+  for (const option of themePicker.querySelectorAll<HTMLInputElement>('input[name="theme"]')) option.checked = option.value === platform().id;
 }
 
 const preferenceStatus = must<HTMLParagraphElement>('#preferences-status');
@@ -67,9 +67,9 @@ export function bindSettings(): void {
 
   syncThemePicker();
 
-  themePicker.addEventListener('change', event => setTheme((event.target as HTMLInputElement).value === 'retro' ? 'retro' : 'tapestry'));
+  themePicker.addEventListener('change', event => setPlatform((event.target as HTMLInputElement).value));
 
-  document.addEventListener('themechange', () => {
+  onPlatformChange(() => {
     syncThemePicker();
     refreshThreadIcons();
     buildPad();
@@ -83,7 +83,7 @@ export function bindSettings(): void {
     updateHint();
     refreshPracticeStatus();
     renderGamepadStatus();
-    miniPlayer.refreshTheme();
+    miniPlayer.refreshPlatform();
   });
 
   showPreferences();

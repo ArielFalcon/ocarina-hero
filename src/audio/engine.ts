@@ -1,5 +1,5 @@
 import type { Arrangement } from '../core/ir';
-import { frequencyOf, type PitchId, type PitchSpec } from '../core/pitches';
+import { frequencyOf, SWITCH2_TUNING, type PitchId, type PitchSpec, type TuningProfile } from '../core/pitches';
 import { buildSchedule, type ScheduledNote } from '../core/schedule';
 import { VOICE, releaseForGap } from './voice-model';
 
@@ -28,6 +28,9 @@ const {
  * voice; scheduled notes use separate voices. Timing uses the AudioContext clock.
  */
 export class OcarinaEngine {
+  /** `tuning` is read on every note, so a console switch applies from the next one. */
+  constructor(private readonly tuning: () => TuningProfile = () => SWITCH2_TUNING) {}
+
   private ctx: AudioContext | null = null;
   private master: GainNode | null = null;
   private live: Voice | null = null;
@@ -84,7 +87,7 @@ export class OcarinaEngine {
     const { ctx, master } = this.ensure();
     if (ctx.state === 'suspended') void ctx.resume();
     this.livePitch = pitch.id;
-    this.live = this.createVoice(ctx, master, frequencyOf(pitch.id, bend), ctx.currentTime);
+    this.live = this.createVoice(ctx, master, frequencyOf(pitch.id, bend, this.tuning()), ctx.currentTime);
   }
 
   /** Bends the sounding note. `glide` in seconds: 0 is an instant step. */
@@ -92,7 +95,7 @@ export class OcarinaEngine {
     const voice = this.live;
     if (!voice || !this.livePitch) return;
 
-    const hz = frequencyOf(this.livePitch, semitones);
+    const hz = frequencyOf(this.livePitch, semitones, this.tuning());
     const now = voice.ctx.currentTime;
     const params = [
       voice.fundamental.frequency,
@@ -144,7 +147,7 @@ export class OcarinaEngine {
           if (!note || note.startTime > horizon) break;
           cursor += 1;
           const gap = (schedule[cursor]?.startTime ?? Infinity) - note.startTime - note.duration;
-          this.scheduled.push(this.createVoice(ctx, master, frequencyOf(note.pitch, note.bend), note.startTime, note.duration, releaseForGap(gap)));
+          this.scheduled.push(this.createVoice(ctx, master, frequencyOf(note.pitch, note.bend, this.tuning()), note.startTime, note.duration, releaseForGap(gap)));
         }
         if (cursor >= schedule.length) this.clearTimer();
       };

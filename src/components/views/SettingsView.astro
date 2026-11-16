@@ -1,5 +1,6 @@
 ---
 import { assetUrl } from '../../site/site';
+import { PLATFORMS } from '../../ui/platforms';
 ---
 <section id="settings-view" class="view padded-view settings-view" aria-labelledby="settings-title" hidden>
   <div class="section-art"><p class="eyebrow stitched-label">Settings</p><h2 id="settings-title" class="view-title embroidered">Make it yours</h2><p class="subtitle stitched-label">Choose your look and your keys.</p></div>
@@ -8,8 +9,7 @@ import { assetUrl } from '../../site/site';
     <div class="settings-body">
       <fieldset id="theme-picker" class="theme-picker">
         <legend class="visually-hidden">Look</legend>
-        <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="tapestry" /><img class="theme-card-art" src={assetUrl('art/theme/keycard-large.svg')} width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">2026 remake</span><span class="theme-card-detail">Woven tapestry with Switch 2 controls</span></span></label>
-        <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value="retro" /><img class="theme-card-art" src={assetUrl('art/theme/cartridge-large.svg')} width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">1998 original</span><span class="theme-card-detail">Stone subscreen with N64 controls</span></span></label>
+        {PLATFORMS.map(({ id, picker }) => <label class="universe-chip theme-card"><input class="visually-hidden" type="radio" name="theme" value={id} /><img class="theme-card-art" src={assetUrl(picker.art)} width="88" height="88" alt="" draggable="false" /><span class="theme-card-copy"><span class="theme-card-title stitched-label">{picker.title}</span><span class="theme-card-detail">{picker.detail}</span></span></label>)}
       </fieldset>
       <label class="toggle"><input id="pref-link" type="checkbox" /><span class="stitched-label">Link hanging from the top</span></label>
       <p class="meta">Drag him around. Pull hard downwards and the thread snaps; a short loose end stays behind: tap it, or switch this back on, to tie him up again.</p>

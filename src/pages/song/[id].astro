@@ -1,9 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import AppShell from '../../layouts/AppShell.astro';
-import { groups, pages } from '../../site/songs';
+import { groups, modified, pages } from '../../site/songs';
 import { SITE_URL } from '../../site/config';
-import { relatedSongs, songDirectoryHtml, songHead } from '../../site/song-pages';
+import { relatedSongs, songHead } from '../../site/song-pages';
 
 export const getStaticPaths = (() => pages.map(song => ({
   params: { id: song.id },
@@ -12,4 +12,4 @@ export const getStaticPaths = (() => pages.map(song => ({
 
 const { song, related } = Astro.props;
 ---
-<AppShell page={songHead(song, SITE_URL)} song={song} directory={songDirectoryHtml(song, related, SITE_URL)} />
+<AppShell page={songHead(song, SITE_URL, modified.get(song.id))} song={song} related={related} />

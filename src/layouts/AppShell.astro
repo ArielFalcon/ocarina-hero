@@ -6,7 +6,7 @@ import SettingsView from '../components/views/SettingsView.astro';
 import WorkshopView from '../components/views/WorkshopView.astro';
 import Head from '../components/Head.astro';
 import { assetUrl, type PageHead } from '../site/site';
-import type { SongPage } from '../site/song-pages';
+import type { SongLink, SongPage } from '../site/song-pages';
 import '../ui/styles.css';
 import '../ui/retro.css';
 
@@ -14,10 +14,12 @@ interface Props {
   page: PageHead;
   /** The song the page opens on; the home opens on the songbook. */
   song?: SongPage;
+  /** The other songs of the song's universe, linked below the lesson. */
+  related?: readonly SongLink[];
   /** Crawlable song list shown to visitors without scripts. */
-  directory: string;
+  directory?: string;
 }
-const { page, song, directory } = Astro.props;
+const { page, song, related, directory } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -47,11 +49,11 @@ const { page, song, directory } = Astro.props;
           </span>
         </header>
         <CatalogView hidden={!!song} />
-        <LessonView song={song} />
+        <LessonView song={song} related={related} />
         <PopularView />
         <WorkshopView />
         <SettingsView />
-        <noscript id="song-directory" set:html={directory} />
+        {directory && <noscript id="song-directory" set:html={directory} />}
       </main>
       <footer class="menu-footer">
         <img class="menu-ornament" src={assetUrl('art/sword-triforce-v2.webp')} data-retro-src={assetUrl('art/retro/sword-triforce.svg')} width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />

@@ -5,11 +5,10 @@ import { DEMOS } from './catalogue-loader';
 import { songDocumentTitle } from '../src/ui/route';
 import { createSongbookEntries, songMeta } from '../src/ui/songbook';
 import { homeHead, jsonLd } from '../src/site/site';
-import { homeDirectoryHtml, llmsTxt, relatedSongs, robotsTxt, sitemapXml, songDirectoryHtml, songGroups, songHead, songPageOf } from '../src/site/song-pages';
+import { homeDirectoryHtml, llmsTxt, relatedSongs, robotsTxt, sitemapXml, songGroups, songHead, songPageOf } from '../src/site/song-pages';
 
 const SITE = 'https://ocarinahero.app/';
 const song = { id: 'song-of-storms', title: 'Song of "Storms" & Rain', meta: 'Zelda · Ocarina of Time', universe: 'The Legend of <Zelda>', details: 'Ocarina of Time · 23 notes', tab: 'L R X | L + D-pad up' };
-const related = [{ id: 'zeldas-lullaby', title: 'Zelda’s Lullaby', meta: 'Zelda · Ocarina of Time' }];
 const graphItem = (data: unknown, type: string) => (data as { '@graph': { '@type': string }[] })['@graph'].find(item => item['@type'] === type) as Record<string, any>;
 
 test('a song page carries its own title, description, canonical address and share preview', () => {
@@ -60,7 +59,7 @@ test('every bundled song id is safe as a directory and URL segment', () => {
   assert.deepEqual(DEMOS.map(track => track.id).filter(id => !/^[a-z0-9-]+$/.test(id)), []);
 });
 
-test('a song page describes its song to search engines and links the other songs of its universe', () => {
+test('a song page describes its song to search engines', () => {
   const head = songHead(song, SITE);
   const page = graphItem(head.structuredData, 'WebPage');
   assert.equal(page.url, 'https://ocarinahero.app/song/song-of-storms/');
@@ -70,10 +69,11 @@ test('a song page describes its song to search engines and links the other songs
   const crumbs = graphItem(head.structuredData, 'BreadcrumbList').itemListElement;
   assert.deepEqual(crumbs.map((crumb: { name: string; item: string }) => [crumb.name, crumb.item]),
     [['Ocarina Hero', 'https://ocarinahero.app/'], ['Song of "Storms" & Rain', 'https://ocarinahero.app/song/song-of-storms/']]);
-  const links = songDirectoryHtml(song, related, SITE);
-  assert.match(links, /<a href="https:\/\/ocarinahero\.app\/song\/zeldas-lullaby\/">Zelda’s Lullaby<\/a>/);
-  assert.match(links, /<a href="https:\/\/ocarinahero\.app\/">/);
-  assert.ok(links.includes('More The Legend of &lt;Zelda&gt; songs'), 'the universe name is escaped');
+});
+
+test('a song page dates its change only when the day is known', () => {
+  assert.equal(graphItem(songHead(song, SITE, '2026-03-04').structuredData, 'WebPage').dateModified, '2026-03-04');
+  assert.ok(!('dateModified' in graphItem(songHead(song, SITE).structuredData, 'WebPage')));
 });
 
 test('a closing tag inside structured data cannot end its script element early', () => {

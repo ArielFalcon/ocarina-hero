@@ -2,12 +2,14 @@
 /** The songbook: the home view, hidden when the page opens on a song. */
 interface Props { hidden?: boolean }
 const { hidden = false } = Astro.props;
+/** The page's one H1 is the heading of the view it opens on; the other views keep theirs as H2 of the same look. */
+const Title = hidden ? 'h2' : 'h1';
 ---
 <section id="catalog-view" class="view" aria-labelledby="catalog-title" hidden={hidden}>
   <div class="catalog-hero">
     <div class="hero-copy">
       <p class="eyebrow stitched-label">Ocarina of Time tabs</p>
-      <h1 id="catalog-title" class="embroidered">Zelda ocarina<br>songs</h1>
+      <Title id="catalog-title" class="view-title embroidered">Zelda ocarina<br>songs</Title>
       <p class="subtitle stitched-label">Game, anime, film and pop melodies.</p>
     </div>
   </div>

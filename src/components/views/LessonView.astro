@@ -1,13 +1,15 @@
 ---
-import type { SongPage } from '../../site/song-pages';
+import { songArticleHtml } from '../../site/song-article';
+import type { SongLink, SongPage } from '../../site/song-pages';
 
-/** The lesson, shown free play until the app opens a song; a song page prerenders its heading and text tab. */
-interface Props { song?: SongPage }
-const { song } = Astro.props;
+/** The lesson, shown free play until the app opens a song; a song page prerenders its heading, summary, text tab and related songs. */
+interface Props { song?: SongPage; related?: readonly SongLink[] }
+const { song, related = [] } = Astro.props;
+const Title = song ? 'h1' : 'h2';
 ---
 <section id="lesson-view" class="view lesson-view" aria-labelledby="lesson-title" hidden={!song}>
   <div class="lesson-top"><button class="text-button back-link" type="button" data-view-link="catalog"><span data-thread-icon="back"></span><span class="back-label"> Songbook</span></button><span class="lesson-actions"><button id="share-song" class="text-button" type="button" aria-label="Share link to this song" hidden><span data-thread-icon="share"></span><span class="share-label">Share</span></button><button id="save-song" class="text-button" type="button" aria-pressed="false" hidden>Save song</button></span></div>
-  <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">{song?.universe ?? 'Your instrument'}</p><h1 id="lesson-title" class="embroidered">{song?.title ?? 'Free play'}</h1><p id="lesson-meta" class="subtitle stitched-label">{song?.details ?? 'Make a little music.'}</p></div>
+  <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">{song?.universe ?? 'Your instrument'}</p><Title id="lesson-title" class="view-title embroidered">{song?.title ?? 'Free play'}</Title><p id="lesson-meta" class="subtitle stitched-label">{song?.details ?? 'Make a little music.'}</p></div>
   <div id="song-modes" class="mode-switch" role="group" aria-label="Learning mode" hidden>
     <button id="listen-mode" class="action" type="button" aria-pressed="true"><span class="stitched-label">Listen</span></button>
     <button id="practice-mode" class="action" type="button" aria-pressed="false"><span class="stitched-label">Practice</span></button>
@@ -34,7 +36,6 @@ const { song } = Astro.props;
       </div>
       <details class="lesson-options">
         <summary>Arrangement</summary>
-        <p id="tab-text" class="tab-text">{song?.tab}</p>
         <label class="toggle"><input id="bends" type="checkbox" checked /><span class="stitched-label">Use bends</span></label>
         <label class="toggle"><input id="simplify" type="checkbox" /><span class="stitched-label">Simplify ornaments</span></label>
         <button id="clear" class="text-button" type="button">Clear and start free play</button>
@@ -49,4 +50,5 @@ const { song } = Astro.props;
       <a class="text-button keyboard-link desktop-only" href="#settings" data-view-link="settings"><span data-thread-icon="keyboard"></span><span>Change keyboard keys</span></a>
     </section>
   </div>
+  <section id="song-article" class="song-article" aria-label="About this song" hidden={!song} set:html={song && songArticleHtml(song, related, import.meta.env.BASE_URL)} />
 </section>

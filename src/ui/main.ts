@@ -31,6 +31,8 @@ import { refreshThreadIcons, threadIcon, type ThreadIcon } from './thread-icons'
 import { controlScheme, currentTheme, setTheme, syncStaticArt } from './theme';
 import { SongbookView } from './songbook-view';
 import { songMeta, type SongbookEntry } from './songbook';
+import { songArticleHtml } from '../site/song-article';
+import { relatedSongs, songGroups, type SongGroup } from '../site/song-pages';
 import { nextSong } from './featured';
 import { loadPopular, reportPlay } from './popularity';
 import { bindPullToRefresh } from './pull-refresh';
@@ -100,7 +102,8 @@ const practiceStatus = must<HTMLParagraphElement>('#practice-status');
 const comboBadge = must<HTMLParagraphElement>('#combo');
 const practiceLine = must<HTMLDivElement>('.practice-line');
 const statusSlot = must<HTMLDivElement>('.status-slot');
-const tabText = must<HTMLParagraphElement>('#tab-text');
+/** The tab line of the song article; absent on pages that open without a song until one is opened. */
+let tabText = document.querySelector<HTMLParagraphElement>('#tab-text');
 const progressTrack = must<HTMLDivElement>('.progress-track');
 let comboHideTimer: number | undefined;
 const songComplete = must<HTMLDivElement>('#song-complete');
@@ -275,10 +278,14 @@ function press(pitch: PitchSpec): void {
   renderTab();
 }
 
+function currentTabText(): string {
+  return current ? toTabText(recorded, undefined, current.tempoBpm, { scheme: controlScheme(), noteSeparator: ', ' }) : '';
+}
+
 function renderTab(): void {
   playButton.disabled = importer.pending || recorded.length === 0;
   passages = createPassages(recorded, current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, current?.phraseStarts);
-  tabText.textContent = current ? toTabText(recorded, undefined, current.tempoBpm, { scheme: controlScheme(), noteSeparator: ', ' }) : '';
+  if (tabText) tabText.textContent = currentTabText();
   bends.hidden = current !== null && !recorded.some(note => !!note.bend);
   passageIndex = Math.max(0, Math.min(passageIndex, passages.length - 1));
   // Keep the staff and its passage controls at a stable size: free play can add a bend at any time.
@@ -842,6 +849,25 @@ function renderLessonMeta(): void {
     : 'Make a little music.';
 }
 
+let songGroupsCache: { entries: readonly SongbookEntry[]; groups: SongGroup[] } | undefined;
+let articleHtml = '';
+
+/** The text under the player (summary, tab, related songs): written by the same renderer the page is built with, only for a song of the songbook. */
+function renderSongArticle(): void {
+  const article = must('#song-article');
+  article.hidden = !selectedEntry || !current;
+  if (!selectedEntry || !current) return;
+  if (songGroupsCache?.entries !== catalogue.entries) songGroupsCache = { entries: catalogue.entries, groups: songGroups(catalogue.entries) };
+  const html = songArticleHtml({
+    title: selectedEntry.title, universe: selectedEntry.universe, version: selectedEntry.version,
+    noteCount: recorded.length, passageCount: passages.length, difficulty: selectedEntry.difficulty.level, tab: currentTabText(),
+  }, relatedSongs(songGroupsCache.groups, { id: selectedEntry.id, universe: selectedEntry.universe }), APP_BASE);
+  if (html === articleHtml) return;
+  articleHtml = html;
+  article.innerHTML = html;
+  tabText = must<HTMLParagraphElement>('#tab-text');
+}
+
 function updateLessonHeading(): void {
   must('#lesson-title').textContent = selectedEntry?.title ?? current?.title ?? 'Free play';
   const universe = must('#lesson-universe');
@@ -860,6 +886,7 @@ function updateLessonHeading(): void {
   must('#listen-mode').setAttribute('aria-pressed', String(!practiceMode));
   must('#practice-mode').setAttribute('aria-pressed', String(practiceMode));
   must<HTMLButtonElement>('#open-import').disabled = current === null || selectedEntry !== null || importer.pending;
+  renderSongArticle();
   refreshPracticeStatus();
 }
 
@@ -1192,6 +1219,15 @@ repeatPassage.addEventListener('change', () => {
   if (!repeatPassage.checked && repeatingTimer !== undefined) stopPlayback();
 });
 must('#open-import').addEventListener('click', () => showView('lesson'));
+
+/** A related song of the article opens in the app; a modified click keeps the browser's own link behavior. */
+must('#song-article').addEventListener('click', event => {
+  const link = (event.target as Element).closest<HTMLElement>('[data-song-link]');
+  const entry = link && catalogue.entries.find(item => item.id === link.dataset.songLink);
+  if (!entry || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  openSong(entry);
+});
 
 document.addEventListener('click', event => {
   const link = (event.target as Element).closest<HTMLElement>('[data-view-link], .brand');

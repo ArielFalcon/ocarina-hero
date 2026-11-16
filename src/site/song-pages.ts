@@ -1,3 +1,4 @@
+import type { DifficultyLevel } from '../core/difficulty';
 import type { DemoTrack } from '../core/demo';
 import { toTabText } from '../core/tab';
 import { createPassages, lessonDetails } from '../ui/lesson';
@@ -14,18 +15,24 @@ export interface SongPage {
   readonly universe: string;
   /** Version and size of the arrangement, as a first visit shows them under the lesson title. */
   readonly details: string;
+  readonly version?: string;
+  readonly noteCount: number;
+  readonly passageCount: number;
+  readonly difficulty: DifficultyLevel;
   /** Button tab of the arrangement the lesson opens with. */
   readonly tab: string;
 }
 
 export function songPageOf(song: SongbookEntry & { track: DemoTrack }): SongPage {
   const notes = openingNotes(song.track);
+  const passageCount = createPassages(notes, song.track.tempoBpm, song.track.phraseStarts).length;
   return {
     id: song.id,
     title: song.title,
     meta: songMeta(song),
     universe: song.universe,
-    details: lessonDetails(song.version, notes.length, createPassages(notes, song.track.tempoBpm, song.track.phraseStarts).length).join(' · '),
+    details: lessonDetails(song.version, notes.length, passageCount).join(' · '),
+    version: song.version, noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
     tab: toTabText(notes, song.track.beatsPerBar, song.track.tempoBpm, { noteSeparator: ', ' }),
   };
 }
@@ -64,14 +71,8 @@ export function homeDirectoryHtml(groups: readonly SongGroup[], siteUrl: string)
   return `<section><h2>Songs to play on the Zelda ocarina</h2><p>${escapeHtml(INTRO)}</p><p>${count} songs:</p>${groups.map(group => `<h3>${escapeHtml(group.universe)}</h3>${linkList(siteUrl, group.songs)}`).join('')}</section>`;
 }
 
-/** The other songs of the universe plus a link home, for a song page's <noscript> content. */
-export function songDirectoryHtml(song: SongPage, related: readonly SongLink[], siteUrl: string): string {
-  const more = related.length ? `<h2>More ${escapeHtml(song.universe)} songs on the Zelda ocarina</h2>${linkList(siteUrl, related)}` : '';
-  return `<section>${more}<p><a href="${escapeHtml(siteUrl)}">Every song in the Ocarina Hero songbook</a></p></section>`;
-}
-
 /** The songs of a song's universe other than itself. */
-export function relatedSongs(groups: readonly SongGroup[], song: SongPage): SongLink[] {
+export function relatedSongs(groups: readonly SongGroup[], song: Pick<SongPage, 'id' | 'universe'>): SongLink[] {
   return (groups.find(group => group.universe === song.universe)?.songs ?? []).filter(link => link.id !== song.id);
 }
 
@@ -87,8 +88,8 @@ export function robotsTxt(siteUrl: string): string {
   return `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}sitemap.xml\n`;
 }
 
-/** What a song page tells search engines and link previews: title, description, canonical address and structured data. */
-export function songHead(song: SongPage, siteUrl: string): PageHead {
+/** What a song page tells search engines and link previews: title, description, canonical address and structured data; `modified` is the day (YYYY-MM-DD) its notes last changed, when known. */
+export function songHead(song: SongPage, siteUrl: string, modified?: string): PageHead {
   const title = songDocumentTitle(song.title, song.meta);
   const description = `Learn to play ${song.title} (${song.meta}) on the Zelda ocarina of Ocarina of Time: follow the button tab, listen to it and practice one passage at a time. Free, in your browser.`;
   const url = songUrl(siteUrl, song.id);
@@ -100,6 +101,7 @@ export function songHead(song: SongPage, siteUrl: string): PageHead {
         {
           '@type': 'WebPage', url, name: title, description, inLanguage: 'en',
           isPartOf: { '@id': `${siteUrl}#website` },
+          ...modified && { dateModified: modified },
           about: { '@type': 'MusicComposition', name: song.title, description: song.meta },
           mainEntity: { '@type': 'CreativeWork', name: `${song.title} ocarina button tab`, text: song.tab },
         },

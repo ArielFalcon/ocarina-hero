@@ -41,7 +41,6 @@ function group(universe: string, categories: readonly EntryCategory[], icon: Thr
 
 // Games
 group('The Legend of Zelda', ['Games'], 'triforce', [
-  ['lullaby-game', 'Zelda’s Lullaby', { version: 'Complete, adapted', aliases: ['Lullaby'] }],
   ['lullaby-trigger', 'Zelda’s Lullaby', { version: 'Ocarina of Time', aliases: ['Lullaby'] }],
   ['catalogue-gerudo-valley', 'Gerudo Valley'],
   ['catalogue-fairy-fountain', 'Great Fairy Fountain'],

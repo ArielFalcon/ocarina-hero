@@ -1,33 +1,10 @@
 import type { MelodyNote } from './project';
 import type { Note } from './ir';
-import { BEND_LIMIT, PITCHES, pitchById } from './pitches';
-import lullaby from './songs/lullaby-reference.json';
 import lullabyComplete from './songs/zelda-lullaby-complete.json';
 import littleroot from './songs/littleroot.json';
 import videoDemos from './songs/from-videos.json';
 import { CATALOGUE_INDEX } from './songs/catalogue-index';
 import type { Difficulty } from './difficulty';
-
-const LULLABY_TRIGGER: readonly Note[] = [0, 4.52].flatMap((offset) => [
-  { pitch: 'B4', startBeat: offset, durationBeats: 1.17 },
-  { pitch: 'D5', startBeat: offset + 1.45, durationBeats: 1.20 },
-  { pitch: 'A4', startBeat: offset + 3.00, durationBeats: 1.24 },
-] satisfies Note[]);
-
-const lastTriggerNote = LULLABY_TRIGGER[LULLABY_TRIGGER.length - 1]!;
-const LULLABY_AUTOMATIC_START = lastTriggerNote.startBeat + lastTriggerNote.durationBeats + 0.46;
-const LULLABY_GAME: readonly Note[] = [
-  ...LULLABY_TRIGGER,
-  ...lullaby.notes.map(({ midi, startBeat, durationBeats }) => {
-    const target = midi - 5;
-    const pitch = [...PITCHES].sort((a, b) =>
-      Math.abs(target - (a.midi + 12)) - Math.abs(target - (b.midi + 12)),
-    )[0]!;
-    const bend = target - (pitch.midi + 12);
-    if (Math.abs(bend) > BEND_LIMIT) throw new RangeError('Lullaby pitch is outside the instrument range');
-    return { pitch: pitch.id, bend, startBeat: LULLABY_AUTOMATIC_START + startBeat, durationBeats };
-  }),
-];
 
 /** Explicit [midi, beats] pairs, laid out from a start beat. */
 function seq(
@@ -93,17 +70,6 @@ export interface TrackSummary {
 
 /** Demos defined in code; the curated catalogue lives in per-song files. */
 export const INLINE_DEMOS: readonly DemoTrack[] = [
-  {
-    id: 'lullaby-game',
-    title: 'Lullaby (complete, adapted)',
-    subtitle: 'Y X A trigger twice · automatic melody transposed down 5 semitones',
-    tempoBpm: 60,
-    phraseStarts: [0, 3, 6, 9, 12],
-    fixedNotes: LULLABY_GAME,
-    melody: LULLABY_GAME.map(({ pitch, bend, startBeat, durationBeats }) => ({
-      midi: pitchById(pitch).midi + 12 + (bend ?? 0), startBeat, durationBeats,
-    })),
-  },
   {
     id: 'lullaby-trigger',
     title: 'Lullaby (Ocarina of Time theme)',

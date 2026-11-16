@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseLocation, parseRoute, shareUrl, songPath } from '../src/ui/route';
+import { parseLocation, parseRoute, popularPath, shareUrl, songPath } from '../src/ui/route';
 
 test('earlier hash links to a song still parse, including ids that need encoding', () => {
   for (const id of ['zelda-lullaby', 'pokémon/route 1']) {
@@ -50,4 +50,17 @@ test('a malformed song address falls back to the songbook instead of throwing', 
 test('share links point at the song path and drop the current query and hash', () => {
   assert.equal(shareUrl('https://ocarinahero.app/?x=1#catalog', '/', 'song-of-storms'), 'https://ocarinahero.app/song/song-of-storms/');
   assert.equal(shareUrl('https://user.github.io/ocarina-hero/song/ode/', '/ocarina-hero/', 'twinkle'), 'https://user.github.io/ocarina-hero/song/twinkle/');
+});
+
+test('Popular lives at its own path under the app base, and the old #popular link still resolves to it', () => {
+  for (const base of ['/', '/ocarina-hero/']) {
+    assert.equal(popularPath(base), `${base}popular/`);
+    assert.deepEqual(parseLocation(base, popularPath(base), ''), { view: 'popular' });
+    assert.deepEqual(parseLocation(base, `${base}popular`, ''), { view: 'popular' });
+    assert.deepEqual(parseLocation(base, base, '#popular'), { view: 'popular' });
+    assert.deepEqual(parseLocation(base, popularPath(base), '#main-content'), { view: 'popular' });
+    assert.deepEqual(parseLocation(base, popularPath(base), '#settings'), { view: 'settings' });
+    assert.deepEqual(parseLocation(base, popularPath(base), '#catalog'), { view: 'catalog' });
+  }
+  assert.deepEqual(parseLocation('/app/', '/popular/', ''), { view: 'catalog' });
 });

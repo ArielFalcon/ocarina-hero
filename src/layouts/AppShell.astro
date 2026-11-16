@@ -17,10 +17,12 @@ interface Props {
   song?: SongPage;
   /** The other songs of the song's universe, linked below the lesson. */
   related?: readonly SongLink[];
+  /** The page opens on the Popular view with the rows of the build's ranking; the home opens on the songbook. */
+  popular?: { readonly rows: string; readonly ranking: string };
   /** Crawlable song list shown to visitors without scripts. */
   directory?: string;
 }
-const { page, song, related, directory } = Astro.props;
+const { page, song, related, popular, directory } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -45,9 +47,9 @@ const { page, song, related, directory } = Astro.props;
           <a class="action repo-link" href="https://github.com/ArielFalcon/ocarina-hero" target="_blank" rel="noopener" aria-label="Star Ocarina Hero on GitHub (opens in a new tab)"><span data-thread-icon="star"></span><span><span class="repo-long">Star on </span>GitHub</span></a>
           </span>
         </header>
-        <CatalogView hidden={!!song} />
+        <CatalogView hidden={!!song || !!popular} />
         <LessonView song={song} related={related} />
-        <PopularView />
+        <PopularView active={!!popular} rows={popular?.rows} ranking={popular?.ranking} />
         <WorkshopView />
         <SettingsView />
         {directory && <noscript id="song-directory" set:html={directory} />}
@@ -64,7 +66,7 @@ const { page, song, related, directory } = Astro.props;
           <div class="mini-staff" aria-hidden="true" inert><div class="tab"></div></div>
           <p id="mini-status" class="visually-hidden" role="status" aria-live="polite"></p>
         </section>
-        <nav class="app-nav" aria-label="Main navigation"><a href="#catalog" data-view-link="catalog" aria-current="page"><span data-thread-icon="songbook"></span><span>Songbook</span></a><a class="nav-saved" href="#saved" data-view-link="saved"><span data-thread-icon="heart"></span><span>Saved</span></a><a class="nav-popular" href="#popular" data-view-link="popular"><span data-thread-icon="star"></span><span>Popular</span></a><a href="#free" data-view-link="free"><span data-thread-icon="music"></span><span>Free play</span></a><a href="#workshop" data-view-link="workshop"><span data-thread-icon="waveform"></span><span>Workshop</span></a></nav>
+        <nav class="app-nav" aria-label="Main navigation"><a href="#catalog" data-view-link="catalog" aria-current={popular ? undefined : 'page'}><span data-thread-icon="songbook"></span><span>Songbook</span></a><a class="nav-saved" href="#saved" data-view-link="saved"><span data-thread-icon="heart"></span><span>Saved</span></a><a class="nav-popular" href={assetUrl('popular/')} data-view-link="popular" aria-current={popular ? 'page' : undefined}><span data-thread-icon="star"></span><span>Popular</span></a><a href="#free" data-view-link="free"><span data-thread-icon="music"></span><span>Free play</span></a><a href="#workshop" data-view-link="workshop"><span data-thread-icon="waveform"></span><span>Workshop</span></a></nav>
       </footer>
     </div>
     <script>

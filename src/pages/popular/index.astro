@@ -1,0 +1,13 @@
+---
+import AppShell from '../../layouts/AppShell.astro';
+import { SITE_URL } from '../../site/config';
+import { fetchPopularSnapshot, popularHead, popularRowsHtml, popularSnapshot } from '../../site/popular';
+import { songbook } from '../../site/songs';
+import { assetUrl } from '../../site/site';
+
+/** The ranking as of this build: a snapshot for crawlers and the first paint; the app refreshes it live. */
+const rows = popularSnapshot(songbook, await fetchPopularSnapshot(process.env.POPULARITY_SNAPSHOT_URL ?? `${SITE_URL}api/popularity`));
+const icon = (name: string) => `<img class="thread-icon" src="${assetUrl(`art/icons/${name}.webp`)}" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
+const popular = { rows: popularRowsHtml(rows, import.meta.env.BASE_URL, icon), ranking: JSON.stringify(rows.map(({ entry, plays }) => ({ id: entry.id, plays }))) };
+---
+<AppShell page={popularHead(SITE_URL, rows)} popular={popular} />

@@ -2,7 +2,7 @@ import type { DifficultyLevel } from '../core/difficulty';
 import type { DemoTrack } from '../core/demo';
 import { toTabText } from '../core/tab';
 import { createPassages, lessonDetails } from '../ui/lesson';
-import { songDocumentTitle, songPath } from '../ui/route';
+import { popularPath, songDocumentTitle, songPath } from '../ui/route';
 import { openingNotes, songMeta, songTitleQualifier, type SongbookEntry } from '../ui/songbook';
 import { hubName, hubPath, hubUrl, plural, ZELDA_UNIVERSE, type Hub } from './hubs';
 import type { PageHead } from './site';
@@ -64,6 +64,10 @@ export function songUrl(siteUrl: string, id: string): string {
   return new URL(songPath('', id), siteUrl).href;
 }
 
+export function popularUrl(siteUrl: string): string {
+  return new URL(popularPath(''), siteUrl).href;
+}
+
 function linkList(siteUrl: string, songs: readonly SongLink[]): string {
   return `<ul>${songs.map(song => `<li><a href="${escapeHtml(songUrl(siteUrl, song.id))}">${escapeHtml(song.title)}</a> (${escapeHtml(song.meta)})</li>`).join('')}</ul>`;
 }
@@ -92,7 +96,7 @@ export function relatedSongs(groups: readonly SongGroup[], song: Pick<SongPage, 
 export function llmsTxt(siteUrl: string, groups: readonly SongGroup[], hubs: readonly Hub[] = []): string {
   return `# Ocarina Hero\n\n> ${INTRO}\n\n`
     + 'Each song page shows the button tab of the melody (for example "L + D-pad down, R + D-pad down"), the number of notes and passages, and opens an interactive lesson that plays the melody and checks each note. The Workshop imports a MIDI file or a short recording as a new tab. Fan project, not affiliated with or endorsed by Nintendo.\n\n'
-    + `## Pages\n\n- [Songbook](${siteUrl}): search and filter every song by category, universe and difficulty\n- [Sitemap](${siteUrl}sitemap.xml)\n\n`
+    + `## Pages\n\n- [Songbook](${siteUrl}): search and filter every song by category, universe and difficulty\n- [Most popular](${popularUrl(siteUrl)}): the songs players practice most, ranked by plays\n- [Sitemap](${siteUrl}sitemap.xml)\n\n`
     + (hubs.length ? `## Hubs\n\n${hubs.filter(hub => hub.indexable).map(hub => `- [${hub.h1}](${hubUrl(siteUrl, hub)}): ${plural(hub.songIds.length, 'song')}`).join('\n')}\n\n` : '')
     + groups.map(group => `## ${group.universe}\n\n${group.songs.map(song => `- [${song.title}](${songUrl(siteUrl, song.id)}): ${song.meta}`).join('\n')}`).join('\n\n') + '\n';
 }
@@ -129,13 +133,14 @@ export function songHead(song: SongPage, siteUrl: string, modified?: string): Pa
 }
 
 /**
- * The sitemap: the home and every song. `lastModified` maps a song id to the day (YYYY-MM-DD) its notes last changed;
+ * The sitemap: the home, the Popular page and every song. `lastModified` maps a song id to the day (YYYY-MM-DD) its notes last changed;
  * the home carries the newest of them. Songs without a known day omit the tag rather than claim one.
  */
 export function sitemapXml(siteUrl: string, songIds: readonly string[], lastModified: ReadonlyMap<string, string> = new Map(), hubs: readonly Hub[] = []): string {
   const newest = [...lastModified.values()].sort().at(-1);
   const entries = [
     { url: siteUrl, day: newest },
+    { url: popularUrl(siteUrl), day: undefined },
     ...songIds.map(id => ({ url: songUrl(siteUrl, id), day: lastModified.get(id) })),
     // A hub changes when its newest song does; one that is kept out of the index stays out of the sitemap.
     ...hubs.filter(hub => hub.indexable).map(hub => ({ url: hubUrl(siteUrl, hub), day: hub.songIds.map(id => lastModified.get(id)).filter(Boolean).sort().at(-1) })),

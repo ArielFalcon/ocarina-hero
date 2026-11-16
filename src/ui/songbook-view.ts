@@ -4,11 +4,11 @@ import type { DemoTrack, TrackSummary } from '../core/demo';
 import { DIFFICULTY_LEVELS, type DifficultyLevel } from '../core/difficulty';
 import { gameSongs } from './featured';
 import { completedIds, lastOpened, type Progress } from './progress';
-import { journey, playsLabel } from './journey';
+import { journey } from './journey';
 import { missedSearchNoter } from '../core/search-text';
 import { reportMissedSearch, type PopularEntry } from './popularity';
 import { SAVED_STORAGE } from './local-data';
-import { songPath } from './route';
+import { DIFFICULTY_NAMES, escapeHtml, playsHtml, rankHtml, sealMarkup, songRowHtml } from '../site/song-row';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
 const RAIL_MIN_RESULTS = 12;
@@ -18,11 +18,10 @@ const FOCUSABLE_ROW_CONTROLS = 'button, a[href]';
 const JUMP_SETTLE_FRAMES = 6;
 /** Range steps: 0 is every difficulty, then one step per tier. */
 const DIFFICULTY_STEPS = ['', ...DIFFICULTY_LEVELS] as const;
-const DIFFICULTY_NAMES: Record<DifficultyLevel | '', string> = { '': 'Any', easy: 'Easy', medium: 'Medium', hard: 'Hard', expert: 'Expert' };
 
 /** A song seal; its tier frame is a decorative overlay outside the slot. */
 function sealHtml(icon: ThreadIcon, level: DifficultyLevel | '', extraClass = ''): string {
-  return `<span class="song-seal${extraClass ? ` ${extraClass}` : ''}"${level ? ` data-difficulty="${level}"` : ''} aria-hidden="true">${threadIcon(icon)}${level ? '<span class="seal-frame"></span>' : ''}</span>`;
+  return sealMarkup(threadIcon(icon), level, extraClass);
 }
 
 const CATEGORY_ICONS: Record<SongCategory, ThreadIcon> = { All: 'songbook', Games: 'gamepad', Anime: 'anime', Film: 'film', Pop: 'microphone', Classics: 'lyre', Other: 'collection' };
@@ -32,16 +31,6 @@ function countHtml(count: number, noun: string): string {
   return `<span class="count-badge" aria-hidden="true">${count}</span><span class="visually-hidden">${count} ${noun}</span>`;
 }
 
-/** The rank count badge: rust for the top three, forest cloth after. */
-function rankHtml(rank: number): string {
-  return `<span class="count-badge popular-rank${rank > 3 ? ' is-trailing' : ''}" aria-hidden="true">${rank}</span>`;
-}
-
-function playsHtml(plays: number): string {
-  const label = playsLabel(plays);
-  return label ? `<span class="popular-plays">${label}</span>` : '';
-}
-
 /** A click the browser would follow as a link in place, not into a new tab or window. */
 function isPlainClick(event: MouseEvent): boolean {
   return event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
@@ -49,10 +38,6 @@ function isPlainClick(event: MouseEvent): boolean {
 
 function shelfTitle(text: string): string {
   return `<h2 class="shelf-title eyebrow stitched-label">${text}</h2>`;
-}
-
-function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]!);
 }
 
 /**
@@ -109,6 +94,14 @@ class Fold {
   }
 }
 
+/** The ranking the Popular page was built with, so its rows stay on screen (and take the player's saved state) until the live ranking arrives. */
+function builtRanking(list: HTMLElement | null): PopularEntry[] {
+  try {
+    const parsed: unknown = JSON.parse(list?.dataset.ranking ?? '[]');
+    return Array.isArray(parsed) ? parsed.flatMap(song => typeof song?.id === 'string' && Number.isFinite(song.plays) ? [{ id: song.id as string, plays: Number(song.plays) }] : []) : [];
+  } catch { return []; }
+}
+
 function idle(run: () => void): void {
   if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(run, { timeout: 1500 });
   else window.setTimeout(run, 50);
@@ -128,7 +121,9 @@ export class SongbookView {
   private difficultyFold: Fold;
   private list: HTMLElement;
   private journey: HTMLElement;
-  private popular: readonly PopularEntry[] = [];
+  private popular: readonly PopularEntry[] = builtRanking(document.querySelector('#popular-list'));
+  /** The ranking on screen is the one the page was built with: a live ranking that comes back empty (API down) does not replace it. */
+  private builtRankingShown = this.popular.length > 0;
   private filterFrame = 0;
   private readonly noteSearch = missedSearchNoter(reportMissedSearch);
   /** The phone "Popular" view's list; it shares the row markup and actions with the Songbook list. */
@@ -501,6 +496,8 @@ export class SongbookView {
 
   /** Show the shared ranking; it arrives best first and may name songs this build no longer has. */
   setPopular(ranking: readonly PopularEntry[]): void {
+    if (this.builtRankingShown && !ranking.length) return;
+    this.builtRankingShown = false;
     const same = ranking.length === this.popular.length && ranking.every((song, index) => song.id === this.popular[index]!.id && song.plays === this.popular[index]!.plays);
     if (same) return;
     this.popular = ranking;
@@ -530,11 +527,7 @@ export class SongbookView {
   }
 
   private rowHtml(entry: SongbookEntry, completed: ReadonlySet<string>, letter?: string, ranked?: { rank: number; plays: number }): string {
-    const title = escapeHtml(entry.title);
-    const saved = this.saved.has(entry.id);
-    const rank = ranked ? rankHtml(ranked.rank) : '';
-    const plays = ranked && playsLabel(ranked.plays);
-    return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<a class="song-open" href="${escapeHtml(songPath(import.meta.env.BASE_URL, entry.id))}" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealHtml(entry.icon, entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${plays ? ` · ${plays}` : ''}${completed.has(entry.id) ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></a><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${threadIcon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
+    return songRowHtml(entry, { base: import.meta.env.BASE_URL, icon: threadIcon, completed: completed.has(entry.id), saved: this.saved.has(entry.id), letter, ranked });
   }
 
   /** Shown above the full list while no search or filter is active: the song to resume, then the in-game songs. */

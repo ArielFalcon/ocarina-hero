@@ -26,16 +26,17 @@ test('the page of a bundled song carries the tab the lesson opens with', () => {
   assert.equal(lullaby.details, 'Ocarina of Time · 16 notes · 4 passages');
 });
 
-test('the sitemap lists the home and every song', () => {
+test('the sitemap lists the home, the Popular page and every song', () => {
   const xml = sitemapXml(SITE, ['ode', 'song-of-storms']);
   assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map(match => match[1]),
-    ['https://ocarinahero.app/', 'https://ocarinahero.app/song/ode/', 'https://ocarinahero.app/song/song-of-storms/']);
+    ['https://ocarinahero.app/', 'https://ocarinahero.app/popular/', 'https://ocarinahero.app/song/ode/', 'https://ocarinahero.app/song/song-of-storms/']);
 });
 
 test('the sitemap dates a song only when its day is known, and the home carries the newest day', () => {
   const xml = sitemapXml(SITE, ['ode', 'song-of-storms'], new Map([['ode', '2026-01-02'], ['other', '2026-03-04']]));
   assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>(?:<lastmod>([^<]*)<\/lastmod>)?/g)].map(match => [match[1], match[2]]), [
     ['https://ocarinahero.app/', '2026-03-04'],
+    ['https://ocarinahero.app/popular/', undefined],
     ['https://ocarinahero.app/song/ode/', '2026-01-02'],
     ['https://ocarinahero.app/song/song-of-storms/', undefined],
   ]);

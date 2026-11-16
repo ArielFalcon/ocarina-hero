@@ -9,7 +9,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 150,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.28,
+      "score": 6.56,
       "level": "hard"
     }
   },
@@ -31,7 +31,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.73,
+      "score": 9,
       "level": "expert"
     }
   },
@@ -152,7 +152,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 108.000108000108,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.81,
+      "score": 4.77,
       "level": "medium"
     }
   },
@@ -185,7 +185,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 139.97988955586715,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 9.14,
+      "score": 9.5,
       "level": "expert"
     }
   },
@@ -218,7 +218,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 140.00014000014,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.2,
+      "score": 6.41,
       "level": "hard"
     }
   },
@@ -284,7 +284,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 80,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.84,
+      "score": 3.95,
       "level": "medium"
     }
   },
@@ -306,7 +306,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 150,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.17,
+      "score": 5.35,
       "level": "medium"
     }
   },
@@ -339,7 +339,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 89.00004005001803,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 3.9,
+      "score": 3.95,
       "level": "medium"
     }
   },
@@ -361,7 +361,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 130.00041166797027,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.04,
+      "score": 5.11,
       "level": "medium"
     }
   },
@@ -372,7 +372,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.58,
+      "score": 2.59,
       "level": "easy"
     }
   },
@@ -416,7 +416,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 123.00022140039852,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6,
+      "score": 6.2,
       "level": "hard"
     }
   },
@@ -449,7 +449,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 135.000135000135,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.68,
+      "score": 7.73,
       "level": "expert"
     }
   },
@@ -471,7 +471,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 190.0002850004275,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.8,
+      "score": 7.16,
       "level": "hard"
     }
   },
@@ -482,7 +482,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 186.000372000744,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.59,
+      "score": 4.72,
       "level": "medium"
     }
   },
@@ -515,8 +515,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 111.000111000111,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.32,
-      "level": "medium"
+      "score": 5.66,
+      "level": "hard"
     }
   },
   {
@@ -559,7 +559,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 96,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.2,
+      "score": 2.38,
       "level": "easy"
     }
   },
@@ -691,7 +691,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 200,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.11,
+      "score": 5.22,
       "level": "medium"
     }
   },
@@ -702,7 +702,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 225.3707348588428,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 8.83,
+      "score": 9.25,
       "level": "expert"
     }
   },
@@ -724,7 +724,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 164.89994695718372,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.03,
+      "score": 7.08,
       "level": "hard"
     }
   },
@@ -768,7 +768,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 108.000108000108,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.08,
+      "score": 3.24,
       "level": "easy"
     }
   },
@@ -812,7 +812,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 108.000108000108,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.38,
+      "score": 5.4,
       "level": "medium"
     }
   },
@@ -823,7 +823,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 117.99990166674861,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.6,
+      "score": 8.8,
       "level": "expert"
     }
   },
@@ -845,8 +845,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 90.23438381195155,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.31,
-      "level": "hard"
+      "score": 7.54,
+      "level": "expert"
     }
   },
   {
@@ -856,8 +856,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 75,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.45,
-      "level": "easy"
+      "score": 3.5,
+      "level": "medium"
     }
   },
   {
@@ -867,7 +867,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 138.00019320027047,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.86,
+      "score": 8.26,
       "level": "expert"
     }
   },
@@ -878,7 +878,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.21,
+      "score": 7.4,
       "level": "hard"
     }
   },
@@ -933,7 +933,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.1,
+      "score": 4.13,
       "level": "medium"
     }
   },
@@ -944,7 +944,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 96.54016151169021,
     "beatsPerBar": 2,
     "difficulty": {
-      "score": 6.09,
+      "score": 6.45,
       "level": "hard"
     }
   },
@@ -977,7 +977,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 70.00007000007,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.82,
+      "score": 2.91,
       "level": "easy"
     }
   },
@@ -1010,7 +1010,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 84.000084000084,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.17,
+      "score": 3.16,
       "level": "easy"
     }
   },
@@ -1021,7 +1021,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 80,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.14,
+      "score": 4.18,
       "level": "medium"
     }
   },
@@ -1032,7 +1032,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 138.00019320027047,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.49,
+      "score": 6.85,
       "level": "hard"
     }
   },
@@ -1054,7 +1054,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 208.00038826739143,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.52,
+      "score": 5.7,
       "level": "hard"
     }
   },
@@ -1076,7 +1076,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 166.00035966744593,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.9,
+      "score": 6.93,
       "level": "hard"
     }
   },
@@ -1087,7 +1087,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.93,
+      "score": 5.03,
       "level": "medium"
     }
   },
@@ -1098,7 +1098,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 115.00002875000719,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.09,
+      "score": 7.14,
       "level": "hard"
     }
   },
@@ -1153,7 +1153,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 80,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.86,
+      "score": 3.14,
       "level": "easy"
     }
   },
@@ -1164,7 +1164,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 76.00035466832179,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.79,
+      "score": 5.98,
       "level": "hard"
     }
   },
@@ -1175,7 +1175,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 60,
     "beatsPerBar": 2,
     "difficulty": {
-      "score": 2.16,
+      "score": 2.07,
       "level": "easy"
     }
   },
@@ -1197,7 +1197,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 55.00000458333371,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 1.94,
+      "score": 2,
       "level": "easy"
     }
   },
@@ -1219,7 +1219,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 180.00018000018,
     "beatsPerBar": 4.5,
     "difficulty": {
-      "score": 8.48,
+      "score": 8.69,
       "level": "expert"
     }
   },
@@ -1230,7 +1230,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 164.00029520053135,
     "beatsPerBar": 6,
     "difficulty": {
-      "score": 6.03,
+      "score": 6.13,
       "level": "hard"
     }
   },
@@ -1296,7 +1296,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 132.72779961641666,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.28,
+      "score": 5.3,
       "level": "medium"
     }
   },
@@ -1318,7 +1318,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 110.00011000011,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.22,
+      "score": 4.24,
       "level": "medium"
     }
   },
@@ -1340,7 +1340,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 80,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 3.44,
+      "score": 3.45,
       "level": "easy"
     }
   },
@@ -1384,7 +1384,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 225.00056250140625,
     "beatsPerBar": 6,
     "difficulty": {
-      "score": 8.81,
+      "score": 8.63,
       "level": "expert"
     }
   },
@@ -1417,7 +1417,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 104.00001386666851,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.59,
+      "score": 5.79,
       "level": "hard"
     }
   },
@@ -1472,7 +1472,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 132.000132000132,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 3.07,
+      "score": 3.48,
       "level": "easy"
     }
   },
@@ -1516,7 +1516,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 203.00034510058669,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.07,
+      "score": 6.65,
       "level": "hard"
     }
   },
@@ -1527,7 +1527,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 100,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.28,
+      "score": 3.46,
       "level": "easy"
     }
   },
@@ -1549,7 +1549,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 138.00082800496804,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.61,
+      "score": 4.81,
       "level": "medium"
     }
   },
@@ -1582,7 +1582,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 119.00016065021688,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.98,
+      "score": 5.23,
       "level": "medium"
     }
   },
@@ -1604,8 +1604,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 108.00108001080011,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.35,
-      "level": "easy"
+      "score": 3.71,
+      "level": "medium"
     }
   },
   {
@@ -1637,7 +1637,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 93.00004185001883,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 2.97,
+      "score": 3.03,
       "level": "easy"
     }
   },
@@ -1648,7 +1648,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.13,
+      "score": 6.15,
       "level": "hard"
     }
   },
@@ -1692,7 +1692,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 200,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 6.34,
+      "score": 6.4,
       "level": "hard"
     }
   },
@@ -1703,7 +1703,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 96,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 2.52,
+      "score": 2.7,
       "level": "easy"
     }
   },
@@ -1725,7 +1725,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 130.00013000013,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.68,
+      "score": 5.86,
       "level": "hard"
     }
   },
@@ -1736,7 +1736,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.3,
+      "score": 3.48,
       "level": "easy"
     }
   },
@@ -1769,7 +1769,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 130.00013000013,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.61,
+      "score": 7.99,
       "level": "expert"
     }
   },
@@ -1813,7 +1813,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 104.00001386666851,
     "beatsPerBar": 2,
     "difficulty": {
-      "score": 6.15,
+      "score": 6.38,
       "level": "hard"
     }
   },
@@ -1824,7 +1824,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 111.80013117882058,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.22,
+      "score": 4.42,
       "level": "medium"
     }
   },
@@ -1835,7 +1835,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 221.00017311680227,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 11.2,
+      "score": 11.26,
       "level": "expert"
     }
   },
@@ -1857,7 +1857,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 78.000078000078,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 2.47,
+      "score": 2.51,
       "level": "easy"
     }
   },
@@ -1868,7 +1868,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 220.00022000022,
     "beatsPerBar": 6,
     "difficulty": {
-      "score": 6,
+      "score": 6.24,
       "level": "hard"
     }
   },
@@ -1879,7 +1879,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 241.00063463500453,
     "beatsPerBar": 8,
     "difficulty": {
-      "score": 5.34,
+      "score": 5.41,
       "level": "medium"
     }
   },
@@ -1901,7 +1901,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 100,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6,
+      "score": 6.02,
       "level": "hard"
     }
   },
@@ -1923,7 +1923,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 132.00158401900822,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 14.46,
+      "score": 14.72,
       "level": "expert"
     }
   },
@@ -1945,8 +1945,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 126.000126000126,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.35,
-      "level": "easy"
+      "score": 4.04,
+      "level": "medium"
     }
   },
   {
@@ -1956,7 +1956,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 72.000288001152,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.38,
+      "score": 4.57,
       "level": "medium"
     }
   },
@@ -2022,7 +2022,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 126.000126000126,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.3,
+      "score": 6.71,
       "level": "hard"
     }
   },
@@ -2077,7 +2077,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 185.000185000185,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.63,
+      "score": 8.84,
       "level": "expert"
     }
   },
@@ -2132,7 +2132,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 143.000143000143,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.07,
+      "score": 6.39,
       "level": "hard"
     }
   },
@@ -2143,7 +2143,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.13,
+      "score": 8.5,
       "level": "expert"
     }
   },
@@ -2165,7 +2165,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 109.99990833340972,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.22,
+      "score": 8.28,
       "level": "expert"
     }
   },
@@ -2187,7 +2187,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 180.00018000018,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 5.94,
+      "score": 6.19,
       "level": "hard"
     }
   },
@@ -2231,7 +2231,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 165.000165000165,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 7.8,
+      "score": 7.96,
       "level": "expert"
     }
   },
@@ -2253,7 +2253,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 165.000165000165,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.87,
+      "score": 6.72,
       "level": "hard"
     }
   },
@@ -2275,7 +2275,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 137.00006393336318,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.75,
+      "score": 6.83,
       "level": "hard"
     }
   },
@@ -2286,7 +2286,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 80,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.74,
+      "score": 6.09,
       "level": "hard"
     }
   },
@@ -2297,7 +2297,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 127.00025400050801,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.73,
+      "score": 4.92,
       "level": "medium"
     }
   },
@@ -2308,7 +2308,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 175.0138552635417,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.16,
+      "score": 4.35,
       "level": "medium"
     }
   },
@@ -2319,8 +2319,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 141.00030315065177,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.4,
-      "level": "easy"
+      "score": 3.62,
+      "level": "medium"
     }
   },
   {
@@ -2330,7 +2330,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.64,
+      "score": 3.68,
       "level": "medium"
     }
   },
@@ -2352,8 +2352,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 100,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.46,
-      "level": "medium"
+      "score": 5.87,
+      "level": "hard"
     }
   },
   {
@@ -2363,7 +2363,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 84.000084000084,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.15,
+      "score": 4.16,
       "level": "medium"
     }
   },
@@ -2396,7 +2396,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 90.00090000900009,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.57,
+      "score": 3.58,
       "level": "medium"
     }
   },
@@ -2407,7 +2407,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.4,
+      "score": 3.42,
       "level": "easy"
     }
   },
@@ -2451,7 +2451,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.22,
+      "score": 6.31,
       "level": "hard"
     }
   },
@@ -2462,7 +2462,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 92.00012880018032,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 3.74,
+      "score": 3.77,
       "level": "medium"
     }
   },
@@ -2495,7 +2495,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 113.99995440001824,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.82,
+      "score": 3.83,
       "level": "medium"
     }
   },
@@ -2517,7 +2517,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 126.000126000126,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 6.1,
+      "score": 6.2,
       "level": "hard"
     }
   },
@@ -2528,7 +2528,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 94.00012846684224,
     "beatsPerBar": 2,
     "difficulty": {
-      "score": 5.74,
+      "score": 5.87,
       "level": "hard"
     }
   },
@@ -2539,7 +2539,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 168.60089358473599,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.44,
+      "score": 4.63,
       "level": "medium"
     }
   },
@@ -2572,7 +2572,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 170.0000850000425,
     "beatsPerBar": 6,
     "difficulty": {
-      "score": 2.01,
+      "score": 1.9,
       "level": "easy"
     }
   },
@@ -2660,7 +2660,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 192,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.79,
+      "score": 5.85,
       "level": "hard"
     }
   },
@@ -2715,7 +2715,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 123.00022140039852,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.37,
+      "score": 4.78,
       "level": "medium"
     }
   },
@@ -2759,7 +2759,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 170.00056666855556,
     "beatsPerBar": 3,
     "difficulty": {
-      "score": 3.51,
+      "score": 3.55,
       "level": "medium"
     }
   },
@@ -2792,7 +2792,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 110.00011000011,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.54,
+      "score": 5.69,
       "level": "hard"
     }
   },
@@ -2803,7 +2803,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 139.4998465501688,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.94,
+      "score": 4.01,
       "level": "medium"
     }
   },
@@ -2847,7 +2847,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 114.0001710002565,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.7,
+      "score": 5.66,
       "level": "hard"
     }
   },
@@ -2869,7 +2869,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 126.000126000126,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.58,
+      "score": 5.78,
       "level": "hard"
     }
   },
@@ -3034,8 +3034,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 127.00025400050801,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.45,
-      "level": "easy"
+      "score": 3.56,
+      "level": "medium"
     }
   },
   {
@@ -3056,7 +3056,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 92.00012880018032,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 3.03,
+      "score": 3.07,
       "level": "easy"
     }
   },
@@ -3067,7 +3067,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 136.0001450668214,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.92,
+      "score": 2.74,
       "level": "easy"
     }
   },
@@ -3089,7 +3089,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 54.00000540000054,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 1.6,
+      "score": 1.66,
       "level": "easy"
     }
   },
@@ -3100,7 +3100,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 102.20751191143378,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.81,
+      "score": 4.99,
       "level": "medium"
     }
   },
@@ -3111,7 +3111,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 129.14056950991153,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 8.15,
+      "score": 8.18,
       "level": "expert"
     }
   },
@@ -3166,7 +3166,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 92.00012880018032,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.24,
+      "score": 5.4,
       "level": "medium"
     }
   },
@@ -3199,7 +3199,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 125.91815320041972,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 4.75,
+      "score": 4.83,
       "level": "medium"
     }
   },

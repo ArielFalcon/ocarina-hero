@@ -1,4 +1,4 @@
-import { PITCHES, frequencyOf, type PitchId } from './pitches';
+import { PITCHES, SWITCH2_TUNING, frequencyOf, type PitchId, type TuningProfile } from './pitches';
 import type { Note } from './ir';
 
 /** A monophonic melody in MIDI numbers, before projection. */
@@ -11,6 +11,8 @@ export interface MelodyNote {
 export interface ProjectionOptions {
   /** Semitones of bend the player is allowed to use, 0..2. */
   readonly maxBend?: number;
+  /** Console the tab is for: fingerings are chosen by how each one sounds there. Defaults to the Switch 2. */
+  readonly tuning?: TuningProfile;
 }
 
 export interface Projection {
@@ -34,7 +36,8 @@ interface State {
 }
 
 const EMISSION_WEIGHT = 1;
-const TRANSITION_WEIGHT = 0.55;
+/** Cost per octave of difference between a source interval and the interval the console sounds. */
+const TRANSITION_WEIGHT = 5;
 /**
  * Bend costs mirror the difficulty model (src/core/difficulty.ts): one gesture per bend change,
  * a quarter of that per note held bent. A change costs the same whatever the distance, so holding
@@ -55,7 +58,7 @@ function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function buildStates(maxBend: number): State[] {
+function buildStates(maxBend: number, tuning: TuningProfile): State[] {
   const states: State[] = [];
   for (const pitch of PITCHES) {
     for (let bend = -maxBend; bend <= maxBend; bend += 1) {
@@ -63,7 +66,7 @@ function buildStates(maxBend: number): State[] {
       states.push({
         id: pitch.id,
         bend,
-        midi: 69 + 12 * Math.log2(frequencyOf(pitch.id, bend) / 440),
+        midi: 69 + 12 * Math.log2(frequencyOf(pitch.id, bend, tuning) / 440),
         pc: ((nominal % 12) + 12) % 12,
       });
     }
@@ -171,7 +174,7 @@ export function projectMelody(
     };
   }
 
-  const states = buildStates(maxBend);
+  const states = buildStates(maxBend, options.tuning ?? SWITCH2_TUNING);
   const rawWeights = melody.map((note) =>
     Number.isFinite(note.durationBeats) && note.durationBeats > 0 ? note.durationBeats : 0,
   );

@@ -65,18 +65,38 @@ export interface TuningProfile {
   readonly bendCents: Readonly<Partial<Record<PitchId, Readonly<Record<number, number>>>>>;
 }
 
-/** Provisional offsets from the isolated Switch 2 base-note recording; see docs/calibration.md. */
+/**
+ * The Switch 2 remake: medians of 25 gameplay holds, every button with each D-pad and stick
+ * bend. Its F sits about 20 cents below the other notes. Stick-down holds drift 20 to 45 cents
+ * within a hold, so those five values are the least certain.
+ */
 export const SWITCH2_TUNING: TuningProfile = {
-  noteCents: {
-    D4: 23.92,
-    F4: 4.31,
-    A4: 27.38,
-    B4: 23.59,
-    D5: 23.31,
-  },
+  noteCents: { D4: 24.79, F4: 4.37, A4: 28.42, B4: 23.41, D5: 23.63 },
   bendCents: {
-    D5: { [-1]: -19, 1: 14 },
+    D4: { [-2]: 2.57, [-1]: -8.15, 1: 3.39, 2: -3.78 },
+    F4: { [-2]: 1.25, [-1]: 3.06, 1: -8.97, 2: 0.21 },
+    A4: { [-2]: -1.8, [-1]: -3.82, 1: -5.13, 2: -3.37 },
+    B4: { [-2]: 6.34, [-1]: -0.04, 1: -2.3, 2: 1.33 },
+    D5: { [-2]: 6.6, [-1]: -22.6, 1: 11.77, 2: -3.59 },
   },
+};
+
+/**
+ * The 1998 N64 original: base notes from two gameplay recordings, close to equal temperament.
+ * Bends were not measured and stay nominal.
+ */
+export const N64_TUNING: TuningProfile = {
+  noteCents: { D4: 5, F4: 3, A4: 5, B4: 4, D5: 3 },
+  bendCents: {},
+};
+
+/**
+ * The 2011 3DS release: base notes from a gameplay recording, close to equal temperament.
+ * Its F has the fewest samples. Bends were not measured and stay nominal.
+ */
+export const THREEDS_TUNING: TuningProfile = {
+  noteCents: { D4: 6, F4: 10, A4: 4, B4: 3, D5: 4 },
+  bendCents: {},
 };
 
 /** Extra offset on top of the measured table, for the user's own setup. */

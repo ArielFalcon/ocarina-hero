@@ -7,7 +7,7 @@ import { createPassages, FREE_PLAY_TEMPO_BPM, lessonDetails, staffTransition } f
 import { swapStaff, timeNoteThread } from '../staff-motion';
 import { staffClef, staffTokenHtml } from '../staff';
 import { threadIcon } from '../thread-icons';
-import { instruction, tabInstructions } from '../platform';
+import { instruction, platform, tabInstructions } from '../platform';
 import type { SongbookEntry } from '../songbook';
 import { songArticleHtml } from '../../site/song-article';
 import { relatedSongs, songGroups, type SongGroup } from '../../site/song-pages';
@@ -116,6 +116,7 @@ export function renderSource(source: Source, play = false): void {
   const prepared = prepareMelody(source, {
     simplify: preferences.get().simplify,
     maxBend: preferences.get().bends ? 2 : 0,
+    tuning: platform().tuning,
   });
 
   const removed = prepared.removed ? ` · ${prepared.removed} ornaments removed` : '';

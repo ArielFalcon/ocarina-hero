@@ -1,5 +1,5 @@
 import { N64_CONTROLS, SWITCH_CONTROLS, type ControlScheme } from '../core/control-schemes';
-import { SWITCH2_TUNING, type ControllerButton, type TuningProfile } from '../core/pitches';
+import { N64_TUNING, SWITCH2_TUNING, type ControllerButton, type TuningProfile } from '../core/pitches';
 import type { PadLayout } from './gamepad';
 
 /**
@@ -63,8 +63,7 @@ const TAPESTRY: Platform = {
 const RETRO: Platform = {
   id: 'retro',
   controls: N64_CONTROLS,
-  /** Not measured on an N64 yet: plays the Switch 2 calibration. */
-  tuning: SWITCH2_TUNING,
+  tuning: N64_TUNING,
   gamepad: {
     /** A is either lower face button, the right stick is the C buttons, and both right and both left shoulders are R and Z. */
     layout: { noteButtons: [[0, 'L'], [1, 'L']], bendButtons: [[5, 1], [7, 1], [4, -1], [6, -1]], bendAxes: [1], noteStick: [2, 3, 'A', 'Y', 'X', 'R'] },

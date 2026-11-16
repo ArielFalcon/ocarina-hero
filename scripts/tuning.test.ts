@@ -4,15 +4,17 @@ import { PITCHES, SWITCH2_TUNING, frequencyOf, type TuningProfile } from '../src
 
 const BENDS = [-2, -1, 0, 1, 2];
 
-test('the Switch 2 tuning keeps the calibrated frequency of every pitch and bend', () => {
-  const hz = PITCHES.flatMap(pitch => BENDS.map(bend => Number(frequencyOf(pitch.id, bend).toFixed(6))));
-  assert.deepEqual(hz, [
-    530.522314, 562.068813, 595.491163, 630.900911, 668.416231,
-    623.808191, 660.901756, 700.20102, 741.837139, 785.949071,
-    796.488496, 843.850166, 894.028108, 947.189786, 1003.512622,
-    892.067089, 945.112158, 1001.311452, 1060.852529, 1123.934103,
-    1060.688895, 1111.495085, 1190.58303, 1271.620549, 1336.384266,
-  ]);
+test('the Switch 2 tuning plays every pitch and bend at its measured frequency', () => {
+  // Medians of the 25 gameplay holds (out/references/2026-11-12/analysis/hold-measurements.json), bends -2..2.
+  const measured = [
+    531.58, 559.71, 595.79, 632.46, 667.29,
+    624.28, 662.1, 700.23, 738.03, 786.07,
+    796.14, 842.49, 894.56, 944.96, 1002.16,
+    895.25, 944.99, 1001.21, 1059.33, 1124.68,
+    1064.93, 1109.39, 1190.8, 1270.22, 1333.86,
+  ];
+  const cents = PITCHES.flatMap(pitch => BENDS.map(bend => frequencyOf(pitch.id, bend))).map((hz, i) => 1200 * Math.log2(hz / measured[i]!));
+  assert.deepEqual(cents.map(c => Math.abs(c) < 0.1), measured.map(() => true), cents.map(c => c.toFixed(2)).join(' '));
   assert.equal(frequencyOf('D5', 1, SWITCH2_TUNING), frequencyOf('D5', 1));
 });
 

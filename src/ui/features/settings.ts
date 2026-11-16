@@ -9,7 +9,7 @@ import { APP_BASE, bendsInput, playbackRate, preferences, simplifyInput, state, 
 import { downloadJson, must } from './dom';
 import { applyBend, buildPad, renderGamepadStatus, updateHint } from './pad';
 import { renderBindings } from './keyboard';
-import { refreshPracticeStatus, renderTab, updateProgress } from './staff';
+import { refreshPracticeStatus, renderSource, renderTab, updateProgress } from './staff';
 import { catalogue, miniPlayer } from './songbook';
 
 const themePicker = must<HTMLFieldSetElement>('#theme-picker');
@@ -72,7 +72,8 @@ export function bindSettings(): void {
     renderBindings();
     delete tab.dataset.notes;
     state.renderedWindow = null;
-    renderTab();
+    if (state.current) renderSource(state.current);
+    else renderTab();
     updateProgress();
     applyBend(state.bend);
     updateHint();

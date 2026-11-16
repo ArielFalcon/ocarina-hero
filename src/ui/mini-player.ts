@@ -2,6 +2,7 @@ import type { DemoTrack } from '../core/demo';
 import type { Arrangement } from '../core/ir';
 import { latestRequest, type TrackLoader } from '../core/track-loader';
 import { prepareMelody } from '../core/prepare';
+import { platform } from './platform';
 import { createPassages, staffTransition } from './lesson';
 import type { Player } from './playback';
 import { QuickPlay, type QuickPlayState } from './quick-play';
@@ -12,8 +13,15 @@ import { threadIcon } from './thread-icons';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+/** A song's opening arrangement projected for the active console. */
+function arrange(entry: SongbookEntry, track: DemoTrack): Loaded {
+  const notes = prepareMelody(track, { simplify: false, maxBend: 2, tuning: platform().tuning }).notes;
+  return { entry, track, arrangement: { title: track.title, tempoBpm: track.tempoBpm, notes }, passages: createPassages(notes, track.tempoBpm, track.phraseStarts) };
+}
+
 interface Loaded {
   readonly entry: SongbookEntry;
+  readonly track: DemoTrack;
   readonly arrangement: Arrangement;
   readonly passages: number[][];
 }
@@ -102,12 +110,8 @@ export class MiniPlayer {
       return;
     }
     if (track) {
-      const notes = prepareMelody(track, { simplify: false, maxBend: 2 }).notes;
-      this.loaded = {
-        entry,
-        arrangement: { title: track.title, tempoBpm: track.tempoBpm, notes },
-        passages: createPassages(notes, track.tempoBpm, track.phraseStarts),
-      };
+      this.loaded = arrange(entry, track);
+      const { notes } = this.loaded.arrangement;
       this.title.textContent = entry.title;
       this.expandButton.setAttribute('aria-label', `Open the lesson for ${entry.title}`);
       this.meta.textContent = songMeta(entry);
@@ -151,6 +155,10 @@ export class MiniPlayer {
 
   /** Re-render the staff with the active console's glyphs and control names. */
   refreshPlatform(): void {
+    if (this.loaded) {
+      this.loaded = arrange(this.loaded.entry, this.loaded.track);
+      this.tab.classList.toggle('has-modifiers', this.loaded.arrangement.notes.some(note => !!note.bend));
+    }
     delete this.tab.dataset.notes;
     this.renderedWindow = null;
     this.shown = null;

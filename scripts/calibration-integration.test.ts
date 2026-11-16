@@ -58,8 +58,9 @@ test('calibration frame selection does not move with the prior fine tuning', () 
 test('live bend changes and returns preserve the calibrated sounding register', () => {
   setTuning(9);
   for (const [id, base, up, down] of [
-    ['D5', 1196.79, 1278.25, 1117.30],
-    ['A4', 898.69, 952.13, 848.25],
+    // The measured Switch 2 holds, raised by the 9-cent fine tuning.
+    ['D5', 1197.01, 1276.84, 1115.17],
+    ['A4', 899.22, 949.89, 846.88],
   ] as const) {
     const engine = new OcarinaEngine() as any;
     const values: number[] = [];
@@ -111,6 +112,6 @@ test('scheduled bent notes start at their calibrated targets', async () => {
     { pitch: 'D5', bend: 1, startBeat: 0, durationBeats: 1 },
     { pitch: 'A4', bend: -1, startBeat: 2, durationBeats: 1 },
   ] });
-  assert.ok(Math.abs(calls[0]! - 1271.3) < 1);
-  assert.ok(Math.abs(calls[1]! - 843.85) < 1);
+  assert.ok(Math.abs(calls[0]! - 1270.22) < 1);
+  assert.ok(Math.abs(calls[1]! - 842.49) < 1);
 });

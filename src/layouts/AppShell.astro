@@ -62,7 +62,7 @@ const { page, song, related, popular, directory } = Astro.props;
         <section id="support-card" class="support-card" role="dialog" aria-modal="false" aria-labelledby="support-ask-title" hidden>
           <button id="support-close" class="patch-button support-close" type="button" aria-label="Close"><span data-thread-icon="close"></span></button>
           <div class="support-ask">
-            <h2 id="support-ask-title" class="support-title embroidered">Ocarina Hero is totally free; no ads, no sign up.</h2>
+            <h2 id="support-ask-title" class="support-title embroidered">Ocarina Hero is totally free,<br /> no ads, no sign-up.</h2>
             <p class="support-line">Tips allow me to keep it up!</p>
             <div class="support-amounts">
               {TIPS.map(tip => <a class="action support-amount" href={tip.url} data-tip={tip.euros} aria-label={`Tip ${tip.euros} euros`}><img src={assetUrl(DEFAULT_PLATFORM.art[tip.art])} data-art={tip.art} width="20" height="34" alt="" aria-hidden="true" draggable="false" /><span class="stitched-label">{tip.euros}</span></a>)}
@@ -88,6 +88,7 @@ const { page, song, related, popular, directory } = Astro.props;
         </section>
         <nav class="app-nav" aria-label="Main navigation"><a href="#catalog" data-view-link="catalog" aria-current={popular ? undefined : 'page'}><span data-thread-icon="songbook"></span><span>Songbook</span></a><a class="nav-saved" href="#saved" data-view-link="saved"><span data-thread-icon="heart"></span><span>Saved</span></a><a class="nav-popular" href={assetUrl('popular/')} data-view-link="popular" aria-current={popular ? 'page' : undefined}><span data-thread-icon="star"></span><span>Popular</span></a><a href="#free" data-view-link="free"><span data-thread-icon="music"></span><span>Free play</span></a><a href="#workshop" data-view-link="workshop"><span data-thread-icon="waveform"></span><span>Workshop</span></a></nav>
       </footer>
+      <div id="support-backdrop" class="support-backdrop" aria-hidden="true" hidden></div>
     </div>
     <script>
       import '../ui/main.ts';

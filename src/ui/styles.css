@@ -902,7 +902,10 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 /* Tip card: floats above the bottom navigation (and the quick player when it is open); it never pauses playback. */
 .support-card { position: absolute; bottom: calc(100% + var(--mini-player-space, 8px)); right: 10px; z-index: 11; width: min(360px, calc(100% - 20px)); padding: 14px 16px 10px; border-radius: 6px; background: var(--bg) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-raised), 0 6px 16px #050a0699; }
 .support-card::before { content: ''; position: absolute; inset: 0; padding: 2.5px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; filter: url('#cord-edge'); }
-.support-card[hidden] { display: none; }
+.support-card[hidden], .support-backdrop[hidden] { display: none; }
+/* Behind the open tip card the app dims and blurs slightly; a tap on it closes the card. */
+.support-backdrop { position: fixed; inset: 0; z-index: 10; background: #0000003d; -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); animation: backdrop-in .2s ease-out; }
+@keyframes backdrop-in { from { opacity: 0; } }
 .support-close { position: absolute; top: 6px; right: 6px; }
 .support-close .thread-icon { width: 30px; height: 30px; }
 .support-title { margin: 0 44px 4px 0; font-size: 19px; line-height: 1.25; }
@@ -919,8 +922,9 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 .support-link.is-celebrating { animation: thanks-button .9s ease-out .5s both; }
 @keyframes thanks-heart { 0% { transform: scale(0) rotate(-12deg); } 45% { transform: scale(1.25) rotate(6deg); } 70% { transform: scale(.92); } 100% { transform: scale(1); } }
 @keyframes thanks-button { 0%, 100% { transform: none; } 35% { transform: scale(1.12); } 65% { transform: scale(.96); } }
+@media (max-width: 359px) { .support-title { margin-right: 38px; font-size: 17px; } }
 @media (min-width: 800px) { .support-card { right: 24px; } }
-@media (prefers-reduced-motion: reduce) { .support-card.is-celebrating .support-thanks-heart, .support-link.is-celebrating { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .support-card.is-celebrating .support-thanks-heart, .support-link.is-celebrating, .support-backdrop { animation: none; } }
 .mini-head { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .mini-toggle .thread-icon { width: 42px; height: 42px; }
 .mini-open { flex: 1; margin-left: 4px; min-width: 0; min-height: 44px; display: flex; flex-direction: column; justify-content: center; padding: 0; border: 0; background: transparent; text-align: left; }

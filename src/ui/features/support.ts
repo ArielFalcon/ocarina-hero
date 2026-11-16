@@ -7,6 +7,7 @@ import { must } from './dom';
 const session = sessionStore() ?? null;
 
 const card = must('#support-card');
+const backdrop = must('#support-backdrop');
 const ask = must('#support-card .support-ask');
 const thanks = must('#support-card .support-thanks');
 const status = must('#support-status');
@@ -59,6 +60,7 @@ function open(placement: TipPlacement, focus: boolean): void {
   render();
   card.querySelectorAll<HTMLAnchorElement>('.support-amount').forEach((link, index) => { link.href = tipUrl(TIPS[index]!, placement); });
   card.hidden = false;
+  backdrop.hidden = false;
   card.classList.remove('is-celebrating');
   button.setAttribute('aria-expanded', 'true');
   if (focus) (card.querySelector<HTMLElement>(supporter() ? '.support-close' : '.support-amount'))?.focus();
@@ -68,6 +70,7 @@ function close(): void {
   if (card.hidden) return;
   const hadFocus = card.contains(document.activeElement);
   card.hidden = true;
+  backdrop.hidden = true;
   card.classList.remove('is-celebrating');
   button.setAttribute('aria-expanded', 'false');
   if (hadFocus) button.focus();
@@ -92,6 +95,7 @@ export function bindSupport(): void {
   button.addEventListener('click', () => { if (card.hidden) open('header', true); else close(); });
   must('#support-close').addEventListener('click', close);
   must('#support-later').addEventListener('click', close);
+  backdrop.addEventListener('click', close);
   card.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
   button.addEventListener('animationend', () => button.classList.remove('is-celebrating'));
 }

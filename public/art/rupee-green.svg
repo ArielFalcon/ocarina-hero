@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" fill="none" stroke-linejoin="round" stroke-linecap="round">
+<defs>
+  <filter id="rupee-green-shadow" x="-25%" y="-15%" width="150%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+  <!-- Fine, irregular nap modulates pigment without a woven grid or specular light. -->
+  <filter id="rupee-green-suede" x="-3%" y="-3%" width="106%" height="106%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".72 .94" numOctaves="3" seed="17" result="nap"/>
+    <feColorMatrix in="nap" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncR type="linear" slope=".68" intercept=".61"/><feFuncG type="linear" slope=".68" intercept=".61"/><feFuncB type="linear" slope=".68" intercept=".61"/></feComponentTransfer>
+    <feBlend in="SourceGraphic" mode="multiply"/>
+    <feComposite in2="SourceGraphic" operator="in" result="pigment"/>
+    <feDisplacementMap in="pigment" in2="nap" scale=".48" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <linearGradient id="rupee-green-rim" x1="18" y1="25" x2="103" y2="167" gradientUnits="userSpaceOnUse"><stop stop-color="#83df55"/><stop offset=".45" stop-color="#45b536"/><stop offset="1" stop-color="#248635"/></linearGradient>
+  <linearGradient id="rupee-green-thread" x1="0" y1="-1.4" x2="0" y2="1.4" gradientUnits="userSpaceOnUse"><stop stop-color="#d1c9b9"/><stop offset=".38" stop-color="#f2ecdf"/><stop offset=".65" stop-color="#ece6d8"/><stop offset="1" stop-color="#beb4a1"/></linearGradient>
+  <pattern id="rupee-green-fibers" width="11" height="13" patternUnits="userSpaceOnUse">
+    <path d="m1 2 .4-.9m4 3 .6-.8m3.4-1 .3-.7M2 10l.7-.8m4 2 .4-1m2-4 .5-.6" stroke="#fff6dc" stroke-opacity=".19" stroke-width=".45"/>
+    <path d="m3 1 .3.8m5 4 .2.9M1 7l.4.8m4.6 3 .3.8m3.5 1 .3.8" stroke="#19261b" stroke-opacity=".13" stroke-width=".4"/>
+  </pattern>
+  <!-- One straight capsule; its local x axis is rotated parallel to each edge. -->
+  <g id="rupee-green-stitch">
+    <ellipse cx="-6.5" cy=".4" rx="1.65" ry="1.35" fill="#18251a" opacity=".65"/>
+    <ellipse cx="6.5" cy=".4" rx="1.65" ry="1.35" fill="#18251a" opacity=".65"/>
+    <path d="M-6.5 .65H6.5" stroke="#152419" stroke-opacity=".45" stroke-width="3.2"/>
+    <path d="M-6.5 0H6.5" stroke="url(#rupee-green-thread)" stroke-width="2.8"/>
+    <path d="m-4.7-.8-.6 1.3m3.1-1.3-.6 1.3M.3-.8-.3.5M2.8-.8 2.2.5M5.3-.8 4.7.5" stroke="#b7ad99" stroke-opacity=".42" stroke-width=".28"/>
+  </g>
+</defs>
+<path d="M60 8 106 39V157L60 188 14 157V39Z" transform="translate(0 3)" fill="#0a160e" stroke="#0a160e" stroke-width="5" opacity=".6" filter="url(#rupee-green-shadow)"/>
+<g filter="url(#rupee-green-suede)">
+  <path d="M60 8 106 39V157L60 188 14 157V39Z" transform="translate(0 2)" fill="#267b2b" stroke="#267b2b" stroke-width="4"/>
+  <path d="M60 8 106 39V157L60 188 14 157V39Z" fill="url(#rupee-green-rim)" stroke="#83df55" stroke-width="1.8"/>
+  <path d="M60 22 95 46V150L60 174 25 150V46Z" fill="#23772d" stroke="#23772d" stroke-width="4"/>
+  <path d="M60 22 40 52 25 46Z" fill="#a3ed78"/>
+  <path d="M60 22 95 46 80 52Z" fill="#76dd4c"/>
+  <path d="M25 46 40 52V141L25 150Z" fill="#78df51"/>
+  <path d="M95 46 80 52V141L95 150Z" fill="#239644"/>
+  <path d="M25 150 40 141 60 174Z" fill="#3ca23a"/>
+  <path d="M95 150 80 141 60 174Z" fill="#1a7b32"/>
+  <path d="M60 32 80 52V141L60 164 40 141V52Z" fill="#45ce38"/>
+  <path d="M60 32 40 52V141" stroke="#b2f18c" stroke-width="1.1" opacity=".55"/>
+  <path d="M80 52V141L60 164" stroke="#278f32" stroke-width="1.4" opacity=".6"/>
+  <path d="M60 8 106 39V157L60 188 14 157V39Z" fill="url(#rupee-green-fibers)"/>
+</g>
+<!-- 18 separate stitches: 2 per diagonal, 5 per vertical; no corner wrapping. -->
+<use href="#rupee-green-stitch" transform="translate(70.000 22.750) rotate(34.01935)"/>
+<use href="#rupee-green-stitch" transform="translate(90.000 36.250) rotate(34.01935)"/>
+<use href="#rupee-green-stitch" transform="translate(100.000 54.000) rotate(90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(100.000 76.000) rotate(90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(100.000 98.000) rotate(90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(100.000 120.000) rotate(90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(100.000 142.000) rotate(90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(90.000 159.750) rotate(145.98065)"/>
+<use href="#rupee-green-stitch" transform="translate(70.000 173.250) rotate(145.98065)"/>
+<use href="#rupee-green-stitch" transform="translate(50.000 173.250) rotate(-145.98065)"/>
+<use href="#rupee-green-stitch" transform="translate(30.000 159.750) rotate(-145.98065)"/>
+<use href="#rupee-green-stitch" transform="translate(20.000 142.000) rotate(-90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(20.000 120.000) rotate(-90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(20.000 98.000) rotate(-90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(20.000 76.000) rotate(-90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(20.000 54.000) rotate(-90.00000)"/>
+<use href="#rupee-green-stitch" transform="translate(30.000 36.250) rotate(-34.01935)"/>
+<use href="#rupee-green-stitch" transform="translate(50.000 22.750) rotate(-34.01935)"/>
+</svg>

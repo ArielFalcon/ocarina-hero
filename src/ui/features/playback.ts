@@ -5,6 +5,7 @@ import { readPreferences } from '../preferences';
 import { engine, playButton, playbackRate, practiceStatus, preferences, recorded, repeatPassage, state } from './state';
 import { clearActive, controls } from './pad';
 import { renderTab } from './staff';
+import { songPlaying } from './support';
 
 function highlight(index: number | null): void {
   const next = index === null ? null : state.playbackIndices[index] ?? null;
@@ -22,6 +23,7 @@ export const playback = new Playback(engine, {
   highlight,
   status: (playing) => {
     state.isPlaying = playing;
+    songPlaying('lesson', state.selectedEntry?.id ?? null, playing);
     setPlayLabel(playing ? 'Stop' : 'Play');
   },
   complete: () => {

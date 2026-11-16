@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke-linejoin="round" stroke-linecap="round">
+<title>Glossy red life heart</title>
+<defs>
+<radialGradient id="heart-thanks-body" cx="33%" cy="22%" r="85%"><stop stop-color="#ffb0a0"/><stop offset=".32" stop-color="#fa5653"/><stop offset=".65" stop-color="#ce242e"/><stop offset="1" stop-color="#700f27"/></radialGradient>
+<linearGradient id="heart-thanks-edge" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#ffd4b7"/><stop offset=".33" stop-color="#f38772"/><stop offset=".67" stop-color="#a42432"/><stop offset="1" stop-color="#560e25"/></linearGradient>
+</defs>
+<path d="M50 23C37 5 11 10 7 31 2 53 27 72 50 92 73 72 98 53 93 31 89 10 63 5 50 23Z" fill="url(#heart-thanks-edge)" stroke="#0c1012" stroke-width="4.2"/>
+<path d="M50 31C38 12 17 18 14 34 10 51 31 70 50 84 69 70 90 51 86 34 83 18 62 12 50 31Z" fill="url(#heart-thanks-body)"/>
+<path d="M18 33C20 22 33 20 40 28" stroke="#fff" stroke-opacity=".8" stroke-width="3.7" fill="none"/>
+<ellipse cx="19" cy="40" rx="2" ry="3" fill="#fff" opacity=".65" transform="rotate(15 19 40)"/>
+<path d="M84 47C77 62 62 75 50 84" stroke="#ff9d94" stroke-width="1.5" opacity=".5" fill="none"/>
+</svg>

@@ -7,6 +7,7 @@ import { bindWorkshop } from './features/workshop';
 import { bindSongbook } from './features/songbook';
 import { bindNavigation, restoreView } from './features/navigation';
 import { bindSettings, syncLink } from './features/settings';
+import { bindSupport } from './features/support';
 import { renderTab } from './features/staff';
 
 /** The app's entry: the features own their parts of the page; this wires them in order. */
@@ -23,6 +24,7 @@ for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]'))
   icon.innerHTML = threadIcon(icon.dataset.threadIcon as ThreadIcon);
 }
 bindSettings();
+bindSupport();
 
 restoreView();
 // After the page has loaded and gone idle, so the first paint and the song lists never wait for the drop.

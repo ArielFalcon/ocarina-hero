@@ -3,6 +3,7 @@ import { parseLocation, popularPath, songDocumentTitle, songPath } from '../rout
 import { POPULAR_TITLE } from '../../site/popular';
 import { songTitleQualifier, type SongbookEntry } from '../songbook';
 import { reportPlay } from '../popularity';
+import { songOpened } from './support';
 import { markOpened } from '../progress';
 import { APP_BASE, type AppView, state } from './state';
 import { must } from './dom';
@@ -74,6 +75,7 @@ export function openSong(entry: SongbookEntry, pushHistory = true): void {
     state.practiceMode = false;
     saveProgress(markOpened(state.progress, entry.id, Date.now()));
     reportPlay(entry.id, 'open');
+    songOpened(entry.id);
     runDemo(track);
     showView('lesson', pushHistory);
   };

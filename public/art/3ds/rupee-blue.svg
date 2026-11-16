@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100" stroke-linejoin="round" stroke-linecap="round">
+<title>Glossy blue rupee</title>
+<defs>
+<linearGradient id="rupee-blue-3ds-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b6d4ff"/><stop offset=".34" stop-color="#5795f5"/><stop offset=".7" stop-color="#2663d5"/><stop offset="1" stop-color="#12358d"/></linearGradient>
+<linearGradient id="rupee-blue-3ds-left" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e3eeff"/><stop offset=".33" stop-color="#a2c3ff"/><stop offset=".67" stop-color="#4c7fdf"/><stop offset="1" stop-color="#204eb4"/></linearGradient>
+<linearGradient id="rupee-blue-3ds-right" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6299ec"/><stop offset=".33" stop-color="#265dc3"/><stop offset=".67" stop-color="#123b8e"/><stop offset="1" stop-color="#0b2356"/></linearGradient>
+</defs>
+<path d="M28 5q2-2 4 0l21 15q2 1 2 4v52q0 3-2 4L32 95q-2 2-4 0L7 80q-2-1-2-4V24q0-3 2-4Z" fill="url(#rupee-blue-3ds-face)" stroke="#0c1012" stroke-width="3.4"/>
+<path d="M30 5 19 26v48L6 79V22Z" fill="url(#rupee-blue-3ds-left)"/>
+<path d="m30 5 24 17-13 4Z" fill="#92baff"/>
+<path d="m54 22-13 4v48L30 95l24-16Z" fill="url(#rupee-blue-3ds-right)"/>
+<path d="m6 79 13-5 11 21Z" fill="#2655bb"/>
+<path d="m30 15 11 15v40L30 85 19 70V30Z" fill="url(#rupee-blue-3ds-face)" stroke="#10337c" stroke-width="1.2"/>
+<path d="m30 16-10 15v37" stroke="#fff" stroke-opacity=".7" stroke-width="2" fill="none"/>
+<path d="m11 24 13-10" stroke="#fff" stroke-opacity=".8" stroke-width="2.4"/>
+<path d="m41 33 1 36-12 16" fill="none" stroke="#83aff9" stroke-opacity=".6" stroke-width="1.2"/>
+</svg>

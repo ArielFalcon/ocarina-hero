@@ -99,7 +99,7 @@ export function createHangingLink(host: HTMLElement, options: HangingLinkOptions
     cordScale = Math.max(0.12, cordScale * Math.exp(-CORD_RECOIL * dt));
     const cordTurn = parseFloat(cord.dataset.turn ?? '0');
     paint(falling.x, falling.y, falling.turn, cordScale, cordTurn);
-    if (falling.y > host.clientHeight + figureHeight || fallTime > FALL_CUTOFF_SECONDS) { leave(); return; }
+    if (falling.y > window.innerHeight + figureHeight || fallTime > FALL_CUTOFF_SECONDS) { leave(); return; }
     requestFrame();
   }
 

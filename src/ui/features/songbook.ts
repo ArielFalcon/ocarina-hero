@@ -8,6 +8,7 @@ import { engine, state } from './state';
 import { must } from './dom';
 import { updateLessonHeading } from './staff';
 import { openSong, syncRoute } from './navigation';
+import { songPlaying } from './support';
 
 /** Notes of curated songs are separate files, fetched on demand and warmed when a song is likely to open. */
 export const trackLoader = createTrackLoader(LISTING, sourcesByFile(import.meta.glob<SongData>('../../core/songs/catalogue/*.json', { import: 'default' })));
@@ -55,7 +56,7 @@ function reloadPopular(): Promise<void> {
 
 export const miniPlayer = new MiniPlayer(must('#mini-player'), engine, trackLoader, {
   open: entry => openSong(entry),
-  changed: (id, playing) => catalogue.setNowPlaying(id, playing),
+  changed: (id, playing) => { catalogue.setNowPlaying(id, playing); songPlaying('preview', id, playing); },
 });
 
 export function bindSongbook(): void {

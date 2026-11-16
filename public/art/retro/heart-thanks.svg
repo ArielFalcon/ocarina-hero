@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke-linejoin="round" stroke-linecap="round">
+<title>Faceted red life heart</title>
+<path d="m50 24 12-12h17l13 13 2 19-12 19-32 30-32-30L6 44l2-19 13-13h17Z" fill="#c8262a" stroke="#120e08" stroke-width="6"/>
+<path d="m8 25 13-13h17l12 12v11L33 24H23l-6 9-1 13L6 44Z" fill="#f47b67"/>
+<path d="m50 24 12-12h17l13 13-14-1H67L50 35Z" fill="#e9544b"/>
+<path d="m92 25 2 19-12 19-32 30V78l25-24 7-15-4-15Z" fill="#871c29"/>
+<path d="m6 44 10 2 10 15 24 17v15L18 63Z" fill="#a31f28"/>
+<path d="m16 46 1-13 6-9h10l-9 9-2 13Z" fill="#f6b39a"/>
+<path d="m50 35 17-11h11l4 15-7 15-25 24-24-17-10-15 6 0 2-13 9-9Z" fill="#d93636"/>
+</svg>

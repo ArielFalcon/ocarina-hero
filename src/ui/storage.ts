@@ -6,6 +6,11 @@ function local(): StorageLike | null {
   try { return window.localStorage; } catch { return null; }
 }
 
+/** The browser's session storage, or undefined where the browser blocks it. */
+export function sessionStore(): Storage | undefined {
+  try { return window.sessionStorage; } catch { return undefined; }
+}
+
 /**
  * One persisted JSON value. Each key's owner passes the parser that validates it; a missing value
  * reaches the parser as null, and an unreadable one (bad JSON, blocked storage) does too, flagged.

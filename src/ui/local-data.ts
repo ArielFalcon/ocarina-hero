@@ -3,11 +3,12 @@ import { PENDING_PLAYS_STORAGE } from './play-batch';
 import { PREFERENCES_STORAGE } from './preferences';
 import { PROGRESS_STORAGE } from './progress';
 import { PLATFORM_STORAGE } from './platforms';
+import { SUPPORTER_STORAGE } from './supporter';
 
 export const SAVED_STORAGE = 'ocarina.saved.v1';
 
 /** Every key the app writes to browser storage; "Clear local data" removes exactly these. */
-export const LOCAL_DATA_KEYS = [SAVED_STORAGE, PROGRESS_STORAGE, KEY_BINDINGS_STORAGE, PREFERENCES_STORAGE, PLATFORM_STORAGE, PENDING_PLAYS_STORAGE] as const;
+export const LOCAL_DATA_KEYS = [SAVED_STORAGE, PROGRESS_STORAGE, KEY_BINDINGS_STORAGE, PREFERENCES_STORAGE, PLATFORM_STORAGE, PENDING_PLAYS_STORAGE, SUPPORTER_STORAGE] as const;
 
 const EXPORT_APP = 'ocarina-hero';
 

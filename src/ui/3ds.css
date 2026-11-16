@@ -184,7 +184,7 @@
 :root[data-theme='3ds'] .pull-note-face { transform-box: fill-box; transform-origin: center; opacity: clamp(.25, calc((var(--pull-progress, 0) * 5 - var(--i) + .001) * 1000), 1); }
 :root[data-theme='3ds'] .pull-refresh.is-refreshing .pull-note-face { opacity: .25; animation: pull-play 1.5s steps(1, end) infinite; animation-delay: calc((var(--i) - 1) * .3s); }
 @media (prefers-reduced-motion: reduce) { :root[data-theme='3ds'] .pull-refresh.is-refreshing .pull-note-face { animation: none; opacity: 1; } }
-:root[data-theme='3ds'] .mini-player::before { padding: 3px; }
+:root[data-theme='3ds'] :is(.mini-player, .support-card)::before { padding: 3px; }
 
 @media (forced-colors: active) {
   :root[data-theme='3ds'] .embroidered, :root[data-theme='3ds'] .stitched-label { text-shadow: none; }

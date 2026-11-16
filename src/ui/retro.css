@@ -179,7 +179,7 @@
 :root[data-theme='retro'] .pull-refresh.is-armed { box-shadow: inset 2px 2px 0 #8a7f63, inset -2px -2px 0 #2f2a1f, 0 0 0 2px var(--n64-yellow), 0 0 0 3px var(--outline); }
 :root[data-theme='retro'] .pull-refresh.is-refreshing .pull-note-face { opacity: .25; animation: pull-play 1.5s steps(1, end) infinite; animation-delay: calc((var(--i) - 1) * .3s); }
 @media (prefers-reduced-motion: reduce) { :root[data-theme='retro'] .pull-refresh.is-refreshing .pull-note-face { animation: none; opacity: 1; } }
-:root[data-theme='retro'] .mini-player::before { padding: 3px; }
+:root[data-theme='retro'] :is(.mini-player, .support-card)::before { padding: 3px; }
 
 @media (forced-colors: active) {
   :root[data-theme='retro'] .embroidered, :root[data-theme='retro'] .stitched-label { text-shadow: none; }

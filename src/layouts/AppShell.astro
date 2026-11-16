@@ -8,6 +8,7 @@ import ThreadFilters from '../components/ThreadFilters.astro';
 import Head from '../components/Head.astro';
 import { assetUrl, type PageHead } from '../site/site';
 import { DEFAULT_PLATFORM } from '../ui/platforms';
+import { TIPS } from '../ui/tips';
 import type { SongLink, SongPage } from '../site/song-pages';
 import '../ui/styles.css';
 import '../ui/retro.css';
@@ -46,7 +47,7 @@ const { page, song, related, popular, directory } = Astro.props;
           <a class="brand" href="#catalog"><img class="brand-icon" src={assetUrl(DEFAULT_PLATFORM.art.brand)} data-art="brand" width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
           <span class="head-actions">
           <a class="action settings-link" href="#settings" data-view-link="settings" aria-label="Settings"><span data-thread-icon="settings"></span></a>
-          <a class="action repo-link" href="https://github.com/ArielFalcon/ocarina-hero" target="_blank" rel="noopener" aria-label="Star Ocarina Hero on GitHub (opens in a new tab)"><span data-thread-icon="star"></span><span><span class="repo-long">Star on </span>GitHub</span></a>
+          <span class="support-anchor"><button id="support-button" class="action support-link" type="button" aria-controls="support-card" aria-expanded="false"><span class="support-thread-heart" data-thread-icon="heart"></span><img class="support-art-heart" src={assetUrl(DEFAULT_PLATFORM.art.thanksHeart)} data-art="thanksHeart" width="20" height="20" alt="" aria-hidden="true" draggable="false" hidden /><span class="support-label">Support</span></button></span>
           </span>
         </header>
         <CatalogView hidden={!!song || !!popular} />
@@ -58,6 +59,23 @@ const { page, song, related, popular, directory } = Astro.props;
       </main>
       <footer class="menu-footer">
         <img class="menu-ornament" src={assetUrl(DEFAULT_PLATFORM.art.ornament)} data-art="ornament" width="1280" height="546" alt="" aria-hidden="true" draggable="false" decoding="async" />
+        <section id="support-card" class="support-card" role="dialog" aria-modal="false" aria-labelledby="support-ask-title" hidden>
+          <button id="support-close" class="patch-button support-close" type="button" aria-label="Close"><span data-thread-icon="close"></span></button>
+          <div class="support-ask">
+            <h2 id="support-ask-title" class="support-title embroidered">Ocarina Hero is totally free; no ads, no sign up.</h2>
+            <p class="support-line">Tips allow me to keep it up!</p>
+            <div class="support-amounts">
+              {TIPS.map(tip => <a class="action support-amount" href={tip.url} data-tip={tip.euros} aria-label={`Tip ${tip.euros} euros`}><img src={assetUrl(DEFAULT_PLATFORM.art[tip.art])} data-art={tip.art} width="20" height="34" alt="" aria-hidden="true" draggable="false" /><span class="stitched-label">{tip.euros}</span></a>)}
+            </div>
+            <button id="support-later" class="text-button support-later" type="button">Not now</button>
+          </div>
+          <div class="support-thanks" hidden>
+            <img class="support-thanks-heart" src={assetUrl(DEFAULT_PLATFORM.art.thanksHeart)} data-art="thanksHeart" width="56" height="56" alt="" aria-hidden="true" draggable="false" />
+            <h2 id="support-thanks-title" class="support-title embroidered">Thank you!</h2>
+            <p class="support-line">You help keep Ocarina Hero free for everyone.</p>
+          </div>
+          <p id="support-status" class="visually-hidden" role="status" aria-live="polite"></p>
+        </section>
         <section id="mini-player" class="mini-player" aria-label="Quick play" hidden>
           <div class="mini-head">
             <button id="mini-toggle" class="patch-button mini-toggle" type="button" aria-label="Play"></button>

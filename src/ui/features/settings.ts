@@ -5,6 +5,7 @@ import { refreshThreadIcons } from '../thread-icons';
 import { onPlatformChange, platform, setPlatform, syncStaticArt } from '../platform';
 import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from '../local-data';
 import { readPreferences } from '../preferences';
+import { sessionStore } from '../storage';
 import { APP_BASE, bendsInput, playbackRate, preferences, simplifyInput, state, tab } from './state';
 import { downloadJson, must } from './dom';
 import { applyBend, buildPad, renderGamepadStatus, updateHint } from './pad';
@@ -29,10 +30,9 @@ const preferenceInputs = {
   link: must<HTMLInputElement>('#pref-link'),
 };
 
-/** Session storage can be blocked; without it the figure simply returns on every load. */
-const session: Storage | undefined = (() => { try { return window.sessionStorage; } catch { return undefined; } })();
+const session = sessionStore();
 
-const hangingLink = createHangingLink(must('.app'), {
+const hangingLink = createHangingLink(must('.support-anchor'), {
   src: () => `${APP_BASE}${platform().assets.hangingFigure}`,
   onGone() { markGone(session); preferenceInputs.link.checked = false; },
   onRestore() { clearGone(session); preferenceInputs.link.checked = true; },

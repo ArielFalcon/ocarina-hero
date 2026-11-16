@@ -28,3 +28,28 @@ export function readPreferences(stored: unknown): Preferences {
     link: flag('link'),
   };
 }
+
+export type PreferencesListener = (next: Preferences, previous: Preferences, persisted: boolean) => void;
+
+/** The single owner of the preferences: every input reads and writes through it and re-renders on its change. */
+export interface PreferenceStore {
+  get(): Preferences;
+  /** Apply a change for this session and persist it; listeners hear whether it was persisted. */
+  update(change: Partial<Preferences>): void;
+  subscribe(listener: PreferencesListener): void;
+}
+
+export function createPreferenceStore(initial: Preferences, persist: (value: Preferences) => boolean): PreferenceStore {
+  let current = initial;
+  const listeners: PreferencesListener[] = [];
+  return {
+    get: () => current,
+    update(change) {
+      const previous = current;
+      current = { ...current, ...change };
+      const persisted = persist(current);
+      for (const listener of listeners) listener(current, previous, persisted);
+    },
+    subscribe(listener) { listeners.push(listener); },
+  };
+}

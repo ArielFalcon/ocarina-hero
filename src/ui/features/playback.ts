@@ -2,10 +2,9 @@ import { Playback } from '../playback';
 import { FREE_PLAY_TEMPO_BPM, playbackSelection } from '../lesson';
 import { threadIcon } from '../thread-icons';
 import { readPreferences } from '../preferences';
-import { engine, playButton, playbackRate, practiceStatus, recorded, repeatPassage, state } from './state';
+import { engine, playButton, playbackRate, practiceStatus, preferences, recorded, repeatPassage, state } from './state';
 import { clearActive, controls } from './pad';
 import { renderTab } from './staff';
-import { savePreferences } from './settings';
 
 function highlight(index: number | null): void {
   const next = index === null ? null : state.playbackIndices[index] ?? null;
@@ -57,8 +56,9 @@ export function replay(): void {
   const selection = playbackSelection(arrangement, state.passages[state.passageIndex] ?? [], cursor, !!state.current && repeatPassage.checked);
   state.playbackIndices = selection.indices;
   if (!state.playbackIndices.length) return;
-  state.playbackBeatMs = 60000 / (selection.arrangement.tempoBpm * Number(playbackRate.value));
-  void playback.start(selection.arrangement, Number(playbackRate.value));
+  const rate = Number(preferences.get().rate);
+  state.playbackBeatMs = 60000 / (selection.arrangement.tempoBpm * rate);
+  void playback.start(selection.arrangement, rate);
 }
 
 export function bindPlayback(): void {
@@ -67,9 +67,11 @@ export function bindPlayback(): void {
     else replay();
   });
 
-  playbackRate.addEventListener('change', () => {
-    savePreferences({ ...state.preferences, rate: readPreferences({ rate: playbackRate.value }).rate });
-    const speed = playbackRate.selectedOptions[0]?.text ?? playbackRate.value;
+  playbackRate.addEventListener('change', () => preferences.update({ rate: readPreferences({ rate: playbackRate.value }).rate }));
+
+  preferences.subscribe((next, previous) => {
+    if (next.rate === previous.rate) return;
+    const speed = [...playbackRate.options].find(option => option.value === next.rate)?.text ?? next.rate;
     if (playback.playing) {
       replay();
       practiceStatus.textContent = `Playing at ${speed} speed.`;

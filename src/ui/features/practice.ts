@@ -4,6 +4,7 @@ import { centreIn, haptic, retrigger, ribbon, sparkBurst, stitchRipple } from '.
 import { instruction } from '../platform';
 import { nextSong } from '../featured';
 import { completedIds, markPractice, PROGRESS_STORAGE, type Progress } from '../progress';
+import { writeStored } from '../storage';
 import { bends, comboBadge, nextSongButton, pad, practiceLine, practiceStatus, progressTrack, recorded, repeatPassage, songComplete, state, statusSlot, tab } from './state';
 import { clearActive, controls } from './pad';
 import { refreshPracticeStatus, renderLessonMeta, renderTab } from './staff';
@@ -74,8 +75,7 @@ function rewardHit(point: { x: number; y: number } | null, button: ControllerBut
 
 export function saveProgress(next: Progress): void {
   state.progress = next;
-  try { localStorage.setItem(PROGRESS_STORAGE, JSON.stringify(state.progress)); }
-  catch { catalogue.noteSessionOnly(); }
+  if (!writeStored(PROGRESS_STORAGE, state.progress)) catalogue.noteSessionOnly();
 }
 
 function recordPractice(finished: boolean): void {

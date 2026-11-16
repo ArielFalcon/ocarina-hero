@@ -8,6 +8,7 @@ import { journey } from './journey';
 import { missedSearchNoter } from '../core/search-text';
 import { reportMissedSearch, type PopularEntry } from './popularity';
 import { SAVED_STORAGE } from './local-data';
+import { readStored, writeStored } from './storage';
 import { DIFFICULTY_NAMES, escapeHtml, playsHtml, rankHtml, sealMarkup, songRowHtml } from '../site/song-row';
 
 /** Below this many results the list is short enough to scan, so the letter rail is hidden. */
@@ -208,10 +209,9 @@ export class SongbookView {
       this.setDifficulty(Number(step.dataset.step));
       this.difficultyFold.fold();
     });
-    try {
-      const value: unknown = JSON.parse(localStorage.getItem(SAVED_STORAGE) ?? '[]');
-      if (Array.isArray(value)) this.saved = new Set(value.filter((id): id is string => typeof id === 'string'));
-    } catch { this.sessionOnly = true; }
+    const stored = readStored(SAVED_STORAGE, value => Array.isArray(value) ? value.filter((id): id is string => typeof id === 'string') : []);
+    this.saved = new Set(stored.value);
+    if (!stored.readable) this.sessionOnly = true;
     this.search.addEventListener('input', () => {
       if (!this.desktop.matches) this.filters.open = false;
       this.filterAfterPaint();
@@ -366,8 +366,7 @@ export class SongbookView {
   }
 
   private savedEdited(): void {
-    try { localStorage.setItem(SAVED_STORAGE, JSON.stringify([...this.saved])); }
-    catch { this.sessionOnly = true; }
+    if (!writeStored(SAVED_STORAGE, [...this.saved])) this.sessionOnly = true;
     this.updateSavedCard();
     this.renderCategoryToggle();
     this.renderResults();

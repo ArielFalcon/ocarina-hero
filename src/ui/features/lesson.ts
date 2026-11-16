@@ -1,6 +1,6 @@
 import { shareUrl } from '../route';
 import { resetPassage } from '../lesson';
-import { APP_BASE, analysisDownload, bendsInput, fileInput, fileName, nextSongButton, passageSelect, practiceStatus, recorded, repeatPassage, simplifyInput, songComplete, songHint, state, tab, take } from './state';
+import { APP_BASE, analysisDownload, bendsInput, fileInput, fileName, nextSongButton, passageSelect, practiceStatus, recorded, preferences, repeatPassage, simplifyInput, songComplete, songHint, state, tab, take } from './state';
 import { must } from './dom';
 import { closeAudioEditor } from './workshop';
 import { clearActive, controls } from './pad';
@@ -9,7 +9,6 @@ import { resetCombo, selectPassage } from './practice';
 import { playback, replay, stopPlayback } from './playback';
 import { catalogue } from './songbook';
 import { openSong, showView } from './navigation';
-import { savePreferences } from './settings';
 
 let shareResetTimer: number | undefined;
 
@@ -48,14 +47,12 @@ export function bindLesson(): void {
     songHint.textContent = 'Free play recording.';
   });
 
-  bendsInput.addEventListener('change', () => {
-    savePreferences({ ...state.preferences, bends: bendsInput.checked });
-    if (state.current) renderSource(state.current);
-  });
+  bendsInput.addEventListener('change', () => preferences.update({ bends: bendsInput.checked }));
 
-  simplifyInput.addEventListener('change', () => {
-    savePreferences({ ...state.preferences, simplify: simplifyInput.checked });
-    if (state.current) renderSource(state.current);
+  simplifyInput.addEventListener('change', () => preferences.update({ simplify: simplifyInput.checked }));
+
+  preferences.subscribe((next, previous) => {
+    if ((next.bends !== previous.bends || next.simplify !== previous.simplify) && state.current) renderSource(state.current);
   });
 
   must('#save-song').addEventListener('click', () => {

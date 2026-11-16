@@ -3,9 +3,9 @@ import { clearGone, goneThisSession, markGone } from '../rope';
 import { setPracticeFeedback } from '../practice-fx';
 import { refreshThreadIcons } from '../thread-icons';
 import { onPlatformChange, platform, setPlatform, syncStaticArt } from '../platform';
-import { PREFERENCES_STORAGE, type Preferences } from '../preferences';
 import { LOCAL_DATA_KEYS, parseSavedExport, savedExport } from '../local-data';
-import { APP_BASE, bendsInput, playbackRate, simplifyInput, state, tab } from './state';
+import { readPreferences } from '../preferences';
+import { APP_BASE, bendsInput, playbackRate, preferences, simplifyInput, state, tab } from './state';
 import { downloadJson, must } from './dom';
 import { applyBend, buildPad, renderGamepadStatus, updateHint } from './pad';
 import { renderBindings } from './keyboard';
@@ -39,25 +39,20 @@ const hangingLink = createHangingLink(must('.app'), {
 });
 
 export function syncLink(): void {
-  if (state.preferences.link) hangingLink.show(goneThisSession(session) ? 'snapped' : 'hanging');
+  if (preferences.get().link) hangingLink.show(goneThisSession(session) ? 'snapped' : 'hanging');
   else hangingLink.hide();
 }
 
+/** Every input that shows a preference, in Settings and in the lesson options, reflects the store. */
 function showPreferences(): void {
-  bendsInput.checked = preferenceInputs.bends.checked = state.preferences.bends;
-  simplifyInput.checked = preferenceInputs.simplify.checked = state.preferences.simplify;
-  playbackRate.value = preferenceInputs.rate.value = state.preferences.rate;
-  preferenceInputs.effects.checked = state.preferences.effects;
-  preferenceInputs.haptics.checked = state.preferences.haptics;
-  preferenceInputs.link.checked = state.preferences.link && !goneThisSession(session);
-  setPracticeFeedback(state.preferences);
-}
-
-export function savePreferences(next: Preferences): void {
-  state.preferences = next;
-  showPreferences();
-  try { localStorage.setItem(PREFERENCES_STORAGE, JSON.stringify(state.preferences)); }
-  catch { preferenceStatus.textContent = 'Preferences apply for this session; browser storage is unavailable.'; }
+  const current = preferences.get();
+  bendsInput.checked = preferenceInputs.bends.checked = current.bends;
+  simplifyInput.checked = preferenceInputs.simplify.checked = current.simplify;
+  playbackRate.value = preferenceInputs.rate.value = current.rate;
+  preferenceInputs.effects.checked = current.effects;
+  preferenceInputs.haptics.checked = current.haptics;
+  preferenceInputs.link.checked = current.link && !goneThisSession(session);
+  setPracticeFeedback(current);
 }
 
 const dataStatus = must<HTMLParagraphElement>('#data-status');
@@ -88,23 +83,26 @@ export function bindSettings(): void {
 
   showPreferences();
 
+  preferences.subscribe((_next, _previous, persisted) => {
+    showPreferences();
+    if (!persisted) preferenceStatus.textContent = 'Preferences apply for this session; browser storage is unavailable.';
+  });
+
   preferenceInputs.haptics.closest('label')!.hidden = !('vibrate' in navigator);
 
-  for (const [preference, lessonInput] of [[preferenceInputs.bends, bendsInput], [preferenceInputs.simplify, simplifyInput], [preferenceInputs.rate, playbackRate]] as const) {
-    preference.addEventListener('change', () => {
-      if (preference instanceof HTMLInputElement) (lessonInput as HTMLInputElement).checked = preference.checked;
-      else lessonInput.value = preference.value;
-      lessonInput.dispatchEvent(new Event('change'));
-    });
-  }
+  preferenceInputs.bends.addEventListener('change', () => preferences.update({ bends: preferenceInputs.bends.checked }));
 
-  preferenceInputs.effects.addEventListener('change', () => savePreferences({ ...state.preferences, effects: preferenceInputs.effects.checked }));
+  preferenceInputs.simplify.addEventListener('change', () => preferences.update({ simplify: preferenceInputs.simplify.checked }));
 
-  preferenceInputs.haptics.addEventListener('change', () => savePreferences({ ...state.preferences, haptics: preferenceInputs.haptics.checked }));
+  preferenceInputs.rate.addEventListener('change', () => preferences.update({ rate: readPreferences({ rate: preferenceInputs.rate.value }).rate }));
+
+  preferenceInputs.effects.addEventListener('change', () => preferences.update({ effects: preferenceInputs.effects.checked }));
+
+  preferenceInputs.haptics.addEventListener('change', () => preferences.update({ haptics: preferenceInputs.haptics.checked }));
 
   preferenceInputs.link.addEventListener('change', () => {
     if (preferenceInputs.link.checked) clearGone(session);
-    savePreferences({ ...state.preferences, link: preferenceInputs.link.checked });
+    preferences.update({ link: preferenceInputs.link.checked });
     syncLink();
   });
 

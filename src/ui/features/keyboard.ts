@@ -2,6 +2,7 @@ import { pitchForButton, type ControllerButton } from '../../core/pitches';
 import { buttonIcon, modifierIcon } from '../controller-icons';
 import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, KEYBOARD_ACTIONS, keyLabel, handleKeyDown, type KeyboardAction } from '../keyboard';
 import { bendName, buttonName } from '../platform';
+import { writeStored } from '../storage';
 import { bends, pad, state } from './state';
 import { must } from './dom';
 import { clearActive, controls } from './pad';
@@ -40,10 +41,9 @@ export function renderBindings(): void {
 }
 
 function saveBindings(): void {
-  try {
-    localStorage.setItem(KEY_BINDINGS_STORAGE, JSON.stringify(state.bindings));
-    must('#keyboard-status').textContent = 'Keyboard mapping saved.';
-  } catch { must('#keyboard-status').textContent = 'Mapping applies for this session; browser storage is unavailable.'; }
+  must('#keyboard-status').textContent = writeStored(KEY_BINDINGS_STORAGE, state.bindings)
+    ? 'Keyboard mapping saved.'
+    : 'Mapping applies for this session; browser storage is unavailable.';
 }
 
 export function cancelBinding(): void {

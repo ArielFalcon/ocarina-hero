@@ -1,4 +1,4 @@
-import { type KeyBindings, DEFAULT_BINDINGS, KEY_BINDINGS_STORAGE, readBindings, type KeyboardAction } from '../keyboard';
+import { type KeyBindings, KEY_BINDINGS_STORAGE, readBindings, type KeyboardAction } from '../keyboard';
 import { OcarinaEngine } from '../../audio/engine';
 import { platform } from '../platform';
 import type { Arrangement, Note } from '../../core/ir';
@@ -8,7 +8,8 @@ import type { AudioFragmentEditor } from '../audio-editor';
 import { FreePlayTake, type Combo } from '../lesson';
 import type { SongbookEntry } from '../songbook';
 import { PROGRESS_STORAGE, readProgress, type Progress } from '../progress';
-import { DEFAULT_PREFERENCES, PREFERENCES_STORAGE, readPreferences, type Preferences } from '../preferences';
+import { createPreferenceStore, PREFERENCES_STORAGE, readPreferences } from '../preferences';
+import { readStored, writeStored } from '../storage';
 import { must } from './dom';
 
 export interface Source {
@@ -28,6 +29,9 @@ export type AppView = 'catalog' | 'popular' | 'lesson' | 'workshop' | 'settings'
 export const APP_BASE = import.meta.env.BASE_URL;
 
 export const engine = new OcarinaEngine(() => platform().tuning);
+
+/** Lesson and practice choices; the lesson options and Settings both edit them through this store. */
+export const preferences = createPreferenceStore(readStored(PREFERENCES_STORAGE, readPreferences).value, value => writeStored(PREFERENCES_STORAGE, value));
 
 export const recorded: Note[] = [];
 
@@ -99,7 +103,6 @@ interface AppState {
   progress: Progress;
   bindings: KeyBindings;
   bindingTarget: KeyboardAction | null;
-  preferences: Preferences;
   /** Bumped whenever a loading recording is abandoned, so a slower earlier load drops its result. */
   audioLoadVersion: number;
   importer: SourceImporter | undefined;
@@ -124,19 +127,9 @@ export const state: AppState = {
   repeatingTimer: undefined,
   isPlaying: false,
   bend: 0,
-  progress: (() => {
-    try { return readProgress(JSON.parse(localStorage.getItem(PROGRESS_STORAGE) ?? 'null')); }
-    catch { return {}; }
-  })(),
-  bindings: (() => {
-    try { return readBindings(JSON.parse(localStorage.getItem(KEY_BINDINGS_STORAGE) ?? 'null')); }
-    catch { return { ...DEFAULT_BINDINGS }; }
-  })(),
+  progress: readStored(PROGRESS_STORAGE, readProgress).value,
+  bindings: readStored(KEY_BINDINGS_STORAGE, readBindings).value,
   bindingTarget: null,
-  preferences: (() => {
-    try { return readPreferences(JSON.parse(localStorage.getItem(PREFERENCES_STORAGE) ?? 'null')); }
-    catch { return DEFAULT_PREFERENCES; }
-  })(),
   audioLoadVersion: 0,
   importer: undefined,
   editor: undefined,

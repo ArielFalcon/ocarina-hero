@@ -11,7 +11,7 @@ import { instruction, tabInstructions } from '../platform';
 import type { SongbookEntry } from '../songbook';
 import { songArticleHtml } from '../../site/song-article';
 import { relatedSongs, songGroups, type SongGroup } from '../../site/song-pages';
-import { APP_BASE, type Source, analysisDownload, bends, bendsInput, fileName, pad, passageSelect, playButton, practiceStatus, progressTrack, recorded, simplifyInput, songComplete, songHint, state, tab } from './state';
+import { APP_BASE, type Source, analysisDownload, bends, bendsInput, fileName, pad, passageSelect, playButton, practiceStatus, preferences, progressTrack, recorded, simplifyInput, songComplete, songHint, state, tab } from './state';
 import { must } from './dom';
 import { closeAudioEditor, isImporting } from './workshop';
 import { renderCombo } from './practice';
@@ -114,8 +114,8 @@ export function renderSource(source: Source, play = false): void {
   bendsInput.disabled = fixed;
   bendsInput.title = fixed ? 'Fixed arrangements preserve their notes and timing.' : '';
   const prepared = prepareMelody(source, {
-    simplify: simplifyInput.checked,
-    maxBend: bendsInput.checked ? 2 : 0,
+    simplify: preferences.get().simplify,
+    maxBend: preferences.get().bends ? 2 : 0,
   });
 
   const removed = prepared.removed ? ` · ${prepared.removed} ornaments removed` : '';

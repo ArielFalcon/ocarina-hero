@@ -3,20 +3,21 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { DEMOS } from './catalogue-loader';
 import { songDocumentTitle } from '../src/ui/route';
-import { createSongbookEntries, songMeta } from '../src/ui/songbook';
+import { createSongbookEntries, songTitleQualifier } from '../src/ui/songbook';
 import { homeHead, jsonLd } from '../src/site/site';
 import { homeDirectoryHtml, llmsTxt, relatedSongs, robotsTxt, sitemapXml, songGroups, songHead, songPageOf } from '../src/site/song-pages';
 
 const SITE = 'https://ocarinahero.app/';
-const song = { id: 'song-of-storms', title: 'Song of "Storms" & Rain', meta: 'Zelda · Ocarina of Time', universe: 'The Legend of <Zelda>', details: 'Ocarina of Time · 23 notes', tab: 'L R X | L + D-pad up' };
+const song = { id: 'song-of-storms', title: 'Song of "Storms" & Rain', meta: 'Zelda · Ocarina of Time', qualifier: 'Ocarina of Time', universe: 'The Legend of <Zelda>', details: 'Ocarina of Time · 23 notes', tab: 'L R X | L + D-pad up' };
 const graphItem = (data: unknown, type: string) => (data as { '@graph': { '@type': string }[] })['@graph'].find(item => item['@type'] === type) as Record<string, any>;
 
 test('a song page carries its own title, description, canonical address and share preview', () => {
   const head = songHead(song, SITE);
-  assert.equal(head.title, 'Song of "Storms" & Rain (Zelda · Ocarina of Time) · Zelda ocarina tab · Ocarina Hero');
+  assert.equal(head.title, 'Song of "Storms" & Rain (Ocarina of Time) – Zelda Ocarina Tabs & Notes');
   assert.equal(head.shareTitle, head.title);
   assert.equal(head.url, 'https://ocarinahero.app/song/song-of-storms/');
-  assert.ok(head.description.includes('Song of "Storms" & Rain') && head.description.includes('Zelda · Ocarina of Time'));
+  assert.ok(head.description.startsWith('How to play Song of "Storms" & Rain (Zelda · Ocarina of Time) on the Zelda ocarina'));
+  assert.ok(head.description.includes('tabs and notes'));
 });
 
 test('the page of a bundled song carries the tab the lesson opens with', () => {
@@ -51,8 +52,15 @@ test('the pages.dev address is kept out of search results, the custom domain is 
 });
 
 test('no two bundled songs share a page title', () => {
-  const titles = createSongbookEntries(DEMOS).map(song => songDocumentTitle(song.title, songMeta(song)));
+  const titles = createSongbookEntries(DEMOS).map(song => songDocumentTitle(song.title, songTitleQualifier(song)));
   assert.deepEqual(titles.filter((title, index) => titles.indexOf(title) !== index), []);
+});
+
+test('a page title tells a song apart by its version, else its artist, else its universe', () => {
+  const entry = (fields: object) => ({ title: 'Main Theme', universe: 'The Legend of Zelda', ...fields }) as Parameters<typeof songTitleQualifier>[0];
+  assert.equal(songTitleQualifier(entry({ version: "Majora's Mask", artist: 'Koji Kondo' })), "Majora's Mask");
+  assert.equal(songTitleQualifier(entry({ artist: 'Koji Kondo' })), 'Koji Kondo');
+  assert.equal(songTitleQualifier(entry({})), 'Zelda');
 });
 
 test('every bundled song id is safe as a directory and URL segment', () => {

@@ -30,7 +30,7 @@ import { actionForCode, assignKey, BEND_ACTIONS, DEFAULT_BINDINGS, KEY_BINDINGS_
 import { refreshThreadIcons, threadIcon, type ThreadIcon } from './thread-icons';
 import { controlScheme, currentTheme, setTheme, syncStaticArt } from './theme';
 import { SongbookView } from './songbook-view';
-import { songMeta, type SongbookEntry } from './songbook';
+import { songMeta, songTitleQualifier, type SongbookEntry } from './songbook';
 import { songArticleHtml } from '../site/song-article';
 import { relatedSongs, songGroups, type SongGroup } from '../site/song-pages';
 import { nextSong } from './featured';
@@ -1070,7 +1070,7 @@ function showView(next: AppView, pushHistory = true): void {
   if (next === 'lesson') watchGamepads();
   if (returningToCatalog) catalogue.refresh();
   if (next === 'catalog' || next === 'popular') refreshPopular();
-  document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title, songMeta(selectedEntry)) : `${current.title} · Ocarina Hero`;
+  document.title = next !== 'lesson' || !current ? 'Ocarina Hero' : selectedEntry ? songDocumentTitle(selectedEntry.title, songTitleQualifier(selectedEntry)) : `${current.title} · Ocarina Hero`;
   scroller.scrollTop = returningToCatalog ? catalogScroll : 0;
 }
 

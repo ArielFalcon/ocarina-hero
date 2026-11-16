@@ -512,6 +512,11 @@ export function universeLabel(universe: string): string {
 }
 
 /** One-line song detail: universe, then artist and version when present. */
+/** What a page title puts in brackets so songs that share a name stay apart: the version, else the artist, else the universe. */
+export function songTitleQualifier(entry: Pick<SongbookEntry, 'universe' | 'artist' | 'version'>): string {
+  return entry.version ?? entry.artist ?? universeLabel(entry.universe);
+}
+
 export function songMeta(entry: SongbookEntry): string {
   return [universeLabel(entry.universe), entry.artist, entry.version].filter(Boolean).join(' · ');
 }

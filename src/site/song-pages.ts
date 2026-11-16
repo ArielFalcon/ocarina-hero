@@ -3,7 +3,7 @@ import type { DemoTrack } from '../core/demo';
 import { toTabText } from '../core/tab';
 import { createPassages, lessonDetails } from '../ui/lesson';
 import { songDocumentTitle, songPath } from '../ui/route';
-import { openingNotes, songMeta, type SongbookEntry } from '../ui/songbook';
+import { openingNotes, songMeta, songTitleQualifier, type SongbookEntry } from '../ui/songbook';
 import type { PageHead } from './site';
 
 export interface SongPage {
@@ -11,6 +11,8 @@ export interface SongPage {
   readonly title: string;
   /** Universe, artist and version, as shown under the title in the Songbook. */
   readonly meta: string;
+  /** Tells the page title apart from songs that share its name. */
+  readonly qualifier: string;
   /** Shown above the lesson title. */
   readonly universe: string;
   /** Version and size of the arrangement, as a first visit shows them under the lesson title. */
@@ -30,6 +32,7 @@ export function songPageOf(song: SongbookEntry & { track: DemoTrack }): SongPage
     id: song.id,
     title: song.title,
     meta: songMeta(song),
+    qualifier: songTitleQualifier(song),
     universe: song.universe,
     details: lessonDetails(song.version, notes.length, passageCount).join(' · '),
     version: song.version, noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
@@ -90,8 +93,8 @@ export function robotsTxt(siteUrl: string): string {
 
 /** What a song page tells search engines and link previews: title, description, canonical address and structured data; `modified` is the day (YYYY-MM-DD) its notes last changed, when known. */
 export function songHead(song: SongPage, siteUrl: string, modified?: string): PageHead {
-  const title = songDocumentTitle(song.title, song.meta);
-  const description = `Learn to play ${song.title} (${song.meta}) on the Zelda ocarina of Ocarina of Time: follow the button tab, listen to it and practice one passage at a time. Free, in your browser.`;
+  const title = songDocumentTitle(song.title, song.qualifier);
+  const description = `How to play ${song.title} (${song.meta}) on the Zelda ocarina: button tabs and notes for the ocarina of Ocarina of Time. Listen, then practice one passage at a time. Free, in your browser.`;
   const url = songUrl(siteUrl, song.id);
   return {
     title, description, url, shareTitle: title,

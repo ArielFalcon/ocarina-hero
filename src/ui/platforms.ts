@@ -61,7 +61,7 @@ const TAPESTRY: Platform = {
   picker: { title: '2026 remake', detail: 'Woven tapestry with Switch 2 controls', art: 'art/theme/keycard-large.svg' },
 };
 
-/** The 2011 3DS release: the glossy touch-screen look. */
+/** The 2011 3DS release: the touch-screen subscreen look. */
 const THREEDS: Platform = {
   id: '3ds',
   controls: THREEDS_CONTROLS,

@@ -3,7 +3,6 @@
  * panels framed in wood, cracked marble rims, outlined white lettering and corner-bracket cursors.
  * Everything here is scoped to :root[data-theme='3ds']; the other themes are untouched.
  */
-@font-face { font-family: 'Commissioner'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/commissioner-latin.woff2') format('woff2'); }
 
 :root[data-theme='3ds'] {
   --bg: #1a2429;
@@ -76,8 +75,8 @@
 :root[data-theme='3ds'] .app::after { box-shadow: inset 0 0 0 3px var(--wood-dark), inset 0 0 0 5px var(--wood), inset 0 0 90px 10px #05080a99; }
 :root[data-theme='3ds'] .tapestry-edge { background: url('/art/3ds/band.svg') top left / auto 100% repeat-x; }
 :root[data-theme='3ds'] .tapestry-art { display: none; }
-:root[data-theme='3ds'] .retro-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .5; background: url('/art/3ds/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
-@media (min-width: 800px) { :root[data-theme='3ds'] .retro-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/3ds/tree-desktop.svg'); } }
+:root[data-theme='3ds'] .console-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .5; background: url('/art/3ds/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
+@media (min-width: 800px) { :root[data-theme='3ds'] .console-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/3ds/tree-desktop.svg'); } }
 :root[data-theme='3ds'] .brand-icon { filter: drop-shadow(0 2px 0 var(--outline)); }
 :root[data-theme='3ds'] .brand-icon[data-platform] { display: none; }
 :root[data-theme='3ds'] .brand-icon[data-platform='3ds'] { display: block; }
@@ -189,5 +188,5 @@
 
 @media (forced-colors: active) {
   :root[data-theme='3ds'] .embroidered, :root[data-theme='3ds'] .stitched-label { text-shadow: none; }
-  :root[data-theme='3ds'] .retro-art { display: none; }
+  :root[data-theme='3ds'] .console-art { display: none; }
 }

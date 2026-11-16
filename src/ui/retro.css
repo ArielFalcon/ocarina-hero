@@ -3,9 +3,6 @@
  * outlined rounded lettering, primary N64 face colors and a red-line staff.
  * Everything here is scoped to :root[data-theme='retro']; the tapestry theme is untouched.
  */
-/* Commissioner (OFL) fixed at full flare: the closest free match to FOT-Chiaro, the 1998 in-game text face. */
-@font-face { font-family: 'Commissioner'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/commissioner-latin.woff2') format('woff2'); }
-
 
 :root[data-theme='retro'] {
   --bg: #2f2a1f;
@@ -59,8 +56,8 @@
 :root[data-theme='retro'] .app::after { box-shadow: inset 0 0 0 3px #241f17, inset 0 0 90px 10px #0a080599; }
 :root[data-theme='retro'] .tapestry-edge { background: url('/art/retro/band.svg') top left / auto 100% repeat-x; }
 :root[data-theme='retro'] .tapestry-art { display: none; }
-:root[data-theme='retro'] .retro-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .55; background: url('/art/retro/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
-@media (min-width: 800px) { :root[data-theme='retro'] .retro-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/retro/tree-desktop.svg'); } }
+:root[data-theme='retro'] .console-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .55; background: url('/art/retro/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
+@media (min-width: 800px) { :root[data-theme='retro'] .console-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/retro/tree-desktop.svg'); } }
 :root[data-theme='retro'] .brand-icon { filter: drop-shadow(1px 2px 0 var(--outline)); }
 :root[data-theme='retro'] .brand-icon[data-platform] { display: none; }
 :root[data-theme='retro'] .brand-icon[data-platform='retro'] { display: block; }
@@ -181,11 +178,10 @@
 :root[data-theme='retro'] .pull-note-face { transform-box: fill-box; transform-origin: center; opacity: clamp(.25, calc((var(--pull-progress, 0) * 5 - var(--i) + .001) * 1000), 1); }
 :root[data-theme='retro'] .pull-refresh.is-armed { box-shadow: inset 2px 2px 0 #8a7f63, inset -2px -2px 0 #2f2a1f, 0 0 0 2px var(--n64-yellow), 0 0 0 3px var(--outline); }
 :root[data-theme='retro'] .pull-refresh.is-refreshing .pull-note-face { opacity: .25; animation: pull-play 1.5s steps(1, end) infinite; animation-delay: calc((var(--i) - 1) * .3s); }
-@keyframes pull-play { 0% { opacity: 1; scale: 1.18; } 20%, 100% { opacity: .25; scale: 1; } }
 @media (prefers-reduced-motion: reduce) { :root[data-theme='retro'] .pull-refresh.is-refreshing .pull-note-face { animation: none; opacity: 1; } }
 :root[data-theme='retro'] .mini-player::before { padding: 3px; }
 
 @media (forced-colors: active) {
   :root[data-theme='retro'] .embroidered, :root[data-theme='retro'] .stitched-label { text-shadow: none; }
-  :root[data-theme='retro'] .retro-art { display: none; }
+  :root[data-theme='retro'] .console-art { display: none; }
 }

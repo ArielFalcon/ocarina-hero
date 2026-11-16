@@ -5,7 +5,7 @@ import { PITCHES, SWITCH2_TUNING, frequencyOf, type TuningProfile } from '../src
 const BENDS = [-2, -1, 0, 1, 2];
 
 test('the Switch 2 tuning plays every pitch and bend at its measured frequency', () => {
-  // Medians of the 25 gameplay holds (out/references/2026-11-12/analysis/hold-measurements.json), bends -2..2.
+  // Medians of the 25 Switch 2 gameplay holds, bends -2..2.
   const measured = [
     531.58, 559.71, 595.79, 632.46, 667.29,
     624.28, 662.1, 700.23, 738.03, 786.07,

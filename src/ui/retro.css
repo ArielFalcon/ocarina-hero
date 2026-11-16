@@ -177,7 +177,7 @@
    Pulling lights one note per fifth of the threshold; refreshing plays them in turn like a song, and repeats. */
 :root[data-theme='retro'] .pull-refresh { background: #5f5745; box-shadow: inset 2px 2px 0 #8a7f63, inset -2px -2px 0 #2f2a1f, 0 0 0 2px var(--outline), 0 3px 0 var(--outline); }
 :root[data-theme='retro'] .pull-stitches { display: none; }
-:root[data-theme='retro'] .pull-notes { display: block !important; }
+:root[data-theme='retro'] .pull-notes-retro { display: block !important; }
 :root[data-theme='retro'] .pull-note-face { transform-box: fill-box; transform-origin: center; opacity: clamp(.25, calc((var(--pull-progress, 0) * 5 - var(--i) + .001) * 1000), 1); }
 :root[data-theme='retro'] .pull-refresh.is-armed { box-shadow: inset 2px 2px 0 #8a7f63, inset -2px -2px 0 #2f2a1f, 0 0 0 2px var(--n64-yellow), 0 0 0 3px var(--outline); }
 :root[data-theme='retro'] .pull-refresh.is-refreshing .pull-note-face { opacity: .25; animation: pull-play 1.5s steps(1, end) infinite; animation-delay: calc((var(--i) - 1) * .3s); }

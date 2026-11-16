@@ -179,6 +179,12 @@
 :root[data-theme='3ds'] .thread-spinner::after { background: conic-gradient(var(--cursor) 0 25%, transparent 25% 100%); }
 :root[data-theme='3ds'] .pull-refresh { background: radial-gradient(circle at 35% 30%, #fbf7ea, var(--marble) 50%, var(--marble-dark)); box-shadow: 0 0 0 2px var(--outline), 0 3px 0 var(--outline); }
 :root[data-theme='3ds'] .pull-refresh.is-armed { box-shadow: 0 0 0 2px var(--cursor), 0 0 0 3px var(--outline); }
+/* Pull to refresh: the five 3DS note buttons light one by one, then play in turn while refreshing. */
+:root[data-theme='3ds'] .pull-stitches { display: none; }
+:root[data-theme='3ds'] .pull-notes-3ds { display: block !important; }
+:root[data-theme='3ds'] .pull-note-face { transform-box: fill-box; transform-origin: center; opacity: clamp(.25, calc((var(--pull-progress, 0) * 5 - var(--i) + .001) * 1000), 1); }
+:root[data-theme='3ds'] .pull-refresh.is-refreshing .pull-note-face { opacity: .25; animation: pull-play 1.5s steps(1, end) infinite; animation-delay: calc((var(--i) - 1) * .3s); }
+@media (prefers-reduced-motion: reduce) { :root[data-theme='3ds'] .pull-refresh.is-refreshing .pull-note-face { animation: none; opacity: 1; } }
 :root[data-theme='3ds'] .mini-player::before { padding: 3px; }
 
 @media (forced-colors: active) {

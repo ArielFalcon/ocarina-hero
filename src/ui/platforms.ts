@@ -32,6 +32,8 @@ export interface Platform {
     readonly patchIcons: string;
     readonly patchIconExtension: 'webp' | 'svg';
     readonly clef: string;
+    /** The figure hanging from the top of the app. */
+    readonly hangingFigure: string;
   };
   readonly art: Readonly<Record<StaticArt, string>>;
   /** Browser UI colour (`<meta name="theme-color">`). */
@@ -53,7 +55,7 @@ const TAPESTRY: Platform = {
   pad: { shoulders: ['L', 'R'], diamond: ['cell', 'X', 'cell', 'Y', { ghost: 'B' }, 'A'] },
   glyphs: {},
   shoulderKind: 'shoulder',
-  assets: { controller: 'icons/controller/', patchIcons: 'art/icons/', patchIconExtension: 'webp', clef: 'icons/app/icon-192.png' },
+  assets: { controller: 'icons/controller/', patchIcons: 'art/icons/', patchIconExtension: 'webp', clef: 'icons/app/icon-192.png', hangingFigure: 'art/link-hanging.webp' },
   art: { brand: 'icons/app/icon-192.png', ornament: 'art/sword-triforce-v2.webp' },
   themeColor: '#293529',
   picker: { title: '2026 remake', detail: 'Woven tapestry with Switch 2 controls', art: 'art/theme/keycard-large.svg' },
@@ -68,7 +70,7 @@ const THREEDS: Platform = {
   pad: TAPESTRY.pad,
   glyphs: {},
   shoulderKind: 'shoulder',
-  assets: { controller: 'icons/controller-3ds/', patchIcons: 'art/icons-3ds/', patchIconExtension: 'svg', clef: 'art/3ds/clef.svg' },
+  assets: { controller: 'icons/controller-3ds/', patchIcons: 'art/icons-3ds/', patchIconExtension: 'svg', clef: 'art/3ds/clef.svg', hangingFigure: 'art/3ds/link-hanging.svg' },
   art: { brand: 'art/3ds/ocarina.svg', ornament: 'art/3ds/sword-triforce.svg' },
   themeColor: '#141a1d',
   picker: { title: '2011 handheld', detail: 'Touch-screen subscreen with 3DS controls', art: 'art/theme/handheld-large.svg' },
@@ -88,7 +90,7 @@ const RETRO: Platform = {
   /** Notes become A and C-buttons, the D-pad becomes R and Z. */
   glyphs: { l: 'a', r: 'c-down', a: 'c-right', y: 'c-left', x: 'c-up', 'dpad-up': 'r', 'dpad-down': 'z' },
   shoulderKind: 'button',
-  assets: { controller: 'icons/controller-retro/', patchIcons: 'art/icons-retro/', patchIconExtension: 'svg', clef: 'art/retro/clef.svg' },
+  assets: { controller: 'icons/controller-retro/', patchIcons: 'art/icons-retro/', patchIconExtension: 'svg', clef: 'art/retro/clef.svg', hangingFigure: 'art/retro/link-hanging.svg' },
   art: { brand: 'art/retro/ocarina.svg', ornament: 'art/retro/sword-triforce.svg' },
   themeColor: '#14120d',
   picker: { title: '1998 original', detail: 'Stone subscreen with N64 controls', art: 'art/theme/cartridge-large.svg' },

@@ -33,7 +33,7 @@ const preferenceInputs = {
 const session: Storage | undefined = (() => { try { return window.sessionStorage; } catch { return undefined; } })();
 
 const hangingLink = createHangingLink(must('.app'), {
-  src: `${APP_BASE}art/link-hanging.webp`,
+  src: () => `${APP_BASE}${platform().assets.hangingFigure}`,
   onGone() { markGone(session); preferenceInputs.link.checked = false; },
   onRestore() { clearGone(session); preferenceInputs.link.checked = true; },
 });
@@ -80,6 +80,7 @@ export function bindSettings(): void {
     refreshPracticeStatus();
     renderGamepadStatus();
     miniPlayer.refreshPlatform();
+    hangingLink.refreshFigure();
   });
 
   showPreferences();

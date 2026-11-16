@@ -1,12 +1,13 @@
 import { advance, atRest, breaks, dropIn, fall, fallFrom, heldAt, settle, type Fall, type Rope, type RopeConfig } from './rope';
 
 /**
- * The felt Link that hangs from the top of the app on a thread. It drops in once, swings when dragged, and a hard
+ * The figure that hangs from the top of the app on a thread. It drops in once, swings when dragged, and a hard
  * pull downwards snaps the thread. All motion is two `transform` writes per frame, and frames only run while
  * something moves: at rest, while held (it follows the pointer events) and once gone it costs nothing.
  */
 export interface HangingLinkOptions {
-  readonly src: string;
+  /** Image of the figure; read again by `refreshFigure`. */
+  readonly src: () => string;
   /** Called once the thread has snapped and the figure has left the screen; the loose end stays behind. */
   readonly onGone: () => void;
   /** Called when the loose end is tapped and the figure is tied back on. */
@@ -17,6 +18,8 @@ export interface HangingLink {
   /** `snapped` shows only the short loose end of the cut thread, as after a break earlier in the session. */
   show(state: 'hanging' | 'snapped'): void;
   hide(): void;
+  /** Shows the figure image `src` returns now, as after a console change. */
+  refreshFigure(): void;
 }
 
 type Mode = 'dropping' | 'hanging' | 'held' | 'falling';
@@ -47,7 +50,7 @@ export function createHangingLink(host: HTMLElement, options: HangingLinkOptions
 
   function preload(): HTMLImageElement {
     const image = new Image();
-    image.src = options.src;
+    image.src = options.src();
     return image;
   }
 
@@ -202,7 +205,7 @@ export function createHangingLink(host: HTMLElement, options: HangingLinkOptions
     figure.className = 'hanging-link-figure';
     figure.alt = '';
     figure.draggable = false;
-    figure.src = options.src;
+    figure.src = options.src();
     figure.addEventListener('pointerdown', grab);
     figure.addEventListener('pointermove', move);
     figure.addEventListener('pointerup', release);
@@ -246,5 +249,10 @@ export function createHangingLink(host: HTMLElement, options: HangingLinkOptions
     preload().decode().catch(() => undefined).then(() => { if (wanted && !root) mount(); });
   }
 
-  return { show, hide };
+  function refreshFigure(): void {
+    preload();
+    if (root) figure.src = options.src();
+  }
+
+  return { show, hide, refreshFigure };
 }

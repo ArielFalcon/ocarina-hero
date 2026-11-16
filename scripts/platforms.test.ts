@@ -34,6 +34,7 @@ test('every console profile points at art that exists for every glyph, icon and 
       ...remakeGlyphs.map(name => `${platform.assets.controller}${platform.glyphs[name] ?? name}.svg`),
       ...THREAD_ICONS.map(name => patchIconPath(platform, name)),
       platform.assets.clef,
+      platform.assets.hangingFigure,
       ...Object.values(platform.art),
       platform.picker.art,
     ];

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 300" stroke-linecap="round" stroke-linejoin="round"><title>Green-capped young hero playing a blue-violet ocarina</title><defs>
+<radialGradient id="link-hanging-cloth" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#b4db70"/><stop offset=".32" stop-color="#6bac3e"/><stop offset=".68" stop-color="#38722c"/><stop offset="1" stop-color="#173f25"/></radialGradient>
+<radialGradient id="link-hanging-cap" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#b0d56b"/><stop offset=".32" stop-color="#659a3c"/><stop offset=".68" stop-color="#315f2d"/><stop offset="1" stop-color="#173b26"/></radialGradient>
+<radialGradient id="link-hanging-skin" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#fff0cb"/><stop offset=".32" stop-color="#f5c78f"/><stop offset=".68" stop-color="#d99661"/><stop offset="1" stop-color="#9b5d40"/></radialGradient>
+<radialGradient id="link-hanging-ear" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#ffe8b3"/><stop offset=".32" stop-color="#edbb7d"/><stop offset=".68" stop-color="#cf8956"/><stop offset="1" stop-color="#92543b"/></radialGradient>
+<radialGradient id="link-hanging-hair" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#fff0a2"/><stop offset=".32" stop-color="#f4c94c"/><stop offset=".68" stop-color="#ce8d23"/><stop offset="1" stop-color="#855016"/></radialGradient>
+<radialGradient id="link-hanging-leather" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#d7a364"/><stop offset=".32" stop-color="#a36b35"/><stop offset=".68" stop-color="#6d4025"/><stop offset="1" stop-color="#35251d"/></radialGradient>
+<radialGradient id="link-hanging-boot" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#bd8b50"/><stop offset=".32" stop-color="#925d30"/><stop offset=".68" stop-color="#603b25"/><stop offset="1" stop-color="#2d231d"/></radialGradient>
+<radialGradient id="link-hanging-linen" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#fff9df"/><stop offset=".32" stop-color="#e6dfbf"/><stop offset=".68" stop-color="#b8b497"/><stop offset="1" stop-color="#767c67"/></radialGradient>
+<radialGradient id="link-hanging-silver" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#f6ffff"/><stop offset=".32" stop-color="#becfda"/><stop offset=".68" stop-color="#708599"/><stop offset="1" stop-color="#344554"/></radialGradient>
+<radialGradient id="link-hanging-shield" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#a0b4e5"/><stop offset=".32" stop-color="#526db1"/><stop offset=".68" stop-color="#303f79"/><stop offset="1" stop-color="#192644"/></radialGradient>
+<radialGradient id="link-hanging-sword" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#aba4e9"/><stop offset=".32" stop-color="#7166b8"/><stop offset=".68" stop-color="#473f7e"/><stop offset="1" stop-color="#25294c"/></radialGradient>
+<radialGradient id="link-hanging-gold" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#fff4b1"/><stop offset=".32" stop-color="#ecc64e"/><stop offset=".68" stop-color="#b18429"/><stop offset="1" stop-color="#62451d"/></radialGradient>
+<radialGradient id="link-hanging-ocarina" cx="30%" cy="22%" r="85%"><stop offset="0" stop-color="#e2ddff"/><stop offset=".32" stop-color="#9395ec"/><stop offset=".68" stop-color="#5152b9"/><stop offset="1" stop-color="#232660"/></radialGradient>
+</defs><g stroke="#0c1012" stroke-width="1.5">
+<path d="M30 116Q67 101 110 121L130 159Q104 198 76 207Q38 186 23 150Z" fill="url(#link-hanging-silver)" />
+<path d="M34 122Q69 111 105 126L122 159Q102 187 76 199Q45 180 30 149Z" fill="url(#link-hanging-shield)" />
+<path d="M35 128 32 147Q47 175 70 187" fill="none" stroke="#dfedff" stroke-width="2" opacity="0.7"/>
+<path d="M42 137 53 138 66 166 59 171 49 152 43 154Z" fill="url(#link-hanging-silver)" />
+<path d="M104 144 100 165 80 183 78 173 92 158Z" fill="url(#link-hanging-silver)" />
+<path d="M118 127 136 100 145 107 127 139Z" fill="url(#link-hanging-sword)" />
+<path d="M134 107 140 96Q140 91 147 94L153 98Q157 102 151 105L145 113Z" fill="url(#link-hanging-sword)" />
+<path d="M142 98 150 102M139 103 147 107M137 107 143 111" fill="none" stroke="#c5baf1" stroke-width="1.3" opacity="0.85"/>
+<path d="M125 117 128 111 148 124 145 130 137 129 133 125Z" fill="url(#link-hanging-sword)" />
+<path d="M129 113 146 124" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.65"/>
+<path d="M81 1C110 1 137 24 143 56Q147 78 132 96L48 101Q29 118 5 141Q11 113 15 90C18 68 24 43 43 21Q59 4 81 1Z" fill="url(#link-hanging-cap)" />
+<path d="M81 7C51 17 35 48 31 78Q28 108 9 134C30 121 45 104 50 83L68 50Z" fill="url(#link-hanging-cloth)" stroke="none" opacity=".68"/>
+<path d="M47 26Q65 8 83 7M24 81Q20 111 11 129" fill="none" stroke="#d3ed91" stroke-width="1.6" opacity="0.55"/>
+<path d="M39 60Q83 22 131 55L137 74Q89 54 37 81Z" fill="url(#link-hanging-cloth)" />
+<path d="M44 61Q85 32 126 58" fill="none" stroke="#deec9d" stroke-width="1.5" opacity="0.65"/>
+<path d="M47 213 75 215 76 258 46 259Z" fill="url(#link-hanging-linen)" />
+<path d="M86 214 115 212 116 258 87 259Z" fill="url(#link-hanging-linen)" />
+<path d="M52 224 53 243M91 225 93 244" fill="none" stroke="#fff" stroke-width="1.7" opacity="0.6"/>
+<path d="M44 247Q59 253 76 248L75 278Q79 286 76 294Q65 301 37 297Q30 294 35 284L44 274Z" fill="url(#link-hanging-boot)" />
+<path d="M86 248Q100 254 118 246L120 276Q129 284 125 294Q116 300 89 298Q83 295 85 284Z" fill="url(#link-hanging-boot)" />
+<path d="M42 246Q59 251 77 246L78 257Q59 263 40 256Z" fill="url(#link-hanging-leather)" />
+<path d="M85 247Q102 252 119 245L121 256Q103 263 84 257Z" fill="url(#link-hanging-leather)" />
+<path d="M38 282Q52 275 67 280Q72 283 73 290Q56 296 37 292Z" fill="url(#link-hanging-leather)" stroke="none"/>
+<path d="M91 280Q105 276 116 283L123 291Q107 296 90 292Z" fill="url(#link-hanging-leather)" stroke="none"/>
+<path d="M47 264 45 275M91 266 92 276" fill="none" stroke="#e0b581" stroke-width="1.7" opacity="0.7"/>
+<path d="M36 294Q56 300 75 294M88 295Q108 299 124 293" fill="none" stroke="#151b19" stroke-width="2" opacity="1"/>
+<path d="M58 119Q82 110 107 120L122 159 119 183Q122 202 134 218Q83 231 29 218L43 184 41 150Z" fill="url(#link-hanging-cloth)" />
+<path d="M52 181Q44 204 38 215Q54 217 61 216L69 181Z" fill="url(#link-hanging-cap)" stroke="none"/>
+<path d="M96 182Q94 207 103 221L124 218Q113 199 111 182Z" fill="url(#link-hanging-cap)" stroke="none"/>
+<path d="M70 190 66 216M89 194 90 218" fill="none" stroke="#b5da73" stroke-width="1.2" opacity="0.5"/>
+<path d="M61 117 81 139 102 117 109 130 86 157 59 136Z" fill="url(#link-hanging-linen)" />
+<path d="M61 119 81 143 70 151 54 128Z" fill="url(#link-hanging-cloth)" />
+<path d="M104 120 84 143 94 150 112 131Z" fill="url(#link-hanging-cloth)" />
+<path d="M64 127 76 141M104 130 94 142" fill="none" stroke="#d5e994" stroke-width="1.2" opacity="0.7"/>
+<path d="M42 171Q80 179 120 171L120 185Q78 192 40 184Z" fill="url(#link-hanging-leather)" />
+<path d="M46 175Q83 182 116 175" fill="none" stroke="#dfb97a" stroke-width="1" opacity="0.75"/>
+<path d="M74 170 96 170Q98 170 98 173L98 189 72 189 72 172Z" fill="url(#link-hanging-gold)" />
+<path d="M78 175H92V184H78Z" fill="url(#link-hanging-boot)" />
+<path d="M76 172H94" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.75"/>
+<path d="M115 173Q126 174 127 186L123 201 111 199 110 182Z" fill="url(#link-hanging-leather)" />
+<path d="M48 126Q33 128 27 147Q26 164 41 171Q51 176 61 164L70 145 56 133Z" fill="url(#link-hanging-linen)" />
+<path d="M111 127Q132 129 139 149Q143 162 130 170Q119 173 108 158L98 140Z" fill="url(#link-hanging-linen)" />
+<path d="M49 126 62 135 53 146 35 139Q39 129 49 126Z" fill="url(#link-hanging-cloth)" />
+<path d="M109 126Q122 125 132 138L115 148 101 137Z" fill="url(#link-hanging-cloth)" />
+<path d="M44 138 59 145 70 127 57 117Q47 125 44 138Z" fill="url(#link-hanging-leather)" />
+<path d="M112 139 123 147 112 158 96 135 104 124Z" fill="url(#link-hanging-leather)" />
+<path d="M46 143 53 147M117 145 112 150" fill="none" stroke="#f1d099" stroke-width="1.5" opacity="0.65"/>
+<path d="M47 78Q29 69 11 74Q18 88 42 97L51 91Z" fill="url(#link-hanging-ear)" />
+<path d="M122 79Q140 68 160 74Q153 87 129 96L119 90Z" fill="url(#link-hanging-ear)" />
+<path d="M20 77 39 82 42 91Q31 84 20 77Z" fill="#b97951" stroke="none"/>
+<path d="M151 77 133 82 128 91Q141 84 151 77Z" fill="#b97951" stroke="none"/>
+<path d="M45 58Q81 34 118 57Q132 74 125 98Q118 116 98 126Q84 132 67 124Q42 113 39 94Q34 74 45 58Z" fill="url(#link-hanging-skin)" />
+<path d="M119 66Q133 94 111 115Q97 130 81 126Q112 119 116 98Z" fill="#ad6745" stroke="none" opacity=".23"/>
+<ellipse cx="57" cy="99" rx="8" ry="3" fill="#df986e" stroke="none" opacity=".28"/>
+<ellipse cx="111" cy="99" rx="7" ry="3" fill="#cf825e" stroke="none" opacity=".22"/>
+<path d="M39 81Q34 60 48 42Q65 24 86 29Q108 26 124 49Q133 65 128 85L115 73Q105 58 99 42Q98 63 89 72L83 53Q73 70 59 80L43 96Z" fill="url(#link-hanging-hair)" />
+<path d="M83 33Q60 36 47 64L43 83Q59 66 66 48Z" fill="#ffe69a" stroke="none" opacity=".6"/>
+<path d="M100 39Q104 59 120 76L125 80Q127 56 109 43Z" fill="#fff0a9" stroke="none" opacity=".45"/>
+<path d="M43 86 52 79 49 111 43 115Q39 100 43 86Z" fill="url(#link-hanging-hair)" />
+<path d="M120 79 128 87 126 112 120 116 117 103Z" fill="url(#link-hanging-hair)" />
+<path d="M59 69Q63 65 69 67M100 67Q107 65 112 70" fill="none" stroke="#805327" stroke-width="1.5" opacity="1"/>
+<path d="M59 82Q66 89 74 82M97 82Q104 89 112 82" fill="none" stroke="#463628" stroke-width="2.3" opacity="1"/>
+<path d="M58 82 56 80M112 82 114 80" fill="none" stroke="#463628" stroke-width="1.4" opacity="1"/>
+<path d="M85 86Q82 94 86 96L90 96" fill="url(#link-hanging-skin)" stroke="#b77a51" stroke-width="1"/>
+<path d="M78 105Q85 109 92 105" fill="none" stroke="#93563e" stroke-width="1.3" opacity="1"/>
+<path d="M83 108 79 101Q79 99 82 99L86 100 92 110Z" fill="url(#link-hanging-ocarina)" />
+<path d="M80 103 86 101 89 105 83 108Z" fill="url(#link-hanging-gold)" stroke-width="1"/>
+<path d="M61 117Q65 108 81 108Q102 105 113 114Q117 120 108 126Q95 139 78 133Q64 129 61 117Z" fill="url(#link-hanging-ocarina)" />
+<path d="M66 116Q78 108 94 111" fill="none" stroke="#fff" stroke-width="2" opacity=".78"/>
+<ellipse cx="73" cy="115" rx="2.4" ry="1" fill="#fff" stroke="none" opacity=".65"/>
+<ellipse cx="80" cy="119" rx="2.5" ry="2" fill="#161b40" stroke="#c0bcec" stroke-width=".7"/>
+<ellipse cx="92" cy="117" rx="2.5" ry="2" fill="#161b40" stroke="#c0bcec" stroke-width=".7"/>
+<ellipse cx="101" cy="121" rx="2.5" ry="2" fill="#161b40" stroke="#c0bcec" stroke-width=".7"/>
+<ellipse cx="89" cy="128" rx="2.5" ry="2" fill="#161b40" stroke="#c0bcec" stroke-width=".7"/>
+<path d="M53 121Q53 115 58 112Q61 110 63 113L72 119Q75 122 72 125L67 123 73 128Q76 132 72 134L65 130 70 136Q71 140 67 141Q59 140 55 132Z" fill="url(#link-hanging-skin)" />
+<path d="M112 121Q110 115 106 114Q103 113 101 116L95 122Q93 125 96 127L103 122 97 129Q95 133 99 134L106 129 101 136Q100 140 104 141Q111 139 114 132Z" fill="url(#link-hanging-skin)" />
+<path d="M57 118 66 125M58 126 65 132M110 121 105 125M111 129 108 133" fill="none" stroke="#bf8052" stroke-width="1" opacity="1"/>
+<path d="M56 116 60 115M108 116 106 116" fill="none" stroke="#fff" stroke-width="1.4" opacity="0.65"/>
+</g></svg>

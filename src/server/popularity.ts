@@ -12,6 +12,8 @@ export type PopularityAction = typeof PLAY_ACTIONS[number];
 /** Rows returned to clients: more than the twenty shown, so songs removed from the catalogue can be skipped. */
 export const POPULAR_LIMIT = 30;
 export const POPULAR_CACHE_SECONDS = 60;
+/** Most plays one request may carry, as `{ plays: { [song]: count } }`; it also bounds the D1 rows a request writes. */
+export const MAX_BATCH_PLAYS = 5;
 const MAX_BODY_BYTES = 512;
 
 export interface Statement {
@@ -31,16 +33,31 @@ export interface PopularityContext {
 }
 export interface PopularSong { id: string; plays: number }
 
-export function parseEvent(body: unknown, songIds: ReadonlySet<string>): { song: string; action: PopularityAction } | null {
+/** Plays per song from a batch, or from the single `{ song, action }` event that tabs on an older build still send; null when invalid. */
+export function parsePlays(body: unknown, songIds: ReadonlySet<string>): Map<string, number> | null {
   if (typeof body !== 'object' || body === null) return null;
-  const { song, action } = body as Record<string, unknown>;
-  if (typeof song !== 'string' || !songIds.has(song)) return null;
-  if (typeof action !== 'string' || !(PLAY_ACTIONS as readonly string[]).includes(action)) return null;
-  return { song, action: action as PopularityAction };
+  const { plays, song, action } = body as Record<string, unknown>;
+  if (plays === undefined) {
+    if (typeof song !== 'string' || !songIds.has(song)) return null;
+    if (typeof action !== 'string' || !(PLAY_ACTIONS as readonly string[]).includes(action)) return null;
+    return new Map([[song, 1]]);
+  }
+  if (typeof plays !== 'object' || plays === null || Array.isArray(plays)) return null;
+  const entries = Object.entries(plays);
+  let total = 0;
+  for (const [id, count] of entries) {
+    if (!songIds.has(id) || !Number.isInteger(count) || (count as number) < 1) return null;
+    total += count as number;
+  }
+  if (total === 0 || total > MAX_BATCH_PLAYS) return null;
+  return new Map(entries as [string, number][]);
 }
 
-export async function recordEvent(db: Database, event: { song: string; action: PopularityAction }): Promise<void> {
-  await db.prepare('INSERT INTO song_popularity (song_id, plays) VALUES (?, 1) ON CONFLICT (song_id) DO UPDATE SET plays = plays + 1').bind(event.song).run();
+/** One upsert for the whole batch; each song writes two rows, its own and its ranking index entry. */
+export async function recordPlays(db: Database, plays: ReadonlyMap<string, number>): Promise<void> {
+  const rows = [...plays].map(() => '(?, ?)').join(', ');
+  await db.prepare(`INSERT INTO song_popularity (song_id, plays) VALUES ${rows} ON CONFLICT (song_id) DO UPDATE SET plays = plays + excluded.plays`)
+    .bind(...[...plays].flat()).run();
 }
 
 /** The ranking: all-time plays, most played first; ties keep a stable order by id. */
@@ -73,9 +90,9 @@ export async function handlePost(context: PopularityContext): Promise<Response> 
   if (!env.DB || !env.ASSETS) return empty(503);
   let ids: Set<string>;
   try { ids = await knownSongs(env); } catch { return empty(503); }
-  const event = parseEvent(read.body, ids);
-  if (!event) return empty(400);
-  try { await recordEvent(env.DB, event); } catch { return empty(503); }
+  const plays = parsePlays(read.body, ids);
+  if (!plays) return empty(400);
+  try { await recordPlays(env.DB, plays); } catch { return empty(503); }
   return empty(204);
 }
 

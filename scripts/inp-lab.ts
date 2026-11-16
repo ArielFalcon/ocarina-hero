@@ -4,7 +4,10 @@
  * processing and presentation delay. Real (trusted) touch and key input, saved songs, progress and a ranking
  * are seeded so the page does the work a returning visitor's page does.
  *
- * Usage: tsx scripts/inp-lab.ts [dist] [--cpu=4] [--runs=5] [--only=scenario,scenario] [--css="rule"]
+ * Usage: tsx scripts/inp-lab.ts [dist] [--cpu=4] [--runs=5] [--only=scenario,scenario] [--css="rule"] [--cpu-raster]
+ * Raster columns come from a trace of each interaction: desktop raster is far faster than a phone's, so read them as
+ * the relative paint work an interaction causes, not as phone milliseconds.
+ * `--cpu-raster` rasterizes on one CPU thread without a GPU, so paint cost shows up in the numbers as it does on slow phones.
  * `--css` injects a stylesheet into every page, to measure what a rendering change would save before making it.
  */
 import { spawn } from 'node:child_process';
@@ -38,6 +41,7 @@ class Page {
   private next = 0;
   private readonly pending = new Map<number, { resolve: (value: any) => void; reject: (error: Error) => void }>();
   private readonly waiters: { method: string; resolve: () => void }[] = [];
+  private readonly listeners = new Map<string, (params: any) => void>();
   private constructor(private readonly socket: WebSocket) {
     socket.addEventListener('message', event => {
       const message = JSON.parse(String(event.data));
@@ -45,7 +49,10 @@ class Page {
         const call = this.pending.get(message.id);
         this.pending.delete(message.id);
         if (message.error) call?.reject(new Error(message.error.message)); else call?.resolve(message.result);
-      } else for (const waiter of this.waiters.splice(0)) if (waiter.method === message.method) waiter.resolve(); else this.waiters.push(waiter);
+      } else {
+        this.listeners.get(message.method)?.(message.params);
+        for (const waiter of this.waiters.splice(0)) if (waiter.method === message.method) waiter.resolve(); else this.waiters.push(waiter);
+      }
     });
   }
   static async open(url: string): Promise<Page> {
@@ -58,6 +65,7 @@ class Page {
     this.socket.send(JSON.stringify({ id, method, params }));
     return new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
   }
+  on(method: string, listener: (params: any) => void): void { this.listeners.set(method, listener); }
   once(method: string): Promise<void> { return new Promise(resolve => this.waiters.push({ method, resolve })); }
   async evaluate<T>(expression: string): Promise<T> {
     const { result, exceptionDetails } = await this.send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
@@ -82,7 +90,7 @@ const OBSERVER = `(() => {
     .observe({ type: 'long-animation-frame', buffered: true });
 })();`;
 
-interface Interaction { label: string; duration: number; delay: number; processing: number; presentation: number; frameRender: number; frameStyleLayout: number; topScript: string }
+interface Interaction { label: string; duration: number; delay: number; processing: number; presentation: number; frameRender: number; frameStyleLayout: number; raster: number; paints: number; topScript: string }
 interface Frame { start: number; end: number; renderStart: number; styleStart: number; scripts: { name: string; duration: number }[] }
 
 async function sleep(ms: number): Promise<void> { await new Promise(resolve => setTimeout(resolve, ms)); }
@@ -131,11 +139,29 @@ async function collect(page: Page, since: number, label: string): Promise<Intera
     const frameStyleLayout = overlapping.reduce((sum, frame) => sum + (frame.styleStart ? frame.end - frame.styleStart : 0), 0);
     const scripts = overlapping.flatMap(frame => frame.scripts).sort((a, b) => b.duration - a.duration);
     const topScript = scripts[0] ? `${scripts[0].name.trim()} ${Math.round(scripts[0].duration)}` : '';
-    return { label, duration, delay: first.delay, processing, presentation: Math.max(0, duration - first.delay - processing), frameRender, frameStyleLayout, topScript };
+    return { label, duration, delay: first.delay, processing, presentation: Math.max(0, duration - first.delay - processing), frameRender, frameStyleLayout, raster: 0, paints: 0, topScript };
   });
 }
 
 const now = (page: Page) => page.evaluate<number>('performance.now()');
+
+interface TraceEvent { name: string; dur?: number }
+
+/** Runs one interaction under a trace and adds the raster milliseconds and paint count it caused to its entries. */
+async function measure(page: Page, label: string, action: () => Promise<void>): Promise<Interaction[]> {
+  const events: TraceEvent[] = [];
+  page.on('Tracing.dataCollected', ({ value }) => events.push(...value));
+  await page.send('Tracing.start', { categories: 'cc,viz,disabled-by-default-devtools.timeline', transferMode: 'ReportEvents' });
+  const mark = await now(page);
+  await action();
+  const interactions = await collect(page, mark, label);
+  const complete = page.once('Tracing.tracingComplete');
+  await page.send('Tracing.end');
+  await complete;
+  const raster = events.filter(event => event.name === 'RasterTask').reduce((sum, event) => sum + (event.dur ?? 0), 0) / 1000;
+  const paints = events.filter(event => event.name === 'Paint').length;
+  return interactions.map(interaction => ({ ...interaction, raster, paints }));
+}
 
 type Scenario = (page: Page, origin: string, songIds: readonly string[]) => Promise<Interaction[]>;
 
@@ -153,33 +179,25 @@ const SCENARIOS: Record<string, Scenario> = {
   async search(page, origin) {
     await load(page, `${origin}/`, ROWS_READY);
     await tap(page, '#song-search');
-    const mark = await now(page);
-    await type(page, 'zelda lu', 80);
-    return (await collect(page, mark, 'search keystroke')).filter(entry => entry.duration > 0);
+    return (await measure(page, 'search keystroke', () => type(page, 'zelda lu', 80))).filter(entry => entry.duration > 0);
   },
   async nav(page, origin) {
     await load(page, `${origin}/`, ROWS_READY);
     const results: Interaction[] = [];
     for (const [selector, label] of [['.app-nav .nav-popular', 'nav popular'], ['.app-nav .nav-saved', 'nav saved'], ['.app-nav [data-view-link="catalog"]', 'nav songbook']] as const) {
-      const mark = await now(page);
-      await tap(page, selector);
-      results.push(...await collect(page, mark, label));
+      results.push(...await measure(page, label, () => tap(page, selector)));
     }
     return results;
   },
   async back(page, origin, songIds) {
     await load(page, `${origin}/song/${songIds[0]}/`, "document.querySelector('#tab .staff, #tab *')");
-    const mark = await now(page);
-    await tap(page, '.back-link');
-    return collect(page, mark, 'back from deep link');
+    return measure(page, 'back from deep link', () => tap(page, '.back-link'));
   },
   async quickplay(page, origin) {
     await load(page, `${origin}/`, ROWS_READY);
     const results: Interaction[] = [];
     for (const [selector, label] of [['#demos .song-row:nth-of-type(3) [data-quick-play]', 'quick-play first'], ['#demos .song-row:nth-of-type(5) [data-quick-play]', 'quick-play second'], ['#mini-close', 'mini close']] as const) {
-      const mark = await now(page);
-      await tap(page, selector);
-      results.push(...await collect(page, mark, label));
+      results.push(...await measure(page, label, () => tap(page, selector)));
       await sleep(800);
     }
     return results;
@@ -199,6 +217,7 @@ async function main(): Promise<void> {
   const runs = Number(option('runs', '5'));
   const only = option('only', Object.keys(SCENARIOS).join(',')).split(',');
   const css = option('css', '');
+  const cpuRaster = args.includes('--cpu-raster');
   const songIds: string[] = JSON.parse(readFileSync(join(dist, 'song-ids.json'), 'utf8'));
   const ranking = JSON.stringify({ songs: songIds.slice(0, 40).map((id, index) => ({ id, plays: 400 - index * 7 })) });
   const seed = {
@@ -208,7 +227,7 @@ async function main(): Promise<void> {
   const { server, origin } = await serve(dist, ranking);
   const profile = mkdtempSync(join(tmpdir(), 'inp-lab-'));
   const port = 9600 + Math.floor(Math.random() * 300);
-  const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--disk-cache-size=1', '--media-cache-size=1', '--no-first-run', '--autoplay-policy=no-user-gesture-required', 'about:blank'], { stdio: 'ignore' });
+  const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--disk-cache-size=1', '--media-cache-size=1', '--no-first-run', '--autoplay-policy=no-user-gesture-required', ...(cpuRaster ? ['--disable-gpu', '--disable-gpu-rasterization', '--num-raster-threads=1'] : []), 'about:blank'], { stdio: 'ignore' });
   try {
     let target: { webSocketDebuggerUrl: string } | undefined;
     for (let attempt = 0; attempt < 50 && !target; attempt++) {
@@ -229,11 +248,11 @@ ${css ? `document.addEventListener('DOMContentLoaded', () => document.head.appen
     page.close();
     const labels = [...new Set(all.map(entry => entry.label))];
     console.log(`INP lab · ${dist} · 390x844 · CPU ${cpu}x · ${runs} runs${css ? ` · css: ${css}` : ''} (ms, p75 per interaction)`);
-    console.log(['interaction'.padEnd(22), 'n', 'p75', 'max', 'delay', 'processing', 'presentation', 'rAF+render', 'style+layout+paint', 'top script (last run)'].join('\t'));
+    console.log(['interaction'.padEnd(22), 'n', 'p75', 'max', 'delay', 'processing', 'presentation', 'rAF+render', 'style+layout+paint', 'raster', 'paints', 'top script (last run)'].join('\t'));
     for (const label of labels) {
       const entries = all.filter(entry => entry.label === label);
-      const p75 = (key: 'duration' | 'delay' | 'processing' | 'presentation' | 'frameRender' | 'frameStyleLayout') => Math.round(percentile(entries.map(entry => entry[key]), 0.75));
-      console.log([label.padEnd(22), entries.length, p75('duration'), Math.round(Math.max(...entries.map(entry => entry.duration))), p75('delay'), p75('processing'), p75('presentation'), p75('frameRender'), p75('frameStyleLayout'), entries.at(-1)!.topScript].join('\t'));
+      const p75 = (key: 'duration' | 'delay' | 'processing' | 'presentation' | 'frameRender' | 'frameStyleLayout' | 'raster' | 'paints') => Math.round(percentile(entries.map(entry => entry[key]), 0.75));
+      console.log([label.padEnd(22), entries.length, p75('duration'), Math.round(Math.max(...entries.map(entry => entry.duration))), p75('delay'), p75('processing'), p75('presentation'), p75('frameRender'), p75('frameStyleLayout'), p75('raster'), p75('paints'), entries.at(-1)!.topScript].join('\t'));
     }
   } finally {
     chrome.kill();

@@ -43,7 +43,7 @@ test('the Popular page has its own address and tells search engines its ranked s
   const rows = popularSnapshot(entries, [{ id: first!.id, plays: 3 }, { id: second!.id, plays: 2 }]);
   const head = popularHead(SITE, rows);
   assert.equal(head.url, `${SITE}popular/`);
-  assert.equal(head.title, 'Most Popular Zelda Ocarina Songs – Ocarina Hero');
+  assert.equal(head.title, 'Most Popular Zelda Ocarina Songs | Ocarina Hero');
   const graph = (head.structuredData as { '@graph': Record<string, any>[] })['@graph'];
   assert.deepEqual(graph.find(item => item['@type'] === 'CollectionPage')!.mainEntity.itemListElement.map((item: { url: string }) => item.url), [first, second].map(entry => `${SITE}song/${entry!.id}/`));
   assert.deepEqual(graph.find(item => item['@type'] === 'BreadcrumbList')!.itemListElement.map((crumb: { item: string }) => crumb.item), [SITE, `${SITE}popular/`]);

@@ -111,7 +111,7 @@ for (const selection of manifest) {
     const exported = new Midi();
     exported.header.fromJSON({ name: selection.title, ppq: 9600, tempos: [{ ticks: 0, bpm: phrase.tempoBpm }], timeSignatures: [], keySignatures: [], meta: [] });
     const track = exported.addTrack();
-    track.name = `${selection.title} — ${name}`;
+    track.name = `${selection.title}: ${name}`;
     for (const note of phrase.melody) track.addNote({
       midi: note.midi + shift, time: note.startBeat * secondsPerBeat,
       duration: note.durationBeats * secondsPerBeat, velocity: 0.8,

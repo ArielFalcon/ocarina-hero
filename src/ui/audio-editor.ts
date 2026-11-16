@@ -232,7 +232,7 @@ export class AudioFragmentEditor {
   private renderSummary(start: number, end: number): void {
     const max = audioLimits.maxDurationSeconds;
     const length = Math.max(0, end - start);
-    this.summary.textContent = `${formatClock(start)} – ${formatClock(end)} · ${length.toFixed(1)} of ${max} s`;
+    this.summary.textContent = `${formatClock(start)} to ${formatClock(end)} · ${length.toFixed(1)} of ${max} s`;
     this.meter.style.width = `${Math.min(100, length / max * 100)}%`;
   }
 

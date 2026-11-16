@@ -1,7 +1,7 @@
 [
   {
     "id": "numb",
-    "title": "Linkin Park — Numb",
+    "title": "Linkin Park: Numb",
     "category": "pop",
     "hook": "Opening keyboard hook",
     "source": {
@@ -61,7 +61,7 @@
   },
   {
     "id": "imperial-march",
-    "title": "Star Wars — Imperial March",
+    "title": "Star Wars: Imperial March",
     "category": "film",
     "hook": "First march phrase",
     "source": {
@@ -133,7 +133,7 @@
   },
   {
     "id": "once-upon-a-time",
-    "title": "Undertale — Once Upon a Time",
+    "title": "Undertale: Once Upon a Time",
     "category": "gaming",
     "hook": "First opening phrase",
     "source": {
@@ -195,7 +195,7 @@
   },
   {
     "id": "fallen-down",
-    "title": "Undertale — Fallen Down",
+    "title": "Undertale: Fallen Down",
     "category": "gaming",
     "hook": "First main melody phrase",
     "source": {
@@ -319,7 +319,7 @@
   },
   {
     "id": "all-star",
-    "title": "Smash Mouth — All Star",
+    "title": "Smash Mouth: All Star",
     "category": "pop",
     "hook": "First chorus phrase",
     "source": {
@@ -403,7 +403,7 @@
   },
   {
     "id": "pirate",
-    "title": "Pirates of the Caribbean — He’s a Pirate",
+    "title": "Pirates of the Caribbean: He’s a Pirate",
     "category": "film",
     "hook": "First lead theme phrase",
     "source": {
@@ -501,7 +501,7 @@
   },
   {
     "id": "laputa",
-    "title": "Castle in the Sky — Main Theme",
+    "title": "Castle in the Sky: Main Theme",
     "category": "anime",
     "hook": "First lyrical theme phrase",
     "source": {
@@ -563,7 +563,7 @@
   },
   {
     "id": "l-theme",
-    "title": "Death Note — L’s Theme",
+    "title": "Death Note: L’s Theme",
     "category": "anime",
     "hook": "Piano motif",
     "source": {
@@ -653,7 +653,7 @@
   },
   {
     "id": "always-with-me",
-    "title": "Spirited Away — Always With Me",
+    "title": "Spirited Away: Always With Me",
     "category": "anime",
     "hook": "First vocal phrase",
     "source": {
@@ -743,7 +743,7 @@
   },
   {
     "id": "merry-go-round",
-    "title": "Howl’s Moving Castle — Merry-Go-Round of Life",
+    "title": "Howl’s Moving Castle: Merry-Go-Round of Life",
     "category": "anime",
     "hook": "First main waltz phrase",
     "source": {
@@ -799,7 +799,7 @@
   },
   {
     "id": "moonlight",
-    "title": "Sailor Moon — Moonlight Densetsu",
+    "title": "Sailor Moon: Moonlight Densetsu",
     "category": "anime",
     "hook": "First vocal hook",
     "source": {
@@ -877,7 +877,7 @@
   },
   {
     "id": "tapion",
-    "title": "Dragon Ball Z — Tapion’s Theme",
+    "title": "Dragon Ball Z: Tapion’s Theme",
     "category": "anime",
     "hook": "Opening solo phrase",
     "source": {
@@ -971,7 +971,7 @@
   },
   {
     "id": "pallet-town",
-    "title": "Pokémon — Pallet Town",
+    "title": "Pokémon: Pallet Town",
     "category": "gaming",
     "hook": "First main-theme phrase",
     "source": {
@@ -1051,7 +1051,7 @@
   },
   {
     "id": "pokemon-center",
-    "title": "Pokémon — Pokémon Center",
+    "title": "Pokémon: Pokémon Center",
     "category": "gaming",
     "hook": "Complete opening Pokémon Center theme statement",
     "source": {
@@ -1107,7 +1107,7 @@
   },
   {
     "id": "lavender-town",
-    "title": "Pokémon — Lavender Town",
+    "title": "Pokémon: Lavender Town",
     "category": "gaming",
     "hook": "First complete theme phrase",
     "source": {
@@ -1175,7 +1175,7 @@
   },
   {
     "id": "green-hill",
-    "title": "Sonic — Green Hill Zone",
+    "title": "Sonic: Green Hill Zone",
     "category": "gaming",
     "hook": "First lead phrase",
     "source": {
@@ -1230,7 +1230,7 @@
   },
   {
     "id": "ff7-victory",
-    "title": "Final Fantasy VII — Victory Fanfare",
+    "title": "Final Fantasy VII: Victory Fanfare",
     "category": "gaming",
     "hook": "Opening fanfare",
     "source": {
@@ -1285,7 +1285,7 @@
   },
   {
     "id": "green-greens",
-    "title": "Kirby — Green Greens",
+    "title": "Kirby: Green Greens",
     "category": "gaming",
     "hook": "Opening lead phrase",
     "source": {
@@ -1360,7 +1360,7 @@
   },
   {
     "id": "wind-scene",
-    "title": "Chrono Trigger — Wind Scene",
+    "title": "Chrono Trigger: Wind Scene",
     "category": "gaming",
     "hook": "First lyrical melody phrase",
     "source": {
@@ -1420,7 +1420,7 @@
   },
   {
     "id": "gerudo-valley",
-    "title": "Zelda — Gerudo Valley",
+    "title": "Zelda: Gerudo Valley",
     "category": "gaming",
     "hook": "First main-theme phrase",
     "source": {
@@ -1515,7 +1515,7 @@
   },
   {
     "id": "blue-bird",
-    "title": "Naruto Shippuden — Blue Bird",
+    "title": "Naruto Shippuden: Blue Bird",
     "category": "anime",
     "hook": "Complete opening chorus: four lines, from the Habataitara pickup to the held tonic F-sharp",
     "source": {
@@ -1619,7 +1619,7 @@
   },
   {
     "id": "totoro",
-    "title": "My Neighbor Totoro — Tonari no Totoro",
+    "title": "My Neighbor Totoro: Tonari no Totoro",
     "category": "anime",
     "hook": "Title chorus melody",
     "source": {
@@ -1737,7 +1737,7 @@
   },
   {
     "id": "mii-channel",
-    "title": "Wii — Mii Channel",
+    "title": "Wii: Mii Channel",
     "category": "gaming",
     "hook": "Opening motif",
     "source": {

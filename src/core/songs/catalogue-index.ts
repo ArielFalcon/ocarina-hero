@@ -4,7 +4,7 @@ import type { TrackSummary } from '../demo';
 export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: number })[] = [
   {
     "id": "catalogue-tetris",
-    "title": "Tetris — Music A",
+    "title": "Tetris: Music A",
     "subtitle": "First two complete phrases",
     "tempoBpm": 150,
     "beatsPerBar": 4,
@@ -15,7 +15,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-pokemon-route1",
-    "title": "Pokémon — Route 1",
+    "title": "Pokémon: Route 1",
     "subtitle": "First two phrases of the lead channel",
     "tempoBpm": 130.00013000013,
     "beatsPerBar": 4,
@@ -26,7 +26,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-megalovania",
-    "title": "Undertale — Megalovania",
+    "title": "Undertale: Megalovania",
     "subtitle": "Four-bar opening riff with its four bass-note variants",
     "tempoBpm": 120,
     "beatsPerBar": 4,
@@ -37,7 +37,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-naruto",
-    "title": "Naruto — Sadness and Sorrow",
+    "title": "Naruto: Sadness and Sorrow",
     "subtitle": "First main-theme phrase, after the string introduction",
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
@@ -48,7 +48,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-evangelion",
-    "title": "Evangelion — A Cruel Angel’s Thesis",
+    "title": "Evangelion: A Cruel Angel’s Thesis",
     "subtitle": "Opening vocal phrase",
     "tempoBpm": 76.00006586672374,
     "beatsPerBar": 4,
@@ -59,7 +59,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-lilium",
-    "title": "Elfen Lied — Lilium",
+    "title": "Elfen Lied: Lilium",
     "subtitle": "First vocal phrase",
     "tempoBpm": 60,
     "beatsPerBar": 4,
@@ -103,7 +103,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-numb",
-    "title": "Linkin Park — Numb",
+    "title": "Linkin Park: Numb",
     "subtitle": "Opening keyboard hook",
     "tempoBpm": 109.99990833340972,
     "beatsPerBar": 4,
@@ -114,7 +114,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-imperial-march",
-    "title": "Star Wars — Imperial March",
+    "title": "Star Wars: Imperial March",
     "subtitle": "First march phrase",
     "tempoBpm": 102.0000510000255,
     "beatsPerBar": 4,
@@ -125,7 +125,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-once-upon-a-time",
-    "title": "Undertale — Once Upon a Time",
+    "title": "Undertale: Once Upon a Time",
     "subtitle": "First opening phrase",
     "tempoBpm": 140.00014000014,
     "beatsPerBar": 4,
@@ -136,7 +136,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-fallen-down",
-    "title": "Undertale — Fallen Down",
+    "title": "Undertale: Fallen Down",
     "subtitle": "First main melody phrase",
     "tempoBpm": 100.00016666694445,
     "beatsPerBar": 4,
@@ -147,7 +147,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-all-star",
-    "title": "Smash Mouth — All Star",
+    "title": "Smash Mouth: All Star",
     "subtitle": "First chorus phrase",
     "tempoBpm": 108.000108000108,
     "beatsPerBar": 4,
@@ -158,7 +158,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-pirate",
-    "title": "Pirates of the Caribbean — He’s a Pirate",
+    "title": "Pirates of the Caribbean: He’s a Pirate",
     "subtitle": "First lead theme phrase",
     "tempoBpm": 200,
     "beatsPerBar": 4,
@@ -169,7 +169,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-laputa",
-    "title": "Castle in the Sky — Main Theme",
+    "title": "Castle in the Sky: Main Theme",
     "subtitle": "First lyrical theme phrase",
     "tempoBpm": 96,
     "beatsPerBar": 4,
@@ -180,7 +180,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-l-theme",
-    "title": "Death Note — L’s Theme",
+    "title": "Death Note: L’s Theme",
     "subtitle": "Piano motif",
     "tempoBpm": 139.97988955586715,
     "beatsPerBar": 4,
@@ -191,7 +191,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-always-with-me",
-    "title": "Spirited Away — Always With Me",
+    "title": "Spirited Away: Always With Me",
     "subtitle": "First vocal phrase",
     "tempoBpm": 130.00013000013,
     "beatsPerBar": 3,
@@ -202,7 +202,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-merry-go-round",
-    "title": "Howl’s Moving Castle — Merry-Go-Round of Life",
+    "title": "Howl’s Moving Castle: Merry-Go-Round of Life",
     "subtitle": "First main waltz phrase",
     "tempoBpm": 180.00018000018,
     "beatsPerBar": 3,
@@ -213,7 +213,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-moonlight",
-    "title": "Sailor Moon — Moonlight Densetsu",
+    "title": "Sailor Moon: Moonlight Densetsu",
     "subtitle": "First vocal hook",
     "tempoBpm": 140.00014000014,
     "beatsPerBar": 4,
@@ -224,7 +224,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-tapion",
-    "title": "Dragon Ball Z — Tapion’s Theme",
+    "title": "Dragon Ball Z: Tapion’s Theme",
     "subtitle": "Opening solo phrase",
     "tempoBpm": 78.000078000078,
     "beatsPerBar": 4,
@@ -235,7 +235,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-pallet-town",
-    "title": "Pokémon — Pallet Town",
+    "title": "Pokémon: Pallet Town",
     "subtitle": "First main-theme phrase",
     "tempoBpm": 116.95245298024088,
     "beatsPerBar": 4,
@@ -246,7 +246,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-lavender-town",
-    "title": "Pokémon — Lavender Town",
+    "title": "Pokémon: Lavender Town",
     "subtitle": "First complete theme phrase",
     "tempoBpm": 119.99928000431997,
     "beatsPerBar": 4,
@@ -257,7 +257,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-green-hill",
-    "title": "Sonic — Green Hill Zone",
+    "title": "Sonic: Green Hill Zone",
     "subtitle": "First lead phrase",
     "tempoBpm": 151.99185323666651,
     "beatsPerBar": 4,
@@ -268,7 +268,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-ff7-victory",
-    "title": "Final Fantasy VII — Victory Fanfare",
+    "title": "Final Fantasy VII: Victory Fanfare",
     "subtitle": "Opening fanfare",
     "tempoBpm": 129.96014555536303,
     "beatsPerBar": 4,
@@ -279,7 +279,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-wind-scene",
-    "title": "Chrono Trigger — Wind Scene",
+    "title": "Chrono Trigger: Wind Scene",
     "subtitle": "First lyrical melody phrase",
     "tempoBpm": 80,
     "beatsPerBar": 4,
@@ -290,7 +290,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-gerudo-valley",
-    "title": "Zelda — Gerudo Valley",
+    "title": "Zelda: Gerudo Valley",
     "subtitle": "First main-theme phrase",
     "tempoBpm": 119.99928000431997,
     "beatsPerBar": 4,
@@ -301,7 +301,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-blue-bird",
-    "title": "Naruto Shippuden — Blue Bird",
+    "title": "Naruto Shippuden: Blue Bird",
     "subtitle": "Complete opening chorus: four lines, from the Habataitara pickup to the held tonic F-sharp",
     "tempoBpm": 150,
     "beatsPerBar": 4,
@@ -312,7 +312,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-totoro",
-    "title": "My Neighbor Totoro — Tonari no Totoro",
+    "title": "My Neighbor Totoro: Tonari no Totoro",
     "subtitle": "Title chorus melody",
     "tempoBpm": 119.99928000431997,
     "beatsPerBar": 4,
@@ -323,7 +323,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-mii-channel",
-    "title": "Wii — Mii Channel",
+    "title": "Wii: Mii Channel",
     "subtitle": "Opening motif",
     "tempoBpm": 114.0001710002565,
     "beatsPerBar": 4,
@@ -334,7 +334,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-hedwig",
-    "title": "Hedwig’s Theme — Harry Potter",
+    "title": "Hedwig’s Theme: Harry Potter",
     "subtitle": "Complete opening celesta statement through its low-B cadence (14 melody attacks)",
     "tempoBpm": 89.00004005001803,
     "beatsPerBar": 3,
@@ -345,7 +345,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-fairy-fountain",
-    "title": "Great Fairy Fountain — Zelda",
+    "title": "Great Fairy Fountain: Zelda",
     "subtitle": "Complete first descending lead cycle over eight bars; accompaniment arpeggios excluded",
     "tempoBpm": 80,
     "beatsPerBar": 4,
@@ -356,7 +356,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-dire-dire-docks",
-    "title": "Dire, Dire Docks — Super Mario 64",
+    "title": "Dire, Dire Docks: Super Mario 64",
     "subtitle": "First complete lead call and response, from the ascending D pickup through the answering G cadence",
     "tempoBpm": 130.00041166797027,
     "beatsPerBar": 4,
@@ -367,8 +367,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-wet-hands",
-    "title": "Wet Hands — Minecraft",
-    "subtitle": "Complete first eight-bar lead sentence, bars5–12, including its answering A cadence",
+    "title": "Wet Hands: Minecraft",
+    "subtitle": "Complete first eight-bar lead sentence, bars5 to 12, including its answering A cadence",
     "tempoBpm": 72.00002880001152,
     "beatsPerBar": 4,
     "difficulty": {
@@ -378,8 +378,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-sweden",
-    "title": "Sweden — Minecraft",
-    "subtitle": "First complete eight-bar upper melody, including both question and response, score bars27–34",
+    "title": "Sweden: Minecraft",
+    "subtitle": "First complete eight-bar upper melody, including both question and response, score bars27 to 34",
     "tempoBpm": 88.00002346667293,
     "beatsPerBar": 4,
     "difficulty": {
@@ -389,8 +389,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-shinzou",
-    "title": "Shinzou wo Sasageyo! — Attack on Titan",
-    "subtitle": "Complete first refrain call: both Sasageyo calls and their Shinzou response, score bars35–38",
+    "title": "Shinzou wo Sasageyo!: Attack on Titan",
+    "subtitle": "Complete first refrain call: both Sasageyo calls and their Shinzou response, score bars35 to 38",
     "tempoBpm": 160,
     "beatsPerBar": 4,
     "difficulty": {
@@ -400,7 +400,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-fate-of-ophelia",
-    "title": "The Fate of Ophelia — Taylor Swift",
+    "title": "The Fate of Ophelia: Taylor Swift",
     "subtitle": "Complete first chorus, from All that time through the title cadence, with its pickup",
     "tempoBpm": 124.000248000496,
     "beatsPerBar": 4,
@@ -411,7 +411,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-golden",
-    "title": "Golden — HUNTR/X · KPop Demon Hunters",
+    "title": "Golden: HUNTR/X · KPop Demon Hunters",
     "subtitle": "Complete main chorus with pickup, both Golden answers and the closing Oh cadence",
     "tempoBpm": 123.00022140039852,
     "beatsPerBar": 4,
@@ -422,7 +422,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-stateside",
-    "title": "Stateside — PinkPantheress + Zara Larsson",
+    "title": "Stateside: PinkPantheress + Zara Larsson",
     "subtitle": "Full first PinkPantheress chorus, What can I say pickup through final three ha attacks before next singer lyric pickup",
     "tempoBpm": 123.00022140039852,
     "beatsPerBar": 4,
@@ -433,7 +433,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-man-i-need",
-    "title": "Man I Need — Olivia Dean",
+    "title": "Man I Need: Olivia Dean",
     "subtitle": "Full Tell me chorus through the complete tied title cadence, before Talk to me lead-out",
     "tempoBpm": 119.00016065021688,
     "beatsPerBar": 4,
@@ -444,7 +444,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-iris-out",
-    "title": "IRIS OUT — Kenshi Yonezu",
+    "title": "IRIS OUT: Kenshi Yonezu",
     "subtitle": "Complete recognizable chorus through its final three A attacks",
     "tempoBpm": 135.000135000135,
     "beatsPerBar": 4,
@@ -455,8 +455,8 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-kaiju",
-    "title": "Kaiju — Sakanaction",
-    "subtitle": "Kaiju — complete F chorus through bar82 beat2, before G pickup",
+    "title": "Kaiju: Sakanaction",
+    "subtitle": "Kaiju: complete F chorus through bar82 beat2, before G pickup",
     "tempoBpm": 180.00018000018,
     "beatsPerBar": 4,
     "difficulty": {
@@ -466,7 +466,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-aizo",
-    "title": "AIZO — King Gnu",
+    "title": "AIZO: King Gnu",
     "subtitle": "Complete first chorus through the natural lyric cadence, before the instrumental descent",
     "tempoBpm": 190.0002850004275,
     "beatsPerBar": 4,
@@ -477,7 +477,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-kakumei-douchuu",
-    "title": "Kakumei Douchuu — AiNA THE END",
+    "title": "Kakumei Douchuu: AiNA THE END",
     "subtitle": "First E chorus with bar54beat3 pickup through bar69 ending before bar70 instrumental fill",
     "tempoBpm": 186.000372000744,
     "beatsPerBar": 4,
@@ -489,7 +489,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   {
     "id": "catalogue-x-files",
     "title": "The X-Files Theme",
-    "subtitle": "Opening whistle call and answering variation, including both cadences (score bars 2–7)",
+    "subtitle": "Opening whistle call and answering variation, including both cadences (score bars 2 to 7)",
     "tempoBpm": 120,
     "beatsPerBar": 4,
     "difficulty": {
@@ -697,7 +697,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-smb-world-clear",
-    "title": "Super Mario Bros. — Castle Clear",
+    "title": "Super Mario Bros.: Castle Clear",
     "subtitle": "Complete original NES event fanfare, including its terminal cadence",
     "tempoBpm": 225.3707348588428,
     "beatsPerBar": 3,
@@ -708,7 +708,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-smb-game-over",
-    "title": "Super Mario Bros. — Game Over",
+    "title": "Super Mario Bros.: Game Over",
     "subtitle": "Complete original NES event fanfare, including its terminal cadence",
     "tempoBpm": 200.32987653001942,
     "beatsPerBar": 4,
@@ -719,7 +719,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-pokemon-gym-victory",
-    "title": "Pokémon Gold / Silver — Gym Battle Victory",
+    "title": "Pokémon Gold / Silver: Gym Battle Victory",
     "subtitle": "Opening fanfare and complete first eight-bar principal melody statement, through its D cadence",
     "tempoBpm": 164.89994695718372,
     "beatsPerBar": 4,
@@ -1368,7 +1368,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-naruto-hokage-funeral",
-    "title": "Naruto — Grief and Sorrow",
+    "title": "Naruto: Grief and Sorrow",
     "subtitle": "Main violin theme, both statements: A5 B5 A5 G5 E5 G5 D5 C5 D5 C5 A4, twice, ending on the held tonic A4",
     "tempoBpm": 68.0000725334107,
     "beatsPerBar": 4,
@@ -1379,7 +1379,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-naruto-raising-fighting-spirit",
-    "title": "Naruto — The Raising Fighting Spirit",
+    "title": "Naruto: The Raising Fighting Spirit",
     "subtitle": "The two-bar riff: E E E G F# E B A G A G F#, then E E E G F# E and the closing D and A below the riff",
     "tempoBpm": 225.00056250140625,
     "beatsPerBar": 6,
@@ -1390,7 +1390,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   },
   {
     "id": "catalogue-hobbit-misty-mountains",
-    "title": "The Hobbit — Misty Mountains",
+    "title": "The Hobbit: Misty Mountains",
     "subtitle": "Sung stanza, first two lines: D F G B-flat C D C B-flat A G, then D G A A B-flat C B-flat A G, each ending on the tonic G",
     "tempoBpm": 69.99998833333528,
     "beatsPerBar": 4,

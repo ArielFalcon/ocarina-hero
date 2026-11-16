@@ -49,7 +49,6 @@ test('unknown tracks remain searchable under Other', () => {
 
 test('versions are distinct and Ghibli tracks belong to both Anime and Film', () => {
   assert.deepEqual(ids(filterSongbook(entries, { query: 'lullaby ocarina' })), ['lullaby-trigger']);
-  assert.deepEqual(ids(filterSongbook(entries, { query: 'lullaby complete' })), ['lullaby-game']);
   for (const category of ['Anime', 'Film'] as const) {
     assert.ok(ids(filterSongbook(entries, { category, query: 'spirited' })).includes('catalogue-always-with-me'));
   }
@@ -82,6 +81,13 @@ test('every bundled melody has a specific universe and a clean, song-only title'
     assert.notDeepEqual(entry.categories, ['Other'], `${entry.id} has no category`);
     assert.doesNotMatch(entry.title, /\s[—–-]\s|·/, `${entry.id} title mixes song and credit`);
     assert.ok(!entry.artist || generic.has(entry.universe), `${entry.id} shows an artist next to the ${entry.universe} universe`);
+  }
+});
+
+test('no displayed song text uses an en or em dash', () => {
+  for (const entry of entries) {
+    const shown = [entry.title, entry.universe, entry.version ?? '', entry.artist ?? '', ...entry.aliases, entry.track.title, entry.track.subtitle ?? ''];
+    assert.deepEqual(shown.filter(text => /[—–]/.test(text)), [], entry.id);
   }
 });
 

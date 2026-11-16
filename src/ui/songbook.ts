@@ -41,7 +41,6 @@ function group(universe: string, categories: readonly EntryCategory[], icon: Thr
 
 // Games
 group('The Legend of Zelda', ['Games'], 'triforce', [
-  ['lullaby-game', 'Zelda’s Lullaby', { version: 'Complete, adapted', aliases: ['Lullaby'] }],
   ['lullaby-trigger', 'Zelda’s Lullaby', { version: 'Ocarina of Time', aliases: ['Lullaby'] }],
   ['catalogue-gerudo-valley', 'Gerudo Valley'],
   ['catalogue-fairy-fountain', 'Great Fairy Fountain'],
@@ -278,7 +277,7 @@ group('KPop Demon Hunters', ['Film', 'Pop'], 'hunter', [
 group('Star Wars', ['Film'], 'empire', [
   ['catalogue-imperial-march', 'The Imperial March', { aliases: ['John Williams'] }],
   ['catalogue-mandalorian', 'Main Theme', { version: 'The Mandalorian', aliases: ['Ludwig Göransson'], icon: 'film' }],
-  ['catalogue-duel-of-the-fates-brass', 'Duel of the Fates', { version: 'The Phantom Menace', aliases: ['John Williams', 'Episode I', 'Star Wars: Episode I – The Phantom Menace'] }],
+  ['catalogue-duel-of-the-fates-brass', 'Duel of the Fates', { version: 'The Phantom Menace', aliases: ['John Williams', 'Episode I', 'Star Wars Episode I: The Phantom Menace'] }],
 ]);
 group('Pirates of the Caribbean', ['Film'], 'pirate', [['catalogue-pirate', 'He’s a Pirate', { aliases: ['Hans Zimmer', 'Klaus Badelt'] }]]);
 group('Harry Potter', ['Film'], 'wizard', [['catalogue-hedwig', 'Hedwig’s Theme', { aliases: ['John Williams'] }]]);

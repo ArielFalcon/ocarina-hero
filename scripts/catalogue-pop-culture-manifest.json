@@ -3,7 +3,7 @@
     "id": "x-files",
     "title": "The X-Files Theme",
     "category": "film-tv",
-    "hook": "Opening whistle call and answering variation, including both cadences (score bars 2–7)",
+    "hook": "Opening whistle call and answering variation, including both cadences (score bars 2 to 7)",
     "source": {
       "file": "out/catalogue-pop-culture-42/batches/film-tv/sources/x-files-score-transcription.mid",
       "page": "https://soundtrackmusicsheet.wordpress.com/wp-content/uploads/2016/01/the-x-files-theme.pdf",
@@ -1387,7 +1387,7 @@
   },
   {
     "id": "smb-stage-clear",
-    "title": "Super Mario Bros. — Stage Clear",
+    "title": "Super Mario Bros.: Stage Clear",
     "category": "gaming",
     "hook": "Complete original NES event fanfare, including its terminal cadence",
     "source": {
@@ -1480,7 +1480,7 @@
   },
   {
     "id": "smb-world-clear",
-    "title": "Super Mario Bros. — Castle Clear",
+    "title": "Super Mario Bros.: Castle Clear",
     "category": "gaming",
     "hook": "Complete original NES event fanfare, including its terminal cadence",
     "source": {
@@ -1569,7 +1569,7 @@
   },
   {
     "id": "smb-game-over",
-    "title": "Super Mario Bros. — Game Over",
+    "title": "Super Mario Bros.: Game Over",
     "category": "gaming",
     "hook": "Complete original NES event fanfare, including its terminal cadence",
     "source": {
@@ -1628,7 +1628,7 @@
   },
   {
     "id": "pokemon-gym-victory",
-    "title": "Pokémon Gold / Silver — Gym Battle Victory",
+    "title": "Pokémon Gold / Silver: Gym Battle Victory",
     "category": "gaming",
     "hook": "Opening fanfare and complete first eight-bar principal melody statement, through its D cadence",
     "source": {

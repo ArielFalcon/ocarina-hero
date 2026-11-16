@@ -157,7 +157,7 @@ export class SourceImporter {
         analysis = { ...common, engine: { id: 'isolated-periodicity' }, notes: fallback.notes.map(note => ({ ...note })), voicedFrameFraction: fallback.quality, warnings: [`Melody model unavailable (${modelFailure}); used the basic detector.`, 'Continuous reattacks may be unresolved.'] };
       }
       analysis.sourceWindow = { startSeconds: startIndex / buffer.sampleRate, endSeconds: endIndex / buffer.sampleRate, sourceDurationSeconds: buffer.length / buffer.sampleRate };
-      const clip = `${(startIndex / buffer.sampleRate).toFixed(2)}–${(endIndex / buffer.sampleRate).toFixed(2)}s selected`;
+      const clip = `${(startIndex / buffer.sampleRate).toFixed(2)} to ${(endIndex / buffer.sampleRate).toFixed(2)}s selected`;
       const warning = analysis.warnings.length ? ` · ${analysis.warnings.join(' ')}` : '';
       publish({ title: file.name, subtitle: `${analysis.notes.length} source notes · ${Math.round(analysis.voicedFrameFraction * 100)}% voiced frames · ${clip}${warning}`, tempoBpm: 60, beatsPerBar: 4, melody: analysis.notes, preserveTiming: true, analysis });
     } catch (error) {

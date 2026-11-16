@@ -22,37 +22,31 @@ test('every hub link is a catalogued song, and a hub lists a song once', () => {
   }
 });
 
-test('the Zelda ocarina hub lists exactly the Ocarina of Time and Majora\'s Mask songs of the songbook', () => {
-  const expected = entries.filter(entry => entry.universe === ZELDA_UNIVERSE && entry.version && (OCARINA_GAMES as readonly string[]).includes(entry.version)).map(entry => entry.id);
-  assert.ok(expected.length >= 2);
-  assert.deepEqual([...hubOf('zelda-ocarina').songIds].sort(), [...expected].sort());
-  assert.deepEqual(hubOf('zelda-ocarina').sections.map(section => section.heading), [...OCARINA_GAMES].filter(game => entries.some(entry => entry.version === game)));
-});
-
-test('the Zelda songs hub lists every Zelda song once, and the Zelda universe gets no generic hub', () => {
+test('the one Zelda hub lists every Zelda song, the ocarina games first, and the universe gets no generic hub', () => {
   const zelda = entries.filter(entry => entry.universe === ZELDA_UNIVERSE).map(entry => entry.id);
   assert.deepEqual([...hubOf('zelda').songIds].sort(), [...zelda].sort());
-  assert.equal(hubOf('zelda').path, 'zelda-songs/');
-  assert.equal(hubOf('zelda-ocarina').path, 'zelda-ocarina-songs/');
-  assert.ok(!hubs.some(hub => hub.path === 'songs/the-legend-of-zelda/'));
+  assert.deepEqual(hubOf('zelda').sections.slice(0, OCARINA_GAMES.length).map(section => section.heading), [...OCARINA_GAMES]);
+  assert.equal(hubOf('zelda').path, 'zelda-ocarina-songs/');
+  assert.equal(hubs.filter(hub => hub.kind === 'zelda').length, 1);
+  assert.ok(!hubs.some(hub => hub.path === 'songs/the-legend-of-zelda/' || hub.path === 'zelda-songs/'));
   assert.equal(hubs.filter(hub => hub.kind === 'universe').length, new Set(entries.map(entry => entry.universe)).size - 1);
 });
 
-test('the ocarina hub shows each song\'s own tab, cut after the opening notes only when it is longer', () => {
-  const songs = hubOf('zelda-ocarina').sections.flatMap(section => section.songs);
+test('the Zelda hub shows each song\'s own tab, cut after the opening notes only when it is longer', () => {
+  const songs = hubOf('zelda').sections.flatMap(section => section.songs);
   for (const song of songs) {
     const full = pages.find(page => page.id === song.id)!.tab.split(', ');
     assert.equal(song.tab, full.slice(0, OPENING_NOTES).join(', '), song.id);
     assert.equal(song.tabCut, full.length > OPENING_NOTES, song.id);
   }
   assert.ok(songs.some(song => song.tabCut) && songs.some(song => !song.tabCut));
-  assert.ok(hubOf('zelda').sections.every(section => section.songs.every(song => song.tab === undefined)));
+  assert.ok(hubs.filter(hub => hub.kind === 'universe').every(hub => hub.sections.every(section => section.songs.every(song => song.tab === undefined))));
 });
 
 test('hub addresses are unique, URL-safe and stable', () => {
   const paths = hubs.map(hub => hub.path);
   assert.equal(new Set(paths).size, paths.length);
-  assert.deepEqual(paths.filter(path => !/^(zelda-songs|zelda-ocarina-songs|songs\/[a-z0-9]+(-[a-z0-9]+)*)\/$/.test(path)), []);
+  assert.deepEqual(paths.filter(path => !/^(zelda-ocarina-songs|songs\/[a-z0-9]+(-[a-z0-9]+)*)\/$/.test(path)), []);
   assert.equal(universeSlug('Pokémon'), 'pokemon');
   assert.equal(universeSlug('Mission: Impossible'), 'mission-impossible');
   assert.equal(universeSlug('Breakfast at Tiffany’s'), 'breakfast-at-tiffany-s');
@@ -90,12 +84,12 @@ test('a song page breadcrumb goes home, then to its universe hub, then to the so
     assert.deepEqual(crumbs.map(crumb => crumb.item), [SITE, SITE + hubPath(page.universe), `${SITE}song/${id}/`]);
     assert.ok(hubs.some(hub => hub.path === hubPath(page.universe) && hub.songIds.includes(id)));
   }
-  assert.equal(hubPath(ZELDA_UNIVERSE), 'zelda-songs/');
+  assert.equal(hubPath(ZELDA_UNIVERSE), 'zelda-ocarina-songs/');
 });
 
 test('the song article links to its universe hub under the deployment base', () => {
   const page = pages.find(candidate => candidate.id === 'lullaby-trigger')!;
-  assert.ok(songArticleHtml(page, [], '/sub/').includes('<a href="/sub/zelda-songs/">All Zelda songs</a>'));
+  assert.ok(songArticleHtml(page, [], '/sub/').includes('<a href="/sub/zelda-ocarina-songs/">All Zelda songs</a>'));
 });
 
 test('a hub tells search engines its songs in order, in one list, with a breadcrumb back home', () => {
@@ -107,10 +101,10 @@ test('a hub tells search engines its songs in order, in one list, with a breadcr
   assert.equal(hubHead(hub, SITE).url, SITE + hub.path);
 });
 
-test('hub titles and headings are distinct, and the ocarina hub targets "Zelda ocarina songs"', () => {
+test('hub titles and headings are distinct, and the Zelda hub targets "Zelda ocarina songs"', () => {
   assert.equal(new Set(hubs.map(hub => hub.title)).size, hubs.length);
   assert.equal(new Set(hubs.map(hub => hub.h1)).size, hubs.length);
-  assert.match(hubOf('zelda-ocarina').title, /^Zelda Ocarina Songs/);
+  assert.match(hubOf('zelda').title, /^Zelda Ocarina Songs/);
 });
 
 test('the sitemap, llms.txt and home directory keep every earlier entry and add the hubs', () => {
@@ -124,7 +118,7 @@ test('the sitemap, llms.txt and home directory keep every earlier entry and add 
   const old = llmsTxt(SITE, groups);
   const text = llmsTxt(SITE, groups, hubs);
   assert.equal(text.replace(/## Hubs\n\n(?:- .*\n)+\n/, ''), old);
-  assert.ok(text.includes(`(${SITE}zelda-ocarina-songs/)`) && text.includes(`(${SITE}zelda-songs/)`));
+  assert.ok(text.includes(`(${SITE}zelda-ocarina-songs/)`) && !text.includes('zelda-songs/'));
   const hidden = hubs.find(hub => !hub.indexable)!;
   assert.ok(!text.includes(`](${SITE}${hidden.path})`));
 

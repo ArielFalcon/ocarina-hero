@@ -1,6 +1,6 @@
 ---
 import ContentPage from '../layouts/ContentPage.astro';
-import { hubHead, hubName, hubPath, zeldaOcarinaHubPath, ZELDA_UNIVERSE, type Hub } from '../site/hubs';
+import { hubHead, hubName, hubPath, ZELDA_UNIVERSE, type Hub } from '../site/hubs';
 import { SITE_URL } from '../site/config';
 import { assetUrl } from '../site/site';
 import { songPath } from '../ui/route';
@@ -44,8 +44,6 @@ const crumbs = [{ name: 'Ocarina Hero', href: base }, { name: hub.name, href: un
       </section>
     ))}
     <p class="song-home hub-foot">
-      {hub.kind === 'zelda-ocarina' && <><a href={assetUrl(hubPath(ZELDA_UNIVERSE))}>All {hubName(ZELDA_UNIVERSE)}, by game</a> · </>}
-      {hub.kind === 'zelda' && <><a href={assetUrl(zeldaOcarinaHubPath())}>Zelda ocarina songs with their tabs</a> · </>}
       <a href={base}>Every song in the Ocarina Hero songbook</a>
     </p>
   </article>

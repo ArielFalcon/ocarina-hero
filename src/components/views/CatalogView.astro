@@ -1,11 +1,11 @@
 ---
-import { hubPath, zeldaOcarinaHubPath, ZELDA_UNIVERSE } from '../../site/hubs';
+import { hubPath, ZELDA_UNIVERSE } from '../../site/hubs';
 import { assetUrl } from '../../site/site';
 interface Props { hidden?: boolean }
 const { hidden = false } = Astro.props;
 /** The page's one H1 is the heading of the view it opens on; the other views keep theirs as H2 of the same look. */
 const Title = hidden ? 'h2' : 'h1';
-const hubLinks = [{ path: zeldaOcarinaHubPath(), label: 'Zelda ocarina tabs' }, { path: hubPath(ZELDA_UNIVERSE), label: 'Zelda songs by game' }];
+const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs' }];
 ---
 <section id="catalog-view" class="view" aria-labelledby="catalog-title" hidden={hidden}>
   <div class="catalog-hero">

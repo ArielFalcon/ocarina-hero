@@ -1,7 +1,7 @@
 ---
 import ContentPage from '../layouts/ContentPage.astro';
 import { SITE_URL } from '../site/config';
-import { hubName, zeldaOcarinaHubPath, hubPath, ZELDA_UNIVERSE } from '../site/hubs';
+import { hubPath, ZELDA_UNIVERSE } from '../site/hubs';
 import { assetUrl, SITE_NAME } from '../site/site';
 
 const page = {
@@ -24,8 +24,7 @@ const page = {
       <h2 class="stitched-label">Where to next</h2>
       <ul class="song-links">
         <li><a href={import.meta.env.BASE_URL}>Songbook: every song</a></li>
-        <li><a href={assetUrl(zeldaOcarinaHubPath())}>Zelda ocarina songs with tabs</a></li>
-        <li><a href={assetUrl(hubPath(ZELDA_UNIVERSE))}>{hubName(ZELDA_UNIVERSE)} by game</a></li>
+        <li><a href={assetUrl(hubPath(ZELDA_UNIVERSE))}>Zelda ocarina songs with tabs</a></li>
       </ul>
     </section>
   </article>

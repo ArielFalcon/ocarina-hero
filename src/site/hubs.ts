@@ -3,17 +3,16 @@ import { universeLabel } from '../ui/songbook';
 import type { PageHead } from './site';
 import type { SongPage } from './song-pages';
 
-/** The franchise the app is named after: its songs get two hubs instead of a generic one. */
+/** The franchise the app is named after: its hub lists every song with its tab, at its own address. */
 export const ZELDA_UNIVERSE = 'The Legend of Zelda';
-/** The games whose songs the ocarina hub lists, in the order it shows them (names as the songbook spells them). */
+/** The games whose songs lead the Zelda hub, in this order (names as the songbook spells them). */
 export const OCARINA_GAMES = ['Ocarina of Time', 'Majora’s Mask'] as const;
 /** A hub with fewer songs is too thin to rank: it is linked but kept out of the index and the sitemap. */
 export const MIN_INDEXED_SONGS = 3;
-/** The notes of a song's tab the ocarina hub shows before it sends the reader to the lesson. */
+/** The notes of a song's tab the Zelda hub shows before it sends the reader to the lesson. */
 export const OPENING_NOTES = 12;
 
-const ZELDA_OCARINA_PATH = 'zelda-ocarina-songs/';
-const ZELDA_PATH = 'zelda-songs/';
+const ZELDA_PATH = 'zelda-ocarina-songs/';
 
 /** URL-safe name of a universe: lowercase ASCII words joined by hyphens. */
 export function universeSlug(universe: string): string {
@@ -26,9 +25,6 @@ export function universeSlug(universe: string): string {
 export function hubPath(universe: string): string {
   return universe === ZELDA_UNIVERSE ? ZELDA_PATH : `songs/${universeSlug(universe)}/`;
 }
-
-/** Address of the hub that lists the Ocarina of Time and Majora's Mask songs with their tabs. */
-export const zeldaOcarinaHubPath = (): string => ZELDA_OCARINA_PATH;
 
 /** The name a hub goes by in a breadcrumb trail and a link. */
 export function hubName(universe: string): string {
@@ -46,7 +42,7 @@ export interface HubSong {
 }
 export interface HubSection { readonly heading: string; readonly songs: readonly HubSong[] }
 export interface Hub {
-  readonly kind: 'zelda-ocarina' | 'zelda' | 'universe';
+  readonly kind: 'zelda' | 'universe';
   /** Below the site root, ending with a slash. */
   readonly path: string;
   readonly name: string;
@@ -81,28 +77,15 @@ function byGame(songs: readonly SongPage[], withTab: boolean): HubSection[] {
     .map(([game, list]) => ({ heading: game || 'Other Zelda songs', songs: list.map(song => hubSong(song, withTab, true)).sort(byTitle) }));
 }
 
-function zeldaOcarinaHub(zelda: readonly SongPage[]): Hub {
-  const songs = zelda.filter(song => (OCARINA_GAMES as readonly string[]).includes(song.version ?? ''));
-  const sections = byGame(songs, true);
-  const split = sections.map(section => `${section.songs.length} from ${section.heading}`).join(' and ');
-  return {
-    kind: 'zelda-ocarina', path: ZELDA_OCARINA_PATH, name: 'Zelda ocarina songs',
-    title: `Zelda Ocarina Songs – ${OCARINA_GAMES.join(' & ')} Tabs`,
-    h1: 'Zelda ocarina songs',
-    description: `Button tabs for ${plural(songs.length, 'Zelda ocarina song')}: ${split}. Each tab is on the page; open a song to listen and practice it one passage at a time. Free, in your browser.`,
-    intro: `${plural(songs.length, 'song')} to play on the ocarina of ${OCARINA_GAMES.join(' and ')}: ${split}. Each one lists the controller buttons of its melody in order; a plus sign joins buttons held together. Long songs show their opening notes here and the whole melody in the lesson.`,
-    sections, songIds: idsOf(sections), indexable: songs.length >= MIN_INDEXED_SONGS,
-  };
-}
-
 function zeldaHub(zelda: readonly SongPage[]): Hub {
-  const sections = byGame(zelda, false);
+  const sections = byGame(zelda, true);
+  const split = sections.filter(section => (OCARINA_GAMES as readonly string[]).includes(section.heading)).map(section => `${section.songs.length} from ${section.heading}`).join(', ');
   return {
-    kind: 'zelda', path: ZELDA_PATH, name: hubName(ZELDA_UNIVERSE),
-    title: 'Zelda Songs on the Ocarina – Tabs by Game',
-    h1: 'Zelda songs by game',
-    description: `Every one of the ${zelda.length} Zelda songs in Ocarina Hero, grouped by game, with button tabs for the ocarina. Open a song to listen and practice it. Free, in your browser.`,
-    intro: `${plural(zelda.length, 'song')} from The Legend of Zelda series, grouped by the game they come from. Open one to see its button tab and practice it on the ocarina.`,
+    kind: 'zelda', path: ZELDA_PATH, name: 'Zelda ocarina songs',
+    title: 'Zelda Ocarina Songs – Button Tabs by Game',
+    h1: 'Zelda ocarina songs',
+    description: `Button tabs for ${plural(zelda.length, 'Zelda song')} on the ocarina, grouped by game: ${split} and more. Each tab is on the page; open a song to listen and practice it one passage at a time. Free, in your browser.`,
+    intro: `${plural(zelda.length, 'song')} from The Legend of Zelda to play on the ocarina, grouped by game: ${split} and more. Each one lists the controller buttons of its melody in order; a plus sign joins buttons held together. Long songs show their opening notes here and the whole melody in the lesson.`,
     sections, songIds: idsOf(sections), indexable: zelda.length >= MIN_INDEXED_SONGS,
   };
 }
@@ -125,7 +108,7 @@ export function buildHubs(pages: readonly SongPage[]): Hub[] {
   const universes = new Map<string, SongPage[]>();
   for (const page of pages) universes.set(page.universe, [...universes.get(page.universe) ?? [], page]);
   const zelda = universes.get(ZELDA_UNIVERSE) ?? [];
-  const hubs: Hub[] = zelda.length ? [zeldaOcarinaHub(zelda), zeldaHub(zelda)] : [];
+  const hubs: Hub[] = zelda.length ? [zeldaHub(zelda)] : [];
   for (const [universe, songs] of [...universes].sort(([a, listA], [b, listB]) => listB.length - listA.length || a.localeCompare(b, 'en'))) {
     if (universe !== ZELDA_UNIVERSE) hubs.push(universeHub(universe, songs));
   }

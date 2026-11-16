@@ -4,23 +4,27 @@
  * processing and presentation delay. Real (trusted) touch and key input, saved songs, progress and a ranking
  * are seeded so the page does the work a returning visitor's page does.
  *
- * Usage: tsx scripts/inp-lab.ts [dist] [--cpu=4] [--runs=5] [--only=scenario,scenario] [--css="rule"] [--cpu-raster]
+ * Usage: tsx scripts/inp-lab.ts [dist] [--cpu=4] [--runs=5] [--only=scenario,scenario] [--css="rule"] [--cpu-raster] [--device=<adb serial>] [--deadline=480]
+ * Every DevTools call times out after 30 s and the whole run stops at the deadline (seconds), so nothing hangs.
+ * `--device` measures in Chrome on an Android phone over USB (adb forwards DevTools and reverses the site's port),
+ * with no emulation or throttling: the numbers are that phone's own.
  * Raster columns come from a trace of each interaction: desktop raster is far faster than a phone's, so read them as
  * the relative paint work an interaction causes, not as phone milliseconds.
  * `--cpu-raster` rasterizes on one CPU thread without a GPU, so paint cost shows up in the numbers as it does on slow phones.
  * `--css` injects a stylesheet into every page, to measure what a rendering change would save before making it.
  */
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { createServer, type Server } from 'node:http';
-import { tmpdir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import { extname, join, normalize } from 'node:path';
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const ADB = join(homedir(), 'Library/Android/sdk/platform-tools/adb');
 const TYPES: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.wasm': 'application/wasm', '.ico': 'image/x-icon' };
 
 /** A static server shaped like Pages: directory index, home for unknown paths, and a fixed popularity ranking. */
-function serve(dist: string, ranking: string): Promise<{ server: Server; origin: string }> {
+function serve(dist: string, ranking: string, port = 0): Promise<{ server: Server; origin: string }> {
   const server = createServer((request, response) => {
     const path = decodeURIComponent(new URL(request.url ?? '/', 'http://x').pathname);
     if (path === '/api/popularity') return void response.writeHead(200, { 'Content-Type': 'application/json' }).end(ranking);
@@ -30,10 +34,19 @@ function serve(dist: string, ranking: string): Promise<{ server: Server; origin:
     if (!existsSync(file)) file = join(dist, 'index.html');
     response.writeHead(200, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream' }).end(readFileSync(file));
   });
-  return new Promise(resolve => server.listen(0, '127.0.0.1', () => {
+  return new Promise(resolve => server.listen(port, '127.0.0.1', () => {
     const address = server.address();
-    resolve({ server, origin: `http://127.0.0.1:${typeof address === 'object' && address ? address.port : 0}` });
+    resolve({ server, origin: `http://localhost:${typeof address === 'object' && address ? address.port : 0}` });
   }));
+}
+
+const CALL_TIMEOUT_MS = 30_000;
+
+/** A DevTools call that never answers (a dozing phone, a stalled trace) fails the run instead of hanging it. */
+function withTimeout<T>(promise: Promise<T>, what: string): Promise<T> {
+  let timer: NodeJS.Timeout | undefined;
+  const expired = new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new Error(`No answer to ${what} within ${CALL_TIMEOUT_MS / 1000} s`)), CALL_TIMEOUT_MS); });
+  return Promise.race([promise, expired]).finally(() => clearTimeout(timer));
 }
 
 /** One page session over the DevTools protocol. */
@@ -63,10 +76,10 @@ class Page {
   send(method: string, params: object = {}): Promise<any> {
     const id = ++this.next;
     this.socket.send(JSON.stringify({ id, method, params }));
-    return new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
+    return withTimeout(new Promise((resolve, reject) => this.pending.set(id, { resolve, reject })), method);
   }
   on(method: string, listener: (params: any) => void): void { this.listeners.set(method, listener); }
-  once(method: string): Promise<void> { return new Promise(resolve => this.waiters.push({ method, resolve })); }
+  once(method: string): Promise<void> { return withTimeout(new Promise(resolve => this.waiters.push({ method, resolve })), method); }
   async evaluate<T>(expression: string): Promise<T> {
     const { result, exceptionDetails } = await this.send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
     if (exceptionDetails) throw new Error(exceptionDetails.exception?.description ?? exceptionDetails.text);
@@ -213,7 +226,15 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const option = (name: string, fallback: string) => args.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
   const dist = args.find(arg => !arg.startsWith('--')) ?? 'dist';
-  const cpu = Number(option('cpu', '4'));
+  const device = option('device', '');
+  const cleanups: (() => void)[] = [];
+  const deadline = setTimeout(() => {
+    console.error(`INP lab exceeded ${option('deadline', '480')} s; stopping.`);
+    for (const cleanup of cleanups) try { cleanup(); } catch { /* best effort on the way out */ }
+    process.exit(1);
+  }, Number(option('deadline', '480')) * 1000);
+  deadline.unref();
+  const cpu = Number(option('cpu', device ? '1' : '4'));
   const runs = Number(option('runs', '5'));
   const only = option('only', Object.keys(SCENARIOS).join(',')).split(',');
   const css = option('css', '');
@@ -224,30 +245,46 @@ async function main(): Promise<void> {
     'ocarina.saved.v1': JSON.stringify(songIds.filter((_, index) => index % 9 === 0)),
     'ocarina.progress.v1': JSON.stringify(Object.fromEntries(songIds.filter((_, index) => index % 4 === 0).map((id, index) => [id, { completed: index % 2 === 0, bestCombo: 12, openedAt: Date.now() - index * 60_000 }]))),
   };
-  const { server, origin } = await serve(dist, ranking);
-  const profile = mkdtempSync(join(tmpdir(), 'inp-lab-'));
   const port = 9600 + Math.floor(Math.random() * 300);
-  const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--disk-cache-size=1', '--media-cache-size=1', '--no-first-run', '--autoplay-policy=no-user-gesture-required', ...(cpuRaster ? ['--disable-gpu', '--disable-gpu-rasterization', '--num-raster-threads=1'] : []), 'about:blank'], { stdio: 'ignore' });
+  const { server, origin } = await serve(dist, ranking, device ? port + 1 : 0);
+  const adb = (...command: string[]) => execFileSync(ADB, ['-s', device, ...command], { encoding: 'utf8' });
+  if (device) {
+    adb('forward', `tcp:${port}`, 'localabstract:chrome_devtools_remote');
+    adb('reverse', `tcp:${port + 1}`, `tcp:${port + 1}`);
+    cleanups.push(() => adb('forward', '--remove', `tcp:${port}`), () => adb('reverse', '--remove', `tcp:${port + 1}`));
+  }
+  const profile = mkdtempSync(join(tmpdir(), 'inp-lab-'));
+  const chrome = device ? undefined : spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--disk-cache-size=1', '--media-cache-size=1', '--no-first-run', '--autoplay-policy=no-user-gesture-required', ...(cpuRaster ? ['--disable-gpu', '--disable-gpu-rasterization', '--num-raster-threads=1'] : []), 'about:blank'], { stdio: 'ignore' });
   try {
-    let target: { webSocketDebuggerUrl: string } | undefined;
+    let target: { id: string; webSocketDebuggerUrl: string } | undefined;
     for (let attempt = 0; attempt < 50 && !target; attempt++) {
       await sleep(200);
-      target = await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' }).then(response => response.json()).catch(() => undefined);
+      // Chrome on Android cannot open tabs over DevTools: the harness drives a blank (or earlier harness) tab open there.
+      target = device
+        ? await fetch(`http://127.0.0.1:${port}/json/list`).then(response => response.json()).then((pages: { type: string; url: string; id: string; webSocketDebuggerUrl: string }[]) => pages.find(page => page.type === 'page' && (page.url === 'about:blank' || page.url.startsWith('http://localhost:')))).catch(() => undefined)
+        : await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' }).then(response => response.json()).catch(() => undefined);
     }
-    if (!target) throw new Error('Chrome did not start');
+    if (!target) throw new Error(device ? 'No blank tab in Chrome on the phone: open about:blank there' : 'Chrome did not start');
+    const tab = target.id;
+    // Touch input only reaches the tab on screen.
+    if (device) await fetch(`http://127.0.0.1:${port}/json/activate/${tab}`);
     const page = await Page.open(target.webSocketDebuggerUrl);
     await page.send('Page.enable');
     await page.send('Runtime.enable');
-    await page.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
-    await page.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
-    await page.send('Emulation.setCPUThrottlingRate', { rate: cpu });
+    if (!device) {
+      await page.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
+      await page.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+    }
+    if (cpu !== 1) await page.send('Emulation.setCPUThrottlingRate', { rate: cpu });
     await page.send('Page.addScriptToEvaluateOnNewDocument', { source: `${OBSERVER}\ntry { for (const [k, v] of Object.entries(${JSON.stringify(seed)})) localStorage.setItem(k, v); } catch {}
 ${css ? `document.addEventListener('DOMContentLoaded', () => document.head.append(Object.assign(document.createElement('style'), { textContent: ${JSON.stringify(css)} })));` : ''}` });
     const all: Interaction[] = [];
     for (let run = 0; run < runs; run++) for (const name of only) all.push(...await SCENARIOS[name]!(page, origin, songIds));
+    if (device) await page.send('Page.navigate', { url: 'about:blank' });
     page.close();
+    if (!device) await fetch(`http://127.0.0.1:${port}/json/close/${tab}`).catch(() => {});
     const labels = [...new Set(all.map(entry => entry.label))];
-    console.log(`INP lab · ${dist} · 390x844 · CPU ${cpu}x · ${runs} runs${css ? ` · css: ${css}` : ''} (ms, p75 per interaction)`);
+    console.log(`INP lab · ${dist} · ${device ? `device ${device}` : '390x844'} · CPU ${cpu}x · ${runs} runs${css ? ` · css: ${css}` : ''} (ms, p75 per interaction)`);
     console.log(['interaction'.padEnd(22), 'n', 'p75', 'max', 'delay', 'processing', 'presentation', 'rAF+render', 'style+layout+paint', 'raster', 'paints', 'top script (last run)'].join('\t'));
     for (const label of labels) {
       const entries = all.filter(entry => entry.label === label);
@@ -255,7 +292,9 @@ ${css ? `document.addEventListener('DOMContentLoaded', () => document.head.appen
       console.log([label.padEnd(22), entries.length, p75('duration'), Math.round(Math.max(...entries.map(entry => entry.duration))), p75('delay'), p75('processing'), p75('presentation'), p75('frameRender'), p75('frameStyleLayout'), p75('raster'), p75('paints'), entries.at(-1)!.topScript].join('\t'));
     }
   } finally {
-    chrome.kill();
+    chrome?.kill();
+    for (const cleanup of cleanups) cleanup();
+    server.closeAllConnections();
     server.close();
     await sleep(300);
     rmSync(profile, { recursive: true, force: true });

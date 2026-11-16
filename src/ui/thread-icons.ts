@@ -1,6 +1,6 @@
-import { assetDir } from './theme';
+import { assetDir, currentTheme } from './theme';
 
-/** Patch icons: public/art/icons (tapestry) and public/art/icons-retro (retro), one file per name in each. */
+/** Patch icons: public/art/icons (tapestry, WebP rendered from its SVG by scripts/rasterize-icons.ts) and public/art/icons-retro (retro SVG), one file per name in each. */
 const ICONS = [
   'anime',
   'back',
@@ -64,13 +64,17 @@ export type ThreadIcon = typeof ICONS[number];
  * A decorative embroidered patch. Each SVG keeps its own pattern ids, so it is
  * referenced as an image instead of inlined; buttons keep their accessible names.
  */
+function iconSrc(name: string): string {
+  return `${assetDir('icons')}${name}.${currentTheme() === 'retro' ? 'svg' : 'webp'}`;
+}
+
 export function threadIcon(name: ThreadIcon, extraClass = ''): string {
-  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${assetDir('icons')}${name}.svg" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
+  return `<img class="thread-icon${extraClass ? ` ${extraClass}` : ''}" src="${iconSrc(name)}" data-icon="${name}" alt="" aria-hidden="true" draggable="false" decoding="async" />`;
 }
 
 /** Point every rendered patch icon at the active theme's set. */
 export function refreshThreadIcons(): void {
   for (const image of document.querySelectorAll<HTMLImageElement>('img.thread-icon[data-icon]')) {
-    image.src = `${assetDir('icons')}${image.dataset.icon}.svg`;
+    image.src = iconSrc(image.dataset.icon!);
   }
 }

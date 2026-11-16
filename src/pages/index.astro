@@ -1,0 +1,8 @@
+---
+import AppShell from '../layouts/AppShell.astro';
+import { groups } from '../site/songs';
+import { SITE_URL } from '../site/config';
+import { homeHead } from '../site/site';
+import { homeDirectoryHtml } from '../site/song-pages';
+---
+<AppShell page={homeHead(SITE_URL)} directory={homeDirectoryHtml(groups, SITE_URL)} />

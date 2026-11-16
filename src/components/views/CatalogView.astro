@@ -1,0 +1,59 @@
+---
+/** The songbook: the home view, hidden when the page opens on a song. */
+interface Props { hidden?: boolean }
+const { hidden = false } = Astro.props;
+---
+<section id="catalog-view" class="view" aria-labelledby="catalog-title" hidden={hidden}>
+  <div class="catalog-hero">
+    <div class="hero-copy">
+      <p class="eyebrow stitched-label">Ocarina of Time tabs</p>
+      <h1 id="catalog-title" class="embroidered">Zelda ocarina<br>songs</h1>
+      <p class="subtitle stitched-label">Game, anime, film and pop melodies.</p>
+    </div>
+  </div>
+  <div class="catalog-content">
+    <div class="field search-field">
+      <label for="song-search" class="stitched-label">Find a melody</label>
+      <span class="input-frame"><input id="song-search" type="search" placeholder="Song, artist or universe…" autocomplete="off" /></span>
+    </div>
+    <details id="catalog-filters" class="catalog-filters" open>
+    <summary id="filter-summary" class="stitched-label"><span>Filters<span id="filter-summary-detail" class="filter-summary-detail"></span></span></summary>
+    <div class="filter-grid">
+    <fieldset class="category-selector">
+      <legend class="stitched-label">Category</legend>
+      <button id="category-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="category-panel"></button>
+      <div id="category-panel" class="universe-panel category-panel" inert><div class="universe-panel-inner"><div id="categories" class="category-grid"></div></div></div>
+    </fieldset>
+    <div class="catalog-facets">
+      <fieldset class="universe-filter">
+        <legend class="stitched-label">Universe</legend>
+        <button id="universe-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="universe-panel"></button>
+        <div id="universe-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="universes" class="universe-row"></div></div></div>
+      </fieldset>
+      <fieldset class="difficulty-filter">
+        <legend class="stitched-label">Difficulty</legend>
+        <button id="difficulty-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="difficulty-panel"></button>
+        <div id="difficulty-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="difficulty-scale" class="difficulty-scale">
+          <label for="difficulty-range" class="visually-hidden">Difficulty</label>
+          <input id="difficulty-range" type="range" min="0" max="4" step="1" value="0" />
+          <div id="difficulty-steps" class="difficulty-steps" aria-hidden="true"></div>
+        </div></div></div>
+      </fieldset>
+    </div>
+    </div>
+    </details>
+    <div class="catalog-layout">
+      <div>
+        <div class="catalog-count"><p id="catalog-count" role="status" aria-live="polite"></p><button id="reset-search" type="button" class="text-button" hidden>Clear filters</button></div>
+        <div class="song-index">
+          <div id="demos" class="song-list"></div>
+          <nav id="letter-rail" class="letter-rail" aria-label="Jump to letter" hidden><div class="letter-list"></div><span id="letter-bubble" class="letter-bubble" aria-hidden="true"></span></nav>
+        </div>
+      </div>
+      <aside class="catalog-aside" aria-labelledby="journey-title">
+        <div id="journey" class="journey"></div>
+        <button class="action" type="button" data-view-link="free"><span class="stitched-label">Try free play</span></button>
+      </aside>
+    </div>
+  </div>
+</section>

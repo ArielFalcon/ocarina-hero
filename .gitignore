@@ -10,3 +10,4 @@ dist/
 # Local-only working docs and ODD task tracking; never published.
 /docs/
 /odd/
+.astro/

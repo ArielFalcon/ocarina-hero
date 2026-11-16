@@ -1,0 +1,34 @@
+<section id="workshop-view" class="view padded-view workshop" aria-labelledby="workshop-title" hidden>
+  <div class="section-art"><p class="eyebrow stitched-label">Experimental workshop</p><h1 id="workshop-title" class="embroidered">Your own melody</h1><p class="subtitle stitched-label">Bring a recording. Explore its tune.</p></div>
+  <ol class="workshop-steps">
+    <li class="workshop-step">
+      <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">1</span><span class="stitched-label">Choose a recording</span></h2>
+      <div class="file-picker">
+        <label class="action primary" for="file"><span data-thread-icon="music"></span><span class="stitched-label">Choose audio or MIDI</span></label>
+        <input id="file" type="file" accept=".mid,.midi,audio/*" class="visually-hidden" />
+        <span id="file-name" class="file-name">No file selected</span>
+      </div>
+      <p class="meta">Any length works: you will pick up to 15 seconds next. MIDI files import directly. Everything runs on this device.</p>
+    </li>
+    <li class="workshop-step workshop-step-fragment">
+      <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">2</span><span class="stitched-label">Pick the fragment</span></h2>
+      <p class="step-placeholder meta">The waveform appears here after you choose an audio file. MIDI files skip this step.</p>
+      <div id="audio-editor"></div>
+    </li>
+    <li class="workshop-step">
+      <h2 class="workshop-step-title"><span class="step-number" aria-hidden="true">3</span><span class="stitched-label">Find the melody</span></h2>
+      <div class="analysis-controls">
+        <p class="analysis-note meta">The melody is found in your browser. It is most accurate with a single instrument or voice; with accompaniment, some notes can come from other instruments.</p>
+        <button id="analyze" class="action primary analyze-button" type="button" disabled><span data-thread-icon="play"></span><span class="stitched-label">Analyze fragment</span></button>
+      </div>
+      <div id="analysis-progress" class="analysis-progress" hidden>
+        <span class="thread-spinner" aria-hidden="true"></span>
+        <div class="analysis-progress-copy"><p id="analysis-progress-label" class="analysis-progress-label">Analysing the fragment…</p><p class="meta"><span id="analysis-elapsed" aria-hidden="true">0 s</span> · Usually takes a few seconds.</p></div>
+        <button id="cancel-analysis" class="text-button" type="button">Cancel</button>
+      </div>
+      <p id="workshop-status" class="song-hint" role="status" aria-live="polite">Choose a recording to begin.</p>
+      <div class="workshop-actions"><button id="open-import" class="action" type="button" disabled><span class="stitched-label">Open melody</span></button><button id="analysis-download" class="action" type="button" disabled><span class="stitched-label">Download analysis</span></button></div>
+      <p class="notice">Audio extraction is experimental. Some notes may be missed or misidentified; review the result before practicing.</p>
+    </li>
+  </ol>
+</section>

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "test": "tsx --test scripts/*.test.ts",
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build && tsx scripts/build-song-pages.ts",
-    "preview": "vite preview",
-    "preview:tab": "tsx scripts/preview.ts"
+    "dev": "astro dev",
+    "build": "astro check && tsc --noEmit && astro build",
+    "preview": "astro preview",
+    "preview:tab": "tsx scripts/preview.ts",
+    "parity": "tsx scripts/dist-parity.ts"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",

@@ -4,38 +4,20 @@ import test from 'node:test';
 import { DEMOS } from './catalogue-loader';
 import { songDocumentTitle } from '../src/ui/route';
 import { createSongbookEntries, songMeta } from '../src/ui/songbook';
-import { homePageHtml, llmsTxt, siteUrlOf, sitemapXml, songGroups, songPageHtml, songPageOf } from './song-pages';
+import { homeHead, jsonLd } from '../src/site/site';
+import { homeDirectoryHtml, llmsTxt, relatedSongs, robotsTxt, sitemapXml, songDirectoryHtml, songGroups, songHead, songPageOf } from '../src/site/song-pages';
 
-const indexHtml = readFileSync('index.html', 'utf8');
+const SITE = 'https://ocarinahero.app/';
 const song = { id: 'song-of-storms', title: 'Song of "Storms" & Rain', meta: 'Zelda · Ocarina of Time', universe: 'The Legend of <Zelda>', details: 'Ocarina of Time · 23 notes', tab: 'L R X | L + D-pad up' };
-const headWithoutRewrittenValues = (html: string) => html.slice(0, html.indexOf('</head>')).replace(/<title>.*?<\/title>|content="[^"]*"|href="[^"]*"|(<script type="application\/ld\+json"[^>]*>).*?(?=<\/script>)/gs, '$1');
 const related = [{ id: 'zeldas-lullaby', title: 'Zelda’s Lullaby', meta: 'Zelda · Ocarina of Time' }];
-const structuredData = (html: string) => JSON.parse(html.match(/<script type="application\/ld\+json"[^>]*>(.*?)<\/script>/s)![1]!);
-const directory = (html: string) => html.match(/<noscript id="song-directory">(.*?)<\/noscript>/s)![1]!;
+const graphItem = (data: unknown, type: string) => (data as { '@graph': { '@type': string }[] })['@graph'].find(item => item['@type'] === type) as Record<string, any>;
 
 test('a song page carries its own title, description, canonical address and share preview', () => {
-  const html = songPageHtml(indexHtml, song, 'https://ocarinahero.app/', related);
-  const address = 'https://ocarinahero.app/song/song-of-storms/';
-  assert.ok(html.includes('<title>Song of &quot;Storms&quot; &amp; Rain (Zelda · Ocarina of Time) · Zelda ocarina tab · Ocarina Hero</title>'));
-  assert.ok(html.includes(`<link rel="canonical" href="${address}"`));
-  assert.ok(html.includes(`<meta property="og:url" content="${address}"`));
-  for (const tag of ['<meta name="description"', '<meta property="og:title"', '<meta property="og:description"', '<meta name="twitter:title"', '<meta name="twitter:description"']) {
-    const content = html.slice(html.indexOf(tag)).match(/content="([^"]*)"/)![1]!;
-    assert.ok(content.includes('Song of &quot;Storms&quot; &amp; Rain'), `${tag} does not name the song`);
-  }
-  assert.ok(html.match(/<meta name="description" content="([^"]*)"/)![1]!.includes('Zelda · Ocarina of Time'));
-  assert.equal(headWithoutRewrittenValues(html), headWithoutRewrittenValues(indexHtml));
-});
-
-test('a song page opens on the lesson of its song, with its heading and text tab in the markup', () => {
-  const html = songPageHtml(indexHtml, song, 'https://ocarinahero.app/', related);
-  assert.match(html, /<h1 id="lesson-title"[^>]*>Song of &quot;Storms&quot; &amp; Rain<\/h1>/);
-  assert.match(html, /<p id="lesson-universe"[^>]*>The Legend of &lt;Zelda&gt;<\/p>/);
-  assert.match(html, /<p id="lesson-meta"[^>]*>Ocarina of Time · 23 notes<\/p>/);
-  assert.match(html, /<p id="tab-text"[^>]*>L R X \| L \+ D-pad up<\/p>/);
-  assert.match(html, /<section id="catalog-view"[^>]* hidden>/);
-  assert.doesNotMatch(html, /<section id="lesson-view"[^>]* hidden/);
-  assert.match(html, /<div class="app is-lesson has-song">/);
+  const head = songHead(song, SITE);
+  assert.equal(head.title, 'Song of "Storms" & Rain (Zelda · Ocarina of Time) · Zelda ocarina tab · Ocarina Hero');
+  assert.equal(head.shareTitle, head.title);
+  assert.equal(head.url, 'https://ocarinahero.app/song/song-of-storms/');
+  assert.ok(head.description.includes('Song of "Storms" & Rain') && head.description.includes('Zelda · Ocarina of Time'));
 });
 
 test('the page of a bundled song carries the tab the lesson opens with', () => {
@@ -44,24 +26,23 @@ test('the page of a bundled song carries the tab the lesson opens with', () => {
   assert.equal(lullaby.details, 'Ocarina of Time · 16 notes · 4 passages');
 });
 
-test('a page whose head lost a tag to rewrite is refused instead of published half-described', () => {
-  assert.throws(() => songPageHtml(indexHtml.replace('<link rel="canonical"', '<link rel="alternate"'), song, 'https://ocarinahero.app/', related));
-});
-
-test('the site address comes from the canonical link, and the sitemap lists the home and every song', () => {
-  assert.equal(siteUrlOf(indexHtml), 'https://ocarinahero.app/');
-  const xml = sitemapXml('https://ocarinahero.app/', ['ode', 'song-of-storms']);
+test('the sitemap lists the home and every song', () => {
+  const xml = sitemapXml(SITE, ['ode', 'song-of-storms']);
   assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map(match => match[1]),
     ['https://ocarinahero.app/', 'https://ocarinahero.app/song/ode/', 'https://ocarinahero.app/song/song-of-storms/']);
 });
 
 test('the sitemap dates a song only when its day is known, and the home carries the newest day', () => {
-  const xml = sitemapXml('https://ocarinahero.app/', ['ode', 'song-of-storms'], new Map([['ode', '2026-01-02'], ['other', '2026-03-04']]));
+  const xml = sitemapXml(SITE, ['ode', 'song-of-storms'], new Map([['ode', '2026-01-02'], ['other', '2026-03-04']]));
   assert.deepEqual([...xml.matchAll(/<loc>([^<]*)<\/loc>(?:<lastmod>([^<]*)<\/lastmod>)?/g)].map(match => [match[1], match[2]]), [
     ['https://ocarinahero.app/', '2026-03-04'],
     ['https://ocarinahero.app/song/ode/', '2026-01-02'],
     ['https://ocarinahero.app/song/song-of-storms/', undefined],
   ]);
+});
+
+test('robots.txt points crawlers to the sitemap', () => {
+  assert.match(robotsTxt(SITE), /^User-agent: \*\nAllow: \/\n\nSitemap: https:\/\/ocarinahero\.app\/sitemap\.xml\n$/);
 });
 
 test('the pages.dev address is kept out of search results, the custom domain is not', () => {
@@ -80,20 +61,31 @@ test('every bundled song id is safe as a directory and URL segment', () => {
 });
 
 test('a song page describes its song to search engines and links the other songs of its universe', () => {
-  const html = songPageHtml(indexHtml, song, 'https://ocarinahero.app/', related);
-  const data = structuredData(html);
-  const page = data['@graph'].find((item: { '@type': string }) => item['@type'] === 'WebPage');
+  const head = songHead(song, SITE);
+  const page = graphItem(head.structuredData, 'WebPage');
   assert.equal(page.url, 'https://ocarinahero.app/song/song-of-storms/');
   assert.equal(page.about['@type'], 'MusicComposition');
   assert.equal(page.about.name, 'Song of "Storms" & Rain');
-  const crumbs = data['@graph'].find((item: { '@type': string }) => item['@type'] === 'BreadcrumbList').itemListElement;
+  assert.equal(page.mainEntity.text, song.tab);
+  const crumbs = graphItem(head.structuredData, 'BreadcrumbList').itemListElement;
   assert.deepEqual(crumbs.map((crumb: { name: string; item: string }) => [crumb.name, crumb.item]),
     [['Ocarina Hero', 'https://ocarinahero.app/'], ['Song of "Storms" & Rain', 'https://ocarinahero.app/song/song-of-storms/']]);
-  // A closing tag inside a value would end the script early.
-  assert.doesNotMatch(html.match(/<script type="application\/ld\+json"[^>]*>(.*?)<\/script>/s)![1]!, /<\//);
-  const links = directory(html);
+  const links = songDirectoryHtml(song, related, SITE);
   assert.match(links, /<a href="https:\/\/ocarinahero\.app\/song\/zeldas-lullaby\/">Zelda’s Lullaby<\/a>/);
   assert.match(links, /<a href="https:\/\/ocarinahero\.app\/">/);
+  assert.ok(links.includes('More The Legend of &lt;Zelda&gt; songs'), 'the universe name is escaped');
+});
+
+test('a closing tag inside structured data cannot end its script element early', () => {
+  assert.doesNotMatch(jsonLd(songHead(song, SITE).structuredData), /<\//);
+  assert.deepEqual(JSON.parse(jsonLd({ title: '</script><b>' })), { title: '</script><b>' });
+});
+
+test('the other songs of a universe exclude the song itself', () => {
+  const groups = songGroups(createSongbookEntries(DEMOS));
+  const zelda = songPageOf(createSongbookEntries(DEMOS).find(entry => entry.id === 'lullaby-trigger')!);
+  const others = relatedSongs(groups, zelda);
+  assert.ok(others.length > 0 && !others.some(link => link.id === zelda.id));
 });
 
 test('the home page lists every song as a link for crawlers that do not run scripts, Zelda first', () => {
@@ -101,15 +93,14 @@ test('the home page lists every song as a link for crawlers that do not run scri
   const groups = songGroups(songs);
   assert.equal(groups[0]!.universe, 'The Legend of Zelda');
   assert.equal(groups.reduce((sum, group) => sum + group.songs.length, 0), songs.length);
-  const html = homePageHtml(indexHtml, groups, 'https://ocarinahero.app/');
-  const links = [...directory(html).matchAll(/<a href="https:\/\/ocarinahero\.app\/song\/([^/]+)\/">/g)].map(match => match[1]);
+  const links = [...homeDirectoryHtml(groups, SITE).matchAll(/<a href="https:\/\/ocarinahero\.app\/song\/([^/]+)\/">/g)].map(match => match[1]);
   assert.deepEqual([...links].sort(), songs.map(entry => entry.id).sort());
-  assert.equal(structuredData(html)['@graph'].find((item: { '@type': string }) => item['@type'] === 'WebApplication').offers.price, '0');
+  assert.equal(graphItem(homeHead('https://ocarinahero.app/').structuredData, 'WebApplication').offers.price, '0');
 });
 
 test('llms.txt summarises the app and links every song page', () => {
   const songs = createSongbookEntries(DEMOS);
-  const text = llmsTxt('https://ocarinahero.app/', songGroups(songs));
+  const text = llmsTxt(SITE, songGroups(songs));
   assert.match(text, /^# Ocarina Hero\n\n> /);
   for (const entry of songs) assert.ok(text.includes(`(https://ocarinahero.app/song/${entry.id}/)`), entry.id);
 });

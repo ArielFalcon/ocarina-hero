@@ -139,3 +139,17 @@ test('the pause between songs can be skipped or cancelled, and never applies fro
   assert.equal(f.played.length, 3, 'closing during the pause cancels the pending start');
   assert.equal(f.quick.state.id, null);
 });
+
+test('the player hears about a sounding note once, not on every animation frame', async () => {
+  const f = fixture();
+  f.quick.toggle('a', song('a'));
+  await f.settle();
+  f.sound(1);
+  const before = f.states.length;
+  f.sound(1);
+  f.sound(1);
+  assert.equal(f.states.length, before, 'frames on the same note emit nothing');
+  f.sound(2);
+  assert.equal(f.states.length, before + 1);
+  assert.equal(f.states.at(-1)!.activeNote, 2);
+});

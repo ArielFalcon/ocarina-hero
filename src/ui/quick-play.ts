@@ -40,7 +40,9 @@ export class QuickPlay {
   }) {
     this.playback = new Playback(player, {
       highlight: index => {
-        this.activeNote = index === null ? null : this.indices[index] ?? null;
+        const note = index === null ? null : this.indices[index] ?? null;
+        if (note === this.activeNote) return;
+        this.activeNote = note;
         if (this.activeNote !== null) this.cursor = this.activeNote;
         this.emit();
       },

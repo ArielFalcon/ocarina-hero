@@ -1,7 +1,7 @@
 [
   {
     "id": "mario",
-    "title": "Super Mario Bros. — Overworld",
+    "title": "Super Mario Bros.: Overworld",
     "category": "gaming",
     "hook": "Introduction and first full melodic phrase",
     "source": {
@@ -79,7 +79,7 @@
   },
   {
     "id": "tetris",
-    "title": "Tetris — Music A",
+    "title": "Tetris: Music A",
     "category": "gaming",
     "hook": "First two complete phrases",
     "source": {
@@ -148,7 +148,7 @@
   },
   {
     "id": "pokemon-route1",
-    "title": "Pokémon — Route 1",
+    "title": "Pokémon: Route 1",
     "category": "gaming",
     "hook": "First two phrases of the lead channel",
     "source": {
@@ -215,7 +215,7 @@
   },
   {
     "id": "megalovania",
-    "title": "Undertale — Megalovania",
+    "title": "Undertale: Megalovania",
     "category": "gaming",
     "hook": "Four-bar opening riff with its four bass-note variants",
     "source": {
@@ -330,7 +330,7 @@
   },
   {
     "id": "naruto",
-    "title": "Naruto — Sadness and Sorrow",
+    "title": "Naruto: Sadness and Sorrow",
     "category": "anime",
     "hook": "First main-theme phrase, after the string introduction",
     "source": {
@@ -391,7 +391,7 @@
   },
   {
     "id": "evangelion",
-    "title": "Evangelion — A Cruel Angel’s Thesis",
+    "title": "Evangelion: A Cruel Angel’s Thesis",
     "category": "anime",
     "hook": "Opening vocal phrase",
     "source": {
@@ -468,7 +468,7 @@
   },
   {
     "id": "lilium",
-    "title": "Elfen Lied — Lilium",
+    "title": "Elfen Lied: Lilium",
     "category": "anime",
     "hook": "First vocal phrase",
     "source": {

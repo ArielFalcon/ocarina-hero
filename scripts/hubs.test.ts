@@ -105,6 +105,7 @@ test('hub titles and headings are distinct, and the Zelda hub targets "Zelda oca
   assert.equal(new Set(hubs.map(hub => hub.title)).size, hubs.length);
   assert.equal(new Set(hubs.map(hub => hub.h1)).size, hubs.length);
   assert.match(hubOf('zelda').title, /^Zelda Ocarina Songs/);
+  assert.deepEqual(hubs.flatMap(hub => [hub.title, hub.h1, hub.description]).filter(text => /[—–]/.test(text)), []);
 });
 
 test('the sitemap, llms.txt and home directory keep every earlier entry and add the hubs', () => {

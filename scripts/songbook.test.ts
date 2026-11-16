@@ -84,6 +84,13 @@ test('every bundled melody has a specific universe and a clean, song-only title'
   }
 });
 
+test('no displayed song text uses an en or em dash', () => {
+  for (const entry of entries) {
+    const shown = [entry.title, entry.universe, entry.version ?? '', entry.artist ?? '', ...entry.aliases, entry.track.title, entry.track.subtitle ?? ''];
+    assert.deepEqual(shown.filter(text => /[—–]/.test(text)), [], entry.id);
+  }
+});
+
 test('franchise composers and full theme names stay searchable without being displayed', () => {
   assert.deepEqual(ids(filterSongbook(entries, { query: 'zimmer interstellar' })), ['catalogue-cornfield-chase']);
   assert.deepEqual(ids(filterSongbook(entries, { query: 'jujutsu aizo' })), ['catalogue-aizo']);

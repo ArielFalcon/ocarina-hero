@@ -401,13 +401,13 @@ export class SongbookView {
     const current = groups.flatMap(group => group.universes).find(option => option.name === this.universe);
     this.universeFold.toggle.innerHTML = (current
       ? face(universeLabel(current.name), current.icon, current.count)
-      : face('Every universe', 'songbook', total)) + '<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change universe</span>';
+      : face('Every universe', 'songbook', total)) + '<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden">, change universe</span>';
   }
 
   /** The folded category field shows the chosen card's icon, name and count. */
   private renderCategoryToggle(): void {
     const chosen = this.categories.querySelector('[aria-pressed="true"]');
-    this.categoryFold.toggle.innerHTML = `<span class="universe-icon" aria-hidden="true">${chosen?.querySelector('.category-symbol')?.innerHTML ?? ''}</span><span class="universe-name">${chosen?.querySelector('.category-name')?.textContent ?? 'All songs'}</span>${chosen?.querySelector('.category-count')?.innerHTML ?? ''}<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change category</span>`;
+    this.categoryFold.toggle.innerHTML = `<span class="universe-icon" aria-hidden="true">${chosen?.querySelector('.category-symbol')?.innerHTML ?? ''}</span><span class="universe-name">${chosen?.querySelector('.category-name')?.textContent ?? 'All songs'}</span>${chosen?.querySelector('.category-count')?.innerHTML ?? ''}<span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden">, change category</span>`;
   }
 
   /** Typing paints its character first; the list follows in the next task, once for a burst of keystrokes. */
@@ -445,7 +445,7 @@ export class SongbookView {
     this.difficultyRange.setAttribute('aria-valuetext', this.difficulty ? DIFFICULTY_NAMES[this.difficulty] : 'Any difficulty');
     for (const element of this.root.querySelectorAll<HTMLElement>('.difficulty-step')) element.classList.toggle('is-current', Number(element.dataset.step) === step);
     const name = DIFFICULTY_NAMES[this.difficulty];
-    this.difficultyFold.toggle.innerHTML = `${sealHtml(this.difficulty ? 'music' : 'songbook', this.difficulty, 'mini-seal')}<span class="universe-name">${this.difficulty ? name : 'Any difficulty'}</span><span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden"> — change difficulty</span>`;
+    this.difficultyFold.toggle.innerHTML = `${sealHtml(this.difficulty ? 'music' : 'songbook', this.difficulty, 'mini-seal')}<span class="universe-name">${this.difficulty ? name : 'Any difficulty'}</span><span class="universe-chevron" aria-hidden="true"></span><span class="visually-hidden">, change difficulty</span>`;
     this.filterSummaryDetail.textContent = [this.onlySaved ? 'Saved' : this.category === 'All' ? '' : this.category, this.universe, this.difficulty && DIFFICULTY_NAMES[this.difficulty]].filter(Boolean).map(part => ` · ${part}`).join('');
     const result = filterSongbook(this.entries, { query: this.search.value, category: this.category, universe: this.universe, onlySaved: this.onlySaved, savedIds: this.saved, difficulty: this.difficulty || undefined });
     this.noteSearch(this.search.value, !result.length && !this.universe && !this.onlySaved && this.category === 'All' && !this.difficulty);

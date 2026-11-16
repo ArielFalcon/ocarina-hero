@@ -13,7 +13,7 @@ const graphItem = (data: unknown, type: string) => (data as { '@graph': { '@type
 
 test('a song page carries its own title, description, canonical address and share preview', () => {
   const head = songHead(song, SITE);
-  assert.equal(head.title, 'Song of "Storms" & Rain (Ocarina of Time) – Zelda Ocarina Tabs & Notes');
+  assert.equal(head.title, 'Song of "Storms" & Rain (Ocarina of Time) | Ocarina of Time Button Tabs');
   assert.equal(head.shareTitle, head.title);
   assert.equal(head.url, 'https://ocarinahero.app/song/song-of-storms/');
   assert.ok(head.description.startsWith('How to play Song of "Storms" & Rain (Zelda · Ocarina of Time) on the Zelda ocarina'));

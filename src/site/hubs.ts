@@ -82,7 +82,7 @@ function zeldaHub(zelda: readonly SongPage[]): Hub {
   const split = sections.filter(section => (OCARINA_GAMES as readonly string[]).includes(section.heading)).map(section => `${section.songs.length} from ${section.heading}`).join(', ');
   return {
     kind: 'zelda', path: ZELDA_PATH, name: 'Zelda ocarina songs',
-    title: 'Zelda Ocarina Songs – Button Tabs by Game',
+    title: 'Zelda Ocarina Songs: Ocarina of Time Button Tabs by Game',
     h1: 'Zelda ocarina songs',
     description: `Button tabs for ${plural(zelda.length, 'Zelda song')} on the ocarina, grouped by game: ${split} and more. Each tab is on the page; open a song to listen and practice it one passage at a time. Free, in your browser.`,
     intro: `${plural(zelda.length, 'song')} from The Legend of Zelda to play on the ocarina, grouped by game: ${split} and more. Each one lists the controller buttons of its melody in order; a plus sign joins buttons held together. Long songs show their opening notes here and the whole melody in the lesson.`,
@@ -95,7 +95,7 @@ function universeHub(universe: string, songs: readonly SongPage[]): Hub {
   const sections = [{ heading: `${name} songs`, songs: songs.map(song => hubSong(song, false)).sort(byTitle) }];
   return {
     kind: 'universe', path: hubPath(universe), name: hubName(universe),
-    title: `${name} Songs on the Zelda Ocarina – Tabs & Notes`,
+    title: `${name} Songs: Ocarina of Time Button Tabs`,
     h1: `${name} songs`,
     description: `Play ${plural(songs.length, `${name} song`)} on the Zelda ocarina: button tabs and notes for the ocarina of Ocarina of Time. Listen, then practice one passage at a time. Free, in your browser.`,
     intro: `${plural(songs.length, `${name} song`)} as button tabs for the ocarina of The Legend of Zelda: Ocarina of Time. Open one to listen to it and practice it one passage at a time.`,

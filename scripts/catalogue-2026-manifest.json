@@ -1,7 +1,7 @@
 [
   {
     "id": "hedwig",
-    "title": "Hedwig’s Theme — Harry Potter",
+    "title": "Hedwig’s Theme: Harry Potter",
     "category": "Gaming / film",
     "hook": "Complete opening celesta statement through its low-B cadence (14 melody attacks)",
     "source": {
@@ -66,7 +66,7 @@
   },
   {
     "id": "fairy-fountain",
-    "title": "Great Fairy Fountain — Zelda",
+    "title": "Great Fairy Fountain: Zelda",
     "category": "Gaming / film",
     "hook": "Complete first descending lead cycle over eight bars; accompaniment arpeggios excluded",
     "source": {
@@ -135,7 +135,7 @@
   },
   {
     "id": "dire-dire-docks",
-    "title": "Dire, Dire Docks — Super Mario 64",
+    "title": "Dire, Dire Docks: Super Mario 64",
     "category": "Gaming / film",
     "hook": "First complete lead call and response, from the ascending D pickup through the answering G cadence",
     "source": {
@@ -212,9 +212,9 @@
   },
   {
     "id": "wet-hands",
-    "title": "Wet Hands — Minecraft",
+    "title": "Wet Hands: Minecraft",
     "category": "Gaming / film",
-    "hook": "Complete first eight-bar lead sentence, bars5–12, including its answering A cadence",
+    "hook": "Complete first eight-bar lead sentence, bars5 to 12, including its answering A cadence",
     "source": {
       "file": "out/catalogue-2026/batches/gaming/wet-hands-score-transcription.mid",
       "page": "https://squidsheets.com/files/sheets/9/Minecraft-WetHands-SquidSheets.com-9.pdf",
@@ -292,9 +292,9 @@
   },
   {
     "id": "sweden",
-    "title": "Sweden — Minecraft",
+    "title": "Sweden: Minecraft",
     "category": "Gaming / film",
-    "hook": "First complete eight-bar upper melody, including both question and response, score bars27–34",
+    "hook": "First complete eight-bar upper melody, including both question and response, score bars27 to 34",
     "source": {
       "file": "out/catalogue-2026/batches/gaming/sweden-score-transcription.mid",
       "page": "https://img1.wsimg.com/blobby/go/fd78fce4-1d08-4112-9639-b0824c03829e/downloads/Minecraft%20Piano%20-%20Calm%20-%20Sheet%20Music.pdf?ver=1618410010205",
@@ -367,9 +367,9 @@
   },
   {
     "id": "shinzou",
-    "title": "Shinzou wo Sasageyo! — Attack on Titan",
+    "title": "Shinzou wo Sasageyo!: Attack on Titan",
     "category": "Anime",
-    "hook": "Complete first refrain call: both Sasageyo calls and their Shinzou response, score bars35–38",
+    "hook": "Complete first refrain call: both Sasageyo calls and their Shinzou response, score bars35 to 38",
     "source": {
       "file": "out/catalogue-2026/batches/anime/shinzou-score-transcription.mid",
       "page": "https://tuneonmusic.com/music-sheets/anime/attack-on-titan/shinzou-wo-sasageyo/",
@@ -436,7 +436,7 @@
   },
   {
     "id": "fate-of-ophelia",
-    "title": "The Fate of Ophelia — Taylor Swift",
+    "title": "The Fate of Ophelia: Taylor Swift",
     "category": "Pop / 2026",
     "hook": "Complete first chorus, from All that time through the title cadence, with its pickup",
     "source": {
@@ -570,7 +570,7 @@
   },
   {
     "id": "golden",
-    "title": "Golden — HUNTR/X · KPop Demon Hunters",
+    "title": "Golden: HUNTR/X · KPop Demon Hunters",
     "category": "Pop / 2026",
     "hook": "Complete main chorus with pickup, both Golden answers and the closing Oh cadence",
     "source": {
@@ -722,7 +722,7 @@
   },
   {
     "id": "stateside",
-    "title": "Stateside — PinkPantheress + Zara Larsson",
+    "title": "Stateside: PinkPantheress + Zara Larsson",
     "category": "Pop / 2026",
     "hook": "Full first PinkPantheress chorus, What can I say pickup through final three ha attacks before next singer lyric pickup",
     "source": {
@@ -941,7 +941,7 @@
   },
   {
     "id": "man-i-need",
-    "title": "Man I Need — Olivia Dean",
+    "title": "Man I Need: Olivia Dean",
     "category": "Pop / 2026",
     "hook": "Full Tell me chorus through the complete tied title cadence, before Talk to me lead-out",
     "source": {
@@ -1072,7 +1072,7 @@
   },
   {
     "id": "iris-out",
-    "title": "IRIS OUT — Kenshi Yonezu",
+    "title": "IRIS OUT: Kenshi Yonezu",
     "category": "Anime / 2026",
     "hook": "Complete recognizable chorus through its final three A attacks",
     "source": {
@@ -1223,9 +1223,9 @@
   },
   {
     "id": "kaiju",
-    "title": "Kaiju — Sakanaction",
+    "title": "Kaiju: Sakanaction",
     "category": "Anime / 2026",
-    "hook": "Kaiju — complete F chorus through bar82 beat2, before G pickup",
+    "hook": "Kaiju: complete F chorus through bar82 beat2, before G pickup",
     "source": {
       "file": "out/catalogue-2026/batches/anime/kaiju-final/kaiju-score.mid",
       "sha256": "1369b358eeb1821116a4377b17127ce3ad3d28e6a2059aaf6daf3c5349d6b704",
@@ -1340,7 +1340,7 @@
   },
   {
     "id": "aizo",
-    "title": "AIZO — King Gnu",
+    "title": "AIZO: King Gnu",
     "category": "Anime / 2026",
     "hook": "Complete first chorus through the natural lyric cadence, before the instrumental descent",
     "source": {
@@ -1523,7 +1523,7 @@
   },
   {
     "id": "kakumei-douchuu",
-    "title": "Kakumei Douchuu — AiNA THE END",
+    "title": "Kakumei Douchuu: AiNA THE END",
     "category": "Anime / 2026",
     "hook": "First E chorus with bar54beat3 pickup through bar69 ending before bar70 instrumental fill",
     "source": {

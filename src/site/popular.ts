@@ -5,7 +5,7 @@ import type { PageHead } from './site';
 import { popularUrl, songUrl } from './song-pages';
 import { songRowHtml, type IconHtml } from './song-row';
 
-export const POPULAR_TITLE = 'Most Popular Zelda Ocarina Songs – Ocarina Hero';
+export const POPULAR_TITLE = 'Most Popular Zelda Ocarina Songs | Ocarina Hero';
 const DESCRIPTION = 'The Zelda ocarina songs players practice most on Ocarina Hero, ranked by plays. Open any song for its button tab, then listen and practice it. Free, in your browser.';
 
 /** How long the build waits for the ranking before it builds the page with an empty list. */

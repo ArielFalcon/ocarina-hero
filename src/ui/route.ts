@@ -51,5 +51,5 @@ export function shareUrl(pageUrl: string, base: string, songId: string): string 
 
 /** Document title of a song lesson, shared by the app and its prerendered page; `qualifier` tells apart songs that share a title. */
 export function songDocumentTitle(title: string, qualifier: string): string {
-  return `${title} (${qualifier}) – Zelda Ocarina Tabs & Notes`;
+  return `${title} (${qualifier}) | Ocarina of Time Button Tabs`;
 }

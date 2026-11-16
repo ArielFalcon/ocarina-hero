@@ -516,8 +516,13 @@ export function songTitleQualifier(entry: Pick<SongbookEntry, 'universe' | 'arti
   return entry.version ?? entry.artist ?? universeLabel(entry.universe);
 }
 
-export function songMeta(entry: SongbookEntry): string {
-  return [universeLabel(entry.universe), entry.artist, entry.version].filter(Boolean).join(' · ');
+export function songMeta(entry: SongbookEntry, { withUniverse = true } = {}): string {
+  const universe = universeLabel(entry.universe);
+  const credits = [entry.artist, entry.version].filter((credit): credit is string => !!credit);
+  const namesUniverse = (credit: string) => credit.slice(0, universe.length).toLowerCase() === universe.toLowerCase()
+    && !/[\p{L}\p{N}]/u.test(credit.charAt(universe.length));
+  const shown = withUniverse && !credits.some(namesUniverse);
+  return [...shown ? [universe] : [], ...credits].join(' · ');
 }
 
 export function letterAnchors(entries: readonly SongbookEntry[]): LetterAnchor[] {

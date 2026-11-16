@@ -38,12 +38,14 @@ export interface SongRowOptions {
   readonly letter?: string;
   /** Place and plays of a row of the popular ranking. */
   readonly ranked?: { readonly rank: number; readonly plays: number };
+  /** Leave the universe out of the meta line, for a list that already names it. */
+  readonly withUniverse?: boolean;
 }
 
 /** One song of a list: the link to its lesson, quick play and save. The app and the prerendered Popular page share it. */
-export function songRowHtml(entry: SongbookEntry, { base, icon, completed = false, saved = false, letter, ranked }: SongRowOptions): string {
+export function songRowHtml(entry: SongbookEntry, { base, icon, completed = false, saved = false, letter, ranked, withUniverse = true }: SongRowOptions): string {
   const title = escapeHtml(entry.title);
   const rank = ranked ? rankHtml(ranked.rank) : '';
   const plays = ranked && playsLabel(ranked.plays);
-  return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<a class="song-open" href="${escapeHtml(songPath(base, entry.id))}" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealMarkup(icon(entry.icon), entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry))}${plays ? ` · ${plays}` : ''}${completed ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></a><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${icon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
+  return `<article class="song-row"${letter ? ` data-letter="${escapeHtml(letter)}"` : ''}>${rank}<a class="song-open" href="${escapeHtml(songPath(base, entry.id))}" data-song="${escapeHtml(entry.id)}">${ranked ? `<span class="visually-hidden">Number ${ranked.rank}: </span>` : ''}${sealMarkup(icon(entry.icon), entry.difficulty.level)}<span class="song-copy"><span class="song-title">${title}</span><span class="song-meta">${escapeHtml(songMeta(entry, { withUniverse }))}${plays ? ` · ${plays}` : ''}${completed ? '<span class="song-done"> · Completed</span>' : ''}<span class="visually-hidden"> · ${DIFFICULTY_NAMES[entry.difficulty.level]} difficulty</span></span></span></a><button class="patch-button quick-play" type="button" data-quick-play="${escapeHtml(entry.id)}" data-title="${title}"></button><button class="save-button" type="button" data-save="${escapeHtml(entry.id)}" aria-label="${saved ? 'Remove' : 'Save'} ${title}${saved ? ' from saved songs' : ''}" aria-pressed="${saved}">${icon(saved ? 'heart-filled' : 'heart-empty')}</button></article>`;
 }

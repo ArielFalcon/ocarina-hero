@@ -110,6 +110,14 @@ test('song meta shortens Zelda and appends only the artist and version present',
   assert.equal(songMeta(entry('Pop', 'Queen')), 'Pop · Queen');
 });
 
+test('song meta drops the universe when a credit already names it, and on request', () => {
+  const entry = (universe: string, artist?: string, version?: string) => ({ ...entries[0]!, universe, artist, version });
+  assert.equal(songMeta(entry('Fullmetal Alchemist', undefined, 'Fullmetal Alchemist (2003)')), 'Fullmetal Alchemist (2003)');
+  assert.equal(songMeta(entry('Kirby', undefined, 'Kirby’s Adventure')), 'Kirby’s Adventure');
+  assert.equal(songMeta(entry('Pop', 'Poppy')), 'Pop · Poppy');
+  assert.equal(songMeta(entry('The Legend of Zelda', undefined, 'Ocarina of Time'), { withUniverse: false }), 'Ocarina of Time');
+});
+
 test('a song never wears another franchise emblem', () => {
   // Universe marks that are plain drawings, not emblems, may be reused by other songs.
   const generic = new Set(['anime', 'film', 'gamepad', 'heart', 'moon', 'clock']);

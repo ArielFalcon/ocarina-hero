@@ -1,0 +1,13 @@
+---
+import type { GetStaticPaths } from 'astro';
+import HubPage from '../../components/HubPage.astro';
+import { hubs } from '../../site/songs';
+
+export const getStaticPaths = (() => hubs.filter(hub => hub.kind === 'universe').map(hub => ({
+  params: { universe: hub.path.replace(/^songs\/|\/$/g, '') },
+  props: { hub },
+}))) satisfies GetStaticPaths;
+
+const { hub } = Astro.props;
+---
+<HubPage hub={hub} />

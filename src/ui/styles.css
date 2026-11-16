@@ -870,3 +870,30 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 @media (forced-colors: active) { .quick-play[data-state='playing'], .quick-play[data-state='paused'], .repeat-toggle:has(input:checked) { outline: 2px solid Highlight; } }
 .thread-icon { forced-color-adjust: none; }
 .mini-player.is-leaving { pointer-events: none; }
+
+/* Content pages (hubs, 404): the app's cloth and header with a scrolling page instead of views. */
+.hub { padding-bottom: 28px; }
+.hub-hero { padding: 6px 22px 8px; max-width: 760px; }
+.hub-hero .view-title { font-size: clamp(34px, 8.6vw, 58px); }
+.hub-intro { font-size: 18px; color: var(--muted); margin: 10px 0 0; }
+.hub .song-article { margin: 20px 22px 0; }
+.crumbs { padding: 4px 22px 0; font-size: 16px; }
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; margin: 0; padding: 0; list-style: none; }
+.crumbs li + li::before { content: '›'; margin-inline: .5em; color: var(--accent); }
+.crumbs a { display: inline-flex; align-items: center; min-height: 44px; text-decoration-color: #b48d4a; }
+.crumbs [aria-current='page'] { color: var(--muted); }
+.hub-tabs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px 28px; }
+.hub-tabs li { min-width: 0; }
+.hub-tabs h3 { font: 400 20px/1.25 Georgia, serif; margin: 0; }
+.hub-tabs h3 a { display: inline-block; padding-block: 8px; }
+.hub-tabs a, .hub-foot a, .hero-links a { text-decoration-color: #b48d4a; }
+.hub-tabs .tab-text { margin: 4px 0 2px; font-size: 16px; }
+.hub-more { margin: 0; font-size: 15px; }
+.hub-more a { display: inline-flex; align-items: center; min-height: 44px; }
+.hub-foot { padding: 0 22px; }
+.hero-links { display: flex; flex-wrap: wrap; gap: 0 16px; margin: 6px 0 0; font-size: 17px; }
+.hero-links a { display: inline-flex; align-items: center; min-height: 40px; }
+@media (min-width: 800px) {
+  .hub-hero, .crumbs, .hub-foot { padding-inline: 38px; }
+  .hub .song-article { margin-inline: 38px; }
+}

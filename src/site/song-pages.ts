@@ -4,6 +4,7 @@ import { toTabText } from '../core/tab';
 import { createPassages, lessonDetails } from '../ui/lesson';
 import { songDocumentTitle, songPath } from '../ui/route';
 import { openingNotes, songMeta, songTitleQualifier, type SongbookEntry } from '../ui/songbook';
+import { hubName, hubPath, hubUrl, plural, ZELDA_UNIVERSE, type Hub } from './hubs';
 import type { PageHead } from './site';
 
 export interface SongPage {
@@ -18,6 +19,7 @@ export interface SongPage {
   /** Version and size of the arrangement, as a first visit shows them under the lesson title. */
   readonly details: string;
   readonly version?: string;
+  readonly artist?: string;
   readonly noteCount: number;
   readonly passageCount: number;
   readonly difficulty: DifficultyLevel;
@@ -35,7 +37,7 @@ export function songPageOf(song: SongbookEntry & { track: DemoTrack }): SongPage
     qualifier: songTitleQualifier(song),
     universe: song.universe,
     details: lessonDetails(song.version, notes.length, passageCount).join(' · '),
-    version: song.version, noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
+    version: song.version, artist: song.artist, noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
     tab: toTabText(notes, song.track.beatsPerBar, song.track.tempoBpm, { noteSeparator: ', ' }),
   };
 }
@@ -45,7 +47,7 @@ export interface SongLink { readonly id: string; readonly title: string; readonl
 export interface SongGroup { readonly universe: string; readonly songs: readonly SongLink[] }
 
 /** The franchise the app is named after leads; the other universes follow by size, then name. */
-const LEAD_UNIVERSE = 'The Legend of Zelda';
+const LEAD_UNIVERSE = ZELDA_UNIVERSE;
 
 export function escapeHtml(value: string): string {
   return value.replace(/[&<>"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[character]!);
@@ -69,9 +71,16 @@ function linkList(siteUrl: string, songs: readonly SongLink[]): string {
 const INTRO = 'Ocarina Hero turns songs into button tabs for the ocarina of The Legend of Zelda: Ocarina of Time. Open a song to listen to it and practice it one passage at a time with a controller, the keyboard or the on-screen pad, free in your browser.';
 
 /** Every song listed by universe, for crawlers that do not run scripts: the home page's <noscript> content. */
-export function homeDirectoryHtml(groups: readonly SongGroup[], siteUrl: string): string {
+export function homeDirectoryHtml(groups: readonly SongGroup[], siteUrl: string, hubs: readonly Hub[] = []): string {
   const count = groups.reduce((sum, group) => sum + group.songs.length, 0);
-  return `<section><h2>Songs to play on the Zelda ocarina</h2><p>${escapeHtml(INTRO)}</p><p>${count} songs:</p>${groups.map(group => `<h3>${escapeHtml(group.universe)}</h3>${linkList(siteUrl, group.songs)}`).join('')}</section>`;
+  const hubLink = (hub: Hub, text: string) => `<a href="${escapeHtml(hubUrl(siteUrl, hub))}">${escapeHtml(text)}</a>`;
+  const guides = hubs.filter(hub => hub.kind !== 'universe');
+  const guideLinks = guides.length ? `<p>Guides: ${guides.map(hub => hubLink(hub, hub.h1)).join(', ')}.</p>` : '';
+  const more = (universe: string) => {
+    const hub = hubs.find(candidate => candidate.path === hubPath(universe));
+    return hub ? `<p>${hubLink(hub, `All ${hub.name}`)}</p>` : '';
+  };
+  return `<section><h2>Songs to play on the Zelda ocarina</h2><p>${escapeHtml(INTRO)}</p>${guideLinks}<p>${count} songs:</p>${groups.map(group => `<h3>${escapeHtml(group.universe)}</h3>${linkList(siteUrl, group.songs)}${more(group.universe)}`).join('')}</section>`;
 }
 
 /** The songs of a song's universe other than itself. */
@@ -80,10 +89,11 @@ export function relatedSongs(groups: readonly SongGroup[], song: Pick<SongPage, 
 }
 
 /** A plain-text guide to the site for language models (https://llmstxt.org). */
-export function llmsTxt(siteUrl: string, groups: readonly SongGroup[]): string {
+export function llmsTxt(siteUrl: string, groups: readonly SongGroup[], hubs: readonly Hub[] = []): string {
   return `# Ocarina Hero\n\n> ${INTRO}\n\n`
     + 'Each song page shows the button tab of the melody (for example "L + D-pad down, R + D-pad down"), the number of notes and passages, and opens an interactive lesson that plays the melody and checks each note. The Workshop imports a MIDI file or a short recording as a new tab. Fan project, not affiliated with or endorsed by Nintendo.\n\n'
     + `## Pages\n\n- [Songbook](${siteUrl}): search and filter every song by category, universe and difficulty\n- [Sitemap](${siteUrl}sitemap.xml)\n\n`
+    + (hubs.length ? `## Hubs\n\n${hubs.filter(hub => hub.indexable).map(hub => `- [${hub.h1}](${hubUrl(siteUrl, hub)}): ${plural(hub.songIds.length, 'song')}`).join('\n')}\n\n` : '')
     + groups.map(group => `## ${group.universe}\n\n${group.songs.map(song => `- [${song.title}](${songUrl(siteUrl, song.id)}): ${song.meta}`).join('\n')}`).join('\n\n') + '\n';
 }
 
@@ -110,7 +120,8 @@ export function songHead(song: SongPage, siteUrl: string, modified?: string): Pa
         },
         { '@type': 'BreadcrumbList', itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Ocarina Hero', item: siteUrl },
-          { '@type': 'ListItem', position: 2, name: song.title, item: url },
+          { '@type': 'ListItem', position: 2, name: hubName(song.universe), item: new URL(hubPath(song.universe), siteUrl).href },
+          { '@type': 'ListItem', position: 3, name: song.title, item: url },
         ] },
       ],
     },
@@ -121,11 +132,13 @@ export function songHead(song: SongPage, siteUrl: string, modified?: string): Pa
  * The sitemap: the home and every song. `lastModified` maps a song id to the day (YYYY-MM-DD) its notes last changed;
  * the home carries the newest of them. Songs without a known day omit the tag rather than claim one.
  */
-export function sitemapXml(siteUrl: string, songIds: readonly string[], lastModified: ReadonlyMap<string, string> = new Map()): string {
+export function sitemapXml(siteUrl: string, songIds: readonly string[], lastModified: ReadonlyMap<string, string> = new Map(), hubs: readonly Hub[] = []): string {
   const newest = [...lastModified.values()].sort().at(-1);
   const entries = [
     { url: siteUrl, day: newest },
     ...songIds.map(id => ({ url: songUrl(siteUrl, id), day: lastModified.get(id) })),
+    // A hub changes when its newest song does; one that is kept out of the index stays out of the sitemap.
+    ...hubs.filter(hub => hub.indexable).map(hub => ({ url: hubUrl(siteUrl, hub), day: hub.songIds.map(id => lastModified.get(id)).filter(Boolean).sort().at(-1) })),
   ];
   const lines = entries.map(({ url, day }) => `  <url><loc>${escapeHtml(url)}</loc>${day ? `<lastmod>${day}</lastmod>` : ''}</url>`);
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${lines.join('\n')}\n</urlset>\n`;

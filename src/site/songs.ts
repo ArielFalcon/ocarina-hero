@@ -1,5 +1,6 @@
 import { createSongbookEntries } from '../ui/songbook';
 import { SITE_SONGS } from './catalogue';
+import { buildHubs } from './hubs';
 import { songLastModified } from './last-modified';
 import { songGroups, songPageOf } from './song-pages';
 
@@ -7,5 +8,6 @@ import { songGroups, songPageOf } from './song-pages';
 export const songbook = createSongbookEntries(SITE_SONGS);
 export const pages = songbook.map(songPageOf);
 export const groups = songGroups(songbook);
+export const hubs = buildHubs(pages);
 /** Song id → day its notes last changed, from git history; empty outside a checkout. */
 export const modified = songLastModified();

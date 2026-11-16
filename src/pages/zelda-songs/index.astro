@@ -1,0 +1,7 @@
+---
+import HubPage from '../../components/HubPage.astro';
+import { hubs } from '../../site/songs';
+
+const hub = hubs.find(candidate => candidate.kind === 'zelda')!;
+---
+<HubPage hub={hub} />

@@ -4,6 +4,7 @@ import LessonView from '../components/views/LessonView.astro';
 import PopularView from '../components/views/PopularView.astro';
 import SettingsView from '../components/views/SettingsView.astro';
 import WorkshopView from '../components/views/WorkshopView.astro';
+import ThreadFilters from '../components/ThreadFilters.astro';
 import Head from '../components/Head.astro';
 import { assetUrl, type PageHead } from '../site/site';
 import type { SongLink, SongPage } from '../site/song-pages';
@@ -27,11 +28,7 @@ const { page, song, related, directory } = Astro.props;
     <Head page={page} />
   </head>
   <body>
-    <svg class="thread-filters" xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true"><defs>
-      <filter id="satin-edge" x="-5%" y="-12%" width="110%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".8 .52" numOctaves="3" seed="17" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale="1.15" xChannelSelector="R" yChannelSelector="G"/></filter>
-      <filter id="cord-edge" x="-5%" y="-15%" width="110%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".23 .62" numOctaves="3" seed="8" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale="1.8" xChannelSelector="R" yChannelSelector="G"/></filter>
-      <filter id="soft-thread" x="-6%" y="-15%" width="112%" height="140%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".5 .7" numOctaves="2" seed="9" result="fibers"/><feDisplacementMap in="SourceGraphic" in2="fibers" scale=".45" xChannelSelector="R" yChannelSelector="G"/></filter>
-    </defs></svg>
+    <ThreadFilters />
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class={song ? 'app is-lesson has-song' : 'app'}>
       <picture class="tapestry-art" aria-hidden="true">

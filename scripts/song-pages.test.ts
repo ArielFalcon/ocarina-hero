@@ -76,7 +76,7 @@ test('a song page describes its song to search engines', () => {
   assert.equal(page.mainEntity.text, song.tab);
   const crumbs = graphItem(head.structuredData, 'BreadcrumbList').itemListElement;
   assert.deepEqual(crumbs.map((crumb: { name: string; item: string }) => [crumb.name, crumb.item]),
-    [['Ocarina Hero', 'https://ocarinahero.app/'], ['Song of "Storms" & Rain', 'https://ocarinahero.app/song/song-of-storms/']]);
+    [['Ocarina Hero', 'https://ocarinahero.app/'], ['The Legend of <Zelda> songs', 'https://ocarinahero.app/songs/the-legend-of-zelda/'], ['Song of "Storms" & Rain', 'https://ocarinahero.app/song/song-of-storms/']]);
 });
 
 test('a song page dates its change only when the day is known', () => {

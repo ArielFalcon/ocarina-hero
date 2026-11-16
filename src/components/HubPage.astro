@@ -1,0 +1,58 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import { hubHead, hubName, hubPath, zeldaOcarinaHubPath, ZELDA_UNIVERSE, type Hub } from '../site/hubs';
+import { SITE_URL } from '../site/config';
+import { assetUrl } from '../site/site';
+import { songPath } from '../ui/route';
+
+/** A hub: breadcrumb, the one H1, a short factual intro and its songs, each linked to its lesson. */
+interface Props { hub: Hub }
+const { hub } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const crumbs = [{ name: 'Ocarina Hero', href: base }, { name: hub.name, href: undefined }];
+---
+<ContentPage page={hubHead(hub, SITE_URL)}>
+  <article class="hub">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>{crumbs.map(crumb => <li>{crumb.href ? <a href={crumb.href}>{crumb.name}</a> : <span aria-current="page">{crumb.name}</span>}</li>)}</ol>
+    </nav>
+    <header class="hub-hero">
+      <p class="eyebrow stitched-label">Ocarina of Time tabs</p>
+      <h1 class="view-title embroidered">{hub.h1}</h1>
+      <p class="hub-intro">{hub.intro}</p>
+    </header>
+    {hub.sections.map(section => (
+      <section class="song-article hub-section">
+        <h2 class="stitched-label">{section.heading}</h2>
+        {section.songs.some(song => song.tab) ? (
+          <ul class="hub-tabs">
+            {section.songs.map(song => (
+              <li>
+                <h3><a href={songPath(base, song.id)} data-astro-prefetch="tap">{song.title}</a></h3>
+                <p class="tab-text">{song.tab}{song.tabCut && ' …'}</p>
+                {song.tabCut && <p class="hub-more"><a href={songPath(base, song.id)} data-astro-prefetch="tap">Full lesson: {song.title}</a></p>}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul class="song-links">
+            {section.songs.map(song => (
+              <li><a href={songPath(base, song.id)} data-astro-prefetch="tap">{song.title}</a>{song.detail && <span class="song-links-meta">({song.detail})</span>}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))}
+    <p class="song-home hub-foot">
+      {hub.kind === 'zelda-ocarina' && <><a href={assetUrl(hubPath(ZELDA_UNIVERSE))}>All {hubName(ZELDA_UNIVERSE)}, by game</a> · </>}
+      {hub.kind === 'zelda' && <><a href={assetUrl(zeldaOcarinaHubPath())}>Zelda ocarina songs with their tabs</a> · </>}
+      <a href={base}>Every song in the Ocarina Hero songbook</a>
+    </p>
+  </article>
+</ContentPage>
+<script>
+  // Astro's own prefetcher, loaded here instead of through the `prefetch` config, which would add it to the app's pages too.
+  // Only links marked data-astro-prefetch (the song links) are fetched ahead as soon as a tap or click starts.
+  import { init } from 'astro/virtual-modules/prefetch.js';
+  init();
+</script>

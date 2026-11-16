@@ -1,0 +1,32 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import { SITE_URL } from '../site/config';
+import { hubName, zeldaOcarinaHubPath, hubPath, ZELDA_UNIVERSE } from '../site/hubs';
+import { assetUrl, SITE_NAME } from '../site/site';
+
+const page = {
+  title: `Page not found · ${SITE_NAME}`,
+  description: 'This page does not exist. Open the songbook or browse the Zelda ocarina songs.',
+  url: SITE_URL,
+  shareTitle: SITE_NAME,
+  structuredData: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Page not found', url: SITE_URL },
+  robots: 'noindex',
+};
+---
+<ContentPage page={page}>
+  <article class="hub">
+    <header class="hub-hero">
+      <p class="eyebrow stitched-label">Error 404</p>
+      <h1 class="view-title embroidered">Page not found</h1>
+      <p class="hub-intro">This page is not in the songbook. It may have moved, or the address may have a typo.</p>
+    </header>
+    <section class="song-article hub-section">
+      <h2 class="stitched-label">Where to next</h2>
+      <ul class="song-links">
+        <li><a href={import.meta.env.BASE_URL}>Songbook: every song</a></li>
+        <li><a href={assetUrl(zeldaOcarinaHubPath())}>Zelda ocarina songs with tabs</a></li>
+        <li><a href={assetUrl(hubPath(ZELDA_UNIVERSE))}>{hubName(ZELDA_UNIVERSE)} by game</a></li>
+      </ul>
+    </section>
+  </article>
+</ContentPage>

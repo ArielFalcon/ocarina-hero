@@ -18,6 +18,8 @@ export interface PageHead {
   /** Title of the share preview (Open Graph and Twitter). */
   readonly shareTitle: string;
   readonly structuredData: unknown;
+  /** Robots directive; a page that may be indexed leaves it out. */
+  readonly robots?: string;
 }
 
 /** JSON for a script data block: "<" is escaped so no value can close the script element. */

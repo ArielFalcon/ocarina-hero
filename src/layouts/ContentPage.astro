@@ -1,0 +1,35 @@
+---
+import Head from '../components/Head.astro';
+import ThreadFilters from '../components/ThreadFilters.astro';
+import { assetUrl, type PageHead } from '../site/site';
+import '../ui/styles.css';
+import '../ui/retro.css';
+
+/** A page of plain content in the app's cloth: the site header and the page's own markup, with no application script. */
+interface Props { page: PageHead }
+const { page } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head page={page} />
+  </head>
+  <body>
+    <ThreadFilters />
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="app content-page">
+      <picture class="tapestry-art" aria-hidden="true">
+        <source media="(min-width: 800px)" srcset={assetUrl('art/tree-desktop.webp')} width="2172" height="724" />
+        <img src={assetUrl('art/tree-mobile.webp')} width="1200" height="800" alt="" decoding="async" />
+      </picture>
+      <div class="retro-art" aria-hidden="true"></div>
+      <div class="tapestry-edge" aria-hidden="true"></div>
+      <main id="main-content" tabindex="-1">
+        <header class="head">
+          <a class="brand" href={import.meta.env.BASE_URL}><img class="brand-icon" src={assetUrl('icons/app/icon-192.png')} width="192" height="192" alt="" aria-hidden="true" draggable="false" /><span class="embroidered">Ocarina Hero</span></a>
+        </header>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

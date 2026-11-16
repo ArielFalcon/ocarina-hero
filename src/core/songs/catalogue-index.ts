@@ -3067,7 +3067,7 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "tempoBpm": 136.0001450668214,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 2.69,
+      "score": 2.92,
       "level": "easy"
     }
   },

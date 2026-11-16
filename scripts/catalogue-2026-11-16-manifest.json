@@ -2095,7 +2095,7 @@
       "file": "out/catalogue-2026-11-16/charlie-kirk/sources/we-are-charlie-kirk-refrain-derived.mid",
       "page": "derived transcription of the first chorus (about 46.2-58.9 s of the recording)",
       "url": "https://www.youtube.com/watch?v=zwvRzjgahvI",
-      "sha256": "fe0e1ddf8af4f42079bc6e6adf7d1532a1c36ed41d77c5be76caf1710cc4c3bb"
+      "sha256": "ff62d7fe59c0893e2dcdd4830006e6d3fe60b89e99a9e715cd11a4fad91a7acb"
     },
     "trackIndex": 0,
     "indices": [
@@ -2128,7 +2128,7 @@
     "beatsPerBar": 4,
     "evidence": {
       "level": "tutorial-roll-and-audio-pitch-track",
-      "summary": "Derived transcription (SHA-256 fe0e1ddf8af4f42079bc6e6adf7d1532a1c36ed41d77c5be76caf1710cc4c3bb) of the refrain: pitch order from the Top Piano Tutorials lit-key roll (https://www.youtube.com/watch?v=LsJNb1AecSg, roll SHA-256 70bd9023c844379e4bb3e478a5bcc9fa40c99d90aa57e9de2b568e08212320d7), checked against a second tutorial (https://www.youtube.com/watch?v=n354Xy17DFs), a Roblox letter sheet and a pyin pitch track of the original recording (clip kept, SHA-256 e98ce09d7e3c61bf67ff26845b59ff4dfc166c28aae6df2ed1ef19519c7e50bc). accepted by owner 2026-11-16 despite 4 unresolved repeated-pitch attack disagreements (tutorial rhythm kept). Not independently validated; the track is reportedly AI-generated.",
+      "summary": "Derived transcription (SHA-256 ff62d7fe59c0893e2dcdd4830006e6d3fe60b89e99a9e715cd11a4fad91a7acb) of the refrain: pitch order from the Top Piano Tutorials lit-key roll (https://www.youtube.com/watch?v=LsJNb1AecSg, roll SHA-256 70bd9023c844379e4bb3e478a5bcc9fa40c99d90aa57e9de2b568e08212320d7), checked against a second tutorial (https://www.youtube.com/watch?v=n354Xy17DFs), a Roblox letter sheet and a pyin pitch track of the original recording (clip kept, SHA-256 e98ce09d7e3c61bf67ff26845b59ff4dfc166c28aae6df2ed1ef19519c7e50bc). accepted by owner 2026-11-16 despite 4 unresolved repeated-pitch attack disagreements (tutorial rhythm kept). owner listening report 2026-11-16: \"revisa we are charlie kirk que esta bien casi entera excepto algunas notas que repite cuando son diferentes\"; re-audited against the kept clip and the second chorus: the second A at beat 20 is G4 in the recording (A4 then G4 in both choruses); F4 F4, G4 G4 and C5 C5 stay constant-pitch repeats (C5 has one unresolved 0.1-0.2 s dip in the first chorus only). Not independently validated; the track is reportedly AI-generated.",
       "urls": [
         "https://www.youtube.com/watch?v=zwvRzjgahvI",
         "https://www.youtube.com/watch?v=LsJNb1AecSg",
@@ -2162,11 +2162,11 @@
         13,
         14,
         15,
-        16,
-        17
+        16
       ],
       "pitchShift": -36,
       "absentIndices": [
+        12,
         14
       ]
     }

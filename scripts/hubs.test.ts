@@ -132,3 +132,9 @@ test('the sitemap, llms.txt and home directory keep every earlier entry and add 
   for (const hub of hubs) assert.ok(html.includes(`href="${SITE}${hub.path}"`), hub.path);
   assert.deepEqual([...html.matchAll(/href="https:\/\/ocarinahero\.app\/song\/([^/]+)\/"/g)].map(match => match[1]!).sort(), entries.map(entry => entry.id).sort());
 });
+
+test('a song listed under its game heading does not repeat the game beside its name', () => {
+  for (const hub of hubs.filter(hub => hub.kind !== 'universe'))
+    for (const section of hub.sections)
+      assert.deepEqual(section.songs.filter(song => song.detail.includes(section.heading)).map(song => song.id), [], `${hub.path} ${section.heading}`);
+});

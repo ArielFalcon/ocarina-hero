@@ -38,7 +38,6 @@ export function hubName(universe: string): string {
 export interface HubSong {
   readonly id: string;
   readonly title: string;
-  /** Artist and version, when the song has them. */
   readonly detail: string;
   /** Opening notes of the button tab, on the ocarina hub only. */
   readonly tab?: string;
@@ -50,7 +49,6 @@ export interface Hub {
   readonly kind: 'zelda-ocarina' | 'zelda' | 'universe';
   /** Below the site root, ending with a slash. */
   readonly path: string;
-  /** Breadcrumb name. */
   readonly name: string;
   readonly title: string;
   readonly h1: string;
@@ -66,8 +64,8 @@ const byTitle = (a: { title: string }, b: { title: string }): number => a.title.
 
 const idsOf = (sections: readonly HubSection[]): string[] => sections.flatMap(section => section.songs.map(song => song.id));
 
-function hubSong(page: SongPage, withTab: boolean): HubSong {
-  const detail = [page.artist, page.version].filter(Boolean).join(' · ');
+function hubSong(page: SongPage, withTab: boolean, underItsGame = false): HubSong {
+  const detail = [page.artist, underItsGame ? undefined : page.version].filter(Boolean).join(' · ');
   if (!withTab) return { id: page.id, title: page.title, detail };
   const notes = page.tab.split(', ');
   return { id: page.id, title: page.title, detail, tab: notes.slice(0, OPENING_NOTES).join(', '), tabCut: notes.length > OPENING_NOTES };
@@ -80,7 +78,7 @@ function byGame(songs: readonly SongPage[], withTab: boolean): HubSection[] {
   const rank = (game: string): number => (OCARINA_GAMES as readonly string[]).indexOf(game);
   return [...games].sort(([a, listA], [b, listB]) =>
     Number(a === '') - Number(b === '') || Number(rank(b) >= 0) - Number(rank(a) >= 0) || rank(a) - rank(b) || listB.length - listA.length || a.localeCompare(b, 'en'))
-    .map(([game, list]) => ({ heading: game || 'Other Zelda songs', songs: list.map(song => hubSong(song, withTab)).sort(byTitle) }));
+    .map(([game, list]) => ({ heading: game || 'Other Zelda songs', songs: list.map(song => hubSong(song, withTab, true)).sort(byTitle) }));
 }
 
 function zeldaOcarinaHub(zelda: readonly SongPage[]): Hub {

@@ -56,6 +56,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .head { flex-shrink: 0; display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 10px 22px; border-bottom: 1px dashed #a5824259; }
 .brand { display: inline-flex; gap: .3em; align-items: center; font: 600 25px/1.2 Georgia, serif; text-decoration: none; letter-spacing: -.045em; }
 .brand-icon { flex-shrink: 0; width: 1.55em; height: 1.55em; filter: drop-shadow(0 1px 1.5px #110f09b3); }
+.brand-icon[data-platform]:not([data-platform='tapestry']) { display: none; }
 h1, h2, p { overflow-wrap: anywhere; }
 h1, .view-title { font: 600 37px/1.08 Georgia, serif; margin: 0 0 12px; letter-spacing: -.035em; }
 h2 { font: 400 25px/1.2 Georgia, serif; margin: 0 0 14px; }

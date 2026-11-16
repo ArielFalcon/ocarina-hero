@@ -19,3 +19,9 @@ export const N64_CONTROLS: ControlScheme = {
   buttonLabels: { L: 'A', R: 'C-Down', A: 'C-Right', Y: 'C-Left', X: 'C-Up' },
   bendLabels: { [-2]: 'Stick down', [-1]: 'Z', 1: 'R', 2: 'Stick up' },
 };
+
+/** The 3DS release: the Switch 2 buttons, with the Circle Pad bending a tone. */
+export const THREEDS_CONTROLS: ControlScheme = {
+  buttonLabels: SWITCH_CONTROLS.buttonLabels,
+  bendLabels: { [-2]: 'Circle Pad down', [-1]: 'D-pad down', 1: 'D-pad up', 2: 'Circle Pad up' },
+};

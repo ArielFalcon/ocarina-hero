@@ -1,5 +1,5 @@
-import { N64_CONTROLS, SWITCH_CONTROLS, type ControlScheme } from '../core/control-schemes';
-import { N64_TUNING, SWITCH2_TUNING, type ControllerButton, type TuningProfile } from '../core/pitches';
+import { N64_CONTROLS, SWITCH_CONTROLS, THREEDS_CONTROLS, type ControlScheme } from '../core/control-schemes';
+import { N64_TUNING, SWITCH2_TUNING, THREEDS_TUNING, type ControllerButton, type TuningProfile } from '../core/pitches';
 import type { PadLayout } from './gamepad';
 
 /**
@@ -59,6 +59,21 @@ const TAPESTRY: Platform = {
   picker: { title: '2026 remake', detail: 'Woven tapestry with Switch 2 controls', art: 'art/theme/keycard-large.svg' },
 };
 
+/** The 2011 3DS release: the glossy touch-screen look. */
+const THREEDS: Platform = {
+  id: '3ds',
+  controls: THREEDS_CONTROLS,
+  tuning: THREEDS_TUNING,
+  gamepad: TAPESTRY.gamepad,
+  pad: TAPESTRY.pad,
+  glyphs: {},
+  shoulderKind: 'shoulder',
+  assets: { controller: 'icons/controller-3ds/', patchIcons: 'art/icons-3ds/', patchIconExtension: 'svg', clef: 'art/3ds/clef.svg' },
+  art: { brand: 'art/3ds/ocarina.svg', ornament: 'art/3ds/sword-triforce.svg' },
+  themeColor: '#0b1320',
+  picker: { title: '2011 handheld', detail: 'Touch-screen glass with 3DS controls', art: 'art/theme/handheld-large.svg' },
+};
+
 /** The 1998 N64 original: the stone subscreen look. */
 const RETRO: Platform = {
   id: 'retro',
@@ -80,7 +95,7 @@ const RETRO: Platform = {
 };
 
 /** In the order Settings offers them; the first is the default. */
-export const PLATFORMS: readonly Platform[] = [TAPESTRY, RETRO];
+export const PLATFORMS: readonly Platform[] = [TAPESTRY, THREEDS, RETRO];
 
 export const DEFAULT_PLATFORM: Platform = PLATFORMS[0]!;
 

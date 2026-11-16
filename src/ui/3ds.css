@@ -1,168 +1,184 @@
 /*
- * 3DS 2011 theme: the touch-screen subscreen. Slate-blue glass panels with a silver rim,
- * glossy pill buttons, the four face-button colors and a silver-line staff.
+ * 3DS 2011 theme: the Ocarina of Time 3D touch-screen subscreens. Mottled slate and green
+ * panels framed in wood, cracked marble rims, outlined white lettering and corner-bracket cursors.
  * Everything here is scoped to :root[data-theme='3ds']; the other themes are untouched.
  */
 @font-face { font-family: 'Commissioner'; font-style: normal; font-weight: 600 800; font-display: swap; src: url('/fonts/commissioner-latin.woff2') format('woff2'); }
 
 :root[data-theme='3ds'] {
-  --bg: #152131;
-  --panel: #22324a;
-  --line: #9fb7d3;
-  --text: #f2f6fb;
-  --muted: #b4c3d6;
-  --accent: #f0c045;
-  --accent-soft: #f0c0452b;
-  --rust: #d9343f;
-  --glass-light: #34507a;
-  --glass-dark: #152131;
-  --void: #0b1320;
-  --rim: #9fb7d3;
-  --rim-light: #e2edf9;
-  --ds-gold: #f0c045;
-  --ds-red: #d9343f;
-  --ds-blue: #2f74d8;
-  --ds-green: #2fa356;
-  --outline: #08101c;
-  --selected-cloth: linear-gradient(180deg, #4a3d16, #2f2810);
-  --slot-recess: inset 0 2px 3px #050a12, inset 0 -1px 0 #9fb7d344;
-  --slot-raised: inset 0 1px 0 #e2edf9aa, inset 0 -1px 0 #08101c;
-  --thread-rule: linear-gradient(180deg, transparent 3px, #08101c 3px 4px, #9fb7d366 4px 5px, transparent 5px);
-  /* Rim ring: bright top edge fading to a darker bottom, drawn by the shared masked ::before. */
-  --cord: linear-gradient(180deg, #e2edf9 0 18%, #9fb7d3 40% 60%, #4b6688 85%);
+  --bg: #1a2429;
+  --panel: #2c3b42;
+  --line: #9a927a;
+  --text: #ffffff;
+  --muted: #c3cdd0;
+  --accent: #e9c24a;
+  --accent-soft: #e9c24a2b;
+  --rust: #c8423f;
+  --slate-light: #3d5058;
+  --slate-dark: #1a2429;
+  --felt: #2f4a34;
+  --felt-dark: #1d3021;
+  --wood: #5a3a22;
+  --wood-dark: #2e1d10;
+  --void: #141a1d;
+  --marble: #ddd5bb;
+  --marble-dark: #9a927a;
+  --gold: #e9c24a;
+  --cursor: #f2d22a;
+  --equip: #34d6e0;
+  --tab-red: #c8423f;
+  --tab-green: #3fae3a;
+  --tab-blue: #2a5ccc;
+  --digits: #5ef06a;
+  --outline: #0c1012;
+  --selected-cloth: linear-gradient(180deg, #3d5058, #1a2429);
+  --slot-recess: inset 0 2px 4px #0c1012, inset 0 -1px 0 #c3cdd033;
+  --slot-raised: inset 0 1px 0 #ffffff33, inset 0 -2px 0 #0c1012aa;
+  --thread-rule: linear-gradient(180deg, transparent 3px, #0c1012 3px 4px, #c3cdd040 4px 5px, transparent 5px);
+  /* Marble rim: ivory top fading to the grey bevel, drawn by the shared masked ::before. */
+  --cord: linear-gradient(180deg, #f3edd9 0 22%, #ddd5bb 40% 60%, #8f876f 88%);
   --satin: none;
-  --weave: linear-gradient(180deg, #ffffff14, transparent 45%, #00000026);
-  --cloth: url('/art/3ds/glass.svg');
+  --weave: linear-gradient(180deg, #ffffff10, transparent 45%, #00000030);
+  --cloth: url('/art/3ds/slate.svg');
   --cloth-size: 256px;
+  --cursor-corners:
+    linear-gradient(var(--cursor), var(--cursor)) top left / 12px 3px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) top left / 3px 12px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) top right / 12px 3px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) top right / 3px 12px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) bottom left / 12px 3px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) bottom left / 3px 12px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) bottom right / 12px 3px no-repeat,
+    linear-gradient(var(--cursor), var(--cursor)) bottom right / 3px 12px no-repeat;
   --story-font: 'Commissioner', 'Avenir Next', 'Trebuchet MS', sans-serif;
+  --lettering: 2px 0 0 var(--outline), -2px 0 0 var(--outline), 0 2px 0 var(--outline), 0 -2px 0 var(--outline), 1.5px 1.5px 0 var(--outline), -1.5px 1.5px 0 var(--outline), 1.5px -1.5px 0 var(--outline), -1.5px -1.5px 0 var(--outline);
   font-family: var(--story-font);
   font-weight: 600;
   background: var(--void);
 }
 
-/* Lettering: white with a soft drop shadow instead of satin stitches. */
+/* Lettering: chunky white with a thick dark outline, like the subscreen tabs. */
 :root[data-theme='3ds'] .embroidered, :root[data-theme='3ds'] .stitched-label {
   background: none; -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0; filter: none;
-  text-shadow: 0 1px 2px #050a12cc;
+  text-shadow: 1px 1px 0 var(--outline), -1px 1px 0 var(--outline), 1px -1px 0 var(--outline), -1px -1px 0 var(--outline);
 }
-:root[data-theme='3ds'] .embroidered { color: #ffffff; text-shadow: 0 2px 0 var(--outline), 0 0 8px #3d8fe055; }
-:root[data-theme='3ds'] :is(h1, h2, .brand, .song-title, .popular-title, .theme-card-title, .mini-title, .combo-count, .ribbon-title, .letter-slot, .letter-bubble, .count-badge, .step-number, summary::after) { font-family: var(--story-font); font-weight: 700; letter-spacing: 0; }
+:root[data-theme='3ds'] .embroidered { color: #ffffff; text-shadow: var(--lettering), 0 3px 0 var(--outline); }
+:root[data-theme='3ds'] :is(h1, h2, .brand, .song-title, .popular-title, .theme-card-title, .mini-title, .combo-count, .ribbon-title, .letter-slot, .letter-bubble, .count-badge, .step-number, summary::after) { font-family: var(--story-font); font-weight: 800; letter-spacing: -.01em; }
 :root[data-theme='3ds'] .subtitle { font-style: normal; font-weight: 600; }
-:root[data-theme='3ds'] .eyebrow, :root[data-theme='3ds'] .eyebrow.stitched-label { color: var(--ds-gold); letter-spacing: .08em; }
-:root[data-theme='3ds'] a, :root[data-theme='3ds'] .text-button { text-decoration-color: var(--ds-gold); }
-:root[data-theme='3ds'] input::placeholder { color: #8d9fb6; }
+:root[data-theme='3ds'] .eyebrow, :root[data-theme='3ds'] .eyebrow.stitched-label { color: var(--gold); letter-spacing: .08em; }
+:root[data-theme='3ds'] a, :root[data-theme='3ds'] .text-button { text-decoration-color: var(--gold); }
+:root[data-theme='3ds'] input::placeholder { color: #8fa0a6; }
 
-/* No fiber filters anywhere: frames are smooth glass rims. */
+/* No fiber filters anywhere: frames are marble rims. */
 :root[data-theme='3ds'] ::before, :root[data-theme='3ds'] ::after, :root[data-theme='3ds'] .select-chevron { filter: none !important; }
 
-/* Shell: glass with a hinge band on top; the tree and sword are smooth-shaded SVGs. */
-:root[data-theme='3ds'] .app::after { box-shadow: inset 0 0 0 2px #08101c, inset 0 0 90px 10px #02060c99; }
+/* Shell: a slate subscreen under a wood band; the tree and sword are pre-rendered SVGs. */
+:root[data-theme='3ds'] .app::after { box-shadow: inset 0 0 0 3px var(--wood-dark), inset 0 0 0 5px var(--wood), inset 0 0 90px 10px #05080a99; }
 :root[data-theme='3ds'] .tapestry-edge { background: url('/art/3ds/band.svg') top left / auto 100% repeat-x; }
 :root[data-theme='3ds'] .tapestry-art { display: none; }
 :root[data-theme='3ds'] .retro-art { display: block; position: absolute; top: var(--tapestry-band-height); left: 0; width: 100%; height: min(calc(100% - var(--tapestry-band-height)), calc(100vw * 2 / 3)); pointer-events: none; z-index: -1; opacity: .5; background: url('/art/3ds/tree-mobile.svg') right top / contain no-repeat; mask-image: linear-gradient(to bottom, #000 0 88%, transparent); }
 @media (min-width: 800px) { :root[data-theme='3ds'] .retro-art { height: min(calc(100% - var(--tapestry-band-height)), calc(100vw / 3)); background-image: url('/art/3ds/tree-desktop.svg'); } }
-:root[data-theme='3ds'] .brand-icon { filter: drop-shadow(0 2px 2px #050a12aa); }
+:root[data-theme='3ds'] .brand-icon { filter: drop-shadow(0 2px 0 var(--outline)); }
 :root[data-theme='3ds'] .brand-icon[data-platform] { display: none; }
 :root[data-theme='3ds'] .brand-icon[data-platform='3ds'] { display: block; }
-:root[data-theme='3ds'] :is(.settings-section, .head, .catalog-filters, .song-row, .binding-row) { border-bottom: 1px solid #08101c; box-shadow: 0 1px 0 #9fb7d333; }
-:root[data-theme='3ds'] .app-nav { border-top: 1px solid #9fb7d3aa; box-shadow: inset 0 1px 0 #e2edf966; background: linear-gradient(180deg, #2a3d5a, #152131); }
+:root[data-theme='3ds'] :is(.settings-section, .head, .catalog-filters, .song-row, .binding-row) { border-bottom: 2px solid var(--slate-dark); box-shadow: 0 1px 0 #c3cdd026; }
+:root[data-theme='3ds'] .app-nav { border-top: 3px solid var(--wood); box-shadow: inset 0 1px 0 #8a5a36; background: url('/art/3ds/felt.svg') 0 0 / 256px; }
 :root[data-theme='3ds'] .menu-ornament { opacity: .7; }
-:root[data-theme='3ds'] #main-content { scrollbar-color: var(--rim) #152131; }
-:root[data-theme='3ds'] #main-content::-webkit-scrollbar-track { background: #152131; border-left: 0; }
-:root[data-theme='3ds'] #main-content::-webkit-scrollbar-thumb { border-color: #152131; background: var(--rim); }
+:root[data-theme='3ds'] #main-content { scrollbar-color: var(--marble-dark) var(--slate-dark); }
+:root[data-theme='3ds'] #main-content::-webkit-scrollbar-track { background: var(--slate-dark); border-left: 0; }
+:root[data-theme='3ds'] #main-content::-webkit-scrollbar-thumb { border-color: var(--slate-dark); background: var(--marble-dark); }
 
-/* Controls: glass pills with a top highlight; the primary action is the red A button. */
-:root[data-theme='3ds'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .letter-list) { background-color: #22324a; background-image: linear-gradient(180deg, #ffffff12, transparent 55%); }
-:root[data-theme='3ds'] :is(.action, .step):hover:not(:disabled) { background-color: #2c4262; }
-:root[data-theme='3ds'] .action.primary { background-color: var(--ds-red); background-image: linear-gradient(180deg, #ffffff40, #ffffff10 45%, #00000026); }
-:root[data-theme='3ds'] .action.primary:hover:not(:disabled) { background-color: #e64a54; }
-:root[data-theme='3ds'] .action.primary::before { background: linear-gradient(180deg, #ffd6d9 0 20%, #d9343f 50%, #7d1018); }
-:root[data-theme='3ds'] :is(.input-frame, .letter-list) { background-color: #152131; background-image: none; }
-:root[data-theme='3ds'] option { background: #152131; }
-:root[data-theme='3ds'] .select-chevron::before, :root[data-theme='3ds'] .select-chevron::after { background: var(--rim-light); }
-:root[data-theme='3ds'] .universe-chevron { border-color: var(--rim-light); }
-:root[data-theme='3ds'] summary::after { color: var(--ds-gold); -webkit-text-fill-color: var(--ds-gold); }
-:root[data-theme='3ds'] .count-badge { border-color: #ff9aa1; background-color: var(--ds-red); font-family: var(--story-font); font-weight: 700; text-shadow: 0 1px 0 var(--outline); }
-:root[data-theme='3ds'] .song-seal { border-color: var(--rim); background-color: #152131; }
+/* Controls: slate slots in a marble rim; the primary action is the blue Items tab. */
+:root[data-theme='3ds'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .letter-list) { background-color: var(--panel); background-image: linear-gradient(180deg, #ffffff0d, transparent 50%, #00000026); }
+:root[data-theme='3ds'] :is(.action, .step):hover:not(:disabled) { background-color: var(--slate-light); }
+:root[data-theme='3ds'] .action.primary { background-color: var(--tab-blue); background-image: linear-gradient(180deg, #ffffff33, #ffffff08 45%, #00000033); text-shadow: var(--lettering); }
+:root[data-theme='3ds'] .action.primary:hover:not(:disabled) { background-color: #3a6ee0; }
+:root[data-theme='3ds'] :is(.input-frame, .letter-list) { background-color: var(--slate-dark); background-image: none; box-shadow: var(--slot-recess); }
+:root[data-theme='3ds'] option { background: var(--slate-dark); }
+:root[data-theme='3ds'] .select-chevron::before, :root[data-theme='3ds'] .select-chevron::after { background: var(--marble); }
+:root[data-theme='3ds'] .universe-chevron { border-color: var(--marble); }
+:root[data-theme='3ds'] summary::after { color: var(--gold); -webkit-text-fill-color: var(--gold); }
+:root[data-theme='3ds'] .count-badge { border-color: #0c1012; background-color: #0c1012; color: var(--digits); font-family: var(--story-font); font-weight: 800; text-shadow: none; }
+:root[data-theme='3ds'] .song-seal { border-color: var(--marble-dark); background-color: var(--slate-dark); }
 
-/* Selection: the gold cursor rim of the touch screen, with a soft inner glow. */
-:root[data-theme='3ds'] :is(.category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-expected, .bend-key.is-expected, .universe-chip:has(input:checked), .app-nav a[aria-current='page'], .letter-slot[aria-current='true'], .tok.is-expected .staff-modifier, .tok.is-playing .staff-modifier)::after { border: 2px solid var(--ds-gold); box-shadow: inset 0 0 8px #f0c04540, 0 0 0 1px var(--outline); }
+/* Selection: four yellow corner brackets, as the subscreen cursor. */
+:root[data-theme='3ds'] :is(.category-card[aria-pressed='true'], .mode-switch [aria-pressed='true'], .key.is-expected, .bend-key.is-expected, .universe-chip:has(input:checked), .app-nav a[aria-current='page'], .letter-slot[aria-current='true'], .tok.is-expected .staff-modifier, .tok.is-playing .staff-modifier)::after { border: 0; box-shadow: none; background: var(--cursor-corners); }
 :root[data-theme='3ds'] .app-nav a[aria-current='page'] .thread-icon { opacity: 1; }
-:root[data-theme='3ds'] .settings-link[aria-current='page'] { outline: 2px solid var(--ds-gold); outline-offset: -4px; }
-:root[data-theme='3ds'] .binding-key[aria-pressed='true'] { outline-color: var(--ds-gold); }
-:root[data-theme='3ds'] .repeat-toggle input:checked + span .thread-icon { background: var(--selected-cloth); box-shadow: 0 0 0 1px var(--outline), 0 0 0 3px var(--ds-gold), 0 0 0 4px var(--outline); }
+:root[data-theme='3ds'] .settings-link[aria-current='page'] { outline: 2px solid var(--cursor); outline-offset: -4px; }
+:root[data-theme='3ds'] .binding-key[aria-pressed='true'] { outline-color: var(--equip); }
+:root[data-theme='3ds'] .repeat-toggle input:checked + span .thread-icon { background: var(--selected-cloth); box-shadow: 0 0 0 1px var(--outline), 0 0 0 3px var(--equip), 0 0 0 4px var(--outline); }
 
-/* Staff: five silver-blue lines on a translucent navy band, a white clef, glossy buttons as notes. */
-:root[data-theme='3ds'] .tab { border-block: 1px solid #9fb7d366; background: #0b1320d9; box-shadow: inset 0 1px 0 #e2edf933; }
-:root[data-theme='3ds'] .tab::before { background: repeating-linear-gradient(0deg, #9fb7d3aa 0 2px, transparent 2px 18px); }
+/* Staff: five light lines on a translucent near-black band, a white clef, dark button notes. */
+:root[data-theme='3ds'] .tab { border-block: 2px solid var(--wood); background: #0c1012d9; box-shadow: inset 0 2px 0 #00000080; }
+:root[data-theme='3ds'] .tab::before { background: repeating-linear-gradient(0deg, #c3cdd099 0 2px, transparent 2px 18px); }
 :root[data-theme='3ds'] .staff-clef img { width: 30px; height: 44px; margin-top: -8px; object-fit: contain; filter: none; }
 :root[data-theme='3ds'] .note-order { font-family: var(--story-font); font-weight: 700; color: var(--muted); }
 
-/* Sounding note: the button is pressed with a smooth bounce inside a gold ring. */
-:root[data-theme='3ds'] .tok.is-playing, :root[data-theme='3ds'] .tok.is-expected { background: #f0c0451f; }
-:root[data-theme='3ds'] .tok::before { inset: -3px; padding: 3px; background: var(--ds-gold); box-shadow: 0 0 10px #f0c04599; scale: 1.2; }
+/* Sounding note: the button dips and pops inside the corner-bracket cursor. */
+:root[data-theme='3ds'] .tok.is-playing, :root[data-theme='3ds'] .tok.is-expected { background: #f2d22a1f; }
+:root[data-theme='3ds'] .tok::before { inset: -6px; padding: 0; background: var(--cursor-corners); box-shadow: none; scale: 1.15; }
 :root[data-theme='3ds'] .tok.is-playing > .control-icon { translate: none; animation: ds-press .22s cubic-bezier(.3, 1.6, .5, 1) both; }
 @keyframes ds-press { 0% { translate: 0 3px; scale: .92; } 100% { translate: 0 -2px; scale: 1.06; } }
-:root[data-theme='3ds'] .tok::after { background: conic-gradient(#ffffff calc(var(--note-progress) * 1turn), #ffffff22 0); }
+:root[data-theme='3ds'] .tok::after { background: conic-gradient(var(--cursor) calc(var(--note-progress) * 1turn), #ffffff1f 0); }
 @media (prefers-reduced-motion: reduce) { :root[data-theme='3ds'] .tok.is-playing > .control-icon { animation: none; translate: 0 -2px; } }
 
-/* A hit throws round sparkles that take the four face colors as the combo grows. */
-:root[data-theme='3ds'] .hit-burst::before { border: 3px solid var(--ds-gold); box-shadow: 0 0 10px #f0c04588; }
-:root[data-theme='3ds'] .hit-burst i { border-radius: 50%; background: #ffffff; }
-:root[data-theme='3ds'] .hit-burst[data-tier='1'] i:nth-child(odd) { background: var(--ds-gold); }
-:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 1) { background: var(--ds-red); }
-:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 2) { background: var(--ds-gold); }
-:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 3) { background: var(--ds-blue); }
-:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n) { background: var(--ds-green); }
-:root[data-theme='3ds'] .key-ripple { border: 3px solid var(--ds-gold); border-radius: 12px; }
+/* A hit throws sparkles in the four tab colors as the combo grows. */
+:root[data-theme='3ds'] .hit-burst::before { border: 3px solid var(--cursor); box-shadow: 0 0 0 1px var(--outline); }
+:root[data-theme='3ds'] .hit-burst i { border-radius: 50%; background: #ffffff; box-shadow: 0 0 0 1px var(--outline); }
+:root[data-theme='3ds'] .hit-burst[data-tier='1'] i:nth-child(odd) { background: var(--cursor); }
+:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 1) { background: var(--tab-red); }
+:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 2) { background: var(--cursor); }
+:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n + 3) { background: var(--tab-blue); }
+:root[data-theme='3ds'] :is(.hit-burst[data-tier='2'], .hit-burst[data-tier='3'], .hit-burst[data-tier='4'], .hit-burst[data-tier='5']) i:nth-child(4n) { background: var(--tab-green); }
+:root[data-theme='3ds'] .key-ripple { border: 3px solid var(--cursor); border-radius: 10px; }
 
 /* Progress and rewards. */
-:root[data-theme='3ds'] .progress-track { border: 1px solid #9fb7d366; background: #0b1320; }
-:root[data-theme='3ds'] progress::-webkit-progress-bar { background: #1b2a40; }
-:root[data-theme='3ds'] .progress-track::before { background: linear-gradient(100deg, #ffffff00 35%, #ffffffaa 50%, #ffffff00 65%) -90px 0 / 90px 100% no-repeat, linear-gradient(180deg, #7fc0ff, #2f74d8); }
-:root[data-theme='3ds'] .progress-track::after { background: var(--ds-gold); border-color: var(--outline); }
-:root[data-theme='3ds'] :is(.combo-badge[data-tier='2'], .combo-badge[data-tier='3'], .combo-badge[data-tier='4'], .combo-badge[data-tier='5'], .combo-ribbon) { background-color: var(--ds-red); background-image: linear-gradient(180deg, #ffffff33, transparent 50%, #00000026); }
-:root[data-theme='3ds'] .combo-ribbon { border-block: 2px solid var(--ds-gold); border-image: none; }
-:root[data-theme='3ds'] .combo-ribbon.is-passage { background-color: var(--ds-green); }
-:root[data-theme='3ds'] :is(.combo-badge, .combo-ribbon)::after { border-style: solid; border-color: #f0c04599; }
-:root[data-theme='3ds'] .letter-bubble { background-color: var(--ds-blue); color: #ffffff; text-shadow: 0 1px 0 var(--outline); }
-:root[data-theme='3ds'] .letter-bubble::after { border-style: solid; border-color: #ffffff55; }
-:root[data-theme='3ds'] .letter-knot::before { background: #4b6688; opacity: 1; filter: none; }
-:root[data-theme='3ds'] .letter-knot::after { background: var(--ds-gold); box-shadow: 0 0 0 1px var(--outline); }
+:root[data-theme='3ds'] .progress-track { border: 2px solid var(--wood); background: var(--slate-dark); box-shadow: var(--slot-recess); }
+:root[data-theme='3ds'] progress::-webkit-progress-bar { background: var(--slate-dark); }
+:root[data-theme='3ds'] .progress-track::before { background: linear-gradient(100deg, #ffffff00 35%, #ffffffaa 50%, #ffffff00 65%) -90px 0 / 90px 100% no-repeat, linear-gradient(180deg, #8ef59a, #2f9a3a); }
+:root[data-theme='3ds'] .progress-track::after { background: var(--cursor); border-color: var(--outline); }
+:root[data-theme='3ds'] :is(.combo-badge[data-tier='2'], .combo-badge[data-tier='3'], .combo-badge[data-tier='4'], .combo-badge[data-tier='5'], .combo-ribbon) { background-color: var(--tab-red); background-image: linear-gradient(180deg, #ffffff33, transparent 50%, #00000033); }
+:root[data-theme='3ds'] .combo-ribbon { border-block: 3px solid var(--marble); border-image: none; }
+:root[data-theme='3ds'] .combo-ribbon.is-passage { background-color: var(--tab-green); }
+:root[data-theme='3ds'] :is(.combo-badge, .combo-ribbon)::after { border-style: solid; border-color: #ddd5bb99; }
+:root[data-theme='3ds'] .letter-bubble { background-color: var(--tab-blue); color: #ffffff; text-shadow: var(--lettering); }
+:root[data-theme='3ds'] .letter-bubble::after { border-style: solid; border-color: #ddd5bb88; }
+:root[data-theme='3ds'] .letter-knot::before { background: var(--wood); opacity: 1; filter: none; }
+:root[data-theme='3ds'] .letter-knot::after { background: var(--cursor); box-shadow: 0 0 0 1px var(--outline); }
 
-/* Checkbox and range in glass and face-button colors. */
-:root[data-theme='3ds'] .toggle input { background-color: #0b1320; box-shadow: inset 0 2px 3px #050a12; }
-:root[data-theme='3ds'] .toggle input::before { border: 1px solid var(--rim); border-image: none; }
-:root[data-theme='3ds'] .toggle input:checked { background-color: var(--ds-green); }
-:root[data-theme='3ds'] .toggle input:checked::after { background: #ffffff; }
-:root[data-theme='3ds'] input[type='range']::-webkit-slider-runnable-track { background: linear-gradient(180deg, #0b1320, #4b6688); }
-:root[data-theme='3ds'] input[type='range']::-moz-range-track { background: linear-gradient(180deg, #0b1320, #4b6688); }
-:root[data-theme='3ds'] input[type='range']::-webkit-slider-thumb { border: 2px solid var(--outline); border-image: none; background: radial-gradient(circle at 35% 30%, #ffffff, #c8d6e6 45%, #7f95b0); }
-:root[data-theme='3ds'] input[type='range']::-moz-range-thumb { border: 2px solid var(--outline); background: radial-gradient(circle at 35% 30%, #ffffff, #c8d6e6 45%, #7f95b0); }
+/* Checkbox and range: recessed slate with marble knobs. */
+:root[data-theme='3ds'] .toggle input { background-color: var(--slate-dark); box-shadow: var(--slot-recess); }
+:root[data-theme='3ds'] .toggle input::before { border: 2px solid var(--marble-dark); border-image: none; }
+:root[data-theme='3ds'] .toggle input:checked { background-color: var(--tab-green); }
+:root[data-theme='3ds'] .toggle input:checked::after { background: var(--marble); }
+:root[data-theme='3ds'] input[type='range']::-webkit-slider-runnable-track { background: linear-gradient(180deg, var(--slate-dark), var(--slate-light)); }
+:root[data-theme='3ds'] input[type='range']::-moz-range-track { background: linear-gradient(180deg, var(--slate-dark), var(--slate-light)); }
+:root[data-theme='3ds'] input[type='range']::-webkit-slider-thumb { border: 2px solid var(--outline); border-image: none; background: radial-gradient(circle at 35% 30%, #fbf7ea, var(--marble) 45%, var(--marble-dark)); }
+:root[data-theme='3ds'] input[type='range']::-moz-range-thumb { border: 2px solid var(--outline); background: radial-gradient(circle at 35% 30%, #fbf7ea, var(--marble) 45%, var(--marble-dark)); }
 
-/* Difficulty frames: smooth SVG overlays with the same seal window. */
+/* Difficulty frames: pre-rendered SVG overlays with the same seal window. */
 :root[data-theme='3ds'] [data-difficulty='easy'] > .seal-frame { background-image: url('/art/3ds/difficulty/easy.svg'); }
 :root[data-theme='3ds'] [data-difficulty='medium'] > .seal-frame { background-image: url('/art/3ds/difficulty/medium.svg'); }
 :root[data-theme='3ds'] [data-difficulty='hard'] > .seal-frame { background-image: url('/art/3ds/difficulty/hard.svg'); }
 :root[data-theme='3ds'] [data-difficulty='expert'] > .seal-frame { background-image: url('/art/3ds/difficulty/expert.svg'); }
-:root[data-theme='3ds'] .difficulty-step.is-current .difficulty-name { text-decoration-style: solid; text-decoration-color: var(--ds-gold); }
+:root[data-theme='3ds'] .difficulty-step.is-current .difficulty-name { text-decoration-style: solid; text-decoration-color: var(--cursor); }
 
 /* Commissioner runs wider than IM Fell: keep the bottom tabs on one line on phones. */
 @media (max-width: 430px) { :root[data-theme='3ds'] .app-nav a { font-size: 15px; gap: 5px; } :root[data-theme='3ds'] .app-nav { gap: 4px; padding-inline: 8px; } }
 :root[data-theme='3ds'] .rate-field select { font-size: 15px; letter-spacing: -.02em; }
 
-/* Panels and notices. */
-:root[data-theme='3ds'] .settings-section:first-of-type { border-top: 1px solid #08101c; }
-:root[data-theme='3ds'] .controller-panel { background: #152131e6; border-color: var(--rim); border-style: solid; border-radius: 14px; }
-:root[data-theme='3ds'] .notice { border-left-color: var(--ds-gold); background: #152131aa; }
-:root[data-theme='3ds'] .step-number { border-color: var(--ds-gold); background: #152131; }
-:root[data-theme='3ds'] .step-placeholder { border-style: solid; border-color: #9fb7d355; }
-:root[data-theme='3ds'] .catalog-aside { border-left: 1px solid #9fb7d344; }
-:root[data-theme='3ds'] :is(.quick-play[data-state='playing'], .quick-play[data-state='paused']) .thread-icon { box-shadow: 0 0 0 2px var(--outline), 0 0 0 4px var(--ds-gold); border-radius: 50%; }
-:root[data-theme='3ds'] .thread-spinner::before { background: #4b6688; }
-:root[data-theme='3ds'] .thread-spinner::after { background: conic-gradient(var(--ds-gold) 0 25%, transparent 25% 100%); }
-:root[data-theme='3ds'] .pull-refresh { background: linear-gradient(180deg, #34507a, #22324a); box-shadow: inset 0 1px 0 #e2edf9aa, 0 0 0 2px var(--outline), 0 3px 6px #050a12aa; }
-:root[data-theme='3ds'] .pull-refresh.is-armed { box-shadow: inset 0 1px 0 #e2edf9aa, 0 0 0 2px var(--ds-gold), 0 0 10px #f0c04588; }
+/* Panels and notices: the controller sits on the green Gear felt. */
+:root[data-theme='3ds'] .settings-section:first-of-type { border-top: 2px solid var(--slate-dark); }
+:root[data-theme='3ds'] .controller-panel { background: url('/art/3ds/felt.svg') 0 0 / 256px; border: 3px solid var(--wood); border-radius: 10px; box-shadow: inset 0 0 0 1px #0c1012, 0 2px 0 var(--wood-dark); }
+:root[data-theme='3ds'] .notice { border-left-color: var(--gold); background: #1a2429cc; }
+:root[data-theme='3ds'] .step-number { border-color: var(--gold); background: var(--slate-dark); }
+:root[data-theme='3ds'] .step-placeholder { border-style: solid; border-color: #9a927a66; }
+:root[data-theme='3ds'] .catalog-aside { border-left: 3px solid var(--wood); background: url('/art/3ds/felt.svg') 0 0 / 256px; }
+:root[data-theme='3ds'] :is(.quick-play[data-state='playing'], .quick-play[data-state='paused']) .thread-icon { box-shadow: 0 0 0 2px var(--outline), 0 0 0 4px var(--cursor); border-radius: 50%; }
+:root[data-theme='3ds'] .thread-spinner::before { background: var(--marble-dark); }
+:root[data-theme='3ds'] .thread-spinner::after { background: conic-gradient(var(--cursor) 0 25%, transparent 25% 100%); }
+:root[data-theme='3ds'] .pull-refresh { background: radial-gradient(circle at 35% 30%, #fbf7ea, var(--marble) 50%, var(--marble-dark)); box-shadow: 0 0 0 2px var(--outline), 0 3px 0 var(--outline); }
+:root[data-theme='3ds'] .pull-refresh.is-armed { box-shadow: 0 0 0 2px var(--cursor), 0 0 0 3px var(--outline); }
 :root[data-theme='3ds'] .mini-player::before { padding: 3px; }
 
 @media (forced-colors: active) {

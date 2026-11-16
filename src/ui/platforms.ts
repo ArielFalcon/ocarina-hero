@@ -70,8 +70,8 @@ const THREEDS: Platform = {
   shoulderKind: 'shoulder',
   assets: { controller: 'icons/controller-3ds/', patchIcons: 'art/icons-3ds/', patchIconExtension: 'svg', clef: 'art/3ds/clef.svg' },
   art: { brand: 'art/3ds/ocarina.svg', ornament: 'art/3ds/sword-triforce.svg' },
-  themeColor: '#0b1320',
-  picker: { title: '2011 handheld', detail: 'Touch-screen glass with 3DS controls', art: 'art/theme/handheld-large.svg' },
+  themeColor: '#141a1d',
+  picker: { title: '2011 handheld', detail: 'Touch-screen subscreen with 3DS controls', art: 'art/theme/handheld-large.svg' },
 };
 
 /** The 1998 N64 original: the stone subscreen look. */

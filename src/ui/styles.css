@@ -846,7 +846,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 .mini-expand .thread-icon { width: 34px; height: 34px; border-radius: 4px; }
 .mini-open:hover .mini-title { text-decoration: underline; text-underline-offset: 4px; }
 .mini-staff { min-width: 0; overflow: hidden; }
-.mini-staff .tab { zoom: .72; margin: 0; height: 192px; }
+.mini-staff .tab { --staff-shift: 0px; zoom: .72; margin: 0; height: 192px; }
 .mini-staff .tab:not(.has-modifiers) { height: 130px; }
 @media (min-width: 800px) {
   .mini-player { left: 24px; right: 24px; max-width: 1040px; margin-inline: auto; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); align-items: center; column-gap: 24px; padding: 6px 20px; }

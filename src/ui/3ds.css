@@ -88,7 +88,7 @@
 :root[data-theme='3ds'] #main-content::-webkit-scrollbar-thumb { border-color: var(--slate-dark); background: var(--marble-dark); }
 
 /* Controls: slate slots in a marble rim; the primary action is the blue Items tab. */
-:root[data-theme='3ds'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .letter-list) { background-color: var(--panel); background-image: linear-gradient(180deg, #ffffff0d, transparent 50%, #00000026); }
+:root[data-theme='3ds'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .song-card, .letter-list) { background-color: var(--panel); background-image: linear-gradient(180deg, #ffffff0d, transparent 50%, #00000026); }
 :root[data-theme='3ds'] :is(.action, .step):hover:not(:disabled) { background-color: var(--slate-light); }
 :root[data-theme='3ds'] .action.primary { background-color: var(--tab-blue); background-image: linear-gradient(180deg, #ffffff33, #ffffff08 45%, #00000033); text-shadow: var(--lettering); }
 :root[data-theme='3ds'] .action.primary:hover:not(:disabled) { background-color: #3a6ee0; }

@@ -47,6 +47,11 @@ function shelfTitle(text: string): string {
  */
 /** Below this height a floating panel is too cramped, so the page scrolls to make room instead. */
 const MIN_FLOATING_PANEL_PX = 240;
+/** Upward scroll, in one run, that brings the search and filters back over the list on a phone: a small
+ *  correction while reading never does, a deliberate swipe back up does. */
+const CONTROLS_REVEAL_PX = 96;
+/** Downward scroll, in one run, that tucks them away again. */
+const CONTROLS_TUCK_PX = 24;
 
 class Fold {
   constructor(readonly toggle: HTMLButtonElement, readonly panel: HTMLElement, private content: HTMLElement, focusSelector: string, private onOpen = (): void => {}) {
@@ -82,9 +87,15 @@ class Fold {
     const nav = document.querySelector('.app-nav')?.getBoundingClientRect();
     const bottomEdge = nav && nav.top > innerHeight / 2 ? nav.top : innerHeight;
     const toggle = this.toggle.getBoundingClientRect();
-    // A floating panel (desktop) fits the room below its toggle and scrolls inside, so the page stays put.
+    const room = Math.max(MIN_FLOATING_PANEL_PX, bottomEdge - toggle.bottom - 24);
+    // A floating panel (desktop) fits the room below its toggle and scrolls inside, so the page stays put;
+    // so does a panel of the controls pinned over the list on a phone, where scrolling the page would not move it.
+    const pinned = this.toggle.closest('.catalog-controls.is-floating') !== null;
     if (getComputedStyle(this.panel).position === 'absolute') {
-      this.panel.style.maxHeight = `min(62vh, 560px, ${Math.max(MIN_FLOATING_PANEL_PX, bottomEdge - toggle.bottom - 24)}px)`;
+      this.panel.style.maxHeight = `min(62vh, 560px, ${room}px)`;
+    } else if (pinned) {
+      this.panel.style.maxHeight = `min(60dvh, 480px, ${room}px)`;
+      return;
     } else {
       this.panel.style.removeProperty('max-height');
     }
@@ -141,7 +152,12 @@ export class SongbookView {
   private shownRail = '';
   private reset: HTMLButtonElement;
   private filters: HTMLElement;
+  /** The search and the filters, which a phone pins over the list on a swipe back up. */
+  private controls: HTMLElement;
+  private controlsHeldUntil = 0;
   private universeSearch: HTMLInputElement;
+  /** Universe groups the player unfolded; the rest stay folded so the panel opens short. */
+  private openGroups = new Set<string>();
   private difficulty: DifficultyLevel | '' = '';
   private difficultyRange: HTMLInputElement;
   private nowPlaying: { id: string | null; playing: boolean } = { id: null, playing: false };
@@ -185,6 +201,7 @@ export class SongbookView {
     this.scroller = root.closest<HTMLElement>('main') ?? document.documentElement;
     this.reset = root.querySelector('#reset-search')!;
     this.filters = root.querySelector('#catalog-filters')!;
+    this.controls = root.querySelector('#catalog-controls')!;
     document.addEventListener('pointerdown', event => {
       if (event.target instanceof Node && this.filters.contains(event.target)) return;
       for (const fold of this.folds()) fold.setOpen(false);
@@ -212,22 +229,30 @@ export class SongbookView {
     this.search.addEventListener('input', () => this.filterAfterPaint());
     // Pointer picks fold the panel; arrow keys only browse, so keyboard users fold with Enter or Space.
     let pointerPick = false;
-    this.universes.addEventListener('pointerdown', () => { pointerPick = true; });
+    this.universes.addEventListener('pointerdown', event => { pointerPick = (event.target as Element).closest('.universe-chip') !== null; });
     this.universes.addEventListener('change', event => {
       this.universe = (event.target as HTMLInputElement).value;
       this.filterChanged();
     });
     this.universes.addEventListener('click', event => {
+      const group = (event.target as Element).closest<HTMLElement>('.universe-group');
+      if (group) {
+        const name = group.dataset.group!;
+        if (!this.openGroups.delete(name)) this.openGroups.add(name);
+        this.filterUniverseChips();
+        return;
+      }
       if (!(event.target instanceof HTMLInputElement) || !pointerPick) return;
       pointerPick = false;
       this.universeFold.fold();
     });
     this.universeFold.panel.addEventListener('keydown', event => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.key !== 'Enter' && event.key !== ' ' || !(event.target instanceof HTMLInputElement && event.target.type === 'radio')) return;
       event.preventDefault();
       this.universeFold.fold();
     });
     this.bindRail();
+    this.bindFloatingControls();
     this.reset.addEventListener('click', () => {
       this.applyUserFilter(() => {
         this.search.value = '';
@@ -284,23 +309,29 @@ export class SongbookView {
     for (const fold of this.folds()) if (fold !== opened) fold.setOpen(false);
   }
 
-  /** Hides the universe chips whose name does not match the panel's search, and group labels left empty. */
+  /**
+   * Shows the universe chips whose name matches the panel's search and whose group is unfolded; a search
+   * unfolds every group, and a group with no match hides its heading.
+   */
   private filterUniverseChips(): void {
     const query = normalizeSearch(this.universeSearch.value);
     let anyShown = false;
     let group: HTMLElement | null = null;
     let groupShown = false;
+    let groupOpen = true;
     for (const element of this.universes.children as HTMLCollectionOf<HTMLElement>) {
       if (element.classList.contains('universe-group')) {
         if (group) group.hidden = !groupShown;
         group = element;
         groupShown = false;
+        groupOpen = !!query || this.openGroups.has(element.dataset.group!);
+        element.setAttribute('aria-expanded', String(groupOpen));
         continue;
       }
-      const shown = !query || normalizeSearch(element.querySelector('.universe-name')?.textContent ?? '').includes(query);
-      element.hidden = !shown;
-      groupShown ||= shown;
-      anyShown ||= shown;
+      const matches = !query || normalizeSearch(element.querySelector('.universe-name')?.textContent ?? '').includes(query);
+      element.hidden = !matches || !groupOpen;
+      groupShown ||= matches;
+      anyShown ||= matches;
     }
     if (group) group.hidden = !groupShown;
     this.root.querySelector<HTMLElement>('#universe-empty')!.hidden = anyShown;
@@ -408,7 +439,8 @@ export class SongbookView {
     const optionChip = (option: (typeof groups)[number]['universes'][number]) => chip(option.name, universeLabel(option.name), option.icon, option.count);
     this.universes.innerHTML = chip('', 'Every universe', 'songbook', total) + (chosen ? optionChip(chosen) : '') + groups.map(group => {
       const rest = group.universes.filter(option => option.name !== chosen?.name);
-      return rest.length ? (showGroups ? `<span class="universe-group" aria-hidden="true">${group.category}</span>` : '') + rest.map(optionChip).join('') : '';
+      const heading = `<button class="universe-group" type="button" data-group="${group.category}" aria-expanded="false"><span>${group.category}</span><span class="universe-group-count">${rest.length}</span><span class="universe-chevron" aria-hidden="true"></span></button>`;
+      return rest.length ? (showGroups ? heading : '') + rest.map(optionChip).join('') : '';
     }).join('');
     this.filterUniverseChips();
     const checked = this.universes.querySelector<HTMLInputElement>('input:checked');
@@ -582,6 +614,9 @@ export class SongbookView {
   private jumpToLetter(letter: string): void {
     const row = this.list.querySelector<HTMLElement>(`.song-row[data-letter="${CSS.escape(letter)}"]`);
     if (!row) return;
+    this.tuckControls();
+    // The jump itself scrolls the list, maybe upward: it is not a swipe that should bring the controls back.
+    this.controlsHeldUntil = performance.now() + 500;
     this.alignRow(row);
     this.markCurrentLetter(letter);
     cancelAnimationFrame(this.jumpFrame);
@@ -618,6 +653,56 @@ export class SongbookView {
       if (button.dataset.letter === current) button.setAttribute('aria-current', 'true');
       else button.removeAttribute('aria-current');
     }
+  }
+
+  /**
+   * On a phone, once the list is scrolled past the search and filters, a swipe back up pins them over the
+   * list and a scroll down tucks them away; back at their own place they return to the page flow.
+   * Scrolling the list never tucks them while one of their panels is open.
+   */
+  private bindFloatingControls(): void {
+    const phone = matchMedia('(max-width: 799px)');
+    const layout = this.root.querySelector<HTMLElement>('.catalog-layout')!;
+    let last = this.scroller.scrollTop;
+    let run = 0;
+    // The letter rail starts below the pinned controls, and the hanging figure steps aside so it never covers them.
+    const setSpace = () => {
+      const pinned = this.controls.classList.contains('is-floating') && !this.controls.classList.contains('is-tucked');
+      this.root.style.setProperty('--controls-space', pinned ? `${this.universeFold.toggle.getBoundingClientRect().bottom - this.controls.getBoundingClientRect().top + 12}px` : '0px');
+      this.root.closest('.app')?.classList.toggle('controls-pinned', pinned);
+    };
+    this.controls.addEventListener('transitionend', event => {
+      if (event.target !== this.controls || !this.controls.classList.contains('is-tucked')) return;
+      this.controls.classList.remove('is-floating', 'is-tucked');
+    });
+    this.scroller.addEventListener('scroll', () => {
+      const top = this.scroller.scrollTop;
+      const delta = top - last;
+      last = top;
+      if (this.root.hidden || !delta) return;
+      run = performance.now() < this.controlsHeldUntil ? 0 : Math.sign(delta) === Math.sign(run) ? run + delta : delta;
+      const floating = this.controls.classList.contains('is-floating');
+      const inPlace = !phone.matches || layout.getBoundingClientRect().top > this.scroller.getBoundingClientRect().top;
+      if (inPlace) {
+        if (floating) this.controls.classList.remove('is-floating', 'is-tucked');
+      } else if (run <= -CONTROLS_REVEAL_PX && (!floating || this.controls.classList.contains('is-tucked'))) {
+        this.controls.classList.remove('is-tucked');
+        this.controls.classList.add('is-floating');
+      } else if (run >= CONTROLS_TUCK_PX && floating && !this.folds().some(fold => fold.isOpen())) {
+        this.tuckControls();
+      }
+      setSpace();
+    }, { passive: true });
+  }
+
+  /** Slides the pinned search and filters out of view; the transition's end returns them to the page flow. */
+  private tuckControls(): void {
+    if (!this.controls.classList.contains('is-floating') || this.controls.classList.contains('is-tucked')) return;
+    if (this.controls.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
+    this.controls.classList.add('is-tucked');
+    this.root.style.setProperty('--controls-space', '0px');
+    this.root.closest('.app')?.classList.remove('controls-pinned');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) this.controls.classList.remove('is-floating', 'is-tucked');
   }
 
   private bindRail(): void {

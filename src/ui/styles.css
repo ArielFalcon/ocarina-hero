@@ -189,10 +189,10 @@ details[open] summary { color: var(--text); }
 @media (prefers-reduced-motion: reduce) { .universe-panel { transition: none; } }
 .universe-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 2px 4px; }
 .universe-row .universe-chip { min-width: 0; white-space: normal; }
-.universe-row .universe-name { flex: 1; min-width: 0; font-size: 15px; line-height: 1.15; overflow-wrap: anywhere; }
+.universe-row .universe-name { flex: 1; min-width: 0; font-size: 15px; line-height: 1.15; overflow-wrap: break-word; hyphens: auto; }
 .universe-chip { position: relative; flex: 0 0 auto; display: flex; align-items: center; gap: 7px; min-height: 44px; padding: 6px 8px 6px 10px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); cursor: pointer; white-space: nowrap; }
-.universe-chip::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
-.universe-chip:hover { background-color: #2b3a2b; }
+.universe-chip::before, .song-card::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
+.universe-chip:hover, .song-card:hover { background-color: #2b3a2b; }
 .universe-chip:has(input:checked) { background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); }
 .universe-chip:has(input:checked)::before { padding: 2.5px; opacity: 1; filter: url('#cord-edge'); }
 .universe-chip:has(input:checked)::after { content: ''; position: absolute; inset: 5px; border: 1px dashed #e5c993b3; border-radius: 3px; pointer-events: none; }
@@ -201,7 +201,11 @@ details[open] summary { color: var(--text); }
 .universe-icon .thread-icon { width: 20px; height: 22px; }
 .universe-name { font-size: 16px; }
 .universe-chip .count-badge { min-width: 24px; padding-inline: 5px; font-size: 13px; }
-.universe-group { grid-column: 1 / -1; padding: 6px 2px 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+/* A group heading folds its universes away; the count says how many sit under it. */
+.universe-group { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 6px 2px 0; border: 0; border-bottom: 1px dashed #a2824959; background: none; color: var(--muted); font-size: 13px; line-height: 1.2; letter-spacing: .1em; text-transform: uppercase; text-align: left; }
+.universe-group:hover, .universe-group[aria-expanded='true'] { color: var(--text); }
+.universe-group-count { margin-right: auto; letter-spacing: 0; opacity: .75; }
+.universe-group[aria-expanded='true'] .universe-chevron { margin-top: 4px; transform: rotate(-135deg); }
 /* In a panel the search and the group labels stay in view while the chips scroll under them. */
 .universe-search { position: sticky; top: 0; z-index: 2; margin-top: 10px; background-color: var(--forest-deep, #202b20); }
 .universe-search input { min-height: 48px; padding-block: 9px; }
@@ -450,8 +454,20 @@ progress::-moz-progress-bar { background: transparent; }
 .song-article { grid-column: 1 / -1; position: relative; margin-top: 20px; padding-top: 22px; font-size: 16px; min-width: 0; }
 .song-article::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--thread-rule); pointer-events: none; }
 .song-article h2 { font-size: 21px; margin: 0 0 8px; }
-.song-article h2:not(:first-child) { margin-top: 24px; }
+.song-article :is(h2, .song-cards-more):not(:first-child) { margin-top: 20px; }
 .song-article p { margin: 0 0 8px; }
+/* Folded, the article is one line under the lesson; open, it lists the tab and the related songs as cards. */
+.song-about > summary { flex-wrap: wrap; column-gap: 12px; row-gap: 0; min-height: 48px; padding: 4px 0; }
+.song-about-title { font-size: 19px; color: var(--text); }
+.song-about-hint { margin-right: auto; font-size: 15px; color: var(--muted); }
+.song-about-body { padding: 8px 0 4px; }
+.song-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 8px; }
+.song-cards-more > summary { font-size: 16px; }
+.song-cards-more > .song-cards { padding-top: 4px; }
+.song-card { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%; min-height: 56px; padding: 8px 12px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); color: var(--text); text-decoration: none; }
+.song-card:focus-visible { outline-offset: 3px; }
+.song-card-title { font-size: 16px; line-height: 1.2; overflow-wrap: break-word; }
+.song-card-meta { font-size: 13px; line-height: 1.25; color: var(--muted); }
 .song-summary { color: var(--muted); }
 .song-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); column-gap: 24px; }
 .song-links li { display: flex; flex-wrap: wrap; align-items: center; column-gap: .4em; min-height: 44px; min-width: 0; }
@@ -532,7 +548,7 @@ progress::-moz-progress-bar { background: transparent; }
   .score-panel { display: contents; }
   .score-panel > * { order: 0; }
   .score-panel > .lesson-options { order: 2; }
-  .song-article { order: 3; flex: 1 1 100%; margin: 14px 0 0; }
+  .song-article { order: 3; flex: 1 1 100%; margin: 10px 0 0; padding-top: 12px; }
   .key-ref, .desktop-only { display: none !important; }
 
   /* The lesson is a single-screen instrument on phones: staff, Play and controller stay in view. */
@@ -738,7 +754,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   #catalog-view { display: grid; grid-template-columns: minmax(0, max-content) minmax(320px, 520px) minmax(0, 1fr); align-items: end; }
   .catalog-hero { grid-column: 1; padding-bottom: 24px; }
   .hero-copy { width: auto; }
-  .catalog-content { display: contents; }
+  .catalog-content, .catalog-controls { display: contents; }
   .search-field { grid-column: 2; max-width: none; margin: 0 0 24px 8px; }
   .catalog-filters, .catalog-layout { grid-column: 1 / -1; align-self: start; padding-inline: 38px; }
   .catalog-filters { padding-top: 4px; }
@@ -801,7 +817,21 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   }
   .catalog-count { margin-top: 6px; }
   .shelf-title { margin-top: 14px; }
+  /* Scrolled past, the search and filters come back pinned over the list on a swipe up, edge to edge. */
+  .catalog-controls.is-floating {
+    position: sticky; top: 0; z-index: 6; margin-inline: -22px; padding: 10px 22px 0;
+    background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); box-shadow: 0 6px 14px #050a0699;
+    animation: controls-drop .22s ease-out; transition: translate .2s ease-in;
+  }
+  .catalog-controls.is-floating.is-tucked { translate: 0 -110%; }
+  .hanging-link { transition: opacity .2s ease, visibility .2s; }
+  .app.controls-pinned .hanging-link { opacity: 0; visibility: hidden; }
+  .catalog-controls.is-floating .search-field { margin-bottom: 10px; }
+  @keyframes controls-drop { from { translate: 0 -100%; } }
+  .letter-list { top: calc(12px + var(--controls-space, 0px)); flex-basis: calc(100cqh - 24px - var(--mini-player-space, 0px) - var(--controls-space, 0px)); transition: top .2s ease; }
 }
+@media (max-width: 350px) { .catalog-controls.is-floating { margin-inline: -15px; padding-inline: 15px; } }
+@media (prefers-reduced-motion: reduce) { .catalog-controls.is-floating { animation: none; transition: none; } .letter-list { transition: none; } }
 @media (max-width: 380px) {
   .mode-switch { flex-basis: 120px; gap: 4px; }
   .mode-switch .action { padding: 4px; font-size: 15px; }

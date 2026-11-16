@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DEMOS } from './catalogue-loader';
-import { songArticleHtml, songSummary, type SongArticle } from '../src/site/song-article';
+import { RELATED_SHOWN, songArticleHtml, songSummary, type SongArticle } from '../src/site/song-article';
 import { relatedSongs, songGroups, songPageOf } from '../src/site/song-pages';
 import { createSongbookEntries } from '../src/ui/songbook';
 
@@ -22,7 +22,7 @@ test('the article shows the tab and the summary as text, escaped', () => {
 
 test('the article links the related songs and the songbook under the deployment base', () => {
   const html = songArticleHtml(article, related, '/sub/');
-  assert.ok(html.includes('<a href="/sub/song/zeldas-lullaby/" data-song-link="zeldas-lullaby">Zelda’s &lt;Lullaby&gt;</a>'));
+  assert.ok(html.includes('<a class="song-card" href="/sub/song/zeldas-lullaby/" data-song-link="zeldas-lullaby"><span class="song-card-title">Zelda’s &lt;Lullaby&gt;</span>'));
   assert.ok(html.includes('More The Legend of &lt;Zelda&gt; songs'));
   assert.ok(html.includes('<a href="/sub/" data-view-link="catalog">'));
   assert.doesNotMatch(songArticleHtml(article, [], '/'), /<ul|More /);
@@ -37,4 +37,16 @@ test('a bundled song page feeds the article with its opening arrangement and nev
   assert.ok(html.includes(`${page.noteCount} notes in ${page.passageCount} passages`));
   assert.ok(html.includes(page.tab.replace(/&/g, '&amp;')));
   assert.ok(!others.some(link => link.id === page.id) && others.every(link => html.includes(`href="/song/${link.id}/"`)));
+});
+
+test('the article folds under one closed disclosure, and related songs past the first cards fold under "Show N more"', () => {
+  const links = Array.from({ length: RELATED_SHOWN + 2 }, (_, index) => ({ id: `song-${index}`, title: `Song ${index}`, meta: 'Zelda' }));
+  const html = songArticleHtml(article, links, '/');
+  assert.match(html, /^<details class="song-about"><summary>/);
+  assert.doesNotMatch(html, /<details[^>]* open/);
+  const [shown, folded] = html.split('<details class="song-cards-more"><summary>Show 2 more</summary>');
+  assert.ok(folded !== undefined);
+  assert.ok(links.slice(0, RELATED_SHOWN).every(link => shown!.includes(`data-song-link="${link.id}"`)));
+  assert.ok(links.slice(RELATED_SHOWN).every(link => !shown!.includes(`data-song-link="${link.id}"`) && folded.includes(`data-song-link="${link.id}"`)));
+  assert.doesNotMatch(songArticleHtml(article, links.slice(0, RELATED_SHOWN), '/'), /song-cards-more/);
 });

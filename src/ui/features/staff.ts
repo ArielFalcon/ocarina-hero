@@ -189,7 +189,10 @@ function renderSongArticle(): void {
   }, relatedSongs(songGroupsCache.groups, { id: state.selectedEntry.id, universe: state.selectedEntry.universe }), APP_BASE);
   if (html === articleHtml) return;
   articleHtml = html;
+  // A new arrangement rewrites the text; the disclosures the player opened stay open.
+  const opened = [...article.querySelectorAll('details')].map(details => details.open);
   article.innerHTML = html;
+  article.querySelectorAll('details').forEach((details, index) => { details.open = opened[index] ?? false; });
   tabText = must<HTMLParagraphElement>('#tab-text');
 }
 

@@ -69,7 +69,7 @@
 :root[data-theme='retro'] #main-content::-webkit-scrollbar-thumb { border-color: #241f17; background: var(--n64-yellow); }
 
 /* Controls: stone slabs with a bevel; the primary action is the blue A button. */
-:root[data-theme='retro'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .letter-list) { background-color: #4a4335; }
+:root[data-theme='retro'] :is(.action, .step, .key, .bend-key, .input-frame, .category-card, .universe-chip, .song-card, .letter-list) { background-color: #4a4335; }
 :root[data-theme='retro'] :is(.action, .step):hover:not(:disabled) { background-color: #5c5442; }
 :root[data-theme='retro'] .action.primary { background-color: var(--n64-blue); background-image: linear-gradient(180deg, #ffffff26, transparent 45%, #00000033); }
 :root[data-theme='retro'] .action.primary:hover:not(:disabled) { background-color: #3a6ce6; }

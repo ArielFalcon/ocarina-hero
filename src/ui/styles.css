@@ -144,7 +144,6 @@ details[open] summary { color: var(--text); }
 .catalog-content, .padded-view { padding: 22px; }
 .search-field { margin-bottom: 23px; }
 .catalog-filters { border-bottom: 1px dashed #a2824959; padding-bottom: 10px; }
-.catalog-filters > summary { font-size: 19px; margin-bottom: 10px; }
 .category-selector { border: 0; padding: 0; margin: 0; min-width: 0; }
 .category-panel .category-grid { padding: 12px 2px 4px; }
 .category-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
@@ -168,7 +167,6 @@ details[open] summary { color: var(--text); }
 .category-symbol { flex-shrink: 0; display: flex; }
 .category-symbol .thread-icon { width: 22px; height: 24px; }
 @media (max-width: 380px) { .category-card { padding: 7px 8px; gap: 6px; } .category-name { font-size: 16px; } }
-/* Compact filter list: each label sits beside its toggle; an open panel spans the row beneath. */
 .filter-grid { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 14px; row-gap: 8px; align-items: center; }
 .filter-grid > fieldset, .catalog-facets, .catalog-facets > fieldset { display: contents; }
 .filter-grid legend { grid-column: 1; margin: 0; padding: 0; font-size: 16px; }
@@ -204,6 +202,11 @@ details[open] summary { color: var(--text); }
 .universe-name { font-size: 16px; }
 .universe-chip .count-badge { min-width: 24px; padding-inline: 5px; font-size: 13px; }
 .universe-group { grid-column: 1 / -1; padding: 6px 2px 0; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+/* In a panel the search and the group labels stay in view while the chips scroll under them. */
+.universe-search { position: sticky; top: 0; z-index: 2; margin-top: 10px; background-color: var(--forest-deep, #202b20); }
+.universe-search input { min-height: 48px; padding-block: 9px; }
+.universe-panel .universe-group { position: sticky; top: 48px; z-index: 1; padding: 8px 2px 6px; background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); }
+#universe-empty { padding: 12px 2px 4px; }
 .catalog-count { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 18px; min-height: 44px; }
 .catalog-count p { color: var(--muted); font-size: 16px; }
 .catalog-count { position: relative; padding-bottom: 6px; }
@@ -228,7 +231,9 @@ details[open] summary { color: var(--text); }
 #save-song[aria-pressed='true'] { color: #e4b270; }
 .back-link { display: inline-flex; align-items: center; gap: 6px; }
 .back-link .thread-icon { width: 22px; height: 22px; }
-/* Letter rail: a recessed cord-framed strip of stitched initials beside the full song list. */
+/* Letter rail: a recessed cord-framed strip of stitched initials beside the full song list. It spans the visible
+   scroller (minus 12px insets) but never outgrows the list: the rail cell adds no height to its grid row
+   (height 0, min-height 100% of the row), and the sticky strip shrinks to fit it. */
 .song-index { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
 .song-row { scroll-margin-top: 12px; }
 /* Off-screen rows skip rendering: until drawn once, their content box takes the average row height,
@@ -239,11 +244,14 @@ details[open] summary { color: var(--text); }
 @media (min-width: 1100px) {
   #demos > .song-row { contain-intrinsic-block-size: auto 68px; }
 }
-.letter-rail { position: sticky; top: 12px; margin-top: 10px; }
-.letter-list { position: relative; display: flex; flex-direction: column; width: 36px; height: min(calc(var(--letters, 26) * 28px + 12px), calc(100cqh - max(161px, 24px + var(--mini-player-space, 0px)))); padding: 6px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
+.letter-rail { position: relative; height: 0; min-height: 100%; display: flex; flex-direction: column; padding-top: 10px; }
+.letter-list { position: sticky; top: 12px; flex: 0 1 calc(100cqh - 24px - var(--mini-player-space, 0px)); display: flex; flex-direction: column; width: 36px; min-height: 0; padding: 8px 4px; border-radius: 6px; background-color: var(--bg); background-image: var(--weave); box-shadow: var(--slot-recess); touch-action: none; user-select: none; -webkit-user-select: none; }
 .letter-list::before { content: ''; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: var(--cord); opacity: .6; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; }
-.letter-slot { position: relative; flex: 1 1 0; min-height: 0; display: grid; place-items: center; padding: 0; border: 0; border-radius: 4px; background: transparent; font: 600 17px/1 Georgia, serif; letter-spacing: 0; }
-.letter-knot { flex: none; height: 0; margin-inline: 30%; border-top: 1px dashed #a2824940; pointer-events: none; }
+.letter-slot { position: relative; flex: 0 1 24px; min-height: 0; display: grid; place-items: center; padding: 0; border: 0; border-radius: 4px; background: transparent; font: 600 17px/1 Georgia, serif; letter-spacing: 0; }
+/* In short windows the knots collapse first, then the slots shrink, so every letter always fits. */
+.letter-knot { position: relative; flex: 1 1 0; min-height: 0; overflow: hidden; pointer-events: none; }
+.letter-knot::before { content: ''; position: absolute; left: 50%; top: 1px; bottom: 1px; width: 2px; translate: -50% 0; background: var(--cord); opacity: .55; filter: url('#soft-thread'); }
+.letter-knot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; translate: -50% -50%; rotate: 45deg; background: var(--satin); background-size: 2.8px 2.8px, auto; box-shadow: 0 0 0 1px #6f5226; }
 .letter-slot .stitched-label { opacity: .78; }
 .letter-slot:hover .stitched-label { opacity: 1; }
 .letter-slot[aria-current='true'] { background-color: #604620; background-image: var(--weave), var(--selected-cloth); box-shadow: var(--slot-raised); }
@@ -659,7 +667,6 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .catalog-hero .subtitle { font-size: 25px; }
   .catalog-content, .padded-view { padding: 28px 38px; }
   .search-field { max-width: 640px; }
-  .catalog-filters > summary { width: fit-content; }
   .universe-row { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
   .universe-row .universe-name { font-size: 16px; }
   .category-grid { grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; }
@@ -681,9 +688,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .filter-grid #universe-panel { grid-column: 1 / -1; }
   /* The difficulty scale is short: it opens under its own toggle at its natural width. */
   .filter-grid #difficulty-panel { grid-column: 3 / -1; left: 0; right: auto; width: max-content; }
-  /* Filters stay unfolded on desktop, so the section labels are enough: no disclosure summary. */
   .filter-grid legend { line-height: 24px; margin-bottom: 8px; }
-  .catalog-filters > summary { display: none; }
   .catalog-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(210px, .85fr); gap: 32px; }
   /* The side panel follows the list while it scrolls; the in-list Continue shelf moves into it.
      It is capped to the scroller height, less its 16px insets and the mini player's space, and scrolls only as a fallback. */
@@ -691,16 +696,6 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .catalog-aside h2 { margin: 0; font-size: 28px; line-height: 1.15; }
   .catalog-aside p { font-size: 18px; color: var(--muted); }
   .catalog-aside .action { align-self: flex-start; }
-  /* The rail spans the visible scroller (minus 12px insets) but never outgrows the list: the rail cell adds no
-     height to its grid row (height 0, min-height 100% of the row), and the sticky strip shrinks to fit it.
-     Letters keep a fixed slot; the knots between them absorb the rest as cord seams tied with a satin diamond. */
-  .letter-rail { position: relative; top: auto; height: 0; min-height: 100%; display: flex; flex-direction: column; margin-top: 0; padding-top: 10px; }
-  .letter-list { position: sticky; top: 12px; flex: 0 1 calc(100cqh - 24px - var(--mini-player-space, 0px)); height: auto; min-height: 0; padding-block: 8px; }
-  /* In short windows the knots collapse first, then the slots shrink, so every letter always fits. */
-  .letter-slot { flex: 0 1 24px; }
-  .letter-knot { position: relative; flex: 1 1 0; min-height: 0; margin: 0; border: 0; overflow: hidden; }
-  .letter-knot::before { content: ''; position: absolute; left: 50%; top: 1px; bottom: 1px; width: 2px; translate: -50% 0; background: var(--cord); opacity: .55; filter: url('#soft-thread'); }
-  .letter-knot::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; translate: -50% -50%; rotate: 45deg; background: var(--satin); background-size: 2.8px 2.8px, auto; box-shadow: 0 0 0 1px #6f5226; }
   .journey { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .journey-section { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding-top: 14px; }
   .journey-section::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--thread-rule); pointer-events: none; }
@@ -711,12 +706,13 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .journey-section .song-open { min-height: 54px; }
   .catalog-aside .journey-note { margin: -4px 0 4px; font-size: 16px; }
   .popular-list { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; padding: 0; list-style: none; }
-  .popular-song { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 36px; padding: 2px 0; border: 0; background: transparent; color: var(--text); text-align: left; }
+  .popular-song { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 4px 0; border: 0; background: transparent; color: var(--text); text-align: left; }
   .popular-song:hover .popular-title { text-decoration: underline; text-underline-offset: 4px; }
   .popular-rank.is-trailing { background-color: var(--panel); }
-  .popular-copy { display: flex; flex: 1; align-items: baseline; gap: 8px; min-width: 0; overflow: hidden; }
-  .popular-title { font: 18px/1.2 Georgia, serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
-  .popular-meta { flex: 0 10 auto; min-width: 0; color: var(--muted); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Title above its universe, so the narrow panel truncates neither in favour of the other. */
+  .popular-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+  .popular-title { font: 18px/1.2 Georgia, serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .popular-meta { color: var(--muted); font-size: 14px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .popular-plays { flex: 0 0 auto; margin-left: auto; padding-left: 8px; color: var(--accent); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .resume-shelf { display: none; }
   .lesson-view { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr); column-gap: 32px; align-content: start; padding: 20px 34px 32px; }
@@ -746,7 +742,6 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .search-field { grid-column: 2; max-width: none; margin: 0 0 24px 8px; }
   .catalog-filters, .catalog-layout { grid-column: 1 / -1; align-self: start; padding-inline: 38px; }
   .catalog-filters { padding-top: 4px; }
-  .catalog-filters[open] > summary { left: 38px; }
   .catalog-layout { padding-bottom: 28px; }
 }
 @media (min-width: 1280px) {
@@ -787,8 +782,23 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .catalog-hero .subtitle { display: none; }
   .search-field { margin-bottom: 12px; }
   .search-field label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .catalog-filters { padding-bottom: 4px; }
-  .catalog-filters:not([open]) > summary { margin-bottom: 0; }
+  /* The three filters stay visible as one compact row: each toggle shows its current value, and its panel
+     opens beneath the row at a capped height that scrolls inside, so a long list never stretches the page. */
+  .catalog-filters { padding-bottom: 12px; }
+  .filter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8px; row-gap: 10px; }
+  .filter-grid legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .filter-grid .universe-toggle { grid-row: 1; justify-self: stretch; width: 100%; min-height: 48px; gap: 4px; padding: 6px 8px 6px 10px; }
+  .filter-grid .category-selector .universe-toggle { grid-column: 1; }
+  .filter-grid .universe-filter .universe-toggle { grid-column: 2; }
+  .filter-grid .difficulty-filter .universe-toggle { grid-column: 3; }
+  /* A third of a phone row only fits the value and its chevron: the count and the leading icon stay in the panel. */
+  .filter-grid .universe-toggle :is(.count-badge, .universe-icon, .mini-seal) { display: none; }
+  .filter-grid .universe-toggle .universe-name { flex: 1; font-size: 15px; line-height: 1.15; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .filter-grid .universe-chevron { flex: none; margin-inline: 0 2px; }
+  .filter-grid .universe-panel {
+    grid-row: 2; max-height: min(60dvh, 480px); overflow-y: auto; overscroll-behavior: contain; padding: 0 10px 10px; scrollbar-width: thin; scrollbar-color: #aa8341 transparent;
+    border: 1px solid #a2824980; border-radius: 6px; background: var(--panel) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-recess);
+  }
   .catalog-count { margin-top: 6px; }
   .shelf-title { margin-top: 14px; }
 }

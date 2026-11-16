@@ -5,7 +5,7 @@ interface Props { hidden?: boolean }
 const { hidden = false } = Astro.props;
 /** The page's one H1 is the heading of the view it opens on; the other views keep theirs as H2 of the same look. */
 const Title = hidden ? 'h2' : 'h1';
-const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs' }];
+const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs by game' }];
 ---
 <section id="catalog-view" class="view" aria-labelledby="catalog-title" hidden={hidden}>
   <div class="catalog-hero">
@@ -21,8 +21,7 @@ const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs' 
       <label for="song-search" class="stitched-label">Find a melody</label>
       <span class="input-frame"><input id="song-search" type="search" placeholder="Song, artist or universe…" autocomplete="off" /></span>
     </div>
-    <details id="catalog-filters" class="catalog-filters" open>
-    <summary id="filter-summary" class="stitched-label"><span>Filters<span id="filter-summary-detail" class="filter-summary-detail"></span></span></summary>
+    <div id="catalog-filters" class="catalog-filters">
     <div class="filter-grid">
     <fieldset class="category-selector">
       <legend class="stitched-label">Category</legend>
@@ -33,7 +32,7 @@ const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs' 
       <fieldset class="universe-filter">
         <legend class="stitched-label">Universe</legend>
         <button id="universe-toggle" class="universe-chip universe-toggle" type="button" aria-expanded="false" aria-controls="universe-panel"></button>
-        <div id="universe-panel" class="universe-panel" inert><div class="universe-panel-inner"><div id="universes" class="universe-row"></div></div></div>
+        <div id="universe-panel" class="universe-panel" inert><div class="universe-panel-inner"><span class="input-frame universe-search"><input id="universe-search" type="search" placeholder="Find a universe…" autocomplete="off" aria-label="Find a universe" /></span><div id="universes" class="universe-row"></div><p id="universe-empty" class="empty" hidden>No universe matches.</p></div></div>
       </fieldset>
       <fieldset class="difficulty-filter">
         <legend class="stitched-label">Difficulty</legend>
@@ -46,7 +45,7 @@ const hubLinks = [{ path: hubPath(ZELDA_UNIVERSE), label: 'Zelda ocarina songs' 
       </fieldset>
     </div>
     </div>
-    </details>
+    </div>
     <div class="catalog-layout">
       <div>
         <div class="catalog-count"><p id="catalog-count" role="status" aria-live="polite"></p><button id="reset-search" type="button" class="text-button" hidden>Clear filters</button></div>

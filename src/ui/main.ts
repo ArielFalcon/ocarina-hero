@@ -13,8 +13,8 @@ import type { MelodyNote, Projection } from '../core/project';
 import { prepareMelody } from '../core/prepare';
 import { buttonLabel, noteInstruction, schemeBendLabel, toTabText, type ControlScheme } from '../core/tab';
 import { buttonIcon, modifierIcon } from './controller-icons';
-import { SourceImporter, type AudioSourceAnalysis, type PreparedAudio } from './import';
-import { AudioFragmentEditor } from './audio-editor';
+import type { AudioSourceAnalysis, PreparedAudio, SourceImporter } from './import';
+import type { AudioFragmentEditor } from './audio-editor';
 import { Controls } from './input';
 import { GamepadInput } from './gamepad';
 import { Playback } from './playback';
@@ -112,7 +112,21 @@ const passageSelect = must<HTMLSelectElement>('#passage');
 const repeatPassage = must<HTMLInputElement>('#repeat-passage');
 let selectedAudio: PreparedAudio | null = null;
 let audioLoadVersion = 0;
-const importer = new SourceImporter({
+let importer: SourceImporter | undefined;
+let editor: AudioFragmentEditor | undefined;
+let workshopTools: Promise<{ importer: SourceImporter; editor: AudioFragmentEditor }> | undefined;
+
+/** The Workshop's importer and waveform editor (MIDI parser, audio model, wavesurfer) load on first use, not with every page. */
+function loadWorkshopTools(): Promise<{ importer: SourceImporter; editor: AudioFragmentEditor }> {
+  workshopTools ??= Promise.all([import('./import'), import('./audio-editor')]).then(([{ SourceImporter }, { AudioFragmentEditor }]) => {
+    importer = createImporter(SourceImporter);
+    editor = createEditor(AudioFragmentEditor);
+    return { importer, editor };
+  });
+  return workshopTools;
+}
+
+const createImporter = (Importer: typeof SourceImporter) => new Importer({
   onSource(source) {
     selectedEntry = null;
     practiceMode = false;
@@ -128,7 +142,7 @@ const importer = new SourceImporter({
     setWorkshopStatus(message);
   },
   onPending(pending) {
-    editor.setBusy(pending);
+    editor?.setBusy(pending);
     showAnalysisProgress(pending);
     updateAnalyzeButton();
     playButton.disabled = pending || recorded.length === 0;
@@ -138,7 +152,7 @@ const importer = new SourceImporter({
     must<HTMLButtonElement>('#open-import').disabled = pending || current === null || selectedEntry !== null;
   },
 });
-const editor = new AudioFragmentEditor(must<HTMLElement>('#audio-editor'), {
+const createEditor = (Editor: typeof AudioFragmentEditor) => new Editor(must<HTMLElement>('#audio-editor'), {
   onSelectionChange() { invalidateAudioResult('Fragment changed. Choose Analyze fragment to generate its TAB.'); },
   onSelectionReady() { updateAnalyzeButton(); },
   onPreviewStart() {
@@ -158,12 +172,16 @@ const analysisElapsed = must<HTMLElement>('#analysis-elapsed');
 let analysisPhase: 'decoding' | 'analysing' | 'importing' = 'analysing';
 let analysisTimer: number | undefined;
 
+function isImporting(): boolean {
+  return importer?.pending ?? false;
+}
+
 function setWorkshopStatus(message: string): void {
   must('#workshop-status').textContent = message;
 }
 
 function updateAnalyzeButton(): void {
-  analyzeButton.disabled = importer.pending || !selectedAudio || !editor.selection;
+  analyzeButton.disabled = isImporting() || !selectedAudio || !editor?.selection;
 }
 
 /** Show a determinate-looking but honest loader: a woven spinner plus elapsed time. */
@@ -173,7 +191,8 @@ function showAnalysisProgress(pending: boolean): void {
   analysisProgress.hidden = !pending;
   analyzeButton.hidden = pending;
   if (!pending) return;
-  const seconds = editor.selection && selectedAudio ? (editor.selection.endIndex - editor.selection.startIndex) / selectedAudio.buffer.sampleRate : 0;
+  const selection = editor?.selection;
+  const seconds = selection && selectedAudio ? (selection.endIndex - selection.startIndex) / selectedAudio.buffer.sampleRate : 0;
   must('#analysis-progress-label').textContent = analysisPhase === 'decoding'
     ? 'Reading the recording…'
     : analysisPhase === 'importing' ? 'Importing the MIDI melody…' : `Finding the melody in ${seconds.toFixed(1)} s of audio…`;
@@ -183,7 +202,7 @@ function showAnalysisProgress(pending: boolean): void {
 }
 
 function invalidateAudioResult(message: string): void {
-  importer.invalidate();
+  importer?.invalidate();
   stopPlayback();
   current = null;
   selectedEntry = null;
@@ -200,8 +219,8 @@ function invalidateAudioResult(message: string): void {
 function closeAudioEditor(): void {
   audioLoadVersion++;
   selectedAudio = null;
-  importer.releaseAudio();
-  editor.clear();
+  importer?.releaseAudio();
+  editor?.clear();
 }
 
 function must<T extends HTMLElement = HTMLElement>(selector: string): T {
@@ -262,7 +281,7 @@ function updateHint(): void {
 }
 
 function press(pitch: PitchSpec): void {
-  editor.stopPreview();
+  editor?.stopPreview();
   if (isPlaying || repeatingTimer !== undefined) stopPlayback();
   engine.noteOn(pitch, bend);
   lastNoteLabel = `${buttonLabel(pitch.button, controlScheme())} · ${pitch.id} · ${frequencyOf(pitch.id, bend).toFixed(1)} Hz`;
@@ -283,7 +302,7 @@ function currentTabText(): string {
 }
 
 function renderTab(): void {
-  playButton.disabled = importer.pending || recorded.length === 0;
+  playButton.disabled = isImporting() || recorded.length === 0;
   passages = createPassages(recorded, current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, current?.phraseStarts);
   if (tabText) tabText.textContent = currentTabText();
   bends.hidden = current !== null && !recorded.some(note => !!note.bend);
@@ -360,7 +379,7 @@ function show(arrangement: Arrangement, label: string, play = false): void {
 }
 
 function renderSource(source: Source, play = false): void {
-  if (importer.pending) return;
+  if (isImporting()) return;
   stopPlayback();
   current = source;
   analysisDownload.disabled = !source.analysis;
@@ -723,7 +742,7 @@ function setPlayLabel(label: string): void {
 }
 
 function replay(): void {
-  editor.stopPreview();
+  editor?.stopPreview();
   controls.reset();
   clearActive();
   const arrangement = songArrangement ?? (recorded.length ? { title: 'live', tempoBpm: FREE_PLAY_TEMPO_BPM, notes: recorded } : null);
@@ -757,6 +776,8 @@ async function openAudioFile(file: File): Promise<void> {
   songHint.textContent = 'Reading the recording…';
   setWorkshopStatus('');
   analysisPhase = 'decoding';
+  const { importer, editor } = await loadWorkshopTools();
+  if (version !== audioLoadVersion) return;
   const audio = await importer.prepareAudio(file);
   if (!audio || version !== audioLoadVersion) return;
   selectedAudio = audio;
@@ -783,15 +804,15 @@ fileInput.addEventListener('change', () => {
   controls.reset();
   clearActive();
   fileName.textContent = file.name;
-  if (/\.midi?$/i.test(file.name)) { analysisPhase = 'importing'; void importer.load(file); }
+  if (/\.midi?$/i.test(file.name)) { analysisPhase = 'importing'; void loadWorkshopTools().then(tools => tools.importer.load(file)); }
   else void openAudioFile(file);
   fileInput.value = '';
 });
 
 analyzeButton.addEventListener('click', () => {
-  const selection = editor.selection;
-  if (!selectedAudio || !selection || importer.pending) return;
-  editor.stopPreview();
+  const selection = editor?.selection;
+  if (!importer || !selectedAudio || !selection || isImporting()) return;
+  editor?.stopPreview();
   invalidateAudioResult('');
   analysisPhase = 'analysing';
   void importer.analyzeAudio(selectedAudio, selection);
@@ -818,7 +839,7 @@ function downloadJson(fileName: string, json: string): void {
 }
 
 analysisDownload.addEventListener('click', () => {
-  if (importer.pending || !current?.analysis) return;
+  if (isImporting() || !current?.analysis) return;
   downloadJson(`${current.title.replace(/\.[^.]+$/, '')}-analysis.json`, JSON.stringify(current.analysis, null, 2));
 });
 
@@ -885,7 +906,7 @@ function updateLessonHeading(): void {
   must('.app').classList.toggle('has-song', current !== null);
   must('#listen-mode').setAttribute('aria-pressed', String(!practiceMode));
   must('#practice-mode').setAttribute('aria-pressed', String(practiceMode));
-  must<HTMLButtonElement>('#open-import').disabled = current === null || selectedEntry !== null || importer.pending;
+  must<HTMLButtonElement>('#open-import').disabled = current === null || selectedEntry !== null || isImporting();
   renderSongArticle();
   refreshPracticeStatus();
 }
@@ -1053,14 +1074,15 @@ function showView(next: AppView, pushHistory = true): void {
     stopPlayback();
     controls.reset();
     clearActive();
-    editor.stopPreview();
-    if (view === 'workshop' && importer.pending) {
+    editor?.stopPreview();
+    if (view === 'workshop' && isImporting()) {
       audioLoadVersion++;
-      importer.invalidate();
+      importer?.invalidate();
       setWorkshopStatus('Analysis cancelled. Choose Analyze fragment to try again.');
     }
   }
   view = next;
+  if (next === 'workshop') void loadWorkshopTools();
   must('.app').classList.toggle('is-lesson', next === 'lesson');
   for (const name of ['catalog', 'popular', 'lesson', 'workshop', 'settings'] as const) {
     must(`#${name}-view`).hidden = next !== name;
@@ -1268,7 +1290,7 @@ function restoreView(): void {
 }
 window.addEventListener('popstate', restoreView);
 window.addEventListener('visibilitychange', () => {
-  if (document.hidden) { stopPlayback(); miniPlayer.pause(); controls.reset(); clearActive(); editor.stopPreview(); }
+  if (document.hidden) { stopPlayback(); miniPlayer.pause(); controls.reset(); clearActive(); editor?.stopPreview(); }
   else watchGamepads();
 });
 for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]')) {

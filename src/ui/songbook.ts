@@ -228,6 +228,8 @@ group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-naruto-man-of-the-world', 'Man of the World', { version: 'Shippuden', aliases: ['Utsusemi', 'Yasuharu Takanashi', 'Naruto Shippuden OST'] }],
   ['catalogue-naruto-samidare', 'Samidare', { version: 'Shippuden', aliases: ['Early Summer Rain', 'Yasuharu Takanashi', '五月雨'] }],
   ['catalogue-naruto-loneliness', 'Loneliness', { aliases: ['Kodoku', '孤独', 'Toshio Masuda'] }],
+  ['catalogue-naruto-silhouette', 'Silhouette', { version: 'Shippuden opening 16', aliases: ['KANA-BOON'] }],
+  ['catalogue-naruto-kanashimi-wo-yasashisa-ni', 'Kanashimi wo Yasashisa ni', { version: 'Opening 3', aliases: ['little by little', 'Turning Sadness Into Kindness', '悲しみをやさしさに'] }],
 ]);
 group('Neon Genesis Evangelion', ['Anime'], 'unit', [['catalogue-evangelion', 'A Cruel Angel’s Thesis', { aliases: ['Evangelion'] }]]);
 group('Elfen Lied', ['Anime'], 'lily', [['catalogue-lilium', 'Lilium']]);
@@ -450,6 +452,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-smashing-pumpkins-1979', '1979', { artist: 'The Smashing Pumpkins', aliases: ['Smashing Pumpkins', 'Nineteen Seventy-Nine'] }],
   ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
   ['catalogue-smells-like-teen-spirit', 'Smells Like Teen Spirit', { artist: 'Nirvana', aliases: ['Teen Spirit'] }],
+  ['catalogue-birds-of-a-feather', 'Birds of a Feather', { artist: 'Billie Eilish' }],
 ]);
 
 // Classics

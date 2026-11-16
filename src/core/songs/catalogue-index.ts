@@ -3180,5 +3180,38 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 3.33,
       "level": "easy"
     }
+  },
+  {
+    "id": "catalogue-naruto-silhouette",
+    "title": "Silhouette",
+    "subtitle": "The sung chorus line of the Naruto Shippuden opening: a stepwise D F# E figure that climbs to a G, then the B A D, B A D leaps and the D C# D E F# D tag",
+    "tempoBpm": 183.26262450404553,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.55,
+      "level": "hard"
+    }
+  },
+  {
+    "id": "catalogue-naruto-kanashimi-wo-yasashisa-ni",
+    "title": "Kanashimi wo Yasashisa ni",
+    "subtitle": "The sung chorus of Naruto opening 3: the repeated B B B C# B A# figure that falls to F# and climbs back to A#, a lower D# E answer, and the restatement closing on a held B",
+    "tempoBpm": 125.91815320041972,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.75,
+      "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-birds-of-a-feather",
+    "title": "Birds of a Feather",
+    "subtitle": "The sung chorus: a rising answer to the held opening tone, then the same figure with a sixteenth turn, a repeated high B-A figure and a stepwise fall",
+    "tempoBpm": 105.000105000105,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.78,
+      "level": "medium"
+    }
   }
 ];

@@ -1380,12 +1380,12 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   {
     "id": "catalogue-naruto-raising-fighting-spirit",
     "title": "Naruto: The Raising Fighting Spirit",
-    "subtitle": "The two-bar riff: E E E G F# E B A G A G F#, then E E E G F# E and the closing D and A below the riff",
-    "tempoBpm": 225.00056250140625,
+    "subtitle": "The lead verse after the riff: E, E F# G F#, D, E, E F# G A, then C C D C B, A G F# G A B; answered by the same opening rising to C C D E D, C B A D B",
+    "tempoBpm": 210.00021000021,
     "beatsPerBar": 6,
     "difficulty": {
-      "score": 8.63,
-      "level": "expert"
+      "score": 4.15,
+      "level": "medium"
     }
   },
   {
@@ -3069,6 +3069,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     "difficulty": {
       "score": 3.5,
       "level": "medium"
+    }
+  },
+  {
+    "id": "catalogue-naruto-afternoon-of-konoha",
+    "title": "Afternoon of Konoha",
+    "subtitle": "The plucked string opening of the Naruto filler-episode track, every note a short detached pluck: E F# G G# E D, the answer D D C# D D# E, the same figure again, and the closing answer D D D# D# E",
+    "tempoBpm": 98.00014373354415,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.52,
+      "level": "hard"
     }
   },
   {

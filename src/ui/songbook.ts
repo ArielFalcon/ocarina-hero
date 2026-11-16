@@ -227,6 +227,7 @@ group('Naruto', ['Anime'], 'konohaLeaf', [
   ['catalogue-naruto-man-of-the-world', 'Man of the World', { version: 'Shippuden', aliases: ['Utsusemi', 'Yasuharu Takanashi', 'Naruto Shippuden OST'] }],
   ['catalogue-naruto-samidare', 'Samidare', { version: 'Shippuden', aliases: ['Early Summer Rain', 'Yasuharu Takanashi', '五月雨'] }],
   ['catalogue-naruto-loneliness', 'Loneliness', { aliases: ['Kodoku', '孤独', 'Toshio Masuda'] }],
+  ['catalogue-naruto-afternoon-of-konoha', 'Afternoon of Konoha', { aliases: ['Konoha no Gogo', '木ノ葉の午後', 'Toshio Masuda', 'MUSASHI PROJECT', 'Naruto filler theme', 'Naruto filler music'] }],
   ['catalogue-naruto-silhouette', 'Silhouette', { version: 'Shippuden opening 16', aliases: ['KANA-BOON'] }],
   ['catalogue-naruto-kanashimi-wo-yasashisa-ni', 'Kanashimi wo Yasashisa ni', { version: 'Opening 3', aliases: ['little by little', 'Turning Sadness Into Kindness', '悲しみをやさしさに'] }],
 ]);

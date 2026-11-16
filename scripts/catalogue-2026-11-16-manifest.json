@@ -2216,5 +2216,93 @@
         33
       ]
     }
+  },
+  {
+    "id": "naruto-afternoon-of-konoha",
+    "title": "Afternoon of Konoha",
+    "category": "anime",
+    "hook": "The plucked string opening of the Naruto filler-episode track, every note a short detached pluck: E F# G G# E D, the answer D D C# D D# E, the same figure again, and the closing answer D D D# D# E",
+    "source": {
+      "file": "out/catalogue-2026-11-17/filler/sources/naruto-afternoon-of-konoha-opening-audio-led-primary.mid",
+      "page": "derived audio-led transcription of the plucked string opening (0.63-9.46 s of the recording)",
+      "url": "https://www.youtube.com/watch?v=oHnGR-V7g1Q",
+      "sha256": "78a3be92d697bedc7f323afa8cc540c2a40a17164841b0db5cfe5217d2dd175a"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "phraseStarts": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "audio-stem-and-score",
+      "summary": "Derived transcription (SHA-256 78a3be92d697bedc7f323afa8cc540c2a40a17164841b0db5cfe5217d2dd175a) of the plucked string opening of the official recording (https://www.youtube.com/watch?v=oHnGR-V7g1Q, Aniplex topic upload, NARUTO ORIGINAL SOUNDTRACK 2 track \"Afternoon of Konoha\"), bars 1-4, 0.63-9.46 s: pitches, attacks and sounding lengths of all 23 plucks from the htdemucs_6s guitar stem (flux onsets SHA-256 1cbd776bb2e9c6e98927d7b75144ac6fab256c1f5efe563e0ccc480d8e55394c, per-pluck audit SHA-256 c6e2e7fa08329936706937ea603c108b29ddc748e2f51ea474ef954f5b43827f), on a 98 BPM grid fitted to the bar downbeats, rounded to 1/8 beat; each note keeps its measured length to 6 dB below its peak and is followed by a rest (a struck string, never held). Matching original clip kept (0.0-10.0 s, SHA-256 d23d88e638b06a30a5203bef934bf1ad92efaee49f70d8d1624008d3b027a7f7). Second source: Classical Guitar 101 score by Michael Silva (https://www.youtube.com/watch?v=et42_qTx8dg, PDF SHA-256 f475e7b888636f05d986a81c02d2ff8d21363d4e09079a7a8f5482b701564c56), intro bars 1-4: all 23 pitches equal one octave lower (guitar sounding pitch), every onset within 1/8 beat. Third: Misha Kokh piano MIDI (https://www.youtube.com/watch?v=hRIVGGCzmdI, SHA-256 2d5da9cef649f2010c66b8ba3ced609b87758db112500b4913e33df08b72eb27): 21 of 23 pitches equal one octave higher; it omits the G of the F# G G# slide twice, re-strikes the first E and adds an extra B figure before the close.",
+      "urls": [
+        "https://www.youtube.com/watch?v=oHnGR-V7g1Q",
+        "https://www.youtube.com/watch?v=et42_qTx8dg",
+        "https://www.youtube.com/watch?v=hRIVGGCzmdI"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": true,
+      "notes": "Matching original clip kept as diagnostic evidence: out/catalogue-2026-11-17/filler/sources/original-clip-0.0-10.0s.flac (0.0-10.0 s of https://www.youtube.com/watch?v=oHnGR-V7g1Q, SHA-256 d23d88e638b06a30a5203bef934bf1ad92efaee49f70d8d1624008d3b027a7f7); beat 0 = 0.631 s, 0.612245 s per beat; transcription onsets are stem flux onsets rounded to 1/8 beat. Alignment is not validated as a corpus label."
+    },
+    "reference": {
+      "scorePitches": [
+        76,
+        78,
+        79,
+        80,
+        76,
+        74,
+        74,
+        74,
+        73,
+        74,
+        75,
+        76,
+        76,
+        78,
+        79,
+        80,
+        76,
+        74,
+        74,
+        74,
+        75,
+        75,
+        76
+      ],
+      "pitchShift": -12
+    }
   }
 ]

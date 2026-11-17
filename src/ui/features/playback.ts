@@ -6,6 +6,7 @@ import { engine, playButton, playbackRate, practiceStatus, preferences, recorded
 import { clearActive, controls } from './pad';
 import { renderTab } from './staff';
 import { songPlaying } from './support';
+import { sceneOnListenEnd, sceneOnPlayback } from './scenes';
 
 function highlight(index: number | null): void {
   const next = index === null ? null : state.playbackIndices[index] ?? null;
@@ -22,8 +23,10 @@ function highlight(index: number | null): void {
 export const playback = new Playback(engine, {
   highlight,
   status: (playing) => {
+    const wasPlaying = state.isPlaying;
     state.isPlaying = playing;
     songPlaying('lesson', state.selectedEntry?.id ?? null, playing);
+    sceneOnPlayback(wasPlaying, playing);
     setPlayLabel(playing ? 'Stop' : 'Play');
   },
   complete: () => {
@@ -32,6 +35,8 @@ export const playback = new Playback(engine, {
       state.playbackCursor = state.passages[state.passageIndex]?.[0] ?? 0;
       state.practiceCursor = state.playbackCursor;
       state.repeatingTimer = window.setTimeout(() => { state.repeatingTimer = undefined; void replay(); }, 200);
+    } else {
+      sceneOnListenEnd();
     }
   },
   error: (error) => { practiceStatus.textContent = `Playback failed: ${error instanceof Error ? error.message : 'unknown error'}`; },

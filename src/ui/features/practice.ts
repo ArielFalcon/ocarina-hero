@@ -10,6 +10,7 @@ import { clearActive, controls } from './pad';
 import { refreshPracticeStatus, renderLessonMeta, renderTab } from './staff';
 import { playback, replay, stopPlayback } from './playback';
 import { catalogue } from './songbook';
+import { sceneOnPracticeNote } from './scenes';
 
 let comboHideTimer: number | undefined;
 
@@ -108,6 +109,7 @@ export function practiceNote(button: ControllerButton): void {
     retrigger(pad.querySelector(`[data-button="${button}"]`), 'is-miss');
     if (result.broken) haptic(24);
     renderCombo(result.broken);
+    sceneOnPracticeNote({ hit: false, milestone: false, cleared: false, finished: false });
     practiceStatus.textContent = `${result.broken ? 'Combo broken · try' : 'Keep your place. Try'} ${instruction(pitchById(expected.pitch).button, expected.bend ?? 0)}.`;
     return;
   }
@@ -123,6 +125,7 @@ export function practiceNote(button: ControllerButton): void {
   const stillDrawnHit = centreIn(tab, tab.querySelector(`[data-note-index="${hitIndex}"]`));
   const songFinished = finished && !repeatPassage.checked;
   rewardHit(stillDrawnHit, button, expected.bend ?? 0, result.milestone, cleared, songFinished);
+  sceneOnPracticeNote({ hit: true, milestone: result.milestone !== null, cleared, finished: songFinished });
   refreshPracticeStatus(result.milestone ? `${result.milestone.label}! ` : '');
   recordPractice(songFinished);
   if (songFinished) offerNextStep();

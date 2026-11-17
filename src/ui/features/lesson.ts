@@ -9,6 +9,7 @@ import { resetCombo, selectPassage } from './practice';
 import { playback, replay, stopPlayback } from './playback';
 import { catalogue } from './songbook';
 import { openSong, showView } from './navigation';
+import { sceneOnRestart } from './scenes';
 
 let shareResetTimer: number | undefined;
 
@@ -95,6 +96,7 @@ export function bindLesson(): void {
   must('#next-passage').addEventListener('click', () => selectPassage(state.passageIndex + 1));
 
   must('#restart').addEventListener('click', () => {
+    sceneOnRestart();
     // Free play has nothing to rewind to: reset discards the take.
     if (!state.songArrangement) {
       take.clear();

@@ -36,6 +36,8 @@ export interface Platform {
     readonly hangingFigure: string;
   };
   readonly art: Readonly<Record<StaticArt, string>>;
+  /** Whether the lesson shows its universe's scene (src/ui/scenes). */
+  readonly scenes: boolean;
   /** Browser UI colour (`<meta name="theme-color">`). */
   readonly themeColor: string;
   /** The card that offers this console in Settings. */
@@ -57,6 +59,7 @@ const TAPESTRY: Platform = {
   shoulderKind: 'shoulder',
   assets: { controller: 'icons/controller/', patchIcons: 'art/icons/', patchIconExtension: 'webp', clef: 'icons/app/icon-192.png', hangingFigure: 'art/link-hanging.webp' },
   art: { brand: 'icons/app/icon-192.png', ornament: 'art/sword-triforce-v2.webp', rupeeGreen: 'art/rupee-green.svg', rupeeBlue: 'art/rupee-blue.svg', rupeeRed: 'art/rupee-red.svg', thanksHeart: 'art/heart-thanks.svg' },
+  scenes: true,
   themeColor: '#293529',
   picker: { title: '2026 remake', detail: 'Woven tapestry with Switch 2 controls', art: 'art/theme/keycard-large.svg' },
 };
@@ -72,6 +75,7 @@ const THREEDS: Platform = {
   shoulderKind: 'shoulder',
   assets: { controller: 'icons/controller-3ds/', patchIcons: 'art/icons-3ds/', patchIconExtension: 'svg', clef: 'art/3ds/clef.svg', hangingFigure: 'art/3ds/link-hanging.svg' },
   art: { brand: 'art/3ds/ocarina.svg', ornament: 'art/3ds/sword-triforce.svg', rupeeGreen: 'art/3ds/rupee-green.svg', rupeeBlue: 'art/3ds/rupee-blue.svg', rupeeRed: 'art/3ds/rupee-red.svg', thanksHeart: 'art/3ds/heart-thanks.svg' },
+  scenes: false,
   themeColor: '#141a1d',
   picker: { title: '2011 handheld', detail: 'Touch-screen subscreen with 3DS controls', art: 'art/theme/handheld-large.svg' },
 };
@@ -92,6 +96,7 @@ const RETRO: Platform = {
   shoulderKind: 'button',
   assets: { controller: 'icons/controller-retro/', patchIcons: 'art/icons-retro/', patchIconExtension: 'svg', clef: 'art/retro/clef.svg', hangingFigure: 'art/retro/link-hanging.svg' },
   art: { brand: 'art/retro/ocarina.svg', ornament: 'art/retro/sword-triforce.svg', rupeeGreen: 'art/retro/rupee-green.svg', rupeeBlue: 'art/retro/rupee-blue.svg', rupeeRed: 'art/retro/rupee-red.svg', thanksHeart: 'art/retro/heart-thanks.svg' },
+  scenes: false,
   themeColor: '#14120d',
   picker: { title: '1998 original', detail: 'Stone subscreen with N64 controls', art: 'art/theme/cartridge-large.svg' },
 };

@@ -9,6 +9,7 @@ import { bindNavigation, restoreView } from './features/navigation';
 import { bindSettings, syncLink } from './features/settings';
 import { bindSupport } from './features/support';
 import { renderTab } from './features/staff';
+import { bindScenes } from './features/scenes';
 
 /** The app's entry: the features own their parts of the page; this wires them in order. */
 buildPad();
@@ -25,6 +26,7 @@ for (const icon of document.querySelectorAll<HTMLElement>('[data-thread-icon]'))
 }
 bindSettings();
 bindSupport();
+bindScenes();
 
 restoreView();
 // After the page has loaded and gone idle, so the first paint and the song lists never wait for the drop.

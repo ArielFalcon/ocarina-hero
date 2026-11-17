@@ -11,6 +11,11 @@ export function setPracticeFeedback(options: { effects: boolean; haptics: boolea
   Object.assign(enabled, options);
 }
 
+/** Whether Settings keeps the visual rewards on. */
+export function celebrationsEnabled(): boolean {
+  return enabled.effects;
+}
+
 /** Restart a one-shot CSS animation class on an element that may still carry it. */
 export function retrigger(element: Element | null, className: string): void {
   if (!element) return;

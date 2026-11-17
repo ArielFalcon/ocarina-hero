@@ -15,6 +15,7 @@ import { APP_BASE, type Source, analysisDownload, bends, bendsInput, fileName, p
 import { must } from './dom';
 import { closeAudioEditor, isImporting } from './workshop';
 import { renderCombo } from './practice';
+import { syncScene } from './scenes';
 import { replay, stopPlayback } from './playback';
 import { catalogue } from './songbook';
 
@@ -215,6 +216,7 @@ export function updateLessonHeading(): void {
   must('#practice-mode').setAttribute('aria-pressed', String(state.practiceMode));
   must<HTMLButtonElement>('#open-import').disabled = state.current === null || state.selectedEntry !== null || isImporting();
   renderSongArticle();
+  syncScene();
   refreshPracticeStatus();
 }
 

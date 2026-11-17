@@ -6,9 +6,9 @@ interface Props { song?: SongPage; related?: readonly SongLink[] }
 const { song, related = [] } = Astro.props;
 const Title = song ? 'h1' : 'h2';
 ---
-<section id="lesson-view" class="view lesson-view" aria-labelledby="lesson-title" hidden={!song}>
+<section id="lesson-view" class="view lesson-view" data-scene-stage aria-labelledby="lesson-title" hidden={!song}>
   <div class="lesson-top"><button class="text-button back-link" type="button" data-view-link="catalog"><span data-thread-icon="back"></span><span class="back-label"> Songbook</span></button><span class="lesson-actions"><button id="share-song" class="text-button" type="button" aria-label="Share link to this song" hidden><span data-thread-icon="share"></span><span class="share-label">Share</span></button><button id="save-song" class="text-button" type="button" aria-pressed="false" hidden>Save song</button></span></div>
-  <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">{song?.universe ?? 'Your instrument'}</p><Title id="lesson-title" class="view-title embroidered">{song?.title ?? 'Free play'}</Title><p id="lesson-meta" class="subtitle stitched-label">{song?.details ?? 'Make a little music.'}</p></div>
+  <div class="lesson-heading"><p id="lesson-universe" class="eyebrow stitched-label">{song?.universe ?? 'Your instrument'}</p><Title id="lesson-title" class="view-title embroidered">{song?.title ?? 'Free play'}</Title><p id="lesson-meta" class="subtitle stitched-label">{song?.details ?? 'Make a little music.'}</p><span class="scene-slot" data-scene-slot="heading" aria-hidden="true"></span></div>
   <div id="song-modes" class="mode-switch" role="group" aria-label="Learning mode" hidden>
     <button id="listen-mode" class="action" type="button" aria-pressed="true"><span class="stitched-label">Listen</span></button>
     <button id="practice-mode" class="action" type="button" aria-pressed="false"><span class="stitched-label">Practice</span></button>
@@ -33,6 +33,7 @@ const Title = song ? 'h1' : 'h2';
         <span class="input-frame select-frame rate-field"><span class="rate-icon" data-thread-icon="speed" aria-hidden="true"></span><select id="playback-rate" aria-label="Playback speed" title="Playback speed"><option value="1">100%</option><option value="0.75">75%</option><option value="0.5">50%</option></select><span class="select-chevron" aria-hidden="true"></span></span>
         <label class="toggle repeat-toggle"><input id="repeat-passage" type="checkbox" /><span data-thread-icon="repeat"></span><span class="stitched-label">Repeat passage</span></label>
       </div>
+      <div class="scene-slot scene-band" data-scene-slot="band" aria-hidden="true"></div>
       <details class="lesson-options">
         <summary>Arrangement</summary>
         <label class="toggle"><input id="bends" type="checkbox" checked /><span class="stitched-label">Use bends</span></label>
@@ -47,6 +48,7 @@ const Title = song ? 'h1' : 'h2';
       <p id="hint" class="hint" aria-live="off">Press a note to begin.</p>
       <p id="gamepad-status" class="hint desktop-only" role="status" aria-live="polite">Connect a controller and press any of its buttons to play with it.</p>
       <a class="text-button keyboard-link desktop-only" href="#settings" data-view-link="settings"><span data-thread-icon="keyboard"></span><span>Change keyboard keys</span></a>
+      <span class="scene-slot" data-scene-slot="controller" aria-hidden="true"></span>
     </section>
   </div>
   <section id="song-article" class="song-article" aria-label="About this song" hidden={!song} set:html={song && songArticleHtml(song, related, import.meta.env.BASE_URL)} />

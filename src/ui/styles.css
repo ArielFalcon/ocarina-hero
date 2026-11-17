@@ -857,6 +857,7 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 /* Link on his thread: the root is a zero-size pivot at the top edge of the app; only the figure takes pointer input. */
 .hanging-link { --link-h: 96px; --link-cord: 72px; --link-stub: 68px; position: absolute; top: 0; right: calc(clamp(36px, 10vw, 120px) + var(--link-h) * .3); z-index: 8; width: 0; height: 0; pointer-events: none; }
 @media (min-width: 700px) { .hanging-link { --link-h: 140px; --link-cord: 100px; --link-stub: 96px; } }
+.app.is-lesson .hanging-link { visibility: hidden; }
 .hanging-link-cord { position: absolute; left: -1.5px; top: 0; width: 3px; height: var(--link-cord); transform-origin: 50% 0; background: var(--cord); box-shadow: 1px 0 1px #050a0680; will-change: transform; }
 .hanging-link-figure { position: absolute; left: calc(var(--link-h) * -.27); top: 0; display: block; height: var(--link-h); aspect-ratio: 162 / 300; transform-origin: 50% 0; pointer-events: auto; touch-action: none; cursor: grab; user-select: none; -webkit-user-drag: none; will-change: transform; }
 .hanging-link-figure.is-held { cursor: grabbing; }

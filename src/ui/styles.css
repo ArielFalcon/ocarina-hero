@@ -899,10 +899,10 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 .song-row .quick-play { margin-right: -9px; }
 
 .mini-player { position: absolute; bottom: calc(100% + 8px); left: 10px; right: 10px; z-index: 10; display: grid; gap: 2px; padding: 8px 12px 6px; border-radius: 6px; background: var(--bg) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-raised), 0 6px 16px #050a0699; }
-.mini-player::before, #main-content::after { content: ''; display: block; height: var(--mini-player-space, 0px); }
+#main-content::after { content: ''; display: block; height: var(--mini-player-space, 0px); }
 /* Tip card: centred over the dimmed app; it never pauses playback. */
 .support-card { position: fixed; top: 50%; left: 50%; translate: -50% -50%; z-index: 11; width: min(380px, calc(100% - 32px)); padding: 14px 16px 10px; border-radius: 6px; background: var(--bg) var(--cloth) repeat top left / var(--cloth-size); box-shadow: var(--slot-raised), 0 6px 16px #050a0699; }
-.support-card::before { content: ''; position: absolute; inset: 0; padding: 2.5px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; filter: url('#cord-edge'); }
+.mini-player::before, .support-card::before { content: ''; position: absolute; inset: 0; padding: 2.5px; border-radius: inherit; background: var(--cord); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; pointer-events: none; filter: url('#cord-edge'); }
 .support-card[hidden], .support-backdrop[hidden] { display: none; }
 /* Behind the open tip card the app dims and blurs slightly; a tap on it closes the card. */
 .support-backdrop { position: fixed; inset: 0; z-index: 10; background: #0000003d; -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); animation: backdrop-in .2s ease-out; }

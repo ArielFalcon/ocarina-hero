@@ -7,10 +7,16 @@ import type { SceneLoader } from './scene';
  * in a shared module that the scene modules import.
  */
 export const SCENES_BY_UNIVERSE: Readonly<Record<string, SceneLoader>> = {
+  'Animal Crossing': () => import('./universes/animal-crossing'),
+  'Doom': () => import('./universes/doom'),
+  'Jujutsu Kaisen': () => import('./universes/jujutsu-kaisen'),
   'Naruto': () => import('./universes/naruto'),
+  'Neon Genesis Evangelion': () => import('./universes/evangelion'),
   'One Piece': () => import('./universes/one-piece'),
   'Pokémon': () => import('./universes/pokemon'),
   'The Legend of Zelda': () => import('./universes/zelda'),
+  'Undertale': () => import('./universes/undertale'),
+  'Wii': () => import('./universes/wii'),
 };
 
 /** A song whose scene differs from its universe's: Pop and Classics group real artists, so their scenes go per song. */

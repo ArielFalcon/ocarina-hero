@@ -744,9 +744,9 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
   .lesson-heading .subtitle { font-size: 17px; }
   .lesson-heading { margin-bottom: 12px; }
   .mode-switch { align-self: end; justify-self: end; width: min(100%, 320px); margin: 0 0 12px; }
-  .lesson-layout { display: grid; grid-template-columns: subgrid; }
+  .lesson-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .lesson-options { max-width: 520px; }
-  .controller-panel { background: #18251ba6; border-top: 0; border-left: 1px dashed #a2824959; padding: 12px 0 0 26px; }
+  .controller-panel { background: #18251ba6; border-top: 1px dashed #a2824959; padding: 14px 20px; }
   .app-nav { padding: 14px 24px; }
   .section-art { margin: -28px -38px 24px; padding: 34px 38px 44px; }
 }

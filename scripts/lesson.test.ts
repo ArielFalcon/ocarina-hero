@@ -1,7 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { Note } from '../src/core/ir';
-import { advancePractice, comboTier, createPassages, FreePlayTake, noteThreadTiming, passageArrangement, playbackSelection, resetPassage, scoreCombo, staffTransition } from '../src/ui/lesson';
+import { advancePractice, comboTier, createPassages, FreePlayTake, noteThreadTiming, passageArrangement, playbackSelection, resetPassage, scoreCombo, staffCapacity, staffTransition } from '../src/ui/lesson';
+
+test('desktop staff capacity grows only when a complete slot fits; phones keep five notes', () => {
+  assert.equal(staffCapacity(927, true), 11);
+  assert.equal(staffCapacity(928, true), 12);
+  assert.equal(staffCapacity(0, true), 5);
+  assert.equal(staffCapacity(1400, false), 5);
+  const sequence: Note[] = Array.from({ length: 14 }, (_, startBeat) => ({ pitch: 'D4', startBeat, durationBeats: 1 }));
+  assert.deepEqual(createPassages(sequence, 120, [0, 13], staffCapacity(928, true)), [Array.from({ length: 12 }, (_, i) => i), [12], [13]]);
+});
 
 const notes: Note[] = [0, 1, 2, 3, 4, 5, 9, 10].map((startBeat, index) => ({
   pitch: index === 2 ? 'F4' : 'D4', startBeat, durationBeats: 1,

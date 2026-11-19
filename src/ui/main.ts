@@ -8,12 +8,13 @@ import { bindSongbook } from './features/songbook';
 import { bindNavigation, restoreView } from './features/navigation';
 import { bindSettings, syncLink } from './features/settings';
 import { bindSupport } from './features/support';
-import { renderTab } from './features/staff';
+import { bindStaff, renderTab } from './features/staff';
 import { bindScenes } from './features/scenes';
 
 /** The app's entry: the features own their parts of the page; this wires them in order. */
 buildPad();
 renderTab();
+bindStaff();
 bindPad();
 bindKeyboard();
 bindLesson();

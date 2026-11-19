@@ -2,6 +2,11 @@ import type { Arrangement, Note } from '../core/ir';
 import { pitchById, type ControllerButton, type PitchId } from '../core/pitches';
 import { toTabPhrases, toTabRestGroups } from '../core/tab';
 
+/** Desktop slots leave room for the 48px token and its animated stitch ring. */
+export function staffCapacity(width: number, desktop: boolean): number {
+  return desktop ? Math.max(5, Math.floor((width - 64) / 72)) : 5;
+}
+
 /** Divide source groups into display windows without changing the arrangement. */
 export function createPassages(
   notes: readonly Note[],

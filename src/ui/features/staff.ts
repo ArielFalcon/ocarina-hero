@@ -3,7 +3,7 @@ import type { Arrangement } from '../../core/ir';
 import { pitchById } from '../../core/pitches';
 import type { Projection } from '../../core/project';
 import { prepareMelody } from '../../core/prepare';
-import { createPassages, FREE_PLAY_TEMPO_BPM, lessonDetails, staffTransition } from '../lesson';
+import { createPassages, FREE_PLAY_TEMPO_BPM, lessonDetails, staffCapacity, staffTransition } from '../lesson';
 import { swapStaff, timeNoteThread } from '../staff-motion';
 import { staffClef, staffTokenHtml } from '../staff';
 import { threadIcon } from '../thread-icons';
@@ -22,13 +22,30 @@ import { catalogue } from './songbook';
 /** The tab line of the song article; absent on pages that open without a song until one is opened. */
 let tabText = document.querySelector<HTMLParagraphElement>('#tab-text');
 
+let capacity = 5;
+
+/** Reflow around the current note when the visible staff gains or loses slots. */
+export function bindStaff(): void {
+  new ResizeObserver(() => {
+    if (!tab.clientWidth) return;
+    const next = staffCapacity(tab.clientWidth, window.matchMedia('(min-width: 800px)').matches);
+    if (next === capacity) return;
+    const anchor = state.activeNote ?? (state.practiceMode ? state.practiceCursor : state.passages[state.passageIndex]?.[0]);
+    capacity = next;
+    state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts, capacity);
+    state.passageIndex = Math.max(0, state.passages.findIndex(indices => anchor !== undefined && indices.includes(anchor)));
+    renderTab();
+    renderLessonMeta();
+  }).observe(tab);
+}
+
 function currentTabText(): string {
   return state.current ? tabInstructions(recorded, undefined, state.current.tempoBpm, ', ') : '';
 }
 
 export function renderTab(): void {
   playButton.disabled = isImporting() || recorded.length === 0;
-  state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts);
+  state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts, capacity);
   if (tabText) tabText.textContent = currentTabText();
   bends.hidden = state.current !== null && !recorded.some(note => !!note.bend);
   state.passageIndex = Math.max(0, Math.min(state.passageIndex, state.passages.length - 1));

@@ -14,5 +14,5 @@ export function staffClef(): string {
 /** One note token placed in its slot of a staff window; shared by the lesson and the quick player. */
 export function staffTokenHtml(note: Note, index: number, slot: number, count: number, classes = '', current = false): string {
   const spec = pitchById(note.pitch);
-  return `<button type="button" class="tok${classes ? ` ${classes}` : ''}" data-note-index="${index}" style="--staff-x:calc(42px + (100% - 64px) * ${(slot + .5) / count});--staff-y:${STAFF_LEVELS[spec.button]}px" aria-label="Note ${index + 1}: ${instruction(spec.button, note.bend ?? 0)}"${current ? ' aria-current="true"' : ''}>${buttonIcon(spec.button)}<span class="note-order" aria-hidden="true">${index + 1}</span>${note.bend ? `<span class="staff-modifier">${modifierIcon(note.bend)}</span>` : ''}</button>`;
+  return `<button type="button" class="tok${classes ? ` ${classes}` : ''}" data-note-index="${index}" style="--staff-x:calc(42px + min(var(--staff-step, 100%), calc((100% - 64px) / ${count})) * ${slot + .5});--staff-y:${STAFF_LEVELS[spec.button]}px" aria-label="Note ${index + 1}: ${instruction(spec.button, note.bend ?? 0)}"${current ? ' aria-current="true"' : ''}>${buttonIcon(spec.button)}<span class="note-order" aria-hidden="true">${index + 1}</span>${note.bend ? `<span class="staff-modifier">${modifierIcon(note.bend)}</span>` : ''}</button>`;
 }

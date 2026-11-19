@@ -16,6 +16,12 @@ const notes: Note[] = [0, 1, 2, 3, 4, 5, 9, 10].map((startBeat, index) => ({
   pitch: index === 2 ? 'F4' : 'D4', startBeat, durationBeats: 1,
 }));
 
+test('wide windows combine adjacent groups without changing note order or exceeding capacity', () => {
+  const sequence: Note[] = Array.from({ length: 14 }, (_, startBeat) => ({ pitch: 'D4', startBeat, durationBeats: 1 }));
+  assert.deepEqual(createPassages(sequence, 120, [0, 3, 6, 9], 10, true), [[0, 1, 2, 3, 4, 5, 6, 7, 8], [9, 10, 11, 12, 13]]);
+  assert.deepEqual(createPassages(notes, 120, undefined, 8, true), [[0, 1, 2, 3, 4, 5, 6, 7]]);
+});
+
 test('playback continues across display passages unless repeat is explicitly enabled', () => {
   const arrangement = { title: 'Continuous', tempoBpm: 90, notes };
   const continuous = playbackSelection(arrangement, [0, 1, 2], 1, false);

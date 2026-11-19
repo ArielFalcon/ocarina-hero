@@ -13,6 +13,7 @@ export function createPassages(
   tempoBpm: number,
   phraseStarts?: readonly number[],
   maxNotes = 5,
+  combineGroups = false,
 ): number[][] {
   if (!Number.isInteger(maxNotes) || maxNotes <= 0) {
     throw new RangeError(`Invalid maximum notes: ${maxNotes}`);
@@ -26,7 +27,10 @@ export function createPassages(
   const passages: number[][] = [];
   for (const group of groups) {
     for (let offset = 0; offset < group.tokens.length; offset += maxNotes) {
-      passages.push(group.tokens.slice(offset, offset + maxNotes).map(token => token.noteIndex));
+      const indices = group.tokens.slice(offset, offset + maxNotes).map(token => token.noteIndex);
+      const previous = passages.at(-1);
+      if (combineGroups && previous && previous.length + indices.length <= maxNotes) previous.push(...indices);
+      else passages.push(indices);
     }
   }
   return passages;

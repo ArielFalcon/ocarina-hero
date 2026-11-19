@@ -23,18 +23,17 @@ import { catalogue } from './songbook';
 let tabText = document.querySelector<HTMLParagraphElement>('#tab-text');
 
 let capacity = 5;
+const desktop = window.matchMedia('(min-width: 800px)');
 
 /** Reflow around the current note when the visible staff gains or loses slots. */
 export function bindStaff(): void {
   new ResizeObserver(() => {
     if (!tab.clientWidth) return;
-    const next = staffCapacity(tab.clientWidth, window.matchMedia('(min-width: 800px)').matches);
+    const next = staffCapacity(tab.clientWidth, desktop.matches);
     if (next === capacity) return;
     const anchor = state.activeNote ?? (state.practiceMode ? state.practiceCursor : state.passages[state.passageIndex]?.[0]);
     capacity = next;
-    state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts, capacity);
-    state.passageIndex = Math.max(0, state.passages.findIndex(indices => anchor !== undefined && indices.includes(anchor)));
-    renderTab();
+    renderTab(anchor);
     renderLessonMeta();
   }).observe(tab);
 }
@@ -43,9 +42,10 @@ function currentTabText(): string {
   return state.current ? tabInstructions(recorded, undefined, state.current.tempoBpm, ', ') : '';
 }
 
-export function renderTab(): void {
+export function renderTab(anchor?: number): void {
   playButton.disabled = isImporting() || recorded.length === 0;
-  state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts, capacity);
+  state.passages = createPassages(recorded, state.current?.tempoBpm ?? FREE_PLAY_TEMPO_BPM, state.current?.phraseStarts, capacity, desktop.matches);
+  if (anchor !== undefined) state.passageIndex = Math.max(0, state.passages.findIndex(indices => indices.includes(anchor)));
   if (tabText) tabText.textContent = currentTabText();
   bends.hidden = state.current !== null && !recorded.some(note => !!note.bend);
   state.passageIndex = Math.max(0, Math.min(state.passageIndex, state.passages.length - 1));

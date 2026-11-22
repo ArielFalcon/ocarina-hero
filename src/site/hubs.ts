@@ -31,6 +31,25 @@ export function hubName(universe: string): string {
   return `${universeLabel(universe)} songs`;
 }
 
+/** A thematic collection: songs from several universes that a search for the theme should find together. */
+export interface Collection {
+  readonly name: string;
+  readonly title: string;
+  readonly h1: string;
+  readonly description: string;
+  readonly intro: string;
+}
+/** The collections a song may declare in the songbook, by slug; the slug is the address `songs/<slug>/`. */
+export const COLLECTIONS: Readonly<Record<string, Collection>> = {
+  christmas: {
+    name: 'Christmas songs',
+    title: 'Christmas Songs on the Zelda Ocarina: Button Tabs',
+    h1: 'Christmas songs on the ocarina',
+    description: 'Play Christmas songs and carols on the Zelda ocarina: button tabs and notes for classics and pop hits. Listen, then practice one passage at a time. Free, in your browser.',
+    intro: 'Christmas carols and holiday hits as button tabs for the ocarina of The Legend of Zelda: Ocarina of Time. Open one to listen to it and practice it one passage at a time.',
+  },
+};
+
 export interface HubSong {
   readonly id: string;
   readonly title: string;
@@ -42,7 +61,7 @@ export interface HubSong {
 }
 export interface HubSection { readonly heading: string; readonly songs: readonly HubSong[] }
 export interface Hub {
-  readonly kind: 'zelda' | 'universe';
+  readonly kind: 'zelda' | 'universe' | 'collection';
   /** Below the site root, ending with a slash. */
   readonly path: string;
   readonly name: string;
@@ -103,7 +122,17 @@ function universeHub(universe: string, songs: readonly SongPage[]): Hub {
   };
 }
 
-/** Every hub of the site, built from the songbook's pages: the two Zelda hubs first, then a hub per other universe. Throws when two universes would share an address. */
+function collectionHub(slug: string, songs: readonly SongPage[]): Hub {
+  const collection = COLLECTIONS[slug]!;
+  const sections = [{ heading: collection.name, songs: songs.map(song => hubSong(song, false)).sort(byTitle) }];
+  return {
+    kind: 'collection', path: `songs/${slug}/`, name: collection.name,
+    title: collection.title, h1: collection.h1, description: collection.description, intro: collection.intro,
+    sections, songIds: idsOf(sections), indexable: songs.length >= MIN_INDEXED_SONGS,
+  };
+}
+
+/** Every hub of the site, built from the songbook's pages: the Zelda hub first, then a hub per collection a song declares, then a hub per other universe. Throws when a song names an unknown collection or two hubs would share an address. */
 export function buildHubs(pages: readonly SongPage[]): Hub[] {
   const universes = new Map<string, SongPage[]>();
   for (const page of pages) universes.set(page.universe, [...universes.get(page.universe) ?? [], page]);
@@ -112,6 +141,12 @@ export function buildHubs(pages: readonly SongPage[]): Hub[] {
   for (const [universe, songs] of [...universes].sort(([a, listA], [b, listB]) => listB.length - listA.length || a.localeCompare(b, 'en'))) {
     if (universe !== ZELDA_UNIVERSE) hubs.push(universeHub(universe, songs));
   }
+  const collections = new Map<string, SongPage[]>();
+  for (const page of pages) for (const slug of page.collections) {
+    if (!COLLECTIONS[slug]) throw new Error(`The song "${page.id}" names the unknown collection "${slug}"`);
+    collections.set(slug, [...collections.get(slug) ?? [], page]);
+  }
+  hubs.splice(zelda.length ? 1 : 0, 0, ...Object.keys(COLLECTIONS).filter(slug => collections.has(slug)).map(slug => collectionHub(slug, collections.get(slug)!)));
   const seen = new Map<string, string>();
   for (const hub of hubs) {
     if (seen.has(hub.path)) throw new Error(`The hubs "${seen.get(hub.path)}" and "${hub.name}" share the address ${hub.path}`);

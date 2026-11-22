@@ -20,6 +20,8 @@ export interface SongPage {
   readonly details: string;
   readonly version?: string;
   readonly artist?: string;
+  /** Thematic collections the songbook files the song under. */
+  readonly collections: readonly string[];
   readonly noteCount: number;
   readonly passageCount: number;
   readonly difficulty: DifficultyLevel;
@@ -37,7 +39,7 @@ export function songPageOf(song: SongbookEntry & { track: DemoTrack }): SongPage
     qualifier: songTitleQualifier(song),
     universe: song.universe,
     details: lessonDetails(song.version, notes.length, passageCount).join(' · '),
-    version: song.version, artist: song.artist, noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
+    version: song.version, artist: song.artist, collections: song.collections ?? [], noteCount: notes.length, passageCount, difficulty: song.difficulty.level,
     tab: toTabText(notes, song.track.beatsPerBar, song.track.tempoBpm, { noteSeparator: ', ' }),
   };
 }

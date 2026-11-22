@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { DEMOS } from './catalogue-loader';
-import { buildHubs, hubHead, hubPath, MIN_INDEXED_SONGS, OCARINA_GAMES, OPENING_NOTES, universeSlug, ZELDA_UNIVERSE } from '../src/site/hubs';
+import { buildHubs, COLLECTIONS, hubHead, hubPath, MIN_INDEXED_SONGS, OCARINA_GAMES, OPENING_NOTES, universeSlug, ZELDA_UNIVERSE } from '../src/site/hubs';
 import { homeDirectoryHtml, llmsTxt, sitemapXml, songGroups, songHead, songPageOf } from '../src/site/song-pages';
 import { songArticleHtml } from '../src/site/song-article';
 import { createSongbookEntries } from '../src/ui/songbook';
@@ -132,4 +132,38 @@ test('a song listed under its game heading does not repeat the game beside its n
   for (const hub of hubs.filter(hub => hub.kind !== 'universe'))
     for (const section of hub.sections)
       assert.deepEqual(section.songs.filter(song => song.detail.includes(section.heading)).map(song => song.id), [], `${hub.path} ${section.heading}`);
+});
+
+test('a collection hub lists exactly the songs that declare it, across universes, at songs/<slug>/, and leaves universe hubs alone', () => {
+  const hub = hubOf('collection');
+  const members = entries.filter(entry => entry.collections?.includes('christmas')).map(entry => entry.id);
+  assert.ok(members.length >= MIN_INDEXED_SONGS && new Set(entries.filter(entry => members.includes(entry.id)).map(entry => entry.universe)).size > 1);
+  assert.equal(hub.path, 'songs/christmas/');
+  assert.equal(hub.indexable, true);
+  assert.deepEqual([...hub.songIds].sort(), [...members].sort());
+  const titles = hub.sections.flatMap(section => section.songs.map(song => song.title));
+  assert.deepEqual(titles, [...titles].sort((a, b) => a.localeCompare(b, 'en')));
+  assert.ok(hub.sections[0]!.songs.every(song => song.detail.length > 0 && song.tab === undefined));
+  // Membership never changes the universe hubs: a member still sits in its own universe hub.
+  for (const id of members) assert.ok(hubs.some(other => other.kind === 'universe' && other.songIds.includes(id)), id);
+  assert.deepEqual(Object.keys(COLLECTIONS), hubs.filter(other => other.kind === 'collection').map(other => other.path.replace(/^songs\/|\/$/g, '')));
+});
+
+test('a collection below the threshold is noindex; an unknown collection or a universe on its address fails the build', () => {
+  const page = (id: string, extra: object = {}) => ({ ...pages[0]!, id, universe: `U${id}`, collections: ['christmas'], ...extra });
+  const small = buildHubs([page('a'), page('b')]).find(hub => hub.kind === 'collection')!;
+  assert.equal(small.indexable, false);
+  assert.equal(hubHead(small, SITE).robots, 'noindex,follow');
+  assert.equal(buildHubs([page('a'), page('b'), page('c')]).find(hub => hub.kind === 'collection')!.indexable, true);
+  assert.equal(buildHubs([page('a', { collections: [] })]).some(hub => hub.kind === 'collection'), false);
+  assert.throws(() => buildHubs([page('a', { collections: ['easter'] })]), /unknown collection "easter"/);
+  assert.throws(() => buildHubs([page('a', { universe: 'Christmas' })]), /share the address songs\/christmas\//);
+});
+
+test('the sitemap and llms.txt list the collection hub, and the home directory links it under Guides', () => {
+  const hub = hubOf('collection');
+  assert.ok(locs(sitemapXml(SITE, pages.map(page => page.id), new Map(), hubs)).includes(SITE + hub.path));
+  assert.ok(llmsTxt(SITE, songGroups(entries), hubs).includes(`(${SITE}${hub.path})`));
+  const guides = homeDirectoryHtml(songGroups(entries), SITE, hubs).match(/<p>Guides: .*?<\/p>/)![0];
+  assert.ok(guides.includes(`href="${SITE}${hub.path}"`));
 });

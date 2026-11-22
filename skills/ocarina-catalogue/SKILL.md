@@ -53,6 +53,7 @@ Every bundled song gets an explicit entry in `src/ui/songbook.ts`; none may fall
 | `version` | Specific game, film, season or arrangement inside the universe | `Super Mario 64`, `Spirited Away`, `Season 2 opening` |
 | `artist` | Only in `Pop` and `Classics`; join performers with `&` | `PinkPantheress & Zara Larsson` |
 | `aliases` | Composers and performers of franchise songs, alternate and original titles, so they stay searchable | `['Hans Zimmer']`, `['On The Way']` |
+| `collections` | Optional thematic collections, by slug from `COLLECTIONS` in `src/site/hubs.ts`; set it explicitly, never infer it from titles or aliases. A new Christmas song gets `collections: ['christmas']` and appears on `/songs/christmas/` | `{ collections: ['christmas'], artist: 'Traditional' }` |
 | `categories` | Primary first: `Games`, `Anime`, `Film` (includes TV), `Pop`, `Classics`. Add a second only when the song genuinely belongs to both | Studio Ghibli: `['Anime', 'Film']` |
 | `icon` | Optional per-song patch. Never another franchise's emblem; emblem icons are named after what they depict, so look at the SVG, not the name | Greensleeves: `flower`, not `konohaLeaf` |
 

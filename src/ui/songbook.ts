@@ -21,6 +21,8 @@ export interface SongbookEntry {
   version?: string;
   artist?: string;
   aliases: readonly string[];
+  /** Thematic collections the song belongs to (slugs of the registry in `src/site/hubs.ts`), besides its universe; never derived from titles or aliases. */
+  collections?: readonly string[];
   /** Rated on the arrangement the lesson opens with: bends on, ornaments kept. */
   difficulty: Difficulty;
 }
@@ -29,7 +31,7 @@ type Metadata = Omit<SongbookEntry, 'track' | 'id' | 'difficulty'>;
 const metadata = new Map<string, Metadata>();
 
 function group(universe: string, categories: readonly EntryCategory[], icon: ThreadIcon,
-  songs: readonly (readonly [id: string, title: string, extra?: Partial<Pick<Metadata, 'version' | 'artist' | 'aliases' | 'icon'>>])[]): void {
+  songs: readonly (readonly [id: string, title: string, extra?: Partial<Pick<Metadata, 'version' | 'artist' | 'aliases' | 'collections' | 'icon'>>])[]): void {
   for (const [id, title, extra] of songs) {
     metadata.set(id, { universe, categories, icon, universeIcon: icon, title, aliases: [], ...extra });
   }
@@ -429,7 +431,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-manchild', 'Manchild', { artist: 'Sabrina Carpenter' }],
   ['catalogue-end-of-beginning', 'End of Beginning', { artist: 'Djo', aliases: ['Joe Keery'] }],
   ['catalogue-wildflower', 'Wildflower', { artist: 'Billie Eilish' }],
-  ['catalogue-rockin-around-the-christmas-tree', 'Rockin’ Around the Christmas Tree', { artist: 'Brenda Lee', aliases: ['Rockin\' Around the Christmas Tree', 'Rockin Around the Christmas Tree', 'Johnny Marks', 'Christmas'] }],
+  ['catalogue-rockin-around-the-christmas-tree', 'Rockin’ Around the Christmas Tree', { collections: ['christmas'], artist: 'Brenda Lee', aliases: ['Rockin\' Around the Christmas Tree', 'Rockin Around the Christmas Tree', 'Johnny Marks', 'Christmas'] }],
   ['catalogue-cliff-richard-congratulations', 'Congratulations', { artist: 'Cliff Richard', aliases: ['Congratulations (Cliff Richard)', 'Eurovision 1968', 'Bill Martin', 'Phil Coulter'] }],
   ['catalogue-bts-butter-chorus', 'Butter', { artist: 'BTS', aliases: ['Bangtan Boys', 'Bangtan Sonyeondan', 'Butter BTS'] }],
   ['catalogue-gorillaz-feel-good-inc-bass-riff', 'Feel Good Inc.', { artist: 'Gorillaz', aliases: ['Feel Good Inc', 'Demon Days', 'De La Soul', 'Damon Albarn'] }],
@@ -453,7 +455,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
   ['catalogue-smells-like-teen-spirit', 'Smells Like Teen Spirit', { artist: 'Nirvana', aliases: ['Teen Spirit'] }],
   ['catalogue-birds-of-a-feather', 'Birds of a Feather', { artist: 'Billie Eilish' }],
-  ['catalogue-all-i-want-for-christmas-is-you', 'All I Want for Christmas Is You', { artist: 'Mariah Carey', aliases: ['Mariah Carey & Walter Afanasieff', 'Walter Afanasieff', 'All I Want for Christmas', 'Christmas'], icon: 'star' }],
+  ['catalogue-all-i-want-for-christmas-is-you', 'All I Want for Christmas Is You', { collections: ['christmas'], artist: 'Mariah Carey', aliases: ['Mariah Carey & Walter Afanasieff', 'Walter Afanasieff', 'All I Want for Christmas', 'Christmas'], icon: 'star' }],
 ]);
 
 // Classics
@@ -470,9 +472,9 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-greensleeves-verse', 'Greensleeves', { artist: 'Traditional', aliases: ['Green Sleeves', 'English folk song'], icon: 'flower' }],
   ['catalogue-brahms-lullaby', 'Lullaby', { artist: 'Johannes Brahms', version: 'Wiegenlied, Op. 49 No. 4', aliases: ['Brahms', 'Brahms’ Lullaby', 'Wiegenlied', 'Cradle Song', 'Op. 49 No. 4'], icon: 'moon' }],
   ['catalogue-swan-lake-theme', 'Swan Lake', { artist: 'Pyotr Ilyich Tchaikovsky', version: 'Swan theme, Op. 20', aliases: ['Tchaikovsky', 'Swan Theme', 'Le Lac des cygnes', 'Lebedinoye ozero', 'Op. 20'] }],
-  ['catalogue-we-wish-you-a-merry-christmas', 'We Wish You a Merry Christmas', { artist: 'Traditional', aliases: ['English carol', 'West Country carol', 'Christmas carol'], icon: 'star' }],
-  ['catalogue-joy-to-the-world', 'Joy to the World', { artist: 'George Frideric Handel & Isaac Watts', version: 'Hymn tune Antioch', aliases: ['Handel', 'Isaac Watts', 'Lowell Mason', 'Antioch'], icon: 'star' }],
-  ['catalogue-deck-the-halls', 'Deck the Halls', { artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'star' }],
+  ['catalogue-we-wish-you-a-merry-christmas', 'We Wish You a Merry Christmas', { collections: ['christmas'], artist: 'Traditional', aliases: ['English carol', 'West Country carol', 'Christmas carol'], icon: 'star' }],
+  ['catalogue-joy-to-the-world', 'Joy to the World', { collections: ['christmas'], artist: 'George Frideric Handel & Isaac Watts', version: 'Hymn tune Antioch', aliases: ['Handel', 'Isaac Watts', 'Lowell Mason', 'Antioch'], icon: 'star' }],
+  ['catalogue-deck-the-halls', 'Deck the Halls', { collections: ['christmas'], artist: 'Traditional', aliases: ['Deck the Hall', 'Nos Galan', 'Welsh carol', 'Thomas Oliphant'], icon: 'star' }],
   ['catalogue-pachelbel-canon', 'Canon in D', { artist: 'Johann Pachelbel', version: 'Canon per 3 Violini e Basso', aliases: ['Pachelbel', 'Pachelbel’s Canon', 'Kanon und Gigue', 'P. 37'] }],
   ['catalogue-chopin-nocturne-op9-no2-opening', 'Nocturne in E-flat major', { artist: 'Frédéric Chopin', version: 'Op. 9 No. 2', aliases: ['Chopin', 'Nocturne Op. 9 No. 2', 'Nocturne No. 2', 'Nocturne in Eb'], icon: 'moon' }],
   ['catalogue-air-on-the-g-string', 'Air on the G String', { artist: 'Johann Sebastian Bach', version: 'Orchestral Suite No. 3, BWV 1068', aliases: ['Bach', 'Air', 'BWV 1068', 'Aria', 'Suite No. 3 in D major'] }],

@@ -4,6 +4,8 @@ Read [the ocarina catalogue skill](skills/ocarina-catalogue/SKILL.md) before cur
 
 Every song added to the app must be classified in `src/ui/songbook.ts` following the skill's "Songbook Metadata" rules: song-only title, franchise universe, specific version, and artist shown only for Pop and Classics.
 
+Read [the TikTok campaign skill](skills/tiktok-campaign/SKILL.md) before planning, producing, uploading or scheduling TikTok videos for the site. It holds the owner's rules for every film, the review gates, and the caption, hashtag and scheduling procedure.
+
 Keep downloaded media outside this project. `out` is an ignored symlink to `../ocarina-tabs-media`. Retain only matching original audio clips for new corpus items; distinguish them from synthesized previews.
 
 ## Visual identity

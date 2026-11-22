@@ -5,7 +5,7 @@ Use a preview tab you open yourself, logged in to the owner's account. The brows
 ## Upload one film
 
 1. Open `https://www.tiktok.com/tiktokstudio/upload`; upload the MP4 to `input[type=file]`; wait for the text `Uploaded`.
-2. Caption: `type` into `.public-DraftEditor-content` with `clear: true`, the whole caption including hashtags, ending with a space; then press Escape. Without the trailing space and Escape, a later click accepts a hashtag suggestion (`#tetris` became `#tetrispro`). Read the editor's text back.
+2. Caption: `type` into `.public-DraftEditor-content` with `clear: true`, the whole caption including hashtags, ending with a space; then press Escape. Without the trailing space and Escape, a later click accepts a hashtag suggestion and changes the tag. Read the editor's text back.
 3. Cover: click `Edit cover`, then `Upload cover`, upload the delivery JPG to `input[type=file][accept*=image]`, click `Save`. Check the modal closed.
 4. Schedule: click the `Schedule` label; the first time a dialog "Allow your video to be saved for scheduled posting?" appears: `Allow`.
 5. Date: click the date input, then the `span.day.valid` with the day inside `.calendar-wrapper`.

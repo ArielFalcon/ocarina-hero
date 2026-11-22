@@ -4,7 +4,7 @@ Data read: <best posts and why, audience peak, site traffic, what failed>.
 
 | # | Date | Slot (Madrid) | Format | Opener | Other songs | Hook in one line | Why |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Mon 23 Nov | 18:00 | Pack | Tetris | The Simpsons, Mission Impossible, Pink Panther | "Learn the Tetris song" with Tetris sounding at frame 0 | Proven format, most recognisable opener left |
+| 1 | <day date> | <HH:MM> | <format> | <opener> | <songs> | <what the viewer sees and hears at second 0> | <data or reason> |
 
 Opener ledger (never reuse): <every opener already used>.
 

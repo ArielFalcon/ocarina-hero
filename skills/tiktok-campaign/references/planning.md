@@ -2,33 +2,33 @@
 
 ## Read the data first
 
-- TikTok Studio content list (`https://www.tiktok.com/tiktokstudio/content`): views per post with its caption and hashtags. The list is virtualised: scroll its scroll container step by step and collect rows.
+- TikTok Studio content list (`https://www.tiktok.com/tiktokstudio/content`): views, caption and hashtags per post. The list is virtualised: scroll its scroll container step by step and collect rows.
 - TikTok Studio analytics: follower activity peak, audience countries, retention per video.
-- Cloudflare Web Analytics for the site: daily visits, direct and brand traffic. Direct and brand search visits are TikTok's effect, not SEO; measure TikTok by total daily visits, not only bio clicks.
-- The previous plan's file (`out/promo-source/plan-<date>/BRIEF.md`) and its opener ledger.
+- The site's web analytics: daily visits, direct and brand traffic. A TikTok hit shows up as direct and brand visits, not only bio clicks; measure by total daily visits.
+- The previous plan and its opener ledger.
 
-## Formats that exist
+## Formats
 
 | Format | Shape | Gate |
 | --- | --- | --- |
-| Pack "Learn the X song" | 4 instantly recognisable songs, 28 to 32 s, never over 35 s, "1/4" counter, song name largest | Draft only |
-| Search bar "Is yours here?" | Typing famous song names into the site's search, each one heard long enough to recognise | Draft only |
-| Meme or story film | Felt characters, a joke told through camera changes; songs may play | Stills, then draft |
-| Seasonal meme | Quotes a famous sound and continues with the part of the song that follows it in the meme; posted early (before the season) | Stills, then draft |
+| Pack | A few instantly recognisable songs taught one after another, about 30 s, never over 35 s | Draft only |
+| Product demo | The site in use (search, playback), each song heard long enough to recognise | Draft only |
+| Story or meme film | Characters and a joke told through camera changes; songs may play | Stills, then draft |
+| Seasonal meme | Quotes a famous sound; posted before the season, not during it | Stills, then draft |
 
-The proven format on this account is the "learn N songs" pack; memes aim at shares. Mix both.
+Favour the format the account's data proves; add others for reach and shares.
 
 ## Openers
 
-- Each film opens on a different, famous, distinctive melody, recognisable in a couple of notes, at second 0. Keep a ledger in the plan file; never reuse an opener.
-- Only songs the general public knows by name. Avoid anything the owner marked as overused (Megalovania, Sans).
+- Each film opens at second 0 on a famous, distinctive melody, recognisable in a couple of notes.
+- Keep a ledger of openers and of songs used across films; never reuse an opener, and rotate away from songs that appeared often.
 
 ## Slots and cadence
 
-- One post per day at most, at least 4 h apart from the previous one.
-- Alternate 18:00 and 22:00 Madrid: 18:00 sits near the account's hits (14:25, 17:57); 22:00 is inside the followers' 20 to 23 h peak and is afternoon in Mexico (15:00) and New York (16:00), the best slot for Spanish content.
-- TikTok Studio schedules at most 10 days ahead; films beyond that window wait.
-- No low-volume viral audio under the film: no evidence it helps, it competes with the melody that is the hook, and it risks muting. Post with the film's original sound.
+- One post per day at most, a few hours apart from the previous one.
+- Pick slots from the data: near the times of the account's best posts and inside the followers' activity peak, with the main audience's time zones in mind. Alternate two slots to compare them.
+- TikTok Studio schedules at most 10 days ahead; later films wait.
+- Post with the film's original sound; no low-volume trending audio underneath (no evidence it helps, it competes with the melody, it risks muting).
 
 ## The proposal
 

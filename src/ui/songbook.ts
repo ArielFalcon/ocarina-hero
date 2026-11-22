@@ -481,6 +481,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-auld-lang-syne', 'Auld Lang Syne', { artist: 'Traditional', aliases: ['Robert Burns', 'Scottish song', 'New Year song'], icon: 'clock' }],
   ['catalogue-nokia-tune-grande-valse', 'Gran Vals', { version: 'Nokia tune', artist: 'Francisco Tárrega', aliases: ['Nokia Tune', 'Nokia ringtone', 'Grande Valse', 'Gran Vals (Nokia tune)', 'Tarrega'] }],
   ['catalogue-daisy-bell', 'Daisy Bell', { artist: 'Harry Dacre', aliases: ['Bicycle Built for Two', 'Daisy Daisy', 'HAL 9000', 'Daisy Bell (Bicycle Built for Two)'] }],
+  ['catalogue-jingle-bells', 'Jingle Bells', { collections: ['christmas'], artist: 'James Lord Pierpont', aliases: ['Pierpont', 'One Horse Open Sleigh', 'The One Horse Open Sleigh', 'Christmas carol', 'Christmas'], icon: 'star' }],
 ]);
 
 /** Notes of the arrangement a lesson opens with: bends on, ornaments kept. */

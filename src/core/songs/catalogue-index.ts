@@ -3235,5 +3235,16 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 5.21,
       "level": "medium"
     }
+  },
+  {
+    "id": "catalogue-jingle-bells",
+    "title": "Jingle Bells",
+    "subtitle": "One complete stanza as sung today: the verse \"Dashing through the snow ... a sleighing song tonight\" followed by the whole chorus, \"Jingle bells, jingle bells ... one-horse open sleigh\" twice, the second time resolving to the tonic",
+    "tempoBpm": 130.00013000013,
+    "beatsPerBar": 2,
+    "difficulty": {
+      "score": 5.77,
+      "level": "hard"
+    }
   }
 ];

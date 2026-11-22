@@ -3224,5 +3224,16 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 4.78,
       "level": "medium"
     }
+  },
+  {
+    "id": "catalogue-all-i-want-for-christmas-is-you",
+    "title": "All I Want for Christmas Is You",
+    "subtitle": "The up-tempo \"I just want you for my own\" period: two statements of the rising-and-falling opening line, the leap to the high \"make my wish come true\", and the title line closing on the long held G",
+    "tempoBpm": 150,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.21,
+      "level": "medium"
+    }
   }
 ];

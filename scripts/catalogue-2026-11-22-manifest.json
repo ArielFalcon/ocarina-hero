@@ -1,0 +1,109 @@
+[
+  {
+    "id": "all-i-want-for-christmas-is-you",
+    "title": "All I Want for Christmas Is You",
+    "category": "pop",
+    "hook": "The up-tempo \"I just want you for my own\" period: two statements of the rising-and-falling opening line, the leap to the high \"make my wish come true\", and the title line closing on the long held G",
+    "source": {
+      "file": "out/catalogue-2026-11-22/mariah/sources/all-i-want-for-christmas-is-you-prechorus-derived.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/mariah-carey/all-i-want-for-christmas-is-you#pre-chorus-and-chorus",
+      "url": "https://www.hooktheory.com/v1/songs/public/ZgWjykzPrmr?fields=ID,xmlData,song,jsonData",
+      "sha256": "df0df7957a32d76e9d9237babe3a7cb20bfceb24a4aa8c21831506e037ec7ed9"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "phraseStarts": [
+      0,
+      23
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "transcription-and-original-recording-pitch-audit",
+      "summary": "Primary: Hooktheory public JSON \"Pre-Chorus and Chorus\" (SHA-256 f4ef90bf...), G major, 150 BPM, notes 0-33 frozen as a derived MIDI at PPQ 9600 with documented edits: Hooktheory-only sixteenths E4 D4 (notes 25-26) dropped, the \"all I want for Christmas\" run (notes 23-29) re-timed to the recording, three holds lengthened to the recording. Reference: the lead vocal of the original recording (official lyric video NrGGIoDL6U4, 4:01 album version), Demucs htdemucs vocal stem, pyin segments plus CQT: 31 of 32 pitches equal in order at shift 0 (the second-line A4, position 9, is only a sliding stub); onsets within 0.5 beat except the retimed run. No second symbolic transcription was available (MIDI Show files need a login), so the independent evidence is the recording itself. The phrase shares its melody with the verse in the slow intro and the repeat at 104 s; the verse, which starts on G3, cannot be joined to it (span 19).",
+      "urls": [
+        "https://www.hooktheory.com/theorytab/view/mariah-carey/all-i-want-for-christmas-is-you#pre-chorus-and-chorus",
+        "https://www.youtube.com/watch?v=NrGGIoDL6U4"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": true,
+      "notes": "Pitch audit against the original recording (vocal stem pyin + CQT); matching clip kept outside the corpus at out/catalogue-2026-11-22/mariah/sources/original-clip-82.0-99.5s.flac: 82.0-99.5 s of the official lyric video audio; the first sung note starts 1.43 s into the clip. Alignment kept unvalidated; not indexed in the corpus."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-22/mariah/sources/all-i-want-for-christmas-is-you-original-vocal-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "pitchShift": 0,
+      "absentIndices": [
+        9
+      ]
+    }
+  }
+]

@@ -453,6 +453,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-we-are-charlie-kirk', 'We Are Charlie Kirk', { artist: 'Spalexma', aliases: ['SP Music Project', 'Charlie Kirk'] }],
   ['catalogue-smells-like-teen-spirit', 'Smells Like Teen Spirit', { artist: 'Nirvana', aliases: ['Teen Spirit'] }],
   ['catalogue-birds-of-a-feather', 'Birds of a Feather', { artist: 'Billie Eilish' }],
+  ['catalogue-all-i-want-for-christmas-is-you', 'All I Want for Christmas Is You', { artist: 'Mariah Carey', aliases: ['Mariah Carey & Walter Afanasieff', 'Walter Afanasieff', 'All I Want for Christmas', 'Christmas'], icon: 'star' }],
 ]);
 
 // Classics

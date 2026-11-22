@@ -3246,5 +3246,16 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
       "score": 5.77,
       "level": "hard"
     }
+  },
+  {
+    "id": "catalogue-nanny-nanny-boo-boo",
+    "title": "Nanny Nanny Boo Boo",
+    "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",
+    "tempoBpm": 120,
+    "beatsPerBar": 2,
+    "difficulty": {
+      "score": 3.94,
+      "level": "medium"
+    }
   }
 ];

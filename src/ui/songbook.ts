@@ -482,6 +482,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-nokia-tune-grande-valse', 'Gran Vals', { version: 'Nokia tune', artist: 'Francisco Tárrega', aliases: ['Nokia Tune', 'Nokia ringtone', 'Grande Valse', 'Gran Vals (Nokia tune)', 'Tarrega'] }],
   ['catalogue-daisy-bell', 'Daisy Bell', { artist: 'Harry Dacre', aliases: ['Bicycle Built for Two', 'Daisy Daisy', 'HAL 9000', 'Daisy Bell (Bicycle Built for Two)'] }],
   ['catalogue-jingle-bells', 'Jingle Bells', { collections: ['christmas'], artist: 'James Lord Pierpont', aliases: ['Pierpont', 'One Horse Open Sleigh', 'The One Horse Open Sleigh', 'Christmas carol', 'Christmas'], icon: 'star' }],
+  ['catalogue-nanny-nanny-boo-boo', 'Nanny Nanny Boo Boo', { artist: 'Traditional', aliases: ['Na Na Na Boo Boo', 'Na-na na-na boo-boo', 'Neener Neener', 'Nyah Nyah', 'Nyah nyah nyah nyah nyah nyah', 'Lero Lero', 'Ña ña ña', 'Nana Booboo', 'Teasing chant', 'Playground chant', 'Children’s song'] }],
 ]);
 
 /** Notes of the arrangement a lesson opens with: bends on, ornaments kept. */

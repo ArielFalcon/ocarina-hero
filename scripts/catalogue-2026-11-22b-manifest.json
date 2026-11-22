@@ -1,0 +1,39 @@
+[
+  {
+    "id": "nanny-nanny-boo-boo",
+    "title": "Nanny Nanny Boo Boo",
+    "category": "pop",
+    "hook": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",
+    "source": {
+      "file": "out/catalogue-2026-11-22b/nanny-nanny-boo-boo/sources/nanny-nanny-boo-boo-derived.mid",
+      "page": "https://en.wikipedia.org/wiki/Nyah_nyah_nyah_nyah_nyah_nyah",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Nyah_nyah_nyah_music_notation.png",
+      "sha256": "3ec71606300b6344796d623551e7378ea90b68aa5f3f47c382bc33c205e8eda4"
+    },
+    "trackIndex": 0,
+    "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "phraseStarts": [0, 6],
+    "beatsPerBar": 2,
+    "evidence": {
+      "level": "score-audio-and-independent-transcription",
+      "summary": "Primary: the Wikipedia notation image (SHA-256 4e335b11...), 2/4 in C, sol sol mi la in eighths then sol mi in quarters (G4 G4 E4 A4 | G4 E4). Two statements and tempo from the article's own audio Taunt-simple.mp3 (SHA-256 5cc31d9a...), read with scripts/pitch-track.ts: the figure is played twice at 120 BPM (one 2/4 bar per second), pitches G4 E4 A4 G4 E4 per statement at 392/333/443 Hz, the last E held about 2.7 s. Frozen as a derived MIDI at PPQ 9600 (recipe.cjs) with two documented preparation edits: a uniform +7 semitone key change (the chant has no canonical key; sol = D5 so the figure lands on unbent buttons, every interval kept) and the final note held a half note as in the audio. Reference: John Wells, Phonetic Blog, \"Nuh-nuh\" (15 July 2011), an independently engraved staff (ABC G3 E2A G3 E3, image SHA-256 f497053c...): the same G E A G E pitches with the two opening Gs merged, which Wikipedia note 1 also lists as the common five-note variant; a commenter there gives the six-note G G E A G E repeated. The repetition as a second line on the same tune is described by Wikipedia (a second taunt line sung to the figure) and by a commenter on Wells's post (a two-line stanza on the same tune). Wells's MIDI (phon.ucl.ac.uk) is no longer online, so the reference check is contour-level with repeats collapsed.",
+      "urls": [
+        "https://en.wikipedia.org/wiki/Nyah_nyah_nyah_nyah_nyah_nyah",
+        "https://upload.wikimedia.org/wikipedia/commons/7/73/Taunt-simple.mp3",
+        "http://phonetic-blog.blogspot.com/2011/07/nuh-nuh.html",
+        "http://phonetic-blog.blogspot.com/2011/07/nuh-nuh-3.html"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Public-domain folk chant with no canonical recording: no original clip kept. The Wikipedia audio is a synthesized illustration, used only for the number of statements and the tempo."
+    },
+    "reference": {
+      "scorePitches": [67, 64, 69, 67, 64, 67, 64, 69, 67, 64],
+      "pitchShift": 7,
+      "collapseRepeated": true
+    }
+  }
+]

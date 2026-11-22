@@ -66,6 +66,7 @@ export const CATALOGUE_MANIFESTS = [
   'catalogue-2026-11-16b-manifest.json',
   'catalogue-2026-11-16c-manifest.json',
   'catalogue-2026-11-22-manifest.json',
+  'catalogue-2026-11-22b-manifest.json',
 ] as const;
 
 /** Selections whose complete phrase cannot fit the instrument range; the build must reject exactly these. */

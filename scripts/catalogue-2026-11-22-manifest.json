@@ -810,5 +810,116 @@
         35
       ]
     }
+  },
+  {
+    "id": "carol-of-the-bells",
+    "title": "Carol of the Bells",
+    "category": "pop",
+    "hook": "The complete first period of the melody voice in the standard Wilhousky arrangement (bars 17-24 of the SATB score): four statements of the four-note ostinato, the descending line and its cadence",
+    "source": {
+      "file": "out/catalogue-2026-11-22/carol-of-the-bells/sources/carol-of-the-bells-score-transcription.mid",
+      "page": "https://www.youtube.com/watch?v=Tcr_fmp6f34",
+      "url": "https://www.youtube.com/watch?v=Tcr_fmp6f34",
+      "sha256": "5d015f002d23c9a96cdc41bab28658a2d7a54cfb52b2127e8486c780d1bce29a"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "phraseStarts": [
+      0
+    ],
+    "beatsPerBar": 3,
+    "evidence": {
+      "level": "score-and-independent-transcriptions",
+      "summary": "Primary: the engraved SATB score of Leontovych / Wilhousky (G minor, 3/4, 69 bars) shown by the free notation video \"Carol of the bells (arr. Peter J. Wilhousky)\" (Listen & Read, choir of the Church of St. Andrew & St. Paul, Montreal): soprano staff, bars 17-24, read by eye from frames at 22 s, 29 s and 34 s (SHA-256 of the frames and of 2x crops stored beside the recipe), transcribed by hand into a derived MIDI at PPQ 9600, 150 BPM (tempo is editorial). Boundaries: the soprano sings the lower ostinato Bb4 A4 Bb4 G4 in bars 1-16, the upper ostinato D5 C5 D5 Bb4 in bars 17-20, the descending line G5 .. D5 .. C5 in bars 21-23 and the G4 cadence in bar 24; bar 25 starts the rising Merry scale, a new section. Rhythm: quarter, two eighths, quarter per ostinato bar; quarter, two eighths and a slurred eighth pair in bars 21-23; written values kept (staccato dots not shortened). Compared event by event (35 pitches, onsets, durations): Hooktheory John Williams \"Carol Of The Bells\" Chorus (G-sharp minor, separately authored, shift -1) all equal; Hooktheory Trans-Siberian Orchestra (E minor, indices 16-50, shift +3) all equal. Both are Hooktheory user transcriptions of choral-derived arrangements; source-family independence from the score is not proven. The tune is the public-domain Shchedryk melody (Leontovych, 1914).",
+      "urls": [
+        "https://www.youtube.com/watch?v=Tcr_fmp6f34",
+        "https://www.hooktheory.com/theorytab/view/john-williams/carol-of-the-bells",
+        "https://www.hooktheory.com/theorytab/view/trans-siberian-orchestra/carol-of-the-bells"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": false,
+      "notes": "Public-domain tune with no single canonical recording: no original clip kept and no recording audit; the evidence is the engraved Wilhousky score plus two independent Hooktheory transcriptions."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-22/carol-of-the-bells/sources/carol-of-the-bells-hooktheory-jw-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "pitchShift": -1
+    }
   }
 ]

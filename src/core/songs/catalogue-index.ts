@@ -3281,6 +3281,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-carol-of-the-bells",
+    "title": "Carol of the Bells",
+    "subtitle": "The complete first period of the melody voice in the standard Wilhousky arrangement (bars 17-24 of the SATB score): four statements of the four-note ostinato, the descending line and its cadence",
+    "tempoBpm": 150,
+    "beatsPerBar": 3,
+    "difficulty": {
+      "score": 7.38,
+      "level": "hard"
+    }
+  },
+  {
     "id": "catalogue-nanny-nanny-boo-boo",
     "title": "Nanny Nanny Boo Boo",
     "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",

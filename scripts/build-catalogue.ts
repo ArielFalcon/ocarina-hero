@@ -35,6 +35,11 @@ interface Selection {
     collapseRepeated?: boolean;
     /** Selection positions the reference omits or merges into the previous attack; documented per row in the curation evidence. */
     absentIndices?: number[];
+    /**
+     * Owner-approved key changes inside one entry: from `fromPosition` on, the prepared source sits `semitones` away from the
+     * recording, so the reference is compared at `midi - semitones`. Each use needs an explicit owner exception in the evidence.
+     */
+    sectionShifts?: { fromPosition: number; semitones: number }[];
   };
 }
 
@@ -176,7 +181,12 @@ if (process.argv.includes('--audio')) {
 
 function compareReference(selection: Selection, midi: InstanceType<typeof Midi>) {
   const reference = selection.reference;
-  let selected = selection.indices.map(index => midi.tracks[selection.trackIndex]!.notes[index]!);
+  const preparedShift = (position: number) => (reference.sectionShifts ?? [])
+    .filter(shift => position >= shift.fromPosition).reduce((total, shift) => total + shift.semitones, 0);
+  let selected = selection.indices.map((index, position) => {
+    const note = midi.tracks[selection.trackIndex]!.notes[index]!;
+    return { midi: note.midi - preparedShift(position), ticks: note.ticks };
+  });
   if (reference.assembly) {
     const text = readFileSync(reference.file!, 'utf8');
     const section = text.split('Music_Routes1_Ch2::')[1]!.split('.sub1:')[1]!.split('.sub3:')[0]!;

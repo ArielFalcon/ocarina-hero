@@ -14,7 +14,7 @@ Use for curated song fragments, catalogue expansion, source corroboration, or al
 ## Hard Rules
 
 - Read the actual pitch configuration; preserve calibration and playback envelopes.
-- Preserve the complete agreed phrase and every melodic interval. Freeze an evidenced source, record any preparation edits, then preserve its events under one uniform transposition; reject incompatible phrases.
+- Preserve the complete agreed phrase and every melodic interval. Freeze an evidenced source, record any preparation edits, then preserve its events under one uniform transposition; reject incompatible phrases. Only a recorded owner exception (verbatim, dated, in the recipe and the song's notes) may shorten the phrase or give a whole section its own shift through `reference.sectionShifts`; never shift single notes.
 - Select the melodic voice explicitly. Never use an automatic highest-note filter as evidence.
 - Corroborate notes and rhythm with a second source; report ancestry uncertainty and discrepancies.
 - Never equate mapping fit, synthesized pitch checks, source corroboration, listening feedback and original-recording validation.

@@ -3228,11 +3228,11 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
   {
     "id": "catalogue-all-i-want-for-christmas-is-you",
     "title": "All I Want for Christmas Is You",
-    "subtitle": "The up-tempo \"I just want you for my own\" period: two statements of the rising-and-falling opening line, the leap to the high \"make my wish come true\", and the title line closing on the long held G",
+    "subtitle": "The first half of the up-tempo verse from the entry of the drums and sleigh bells, then the pre-chorus period with the leap to the high D and the title line closing on the long held G; the pre-chorus is played a fourth lower than the verse",
     "tempoBpm": 150,
     "beatsPerBar": 4,
     "difficulty": {
-      "score": 5.21,
+      "score": 5.31,
       "level": "medium"
     }
   },

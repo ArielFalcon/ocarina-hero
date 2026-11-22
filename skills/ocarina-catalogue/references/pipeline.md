@@ -4,7 +4,7 @@
 
 The successful catalogue is a symbolic curation workflow. It reads existing MIDI note events, uses human/agent judgement to identify the recognizable melodic voice, corroborates it against another transcription or score, and maps it deterministically to the configured instrument. It does not extract those notes from a mixed original recording. Agents research and adjudicate; executable scripts preserve and validate the events.
 
-A candidate is not accepted merely because it is familiar or a MIDI exists. Keep the full agreed phrase; a source or range failure must be visible. Do not swap the agreed hook for an easier intro, remove a high note, fold octaves per note, insert artificial repeats, or claim an independent source if it is demonstrably a copy. Keep raw sources immutable and identify any prepared derivative explicitly.
+A candidate is not accepted merely because it is familiar or a MIDI exists. Keep the full agreed phrase; a source or range failure must be visible. Do not swap the agreed hook for an easier intro, remove a high note, fold octaves per note, insert artificial repeats, or claim an independent source if it is demonstrably a copy. Keep raw sources immutable and identify any prepared derivative explicitly. The only exception is one the owner records explicitly, quoted verbatim with its date in the recipe, the song's notes and the manifest evidence: it may shorten the agreed phrase or move a whole section by one shift (a key change at a section boundary, declared in `reference.sectionShifts` so the reference check still compares against the untransposed recording). Never shift or fold individual notes.
 
 ## 1. Freeze the fragment
 
@@ -52,7 +52,7 @@ Use `projectFaithfully`, which calls the existing calibrated projection and then
 
 `pitchById(output.pitch).midi + 12 + output.bend === source.midi + oneUniformShift`
 
-After preparing and freezing the source phrase, require identical note count, onsets and durations between that prepared source and the adapted arrangement. Report preparation edits independently. A projection confidence value is arrangement fit, not source accuracy. Reject when the equality gate fails. Preserve the complete rejected phrase and the reason. Do not use modulo/octave equivalence as a substitute for pitch equality.
+After preparing and freezing the source phrase, require identical note count, onsets and durations between that prepared source and the adapted arrangement. Report preparation edits independently. A projection confidence value is arrangement fit, not source accuracy. Reject when the equality gate fails. Preserve the complete rejected phrase and the reason. Do not use modulo/octave equivalence as a substitute for pitch equality. An owner-approved section shift (see the exception at the top of this page) lives in the prepared source, so this gate and the stored-notes test still check one uniform projection of it; record it in the evidence, because the build report still shows `alteredNotes: 0` and a single `transpositionSemitones`.
 
 Store curated arrangements as `fixedNotes`. This bypasses optional simplification and prevents ornaments or timing from being removed when the user changes settings. Record shift, bends and actual configured tuning deviation separately.
 

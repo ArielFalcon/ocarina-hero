@@ -3270,6 +3270,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-jingle-bell-rock",
+    "title": "Jingle Bell Rock",
+    "subtitle": "The complete 16-bar first verse as sung, in two eight-bar halves: the repeated-note title hook and its low answer, the answering line, the climbing third line and the closing line, then the same first three lines with their own closing line that settles on the held final D",
+    "tempoBpm": 121.0001875502907,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.57,
+      "level": "medium"
+    }
+  },
+  {
     "id": "catalogue-nanny-nanny-boo-boo",
     "title": "Nanny Nanny Boo Boo",
     "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",

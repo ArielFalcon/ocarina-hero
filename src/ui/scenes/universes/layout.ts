@@ -1,4 +1,4 @@
-import type { ScenePlacement } from '../scene';
+import type { Scene, ScenePlacement } from '../scene';
 
 /**
  * The composition every universe shares: on desktop the lead hangs beside the heading and a companion from the
@@ -18,3 +18,11 @@ export const STANDARD_PLACEMENTS: readonly ScenePlacement[] = [
   { slot: 'band', role: 'effect', member: 1, delayMs: 160 },
   { slot: 'band', role: 'runner' },
 ];
+
+/**
+ * The standard composition for a universe whose cast has no figure for some roles (a small cast: no companion, no
+ * runner): the places of roles without a figure are dropped, so no slot is left waiting for one.
+ */
+export function standardPlacementsFor(cast: Scene['cast']): readonly ScenePlacement[] {
+  return STANDARD_PLACEMENTS.filter(placement => (cast[placement.role]?.length ?? 0) > 0);
+}

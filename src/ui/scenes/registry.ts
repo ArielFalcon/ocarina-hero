@@ -9,12 +9,20 @@ import type { SceneLoader } from './scene';
 export const SCENES_BY_UNIVERSE: Readonly<Record<string, SceneLoader>> = {
   'Animal Crossing': () => import('./universes/animal-crossing'),
   'Doom': () => import('./universes/doom'),
+  'Dragon Ball Z': () => import('./universes/dragon-ball-z'),
+  'Game of Thrones': () => import('./universes/game-of-thrones'),
+  'James Bond': () => import('./universes/james-bond'),
   'Jujutsu Kaisen': () => import('./universes/jujutsu-kaisen'),
+  'Jurassic Park': () => import('./universes/jurassic-park'),
+  'Mission: Impossible': () => import('./universes/mission-impossible'),
   'Naruto': () => import('./universes/naruto'),
   'Neon Genesis Evangelion': () => import('./universes/evangelion'),
   'One Piece': () => import('./universes/one-piece'),
+  'Pirates of the Caribbean': () => import('./universes/pirates'),
   'Pokémon': () => import('./universes/pokemon'),
+  'Tetris': () => import('./universes/tetris'),
   'The Legend of Zelda': () => import('./universes/zelda'),
+  'The Simpsons': () => import('./universes/simpsons'),
   'Undertale': () => import('./universes/undertale'),
   'Wii': () => import('./universes/wii'),
 };
@@ -23,6 +31,8 @@ export const SCENES_BY_UNIVERSE: Readonly<Record<string, SceneLoader>> = {
 export const SCENES_BY_SONG: Readonly<Record<string, SceneLoader>> = {
   'catalogue-aqua-barbie-girl-verse': () => import('./universes/barbie-girl'),
   'catalogue-beat-it-bass-riff': () => import('./universes/beat-it'),
+  'catalogue-lambada': () => import('./universes/lambada'),
+  'catalogue-never-gonna': () => import('./universes/never-gonna'),
 };
 
 /** The scene of an open song: its own, else its universe's; none in free play or on a console without scenes. */

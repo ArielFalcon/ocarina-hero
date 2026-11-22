@@ -456,6 +456,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-smells-like-teen-spirit', 'Smells Like Teen Spirit', { artist: 'Nirvana', aliases: ['Teen Spirit'] }],
   ['catalogue-birds-of-a-feather', 'Birds of a Feather', { artist: 'Billie Eilish' }],
   ['catalogue-all-i-want-for-christmas-is-you', 'All I Want for Christmas Is You', { collections: ['christmas'], artist: 'Mariah Carey', aliases: ['Mariah Carey & Walter Afanasieff', 'Walter Afanasieff', 'All I Want for Christmas', 'Christmas'], icon: 'star' }],
+  ['catalogue-last-christmas', 'Last Christmas', { collections: ['christmas'], artist: 'Wham!', aliases: ['George Michael', 'Christmas'], icon: 'star' }],
 ]);
 
 // Classics

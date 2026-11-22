@@ -3248,6 +3248,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-last-christmas",
+    "title": "Last Christmas",
+    "subtitle": "The complete chorus in both halves: the two-note call and its answer, the rising turn up to the held D, then the second half that climbs to the high G before easing down to the final held A",
+    "tempoBpm": 107.0001266168165,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 4.4,
+      "level": "medium"
+    }
+  },
+  {
     "id": "catalogue-nanny-nanny-boo-boo",
     "title": "Nanny Nanny Boo Boo",
     "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",

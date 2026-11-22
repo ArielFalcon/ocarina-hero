@@ -341,5 +341,116 @@
         40
       ]
     }
+  },
+  {
+    "id": "last-christmas",
+    "title": "Last Christmas",
+    "category": "pop",
+    "hook": "The complete chorus in both halves: the two-note call and its answer, the rising turn up to the held D, then the second half that climbs to the high G before easing down to the final held A",
+    "source": {
+      "file": "out/catalogue-2026-11-22/last-christmas/sources/last-christmas-chorus-derived.mid",
+      "page": "https://www.hooktheory.com/theorytab/view/wham/last-christmas#chorus",
+      "url": "https://www.hooktheory.com/v1/songs/public/Wegl_EaamrY?fields=ID,xmlData,song,jsonData",
+      "sha256": "ee3c92e1b31525fa6580020f1bcb14b2876f997e9b84e53174fafe36112e4149"
+    },
+    "trackIndex": 0,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "phraseStarts": [
+      0,
+      19
+    ],
+    "beatsPerBar": 4,
+    "evidence": {
+      "level": "transcription-and-original-recording-pitch-audit",
+      "summary": "Primary: Hooktheory public JSON \"Chorus\" (SHA-256 f9579a7b...), D major, 34 notes over 8 bars, frozen as a derived MIDI at PPQ 9600 at 107 BPM (the tab says 108; the recording measures 0.561 and 0.563 s per beat) with four documented timing edits read from the recording: the first note and two late entries retimed, and the final held A3 lengthened from 2 to 3 beats. Reference: the lead vocal of the original recording (official video E8gmARGvPlI, 1984 single), Demucs htdemucs vocal stem, pyin segments plus RMS and CQT: the chorus is sung twice back to back (18.3 s and 36.2 s) and both passes match all 34 pitches in order at shift 0 (recording 0.45 semitone flat; the repeated-E4 pairs are split at RMS dips; A3 at position 3 is sung about a semitone flat and slid in the first pass, a clean A3 in the second; the short B3 at position 21 is audible only in the CQT); onsets within 0.25 beat apart from the first note. No second symbolic transcription of the vocal was available; the independent evidence is the recording itself.",
+      "urls": [
+        "https://www.hooktheory.com/theorytab/view/wham/last-christmas#chorus",
+        "https://www.youtube.com/watch?v=E8gmARGvPlI"
+      ]
+    },
+    "corpus": {
+      "clip": null,
+      "alignmentValidated": false,
+      "originalRecordingAudited": true,
+      "notes": "Pitch audit against the original recording (vocal stem pyin + RMS + CQT, both chorus passes); matching clip kept outside the corpus at out/catalogue-2026-11-22/last-christmas/sources/original-clip-17.5-36.1s.flac: 17.5-36.1 s of the official video audio; the first sung note starts 0.67 s into the clip. Alignment kept unvalidated; not indexed in the corpus."
+    },
+    "reference": {
+      "file": "out/catalogue-2026-11-22/last-christmas/sources/last-christmas-original-vocal-reference.mid",
+      "trackIndex": 0,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "pitchShift": 0,
+      "absentIndices": [
+        3,
+        21
+      ]
+    }
   }
 ]

@@ -457,6 +457,7 @@ group('Pop', ['Pop'], 'microphone', [
   ['catalogue-birds-of-a-feather', 'Birds of a Feather', { artist: 'Billie Eilish' }],
   ['catalogue-all-i-want-for-christmas-is-you', 'All I Want for Christmas Is You', { collections: ['christmas'], artist: 'Mariah Carey', aliases: ['Mariah Carey & Walter Afanasieff', 'Walter Afanasieff', 'All I Want for Christmas', 'Christmas'], icon: 'star' }],
   ['catalogue-last-christmas', 'Last Christmas', { collections: ['christmas'], artist: 'Wham!', aliases: ['George Michael', 'Christmas'], icon: 'star' }],
+  ['catalogue-feliz-navidad', 'Feliz Navidad', { collections: ['christmas'], artist: 'José Feliciano', aliases: ['Jose Feliciano', 'Christmas', 'Navidad'], icon: 'star' }],
 ]);
 
 // Classics

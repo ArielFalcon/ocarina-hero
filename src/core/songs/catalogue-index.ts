@@ -3259,6 +3259,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-feliz-navidad",
+    "title": "Feliz Navidad",
+    "subtitle": "One complete statement as sung: the Spanish section (the three-fold two-bar greeting and its closing wish) followed by the English section (the climbing wish, the lower answer, the climbing wish again and the closing line down to the held final D)",
+    "tempoBpm": 148.000148000148,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 5.67,
+      "level": "hard"
+    }
+  },
+  {
     "id": "catalogue-nanny-nanny-boo-boo",
     "title": "Nanny Nanny Boo Boo",
     "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",

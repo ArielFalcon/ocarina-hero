@@ -1045,8 +1045,10 @@ input[type='range']::-moz-range-thumb { width: 17px; height: 17px; border: 3px s
 @keyframes scene-flinch { 0%, 100% { rotate: 0deg; } 20% { rotate: -7deg; } 45% { rotate: 6deg; } 70% { rotate: -3deg; } }
 @keyframes scene-jump { 0%, 100% { translate: 0 0; scale: 1 1; } 12% { translate: 0 0; scale: 1.06 .92; } 45% { translate: 0 -16px; scale: .96 1.05; } 80% { translate: 0 0; scale: 1.04 .95; } }
 @keyframes scene-burst { 0% { opacity: 0; scale: .2; rotate: -20deg; } 25% { opacity: 1; scale: 1.1; } 60% { opacity: 1; scale: 1; rotate: 8deg; } 100% { opacity: 0; scale: .7; rotate: 14deg; } }
-/* Heading: hangs from a line above the heading, beside the title. Controller: from the panel's top edge. Band: a strip with a thread floor. */
-.scene-slot[data-scene-slot='heading'] { top: -44px; --scene-h: 96px; --scene-thread: 56px; }
+/* Heading: hangs beside the title on a cord tied to the tapestry edge at the top of the page (the slot starts a few
+   pixels above the scroller's top, which clips the rest, so the cord meets the edge at any scroll). Controller: from
+   the panel's top edge. Band: a strip with a thread floor. */
+.scene-slot[data-scene-slot='heading'] { top: -150px; --scene-h: 96px; --scene-thread: 162px; }
 .scene-slot[data-scene-slot='controller'] { top: 0; right: 6px; --scene-h: 104px; --scene-thread: 22px; }
 .scene-slot.scene-band { position: relative; right: auto; justify-content: space-evenly; align-items: flex-end; gap: 0; height: 128px; margin: 10px -16px 0; padding: 0 10px 5px; --scene-h: 96px; }
 .scene-slot.scene-band[data-holder] { clip-path: inset(-80px 0 0 0); }

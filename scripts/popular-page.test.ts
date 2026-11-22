@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { execFileSync } from 'node:child_process';
 import { DEMOS } from './catalogue-loader';
 import { createSongbookEntries } from '../src/ui/songbook';
 import { fetchPopularSnapshot, popularHead, popularRowsHtml, popularSnapshot } from '../src/site/popular';
@@ -54,4 +55,16 @@ test('the sitemap and llms.txt list the Popular page', () => {
   const locs = [...sitemapXml(SITE, [first!.id]).matchAll(/<loc>([^<]*)<\/loc>/g)].map(match => match[1]);
   assert.deepEqual(locs.slice(0, 2), [SITE, `${SITE}popular/`]);
   assert.ok(llmsTxt(SITE, songGroups(entries)).includes(`](${SITE}popular/)`));
+});
+
+test('a hung snapshot request settles at its timeout even when nothing else keeps the process alive', () => {
+  // A request that holds no handle of its own must not let Node exit before the timeout fires: the build would end with the page unwritten.
+  const script = `
+    import { fetchPopularSnapshot } from './src/site/popular.ts';
+    const hang = (_url, init) => new Promise((_, reject) => init?.signal?.addEventListener('abort', () => reject(init.signal.reason)));
+    const rows = await fetchPopularSnapshot('https://x.test/api', { fetch: hang, warn: () => {}, timeoutMs: 20 });
+    console.log('settled ' + JSON.stringify(rows));
+  `;
+  const output = execFileSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', script], { encoding: 'utf8' });
+  assert.equal(output.trim(), 'settled []');
 });

@@ -32,8 +32,12 @@ export async function fetchPopularSnapshot(url: string, { fetch: request = fetch
   timeoutMs?: number;
   warn?: (message: string) => void;
 } = {}): Promise<PopularEntry[]> {
+  // A plain timer, not AbortSignal.timeout(): that one does not keep Node alive, so a request holding no handle of its own let
+  // the process exit before the timeout fired, with the build unfinished and the test cancelled.
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(new DOMException(`no answer within ${timeoutMs} ms`, 'TimeoutError')), timeoutMs);
   try {
-    const response = await request(url, { signal: AbortSignal.timeout(timeoutMs), headers: { Accept: 'application/json' } });
+    const response = await request(url, { signal: controller.signal, headers: { Accept: 'application/json' } });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const { songs } = await response.json() as { songs?: unknown };
     if (!Array.isArray(songs)) throw new Error('the response has no songs list');
@@ -41,6 +45,8 @@ export async function fetchPopularSnapshot(url: string, { fetch: request = fetch
   } catch (error) {
     warn(`[popular] could not read the ranking from ${url}; the page is built with an empty list (${error instanceof Error ? error.message : String(error)})`);
     return [];
+  } finally {
+    clearTimeout(timer);
   }
 }
 

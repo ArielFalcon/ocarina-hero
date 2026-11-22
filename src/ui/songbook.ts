@@ -487,6 +487,7 @@ group('Classics', ['Classics'], 'lyre', [
   ['catalogue-jingle-bells', 'Jingle Bells', { collections: ['christmas'], artist: 'James Lord Pierpont', aliases: ['Pierpont', 'One Horse Open Sleigh', 'The One Horse Open Sleigh', 'Christmas carol', 'Christmas'], icon: 'star' }],
   ['catalogue-nanny-nanny-boo-boo', 'Nanny Nanny Boo Boo', { artist: 'Traditional', aliases: ['Na Na Na Boo Boo', 'Na-na na-na boo-boo', 'Neener Neener', 'Nyah Nyah', 'Nyah nyah nyah nyah nyah nyah', 'Lero Lero', 'Ña ña ña', 'Nana Booboo', 'Teasing chant', 'Playground chant', 'Children’s song'] }],
   ['catalogue-carol-of-the-bells', 'Carol of the Bells', { collections: ['christmas'], artist: 'Mykola Leontovych', aliases: ['Shchedryk', 'Peter J. Wilhousky', 'Christmas carol', 'Christmas'], icon: 'star' }],
+  ['catalogue-rudolph-the-red-nosed-reindeer', 'Rudolph the Red-Nosed Reindeer', { collections: ['christmas'], artist: 'Gene Autry', aliases: ['Johnny Marks', 'Rudolph', 'Christmas'], icon: 'star' }],
 ]);
 
 /** Notes of the arrangement a lesson opens with: bends on, ornaments kept. */

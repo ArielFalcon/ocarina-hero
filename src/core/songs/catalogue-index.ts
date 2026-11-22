@@ -3292,6 +3292,17 @@ export const CATALOGUE_INDEX: readonly (TrackSummary & { readonly beatsPerBar: n
     }
   },
   {
+    "id": "catalogue-rudolph-the-red-nosed-reindeer",
+    "title": "Rudolph the Red-Nosed Reindeer",
+    "subtitle": "The complete 16-bar main verse as Gene Autry sings it, in two eight-bar halves: the rocking opening line with its upward leap and long held note, the answering line that rises to a held top note, the descending third line and the closing line of alternating repeated notes, then the same three lines again with a new closing line that leaps to the top and settles on the long held tonic",
+    "tempoBpm": 143.20014129080607,
+    "beatsPerBar": 4,
+    "difficulty": {
+      "score": 3.61,
+      "level": "medium"
+    }
+  },
+  {
     "id": "catalogue-nanny-nanny-boo-boo",
     "title": "Nanny Nanny Boo Boo",
     "subtitle": "The playground teasing chant, complete as children sing it: the six-note figure on the falling minor third with its leap up to the sixth, stated twice and ending on a held low note",
